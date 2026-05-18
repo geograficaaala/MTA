@@ -24,7 +24,7 @@ jobs:
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          pip install beautifulsoup4 requests lxml
+          pip install beautifulsoup4 requests lxml certifi urllib3
 
       - name: Extraer precipitaciones INSIVUMEH para Sololá
         run: |
@@ -38,8 +38,11 @@ jobs:
           from datetime import datetime, timezone
           from pathlib import Path
 
+          import certifi
           import requests
+          import urllib3
           from bs4 import BeautifulSoup
+          from requests.exceptions import SSLError
 
           SOURCE_URL = "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html"
 
@@ -105,6 +108,32 @@ jobs:
                   return None, None
               return int(match.group(1)), int(match.group(2))
 
+          def obtener_pagina(url: str) -> tuple[str, str]:
+              headers = {
+                  "User-Agent": "MTA-Solola-Precipitaciones/0.2 (+https://github.com/geograficaaala/MTA)",
+                  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              }
+
+              try:
+                  response = requests.get(
+                      url,
+                      timeout=45,
+                      headers=headers,
+                      verify=certifi.where(),
+                  )
+                  response.raise_for_status()
+                  return response.text, "ssl_verificado"
+              except SSLError:
+                  urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+                  response = requests.get(
+                      url,
+                      timeout=45,
+                      headers=headers,
+                      verify=False,
+                  )
+                  response.raise_for_status()
+                  return response.text, "ssl_no_verificado_por_certificado_fuente"
+
           def obtener_seccion_solola(lines: list[str]) -> list[str]:
               inicio = None
 
@@ -117,6 +146,7 @@ jobs:
                   raise RuntimeError("No se encontró la sección de Sololá en la página de INSIVUMEH.")
 
               fin = len(lines)
+
               for j in range(inicio, len(lines)):
                   nombre = normalizar(lines[j])
                   if nombre in DEPARTAMENTOS and nombre != "solola":
@@ -169,17 +199,11 @@ jobs:
 
               return estaciones
 
-          response = requests.get(
-              SOURCE_URL,
-              timeout=40,
-              headers={
-                  "User-Agent": "MTA-Solola-Precipitaciones/0.1 (+https://github.com/geograficaaala/MTA)"
-              },
-          )
-          response.raise_for_status()
+          html, ssl_mode = obtener_pagina(SOURCE_URL)
 
-          soup = BeautifulSoup(response.text, "lxml")
+          soup = BeautifulSoup(html, "lxml")
           lines = [line.strip() for line in soup.get_text("\n").splitlines() if line.strip()]
+
           seccion_solola = obtener_seccion_solola(lines)
           estaciones = extraer_estaciones(seccion_solola)
 
@@ -189,17 +213,19 @@ jobs:
           generated_at = datetime.now(timezone.utc).isoformat()
 
           data = {
-              "schema": "mta_precipitaciones_v0_1",
+              "schema": "mta_precipitaciones_v0_2",
               "generated_at_utc": generated_at,
               "department": "Sololá",
               "source": {
                   "institution": "INSIVUMEH",
                   "url": SOURCE_URL,
+                  "ssl_mode": ssl_mode,
                   "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
               },
               "notes": [
                   "Extracción automática diaria desde página institucional autorizada.",
                   "El campo precipitation_mm_accumulated corresponde al acumulado publicado por la fuente al momento de la consulta.",
+                  "Si ssl_mode indica ssl_no_verificado_por_certificado_fuente, la consulta se realizó con verificación SSL desactivada por problema de cadena de certificado en la fuente.",
                   "Los datos deben mostrarse con fuente, fecha de consulta y crédito institucional.",
               ],
               "stations": estaciones,
@@ -228,6 +254,7 @@ jobs:
               writer.writerows(estaciones)
 
           print(f"OK: {len(estaciones)} estaciones extraídas para Sololá.")
+          print(f"Modo SSL: {ssl_mode}")
           print(JSON_OUT)
           print(CSV_OUT)
           PY
