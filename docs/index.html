@@ -4,109 +4,90 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0f3a53" />
-  <meta name="description" content="Plataforma Agroclimática de Sololá: estaciones meteorológicas, mapas interactivos, lluvia, temperatura, riesgos, sequía, recomendaciones y boletines de la Mesa Técnica Agroclimática." />
-  <title>MTA Sololá · Plataforma Agroclimática</title>
+  <meta
+    name="description"
+    content="Página de bienvenida de la Plataforma Agroclimática de Sololá. Acceso a módulos de precipitaciones, estaciones meteorológicas, pronósticos, riesgos, sequía, boletines y fuentes institucionales."
+  />
+  <title>Plataforma Agroclimática de Sololá · MTA</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Lora:wght@600;700&family=Sora:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+  />
 
   <style>
     :root {
-      --font-display: "Lora", Georgia, serif;
-      --font-body: "Sora", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --font-data: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+      --lake-deep: #0f3a53;
+      --lake-dark: #123f5a;
+      --lake-mid: #176680;
+      --lake-light: #2a9db7;
+      --lake-pale: #e6f5f7;
 
-      --ink: #0e2433;
-      --navy: #17314f;
-      --lake-950: #082537;
-      --lake-900: #0f3a53;
-      --lake-800: #124c66;
-      --lake-700: #176680;
-      --lake-500: #2a9db7;
-      --lake-300: #8fd1dc;
-      --lake-100: #e6f5f7;
+      --rain: #1f7ec1;
+      --rain-soft: #e8f4fd;
 
-      --rain-800: #165a96;
-      --rain-600: #1f7ec1;
-      --rain-500: #4aa3df;
-      --rain-200: #bfe1f6;
-      --rain-100: #e8f4fd;
+      --forest: #2f7a62;
+      --forest-dark: #163f37;
+      --forest-soft: #eaf7ef;
 
-      --forest-900: #163f37;
-      --forest-700: #2f7a62;
-      --forest-500: #55a77f;
-      --forest-200: #bfe5cc;
-      --forest-100: #eaf7ef;
+      --maize: #e7b94f;
+      --maize-dark: #9a6d0a;
+      --maize-soft: #fff4d7;
 
-      --maize-700: #a97412;
-      --maize-500: #e7b94f;
-      --maize-200: #ffe7a0;
-      --maize-100: #fff4d7;
+      --coffee: #7a4b34;
+      --coffee-soft: #f1e2d8;
 
-      --earth-700: #835736;
-      --earth-500: #b47a4c;
-      --earth-200: #e4c4a8;
-      --earth-100: #f5e8dd;
+      --risk: #d66a2a;
+      --risk-soft: #fff0e6;
 
-      --coffee-900: #352018;
-      --coffee-700: #5b3427;
-      --coffee-500: #7a4b34;
-      --coffee-100: #f1e2d8;
-
-      --risk-normal: #2f7a62;
-      --risk-watch: #d5a11e;
-      --risk-high: #d66a2a;
-      --risk-extreme: #a33b35;
-      --risk-unknown: #7a8791;
-
-      --page: #f6f8f3;
-      --page-2: #eef5f2;
-      --surface: #ffffff;
-      --surface-soft: #f3f8f6;
-      --surface-tint: #eaf3f0;
-      --line: #d7e5df;
-      --line-soft: #e8f0ec;
-      --muted: #708391;
-      --soft-text: #3b5363;
+      --surface: #f6f8f3;
+      --surface-2: #eef5f2;
       --white: #ffffff;
 
-      --shadow-xs: 0 1px 3px rgba(14, 36, 51, .06), 0 2px 10px rgba(14, 36, 51, .04);
-      --shadow-sm: 0 8px 24px rgba(14, 36, 51, .08), 0 2px 8px rgba(14, 36, 51, .04);
-      --shadow-md: 0 18px 46px rgba(14, 36, 51, .10), 0 6px 18px rgba(14, 36, 51, .06);
-      --shadow-lg: 0 28px 72px rgba(14, 36, 51, .16), 0 10px 24px rgba(14, 36, 51, .08);
+      --text: #0e2433;
+      --text-mid: #3b5363;
+      --text-soft: #708391;
 
-      --radius-xs: 10px;
-      --radius-sm: 14px;
-      --radius-md: 20px;
-      --radius-lg: 28px;
-      --radius-xl: 36px;
-      --radius-xxl: 46px;
+      --border: rgba(15, 58, 83, 0.12);
+      --border-strong: rgba(15, 58, 83, 0.18);
 
-      --wrap: min(1520px, calc(100vw - 34px));
-      --header-h: 82px;
-      --ease-out: cubic-bezier(.16, 1, .3, 1);
-      --ease-smooth: cubic-bezier(.65, 0, .35, 1);
+      --shadow-sm: 0 2px 12px rgba(14, 36, 51, 0.07);
+      --shadow-md: 0 10px 34px rgba(14, 36, 51, 0.12);
+      --shadow-lg: 0 24px 70px rgba(14, 36, 51, 0.16);
+
+      --radius-sm: 0.75rem;
+      --radius-md: 1rem;
+      --radius-lg: 1.5rem;
+      --radius-xl: 2rem;
+
+      --max: 1220px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html {
       scroll-behavior: smooth;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      font-family: var(--font-body);
-      color: var(--ink);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
       background:
-        radial-gradient(circle at 12% 6%, rgba(42, 157, 183, .22), transparent 30%),
-        radial-gradient(circle at 92% 12%, rgba(47, 122, 98, .18), transparent 31%),
-        radial-gradient(circle at 52% 0%, rgba(231, 185, 79, .12), transparent 24%),
-        linear-gradient(180deg, #fbfcf8 0%, var(--page) 48%, #eef5f2 100%);
+        radial-gradient(circle at 12% 6%, rgba(42, 157, 183, 0.18), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(47, 122, 98, 0.16), transparent 30%),
+        linear-gradient(180deg, #fbfcf8 0%, var(--surface) 46%, var(--surface-2) 100%);
+      padding-top: 76px;
       overflow-x: hidden;
     }
 
@@ -117,2309 +98,1217 @@
       z-index: -2;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(23,49,79,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23,49,79,.035) 1px, transparent 1px);
+        linear-gradient(rgba(15, 58, 83, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 58, 83, 0.035) 1px, transparent 1px);
       background-size: 44px 44px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.65), transparent 76%);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.52), transparent 76%);
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: auto -10vw -18vw -10vw;
-      height: 38vw;
-      z-index: -3;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, rgba(15,58,83,.10), transparent 62%);
+    a {
+      color: inherit;
     }
 
-    a { color: inherit; }
-    button, input, select { font: inherit; }
-    button { cursor: pointer; }
-    img, svg { max-width: 100%; display: block; }
+    button {
+      font: inherit;
+    }
 
     .wrap {
-      width: var(--wrap);
-      margin-inline: auto;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -120px;
-      z-index: 999;
-      padding: 10px 14px;
-      color: var(--white);
-      background: var(--lake-900);
-      border-radius: 999px;
-      transition: top .2s ease;
-    }
-
-    .skip-link:focus { top: 12px; }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 80;
-      min-height: var(--header-h);
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: 76px;
       display: flex;
       align-items: center;
-      gap: 18px;
-      padding: 12px 28px;
-      color: var(--white);
-      background: linear-gradient(135deg, rgba(8,37,55,.96), rgba(23,102,128,.96) 58%, rgba(42,157,183,.94));
-      box-shadow: 0 18px 46px rgba(13, 39, 67, .20);
-      backdrop-filter: blur(20px) saturate(1.2);
+      background: rgba(15, 58, 83, 0.96);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .navbar-inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 13px;
-      min-width: 290px;
+      gap: 0.8rem;
+      min-width: 0;
+      color: var(--white);
       text-decoration: none;
     }
 
     .brand-mark {
-      position: relative;
-      width: 50px;
-      height: 50px;
-      flex: 0 0 50px;
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
       display: grid;
       place-items: center;
-      border-radius: 17px;
-      color: var(--lake-950);
+      border-radius: 0.9rem;
       background:
-        radial-gradient(circle at 72% 26%, rgba(231,185,79,.92), transparent 18%),
-        linear-gradient(145deg, #ffffff, #e8f4fd);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
-      font-weight: 950;
-      letter-spacing: -.05em;
-    }
-
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 21px;
-      border: 1px solid rgba(255,255,255,.35);
-      opacity: .9;
-    }
-
-    .brand-kicker {
-      display: block;
-      font-size: .72rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.74);
-      font-weight: 900;
-      line-height: 1.05;
+        radial-gradient(circle at 70% 24%, var(--maize) 0 16%, transparent 17%),
+        linear-gradient(145deg, #ffffff, var(--rain-soft));
+      color: var(--lake-deep);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
     }
 
     .brand-title {
-      display: block;
-      color: var(--white);
-      font-weight: 900;
-      line-height: 1.1;
+      display: grid;
+      gap: 0.1rem;
+      min-width: 0;
     }
 
-    .main-nav {
+    .brand-title strong {
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+
+    .brand-title span {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.75rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 6px;
-      margin-left: auto;
-      overflow-x: auto;
-      scrollbar-width: none;
+      gap: 0.35rem;
     }
 
-    .main-nav::-webkit-scrollbar { display: none; }
-
-    .main-nav a {
-      display: inline-flex;
-      align-items: center;
-      min-height: 42px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      color: rgba(255,255,255,.86);
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
       text-decoration: none;
-      font-size: .88rem;
-      font-weight: 800;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.65rem 0.8rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
       white-space: nowrap;
-      transition: background .18s ease, color .18s ease, transform .18s ease;
     }
 
-    .main-nav a:hover,
-    .main-nav a[aria-current="page"] {
+    .nav-links a:hover {
       color: var(--white);
-      background: rgba(255,255,255,.14);
+      background: rgba(255,255,255,0.12);
       transform: translateY(-1px);
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: 8px;
-    }
-
-    .icon-button {
+    .menu-btn {
+      display: none;
       width: 42px;
       height: 42px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 999px;
+      background: rgba(255,255,255,0.08);
       color: var(--white);
-      background: rgba(255,255,255,.10);
-      transition: background .18s ease, transform .18s ease;
+      cursor: pointer;
     }
 
-    .icon-button:hover {
-      background: rgba(255,255,255,.18);
-      transform: translateY(-1px);
-    }
-
-    .mobile-nav-toggle { display: none; }
-
-    .mobile-sheet {
-      position: fixed;
-      inset: var(--header-h) 14px auto 14px;
-      z-index: 70;
+    .mobile-menu {
       display: none;
-      padding: 14px;
-      border: 1px solid rgba(215,229,223,.9);
-      border-radius: 24px;
-      background: rgba(255,255,255,.96);
+      position: fixed;
+      top: 86px;
+      left: 1rem;
+      right: 1rem;
+      z-index: 999;
+      padding: 0.75rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.96);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-lg);
       backdrop-filter: blur(16px);
     }
 
-    .mobile-sheet.is-open { display: grid; gap: 8px; animation: sheetIn .28s var(--ease-out) both; }
+    .mobile-menu.open {
+      display: grid;
+      gap: 0.45rem;
+      animation: sheetIn 0.26s ease both;
+    }
 
-    .mobile-sheet a {
-      padding: 13px 14px;
-      border-radius: 16px;
+    .mobile-menu a {
       text-decoration: none;
-      color: var(--navy);
-      background: var(--surface-soft);
-      font-weight: 850;
+      color: var(--lake-deep);
+      font-weight: 700;
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md);
+      background: var(--surface);
     }
 
     @keyframes sheetIn {
-      from { opacity: 0; transform: translateY(-10px) scale(.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .hero {
+      position: relative;
+      padding: clamp(3rem, 7vw, 6rem) 0 3rem;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: clamp(2rem, 5vw, 4rem);
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      color: var(--lake-700);
-      font-size: .74rem;
-      letter-spacing: .16em;
+      gap: 0.55rem;
+      color: var(--lake-mid);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-weight: 950;
+      font-weight: 800;
+      margin-bottom: 1.1rem;
     }
 
     .eyebrow::before {
       content: "";
-      width: 28px;
+      width: 32px;
       height: 2px;
       border-radius: 999px;
-      background: var(--maize-500);
+      background: var(--maize);
     }
 
-    h1, h2, h3, h4 {
-      margin: 0;
-      color: var(--navy);
-      letter-spacing: -.035em;
-      line-height: 1.05;
-    }
-
-    h1, .display-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.55rem, 5.6vw, 5.85rem);
-      font-weight: 700;
-    }
-
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3vw, 3rem);
-      font-weight: 700;
-    }
-
+    h1,
+    h2,
     h3 {
-      font-size: clamp(1.15rem, 1.8vw, 1.65rem);
-      font-weight: 900;
-      letter-spacing: -.025em;
+      color: var(--lake-deep);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
     }
 
-    h4 {
-      font-size: 1rem;
-      font-weight: 900;
-      letter-spacing: -.01em;
-    }
-
-    p {
-      margin: 0;
-      color: var(--soft-text);
-      line-height: 1.72;
-    }
-
-    .lead {
-      font-size: clamp(1.05rem, 1.35vw, 1.28rem);
-      line-height: 1.75;
-      color: var(--soft-text);
-    }
-
-    .tiny {
-      color: var(--muted);
-      font-size: .77rem;
-      line-height: 1.55;
-    }
-
-    .mono { font-family: var(--font-data); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 46px;
-      padding: 10px 18px;
-      border: 0;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 900;
-      transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s ease;
-      white-space: nowrap;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      color: var(--white);
-      background: linear-gradient(135deg, var(--lake-900), var(--lake-700));
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-primary:hover { box-shadow: var(--shadow-lg); }
-
-    .btn-soft {
-      color: var(--lake-900);
-      background: var(--lake-100);
-      border: 1px solid rgba(42,157,183,.20);
-    }
-
-    .btn-ghost {
-      color: var(--navy);
-      background: rgba(255,255,255,.72);
-      border: 1px solid var(--line);
-    }
-
-    .btn-dark {
-      color: var(--white);
-      background: var(--ink);
-    }
-
-    .hero {
-      position: relative;
-      padding: clamp(48px, 8vw, 96px) 0 48px;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 18% 36%, rgba(42,157,183,.18), transparent 24%),
-        radial-gradient(circle at 76% 22%, rgba(231,185,79,.12), transparent 18%);
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(420px, .95fr);
-      gap: clamp(24px, 4vw, 54px);
-      align-items: center;
-    }
-
-    .hero h1 {
-      max-width: 13ch;
-      margin-top: 16px;
+    h1 {
+      max-width: 11ch;
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(3.1rem, 7.6vw, 6.8rem);
+      font-weight: 400;
     }
 
     .hero-copy {
-      max-width: 65ch;
-      margin-top: 18px;
+      max-width: 650px;
+      margin-top: 1.3rem;
+      color: var(--text-mid);
+      font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+      line-height: 1.75;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
+      gap: 0.8rem;
+      margin-top: 2rem;
     }
 
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 26px;
-    }
-
-    .meta-chip {
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      border: 1px solid rgba(215,229,223,.95);
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 46px;
+      padding: 0.78rem 1.05rem;
       border-radius: 999px;
-      color: var(--soft-text);
-      background: rgba(255,255,255,.64);
-      box-shadow: var(--shadow-xs);
-      font-size: .78rem;
+      border: 0;
+      text-decoration: none;
+      cursor: pointer;
       font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
-    .meta-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--forest-700);
-      box-shadow: 0 0 0 5px rgba(47,122,98,.12);
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
-    .card {
-      position: relative;
-      border: 1px solid rgba(215,229,223,.94);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(255,255,255,.97), rgba(246,250,248,.94));
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(135deg, rgba(255,255,255,.58), transparent 42%);
-    }
-
-    .card-body {
-      position: relative;
-      z-index: 1;
-      padding: clamp(20px, 2.2vw, 30px);
-    }
-
-    .daily-card {
-      min-height: 560px;
-      transform-style: preserve-3d;
-      transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
-    }
-
-    .daily-card:hover { box-shadow: var(--shadow-lg); }
-
-    .daily-card-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: flex-start;
-      margin-bottom: 18px;
-    }
-
-    .live-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 11px;
-      border-radius: 999px;
-      color: var(--forest-900);
-      background: rgba(47,122,98,.12);
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-weight: 950;
-    }
-
-    .live-badge::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: var(--forest-700);
-      animation: pulseDot 1.8s ease-in-out infinite;
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(47,122,98,.30); }
-      50% { box-shadow: 0 0 0 9px rgba(47,122,98,0); }
-    }
-
-    .weather-orb {
-      position: relative;
-      min-height: 230px;
-      border-radius: 34px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 36% 34%, rgba(255,255,255,.95), transparent 8%),
-        radial-gradient(circle at 55% 48%, rgba(255,255,255,.62), transparent 13%),
-        linear-gradient(135deg, rgba(74,163,223,.34), rgba(47,122,98,.18));
-      border: 1px solid rgba(215,229,223,.72);
-    }
-
-    .weather-orb::before {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      left: 50%;
-      top: 55%;
-      transform: translate(-50%, -50%);
-      border-radius: 46% 54% 54% 46% / 48% 45% 55% 52%;
-      background:
-        radial-gradient(circle at 44% 38%, rgba(42,157,183,.26), transparent 16%),
-        linear-gradient(135deg, rgba(255,255,255,.78), rgba(230,245,247,.56));
-      border: 2px solid rgba(15,58,83,.16);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.6), var(--shadow-xs);
-      animation: floatIsland 8s ease-in-out infinite;
-    }
-
-    .weather-orb::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(31,126,193,.55) 0 2px, transparent 3px),
-        radial-gradient(circle, rgba(47,122,98,.48) 0 2px, transparent 3px),
-        radial-gradient(circle, rgba(231,185,79,.70) 0 2px, transparent 3px);
-      background-size: 76px 68px, 96px 82px, 118px 102px;
-      background-position: 15px 18px, 52px 26px, 18px 78px;
-      opacity: .9;
-      animation: driftDots 20s linear infinite;
-    }
-
-    @keyframes floatIsland {
-      0%, 100% { transform: translate(-50%, -50%) rotate(-2deg); }
-      50% { transform: translate(-50%, -54%) rotate(2deg); }
-    }
-
-    @keyframes driftDots {
-      from { background-position: 15px 18px, 52px 26px, 18px 78px; }
-      to { background-position: 91px 86px, 148px 108px, 136px 180px; }
-    }
-
-    .daily-values {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .daily-value {
-      padding: 15px;
-      border: 1px solid var(--line-soft);
-      border-radius: 20px;
-      background: rgba(255,255,255,.68);
-    }
-
-    .data-label {
-      display: block;
-      color: var(--muted);
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-weight: 950;
-    }
-
-    .data-number {
-      display: block;
-      margin-top: 10px;
-      font-family: var(--font-data);
-      font-size: clamp(1.55rem, 3vw, 2.6rem);
-      line-height: 1;
-      letter-spacing: -.06em;
-      font-weight: 800;
-      color: var(--lake-900);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: .72rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-weight: 950;
-    }
-
-    .badge::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: currentColor;
-    }
-
-    .badge-normal { color: var(--risk-normal); background: rgba(47,122,98,.12); }
-    .badge-watch { color: #9a6d0a; background: rgba(213,161,30,.17); }
-    .badge-high { color: var(--risk-high); background: rgba(214,106,42,.14); }
-    .badge-extreme { color: var(--risk-extreme); background: rgba(163,59,53,.14); }
-    .badge-rain { color: var(--rain-800); background: rgba(74,163,223,.14); }
-    .badge-source { color: var(--lake-700); background: rgba(42,157,183,.12); }
-
-    .section {
-      padding: clamp(46px, 7vw, 84px) 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 26px;
-      margin-bottom: 24px;
-    }
-
-    .section-head p { max-width: 72ch; }
-
-    .grid { display: grid; gap: 16px; }
-    .kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .two-col { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); }
-    .three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .four-col { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .kpi-card {
-      min-height: 188px;
-      transition: transform .22s var(--ease-out), box-shadow .22s var(--ease-out);
-    }
-
-    .kpi-card:hover {
-      transform: translateY(-4px);
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--lake-deep), var(--lake-mid));
       box-shadow: var(--shadow-md);
     }
 
-    .kpi-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      margin-bottom: 18px;
-      color: var(--lake-900);
-      background: var(--lake-100);
+    .btn-primary:hover {
+      box-shadow: var(--shadow-lg);
     }
 
-    .kpi-card[data-theme="rain"] .kpi-icon { color: var(--rain-800); background: var(--rain-100); }
-    .kpi-card[data-theme="forest"] .kpi-icon { color: var(--forest-900); background: var(--forest-100); }
-    .kpi-card[data-theme="maize"] .kpi-icon { color: var(--maize-700); background: var(--maize-100); }
-    .kpi-card[data-theme="earth"] .kpi-icon { color: var(--earth-700); background: var(--earth-100); }
-
-    .kpi-big {
-      display: block;
-      margin: 12px 0 8px;
-      font-family: var(--font-data);
-      font-size: clamp(2rem, 4vw, 4rem);
-      line-height: .95;
-      font-weight: 800;
-      letter-spacing: -.07em;
-      color: var(--lake-900);
+    .btn-soft {
+      color: var(--lake-deep);
+      background: var(--lake-pale);
+      border: 1px solid rgba(42, 157, 183, 0.22);
     }
 
-    .kpi-card p { font-size: .92rem; }
-
-    .map-stage {
-      display: grid;
-      grid-template-columns: 320px minmax(0, 1fr) 370px;
-      gap: 14px;
-      min-height: min(760px, calc(100vh - 148px));
-    }
-
-    .map-panel {
-      border: 1px solid rgba(215,229,223,.95);
-      border-radius: 25px;
-      background: rgba(255,255,255,.90);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-    }
-
-    .map-panel-head {
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--line-soft);
-      background: rgba(243,248,246,.92);
-    }
-
-    .map-panel-body {
-      padding: 16px 18px;
-      max-height: 690px;
-      overflow: auto;
-    }
-
-    .search-field {
-      width: 100%;
-      min-height: 44px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 10px 12px;
-      color: var(--ink);
-      background: var(--white);
-      outline: none;
-      transition: border .2s ease, box-shadow .2s ease;
-    }
-
-    .search-field:focus {
-      border-color: var(--lake-500);
-      box-shadow: 0 0 0 4px rgba(42,157,183,.14);
-    }
-
-    .layer-list {
-      display: grid;
-      gap: 9px;
-      margin-top: 14px;
-    }
-
-    .layer-button {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px;
-      border: 1px solid var(--line-soft);
-      border-radius: 17px;
-      color: var(--ink);
-      background: var(--surface-soft);
-      text-align: left;
-      transition: transform .18s var(--ease-out), border .18s ease, background .18s ease;
-    }
-
-    .layer-button:hover {
-      transform: translateY(-1px);
-      border-color: rgba(42,157,183,.36);
-      background: var(--lake-100);
-    }
-
-    .layer-button.is-active {
-      border-color: rgba(42,157,183,.45);
-      background: linear-gradient(135deg, var(--lake-100), rgba(255,255,255,.84));
-    }
-
-    .layer-button strong {
-      display: block;
-      color: var(--navy);
-      font-size: .9rem;
-      line-height: 1.2;
-    }
-
-    .layer-button span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: .74rem;
-      line-height: 1.35;
-    }
-
-    .toggle-pill {
-      width: 38px;
-      height: 22px;
-      padding: 3px;
-      border-radius: 999px;
-      background: #d6e5df;
-      flex: 0 0 auto;
-      transition: background .2s ease;
-    }
-
-    .toggle-pill::before {
-      content: "";
-      display: block;
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      background: var(--white);
-      box-shadow: 0 2px 7px rgba(14,36,51,.18);
-      transition: transform .2s var(--ease-out);
-    }
-
-    .layer-button.is-active .toggle-pill { background: var(--lake-700); }
-    .layer-button.is-active .toggle-pill::before { transform: translateX(16px); }
-
-    .map-canvas {
+    .hero-panel {
       position: relative;
-      min-height: 690px;
-      border: 1px solid rgba(215,229,223,.95);
-      border-radius: 32px;
+      min-height: 430px;
+      border-radius: 2.2rem;
+      border: 1px solid var(--border);
       background:
-        radial-gradient(circle at 50% 44%, rgba(74,163,223,.20), transparent 22%),
-        radial-gradient(circle at 60% 60%, rgba(47,122,98,.18), transparent 20%),
-        linear-gradient(135deg, #dff3f6, #eef7ef 56%, #f9f2de);
-      box-shadow: var(--shadow-md);
+        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,255,255,0.68)),
+        radial-gradient(circle at 30% 25%, rgba(42,157,183,0.18), transparent 30%),
+        radial-gradient(circle at 80% 15%, rgba(231,185,79,0.18), transparent 30%);
+      box-shadow: var(--shadow-lg);
       overflow: hidden;
       isolation: isolate;
     }
 
-    .map-canvas::before {
+    .hero-panel::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(15,58,83,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15,58,83,.055) 1px, transparent 1px);
-      background-size: 38px 38px;
-      mask-image: radial-gradient(circle at 50% 45%, rgba(0,0,0,.9), transparent 82%);
-      z-index: 0;
+      background:
+        linear-gradient(rgba(15,58,83,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,58,83,0.045) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.9), transparent 78%);
+      z-index: -1;
     }
 
-    .lake-shape {
+    .panel-map {
       position: absolute;
-      left: 40%;
-      top: 42%;
-      width: 210px;
-      height: 120px;
+      inset: 3.2rem 3rem 5.5rem 3rem;
+      border-radius: 47% 53% 48% 52% / 55% 42% 58% 45%;
+      background:
+        radial-gradient(circle at 45% 48%, rgba(42,157,183,0.62), transparent 17%),
+        linear-gradient(135deg, rgba(47,122,98,0.28), rgba(42,157,183,0.16));
+      border: 2px solid rgba(15,58,83,0.15);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.60);
+      animation: floatMap 8s ease-in-out infinite;
+    }
+
+    .panel-lake {
+      position: absolute;
+      width: 180px;
+      height: 96px;
+      left: 43%;
+      top: 43%;
       transform: translate(-50%, -50%) rotate(-10deg);
-      border-radius: 44% 56% 58% 42% / 48% 44% 56% 52%;
-      background: linear-gradient(135deg, rgba(42,157,183,.88), rgba(31,126,193,.74));
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,.32), 0 16px 40px rgba(15,58,83,.18);
-      z-index: 1;
-      animation: lakeFloat 8s ease-in-out infinite;
+      border-radius: 48% 52% 58% 42% / 48% 42% 58% 52%;
+      background: linear-gradient(135deg, var(--lake-light), var(--rain));
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.32), 0 20px 50px rgba(15,58,83,0.18);
     }
 
-    @keyframes lakeFloat {
-      0%, 100% { transform: translate(-50%, -50%) rotate(-10deg) scale(1); }
-      50% { transform: translate(-50%, -53%) rotate(-8deg) scale(1.02); }
-    }
-
-    .territory-shape {
+    .panel-dot {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      width: min(80%, 660px);
-      height: min(76%, 520px);
-      transform: translate(-50%, -50%);
-      border-radius: 50% 50% 44% 56% / 54% 42% 58% 46%;
-      background: rgba(255,255,255,.34);
-      border: 2px solid rgba(15,58,83,.18);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.52);
-      z-index: 1;
-    }
-
-    .zone-patch {
-      position: absolute;
-      border: 1px solid rgba(255,255,255,.55);
-      box-shadow: inset 0 0 0 1px rgba(15,58,83,.04);
-      opacity: .84;
-      z-index: 2;
-      transition: opacity .2s ease, transform .2s var(--ease-out);
-    }
-
-    .zone-patch:hover { opacity: 1; transform: translateY(-2px); }
-    .zone-a { left: 22%; top: 20%; width: 26%; height: 23%; border-radius: 50% 42% 60% 40%; background: rgba(143,209,220,.64); }
-    .zone-b { left: 47%; top: 21%; width: 28%; height: 25%; border-radius: 44% 56% 52% 48%; background: rgba(191,229,204,.70); }
-    .zone-c { left: 23%; top: 45%; width: 28%; height: 30%; border-radius: 48% 52% 44% 56%; background: rgba(255,231,160,.64); }
-    .zone-d { left: 52%; top: 48%; width: 25%; height: 27%; border-radius: 42% 58% 52% 48%; background: rgba(228,196,168,.70); }
-
-    .station {
-      position: absolute;
-      z-index: 5;
-      width: 20px;
-      height: 20px;
-      border: 0;
+      width: 17px;
+      height: 17px;
       border-radius: 999px;
-      background: var(--maize-500);
-      box-shadow: 0 0 0 4px rgba(255,255,255,.95), 0 8px 18px rgba(14,36,51,.25);
-      transform: translate(-50%, -50%);
-      transition: transform .18s var(--ease-out), box-shadow .18s ease, background .18s ease;
+      background: var(--maize);
+      box-shadow: 0 0 0 5px rgba(255,255,255,0.92), 0 8px 20px rgba(14,36,51,0.22);
     }
 
-    .station:hover,
-    .station.is-selected {
-      transform: translate(-50%, -50%) scale(1.28);
-      background: var(--risk-high);
-      box-shadow: 0 0 0 6px rgba(255,255,255,.98), 0 14px 28px rgba(14,36,51,.30);
-    }
+    .panel-dot:nth-child(3) { left: 24%; top: 30%; }
+    .panel-dot:nth-child(4) { left: 62%; top: 29%; }
+    .panel-dot:nth-child(5) { left: 36%; top: 58%; }
+    .panel-dot:nth-child(6) { left: 72%; top: 62%; }
+    .panel-dot:nth-child(7) { left: 50%; top: 74%; }
 
-    .station::after {
-      content: attr(data-short);
+    .panel-card {
       position: absolute;
-      left: 50%;
-      top: calc(100% + 8px);
-      transform: translateX(-50%);
-      padding: 4px 7px;
-      border-radius: 999px;
-      color: var(--lake-950);
-      background: rgba(255,255,255,.88);
-      font-size: .66rem;
-      font-weight: 900;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease, transform .18s ease;
-      box-shadow: var(--shadow-xs);
-    }
-
-    .station:hover::after,
-    .station.is-selected::after {
-      opacity: 1;
-      transform: translateX(-50%) translateY(2px);
-    }
-
-    .map-toolbar {
-      position: absolute;
-      left: 18px;
-      top: 18px;
-      z-index: 10;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .map-tool {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 38px;
-      padding: 8px 10px;
-      border: 1px solid rgba(255,255,255,.75);
-      border-radius: 999px;
-      color: var(--lake-950);
-      background: rgba(255,255,255,.78);
-      box-shadow: var(--shadow-xs);
-      backdrop-filter: blur(12px);
-      font-size: .75rem;
-      font-weight: 900;
-    }
-
-    .map-legend {
-      position: absolute;
-      left: 18px;
-      bottom: 18px;
-      z-index: 10;
-      width: min(320px, calc(100% - 36px));
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.72);
-      border-radius: 20px;
-      background: rgba(255,255,255,.82);
-      box-shadow: var(--shadow-sm);
-      backdrop-filter: blur(14px);
-    }
-
-    .legend-row {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-top: 8px;
-      color: var(--soft-text);
-      font-size: .78rem;
-      font-weight: 700;
-    }
-
-    .legend-swatch {
-      width: 28px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--lake-500);
-    }
-
-    .detail-block {
+      left: 1.5rem;
+      right: 1.5rem;
+      bottom: 1.5rem;
       display: grid;
-      gap: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      z-index: 4;
     }
 
-    .detail-hero {
-      padding: 16px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, var(--lake-100), rgba(255,255,255,.88));
-      border: 1px solid rgba(42,157,183,.18);
+    .mini-kpi {
+      padding: 0.95rem;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(15,58,83,0.10);
+      backdrop-filter: blur(10px);
     }
 
-    .detail-hero p { margin-top: 8px; }
-
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .detail-metric {
-      padding: 12px;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: rgba(255,255,255,.72);
-    }
-
-    .detail-metric strong {
+    .mini-kpi span {
       display: block;
-      font-family: var(--font-data);
-      font-size: 1.35rem;
-      line-height: 1;
-      color: var(--lake-900);
-      margin-top: 7px;
-    }
-
-    .credit-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 14px;
-    }
-
-    .credit-line span {
-      display: inline-flex;
-      align-items: center;
-      padding: 5px 9px;
-      border: 1px solid var(--line-soft);
-      border-radius: 999px;
-      color: var(--muted);
-      background: rgba(255,255,255,.72);
-      font-size: .72rem;
+      color: var(--text-soft);
+      font-size: 0.68rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
       font-weight: 800;
     }
 
-    .chart-card {
-      min-height: 360px;
-      border-radius: 30px;
-      background: #fff;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-sm);
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    .chart-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-
-    .chart-title {
+    .mini-kpi strong {
       display: block;
-      color: var(--navy);
-      font-weight: 950;
-      letter-spacing: -.02em;
+      margin-top: 0.35rem;
+      color: var(--lake-deep);
+      font-size: 1.55rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.06em;
     }
 
-    .chart-meta {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: .82rem;
+    @keyframes floatMap {
+      0%, 100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+      50% {
+        transform: translateY(-10px) rotate(1deg);
+      }
     }
 
-    .bars {
-      position: relative;
-      height: 220px;
+    .section {
+      padding: clamp(2.8rem, 6vw, 5rem) 0;
+    }
+
+    .section-head {
       display: flex;
       align-items: end;
-      gap: 9px;
-      padding: 20px 4px 0;
-      border-bottom: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(74,163,223,.09), transparent 58%),
-        repeating-linear-gradient(to top, transparent 0 43px, rgba(15,58,83,.06) 44px);
-    }
-
-    .bar {
-      position: relative;
-      flex: 1;
-      min-width: 9px;
-      border-radius: 999px 999px 5px 5px;
-      background: linear-gradient(180deg, var(--rain-500), var(--rain-800));
-      transform-origin: bottom;
-      animation: growBar .9s var(--ease-out) both;
-      animation-delay: calc(var(--i) * 45ms);
-    }
-
-    .bar:hover::after {
-      opacity: 1;
-      transform: translate(-50%, -8px);
-    }
-
-    .bar::after {
-      content: attr(data-value) " mm";
-      position: absolute;
-      left: 50%;
-      bottom: calc(100% + 9px);
-      transform: translate(-50%, 0);
-      padding: 4px 7px;
-      border-radius: 999px;
-      color: var(--white);
-      background: var(--lake-900);
-      font-size: .68rem;
-      font-weight: 850;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease, transform .18s ease;
-    }
-
-    @keyframes growBar {
-      from { transform: scaleY(.05); opacity: .25; }
-      to { transform: scaleY(1); opacity: 1; }
-    }
-
-    .chart-foot {
-      display: flex;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 13px;
-      color: var(--muted);
-      font-size: .78rem;
-      font-weight: 750;
+      gap: 2rem;
+      margin-bottom: 1.6rem;
     }
 
-    .map-catalog {
+    .section-head h2 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      font-weight: 400;
+    }
+
+    .section-head p {
+      max-width: 580px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .modules-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      gap: 1rem;
     }
 
-    .map-group-card {
-      min-height: 260px;
-      transition: transform .22s var(--ease-out), box-shadow .22s var(--ease-out);
+    .module-card {
+      position: relative;
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      padding: 1.35rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.84);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
 
-    .map-group-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
+    .module-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 84% 14%, var(--module-glow, rgba(42,157,183,0.16)), transparent 34%),
+        linear-gradient(135deg, rgba(255,255,255,0.42), transparent 48%);
+      pointer-events: none;
     }
 
-    .map-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 16px;
+    .module-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-strong);
     }
 
-    .map-list-item {
+    .module-top {
+      position: relative;
+      z-index: 1;
       display: flex;
       justify-content: space-between;
-      gap: 10px;
-      padding: 10px 11px;
-      border-radius: 15px;
-      color: var(--soft-text);
-      background: rgba(243,248,246,.82);
-      border: 1px solid var(--line-soft);
-      font-size: .82rem;
-      font-weight: 750;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
     }
 
-    .map-list-item span:last-child { color: var(--muted); font-size: .74rem; }
-
-    .workflow {
-      position: relative;
+    .module-icon {
+      width: 54px;
+      height: 54px;
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .workflow-step {
-      position: relative;
-      min-height: 210px;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: rgba(255,255,255,.82);
-      box-shadow: var(--shadow-xs);
-      overflow: hidden;
-    }
-
-    .workflow-step::before {
-      content: attr(data-step);
-      display: inline-grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
-      margin-bottom: 22px;
-      border-radius: 15px;
-      color: var(--white);
-      background: var(--lake-700);
-      font-family: var(--font-data);
-      font-weight: 800;
+      border-radius: 1.05rem;
+      color: var(--module-color, var(--lake-deep));
+      background: var(--module-soft, var(--lake-pale));
+      font-size: 1.35rem;
     }
 
-    .workflow-step h3 { font-size: 1.05rem; margin-bottom: 8px; }
-    .workflow-step p { font-size: .88rem; }
-
-    .municipal-grid {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .municipality-chip {
-      padding: 12px;
-      border: 1px solid var(--line-soft);
-      border-radius: 17px;
-      color: var(--navy);
-      background: rgba(255,255,255,.72);
-      font-size: .82rem;
-      font-weight: 850;
-      text-align: left;
-      transition: transform .18s var(--ease-out), background .18s ease, border .18s ease;
-    }
-
-    .municipality-chip:hover,
-    .municipality-chip.is-active {
-      transform: translateY(-2px);
-      border-color: rgba(42,157,183,.36);
-      background: var(--lake-100);
-    }
-
-    .bulletin-card {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 18px;
-      min-height: 420px;
-    }
-
-    .bulletin-preview {
-      position: relative;
-      border-radius: 28px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, #ffffff 0 16%, #eaf4f8 16% 58%, #fff 58% 100%);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-sm);
-      min-height: 420px;
-    }
-
-    .bulletin-logos {
-      height: 58px;
-      display: flex;
+    .module-status {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 10px;
-      border-bottom: 1px solid var(--line-soft);
-      background: #fff;
-    }
-
-    .logo-dot {
-      width: 26px;
-      height: 16px;
+      gap: 0.4rem;
+      padding: 0.38rem 0.55rem;
       border-radius: 999px;
-      background: var(--lake-300);
-    }
-
-    .logo-dot:nth-child(2n) { background: var(--forest-200); }
-    .logo-dot:nth-child(3n) { background: var(--maize-500); }
-    .logo-dot:nth-child(4n) { background: var(--earth-500); }
-
-    .bulletin-title {
-      padding: 18px;
-      text-align: center;
-    }
-
-    .bulletin-title strong {
-      display: block;
-      color: var(--navy);
-      font-size: 1.08rem;
-      letter-spacing: .04em;
+      color: var(--module-color, var(--lake-deep));
+      background: var(--module-soft, var(--lake-pale));
+      font-size: 0.72rem;
+      font-weight: 800;
       text-transform: uppercase;
-      font-weight: 950;
+      letter-spacing: 0.07em;
     }
 
-    .bulletin-title span {
-      display: block;
-      margin-top: 6px;
-      color: var(--lake-700);
-      font-family: var(--font-display);
-      font-size: 2rem;
+    .module-status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+
+    .module-body {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .module-body h3 {
+      font-size: 1.45rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.035em;
+    }
+
+    .module-body p {
+      color: var(--text-mid);
+      line-height: 1.68;
+      font-size: 0.95rem;
+    }
+
+    .module-meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1.15rem;
+    }
+
+    .module-meta span {
+      display: inline-flex;
+      padding: 0.36rem 0.55rem;
+      border-radius: 999px;
+      color: var(--text-soft);
+      background: rgba(255,255,255,0.70);
+      border: 1px solid rgba(15,58,83,0.08);
+      font-size: 0.75rem;
       font-weight: 700;
     }
 
-    .bulletin-map-mini {
-      position: absolute;
-      left: 24px;
-      top: 188px;
-      width: 40%;
-      height: 120px;
-      border-radius: 30px;
-      background: rgba(42,157,183,.24);
-      border: 2px solid rgba(15,58,83,.14);
+    .module-enter {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: auto;
+      padding-top: 1.4rem;
+      color: var(--module-color, var(--lake-deep));
+      font-weight: 800;
     }
 
-    .bulletin-cloud {
-      position: absolute;
-      right: 34px;
-      top: 172px;
-      width: 130px;
-      height: 66px;
-      border-radius: 999px;
-      background: rgba(74,163,223,.42);
-      box-shadow: 18px 18px 0 rgba(74,163,223,.24), -20px 22px 0 rgba(74,163,223,.20);
-      animation: cloudMove 7s ease-in-out infinite;
+    .module-enter i {
+      transition: transform 0.2s ease;
     }
 
-    .bulletin-cloud::after {
-      content: "";
-      position: absolute;
-      left: 18px;
-      top: 82px;
-      width: 7px;
-      height: 28px;
-      border-radius: 999px;
-      background: var(--rain-500);
-      box-shadow: 30px 8px 0 var(--rain-500), 60px 0 0 var(--rain-500), 90px 10px 0 var(--rain-500);
-      opacity: .72;
+    .module-card:hover .module-enter i {
+      transform: translateX(5px);
     }
 
-    @keyframes cloudMove {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(8px); }
+    .module-rain {
+      --module-color: var(--rain);
+      --module-soft: var(--rain-soft);
+      --module-glow: rgba(31,126,193,0.18);
     }
 
-    .bulletin-footer-band {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 36px;
-      background: var(--navy);
+    .module-stations {
+      --module-color: var(--maize-dark);
+      --module-soft: var(--maize-soft);
+      --module-glow: rgba(231,185,79,0.22);
     }
 
-    .source-grid {
+    .module-forecast {
+      --module-color: var(--lake-mid);
+      --module-soft: var(--lake-pale);
+      --module-glow: rgba(42,157,183,0.18);
+    }
+
+    .module-risk {
+      --module-color: var(--risk);
+      --module-soft: var(--risk-soft);
+      --module-glow: rgba(214,106,42,0.20);
+    }
+
+    .module-drought {
+      --module-color: var(--coffee);
+      --module-soft: var(--coffee-soft);
+      --module-glow: rgba(122,75,52,0.18);
+    }
+
+    .module-crops {
+      --module-color: var(--forest);
+      --module-soft: var(--forest-soft);
+      --module-glow: rgba(47,122,98,0.18);
+    }
+
+    .module-bulletins {
+      --module-color: var(--lake-deep);
+      --module-soft: var(--lake-pale);
+      --module-glow: rgba(15,58,83,0.18);
+    }
+
+    .module-sources {
+      --module-color: var(--forest-dark);
+      --module-soft: var(--forest-soft);
+      --module-glow: rgba(22,63,55,0.16);
+    }
+
+    .module-admin {
+      --module-color: #5d6470;
+      --module-soft: #f1f3f5;
+      --module-glow: rgba(93,100,112,0.16);
+    }
+
+    .info-strip {
+      margin-top: 1rem;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
     }
 
-    .source-card {
-      min-height: 210px;
+    .info-card {
+      padding: 1.4rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.78);
+      box-shadow: var(--shadow-sm);
     }
 
-    .source-logo {
-      width: 52px;
-      height: 52px;
+    .info-card h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.15rem;
+    }
+
+    .info-card p {
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .steps {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
       display: grid;
       place-items: center;
-      border-radius: 18px;
+      border-radius: 0.75rem;
       color: var(--white);
-      background: linear-gradient(135deg, var(--lake-900), var(--lake-500));
-      font-weight: 950;
-      margin-bottom: 18px;
+      background: var(--lake-mid);
+      font-size: 0.8rem;
+      font-weight: 800;
     }
 
-    .table-wrap {
-      overflow: auto;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--surface);
-      box-shadow: var(--shadow-xs);
+    .step strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 0.1rem;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    .step span {
+      display: block;
+      color: var(--text-soft);
+      line-height: 1.55;
+      font-size: 0.9rem;
     }
 
-    th, td {
-      padding: 14px 15px;
-      border-bottom: 1px solid var(--line-soft);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      color: var(--navy);
-      background: var(--surface-soft);
-      font-size: .74rem;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-      font-weight: 950;
-    }
-
-    td {
-      color: var(--soft-text);
-      font-size: .9rem;
-    }
-
-    td strong { color: var(--ink); }
-
-    .site-footer {
-      padding: 42px 0;
-      color: rgba(255,255,255,.82);
-      background: linear-gradient(135deg, var(--lake-950), var(--navy));
+    .footer {
+      margin-top: 2rem;
+      padding: 2.5rem 0;
+      color: rgba(255,255,255,0.78);
+      background: linear-gradient(135deg, var(--lake-deep), #082537);
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.2fr .8fr .8fr;
-      gap: 22px;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
       align-items: start;
     }
 
-    .site-footer h3,
-    .site-footer h4 { color: var(--white); }
-    .site-footer p { color: rgba(255,255,255,.76); }
-    .footer-links { display: grid; gap: 8px; margin-top: 12px; }
-    .footer-links a { color: rgba(255,255,255,.78); text-decoration: none; font-weight: 750; }
-    .footer-links a:hover { color: var(--white); }
+    .footer h2,
+    .footer h3 {
+      color: var(--white);
+    }
+
+    .footer h2 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 0.7rem;
+    }
+
+    .footer p {
+      max-width: 680px;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
 
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
 
-    .reveal.is-visible {
+    .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .stagger > * {
+    .module-card {
       opacity: 0;
       transform: translateY(18px);
-      transition: opacity .55s var(--ease-out), transform .55s var(--ease-out);
+      animation: cardIn 0.7s ease forwards;
+      animation-delay: calc(var(--i, 0) * 70ms);
     }
 
-    .stagger.is-visible > * {
-      opacity: 1;
-      transform: translateY(0);
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .stagger.is-visible > *:nth-child(1) { transition-delay: 50ms; }
-    .stagger.is-visible > *:nth-child(2) { transition-delay: 110ms; }
-    .stagger.is-visible > *:nth-child(3) { transition-delay: 170ms; }
-    .stagger.is-visible > *:nth-child(4) { transition-delay: 230ms; }
-    .stagger.is-visible > *:nth-child(5) { transition-delay: 290ms; }
-    .stagger.is-visible > *:nth-child(6) { transition-delay: 350ms; }
-
-    .toast {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 100;
-      max-width: 360px;
-      padding: 14px 16px;
-      border: 1px solid rgba(215,229,223,.9);
-      border-radius: 20px;
-      color: var(--ink);
-      background: rgba(255,255,255,.94);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(16px);
-      transform: translateY(24px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .24s ease, transform .24s var(--ease-out);
-    }
-
-    .toast.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    @media (max-width: 1240px) {
+    @media (max-width: 1020px) {
       .hero-grid,
-      .two-col,
-      .bulletin-card { grid-template-columns: 1fr; }
-      .map-stage { grid-template-columns: 290px 1fr; }
-      .map-stage .map-panel:last-child { grid-column: 1 / -1; }
-      .map-catalog { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .workflow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .source-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .municipal-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .info-strip,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        min-height: 370px;
+      }
+
+      .modules-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      h1 {
+        max-width: 13ch;
+      }
     }
 
-    @media (max-width: 920px) {
-      :root { --header-h: 72px; }
-      .site-header { padding: 10px 16px; }
-      .brand { min-width: auto; }
-      .brand-title { font-size: .9rem; }
-      .brand-kicker { font-size: .66rem; }
-      .main-nav { display: none; }
-      .mobile-nav-toggle { display: grid; }
-      .header-actions { margin-left: auto; }
-      .hero { padding-top: 42px; }
-      .kpi-grid, .three-col, .four-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .map-stage { grid-template-columns: 1fr; }
-      .map-panel-body { max-height: none; }
-      .map-canvas { min-height: 560px; }
-      .workflow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .footer-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 760px) {
+      body {
+        padding-top: 68px;
+      }
 
-    @media (max-width: 660px) {
-      :root { --wrap: min(100vw - 22px, 100%); }
-      .brand-mark { width: 44px; height: 44px; flex-basis: 44px; }
-      .header-actions .btn { display: none; }
-      h1, .display-title { font-size: clamp(2.25rem, 13vw, 3.85rem); }
-      .hero-actions { display: grid; }
-      .btn { width: 100%; }
-      .daily-values, .kpi-grid, .three-col, .four-col, .map-catalog, .workflow, .source-grid, .municipal-grid, .detail-grid { grid-template-columns: 1fr; }
-      .section-head { display: grid; align-items: start; }
-      .map-canvas { min-height: 500px; border-radius: 24px; }
-      .map-toolbar { left: 12px; top: 12px; }
-      .map-legend { left: 12px; bottom: 12px; width: calc(100% - 24px); }
-      .chart-card { padding: 14px; border-radius: 24px; }
-      .bars { gap: 5px; }
-      .toast { left: 12px; right: 12px; max-width: none; }
+      .navbar {
+        height: 68px;
+      }
+
+      .brand-title strong {
+        font-size: 0.86rem;
+      }
+
+      .brand-title span {
+        font-size: 0.66rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-btn {
+        display: grid;
+        place-items: center;
+      }
+
+      .hero {
+        padding-top: 2.4rem;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 0.8rem;
+      }
+
+      .panel-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        min-height: 500px;
+      }
+
+      .panel-map {
+        inset: 2rem 1.6rem 12.5rem 1.6rem;
+      }
+
+      .panel-lake {
+        width: 150px;
+        height: 82px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .001ms !important;
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: .001ms !important;
+        transition-duration: 0.001ms !important;
         scroll-behavior: auto !important;
       }
-      .reveal, .stagger > * { opacity: 1; transform: none; }
+
+      .reveal,
+      .module-card {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
+
 <body>
-  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="./" aria-label="Inicio Plataforma Agroclimática de Sololá">
+        <span class="brand-mark">MTA</span>
+        <span class="brand-title">
+          <span>Sololá</span>
+          <strong>Plataforma Agroclimática</strong>
+        </span>
+      </a>
 
-  <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Inicio Plataforma Agroclimática de Sololá">
-      <span class="brand-mark">MTA</span>
-      <span>
-        <span class="brand-kicker">Sololá</span>
-        <span class="brand-title">Plataforma Agroclimática</span>
-      </span>
-    </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#modulos">Módulos</a>
+        <a href="#flujo">Datos diarios</a>
+        <a href="#creditos">Créditos</a>
+      </nav>
 
-    <nav class="main-nav" aria-label="Navegación principal">
-      <a href="#inicio" aria-current="page">Inicio</a>
-      <a href="#mapa-diario">Mapa diario</a>
-      <a href="#atlas">Atlas</a>
-      <a href="#estaciones">Estaciones</a>
-      <a href="#graficas">Gráficas</a>
-      <a href="#boletines">Boletines</a>
-      <a href="#fuentes">Fuentes</a>
-    </nav>
-
-    <div class="header-actions">
-      <a class="btn btn-ghost" href="#boletines">Último boletín</a>
-      <button class="icon-button mobile-nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-mobile-toggle>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-btn>
+        <i class="bi bi-list"></i>
       </button>
     </div>
   </header>
 
-  <nav class="mobile-sheet" aria-label="Navegación móvil" data-mobile-sheet>
-    <a href="#inicio">Inicio</a>
-    <a href="#mapa-diario">Mapa diario</a>
-    <a href="#atlas">Atlas</a>
-    <a href="#estaciones">Estaciones</a>
-    <a href="#graficas">Gráficas</a>
-    <a href="#boletines">Boletines</a>
-    <a href="#fuentes">Fuentes</a>
+  <nav class="mobile-menu" aria-label="Menú móvil" data-mobile-menu>
+    <a href="#modulos">Módulos</a>
+    <a href="#flujo">Datos diarios</a>
+    <a href="#creditos">Créditos</a>
   </nav>
 
-  <main id="contenido">
-    <section class="hero" id="inicio">
+  <main>
+    <section class="hero">
       <div class="wrap hero-grid">
         <div class="reveal">
-          <span class="eyebrow">Actualización diaria · Mesa Técnica Agroclimática</span>
-          <h1>Datos claros para mejores decisiones en el campo.</h1>
-          <p class="lead hero-copy">Portal interactivo para estaciones meteorológicas, lluvia, temperatura, sequía, riesgos, recomendaciones por cultivo y boletines agroclimáticos del departamento de Sololá.</p>
+          <span class="eyebrow">Mesa Técnica Agroclimática de Sololá</span>
+          <h1>Plataforma Agroclimática</h1>
+          <p class="hero-copy">
+            Sistema de consulta para información meteorológica, mapas interactivos,
+            estaciones, precipitaciones, pronósticos, riesgos agroclimáticos y boletines
+            de apoyo a la toma de decisiones en el departamento de Sololá.
+          </p>
+
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#mapa-diario">Abrir mapa diario</a>
-            <a class="btn btn-soft" href="#atlas">Explorar atlas</a>
-            <a class="btn btn-ghost" href="#estaciones">Ver estaciones</a>
-          </div>
-          <div class="hero-meta">
-            <span class="meta-chip"><span class="meta-dot"></span>Consulta diaria de fuentes autorizadas</span>
-            <span class="meta-chip"><span class="meta-dot"></span>Mapas clicables por municipio y estación</span>
-            <span class="meta-chip"><span class="meta-dot"></span>Créditos visibles por visualización</span>
+            <a class="btn btn-primary" href="#modulos">
+              <i class="bi bi-grid-3x3-gap-fill"></i>
+              Ingresar a módulos
+            </a>
+            <a class="btn btn-soft" href="precipitaciones/">
+              <i class="bi bi-cloud-rain-heavy-fill"></i>
+              Abrir precipitaciones
+            </a>
           </div>
         </div>
 
-        <aside class="card daily-card reveal" data-tilt>
-          <div class="card-body">
-            <div class="daily-card-top">
-              <div>
-                <span class="live-badge">Demo vivo</span>
-                <h2 style="margin-top:14px">Panel agroclimático diario</h2>
+        <div class="hero-panel reveal" aria-label="Ilustración territorial de Sololá">
+          <div class="panel-map"></div>
+          <div class="panel-lake"></div>
+          <span class="panel-dot"></span>
+          <span class="panel-dot"></span>
+          <span class="panel-dot"></span>
+          <span class="panel-dot"></span>
+          <span class="panel-dot"></span>
+
+          <div class="panel-card">
+            <div class="mini-kpi">
+              <span>Actualización</span>
+              <strong>24h</strong>
+            </div>
+            <div class="mini-kpi">
+              <span>Módulos</span>
+              <strong>09</strong>
+            </div>
+            <div class="mini-kpi">
+              <span>Créditos</span>
+              <strong>MTA</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="modulos">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Acceso principal</span>
+            <h2>Módulos de la plataforma</h2>
+          </div>
+          <p>
+            Cada módulo se desarrolla como una página independiente con datos, mapas,
+            gráficas, fuentes institucionales y créditos visibles.
+          </p>
+        </div>
+
+        <div class="modules-grid">
+          <a class="module-card module-rain" style="--i: 0" href="precipitaciones/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-cloud-rain-heavy-fill"></i></span>
+              <span class="module-status">Prioritario</span>
+            </div>
+            <div class="module-body">
+              <h3>Precipitaciones</h3>
+              <p>
+                Consulta diaria de lluvia observada, acumulados, estaciones, tablas,
+                gráficas y mapas de precipitación para Sololá.
+              </p>
+              <div class="module-meta">
+                <span>INSIVUMEH</span>
+                <span>24 h</span>
+                <span>JSON / CSV</span>
               </div>
-              <span class="badge badge-watch">Atención</span>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
             </div>
+          </a>
 
-            <div class="weather-orb" aria-hidden="true"></div>
-
-            <div class="daily-values">
-              <div class="daily-value">
-                <span class="data-label">Lluvia 24 h</span>
-                <span class="data-number" data-count="18">0</span>
-                <p class="tiny">mm promedio demo</p>
+          <a class="module-card module-stations" style="--i: 1" href="estaciones/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-broadcast-pin"></i></span>
+              <span class="module-status">Base técnica</span>
+            </div>
+            <div class="module-body">
+              <h3>Estaciones meteorológicas</h3>
+              <p>
+                Inventario institucional de estaciones, ubicación, variables disponibles,
+                estado operativo, última actualización y créditos.
+              </p>
+              <div class="module-meta">
+                <span>Estaciones</span>
+                <span>Mapa</span>
+                <span>Fichas</span>
               </div>
-              <div class="daily-value">
-                <span class="data-label">Temp. máx.</span>
-                <span class="data-number" data-count="29">0</span>
-                <p class="tiny">°C estimado demo</p>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a class="module-card module-forecast" style="--i: 2" href="pronostico/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-cloud-sun-fill"></i></span>
+              <span class="module-status">Próximo</span>
+            </div>
+            <div class="module-body">
+              <h3>Pronóstico</h3>
+              <p>
+                Pronóstico oficial, avisos meteorológicos, tendencia de lluvia,
+                temperatura y condiciones esperadas por municipio.
+              </p>
+              <div class="module-meta">
+                <span>Oficial</span>
+                <span>72 h</span>
+                <span>Municipal</span>
               </div>
-              <div class="daily-value">
-                <span class="data-label">Mapas</span>
-                <span class="data-number" data-count="125">0</span>
-                <p class="tiny">capas planificadas</p>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a class="module-card module-risk" style="--i: 3" href="riesgos/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-exclamation-triangle-fill"></i></span>
+              <span class="module-status">Semáforo</span>
+            </div>
+            <div class="module-body">
+              <h3>Riesgos agroclimáticos</h3>
+              <p>
+                Semáforo de lluvia fuerte, deslizamientos, inundación, calor, viento,
+                canícula y otros riesgos relevantes para producción agrícola.
+              </p>
+              <div class="module-meta">
+                <span>Riesgo</span>
+                <span>Alertas</span>
+                <span>Recomendaciones</span>
+              </div>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a class="module-card module-drought" style="--i: 4" href="sequia/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-moisture"></i></span>
+              <span class="module-status">Análisis</span>
+            </div>
+            <div class="module-body">
+              <h3>Sequía</h3>
+              <p>
+                Déficit de lluvia, días secos consecutivos, anomalías, vigilancia de
+                estrés hídrico y condiciones para sequía agrícola.
+              </p>
+              <div class="module-meta">
+                <span>Déficit</span>
+                <span>SPI</span>
+                <span>Días secos</span>
+              </div>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a class="module-card module-crops" style="--i: 5" href="cultivos/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-flower1"></i></span>
+              <span class="module-status">Agro</span>
+            </div>
+            <div class="module-body">
+              <h3>Cultivos y recomendaciones</h3>
+              <p>
+                Recomendaciones técnicas por cultivo, zona agroclimática, municipio,
+                vigencia, riesgo y fuente institucional responsable.
+              </p>
+              <div class="module-meta">
+                <span>Café</span>
+                <span>Maíz</span>
+                <span>Hortalizas</span>
+              </div>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a class="module-card module-bulletins" style="--i: 6" href="boletines/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-file-earmark-richtext-fill"></i></span>
+              <span class="module-status">Mensual</span>
+            </div>
+            <div class="module-body">
+              <h3>Boletines</h3>
+              <p>
+                Archivo de boletines agroclimáticos, versión web interactiva,
+                descarga PDF, mapas del mes y recomendaciones validadas.
+              </p>
+              <div class="module-meta">
+                <span>PDF</span>
+                <span>Web</span>
+                <span>Histórico</span>
+              </div>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a class="module-card module-sources" style="--i: 7" href="fuentes/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-building-check"></i></span>
+              <span class="module-status">Transparencia</span>
+            </div>
+            <div class="module-body">
+              <h3>Fuentes institucionales</h3>
+              <p>
+                Instituciones participantes, enlaces originales, tipo de información,
+                frecuencia de consulta, créditos y metodología.
+              </p>
+              <div class="module-meta">
+                <span>Créditos</span>
+                <span>Fuentes</span>
+                <span>Método</span>
+              </div>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+
+          <a class="module-card module-admin" style="--i: 8" href="admin/">
+            <div class="module-top">
+              <span class="module-icon"><i class="bi bi-sliders2-vertical"></i></span>
+              <span class="module-status">Interno</span>
+            </div>
+            <div class="module-body">
+              <h3>Administración</h3>
+              <p>
+                Monitor de fuentes, revisión de datos, publicación de alertas,
+                editor de recomendaciones y generador de boletines.
+              </p>
+              <div class="module-meta">
+                <span>Revisión</span>
+                <span>Publicación</span>
+                <span>Control</span>
+              </div>
+              <span class="module-enter">Entrar al módulo <i class="bi bi-arrow-right"></i></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="flujo">
+      <div class="wrap">
+        <div class="info-strip">
+          <article class="info-card reveal">
+            <span class="eyebrow">Datos diarios</span>
+            <h2 style="margin-top:.8rem;font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:clamp(1.9rem,4vw,3rem);">
+              Cómo se alimenta la plataforma
+            </h2>
+            <p style="margin-top:1rem;">
+              La plataforma consulta páginas institucionales autorizadas al menos una vez al día,
+              guarda datos procesables y publica visualizaciones con fuente, fecha de actualización
+              y crédito correspondiente.
+            </p>
+          </article>
+
+          <article class="info-card reveal">
+            <h3>Flujo de trabajo</h3>
+            <div class="steps">
+              <div class="step">
+                <span class="step-number">1</span>
+                <div>
+                  <strong>Consultar fuentes</strong>
+                  <span>Visita programada a páginas institucionales autorizadas.</span>
+                </div>
+              </div>
+
+              <div class="step">
+                <span class="step-number">2</span>
+                <div>
+                  <strong>Guardar datos</strong>
+                  <span>JSON, CSV, texto crudo o evidencia de la consulta.</span>
+                </div>
+              </div>
+
+              <div class="step">
+                <span class="step-number">3</span>
+                <div>
+                  <strong>Servir módulos</strong>
+                  <span>Las páginas leen datos internos y muestran mapas, gráficas y tablas.</span>
+                </div>
               </div>
             </div>
-
-            <div class="credit-line">
-              <span>Dato observado / estimado / pronosticado</span>
-              <span>Visualización: MTA Sololá</span>
-              <span>Última actualización: diaria</span>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="resumen-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Resumen operativo</span>
-          <h2 id="resumen-title">Lo que verá primero la Mesa cada día</h2>
+          </article>
         </div>
-        <p>Estas tarjetas serán alimentadas por los extractores diarios y servirán como entrada al resto del sistema: mapas, fichas municipales, gráficas y boletines.</p>
       </div>
-
-      <div class="wrap grid kpi-grid stagger">
-        <article class="card kpi-card" data-theme="rain">
-          <div class="card-body">
-            <div class="kpi-icon" aria-hidden="true">☔</div>
-            <span class="data-label">Lluvia acumulada</span>
-            <strong class="kpi-big">24h</strong>
-            <p>Mapa diario de lluvia observada, acumulados y estaciones con mayor precipitación.</p>
-          </div>
-        </article>
-
-        <article class="card kpi-card" data-theme="forest">
-          <div class="card-body">
-            <div class="kpi-icon" aria-hidden="true">🌿</div>
-            <span class="data-label">Condición agroclimática</span>
-            <strong class="kpi-big">17</strong>
-            <p>Fichas municipales para todo el departamento, con riesgos y recomendaciones locales.</p>
-          </div>
-        </article>
-
-        <article class="card kpi-card" data-theme="maize">
-          <div class="card-body">
-            <div class="kpi-icon" aria-hidden="true">⚠</div>
-            <span class="data-label">Riesgo</span>
-            <strong class="kpi-big">MTA</strong>
-            <p>Semáforo agroclimático validado por instituciones participantes de la Mesa.</p>
-          </div>
-        </article>
-
-        <article class="card kpi-card" data-theme="earth">
-          <div class="card-body">
-            <div class="kpi-icon" aria-hidden="true">☕</div>
-            <span class="data-label">Recomendaciones</span>
-            <strong class="kpi-big">PDF</strong>
-            <p>Boletines mensuales en versión web interactiva, PDF y piezas para redes.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="mapa-diario" aria-labelledby="mapa-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Mapa diario</span>
-          <h2 id="mapa-title">Mapa interactivo principal</h2>
-        </div>
-        <p>En esta primera versión el mapa es una maqueta interactiva. Después se conecta a municipios reales, coordenadas de estaciones, capas de lluvia, temperatura, sequía y riesgos.</p>
-      </div>
-
-      <div class="wrap map-stage reveal">
-        <aside class="map-panel" aria-label="Capas del mapa">
-          <div class="map-panel-head">
-            <h3>Capas</h3>
-            <p class="tiny">Active una capa para cambiar el detalle del panel.</p>
-          </div>
-          <div class="map-panel-body">
-            <input class="search-field" type="search" placeholder="Buscar capa, estación o municipio" data-search />
-            <div class="layer-list" data-layer-list></div>
-          </div>
-        </aside>
-
-        <section class="map-canvas" aria-label="Mapa agroclimático demo">
-          <div class="map-toolbar">
-            <span class="map-tool">Sololá · demo</span>
-            <span class="map-tool" data-active-layer-label>Estaciones</span>
-          </div>
-          <div class="territory-shape" aria-hidden="true"></div>
-          <button class="zone-patch zone-a" type="button" data-zone="Altiplano Central" aria-label="Altiplano Central"></button>
-          <button class="zone-patch zone-b" type="button" data-zone="Occidente" aria-label="Occidente"></button>
-          <button class="zone-patch zone-c" type="button" data-zone="Boca Costa" aria-label="Boca Costa"></button>
-          <button class="zone-patch zone-d" type="button" data-zone="Cuenca Atitlán" aria-label="Cuenca Atitlán"></button>
-          <div class="lake-shape" aria-hidden="true"></div>
-          <div data-station-layer></div>
-          <div class="map-legend">
-            <h4>Leyenda dinámica</h4>
-            <div class="legend-row"><span class="legend-swatch" style="background:var(--maize-500)"></span> Estación meteorológica</div>
-            <div class="legend-row"><span class="legend-swatch" style="background:var(--rain-500)"></span> Lluvia / lago / humedad</div>
-            <div class="legend-row"><span class="legend-swatch" style="background:var(--forest-500)"></span> Zona agrícola o condición normal</div>
-          </div>
-        </section>
-
-        <aside class="map-panel" aria-label="Detalle del mapa">
-          <div class="map-panel-head">
-            <h3>Detalle</h3>
-            <p class="tiny">Clic en una estación, zona o capa.</p>
-          </div>
-          <div class="map-panel-body">
-            <div class="detail-block" data-detail>
-              <div class="detail-hero">
-                <span class="badge badge-source">Mapa diario</span>
-                <h3 style="margin-top:12px">Seleccione un elemento</h3>
-                <p>El panel mostrará resumen, valores, fuentes, crédito y estado del dato.</p>
-              </div>
-              <div class="detail-grid">
-                <div class="detail-metric"><span class="data-label">Lluvia</span><strong>--</strong></div>
-                <div class="detail-metric"><span class="data-label">Riesgo</span><strong>--</strong></div>
-              </div>
-              <div class="credit-line">
-                <span>Fuente: instituciones participantes</span>
-                <span>Procesamiento: MTA Sololá</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="graficas" aria-labelledby="graficas-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Estilo Vivamos Mejor como base visual</span>
-          <h2 id="graficas-title">Gráficas limpias para estaciones</h2>
-        </div>
-        <p>Este lenguaje visual queda definido para lluvia, temperatura, humedad y viento: tarjeta clara, valor legible, barras suaves, crédito fijo y metadatos visibles.</p>
-      </div>
-
-      <div class="wrap grid two-col reveal">
-        <article class="chart-card">
-          <div class="chart-head">
-            <div>
-              <span class="chart-title">Lluvia diaria · estación demo</span>
-              <span class="chart-meta">Últimos 12 días · mm/día</span>
-            </div>
-            <span class="badge badge-rain">Observado</span>
-          </div>
-          <div class="bars" data-bars="rain"></div>
-          <div class="chart-foot">
-            <span>Fuente: estación participante</span>
-            <span>Visualización: Mesa Agroclimática de Sololá</span>
-          </div>
-        </article>
-
-        <article class="chart-card">
-          <div class="chart-head">
-            <div>
-              <span class="chart-title">Temperatura máxima · estación demo</span>
-              <span class="chart-meta">Últimos 12 días · °C</span>
-            </div>
-            <span class="badge badge-watch">Estimado</span>
-          </div>
-          <div class="bars" data-bars="temp"></div>
-          <div class="chart-foot">
-            <span>Fuente: estación / modelo autorizado</span>
-            <span>Procesamiento: MTA Sololá</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="atlas" aria-labelledby="atlas-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Atlas agroclimático</span>
-          <h2 id="atlas-title">Catálogo de mapas interactivos</h2>
-        </div>
-        <p>La plataforma debe crecer hacia muchos mapas, no una sola vista. Cada mapa tendrá fecha, fuente, crédito, tipo de dato y descarga.</p>
-      </div>
-
-      <div class="wrap map-catalog stagger" data-map-catalog></div>
-    </section>
-
-    <section class="section" aria-labelledby="flujo-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Actualización diaria</span>
-          <h2 id="flujo-title">Flujo interno de datos</h2>
-        </div>
-        <p>La página pública no depende de consultar fuentes externas en vivo; consulta fuentes autorizadas diariamente, guarda evidencia y sirve datos desde la plataforma.</p>
-      </div>
-
-      <div class="wrap workflow stagger">
-        <article class="workflow-step" data-step="01">
-          <h3>Consultar</h3>
-          <p>Visita programada a páginas institucionales autorizadas, con registro de hora y URL.</p>
-        </article>
-        <article class="workflow-step" data-step="02">
-          <h3>Guardar</h3>
-          <p>Copia interna temporal del HTML, imagen, PDF o tabla, manteniendo fuente y crédito.</p>
-        </article>
-        <article class="workflow-step" data-step="03">
-          <h3>Normalizar</h3>
-          <p>Conversión a variables comunes: lluvia, temperatura, humedad, viento, riesgo y municipio.</p>
-        </article>
-        <article class="workflow-step" data-step="04">
-          <h3>Visualizar</h3>
-          <p>Mapas clicables, gráficas tipo estación, fichas municipales y semáforos agroclimáticos.</p>
-        </article>
-        <article class="workflow-step" data-step="05">
-          <h3>Publicar</h3>
-          <p>Boletines web, PDF, imágenes para redes y resumen para WhatsApp.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="estaciones" aria-labelledby="estaciones-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Inventario semilla</span>
-          <h2 id="estaciones-title">Estaciones meteorológicas</h2>
-        </div>
-        <p>Primero se carga una base semilla. Después se completa con coordenadas exactas, URL de cada estación, estado real, variables disponibles y método de extracción.</p>
-      </div>
-
-      <div class="wrap table-wrap reveal">
-        <table>
-          <thead>
-            <tr>
-              <th>Estación</th>
-              <th>Institución</th>
-              <th>Municipio</th>
-              <th>Estado</th>
-              <th>Variables</th>
-              <th>Crédito</th>
-            </tr>
-          </thead>
-          <tbody data-stations-table></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="municipios-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Entrada local</span>
-          <h2 id="municipios-title">Fichas por municipio</h2>
-        </div>
-        <p>Cada municipio debe abrir un mini-panel con lluvia, temperatura, pronóstico, riesgo, estaciones cercanas, recomendaciones y boletines relacionados.</p>
-      </div>
-
-      <div class="wrap municipal-grid stagger" data-municipios></div>
-    </section>
-
-    <section class="section" id="boletines" aria-labelledby="boletines-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Boletines</span>
-          <h2 id="boletines-title">Del dato diario al boletín mensual</h2>
-        </div>
-        <p>La versión web del boletín debe ser interactiva; el PDF queda como producto oficial descargable.</p>
-      </div>
-
-      <div class="wrap bulletin-card reveal">
-        <div class="bulletin-preview" aria-label="Vista previa de boletín">
-          <div class="bulletin-logos">
-            <span class="logo-dot"></span><span class="logo-dot"></span><span class="logo-dot"></span><span class="logo-dot"></span><span class="logo-dot"></span><span class="logo-dot"></span><span class="logo-dot"></span><span class="logo-dot"></span>
-          </div>
-          <div class="bulletin-title">
-            <strong>Mesa Técnica Agroclimática Sololá</strong>
-            <span>Reporte Climático</span>
-            <p class="tiny">Versión web interactiva + PDF</p>
-          </div>
-          <div class="bulletin-map-mini"></div>
-          <div class="bulletin-cloud"></div>
-          <div class="bulletin-footer-band"></div>
-        </div>
-
-        <article class="card">
-          <div class="card-body">
-            <span class="badge badge-rain">Plantilla mensual</span>
-            <h2 style="margin-top:14px">Boletín agroclimático</h2>
-            <p class="lead" style="margin-top:14px">La estructura base incluye inicio o comportamiento de lluvias, temperatura, ENOS, temporada ciclónica, riesgos y recomendaciones por cultivo.</p>
-            <div class="grid three-col" style="margin-top:22px">
-              <div class="detail-metric"><span class="data-label">Salida</span><strong>Web</strong></div>
-              <div class="detail-metric"><span class="data-label">Salida</span><strong>PDF</strong></div>
-              <div class="detail-metric"><span class="data-label">Salida</span><strong>Redes</strong></div>
-            </div>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#mapa-diario">Ver mapa base</a>
-              <button class="btn btn-soft" type="button" data-toast="Este botón luego abrirá el generador interno de boletines.">Simular generación</button>
-            </div>
-            <div class="credit-line">
-              <span>Datos: instituciones participantes</span>
-              <span>Revisión técnica: Mesa Agroclimática</span>
-              <span>Formato: web + PDF</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="fuentes" aria-labelledby="fuentes-title">
-      <div class="wrap section-head reveal">
-        <div>
-          <span class="eyebrow">Transparencia</span>
-          <h2 id="fuentes-title">Fuentes y créditos</h2>
-        </div>
-        <p>Cada gráfica, mapa, tabla y boletín debe mostrar fuente, fecha de actualización, tipo de dato y procesamiento.</p>
-      </div>
-
-      <div class="wrap source-grid stagger" data-sources></div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer" id="creditos">
     <div class="wrap footer-grid">
       <div>
-        <h3>Plataforma Agroclimática de Sololá</h3>
-        <p style="margin-top:12px">Sistema web de la Mesa Técnica Agroclimática para monitoreo diario, mapas interactivos y boletines agroclimáticos.</p>
+        <h2>Mesa Técnica Agroclimática de Sololá</h2>
+        <p>
+          Plataforma diseñada para centralizar información agroclimática, mejorar la comunicación
+          técnica y facilitar la generación de boletines y mapas interactivos con créditos visibles
+          para cada institución participante.
+        </p>
       </div>
+
       <div>
-        <h4>Secciones</h4>
+        <h3 style="margin-bottom:.9rem;">Accesos rápidos</h3>
         <div class="footer-links">
-          <a href="#mapa-diario">Mapa diario</a>
-          <a href="#atlas">Atlas</a>
-          <a href="#estaciones">Estaciones</a>
-          <a href="#boletines">Boletines</a>
+          <a href="precipitaciones/">Precipitaciones</a>
+          <a href="estaciones/">Estaciones meteorológicas</a>
+          <a href="boletines/">Boletines</a>
+          <a href="fuentes/">Fuentes y metodología</a>
         </div>
-      </div>
-      <div>
-        <h4>Regla editorial</h4>
-        <p style="margin-top:12px">Todo dato debe tener fuente. Todo mapa debe ser clicable. Toda estimación debe explicarse. Toda recomendación debe validarse.</p>
       </div>
     </div>
   </footer>
 
-  <div class="toast" role="status" aria-live="polite" data-toast-box></div>
-
   <script>
-    const MTA = {
-      layers: [
-        { id: "estaciones", title: "Estaciones meteorológicas", meta: "puntos · observado · diario", type: "station", detail: "Red semilla de estaciones de instituciones participantes." },
-        { id: "lluvia24", title: "Lluvia últimas 24 horas", meta: "raster/vector · observado-estimado", type: "rain", detail: "Acumulado diario por estación y estimación espacial." },
-        { id: "lluvia7", title: "Lluvia últimos 7 días", meta: "periodo semanal · observado-estimado", type: "rain", detail: "Acumulado semanal para monitoreo de exceso o déficit." },
-        { id: "temperatura", title: "Temperatura máxima y mínima", meta: "estación/modelo · diario", type: "temp", detail: "Rangos térmicos por municipio y estación cercana." },
-        { id: "sequia", title: "Sequía agrícola", meta: "índice · estimado · diario", type: "drought", detail: "Déficit de lluvia, días secos consecutivos y estrés hídrico probable." },
-        { id: "riesgos", title: "Semáforo agroclimático", meta: "municipal · validado", type: "risk", detail: "Riesgos por lluvia fuerte, sequía, deslizamiento, calor o viento." },
-        { id: "cultivos", title: "Recomendaciones por cultivo", meta: "café · maíz · hortalizas", type: "crop", detail: "Recomendaciones técnicas por cultivo, zona y vigencia." }
-      ],
+    const menuBtn = document.querySelector("[data-menu-btn]");
+    const mobileMenu = document.querySelector("[data-mobile-menu]");
 
-      stations: [
-        { id: "vm-panajachel", name: "Oficina Central", institution: "Vivamos Mejor", municipality: "Panajachel", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 43, y: 44, short: "Panajachel" },
-        { id: "vm-santa-lucia", name: "Casa Santa Rita", institution: "Vivamos Mejor", municipality: "Santa Lucía Utatlán", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 35, y: 29, short: "Sta. Lucía" },
-        { id: "vm-santiago", name: "CoAtitlán R.L.", institution: "Vivamos Mejor", municipality: "Santiago Atitlán", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 50, y: 60, short: "Santiago" },
-        { id: "vm-san-andres", name: "Lomas de Atitlán", institution: "Vivamos Mejor", municipality: "San Andrés Semetabaj", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 55, y: 33, short: "S. Andrés" },
-        { id: "vm-santa-cruz", name: "CEDRACC", institution: "Vivamos Mejor", municipality: "Santa Cruz La Laguna", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 39, y: 50, short: "Sta. Cruz" },
-        { id: "vm-santa-clara", name: "Santa Clara TV Cable", institution: "Vivamos Mejor", municipality: "Santa Clara La Laguna", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 31, y: 66, short: "Sta. Clara" },
-        { id: "vm-pujujil", name: "Caserío Chuacruz", institution: "Vivamos Mejor", municipality: "Aldea Pujujil I, Sololá", status: "mantenimiento", variables: "por verificar", x: 62, y: 25, short: "Pujujil" },
-        { id: "vm-efa", name: "Escuela de Formación Agrícola", institution: "Vivamos Mejor", municipality: "Sololá", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 68, y: 37, short: "EFA" },
-        { id: "ins-el-tablon", name: "El Tablón", institution: "INSIVUMEH", municipality: "Sololá", status: "por verificar", variables: "lluvia, temperatura, humedad, viento", x: 70, y: 48, short: "El Tablón" },
-        { id: "ins-santiago", name: "Santiago Atitlán", institution: "INSIVUMEH", municipality: "Santiago Atitlán", status: "por verificar", variables: "precipitación", x: 46, y: 69, short: "INS Santiago" },
-        { id: "ins-capitan", name: "El Capitán", institution: "INSIVUMEH", municipality: "por verificar", status: "por verificar", variables: "precipitación", x: 75, y: 58, short: "El Capitán" }
-      ],
-
-      mapGroups: [
-        { title: "Estaciones", maps: ["Todas las estaciones", "Por institución", "Activas / mantenimiento", "Cobertura de estaciones"] },
-        { title: "Lluvia", maps: ["24 h", "72 h", "7 días", "Mensual", "Anomalía", "Días secos"] },
-        { title: "Temperatura", maps: ["Máxima", "Mínima", "Media", "Riesgo por calor", "Riesgo por frío"] },
-        { title: "Pronóstico", maps: ["24 h", "48 h", "72 h", "7 días", "Avisos vigentes"] },
-        { title: "Sequía", maps: ["Déficit", "SPI-1", "SPI-3", "Estrés hídrico", "Vigilancia"] },
-        { title: "Riesgos", maps: ["Lluvia fuerte", "Deslizamientos", "Inundación", "Canícula", "Semáforo municipal"] },
-        { title: "Cultivos", maps: ["Café", "Maíz", "Frijol", "Hortalizas", "Conservación de suelos"] },
-        { title: "Boletines", maps: ["Resumen mensual", "Mapa de riesgos", "Mapa de recomendaciones", "Mapa para redes"] },
-        { title: "Base territorial", maps: ["Municipios", "Cuencas", "Zonas agroclimáticas", "Altitud", "Pendientes"] }
-      ],
-
-      sources: [
-        { acronym: "INS", name: "INSIVUMEH", gives: "Pronóstico oficial, estaciones, avisos, lluvia y clima." },
-        { acronym: "VM", name: "Vivamos Mejor", gives: "Estaciones locales y monitoreo territorial." },
-        { acronym: "AMS", name: "AMSCLAE", gives: "Información de la cuenca del lago de Atitlán." },
-        { acronym: "ICC", name: "ICC", gives: "Clima, sequía, canícula y apoyo técnico." },
-        { acronym: "MAGA", name: "MAGA / MTA", gives: "Boletines agroclimáticos y recomendaciones." },
-        { acronym: "ANA", name: "ANACAFÉ", gives: "Recomendaciones técnicas para café." },
-        { acronym: "ICTA", name: "ICTA", gives: "Información agrícola y validación técnica." },
-        { acronym: "UVG", name: "UVG / socios", gives: "Apoyo técnico, mapas, datos y análisis." }
-      ],
-
-      municipios: [
-        "Sololá", "Panajachel", "Nahualá", "Santa Catarina Ixtahuacán", "Santa Lucía Utatlán", "San José Chacayá", "Santa Clara La Laguna", "Concepción", "San Andrés Semetabaj", "San Marcos La Laguna", "Santa Cruz La Laguna", "San Pablo La Laguna", "San Juan La Laguna", "San Pedro La Laguna", "Santiago Atitlán", "San Lucas Tolimán", "Santa María Visitación", "Santa Catarina Palopó", "San Antonio Palopó"
-      ]
-    };
-
-    const $ = (selector, root = document) => root.querySelector(selector);
-    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
-
-    function initMobileNav() {
-      const toggle = $("[data-mobile-toggle]");
-      const sheet = $("[data-mobile-sheet]");
-      if (!toggle || !sheet) return;
-
-      toggle.addEventListener("click", () => {
-        const isOpen = sheet.classList.toggle("is-open");
-        toggle.setAttribute("aria-expanded", String(isOpen));
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", String(isOpen));
       });
 
-      sheet.addEventListener("click", (event) => {
+      mobileMenu.addEventListener("click", (event) => {
         if (event.target.matches("a")) {
-          sheet.classList.remove("is-open");
-          toggle.setAttribute("aria-expanded", "false");
+          mobileMenu.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
         }
       });
     }
 
-    function initScrollSpy() {
-      const links = $$(".main-nav a");
-      const sections = links
-        .map(link => ({ link, el: document.querySelector(link.getAttribute("href")) }))
-        .filter(item => item.el);
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          links.forEach(link => link.removeAttribute("aria-current"));
-          const active = sections.find(item => item.el === entry.target);
-          if (active) active.link.setAttribute("aria-current", "page");
-        });
-      }, { rootMargin: "-40% 0px -55% 0px", threshold: 0 });
-
-      sections.forEach(item => observer.observe(item.el));
-    }
-
-    function initReveal() {
-      const targets = $$(".reveal, .stagger");
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: .13 });
-
-      targets.forEach(target => observer.observe(target));
-    }
-
-    function initCounters() {
-      const counters = $$('[data-count]');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const end = Number(el.dataset.count || 0);
-          const duration = 900;
-          const start = performance.now();
-
-          function tick(now) {
-            const t = Math.min(1, (now - start) / duration);
-            const eased = 1 - Math.pow(1 - t, 3);
-            el.textContent = Math.round(end * eased);
-            if (t < 1) requestAnimationFrame(tick);
-          }
-
-          requestAnimationFrame(tick);
-          observer.unobserve(el);
-        });
-      }, { threshold: .4 });
-
-      counters.forEach(counter => observer.observe(counter));
-    }
-
-    function initTilt() {
-      const cards = $$('[data-tilt]');
-      cards.forEach(card => {
-        card.addEventListener("mousemove", (event) => {
-          const rect = card.getBoundingClientRect();
-          const x = (event.clientX - rect.left) / rect.width - .5;
-          const y = (event.clientY - rect.top) / rect.height - .5;
-          card.style.transform = `rotateX(${y * -4}deg) rotateY(${x * 4}deg) translateY(-2px)`;
-        });
-
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "rotateX(0) rotateY(0) translateY(0)";
-        });
+    const revealEls = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       });
-    }
+    }, { threshold: 0.15 });
 
-    function renderLayers() {
-      const list = $("[data-layer-list]");
-      if (!list) return;
-
-      list.innerHTML = MTA.layers.map((layer, index) => `
-        <button class="layer-button ${index === 0 ? "is-active" : ""}" type="button" data-layer="${layer.id}">
-          <span>
-            <strong>${layer.title}</strong>
-            <span>${layer.meta}</span>
-          </span>
-          <span class="toggle-pill" aria-hidden="true"></span>
-        </button>
-      `).join("");
-
-      list.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-layer]");
-        if (!button) return;
-        $$(".layer-button", list).forEach(item => item.classList.remove("is-active"));
-        button.classList.add("is-active");
-        const layer = MTA.layers.find(item => item.id === button.dataset.layer);
-        setLayerDetail(layer);
-      });
-
-      const search = $("[data-search]");
-      if (search) {
-        search.addEventListener("input", () => {
-          const query = search.value.trim().toLowerCase();
-          $$(".layer-button", list).forEach(button => {
-            button.style.display = button.textContent.toLowerCase().includes(query) ? "flex" : "none";
-          });
-        });
-      }
-    }
-
-    function setLayerDetail(layer) {
-      if (!layer) return;
-      const label = $("[data-active-layer-label]");
-      if (label) label.textContent = layer.title;
-
-      const detail = $("[data-detail]");
-      if (!detail) return;
-
-      const badgeClass = layer.type === "risk" ? "badge-high" : layer.type === "rain" ? "badge-rain" : layer.type === "drought" ? "badge-watch" : "badge-source";
-
-      detail.innerHTML = `
-        <div class="detail-hero">
-          <span class="badge ${badgeClass}">${layer.type}</span>
-          <h3 style="margin-top:12px">${layer.title}</h3>
-          <p>${layer.detail}</p>
-        </div>
-        <div class="detail-grid">
-          <div class="detail-metric"><span class="data-label">Tipo</span><strong>${layer.meta.split("·")[0].trim()}</strong></div>
-          <div class="detail-metric"><span class="data-label">Frecuencia</span><strong>24h</strong></div>
-          <div class="detail-metric"><span class="data-label">Dato</span><strong>${layer.type}</strong></div>
-          <div class="detail-metric"><span class="data-label">Estado</span><strong>demo</strong></div>
-        </div>
-        <div class="credit-line">
-          <span>Fuente: instituciones participantes</span>
-          <span>Procesamiento: Mesa Agroclimática de Sololá</span>
-          <span>Crédito visible por capa</span>
-        </div>
-      `;
-    }
-
-    function renderStationsOnMap() {
-      const layer = $("[data-station-layer]");
-      if (!layer) return;
-      layer.innerHTML = MTA.stations.map(station => `
-        <button
-          class="station"
-          type="button"
-          style="left:${station.x}%; top:${station.y}%;"
-          data-station="${station.id}"
-          data-short="${station.short}"
-          aria-label="${station.name}, ${station.institution}">
-        </button>
-      `).join("");
-
-      layer.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-station]");
-        if (!button) return;
-        $$(".station").forEach(item => item.classList.remove("is-selected"));
-        button.classList.add("is-selected");
-        const station = MTA.stations.find(item => item.id === button.dataset.station);
-        setStationDetail(station);
-      });
-
-      $$("[data-zone]").forEach(zone => {
-        zone.addEventListener("click", () => setZoneDetail(zone.dataset.zone));
-      });
-    }
-
-    function setStationDetail(station) {
-      if (!station) return;
-      const detail = $("[data-detail]");
-      if (!detail) return;
-
-      const isMaintenance = station.status.includes("mantenimiento");
-      detail.innerHTML = `
-        <div class="detail-hero">
-          <span class="badge ${isMaintenance ? "badge-watch" : "badge-normal"}">${station.status}</span>
-          <h3 style="margin-top:12px">${station.name}</h3>
-          <p><strong>${station.institution}</strong> · ${station.municipality}</p>
-        </div>
-        <div class="detail-grid">
-          <div class="detail-metric"><span class="data-label">Lluvia 24h</span><strong>${isMaintenance ? "--" : Math.round(5 + station.x / 4)} mm</strong></div>
-          <div class="detail-metric"><span class="data-label">Temp.</span><strong>${Math.round(17 + station.y / 8)} °C</strong></div>
-          <div class="detail-metric"><span class="data-label">Variables</span><strong>${station.variables.split(",").length}</strong></div>
-          <div class="detail-metric"><span class="data-label">Estado</span><strong>${isMaintenance ? "rev." : "ok"}</strong></div>
-        </div>
-        <p><strong>Variables:</strong> ${station.variables}</p>
-        <div class="credit-line">
-          <span>Datos: ${station.institution}</span>
-          <span>Visualización: MTA Sololá</span>
-          <span>Consulta mínima: diaria</span>
-        </div>
-      `;
-    }
-
-    function setZoneDetail(zone) {
-      const detail = $("[data-detail]");
-      if (!detail) return;
-      detail.innerHTML = `
-        <div class="detail-hero">
-          <span class="badge badge-rain">Zona</span>
-          <h3 style="margin-top:12px">${zone}</h3>
-          <p>Resumen agroclimático territorial. Esta vista luego se conectará con municipios, estaciones cercanas, cultivos y recomendaciones.</p>
-        </div>
-        <div class="detail-grid">
-          <div class="detail-metric"><span class="data-label">Lluvia</span><strong>${zone.includes("Boca") ? "Alta" : "Media"}</strong></div>
-          <div class="detail-metric"><span class="data-label">Riesgo</span><strong>${zone.includes("Boca") ? "Atención" : "Normal"}</strong></div>
-          <div class="detail-metric"><span class="data-label">Cultivos</span><strong>${zone.includes("Boca") ? "Café" : "Maíz"}</strong></div>
-          <div class="detail-metric"><span class="data-label">Vigencia</span><strong>24h</strong></div>
-        </div>
-        <div class="credit-line">
-          <span>Fuente: estaciones y entidades participantes</span>
-          <span>Procesamiento: MTA Sololá</span>
-        </div>
-      `;
-    }
-
-    function renderBars() {
-      const rainValues = [12, 34, 18, 42, 59, 21, 36, 68, 28, 45, 15, 31];
-      const tempValues = [24, 26, 25, 28, 29, 27, 30, 31, 28, 27, 26, 29];
-
-      const rain = $('[data-bars="rain"]');
-      const temp = $('[data-bars="temp"]');
-
-      if (rain) {
-        rain.innerHTML = rainValues.map((value, i) => `<div class="bar" style="height:${Math.max(8, value)}%; --i:${i}" data-value="${value}"></div>`).join("");
-      }
-
-      if (temp) {
-        const max = Math.max(...tempValues);
-        temp.innerHTML = tempValues.map((value, i) => {
-          const height = Math.round((value / max) * 86);
-          return `<div class="bar" style="height:${height}%; --i:${i}; background:linear-gradient(180deg, var(--maize-500), var(--risk-high));" data-value="${value}"></div>`;
-        }).join("");
-      }
-    }
-
-    function renderCatalog() {
-      const el = $("[data-map-catalog]");
-      if (!el) return;
-
-      el.innerHTML = MTA.mapGroups.map(group => `
-        <article class="card map-group-card">
-          <div class="card-body">
-            <span class="badge badge-source">${group.maps.length} mapas</span>
-            <h3 style="margin-top:14px">${group.title}</h3>
-            <div class="map-list">
-              ${group.maps.map(map => `<div class="map-list-item"><span>${map}</span><span>clicable</span></div>`).join("")}
-            </div>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function renderStationsTable() {
-      const tbody = $("[data-stations-table]");
-      if (!tbody) return;
-
-      tbody.innerHTML = MTA.stations.map(station => `
-        <tr>
-          <td><strong>${station.name}</strong></td>
-          <td>${station.institution}</td>
-          <td>${station.municipality}</td>
-          <td><span class="badge ${station.status.includes("mantenimiento") ? "badge-watch" : "badge-normal"}">${station.status}</span></td>
-          <td>${station.variables}</td>
-          <td>Datos: ${station.institution}. Visualización: MTA Sololá.</td>
-        </tr>
-      `).join("");
-    }
-
-    function renderMunicipios() {
-      const el = $("[data-municipios]");
-      if (!el) return;
-      el.innerHTML = MTA.municipios.map((municipio, index) => `
-        <button class="municipality-chip ${index === 0 ? "is-active" : ""}" type="button" data-toast="Ficha municipal pendiente: ${municipio}">${municipio}</button>
-      `).join("");
-    }
-
-    function renderSources() {
-      const el = $("[data-sources]");
-      if (!el) return;
-      el.innerHTML = MTA.sources.map(source => `
-        <article class="card source-card">
-          <div class="card-body">
-            <div class="source-logo">${source.acronym}</div>
-            <h3>${source.name}</h3>
-            <p style="margin-top:10px">${source.gives}</p>
-            <div class="credit-line">
-              <span>Crédito obligatorio</span>
-              <span>Consulta diaria si aplica</span>
-            </div>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    function initToast() {
-      const box = $("[data-toast-box]");
-      if (!box) return;
-      let timer = null;
-
-      document.addEventListener("click", (event) => {
-        const trigger = event.target.closest("[data-toast]");
-        if (!trigger) return;
-        box.textContent = trigger.dataset.toast;
-        box.classList.add("is-visible");
-        clearTimeout(timer);
-        timer = setTimeout(() => box.classList.remove("is-visible"), 2800);
-      });
-    }
-
-    function initKeyboardEsc() {
-      document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-        const sheet = $("[data-mobile-sheet]");
-        const toggle = $("[data-mobile-toggle]");
-        if (sheet) sheet.classList.remove("is-open");
-        if (toggle) toggle.setAttribute("aria-expanded", "false");
-      });
-    }
-
-    function boot() {
-      initMobileNav();
-      initScrollSpy();
-      initReveal();
-      initCounters();
-      initTilt();
-      renderLayers();
-      renderStationsOnMap();
-      renderBars();
-      renderCatalog();
-      renderStationsTable();
-      renderMunicipios();
-      renderSources();
-      initToast();
-      initKeyboardEsc();
-    }
-
-    document.addEventListener("DOMContentLoaded", boot);
+    revealEls.forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
