@@ -1,7 +1,7 @@
 {
   "schema": "mta_precipitacion_estaciones_v6",
-  "generated_at_utc": "2026-05-19T07:27:31.379151+00:00",
-  "generated_at_gt": "2026-05-19T01:27:31.379151-06:00",
+  "generated_at_utc": "2026-05-19T07:39:33.229270+00:00",
+  "generated_at_gt": "2026-05-19T01:39:33.229270-06:00",
   "department": "Sololá",
   "station_count": 17,
   "stations": [
@@ -225,12 +225,12 @@
       "variable": "precipitation",
       "provider": "ambientweather",
       "station_code": "4bd244f9e8c5b0cb889ba4cbb1a463c3",
-      "precipitation_available": "por_verificar",
-      "online_status": "requiere_parser",
+      "precipitation_available": "si_extraida_api",
+      "online_status": "online",
       "quality_class": "complementaria",
       "source_url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
       "station_url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
-      "inventory_method": "pws_config_json",
+      "inventory_method": "ambientweather_api",
       "credit": "Datos: Ambient Weather / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
     {

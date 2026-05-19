@@ -1,14 +1,14 @@
 {
   "schema": "mta_precipitacion_source_status_v6",
-  "generated_at_utc": "2026-05-19T07:27:31.379151+00:00",
-  "generated_at_gt": "2026-05-19T01:27:31.379151-06:00",
+  "generated_at_utc": "2026-05-19T07:39:33.229270+00:00",
+  "generated_at_gt": "2026-05-19T01:39:33.229270-06:00",
   "ambient_weather_api": {
-    "enabled": false,
-    "devices_seen": 0,
+    "enabled": true,
+    "devices_seen": 1,
     "status": {
-      "ok": false,
-      "status_code": null,
-      "error": "ambient_weather_secrets_missing"
+      "ok": true,
+      "status_code": 200,
+      "error": null
     }
   },
   "sources": [
@@ -16,8 +16,8 @@
       "source_id": "insivumeh_precipitaciones_departamentos",
       "institution": "INSIVUMEH",
       "parser": "insivumeh_solola",
-      "checked_at_utc": "2026-05-19T07:27:31.379151+00:00",
-      "checked_at_gt": "2026-05-19T01:27:31.379151-06:00",
+      "checked_at_utc": "2026-05-19T07:39:33.229270+00:00",
+      "checked_at_gt": "2026-05-19T01:39:33.229270-06:00",
       "ok": true,
       "records_added": 9,
       "stations_found": 3,
@@ -37,8 +37,8 @@
       "source_id": "vivamos_mejor_estaciones",
       "institution": "Asociación Vivamos Mejor",
       "parser": "vivamos_mejor_inventory",
-      "checked_at_utc": "2026-05-19T07:27:31.379151+00:00",
-      "checked_at_gt": "2026-05-19T01:27:31.379151-06:00",
+      "checked_at_utc": "2026-05-19T07:39:33.229270+00:00",
+      "checked_at_gt": "2026-05-19T01:39:33.229270-06:00",
       "ok": true,
       "records_added": 0,
       "stations_found": 8,
@@ -58,10 +58,10 @@
       "source_id": "pws_configuradas",
       "institution": "PWS configuradas manualmente",
       "parser": "pws_config",
-      "checked_at_utc": "2026-05-19T07:27:31.379151+00:00",
-      "checked_at_gt": "2026-05-19T01:27:31.379151-06:00",
+      "checked_at_utc": "2026-05-19T07:39:33.229270+00:00",
+      "checked_at_gt": "2026-05-19T01:39:33.229270-06:00",
       "ok": true,
-      "records_added": 3,
+      "records_added": 4,
       "stations_found": 6,
       "urls": [
         {
@@ -102,12 +102,12 @@
         },
         {
           "url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
-          "ok": false,
-          "online_status": "requiere_parser",
+          "ok": true,
+          "online_status": "online",
           "provider": "ambientweather",
           "station_code": null,
           "dashboard_id": "4bd244f9e8c5b0cb889ba4cbb1a463c3",
-          "error": "current_extraction_disabled"
+          "error": null
         },
         {
           "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706/graphs",

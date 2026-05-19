@@ -1,7 +1,7 @@
 {
   "schema": "mta_precipitaciones_pws_v4",
-  "generated_at_utc": "2026-05-19T07:27:31.379151+00:00",
-  "generated_at_gt": "2026-05-19T01:27:31.379151-06:00",
+  "generated_at_utc": "2026-05-19T07:39:33.229270+00:00",
+  "generated_at_gt": "2026-05-19T01:39:33.229270-06:00",
   "department": "Sololá",
   "source": {
     "institution": "PWS configuradas manualmente",
@@ -13,12 +13,12 @@
     "end_date": "2026-05-19"
   },
   "ambient_weather_api": {
-    "enabled": false,
-    "devices_seen": 0,
+    "enabled": true,
+    "devices_seen": 1,
     "status": {
-      "ok": false,
-      "status_code": null,
-      "error": "ambient_weather_secrets_missing"
+      "ok": true,
+      "status_code": 200,
+      "error": null
     }
   },
   "stations": [
@@ -109,12 +109,12 @@
       "variable": "precipitation",
       "provider": "ambientweather",
       "station_code": "4bd244f9e8c5b0cb889ba4cbb1a463c3",
-      "precipitation_available": "por_verificar",
-      "online_status": "requiere_parser",
+      "precipitation_available": "si_extraida_api",
+      "online_status": "online",
       "quality_class": "complementaria",
       "source_url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
       "station_url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
-      "inventory_method": "pws_config_json",
+      "inventory_method": "ambientweather_api",
       "credit": "Datos: Ambient Weather / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
     {
@@ -162,8 +162,8 @@
         "usable": true,
         "engine": "playwright_chromium",
         "error": "networkidle: Timeout 15000ms exceeded.",
-        "html_length": 509259,
-        "text_length": 4568,
+        "html_length": 509384,
+        "text_length": 4540,
         "effective_ok": true
       },
       "raw_text_path": "docs/data/precipitaciones/raw/wunderground_pws_panajachel_2026-05-19.txt"
@@ -192,8 +192,8 @@
         "usable": true,
         "engine": "playwright_chromium",
         "error": "networkidle: Timeout 15000ms exceeded.",
-        "html_length": 444412,
-        "text_length": 4531,
+        "html_length": 444268,
+        "text_length": 4505,
         "effective_ok": true
       },
       "raw_text_path": "docs/data/precipitaciones/raw/wunderground_vivamos_mejor_casa_santa_rita_2026-05-19.txt"
@@ -222,8 +222,8 @@
         "usable": true,
         "engine": "playwright_chromium",
         "error": "networkidle: Timeout 15000ms exceeded.",
-        "html_length": 328620,
-        "text_length": 3288,
+        "html_length": 326109,
+        "text_length": 3255,
         "effective_ok": true
       },
       "raw_text_path": "docs/data/precipitaciones/raw/wunderground_asociacion_vivamos_mejor_coatitlan_r_l_2026-05-19.txt"
@@ -253,11 +253,19 @@
       "provider": "ambientweather",
       "dashboard_id": "4bd244f9e8c5b0cb889ba4cbb1a463c3",
       "station_url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
-      "ok": false,
-      "online_status": "requiere_parser",
-      "precipitation_found": false,
-      "precipitation_mm": null,
-      "error": "current_extraction_disabled"
+      "ok": true,
+      "online_status": "online",
+      "precipitation_found": true,
+      "precipitation_mm": 0.0,
+      "matched_field": "dailyrainin",
+      "unit_conversion": "in_to_mm",
+      "device_match_method": "single_device_available",
+      "error": null,
+      "ambient_api_status": {
+        "ok": true,
+        "status_code": 200,
+        "error": null
+      }
     },
     {
       "station_id": "vivamos_mejor_pws_complementaria_vivamos_mejor_chuitzanchaj_cedracc",
