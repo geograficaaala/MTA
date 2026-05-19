@@ -12,29 +12,6 @@ jobs:
   actualizar-precipitaciones:
     runs-on: ubuntu-latest
 
-    env:
-      # Opcional, para WeatherLink API.
-      # Crear en GitHub:
-      # Settings → Secrets and variables → Actions
-      # Secrets:
-      #   WEATHERLINK_API_KEY
-      #   WEATHERLINK_API_SECRET
-      #
-      # Variables:
-      #   WEATHERLINK_STATIONS_JSON
-      #
-      # Ejemplo de WEATHERLINK_STATIONS_JSON:
-      # [
-      #   {
-      #     "station_id": 123456,
-      #     "station_name": "WeatherLink Panajachel",
-      #     "municipality": "Panajachel"
-      #   }
-      # ]
-      WEATHERLINK_API_KEY: ${{ secrets.WEATHERLINK_API_KEY }}
-      WEATHERLINK_API_SECRET: ${{ secrets.WEATHERLINK_API_SECRET }}
-      WEATHERLINK_STATIONS_JSON: ${{ vars.WEATHERLINK_STATIONS_JSON }}
-
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
@@ -47,7 +24,8 @@ jobs:
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          pip install beautifulsoup4 requests lxml certifi urllib3
+          pip install beautifulsoup4 requests lxml certifi urllib3 playwright
+          python -m playwright install chromium
 
       - name: Extraer precipitaciones
         run: |
@@ -56,7 +34,6 @@ jobs:
 
           import csv
           import json
-          import os
           import re
           import unicodedata
           from datetime import datetime, timezone
@@ -68,6 +45,7 @@ jobs:
           import requests
           import urllib3
           from bs4 import BeautifulSoup
+          from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
           from requests.exceptions import SSLError
 
           GT = ZoneInfo("America/Guatemala")
@@ -79,6 +57,8 @@ jobs:
           DATA_ROOT.mkdir(parents=True, exist_ok=True)
           HIST_ROOT.mkdir(parents=True, exist_ok=True)
           RAW_ROOT.mkdir(parents=True, exist_ok=True)
+
+          CONFIG_JSON = DATA_ROOT / "pws_config.json"
 
           ACTUAL_JSON = DATA_ROOT / "actual.json"
           SOURCE_STATUS_JSON = DATA_ROOT / "source_status.json"
@@ -109,20 +89,136 @@ jobs:
               {
                   "source_id": "vivamos_mejor_estaciones",
                   "institution": "Asociación Vivamos Mejor",
-                  "parser": "vivamos_mejor_precip",
+                  "parser": "vivamos_mejor_inventory",
                   "urls": [
                       "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
                   ],
                   "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
               },
               {
-                  "source_id": "pws_complementarias",
+                  "source_id": "pws_configuradas",
                   "institution": "Estaciones PWS complementarias",
-                  "parser": "pws_precip",
+                  "parser": "pws_config",
                   "urls": [],
                   "credit": "Datos: estación meteorológica complementaria pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
               },
           ]
+
+          FALLBACK_PWS_CONFIG = {
+              "schema": "mta_pws_precipitacion_config_fallback_v1",
+              "stations": [
+                  {
+                      "enabled": True,
+                      "enabled_current_extraction": True,
+                      "enabled_historical_extraction": True,
+                      "provider": "wunderground",
+                      "station_code": "IPANAJ5",
+                      "station_name": "PWS Panajachel",
+                      "institution": "Vivamos Mejor / PWS complementaria",
+                      "municipality": "Panajachel",
+                      "department": "Sololá",
+                      "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
+                      "history_url_template": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/{start_date}/{end_date}/monthly",
+                      "source_unit": "in",
+                      "target_unit": "mm",
+                      "quality_class": "complementaria",
+                      "status": "activa_por_verificar",
+                      "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  },
+                  {
+                      "enabled": True,
+                      "enabled_current_extraction": True,
+                      "enabled_historical_extraction": True,
+                      "provider": "wunderground",
+                      "station_code": "ISANTA535",
+                      "station_name": "Vivamos Mejor / Casa Santa Rita",
+                      "institution": "Vivamos Mejor / PWS complementaria",
+                      "municipality": "Santa Lucía Utatlán",
+                      "department": "Sololá",
+                      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+                      "history_url_template": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/{start_date}/{end_date}/monthly",
+                      "source_unit": "in",
+                      "target_unit": "mm",
+                      "quality_class": "complementaria",
+                      "status": "activa_por_verificar",
+                      "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  },
+                  {
+                      "enabled": True,
+                      "enabled_current_extraction": True,
+                      "enabled_historical_extraction": True,
+                      "provider": "wunderground",
+                      "station_code": "ISANTI135",
+                      "station_name": "Asociación Vivamos Mejor / CoAtitlán R.L.",
+                      "institution": "Vivamos Mejor / PWS complementaria",
+                      "municipality": "Santiago Atitlán",
+                      "department": "Sololá",
+                      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
+                      "history_url_template": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/{start_date}/{end_date}/monthly",
+                      "source_unit": "in",
+                      "target_unit": "mm",
+                      "quality_class": "complementaria",
+                      "status": "activa_por_verificar",
+                      "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  },
+                  {
+                      "enabled": True,
+                      "enabled_current_extraction": False,
+                      "enabled_historical_extraction": True,
+                      "provider": "wunderground",
+                      "station_code": "ISANTACL3",
+                      "station_name": "Vivamos Mejor / TV Cable Santa Clara",
+                      "institution": "Vivamos Mejor / PWS complementaria",
+                      "municipality": "Santa Clara La Laguna",
+                      "department": "Sololá",
+                      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+                      "history_url_template": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/{start_date}/{end_date}/monthly",
+                      "source_unit": "in",
+                      "target_unit": "mm",
+                      "quality_class": "complementaria_historica",
+                      "status": "historica_por_verificar",
+                      "known_data_window": {
+                          "start": "2026-01-01",
+                          "end": "2026-04-30"
+                      },
+                      "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  },
+                  {
+                      "enabled": True,
+                      "enabled_current_extraction": False,
+                      "enabled_historical_extraction": False,
+                      "provider": "ambientweather",
+                      "dashboard_id": "4bd244f9e8c5b0cb889ba4cbb1a463c3",
+                      "station_name": "PWS Santa Catarina Palopó",
+                      "institution": "PWS complementaria",
+                      "municipality": "Santa Catarina Palopó",
+                      "department": "Sololá",
+                      "station_url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
+                      "quality_class": "complementaria",
+                      "status": "requiere_parser_ambientweather",
+                      "source_unit": "por_verificar",
+                      "target_unit": "mm",
+                      "credit": "Datos: Ambient Weather / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  },
+                  {
+                      "enabled": True,
+                      "enabled_current_extraction": False,
+                      "enabled_historical_extraction": False,
+                      "provider": "ambientweather",
+                      "dashboard_id": "89771072704b24646d105a0dec52f706",
+                      "station_name": "Vivamos Mejor / Chuitzanchaj / CEDRACC",
+                      "institution": "Vivamos Mejor / PWS complementaria",
+                      "municipality": "Tzununá, Santa Cruz La Laguna",
+                      "department": "Sololá",
+                      "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706/graphs",
+                      "quality_class": "complementaria",
+                      "status": "requiere_parser_ambientweather",
+                      "source_unit": "por_verificar",
+                      "target_unit": "mm",
+                      "credit": "Datos: Ambient Weather / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  },
+              ],
+          }
 
           VIVAMOS_MEJOR_FALLBACK_STATIONS = [
               {"station_name": "Estación Oficina Central", "municipality": "Panajachel", "status": "por_verificar"},
@@ -133,53 +229,6 @@ jobs:
               {"station_name": "Estación Santa Clara TV Cable", "municipality": "Santa Clara La Laguna", "status": "por_verificar"},
               {"station_name": "Caserío Chuacruz", "municipality": "Aldea Pujujil I, Sololá", "status": "mantenimiento"},
               {"station_name": "Estación Escuela de Formación Agrícola", "municipality": "Sololá", "status": "por_verificar"},
-          ]
-
-          # Lista blanca semilla de PWS observadas en enlaces públicos de Vivamos Mejor.
-          # Si Vivamos Mejor expone más enlaces reales, el extractor también los detecta automáticamente.
-          PWS_FALLBACK = [
-              {
-                  "provider": "wunderground",
-                  "station_code": "IPANAJ5",
-                  "station_name": "PWS Panajachel",
-                  "municipality": "Panajachel",
-                  "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
-              },
-              {
-                  "provider": "wunderground",
-                  "station_code": "ISANTA535",
-                  "station_name": "PWS Santa Lucía Utatlán",
-                  "municipality": "Santa Lucía Utatlán",
-                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
-              },
-              {
-                  "provider": "wunderground",
-                  "station_code": "ISANTACL3",
-                  "station_name": "PWS Santa Clara La Laguna",
-                  "municipality": "Santa Clara La Laguna",
-                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
-              },
-              {
-                  "provider": "wunderground",
-                  "station_code": "ISANTI135",
-                  "station_name": "PWS Santiago Atitlán",
-                  "municipality": "Santiago Atitlán",
-                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
-              },
-              {
-                  "provider": "wunderground",
-                  "station_code": "ISANAN84",
-                  "station_name": "PWS San Andrés Semetabaj",
-                  "municipality": "San Andrés Semetabaj",
-                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
-              },
-              {
-                  "provider": "wunderground",
-                  "station_code": "ISOLOL4",
-                  "station_name": "PWS Sololá",
-                  "municipality": "Sololá",
-                  "station_url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
-              },
           ]
 
           DEPARTAMENTOS = [
@@ -250,28 +299,22 @@ jobs:
                   return None
               return float(match.group(1).replace(",", "."))
 
+          def numero_in(linea: str) -> float | None:
+              match = re.search(
+                  r"([0-9]+(?:[.,][0-9]+)?)\s*(?:in|inch|inches)",
+                  linea,
+                  flags=re.I,
+              )
+              if not match:
+                  return None
+              return float(match.group(1).replace(",", "."))
+
           def pulgadas_a_mm(value: float) -> float:
               return round(value * 25.4, 3)
 
-          def buscar_dias_en_bloque(lineas: list[str]) -> tuple[int | None, int | None]:
-              texto = " | ".join(normalizar(x) for x in lineas)
-
-              con_lluvia = None
-              sin_lluvia = None
-
-              match_con = re.search(r"([0-9]+)\s*dias?\s*con\s*lluvia", texto)
-              match_sin = re.search(r"([0-9]+)\s*dias?\s*sin\s*lluvia", texto)
-
-              if match_con:
-                  con_lluvia = int(match_con.group(1))
-              if match_sin:
-                  sin_lluvia = int(match_sin.group(1))
-
-              return con_lluvia, sin_lluvia
-
           def fetch_url(url: str) -> tuple[str, dict]:
               headers = {
-                  "User-Agent": "MTA-Solola-Precipitaciones/0.8 (+https://github.com/geograficaaala/MTA)",
+                  "User-Agent": "MTA-Solola-Precipitaciones/0.9 (+https://github.com/geograficaaala/MTA)",
                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
               }
 
@@ -327,32 +370,6 @@ jobs:
                   status["error"] = str(exc)
                   return "", status
 
-          def fetch_json(url: str, headers: dict | None = None, params: dict | None = None) -> tuple[dict | None, dict]:
-              status = {
-                  "url": url,
-                  "ok": False,
-                  "status_code": None,
-                  "error": None,
-              }
-
-              try:
-                  response = requests.get(
-                      url,
-                      timeout=45,
-                      headers=headers or {},
-                      params=params or {},
-                      verify=certifi.where(),
-                  )
-                  response.raise_for_status()
-                  status.update({
-                      "ok": True,
-                      "status_code": response.status_code,
-                  })
-                  return response.json(), status
-              except Exception as exc:
-                  status["error"] = str(exc)
-                  return None, status
-
           def html_to_soup(html: str) -> BeautifulSoup:
               soup = BeautifulSoup(html, "lxml")
               for tag in soup(["script", "style", "noscript"]):
@@ -373,6 +390,29 @@ jobs:
           def write_json(path: Path, data: dict) -> None:
               path.parent.mkdir(parents=True, exist_ok=True)
               path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+          def load_pws_config() -> dict:
+              if CONFIG_JSON.exists():
+                  return load_json(CONFIG_JSON, FALLBACK_PWS_CONFIG)
+              return FALLBACK_PWS_CONFIG
+
+          def fecha_actual_rango(gt_now: datetime) -> tuple[str, str]:
+              day = gt_now.strftime("%Y-%m-%d")
+              return day, day
+
+          def build_history_url(station: dict, start_date: str, end_date: str) -> str | None:
+              template = station.get("history_url_template")
+
+              if template:
+                  return template.replace("{start_date}", start_date).replace("{end_date}", end_date)
+
+              provider = station.get("provider")
+              code = station.get("station_code")
+
+              if provider == "wunderground" and code:
+                  return f"https://www.wunderground.com/dashboard/pws/{code}/table/{start_date}/{end_date}/monthly"
+
+              return station.get("provided_url") or station.get("station_url")
 
           def precipitation_record(
               *,
@@ -420,13 +460,15 @@ jobs:
               station_name: str,
               municipality: str | None,
               status: str,
-              source_url: str,
+              source_url: str | None,
               credit: str,
               station_url: str | None = None,
               provider: str | None = None,
               station_code: str | None = None,
               precipitation_available: str = "por_verificar",
+              online_status: str = "por_verificar",
               inventory_method: str = "extracted",
+              quality_class: str = "por_verificar",
           ) -> dict:
               return {
                   "station_id": make_station_id(institution, station_name),
@@ -440,11 +482,29 @@ jobs:
                   "provider": provider,
                   "station_code": station_code,
                   "precipitation_available": precipitation_available,
+                  "online_status": online_status,
+                  "quality_class": quality_class,
                   "source_url": source_url,
                   "station_url": station_url,
                   "inventory_method": inventory_method,
                   "credit": credit,
               }
+
+          def buscar_dias_en_bloque(lineas: list[str]) -> tuple[int | None, int | None]:
+              texto = " | ".join(normalizar(x) for x in lineas)
+
+              con_lluvia = None
+              sin_lluvia = None
+
+              match_con = re.search(r"([0-9]+)\s*dias?\s*con\s*lluvia", texto)
+              match_sin = re.search(r"([0-9]+)\s*dias?\s*sin\s*lluvia", texto)
+
+              if match_con:
+                  con_lluvia = int(match_con.group(1))
+              if match_sin:
+                  sin_lluvia = int(match_sin.group(1))
+
+              return con_lluvia, sin_lluvia
 
           def obtener_seccion_solola(lines: list[str]) -> list[str]:
               inicio = None
@@ -552,7 +612,9 @@ jobs:
                           station_code=None,
                           credit=source["credit"],
                           precipitation_available="si",
+                          online_status="online",
                           inventory_method="from_precipitation_page",
+                          quality_class="oficial",
                       ))
 
                       compat_rows.append({
@@ -613,6 +675,7 @@ jobs:
               for a in soup.find_all("a"):
                   label = a.get_text(" ", strip=True)
                   href = a.get("href")
+
                   if not href:
                       continue
 
@@ -633,6 +696,7 @@ jobs:
 
               parsed = []
               i = 0
+
               while i < len(lines):
                   line = lines[i].strip()
                   clean = normalizar(line)
@@ -681,11 +745,13 @@ jobs:
                   i += 1
 
               inventory_method = "extracted_from_source_page"
+
               if not parsed:
                   parsed = VIVAMOS_MEJOR_FALLBACK_STATIONS
                   inventory_method = "fallback_from_known_public_listing"
 
               stations = []
+
               for idx, item in enumerate(parsed):
                   link = station_links[idx] if idx < len(station_links) else None
                   station_url = link["url"] if link else None
@@ -704,7 +770,9 @@ jobs:
                       station_code=station_code,
                       credit=source["credit"],
                       precipitation_available="por_verificar",
+                      online_status="en_inventario",
                       inventory_method=inventory_method,
+                      quality_class="institucional_local",
                   ))
 
               metadata = {
@@ -714,267 +782,231 @@ jobs:
                   "real_station_links": station_links,
                   "ignored_links": [x for x in all_links if not is_real_station_link(x["url"])],
                   "inventory_method": inventory_method,
-                  "note": "Se ignoran enlaces genéricos. Solo se usan enlaces reales de estación como Wunderground, Ambient Weather, WeatherLink o PWSWeather.",
+                  "note": "Inventario institucional de Vivamos Mejor. Para datos numéricos se usa pws_config.json cuando la estación tiene URL funcional.",
               }
 
               return stations, station_links, metadata, raw_text
 
-          def extract_precip_from_station_page(text: str) -> tuple[float | None, str | None]:
-              lines = [line.strip() for line in text.splitlines() if line.strip()]
-              keywords = [
-                  "precipitacion",
-                  "precipitación",
-                  "lluvia",
-                  "rain",
-                  "rainfall",
-                  "rain rate",
-                  "rain today",
-                  "daily rain",
-                  "precip",
+          def render_page_text_with_playwright(url: str, wait_for: str = "Precipitation") -> tuple[str, str, dict]:
+              status = {
+                  "url": url,
+                  "ok": False,
+                  "engine": "playwright_chromium",
+                  "error": None,
+                  "html_length": None,
+                  "text_length": None,
+              }
+
+              with sync_playwright() as p:
+                  browser = p.chromium.launch(headless=True)
+                  page = browser.new_page(
+                      viewport={"width": 1600, "height": 1200},
+                      user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/125 Safari/537.36 MTA-Solola/0.9",
+                  )
+
+                  try:
+                      page.goto(url, wait_until="networkidle", timeout=65000)
+
+                      try:
+                          page.wait_for_timeout(8000)
+                          page.get_by_text(wait_for, exact=False).first.wait_for(timeout=12000)
+                      except Exception:
+                          pass
+
+                      text = page.locator("body").inner_text(timeout=20000)
+                      html = page.content()
+
+                      status["ok"] = True
+                      status["html_length"] = len(html)
+                      status["text_length"] = len(text)
+
+                      return text, html, status
+
+                  except Exception as exc:
+                      status["error"] = str(exc)
+
+                      try:
+                          text = page.locator("body").inner_text(timeout=5000)
+                          html = page.content()
+                          status["html_length"] = len(html)
+                          status["text_length"] = len(text)
+                          return text, html, status
+                      except Exception:
+                          return "", "", status
+
+                  finally:
+                      browser.close()
+
+          def extract_wunderground_precip(text: str, html: str) -> tuple[float | None, str | None, str]:
+              combined = text + "\n" + html
+
+              patterns = [
+                  r"Precipitation\s+([0-9]+(?:[.,][0-9]+)?)\s*in\b",
+                  r"Precipitation[\s\S]{0,140}?([0-9]+(?:[.,][0-9]+)?)\s*in\b",
+                  r"Rainfall[\s\S]{0,140}?([0-9]+(?:[.,][0-9]+)?)\s*in\b",
+                  r"Rain[\s\S]{0,140}?([0-9]+(?:[.,][0-9]+)?)\s*in\b",
               ]
 
-              for i, line in enumerate(lines):
-                  clean = normalizar(line)
-                  if not any(normalizar(k) in clean for k in keywords):
-                      continue
+              for pattern in patterns:
+                  match = re.search(pattern, combined, flags=re.I)
+                  if match:
+                      value_in = float(match.group(1).replace(",", "."))
+                      return pulgadas_a_mm(value_in), match.group(0), "in_to_mm"
 
-                  block = " | ".join(lines[max(0, i - 2): min(len(lines), i + 5)])
-                  value = numero_mm(block)
+              mm_value = numero_mm(combined)
+              if mm_value is not None and "precip" in normalizar(combined):
+                  return mm_value, "precipitation_mm_detected", "mm"
 
-                  if value is not None:
-                      return value, block
+              return None, None, "not_found"
 
-              keyword_pattern = r"(precipitaci[oó]n|lluvia|rain|rainfall|rain today|daily rain|precip)"
-              match = re.search(
-                  keyword_pattern + r".{0,200}?([0-9]+(?:[.,][0-9]+)?)\s*mm",
-                  text,
-                  flags=re.I | re.S,
-              )
-
-              if match:
-                  return float(match.group(2).replace(",", ".")), match.group(0)
-
-              return None, None
-
-          def fetch_public_station_precip(
+          def fetch_pws_precip_with_config(
               *,
               station: dict,
               source: dict,
               observed_date: str,
               extracted_at_utc: str,
               extracted_at_gt: str,
-          ) -> tuple[dict | None, dict]:
+              start_date: str,
+              end_date: str,
+          ) -> tuple[dict | None, dict, dict]:
+              provider = station.get("provider")
+              station_name = station.get("station_name") or station.get("station_code") or "PWS sin nombre"
+              institution = station.get("institution") or source["institution"]
+              credit = station.get("credit") or source["credit"]
               station_url = station.get("station_url")
+              history_url = build_history_url(station, start_date, end_date)
+
+              inventory = station_inventory_record(
+                  source_id=source["source_id"],
+                  institution=institution,
+                  station_name=station_name,
+                  municipality=station.get("municipality"),
+                  status=station.get("status") or "por_verificar",
+                  source_url=history_url or station_url,
+                  station_url=station_url,
+                  provider=provider,
+                  station_code=station.get("station_code") or station.get("dashboard_id"),
+                  credit=credit,
+                  precipitation_available="por_verificar",
+                  online_status="por_verificar",
+                  inventory_method="pws_config_json",
+                  quality_class=station.get("quality_class") or "complementaria",
+              )
 
               result = {
-                  "station_id": station["station_id"],
-                  "station_name": station["station_name"],
-                  "provider": station.get("provider"),
+                  "station_id": inventory["station_id"],
+                  "station_name": station_name,
+                  "provider": provider,
                   "station_code": station.get("station_code"),
+                  "dashboard_id": station.get("dashboard_id"),
                   "station_url": station_url,
+                  "history_url": history_url,
+                  "enabled": station.get("enabled", True),
+                  "enabled_current_extraction": station.get("enabled_current_extraction", True),
+                  "enabled_historical_extraction": station.get("enabled_historical_extraction", False),
                   "ok": False,
+                  "online_status": "por_verificar",
                   "precipitation_found": False,
+                  "precipitation_mm": None,
                   "error": None,
                   "matched_text": None,
+                  "unit_conversion": None,
               }
 
-              if not station_url:
-                  result["error"] = "sin_url_de_estacion"
-                  return None, result
+              if not station.get("enabled", True):
+                  result["online_status"] = "deshabilitada"
+                  result["error"] = "station_disabled"
+                  inventory["online_status"] = "deshabilitada"
+                  inventory["precipitation_available"] = "no"
+                  return None, result, inventory
 
-              html, status = fetch_url(station_url)
-              result["fetch_status"] = status
+              if not station.get("enabled_current_extraction", True):
+                  if station.get("enabled_historical_extraction"):
+                      result["online_status"] = "historica_no_actual"
+                      result["error"] = "current_extraction_disabled_historical_only"
+                      inventory["online_status"] = "historica"
+                      inventory["precipitation_available"] = "historica_por_verificar"
+                  else:
+                      result["online_status"] = "requiere_parser_o_configuracion"
+                      result["error"] = "current_extraction_disabled"
+                      inventory["online_status"] = "requiere_parser"
+                      inventory["precipitation_available"] = "por_verificar"
 
-              if not status["ok"]:
-                  result["error"] = status.get("error") or "no_response"
-                  return None, result
+                  return None, result, inventory
 
-              soup = html_to_soup(html)
-              text = soup.get_text("\n")
-              value, matched = extract_precip_from_station_page(text + "\n" + html)
+              if provider != "wunderground":
+                  result["online_status"] = "requiere_parser"
+                  result["error"] = f"provider_not_supported_yet:{provider}"
+                  inventory["online_status"] = "requiere_parser"
+                  inventory["precipitation_available"] = "por_verificar"
+                  return None, result, inventory
 
-              if value is None:
-                  result["ok"] = True
-                  result["error"] = "precipitacion_no_detectada_en_html"
-                  return None, result
-
-              result["ok"] = True
-              result["precipitation_found"] = True
-              result["matched_text"] = matched
-
-              record = precipitation_record(
-                  observed_date=observed_date,
-                  extracted_at_utc=extracted_at_utc,
-                  extracted_at_gt=extracted_at_gt,
-                  source_id=station.get("source_id") or source["source_id"],
-                  institution=station.get("institution") or source["institution"],
-                  station_name=station["station_name"],
-                  variable="precipitation_accumulated",
-                  value=value,
-                  unit="mm",
-                  aggregation_period="periodo_publicado_por_fuente",
-                  source_url=station_url,
-                  credit=station.get("credit") or source["credit"],
-                  quality_flag="raw_published_detected_from_station_page",
-              )
-
-              return record, result
-
-          def load_weatherlink_station_list() -> list[dict]:
-              raw = os.getenv("WEATHERLINK_STATIONS_JSON", "").strip()
-              if not raw:
-                  return []
+              if not history_url:
+                  result["online_status"] = "sin_url"
+                  result["error"] = "missing_history_url"
+                  inventory["online_status"] = "sin_url"
+                  inventory["precipitation_available"] = "no"
+                  return None, result, inventory
 
               try:
-                  data = json.loads(raw)
-                  if isinstance(data, list):
-                      return data
-                  return []
-              except Exception:
-                  return []
+                  text, html, render_status = render_page_text_with_playwright(history_url)
+                  result["render_status"] = render_status
 
-          def flatten_json(obj, prefix=""):
-              items = []
-              if isinstance(obj, dict):
-                  for key, value in obj.items():
-                      new_prefix = f"{prefix}.{key}" if prefix else str(key)
-                      items.extend(flatten_json(value, new_prefix))
-              elif isinstance(obj, list):
-                  for idx, value in enumerate(obj):
-                      new_prefix = f"{prefix}.{idx}" if prefix else str(idx)
-                      items.extend(flatten_json(value, new_prefix))
-              else:
-                  items.append((prefix, obj))
-              return items
+                  raw_file = RAW_ROOT / f"wunderground_{slug(station_name)}_{observed_date}.txt"
+                  raw_file.write_text(text[:20000], encoding="utf-8")
+                  result["raw_text_path"] = str(raw_file)
 
-          def find_weatherlink_precip_value(payload: dict) -> tuple[float | None, str | None]:
-              candidates_mm = [
-                  "rainfall_daily_mm",
-                  "rain_day_mm",
-                  "rainfall_day_mm",
-                  "daily_rain_mm",
-                  "rain_storm_mm",
-                  "rainfall_monthly_mm",
-              ]
+                  if not render_status["ok"] and not text:
+                      result["online_status"] = "offline_o_no_render"
+                      result["error"] = render_status.get("error") or "render_failed"
+                      inventory["online_status"] = "offline_o_no_render"
+                      inventory["precipitation_available"] = "no"
+                      return None, result, inventory
 
-              candidates_in = [
-                  "rainfall_daily_in",
-                  "rain_day_in",
-                  "rainfall_day_in",
-                  "daily_rain_in",
-                  "rain_storm_in",
-              ]
+                  value_mm, matched, conversion = extract_wunderground_precip(text, html)
 
-              flat = flatten_json(payload)
-
-              for key, value in flat:
-                  clean_key = normalizar(key).replace(" ", "_")
-                  try:
-                      numeric = float(value)
-                  except Exception:
-                      continue
-
-                  if any(candidate in clean_key for candidate in candidates_mm):
-                      return numeric, key
-
-              for key, value in flat:
-                  clean_key = normalizar(key).replace(" ", "_")
-                  try:
-                      numeric = float(value)
-                  except Exception:
-                      continue
-
-                  if any(candidate in clean_key for candidate in candidates_in):
-                      return pulgadas_a_mm(numeric), key
-
-              for key, value in flat:
-                  clean_key = normalizar(key)
-                  try:
-                      numeric = float(value)
-                  except Exception:
-                      continue
-
-                  if "rain" in clean_key and "rate" not in clean_key and ("daily" in clean_key or "day" in clean_key or "storm" in clean_key):
-                      if "in" in clean_key and "mm" not in clean_key:
-                          return pulgadas_a_mm(numeric), key
-                      return numeric, key
-
-              return None, None
-
-          def fetch_weatherlink_api_precip(
-              *,
-              station: dict,
-              source: dict,
-              observed_date: str,
-              extracted_at_utc: str,
-              extracted_at_gt: str,
-          ) -> tuple[dict | None, dict]:
-              api_key = os.getenv("WEATHERLINK_API_KEY", "").strip()
-              api_secret = os.getenv("WEATHERLINK_API_SECRET", "").strip()
-
-              result = {
-                  "provider": "weatherlink_api",
-                  "station_id": station.get("station_id"),
-                  "station_name": station.get("station_name"),
-                  "municipality": station.get("municipality"),
-                  "ok": False,
-                  "precipitation_found": False,
-                  "error": None,
-                  "matched_field": None,
-              }
-
-              if not api_key or not api_secret:
-                  result["error"] = "weatherlink_api_sin_credenciales"
-                  return None, result
-
-              wl_station_id = station.get("station_id")
-              if wl_station_id is None:
-                  result["error"] = "weatherlink_station_id_faltante"
-                  return None, result
-
-              url = f"https://api.weatherlink.com/v2/current/{wl_station_id}"
-
-              payload, status = fetch_json(
-                  url,
-                  headers={"X-Api-Secret": api_secret},
-                  params={"api-key": api_key},
-              )
-              result["fetch_status"] = status
-
-              if not status["ok"] or not payload:
-                  result["error"] = status.get("error") or "weatherlink_no_response"
-                  return None, result
-
-              value, matched_field = find_weatherlink_precip_value(payload)
-
-              if value is None:
                   result["ok"] = True
-                  result["error"] = "precipitacion_no_detectada_en_weatherlink_payload"
-                  return None, result
 
-              result["ok"] = True
-              result["precipitation_found"] = True
-              result["matched_field"] = matched_field
+                  if value_mm is None:
+                      result["online_status"] = "online_sin_dato_detectado"
+                      result["error"] = "precipitacion_no_detectada_en_tabla_renderizada"
+                      inventory["online_status"] = "online_sin_dato_detectado"
+                      inventory["precipitation_available"] = "por_verificar"
+                      return None, result, inventory
 
-              station_name = station.get("station_name") or f"WeatherLink {wl_station_id}"
+                  result["online_status"] = "online"
+                  result["precipitation_found"] = True
+                  result["precipitation_mm"] = value_mm
+                  result["matched_text"] = matched
+                  result["unit_conversion"] = conversion
 
-              record = precipitation_record(
-                  observed_date=observed_date,
-                  extracted_at_utc=extracted_at_utc,
-                  extracted_at_gt=extracted_at_gt,
-                  source_id=source["source_id"],
-                  institution="WeatherLink",
-                  station_name=station_name,
-                  variable="precipitation_accumulated",
-                  value=value,
-                  unit="mm",
-                  aggregation_period=f"weatherlink_current_field:{matched_field}",
-                  source_url=url,
-                  credit="Datos: WeatherLink. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
-                  quality_flag="weatherlink_api_detected_field",
-              )
+                  inventory["online_status"] = "online"
+                  inventory["precipitation_available"] = "si_extraida"
 
-              return record, result
+                  record = precipitation_record(
+                      observed_date=observed_date,
+                      extracted_at_utc=extracted_at_utc,
+                      extracted_at_gt=extracted_at_gt,
+                      source_id=source["source_id"],
+                      institution=institution,
+                      station_name=station_name,
+                      variable="precipitation_accumulated",
+                      value=value_mm,
+                      unit="mm",
+                      aggregation_period=f"wunderground_table:{start_date}_to_{end_date}",
+                      source_url=history_url,
+                      credit=credit,
+                      quality_flag="pws_complementaria_rendered_table",
+                  )
+
+                  return record, result, inventory
+
+              except Exception as exc:
+                  result["online_status"] = "error"
+                  result["error"] = str(exc)
+                  inventory["online_status"] = "error"
+                  inventory["precipitation_available"] = "no"
+                  return None, result, inventory
 
           def merge_inventory(existing: list[dict], incoming: list[dict]) -> list[dict]:
               by_id = {item["station_id"]: item for item in existing if item.get("station_id")}
@@ -1060,6 +1092,8 @@ jobs:
                   "provider",
                   "station_code",
                   "precipitation_available",
+                  "online_status",
+                  "quality_class",
                   "source_url",
                   "station_url",
                   "inventory_method",
@@ -1076,6 +1110,9 @@ jobs:
           extracted_at_utc = utc_now.isoformat()
           extracted_at_gt = gt_now.isoformat()
           observed_date = gt_now.strftime("%Y-%m-%d")
+          start_date, end_date = fecha_actual_rango(gt_now)
+
+          pws_config = load_pws_config()
 
           all_records = []
           all_inventory = []
@@ -1085,7 +1122,6 @@ jobs:
           insivumeh_raw_section = []
 
           vivamos_mejor_inventory = []
-          vivamos_mejor_station_results = []
           vivamos_mejor_metadata = {}
           vivamos_mejor_raw_text = ""
 
@@ -1138,7 +1174,7 @@ jobs:
                       except Exception as exc:
                           status["errors"].append(f"{url}: {exc}")
 
-              elif source["parser"] == "vivamos_mejor_precip":
+              elif source["parser"] == "vivamos_mejor_inventory":
                   html = ""
                   page_url = source["urls"][0]
 
@@ -1159,11 +1195,13 @@ jobs:
                               html,
                               page_url,
                           )
+
                           vivamos_mejor_inventory = stations
                           vivamos_mejor_metadata = metadata
                           vivamos_mejor_raw_text = raw_text
                           status["ok"] = True
                           status["stations_found"] = len(stations)
+
                       except Exception as exc:
                           status["errors"].append(f"parse_inventory: {exc}")
 
@@ -1181,136 +1219,62 @@ jobs:
                               station_code=None,
                               credit=source["credit"],
                               precipitation_available="por_verificar",
+                              online_status="en_inventario",
                               inventory_method="fallback_from_known_public_listing",
+                              quality_class="institucional_local",
                           )
                           for item in VIVAMOS_MEJOR_FALLBACK_STATIONS
                       ]
+
                       vivamos_mejor_metadata = {
                           "station_count": len(vivamos_mejor_inventory),
                           "inventory_method": "fallback_from_known_public_listing",
                           "real_station_links_found": 0,
                       }
 
-                  for station in vivamos_mejor_inventory:
-                      record, station_result = fetch_public_station_precip(
-                          station=station,
-                          source=source,
-                          observed_date=observed_date,
-                          extracted_at_utc=extracted_at_utc,
-                          extracted_at_gt=extracted_at_gt,
-                      )
-
-                      vivamos_mejor_station_results.append(station_result)
-
-                      if record:
-                          all_records.append(record)
-                          status["records_added"] += 1
-                          station["precipitation_available"] = "si_extraida"
+                      status["ok"] = True
+                      status["stations_found"] = len(vivamos_mejor_inventory)
 
                   all_inventory.extend(vivamos_mejor_inventory)
-                  status["ok"] = True if vivamos_mejor_inventory else status["ok"]
 
-              elif source["parser"] == "pws_precip":
-                  # 1. PWS detectadas desde Vivamos Mejor.
-                  detected_pws = []
-                  for station in vivamos_mejor_inventory:
-                      if station.get("station_url") and station.get("provider"):
-                          detected_pws.append({
-                              "provider": station.get("provider"),
-                              "station_code": station.get("station_code"),
-                              "station_name": station.get("station_name"),
-                              "municipality": station.get("municipality"),
-                              "station_url": station.get("station_url"),
-                              "credit": station.get("credit"),
-                          })
+              elif source["parser"] == "pws_config":
+                  stations_config = [
+                      station for station in pws_config.get("stations", [])
+                      if station.get("enabled", True)
+                  ]
 
-                  # 2. Lista blanca semilla.
-                  detected_codes = {item.get("station_code") for item in detected_pws if item.get("station_code")}
-                  for item in PWS_FALLBACK:
-                      if item.get("station_code") not in detected_codes:
-                          detected_pws.append(item)
-
-                  # 3. WeatherLink API opcional.
-                  weatherlink_api_stations = load_weatherlink_station_list()
-
-                  for item in detected_pws:
-                      station = station_inventory_record(
-                          source_id=source["source_id"],
-                          institution="Estación PWS complementaria",
-                          station_name=item.get("station_name") or item.get("station_code") or "PWS sin nombre",
-                          municipality=item.get("municipality"),
-                          status="complementaria_por_verificar",
-                          source_url=item.get("station_url"),
-                          station_url=item.get("station_url"),
-                          provider=item.get("provider"),
-                          station_code=item.get("station_code"),
-                          credit=item.get("credit") or source["credit"],
-                          precipitation_available="por_verificar",
-                          inventory_method="pws_whitelist_or_detected_from_vivamos_mejor",
-                      )
-
-                      pws_inventory.append(station)
-
-                      record, station_result = fetch_public_station_precip(
+                  for station in stations_config:
+                      record, station_result, inventory_item = fetch_pws_precip_with_config(
                           station=station,
                           source=source,
                           observed_date=observed_date,
                           extracted_at_utc=extracted_at_utc,
                           extracted_at_gt=extracted_at_gt,
+                          start_date=start_date,
+                          end_date=end_date,
                       )
 
                       pws_results.append(station_result)
+                      pws_inventory.append(inventory_item)
 
                       if record:
                           all_records.append(record)
                           status["records_added"] += 1
-                          station["precipitation_available"] = "si_extraida_html"
-
-                  for wl_station in weatherlink_api_stations:
-                      wl_station_name = wl_station.get("station_name") or f"WeatherLink {wl_station.get('station_id')}"
-                      station = station_inventory_record(
-                          source_id=source["source_id"],
-                          institution="WeatherLink",
-                          station_name=wl_station_name,
-                          municipality=wl_station.get("municipality"),
-                          status="api_por_verificar",
-                          source_url=f"https://api.weatherlink.com/v2/current/{wl_station.get('station_id')}",
-                          station_url=None,
-                          provider="weatherlink_api",
-                          station_code=str(wl_station.get("station_id")),
-                          credit="Datos: WeatherLink. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
-                          precipitation_available="por_verificar",
-                          inventory_method="weatherlink_api_variable",
-                      )
-
-                      pws_inventory.append(station)
-
-                      record, station_result = fetch_weatherlink_api_precip(
-                          station=wl_station,
-                          source=source,
-                          observed_date=observed_date,
-                          extracted_at_utc=extracted_at_utc,
-                          extracted_at_gt=extracted_at_gt,
-                      )
-
-                      pws_results.append(station_result)
-
-                      if record:
-                          all_records.append(record)
-                          status["records_added"] += 1
-                          station["precipitation_available"] = "si_extraida_api"
 
                   all_inventory.extend(pws_inventory)
+
                   status["ok"] = True
                   status["stations_found"] = len(pws_inventory)
                   status["urls"] = [
                       {
-                          "url": item.get("station_url") or item.get("source_url"),
-                          "ok": True,
+                          "url": item.get("history_url") or item.get("station_url"),
+                          "ok": item.get("ok"),
+                          "online_status": item.get("online_status"),
                           "provider": item.get("provider"),
                           "station_code": item.get("station_code"),
+                          "error": item.get("error"),
                       }
-                      for item in pws_inventory
+                      for item in pws_results
                   ]
 
               source_status.append(status)
@@ -1329,7 +1293,7 @@ jobs:
           )
 
           actual_payload = {
-              "schema": "mta_precipitaciones_actuales_v3",
+              "schema": "mta_precipitaciones_actuales_v4",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "observed_date": observed_date,
@@ -1341,8 +1305,7 @@ jobs:
                   "included_sources": [
                       "INSIVUMEH",
                       "Asociación Vivamos Mejor",
-                      "Estaciones PWS complementarias",
-                      "WeatherLink API opcional si hay credenciales",
+                      "PWS configuradas manualmente",
                   ],
                   "excluded_sources_for_now": [
                       "AMSCLAE",
@@ -1354,19 +1317,20 @@ jobs:
               "monthly_history_csv": str(monthly_csv) if monthly_csv else None,
               "station_inventory_path": str(INVENTARIO_JSON),
               "source_status_path": str(SOURCE_STATUS_JSON),
+              "pws_config_path": str(CONFIG_JSON),
           }
 
           write_json(ACTUAL_JSON, actual_payload)
 
           write_json(SOURCE_STATUS_JSON, {
-              "schema": "mta_precipitacion_source_status_v3",
+              "schema": "mta_precipitacion_source_status_v4",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "sources": source_status,
           })
 
           inventory_payload = {
-              "schema": "mta_precipitacion_estaciones_v3",
+              "schema": "mta_precipitacion_estaciones_v4",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1378,7 +1342,7 @@ jobs:
           write_inventory_csv(merged_inventory)
 
           write_json(INSIVUMEH_COMPAT_JSON, {
-              "schema": "mta_precipitaciones_insivumeh_actual_v3",
+              "schema": "mta_precipitaciones_insivumeh_actual_v4",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1409,7 +1373,7 @@ jobs:
               writer.writerows(insivumeh_compat_rows)
 
           write_json(VIVAMOS_MEJOR_JSON, {
-              "schema": "mta_precipitaciones_vivamos_mejor_v3",
+              "schema": "mta_precipitaciones_vivamos_mejor_v4",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1420,47 +1384,47 @@ jobs:
               },
               "metadata": vivamos_mejor_metadata,
               "stations": vivamos_mejor_inventory,
-              "station_extraction_results": vivamos_mejor_station_results,
               "notes": [
-                  "Se extrae inventario de estaciones desde la página pública autorizada.",
-                  "Se filtran enlaces genéricos y se conservan solo enlaces reales de estación.",
-                  "Se intenta extraer precipitación desde cada enlace real de estación.",
-                  "Si una estación carga datos por JavaScript o servicio externo, queda registrada como precipitacion_no_detectada_en_html hasta crear parser específico o usar API.",
+                  "Vivamos Mejor se conserva como inventario institucional local.",
+                  "La extracción numérica de las PWS se maneja mediante pws_config.json.",
+                  "Solo se trabaja precipitación en esta etapa.",
               ],
           })
 
           VIVAMOS_MEJOR_RAW_TXT.write_text(vivamos_mejor_raw_text, encoding="utf-8")
 
           write_json(PWS_JSON, {
-              "schema": "mta_precipitaciones_pws_v1",
+              "schema": "mta_precipitaciones_pws_v2",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
               "source": {
-                  "institution": "Estaciones PWS complementarias",
+                  "institution": "PWS configuradas manualmente",
+                  "config_path": str(CONFIG_JSON),
                   "credit": "Datos: estación meteorológica complementaria pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+              },
+              "date_range_used": {
+                  "start_date": start_date,
+                  "end_date": end_date,
               },
               "stations": pws_inventory,
               "station_extraction_results": pws_results,
-              "weatherlink_api_enabled": bool(os.getenv("WEATHERLINK_API_KEY", "").strip() and os.getenv("WEATHERLINK_API_SECRET", "").strip()),
               "notes": [
-                  "AMSCLAE queda fuera del flujo automático de precipitación por ahora.",
-                  "INSIVUMEH se conserva como fuente oficial.",
-                  "Vivamos Mejor aporta inventario institucional local.",
-                  "PWS/Wunderground/WeatherLink se tratan como estaciones complementarias, no oficiales.",
-                  "No se promedian datos crudos en este Action.",
+                  "Se usa pws_config.json como lista blanca manual.",
+                  "Weather Underground se procesa con Chromium/Playwright porque la tabla puede cargar con JavaScript.",
+                  "Ambient Weather queda registrado como estación configurada, pero requiere parser específico.",
+                  "No se promedian datos crudos.",
               ],
           })
 
           print(f"OK registros numéricos de precipitación: {len(all_records)}")
           print(f"OK inventario consolidado de estaciones de precipitación: {len(merged_inventory)}")
           print(f"INSIVUMEH filas compatibilidad: {len(insivumeh_compat_rows)}")
-          print(f"Vivamos Mejor estaciones: {len(vivamos_mejor_inventory)}")
-          print(f"PWS complementarias: {len(pws_inventory)}")
+          print(f"Vivamos Mejor estaciones inventario: {len(vivamos_mejor_inventory)}")
+          print(f"PWS configuradas: {len(pws_inventory)}")
           print(f"Actual: {ACTUAL_JSON}")
           print(f"Inventario: {INVENTARIO_JSON}")
           print(f"Histórico mensual: {monthly_path}")
-          print(f"Vivamos Mejor: {VIVAMOS_MEJOR_JSON}")
           print(f"PWS: {PWS_JSON}")
 
       - name: Guardar cambios generados
