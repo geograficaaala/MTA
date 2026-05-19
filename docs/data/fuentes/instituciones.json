@@ -1,0 +1,81 @@
+{
+  "schema": "mta_instituciones_fuentes_v1",
+  "generated_at_utc": "2026-05-19T00:11:35.253126+00:00",
+  "generated_at_gt": "2026-05-18T18:11:35.253126-06:00",
+  "institutions": [
+    {
+      "source_id": "insivumeh_precipitaciones_departamentos",
+      "institution": "INSIVUMEH",
+      "kind": "observations",
+      "parser": "insivumeh_precip_solola",
+      "urls": [
+        "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html",
+        "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html"
+      ],
+      "variables_declared": [
+        "precipitation_accumulated",
+        "rain_days",
+        "dry_days"
+      ],
+      "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "source_id": "vivamos_mejor_estaciones",
+      "institution": "Asociación Vivamos Mejor",
+      "kind": "station_inventory",
+      "parser": "vivamos_mejor_inventory",
+      "urls": [
+        "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/"
+      ],
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind"
+      ],
+      "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "source_id": "amsclae_clima",
+      "institution": "AMSCLAE",
+      "kind": "station_inventory_and_metadata",
+      "parser": "amsclae_metadata",
+      "urls": [
+        "https://www.amsclae.gob.gt/clima/",
+        "https://www.amsclae.gob.gt/clima/estacion-climatica.php",
+        "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      ],
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "source_id": "icc_redmet",
+      "institution": "ICC",
+      "kind": "station_network_metadata",
+      "parser": "icc_metadata",
+      "urls": [
+        "https://www.icc.org.gt/es/clima/",
+        "https://icc.org.gt/es/estaciones/",
+        "https://icc.org.gt/es/sistema-de-informacion-meteorologica-redmet/"
+      ],
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "solar_radiation",
+        "leaf_wetness",
+        "wind_speed",
+        "wind_direction"
+      ],
+      "credit": "Datos: ICC. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    }
+  ]
+}

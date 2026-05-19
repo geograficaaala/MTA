@@ -1,0 +1,963 @@
+{
+  "schema": "mta_fuente_amsclae_clima_v1",
+  "generated_at_utc": "2026-05-19T00:11:35.253126+00:00",
+  "generated_at_gt": "2026-05-18T18:11:35.253126-06:00",
+  "source": {
+    "source_id": "amsclae_clima",
+    "institution": "AMSCLAE",
+    "urls": [
+      "https://www.amsclae.gob.gt/clima/",
+      "https://www.amsclae.gob.gt/clima/estacion-climatica.php",
+      "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+    ],
+    "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+  },
+  "metadata": {
+    "count_claims": [
+      {
+        "count": 14,
+        "source_url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/",
+        "context": "14 estaciones meteorológicas"
+      }
+    ],
+    "select_options_count": 44,
+    "potential_station_names": [
+      "Seleccione Estación...",
+      "Barraneche",
+      "Cerro de Oro",
+      "Concepcion",
+      "El Tablon",
+      "Finca Santa Victoria",
+      "Los Saminez",
+      "Nahuala",
+      "Panajachel",
+      "San Andres Semetabaj",
+      "San Antonio Palopo",
+      "San Jose Chacaya",
+      "San Juan La Laguna",
+      "San Lucas Toliman",
+      "San Marcos La Laguna",
+      "Santa Catarina Palopo",
+      "Santa Cruz La Laguna",
+      "Santa Lucia Utatlan",
+      "Santa Maria Visitacion",
+      "Santa Rita Nahuala",
+      "Santiago Atitlan",
+      "Solola",
+      "Período...",
+      "Diario",
+      "Mensual",
+      "Temperatura Med.",
+      "Temperatura Min",
+      "Temperatura Max",
+      "Precipitación",
+      "Humedad",
+      "Radiación Solar",
+      "Rad. Solar Max. Abs.",
+      "Índice UV Max. Abs."
+    ],
+    "iframe_sources": [
+      "https://www.arcgis.com/apps/instant/sidebar/index.html?appid=1765035b296f42e88e979f22c16f6743",
+      "https://www.weatherlink.com/embeddablePage/show/52037b4139d34a978421e7e9338db234/slim",
+      "https://www.weatherlink.com/embeddablePage/show/0390713d18ba47918370926d63939d0c/slim",
+      "https://www.weatherlink.com/embeddablePage/show/9ec8c506d97f4f44b3a1ec48e1a509ca/slim",
+      "https://www.weatherlink.com/embeddablePage/show/054d1cce7482497c9b25b24f5bf11680/slim",
+      "https://www.weatherlink.com/embeddablePage/show/bba7bfa4af5348fb9767abc5d1b88c28/slim",
+      "https://www.weatherlink.com/embeddablePage/show/1ca08638993e4ffdb152b1aea77c0918/slim",
+      "https://www.weatherlink.com/embeddablePage/show/f80e9d2e296d4d98b0e1056ec65eaf48/slim",
+      "https://www.weatherlink.com/embeddablePage/show/b2b67c1d060540a496cf28b3ae9c1e16/slim",
+      "https://www.weatherlink.com/embeddablePage/show/adfc56e67c4245f6a51e66d97fb0ece0/slim",
+      "https://www.weatherlink.com/embeddablePage/show/30512e648d61472ab42cc60b75ce838a/slim"
+    ],
+    "relevant_links": [
+      {
+        "text": "Inicio (current)",
+        "url": "https://www.amsclae.gob.gt/clima/index.html"
+      },
+      {
+        "text": "Clima",
+        "url": "https://www.amsclae.gob.gt/clima/estacion-climatica.php"
+      },
+      {
+        "text": "Estado del Lago",
+        "url": "https://www.amsclae.gob.gt/clima/estado-del-lago.php"
+      },
+      {
+        "text": "Nivel del Lago",
+        "url": "https://www.amsclae.gob.gt/clima/nivel-del-lago.php"
+      },
+      {
+        "text": "Ríos",
+        "url": "https://www.amsclae.gob.gt/clima/caudal-rios.php"
+      },
+      {
+        "text": "Contacto",
+        "url": "https://www.amsclae.gob.gt/clima/contacto.php"
+      },
+      {
+        "text": "Inicio (current)",
+        "url": "https://www.amsclae.gob.gt/clima/index.html"
+      },
+      {
+        "text": "Clima",
+        "url": "https://www.amsclae.gob.gt/clima/estacion-climatica.php"
+      },
+      {
+        "text": "Estado del Lago",
+        "url": "https://www.amsclae.gob.gt/clima/estado-del-lago.php"
+      },
+      {
+        "text": "Nivel del Lago",
+        "url": "https://www.amsclae.gob.gt/clima/nivel-del-lago.php"
+      },
+      {
+        "text": "Ríos",
+        "url": "https://www.amsclae.gob.gt/clima/caudal-rios.php"
+      },
+      {
+        "text": "Contacto",
+        "url": "https://www.amsclae.gob.gt/clima/contacto.php"
+      },
+      {
+        "text": "Saltar al contenido",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/#main"
+      },
+      {
+        "text": "Nosotros",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "Estaciones Climáticas",
+        "url": "https://www.amsclae.gob.gt/clima/"
+      },
+      {
+        "text": "Información",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "Estaciones Climáticas",
+        "url": "http://www.amsclae.gob.gt/clima/"
+      },
+      {
+        "text": "Estudios e Informes",
+        "url": "https://www.amsclae.gob.gt/estudios1/"
+      },
+      {
+        "text": "Comunicación Social",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "Informes",
+        "url": "https://www.amsclae.gob.gt/category/informes/"
+      },
+      {
+        "text": "Trámites",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "Ley de Acceso a la Información Pública",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "Solicitud de Información Pública",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "Transparencia Presupuestaria",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "Denunciar",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      },
+      {
+        "text": "",
+        "url": "https://www.amsclae.gob.gt/wp-content/uploads/2024/04/estaciones-2.jpg"
+      },
+      {
+        "text": "Mantenimiento de las estaciones meteorológicas",
+        "url": "https://www.amsclae.gob.gt/wp-content/uploads/photo-gallery/estaciones-2.jpg?bwg=1712672287"
+      },
+      {
+        "text": "Mantenimiento de las estaciones meteorológicas",
+        "url": "https://www.amsclae.gob.gt/wp-content/uploads/photo-gallery/estaciones-3.jpg?bwg=1712672287"
+      },
+      {
+        "text": "Mantenimiento de las estaciones meteorológicas",
+        "url": "https://www.amsclae.gob.gt/wp-content/uploads/photo-gallery/estaciones-5.jpg?bwg=1712672287"
+      },
+      {
+        "text": "Mantenimiento de las estaciones meteorológicas",
+        "url": "https://www.amsclae.gob.gt/wp-content/uploads/photo-gallery/estaciones-6.jpg?bwg=1712672287"
+      },
+      {
+        "text": "Mantenimiento de las estaciones meteorológicas",
+        "url": "https://www.amsclae.gob.gt/wp-content/uploads/photo-gallery/estaciones-4.jpg?bwg=1712672287"
+      },
+      {
+        "text": "Mantenimiento de las estaciones meteorológicas",
+        "url": "https://www.amsclae.gob.gt/wp-content/uploads/photo-gallery/estaciones-1.jpg?bwg=1712672287"
+      },
+      {
+        "text": "Estudios e Informes",
+        "url": "https://www.amsclae.gob.gt/estudios1/"
+      },
+      {
+        "text": "",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/#cm-masthead"
+      },
+      {
+        "text": "",
+        "url": "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.amsclae.gob.gt%2F2024%2F04%2F09%2Fmantenimiento-de-las-estaciones-meteorologicas%2F&t=Mantenimiento%20de%20las%20estaciones%20meteorol%C3%B3gicas"
+      },
+      {
+        "text": "",
+        "url": "https://x.com/intent/tweet?text=Mantenimiento%20de%20las%20estaciones%20meteorol%C3%B3gicas&url=https%3A%2F%2Fwww.amsclae.gob.gt%2F2024%2F04%2F09%2Fmantenimiento-de-las-estaciones-meteorologicas%2F"
+      },
+      {
+        "text": "",
+        "url": "https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fwww.amsclae.gob.gt%2F2024%2F04%2F09%2Fmantenimiento-de-las-estaciones-meteorologicas%2F&title=Mantenimiento%20de%20las%20estaciones%20meteorol%C3%B3gicas&summary=La%20AMSCLAE%20a%20trav%C3%A9s%20del%20Departamento%20de%20Investigaci%C3%B3n%20y%20Calidad%20Ambiental%20monitorea%20el%20comportamiento%20clim%C3%A1tico%20del%20lago%20Atitl%C3%A1n.%20Este%20seguimiento%20se%20lleva%20a%20cabo%20mediante%20una%20red%20de%2014%20estaciones%20meteorol%C3%B3gicas%20estrat%C3%A9gicamente%20ubicadas%20en%20diferentes&mini=true"
+      },
+      {
+        "text": "",
+        "url": "mailto:?subject=Mantenimiento%20de%20las%20estaciones%20meteorol%C3%B3gicas&body=https%3A%2F%2Fwww.amsclae.gob.gt%2F2024%2F04%2F09%2Fmantenimiento-de-las-estaciones-meteorologicas%2F"
+      },
+      {
+        "text": "",
+        "url": "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/"
+      }
+    ],
+    "notes": [
+      "AMSCLAE puede exponer datos mediante formularios, iframes o endpoints internos.",
+      "Este paso captura inventario y metadatos; las observaciones numéricas entrarán cuando se identifique el endpoint estable."
+    ]
+  },
+  "stations": [
+    {
+      "station_id": "amsclae_seleccione_estacion",
+      "station_name": "Seleccione Estación...",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_barraneche",
+      "station_name": "Barraneche",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_cerro_de_oro",
+      "station_name": "Cerro de Oro",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_concepcion",
+      "station_name": "Concepcion",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_el_tablon",
+      "station_name": "El Tablon",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_finca_santa_victoria",
+      "station_name": "Finca Santa Victoria",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_los_saminez",
+      "station_name": "Los Saminez",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_nahuala",
+      "station_name": "Nahuala",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_panajachel",
+      "station_name": "Panajachel",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_san_andres_semetabaj",
+      "station_name": "San Andres Semetabaj",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_san_antonio_palopo",
+      "station_name": "San Antonio Palopo",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_san_jose_chacaya",
+      "station_name": "San Jose Chacaya",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_san_juan_la_laguna",
+      "station_name": "San Juan La Laguna",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_san_lucas_toliman",
+      "station_name": "San Lucas Toliman",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_san_marcos_la_laguna",
+      "station_name": "San Marcos La Laguna",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_santa_catarina_palopo",
+      "station_name": "Santa Catarina Palopo",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_santa_cruz_la_laguna",
+      "station_name": "Santa Cruz La Laguna",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_santa_lucia_utatlan",
+      "station_name": "Santa Lucia Utatlan",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_santa_maria_visitacion",
+      "station_name": "Santa Maria Visitacion",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_santa_rita_nahuala",
+      "station_name": "Santa Rita Nahuala",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_santiago_atitlan",
+      "station_name": "Santiago Atitlan",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_solola",
+      "station_name": "Solola",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_periodo",
+      "station_name": "Período...",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_diario",
+      "station_name": "Diario",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_mensual",
+      "station_name": "Mensual",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_temperatura_med",
+      "station_name": "Temperatura Med.",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_temperatura_min",
+      "station_name": "Temperatura Min",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_temperatura_max",
+      "station_name": "Temperatura Max",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_precipitacion",
+      "station_name": "Precipitación",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_humedad",
+      "station_name": "Humedad",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_radiacion_solar",
+      "station_name": "Radiación Solar",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_rad_solar_max_abs",
+      "station_name": "Rad. Solar Max. Abs.",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    },
+    {
+      "station_id": "amsclae_indice_uv_max_abs",
+      "station_name": "Índice UV Max. Abs.",
+      "institution": "AMSCLAE",
+      "source_id": "amsclae_clima",
+      "department": "Sololá",
+      "municipality": null,
+      "status": "por_verificar",
+      "variables_declared": [
+        "precipitation",
+        "temperature",
+        "relative_humidity",
+        "wind_speed",
+        "wind_direction",
+        "solar_radiation",
+        "uv_index"
+      ],
+      "source_url": "https://www.amsclae.gob.gt/clima/",
+      "station_url": null,
+      "inventory_method": "potential_station_from_select_options",
+      "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+    }
+  ]
+}

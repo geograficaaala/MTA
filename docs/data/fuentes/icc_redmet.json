@@ -1,0 +1,121 @@
+{
+  "schema": "mta_fuente_icc_redmet_v1",
+  "generated_at_utc": "2026-05-19T00:11:35.253126+00:00",
+  "generated_at_gt": "2026-05-18T18:11:35.253126-06:00",
+  "source": {
+    "source_id": "icc_redmet",
+    "institution": "ICC",
+    "urls": [
+      "https://www.icc.org.gt/es/clima/",
+      "https://icc.org.gt/es/estaciones/",
+      "https://icc.org.gt/es/sistema-de-informacion-meteorologica-redmet/"
+    ],
+    "credit": "Datos: ICC. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+  },
+  "metadata": {
+    "count_claims": [
+      {
+        "count": 0,
+        "source_url": "https://www.icc.org.gt/es/clima/",
+        "context": "0 estaciones meteorológicas"
+      },
+      {
+        "count": 48,
+        "source_url": "https://www.icc.org.gt/es/clima/",
+        "context": "48 estaciones automáticas"
+      },
+      {
+        "count": 38,
+        "source_url": "https://icc.org.gt/es/estaciones/",
+        "context": "38 estaciones meteorológicas"
+      },
+      {
+        "count": 38,
+        "source_url": "https://icc.org.gt/es/estaciones/",
+        "context": "38 estaciones meteorológicas"
+      }
+    ],
+    "variables_claims": [
+      {
+        "source_url": "https://www.icc.org.gt/es/clima/",
+        "text": "La red de estaciones meteorológicas del ICC cuenta con 48 estaciones automáticas en la vertiente del Pacífico de Guatemala y 9 en El Salvador, las cuales generan información de precipitación, temperatura, humedad relativa, radiación solar, humedad de la hoja, velocidad y dirección del viento cada 15 minutos. Dicha información está a disposición de investigadores, académicos, estudiantes y población en general."
+      }
+    ],
+    "redmet_links": [
+      {
+        "text": "Clima",
+        "url": "https://www.icc.org.gt/es/clima/"
+      },
+      {
+        "text": "Clima",
+        "url": "https://www.icc.org.gt/es/clima/"
+      },
+      {
+        "text": "Clima",
+        "url": "https://www.icc.org.gt/es/clima/"
+      },
+      {
+        "text": "",
+        "url": "https://redmet.icc.org.gt/login"
+      },
+      {
+        "text": "Clima",
+        "url": "https://icc.org.gt/es/clima/"
+      },
+      {
+        "text": "Clima",
+        "url": "https://icc.org.gt/es/clima/"
+      },
+      {
+        "text": "Clima",
+        "url": "https://icc.org.gt/es/clima/"
+      },
+      {
+        "text": "redmet.org.gt",
+        "url": "https://redmet.icc.org.gt/"
+      },
+      {
+        "text": "www. redmet.icc.org.gt.",
+        "url": "https://redmet.icc.org.gt/"
+      },
+      {
+        "text": "Ir al contenido",
+        "url": "https://icc.org.gt/es/sistema-de-informacion-meteorologica-redmet/#content"
+      },
+      {
+        "text": "Clima",
+        "url": "https://icc.org.gt/es/clima/"
+      },
+      {
+        "text": "Clima",
+        "url": "https://icc.org.gt/es/clima/"
+      },
+      {
+        "text": "Español",
+        "url": "https://icc.org.gt/es/sistema-de-informacion-meteorologica-redmet/"
+      },
+      {
+        "text": "Clima",
+        "url": "https://icc.org.gt/es/clima/"
+      },
+      {
+        "text": "www.redmet.icc.org.gt",
+        "url": "https://redmet.icc.org.gt/login"
+      }
+    ],
+    "declared_variables": [
+      "precipitation",
+      "temperature",
+      "relative_humidity",
+      "solar_radiation",
+      "leaf_wetness",
+      "wind_speed",
+      "wind_direction"
+    ],
+    "notes": [
+      "ICC/REDMET documenta red de estaciones y variables.",
+      "Este paso captura metadatos y enlaces; las observaciones numéricas entrarán cuando se identifique endpoint estable de REDMET."
+    ]
+  },
+  "stations": []
+}
