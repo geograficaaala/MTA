@@ -12,6 +12,10 @@ jobs:
   actualizar-precipitaciones:
     runs-on: ubuntu-latest
 
+    env:
+      AMBIENT_WEATHER_API_KEY: ${{ secrets.AMBIENT_WEATHER_API_KEY }}
+      AMBIENT_WEATHER_APPLICATION_KEY: ${{ secrets.AMBIENT_WEATHER_APPLICATION_KEY }}
+
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
@@ -34,6 +38,7 @@ jobs:
 
           import csv
           import json
+          import os
           import re
           import unicodedata
           from datetime import datetime, timezone
@@ -146,6 +151,8 @@ jobs:
               "region norte",
           ]
 
+          AMBIENT_SANTA_CATARINA_DASHBOARD_ID = "4bd244f9e8c5b0cb889ba4cbb1a463c3"
+
           def now_times() -> tuple[datetime, datetime]:
               utc = datetime.now(timezone.utc)
               gt = utc.astimezone(GT)
@@ -209,7 +216,7 @@ jobs:
 
           def fetch_url(url: str) -> tuple[str, dict]:
               headers = {
-                  "User-Agent": "MTA-Solola-Precipitaciones/1.0 (+https://github.com/geograficaaala/MTA)",
+                  "User-Agent": "MTA-Solola-Precipitaciones/1.1 (+https://github.com/geograficaaala/MTA)",
                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
               }
 
@@ -264,6 +271,33 @@ jobs:
               except Exception as exc:
                   status["error"] = str(exc)
                   return "", status
+
+          def fetch_json(url: str, params: dict) -> tuple[object | None, dict]:
+              status = {
+                  "url": url,
+                  "ok": False,
+                  "status_code": None,
+                  "error": None,
+              }
+
+              try:
+                  response = requests.get(
+                      url,
+                      timeout=45,
+                      params=params,
+                      headers={
+                          "User-Agent": "MTA-Solola-AmbientWeather/1.1",
+                          "Accept": "application/json",
+                      },
+                      verify=certifi.where(),
+                  )
+                  status["status_code"] = response.status_code
+                  response.raise_for_status()
+                  status["ok"] = True
+                  return response.json(), status
+              except Exception as exc:
+                  status["error"] = str(exc)
+                  return None, status
 
           def html_to_soup(html: str) -> BeautifulSoup:
               soup = BeautifulSoup(html, "lxml")
@@ -681,7 +715,7 @@ jobs:
                   browser = p.chromium.launch(headless=True)
                   page = browser.new_page(
                       viewport={"width": 1600, "height": 1200},
-                      user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/125 Safari/537.36 MTA-Solola/1.0",
+                      user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/125 Safari/537.36 MTA-Solola/1.1",
                   )
 
                   try:
@@ -707,9 +741,6 @@ jobs:
                       status["html_length"] = len(html)
                       status["text_length"] = len(text)
                       status["usable"] = bool(text.strip()) or bool(html.strip())
-
-                      if status["usable"] and not status["ok"]:
-                          status["ok"] = False
 
                       return text, html, status
 
@@ -754,7 +785,263 @@ jobs:
 
               return None, None, "not_found"
 
-          def fetch_pws_precip_with_config(
+          def ambient_weather_enabled() -> bool:
+              return bool(os.getenv("AMBIENT_WEATHER_API_KEY", "").strip()) and bool(os.getenv("AMBIENT_WEATHER_APPLICATION_KEY", "").strip())
+
+          def is_santa_catarina_ambient_station(station: dict) -> bool:
+              dashboard_id = str(station.get("dashboard_id") or "")
+              name = normalizar(station.get("station_name") or "")
+              municipality = normalizar(station.get("municipality") or "")
+              return (
+                  dashboard_id == AMBIENT_SANTA_CATARINA_DASHBOARD_ID
+                  or "santa catarina" in name
+                  or "santa catarina" in municipality
+              )
+
+          def fetch_ambient_devices() -> tuple[list[dict], dict]:
+              api_key = os.getenv("AMBIENT_WEATHER_API_KEY", "").strip()
+              app_key = os.getenv("AMBIENT_WEATHER_APPLICATION_KEY", "").strip()
+
+              if not api_key or not app_key:
+                  return [], {
+                      "url": "https://api.ambientweather.net/v1/devices",
+                      "ok": False,
+                      "error": "ambient_weather_secrets_missing",
+                  }
+
+              payload, status = fetch_json(
+                  "https://api.ambientweather.net/v1/devices",
+                  params={
+                      "apiKey": api_key,
+                      "applicationKey": app_key,
+                  },
+              )
+
+              if not status["ok"] or payload is None:
+                  return [], status
+
+              if isinstance(payload, list):
+                  return payload, status
+
+              return [], {
+                  **status,
+                  "ok": False,
+                  "error": "ambient_weather_payload_no_es_lista",
+              }
+
+          def device_text(device: dict) -> str:
+              parts = []
+
+              for key in ["macAddress", "lastData", "info"]:
+                  value = device.get(key)
+                  if isinstance(value, dict):
+                      parts.append(json.dumps(value, ensure_ascii=False))
+                  else:
+                      parts.append(str(value or ""))
+
+              return normalizar(" ".join(parts))
+
+          def choose_ambient_device(devices: list[dict], station: dict) -> tuple[dict | None, str]:
+              configured_mac = (
+                  station.get("mac_address")
+                  or station.get("macAddress")
+                  or station.get("mac")
+              )
+
+              if configured_mac:
+                  configured_mac_clean = normalizar(configured_mac).replace(" ", "").replace(":", "")
+                  for device in devices:
+                      device_mac = str(device.get("macAddress") or "")
+                      device_mac_clean = normalizar(device_mac).replace(" ", "").replace(":", "")
+                      if device_mac_clean == configured_mac_clean:
+                          return device, "matched_by_mac"
+
+                  return None, "configured_mac_not_found"
+
+              if len(devices) == 1:
+                  return devices[0], "single_device_available"
+
+              wanted_tokens = [
+                  token for token in re.split(r"[_\W]+", normalizar(
+                      f"{station.get('station_name', '')} {station.get('municipality', '')}"
+                  ))
+                  if len(token) >= 4
+              ]
+
+              best_device = None
+              best_score = 0
+
+              for device in devices:
+                  text = device_text(device)
+                  score = sum(1 for token in wanted_tokens if token in text)
+
+                  if score > best_score:
+                      best_score = score
+                      best_device = device
+
+              if best_device and best_score >= 2:
+                  return best_device, f"matched_by_text_score_{best_score}"
+
+              return None, "multiple_devices_need_mac_address"
+
+          def ambient_daily_precip_mm(last_data: dict) -> tuple[float | None, str | None, str | None]:
+              fields_in = [
+                  "dailyrainin",
+                  "dailyRainIn",
+                  "daily_rain_in",
+                  "rainDayIn",
+                  "eventrainin",
+                  "hourlyrainin",
+              ]
+
+              fields_mm = [
+                  "dailyrainmm",
+                  "dailyRainMm",
+                  "daily_rain_mm",
+                  "rainDayMm",
+              ]
+
+              for field in fields_mm:
+                  if field in last_data:
+                      try:
+                          return round(float(last_data[field]), 3), field, "mm"
+                      except Exception:
+                          pass
+
+              for field in fields_in:
+                  if field in last_data:
+                      try:
+                          return pulgadas_a_mm(float(last_data[field])), field, "in_to_mm"
+                      except Exception:
+                          pass
+
+              return None, None, None
+
+          def fetch_ambient_precip_with_config(
+              *,
+              station: dict,
+              source: dict,
+              observed_date: str,
+              extracted_at_utc: str,
+              extracted_at_gt: str,
+              ambient_devices: list[dict],
+              ambient_status: dict,
+          ) -> tuple[dict | None, dict, dict]:
+              station_name = station.get("station_name") or "Ambient Weather sin nombre"
+              institution = station.get("institution") or "Ambient Weather"
+              credit = station.get("credit") or "Datos: Ambient Weather. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
+              station_url = station.get("station_url")
+
+              inventory = station_inventory_record(
+                  source_id=source["source_id"],
+                  institution=institution,
+                  station_name=station_name,
+                  municipality=station.get("municipality"),
+                  status=station.get("status") or "activa_api_ambientweather",
+                  source_url=station_url or "https://api.ambientweather.net/v1/devices",
+                  station_url=station_url,
+                  provider="ambientweather",
+                  station_code=station.get("dashboard_id") or station.get("mac_address") or station.get("macAddress"),
+                  credit=credit,
+                  precipitation_available="por_verificar",
+                  online_status="por_verificar",
+                  inventory_method="ambientweather_api",
+                  quality_class=station.get("quality_class") or "complementaria",
+              )
+
+              result = {
+                  "station_id": inventory["station_id"],
+                  "station_name": station_name,
+                  "provider": "ambientweather",
+                  "dashboard_id": station.get("dashboard_id"),
+                  "station_url": station_url,
+                  "ok": False,
+                  "online_status": "por_verificar",
+                  "precipitation_found": False,
+                  "precipitation_mm": None,
+                  "matched_field": None,
+                  "unit_conversion": None,
+                  "device_match_method": None,
+                  "error": None,
+                  "ambient_api_status": {
+                      "ok": ambient_status.get("ok"),
+                      "status_code": ambient_status.get("status_code"),
+                      "error": ambient_status.get("error"),
+                  },
+              }
+
+              if not ambient_weather_enabled():
+                  result["online_status"] = "api_sin_credenciales"
+                  result["error"] = "ambient_weather_secrets_missing"
+                  inventory["online_status"] = "api_sin_credenciales"
+                  inventory["precipitation_available"] = "no"
+                  return None, result, inventory
+
+              if not ambient_status.get("ok"):
+                  result["online_status"] = "api_error"
+                  result["error"] = ambient_status.get("error") or "ambient_api_error"
+                  inventory["online_status"] = "api_error"
+                  inventory["precipitation_available"] = "no"
+                  return None, result, inventory
+
+              device, match_method = choose_ambient_device(ambient_devices, station)
+              result["device_match_method"] = match_method
+
+              if not device:
+                  result["online_status"] = "api_dispositivo_no_identificado"
+                  result["error"] = match_method
+                  inventory["online_status"] = "api_dispositivo_no_identificado"
+                  inventory["precipitation_available"] = "por_verificar"
+                  return None, result, inventory
+
+              last_data = device.get("lastData") or {}
+
+              if not isinstance(last_data, dict):
+                  result["online_status"] = "api_sin_lastdata"
+                  result["error"] = "ambient_device_without_lastData"
+                  inventory["online_status"] = "api_sin_lastdata"
+                  inventory["precipitation_available"] = "no"
+                  return None, result, inventory
+
+              value_mm, field, conversion = ambient_daily_precip_mm(last_data)
+
+              if value_mm is None:
+                  result["ok"] = True
+                  result["online_status"] = "online_sin_precipitacion_detectada"
+                  result["error"] = "ambient_precipitation_field_not_found"
+                  inventory["online_status"] = "online_sin_precipitacion_detectada"
+                  inventory["precipitation_available"] = "por_verificar"
+                  return None, result, inventory
+
+              result["ok"] = True
+              result["online_status"] = "online"
+              result["precipitation_found"] = True
+              result["precipitation_mm"] = value_mm
+              result["matched_field"] = field
+              result["unit_conversion"] = conversion
+
+              inventory["online_status"] = "online"
+              inventory["precipitation_available"] = "si_extraida_api"
+
+              record = precipitation_record(
+                  observed_date=observed_date,
+                  extracted_at_utc=extracted_at_utc,
+                  extracted_at_gt=extracted_at_gt,
+                  source_id=source["source_id"],
+                  institution=institution,
+                  station_name=station_name,
+                  variable="precipitation_accumulated",
+                  value=value_mm,
+                  unit="mm",
+                  aggregation_period=f"ambientweather_lastData:{field}",
+                  source_url=station_url or "https://api.ambientweather.net/v1/devices",
+                  credit=credit,
+                  quality_flag="pws_complementaria_ambientweather_api",
+              )
+
+              return record, result, inventory
+
+          def fetch_wunderground_precip_with_config(
               *,
               station: dict,
               source: dict,
@@ -829,13 +1116,6 @@ jobs:
 
                   return None, result, inventory
 
-              if provider != "wunderground":
-                  result["online_status"] = "requiere_parser"
-                  result["error"] = f"provider_not_supported_yet:{provider}"
-                  inventory["online_status"] = "requiere_parser"
-                  inventory["precipitation_available"] = "por_verificar"
-                  return None, result, inventory
-
               if not history_url:
                   result["online_status"] = "sin_url"
                   result["error"] = "missing_history_url"
@@ -906,6 +1186,122 @@ jobs:
                   inventory["online_status"] = "error"
                   inventory["precipitation_available"] = "no"
                   return None, result, inventory
+
+          def fetch_pws_precip_with_config(
+              *,
+              station: dict,
+              source: dict,
+              observed_date: str,
+              extracted_at_utc: str,
+              extracted_at_gt: str,
+              start_date: str,
+              end_date: str,
+              ambient_devices: list[dict],
+              ambient_status: dict,
+          ) -> tuple[dict | None, dict, dict]:
+              provider = station.get("provider")
+
+              ambient_override = (
+                  provider == "ambientweather"
+                  and ambient_weather_enabled()
+                  and is_santa_catarina_ambient_station(station)
+              )
+
+              if provider == "ambientweather":
+                  if not station.get("enabled_current_extraction", True) and not ambient_override:
+                      station_name = station.get("station_name") or "Ambient Weather sin nombre"
+                      institution = station.get("institution") or source["institution"]
+                      credit = station.get("credit") or source["credit"]
+                      station_url = station.get("station_url")
+
+                      inventory = station_inventory_record(
+                          source_id=source["source_id"],
+                          institution=institution,
+                          station_name=station_name,
+                          municipality=station.get("municipality"),
+                          status=station.get("status") or "requiere_parser_ambientweather",
+                          source_url=station_url,
+                          station_url=station_url,
+                          provider="ambientweather",
+                          station_code=station.get("dashboard_id"),
+                          credit=credit,
+                          precipitation_available="por_verificar",
+                          online_status="requiere_parser",
+                          inventory_method="pws_config_json",
+                          quality_class=station.get("quality_class") or "complementaria",
+                      )
+
+                      result = {
+                          "station_id": inventory["station_id"],
+                          "station_name": station_name,
+                          "provider": "ambientweather",
+                          "dashboard_id": station.get("dashboard_id"),
+                          "station_url": station_url,
+                          "ok": False,
+                          "online_status": "requiere_parser",
+                          "precipitation_found": False,
+                          "precipitation_mm": None,
+                          "error": "current_extraction_disabled",
+                      }
+
+                      return None, result, inventory
+
+                  return fetch_ambient_precip_with_config(
+                      station=station,
+                      source=source,
+                      observed_date=observed_date,
+                      extracted_at_utc=extracted_at_utc,
+                      extracted_at_gt=extracted_at_gt,
+                      ambient_devices=ambient_devices,
+                      ambient_status=ambient_status,
+                  )
+
+              if provider == "wunderground":
+                  return fetch_wunderground_precip_with_config(
+                      station=station,
+                      source=source,
+                      observed_date=observed_date,
+                      extracted_at_utc=extracted_at_utc,
+                      extracted_at_gt=extracted_at_gt,
+                      start_date=start_date,
+                      end_date=end_date,
+                  )
+
+              station_name = station.get("station_name") or "PWS sin nombre"
+              institution = station.get("institution") or source["institution"]
+              credit = station.get("credit") or source["credit"]
+              station_url = station.get("station_url")
+
+              inventory = station_inventory_record(
+                  source_id=source["source_id"],
+                  institution=institution,
+                  station_name=station_name,
+                  municipality=station.get("municipality"),
+                  status=station.get("status") or "requiere_parser",
+                  source_url=station_url,
+                  station_url=station_url,
+                  provider=provider,
+                  station_code=station.get("station_code") or station.get("dashboard_id"),
+                  credit=credit,
+                  precipitation_available="por_verificar",
+                  online_status="requiere_parser",
+                  inventory_method="pws_config_json",
+                  quality_class=station.get("quality_class") or "complementaria",
+              )
+
+              result = {
+                  "station_id": inventory["station_id"],
+                  "station_name": station_name,
+                  "provider": provider,
+                  "station_url": station_url,
+                  "ok": False,
+                  "online_status": "requiere_parser",
+                  "precipitation_found": False,
+                  "precipitation_mm": None,
+                  "error": f"provider_not_supported_yet:{provider}",
+              }
+
+              return None, result, inventory
 
           def rebuild_inventory(incoming: list[dict]) -> list[dict]:
               by_id = {}
@@ -1039,6 +1435,8 @@ jobs:
           pws_inventory = []
           pws_results = []
 
+          ambient_devices, ambient_status = fetch_ambient_devices()
+
           for source in SOURCES:
               status = {
                   "source_id": source["source_id"],
@@ -1163,6 +1561,8 @@ jobs:
                           extracted_at_gt=extracted_at_gt,
                           start_date=start_date,
                           end_date=end_date,
+                          ambient_devices=ambient_devices,
+                          ambient_status=ambient_status,
                       )
 
                       pws_results.append(station_result)
@@ -1183,6 +1583,7 @@ jobs:
                           "online_status": item.get("online_status"),
                           "provider": item.get("provider"),
                           "station_code": item.get("station_code"),
+                          "dashboard_id": item.get("dashboard_id"),
                           "error": item.get("error"),
                       }
                       for item in pws_results
@@ -1196,7 +1597,7 @@ jobs:
           rebuilt_inventory = rebuild_inventory(all_inventory)
 
           actual_payload = {
-              "schema": "mta_precipitaciones_actuales_v5",
+              "schema": "mta_precipitaciones_actuales_v6",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "observed_date": observed_date,
@@ -1210,6 +1611,7 @@ jobs:
                       "INSIVUMEH",
                       "Asociación Vivamos Mejor",
                       "PWS configuradas manualmente",
+                      "Ambient Weather API para Santa Catarina Palopó si hay secrets",
                   ],
                   "excluded_sources_for_now": [
                       "AMSCLAE",
@@ -1227,14 +1629,23 @@ jobs:
           write_json(ACTUAL_JSON, actual_payload)
 
           write_json(SOURCE_STATUS_JSON, {
-              "schema": "mta_precipitacion_source_status_v5",
+              "schema": "mta_precipitacion_source_status_v6",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
+              "ambient_weather_api": {
+                  "enabled": ambient_weather_enabled(),
+                  "devices_seen": len(ambient_devices),
+                  "status": {
+                      "ok": ambient_status.get("ok"),
+                      "status_code": ambient_status.get("status_code"),
+                      "error": ambient_status.get("error"),
+                  },
+              },
               "sources": source_status,
           })
 
           inventory_payload = {
-              "schema": "mta_precipitacion_estaciones_v5",
+              "schema": "mta_precipitacion_estaciones_v6",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1246,7 +1657,7 @@ jobs:
           write_inventory_csv(rebuilt_inventory)
 
           write_json(INSIVUMEH_COMPAT_JSON, {
-              "schema": "mta_precipitaciones_insivumeh_actual_v5",
+              "schema": "mta_precipitaciones_insivumeh_actual_v6",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1277,7 +1688,7 @@ jobs:
               writer.writerows(insivumeh_compat_rows)
 
           write_json(VIVAMOS_MEJOR_JSON, {
-              "schema": "mta_precipitaciones_vivamos_mejor_v5",
+              "schema": "mta_precipitaciones_vivamos_mejor_v6",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1298,7 +1709,7 @@ jobs:
           VIVAMOS_MEJOR_RAW_TXT.write_text(vivamos_mejor_raw_text, encoding="utf-8")
 
           write_json(PWS_JSON, {
-              "schema": "mta_precipitaciones_pws_v3",
+              "schema": "mta_precipitaciones_pws_v4",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1311,19 +1722,30 @@ jobs:
                   "start_date": start_date,
                   "end_date": end_date,
               },
+              "ambient_weather_api": {
+                  "enabled": ambient_weather_enabled(),
+                  "devices_seen": len(ambient_devices),
+                  "status": {
+                      "ok": ambient_status.get("ok"),
+                      "status_code": ambient_status.get("status_code"),
+                      "error": ambient_status.get("error"),
+                  },
+              },
               "stations": pws_inventory,
               "station_extraction_results": pws_results,
               "notes": [
                   "Se usa pws_config.json como lista blanca manual.",
                   "Weather Underground se procesa con Chromium/Playwright porque la tabla puede cargar con JavaScript.",
-                  "Si hay precipitación detectada, la estación se marca online aunque networkidle haya dado timeout.",
-                  "Ambient Weather queda registrado como estación configurada, pero requiere parser específico.",
+                  "Santa Catarina Palopó se intenta leer por Ambient Weather API cuando existen los secrets.",
+                  "Ambient Weather usa dailyrainin cuando está disponible y lo convierte de pulgadas a milímetros.",
                   "No se promedian datos crudos.",
               ],
           })
 
           print(f"OK registros numéricos de precipitación: {len(all_records)}")
           print(f"OK inventario reconstruido de estaciones de precipitación: {len(rebuilt_inventory)}")
+          print(f"Ambient Weather API enabled: {ambient_weather_enabled()}")
+          print(f"Ambient Weather devices seen: {len(ambient_devices)}")
           print(f"INSIVUMEH filas compatibilidad: {len(insivumeh_compat_rows)}")
           print(f"Vivamos Mejor estaciones inventario: {len(vivamos_mejor_inventory)}")
           print(f"PWS configuradas: {len(pws_inventory)}")
