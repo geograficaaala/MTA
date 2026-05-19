@@ -1,7 +1,7 @@
 {
-  "schema": "mta_precipitaciones_pws_v2",
-  "generated_at_utc": "2026-05-19T00:56:56.786784+00:00",
-  "generated_at_gt": "2026-05-18T18:56:56.786784-06:00",
+  "schema": "mta_precipitaciones_pws_v3",
+  "generated_at_utc": "2026-05-19T01:05:29.864273+00:00",
+  "generated_at_gt": "2026-05-18T19:05:29.864273-06:00",
   "department": "Sololá",
   "source": {
     "institution": "PWS configuradas manualmente",
@@ -150,10 +150,12 @@
       "render_status": {
         "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-05-18/2026-05-18/monthly",
         "ok": false,
+        "usable": true,
         "engine": "playwright_chromium",
-        "error": "Page.goto: Timeout 65000ms exceeded.\nCall log:\n  - navigating to \"https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-05-18/2026-05-18/monthly\", waiting until \"networkidle\"\n",
-        "html_length": 501858,
-        "text_length": 4548
+        "error": "networkidle: Timeout 15000ms exceeded.",
+        "html_length": 502242,
+        "text_length": 4568,
+        "effective_ok": true
       },
       "raw_text_path": "docs/data/precipitaciones/raw/wunderground_pws_panajachel_2026-05-18.txt"
     },
@@ -178,10 +180,12 @@
       "render_status": {
         "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-05-18/2026-05-18/monthly",
         "ok": false,
+        "usable": true,
         "engine": "playwright_chromium",
-        "error": "Page.goto: Timeout 65000ms exceeded.\nCall log:\n  - navigating to \"https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-05-18/2026-05-18/monthly\", waiting until \"networkidle\"\n",
-        "html_length": 435500,
-        "text_length": 4504
+        "error": "networkidle: Timeout 15000ms exceeded.",
+        "html_length": 437406,
+        "text_length": 4529,
+        "effective_ok": true
       },
       "raw_text_path": "docs/data/precipitaciones/raw/wunderground_vivamos_mejor_casa_santa_rita_2026-05-18.txt"
     },
@@ -205,11 +209,13 @@
       "unit_conversion": "in_to_mm",
       "render_status": {
         "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-05-18/2026-05-18/monthly",
-        "ok": true,
+        "ok": false,
+        "usable": true,
         "engine": "playwright_chromium",
-        "error": null,
-        "html_length": 317412,
-        "text_length": 3260
+        "error": "networkidle: Timeout 15000ms exceeded.",
+        "html_length": 319184,
+        "text_length": 3279,
+        "effective_ok": true
       },
       "raw_text_path": "docs/data/precipitaciones/raw/wunderground_asociacion_vivamos_mejor_coatitlan_r_l_2026-05-18.txt"
     },
@@ -274,6 +280,7 @@
   "notes": [
     "Se usa pws_config.json como lista blanca manual.",
     "Weather Underground se procesa con Chromium/Playwright porque la tabla puede cargar con JavaScript.",
+    "Si hay precipitación detectada, la estación se marca online aunque networkidle haya dado timeout.",
     "Ambient Weather queda registrado como estación configurada, pero requiere parser específico.",
     "No se promedian datos crudos."
   ]
