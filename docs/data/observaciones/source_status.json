@@ -1,0 +1,91 @@
+{
+  "schema": "mta_source_status_v1",
+  "generated_at_utc": "2026-05-19T00:04:58.465219+00:00",
+  "generated_at_gt": "2026-05-18T18:04:58.465219-06:00",
+  "sources": [
+    {
+      "source_id": "insivumeh_precipitaciones_departamentos",
+      "institution": "INSIVUMEH",
+      "kind": "observations",
+      "parser": "insivumeh_precip_solola",
+      "checked_at_utc": "2026-05-19T00:04:58.465219+00:00",
+      "checked_at_gt": "2026-05-18T18:04:58.465219-06:00",
+      "ok": true,
+      "records_added": 9,
+      "urls": [
+        {
+          "url": "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html",
+          "ok": true,
+          "status_code": 200,
+          "ssl_mode": "ssl_no_verificado_por_certificado_fuente",
+          "content_length": 52119,
+          "error": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "source_id": "vivamos_mejor_estaciones",
+      "institution": "Asociación Vivamos Mejor",
+      "kind": "source_monitor",
+      "parser": "monitor_only",
+      "checked_at_utc": "2026-05-19T00:04:58.465219+00:00",
+      "checked_at_gt": "2026-05-18T18:04:58.465219-06:00",
+      "ok": true,
+      "records_added": 0,
+      "urls": [
+        {
+          "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
+          "ok": true,
+          "status_code": 200,
+          "ssl_mode": "ssl_verificado",
+          "content_length": 884906,
+          "error": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "source_id": "amsclae",
+      "institution": "AMSCLAE",
+      "kind": "source_monitor",
+      "parser": "monitor_only",
+      "checked_at_utc": "2026-05-19T00:04:58.465219+00:00",
+      "checked_at_gt": "2026-05-18T18:04:58.465219-06:00",
+      "ok": true,
+      "records_added": 0,
+      "urls": [
+        {
+          "url": "https://www.amsclae.gob.gt/",
+          "ok": true,
+          "status_code": 200,
+          "ssl_mode": "ssl_verificado",
+          "content_length": 170637,
+          "error": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "source_id": "icc_clima",
+      "institution": "ICC",
+      "kind": "source_monitor",
+      "parser": "monitor_only",
+      "checked_at_utc": "2026-05-19T00:04:58.465219+00:00",
+      "checked_at_gt": "2026-05-18T18:04:58.465219-06:00",
+      "ok": true,
+      "records_added": 0,
+      "urls": [
+        {
+          "url": "https://www.icc.org.gt/es/clima/",
+          "ok": true,
+          "status_code": 200,
+          "ssl_mode": "ssl_verificado",
+          "content_length": 162732,
+          "error": null
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

@@ -1,51 +1,45 @@
 {
-  "schema": "mta_precipitaciones_v0_3",
-  "generated_at_utc": "2026-05-18T23:52:31.900782+00:00",
+  "schema": "mta_precipitaciones_insivumeh_actual_v1",
+  "generated_at_utc": "2026-05-19T00:04:58.465219+00:00",
+  "generated_at_gt": "2026-05-18T18:04:58.465219-06:00",
   "department": "Sololá",
   "source": {
     "institution": "INSIVUMEH",
-    "url": "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html",
-    "ssl_mode": "ssl_no_verificado_por_certificado_fuente",
     "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
   },
-  "notes": [
-    "Extracción automática diaria desde página institucional autorizada.",
-    "El campo precipitation_mm_accumulated corresponde al acumulado publicado por la fuente al momento de la consulta.",
-    "Los datos deben mostrarse con fuente, fecha de consulta y crédito institucional."
-  ],
   "stations": [
     {
-      "station_id": "el_capitan",
+      "station_id": "insivumeh_el_capitan",
       "station_name": "El Capitán",
       "department": "Sololá",
       "institution": "INSIVUMEH",
       "precipitation_mm_accumulated": 45.7,
-      "rain_days": null,
-      "dry_days": null,
+      "rain_days": 9,
+      "dry_days": 22,
       "status": "extraido",
       "data_type": "observado_publicado",
       "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
     {
-      "station_id": "el_tablon",
+      "station_id": "insivumeh_el_tablon",
       "station_name": "El Tablón",
       "department": "Sololá",
       "institution": "INSIVUMEH",
       "precipitation_mm_accumulated": 62.0,
-      "rain_days": null,
-      "dry_days": null,
+      "rain_days": 7,
+      "dry_days": 24,
       "status": "extraido",
       "data_type": "observado_publicado",
       "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
     {
-      "station_id": "santiago_atitlan",
+      "station_id": "insivumeh_santiago_atitlan",
       "station_name": "Santiago Atitlán",
       "department": "Sololá",
       "institution": "INSIVUMEH",
       "precipitation_mm_accumulated": 47.3,
-      "rain_days": null,
-      "dry_days": null,
+      "rain_days": 9,
+      "dry_days": 22,
       "status": "extraido",
       "data_type": "observado_publicado",
       "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
