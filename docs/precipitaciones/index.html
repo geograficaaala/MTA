@@ -1,0 +1,2855 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f3a53" />
+  <title>Precipitaciones · Plataforma Agroclimática de Sololá</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+
+  <style>
+    :root {
+      --lake-950: #082537;
+      --lake-900: #0f3a53;
+      --lake-800: #123f5a;
+      --lake-700: #176680;
+      --lake-600: #1f7ec1;
+      --lake-500: #2a9db7;
+      --lake-100: #e6f5f7;
+      --lake-050: #f2fbfc;
+
+      --forest-900: #163f37;
+      --forest-700: #2f7a62;
+      --forest-100: #eaf7ef;
+
+      --maize-700: #9a6d0a;
+      --maize-500: #e7b94f;
+      --maize-100: #fff4d7;
+
+      --risk-700: #b75118;
+      --risk-500: #d66a2a;
+      --risk-100: #fff0e6;
+
+      --blue-700: #1f7ec1;
+      --blue-500: #3aa6de;
+      --blue-100: #e8f4fd;
+
+      --purple-700: #6146a6;
+      --purple-100: #f0ecff;
+
+      --surface: #f6f8f3;
+      --surface-2: #eef5f2;
+      --paper: #ffffff;
+      --paper-soft: rgba(255, 255, 255, 0.82);
+
+      --text: #0e2433;
+      --text-mid: #3b5363;
+      --text-soft: #708391;
+      --muted: #90a1ad;
+
+      --border: rgba(15, 58, 83, 0.12);
+      --border-strong: rgba(15, 58, 83, 0.2);
+
+      --shadow-sm: 0 2px 12px rgba(14, 36, 51, 0.07);
+      --shadow-md: 0 10px 34px rgba(14, 36, 51, 0.12);
+      --shadow-lg: 0 24px 70px rgba(14, 36, 51, 0.16);
+
+      --radius-sm: 0.75rem;
+      --radius-md: 1rem;
+      --radius-lg: 1.5rem;
+      --radius-xl: 2rem;
+
+      --max: 1440px;
+      --nav-h: 74px;
+      --sidebar-w: 340px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(42, 157, 183, 0.16), transparent 28%),
+        radial-gradient(circle at 95% 12%, rgba(231, 185, 79, 0.18), transparent 30%),
+        linear-gradient(180deg, #fbfcf8 0%, var(--surface) 42%, var(--surface-2) 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(15, 58, 83, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 58, 83, 0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.58), transparent 80%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      background: rgba(15, 58, 83, 0.96);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-width: 0;
+      color: var(--paper);
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 1rem;
+      background:
+        radial-gradient(circle at 70% 24%, var(--maize-500) 0 16%, transparent 17%),
+        linear-gradient(145deg, #ffffff, var(--blue-100));
+      color: var(--lake-900);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .brand-text {
+      display: grid;
+      gap: 0.1rem;
+      min-width: 0;
+    }
+
+    .brand-text span {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .brand-text strong {
+      color: var(--paper);
+      font-size: 0.98rem;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 42px;
+      padding: 0.65rem 0.95rem;
+      color: rgba(255, 255, 255, 0.86);
+      text-decoration: none;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.88rem;
+      font-weight: 800;
+      transition: 0.2s ease;
+    }
+
+    .nav-pill:hover {
+      color: var(--paper);
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .nav-pill.primary {
+      color: var(--lake-900);
+      background: var(--paper);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .layout {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--sidebar-w);
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    .main {
+      min-width: 0;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: calc(var(--nav-h) + 1.2rem);
+      display: grid;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 410px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      background:
+        linear-gradient(115deg, rgba(15, 58, 83, 0.96), rgba(23, 102, 128, 0.92)),
+        radial-gradient(circle at 20% 15%, rgba(42, 157, 183, 0.36), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(231, 185, 79, 0.36), transparent 30%);
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.16), transparent 28%),
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+      background-size: auto, 40px 40px, 40px 40px;
+      mask-image: linear-gradient(120deg, rgba(0, 0, 0, 0.9), transparent 92%);
+    }
+
+    .hero-inner {
+      min-height: 410px;
+      padding: clamp(1.35rem, 4vw, 2.3rem);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--lake-500);
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .hero .eyebrow {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--maize-500);
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--lake-900);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .hero h1 {
+      max-width: 10ch;
+      margin-top: 1rem;
+      color: var(--paper);
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(3.4rem, 7vw, 6.8rem);
+      font-weight: 400;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin-top: 1rem;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      line-height: 1.75;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.6rem;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 36px;
+      padding: 0.48rem 0.68rem;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 0.78rem;
+      font-weight: 800;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: grid;
+      align-content: end;
+      border-radius: 1.7rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)),
+        radial-gradient(circle at 50% 35%, rgba(231, 185, 79, 0.20), transparent 28%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      overflow: hidden;
+      min-height: 280px;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 2.5rem 2rem 6.2rem 2rem;
+      border-radius: 47% 53% 48% 52% / 55% 42% 58% 45%;
+      background:
+        radial-gradient(circle at 45% 48%, rgba(42, 157, 183, 0.82), transparent 17%),
+        linear-gradient(135deg, rgba(47, 122, 98, 0.38), rgba(42, 157, 183, 0.24));
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      filter: drop-shadow(0 22px 50px rgba(0, 0, 0, 0.2));
+      animation: floatMap 8s ease-in-out infinite;
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 88px;
+      left: 44%;
+      top: 42%;
+      transform: translate(-50%, -50%) rotate(-9deg);
+      border-radius: 48% 52% 58% 42% / 48% 42% 58% 52%;
+      background: linear-gradient(135deg, #4cc5dd, #1f7ec1);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.30), 0 20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    @keyframes floatMap {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-9px) rotate(1deg); }
+    }
+
+    .rain-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .rain-dot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--maize-500);
+      box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.84), 0 8px 20px rgba(0, 0, 0, 0.22);
+      animation: pulseDot 3.5s ease-in-out infinite;
+    }
+
+    .rain-dot:nth-child(1) { left: 23%; top: 30%; animation-delay: 0.1s; }
+    .rain-dot:nth-child(2) { left: 63%; top: 27%; animation-delay: 0.6s; }
+    .rain-dot:nth-child(3) { left: 35%; top: 57%; animation-delay: 1.1s; }
+    .rain-dot:nth-child(4) { left: 74%; top: 60%; animation-delay: 1.6s; }
+    .rain-dot:nth-child(5) { left: 50%; top: 74%; animation-delay: 2.1s; }
+
+    @keyframes pulseDot {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.95;
+      }
+      50% {
+        transform: scale(1.12);
+        opacity: 1;
+      }
+    }
+
+    .hero-kpis {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      padding: 1rem;
+    }
+
+    .hero-kpi {
+      padding: 1rem;
+      border-radius: 1.1rem;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero-kpi span {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .hero-kpi strong {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--lake-900);
+      font-size: clamp(1.3rem, 2vw, 1.9rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 900;
+    }
+
+    .hero-kpi small {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      line-height: 1.35;
+    }
+
+    .section {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      padding: 0.2rem 0.2rem 0;
+    }
+
+    .section-head h2 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      font-weight: 400;
+    }
+
+    .section-head p {
+      max-width: 620px;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    .card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--paper-soft);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+
+    .card.pad {
+      padding: 1.2rem;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.46)),
+        radial-gradient(circle at 90% 15%, rgba(42, 157, 183, 0.12), transparent 28%);
+    }
+
+    .card-title h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .card-title h3 i {
+      color: var(--lake-600);
+    }
+
+    .card-subtitle {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .metric {
+      position: relative;
+      min-height: 150px;
+      padding: 1.1rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.68)),
+        radial-gradient(circle at 84% 12%, var(--metric-glow, rgba(42, 157, 183, 0.16)), transparent 34%);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: 0.24s ease;
+    }
+
+    .metric:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .metric-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 1rem;
+      color: var(--metric-color, var(--lake-700));
+      background: var(--metric-soft, var(--lake-100));
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 0.35rem;
+      color: var(--lake-900);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1;
+      letter-spacing: -0.07em;
+      font-weight: 900;
+    }
+
+    .metric small {
+      display: block;
+      margin-top: 0.55rem;
+      color: var(--text-soft);
+      line-height: 1.45;
+      font-size: 0.8rem;
+    }
+
+    .metric.rain {
+      --metric-color: var(--blue-700);
+      --metric-soft: var(--blue-100);
+      --metric-glow: rgba(31, 126, 193, 0.18);
+    }
+
+    .metric.station {
+      --metric-color: var(--forest-700);
+      --metric-soft: var(--forest-100);
+      --metric-glow: rgba(47, 122, 98, 0.18);
+    }
+
+    .metric.status {
+      --metric-color: var(--maize-700);
+      --metric-soft: var(--maize-100);
+      --metric-glow: rgba(231, 185, 79, 0.2);
+    }
+
+    .metric.risk {
+      --metric-color: var(--risk-700);
+      --metric-soft: var(--risk-100);
+      --metric-glow: rgba(214, 106, 42, 0.18);
+    }
+
+    .tabs {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 0 1rem;
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    .tab-btn {
+      min-height: 48px;
+      padding: 0 1rem;
+      border: 0;
+      border-top: 3px solid transparent;
+      background: transparent;
+      color: var(--lake-700);
+      cursor: pointer;
+      font-weight: 800;
+      transition: 0.18s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--text);
+      border-top-color: var(--blue-500);
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .graph-stack {
+      padding: 1rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .chart-panel {
+      position: relative;
+      min-height: 290px;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(15, 58, 83, 0.10);
+      background: #fff;
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .chart-panel.tall {
+      min-height: 360px;
+    }
+
+    .chart-panel-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 50px;
+      padding: 0.8rem 0.95rem 0.35rem;
+    }
+
+    .chart-panel-header h3 {
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .chart-panel-header span {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .chart-wrap {
+      position: relative;
+      height: 270px;
+      padding: 0 0.5rem 0.5rem;
+    }
+
+    .chart-panel.tall .chart-wrap {
+      height: 350px;
+    }
+
+    .chart-placeholder {
+      height: 310px;
+      display: grid;
+      place-items: center;
+      color: var(--text-soft);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .data-table-wrap {
+      max-height: 720px;
+      overflow: auto;
+      border-top: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+      background: var(--paper);
+    }
+
+    th,
+    td {
+      padding: 0.82rem 0.85rem;
+      border-bottom: 1px solid rgba(15, 58, 83, 0.08);
+      text-align: left;
+      vertical-align: middle;
+      font-size: 0.85rem;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      color: var(--lake-900);
+      background: #eef3f6;
+      font-weight: 900;
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(15, 58, 83, 0.025);
+    }
+
+    tbody tr:hover {
+      background: rgba(42, 157, 183, 0.08);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 26px;
+      padding: 0.28rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .badge.official {
+      color: var(--lake-900);
+      background: var(--lake-100);
+    }
+
+    .badge.local {
+      color: var(--forest-900);
+      background: var(--forest-100);
+    }
+
+    .badge.pws {
+      color: var(--purple-700);
+      background: var(--purple-100);
+    }
+
+    .badge.online {
+      color: var(--forest-900);
+      background: var(--forest-100);
+    }
+
+    .badge.warn {
+      color: var(--maize-700);
+      background: var(--maize-100);
+    }
+
+    .badge.off {
+      color: var(--risk-700);
+      background: var(--risk-100);
+    }
+
+    .control-card {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--paper-soft);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(14px);
+    }
+
+    .control-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .control-card h3 i {
+      color: var(--lake-600);
+    }
+
+    .field {
+      display: grid;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .field label {
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      min-height: 42px;
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.85rem;
+      color: var(--text);
+      background: #fff;
+      border: 1px solid var(--border);
+      outline: none;
+      transition: 0.18s ease;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: rgba(42, 157, 183, 0.7);
+      box-shadow: 0 0 0 4px rgba(42, 157, 183, 0.14);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 42px;
+      padding: 0.65rem 0.85rem;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 0.83rem;
+      transition: 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--lake-900), var(--lake-700));
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn.soft {
+      color: var(--lake-900);
+      background: var(--lake-100);
+      border: 1px solid rgba(42, 157, 183, 0.22);
+    }
+
+    .btn.ghost {
+      color: var(--text-mid);
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--border);
+    }
+
+    .station-list {
+      display: grid;
+      gap: 0.65rem;
+      max-height: 540px;
+      overflow: auto;
+      padding-right: 0.2rem;
+    }
+
+    .station-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.6rem;
+      align-items: center;
+      padding: 0.8rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(15, 58, 83, 0.08);
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+
+    .station-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+      border-color: var(--border-strong);
+    }
+
+    .station-item strong {
+      display: block;
+      color: var(--lake-900);
+      font-size: 0.86rem;
+      line-height: 1.25;
+    }
+
+    .station-item span {
+      display: block;
+      margin-top: 0.2rem;
+      color: var(--text-soft);
+      font-size: 0.75rem;
+      line-height: 1.35;
+    }
+
+    .rain-value {
+      display: grid;
+      justify-items: end;
+      color: var(--lake-900);
+      font-weight: 900;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .rain-value small {
+      color: var(--text-soft);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .status-grid {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      padding: 0.75rem 0.8rem;
+      border-radius: 0.95rem;
+      border: 1px solid rgba(15, 58, 83, 0.08);
+      background: rgba(255,255,255,0.68);
+    }
+
+    .status-row span {
+      color: var(--text-mid);
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .status-row strong {
+      color: var(--lake-900);
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    #stationMap {
+      height: 430px;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      overflow: hidden;
+      background: var(--lake-100);
+    }
+
+    .leaflet-container {
+      font-family: "Inter", sans-serif;
+    }
+
+    .map-legend {
+      position: absolute;
+      z-index: 500;
+      right: 1rem;
+      bottom: 1rem;
+      width: min(260px, calc(100% - 2rem));
+      padding: 0.8rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(12px);
+    }
+
+    .map-legend h4 {
+      color: var(--lake-900);
+      font-size: 0.82rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--text-mid);
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-top: 0.3rem;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--blue-500);
+    }
+
+    .legend-dot.insivumeh { background: var(--lake-700); }
+    .legend-dot.pws { background: var(--purple-700); }
+    .legend-dot.local { background: var(--forest-700); }
+    .legend-dot.off { background: var(--risk-500); }
+
+    .source-card {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .source-item {
+      padding: 0.85rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(15,58,83,0.08);
+      background: rgba(255,255,255,0.72);
+    }
+
+    .source-item strong {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+      color: var(--lake-900);
+      font-size: 0.9rem;
+    }
+
+    .source-item p {
+      margin-top: 0.45rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+      font-size: 0.78rem;
+    }
+
+    .credit-box {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.54)),
+        radial-gradient(circle at 92% 8%, rgba(231, 185, 79, 0.18), transparent 30%);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .credit-box h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .credit-box p,
+    .credit-box li {
+      color: var(--text-mid);
+      line-height: 1.55;
+      font-size: 0.82rem;
+    }
+
+    .credit-box ul {
+      display: grid;
+      gap: 0.45rem;
+      padding-left: 1.05rem;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(8, 37, 55, 0.56);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(760px, 100%);
+      max-height: 88vh;
+      overflow: auto;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: #fff;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: start;
+      padding: 1.2rem;
+      border-bottom: 1px solid var(--border);
+      background:
+        linear-gradient(135deg, var(--lake-900), var(--lake-700));
+      color: #fff;
+    }
+
+    .modal-head h3 {
+      color: #fff;
+      font-size: 1.35rem;
+    }
+
+    .modal-head p {
+      margin-top: 0.35rem;
+      color: rgba(255,255,255,0.76);
+      line-height: 1.5;
+    }
+
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 1.2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+    }
+
+    .detail {
+      padding: 0.8rem;
+      border-radius: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .detail span {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .detail strong {
+      display: block;
+      margin-top: 0.3rem;
+      color: var(--lake-900);
+      font-size: 0.94rem;
+      overflow-wrap: anywhere;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 1.2rem;
+      z-index: 6000;
+      display: none;
+      transform: translateX(-50%);
+      padding: 0.85rem 1rem;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--lake-900);
+      box-shadow: var(--shadow-lg);
+      font-weight: 800;
+      font-size: 0.86rem;
+    }
+
+    .toast.show {
+      display: block;
+      animation: toastIn 0.25s ease both;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .loading {
+      display: grid;
+      place-items: center;
+      min-height: 260px;
+      color: var(--text-soft);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 1rem;
+      border-radius: 999px;
+      border: 4px solid rgba(31, 126, 193, 0.18);
+      border-top-color: var(--blue-500);
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .empty {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-soft);
+    }
+
+    .empty i {
+      display: block;
+      margin-bottom: 0.6rem;
+      color: var(--lake-500);
+      font-size: 2rem;
+    }
+
+    @media (max-width: 1180px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --nav-h: 68px;
+      }
+
+      .topbar-inner {
+        padding: 0 0.85rem;
+      }
+
+      .brand-text strong {
+        font-size: 0.84rem;
+      }
+
+      .brand-text span {
+        font-size: 0.64rem;
+      }
+
+      .top-actions .nav-pill:not(.primary) {
+        display: none;
+      }
+
+      .layout {
+        padding: 0.85rem;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        min-height: auto;
+        padding: 1.1rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.9rem, 14vw, 4.2rem);
+      }
+
+      .hero-visual {
+        min-height: 430px;
+      }
+
+      .hero-kpis {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid,
+      .sidebar,
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 0.7rem;
+      }
+
+      .chart-panel,
+      .chart-panel.tall {
+        min-height: 300px;
+      }
+
+      .chart-wrap,
+      .chart-panel.tall .chart-wrap {
+        height: 280px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="../" aria-label="Volver al inicio">
+          <span class="brand-mark">MTA</span>
+          <span class="brand-text">
+            <span>Sololá</span>
+            <strong>Precipitaciones</strong>
+          </span>
+        </a>
+
+        <div class="top-actions">
+          <a class="nav-pill" href="../">
+            <i class="bi bi-house-door-fill"></i>
+            Inicio
+          </a>
+          <a class="nav-pill" href="../data/precipitaciones/actual.json">
+            <i class="bi bi-braces"></i>
+            JSON
+          </a>
+          <button class="nav-pill primary" type="button" id="refreshBtn">
+            <i class="bi bi-arrow-repeat"></i>
+            Actualizar vista
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <main class="main">
+        <section class="hero">
+          <div class="hero-inner">
+            <div>
+              <span class="eyebrow">Mesa Técnica Agroclimática</span>
+              <h1>Lluvia observada</h1>
+              <p class="hero-copy">
+                Módulo de precipitación para Sololá con datos oficiales, estaciones
+                institucionales locales y PWS complementarias. Cada dato conserva
+                fuente, fecha, crédito, estado y trazabilidad.
+              </p>
+
+              <div class="hero-meta">
+                <span class="hero-chip">
+                  <i class="bi bi-cloud-rain-heavy-fill"></i>
+                  Solo precipitación
+                </span>
+                <span class="hero-chip">
+                  <i class="bi bi-database-check"></i>
+                  Histórico mensual
+                </span>
+                <span class="hero-chip">
+                  <i class="bi bi-shield-check"></i>
+                  Sin promediar datos crudos
+                </span>
+                <span class="hero-chip" id="updatedChip">
+                  <i class="bi bi-clock-history"></i>
+                  Cargando actualización
+                </span>
+              </div>
+            </div>
+
+            <div class="hero-visual" aria-label="Ilustración territorial">
+              <div class="rain-dots">
+                <span class="rain-dot"></span>
+                <span class="rain-dot"></span>
+                <span class="rain-dot"></span>
+                <span class="rain-dot"></span>
+                <span class="rain-dot"></span>
+              </div>
+
+              <div class="hero-kpis">
+                <div class="hero-kpi">
+                  <span>Lluvia máx.</span>
+                  <strong id="heroMaxRain">--</strong>
+                  <small id="heroMaxStation">Estación principal</small>
+                </div>
+                <div class="hero-kpi">
+                  <span>Estaciones</span>
+                  <strong id="heroStations">--</strong>
+                  <small>con inventario activo</small>
+                </div>
+                <div class="hero-kpi">
+                  <span>Fuentes</span>
+                  <strong id="heroSources">--</strong>
+                  <small>instituciones/proveedores</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="kpi-grid">
+            <article class="metric rain">
+              <div class="metric-icon"><i class="bi bi-cloud-rain-heavy-fill"></i></div>
+              <span>Máximo observado</span>
+              <strong id="kpiMax">--</strong>
+              <small id="kpiMaxLabel">Esperando datos</small>
+            </article>
+
+            <article class="metric station">
+              <div class="metric-icon"><i class="bi bi-broadcast-pin"></i></div>
+              <span>Estaciones con dato</span>
+              <strong id="kpiWithData">--</strong>
+              <small>precipitación numérica disponible</small>
+            </article>
+
+            <article class="metric status">
+              <div class="metric-icon"><i class="bi bi-wifi"></i></div>
+              <span>Estaciones online</span>
+              <strong id="kpiOnline">--</strong>
+              <small>según último monitoreo</small>
+            </article>
+
+            <article class="metric risk">
+              <div class="metric-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+              <span>Rango diario</span>
+              <strong id="kpiRange">--</strong>
+              <small>mínimo a máximo observado</small>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Vista principal</span>
+              <h2>Gráficas y tabla de precipitación</h2>
+            </div>
+            <p>
+              Inspirada en las gráficas de estaciones personales: paneles apilados,
+              fondo por franjas temporales, comparación por estación y lectura rápida
+              de valores extremos.
+            </p>
+          </div>
+
+          <article class="card" id="mainDataCard">
+            <div class="tabs" role="tablist">
+              <button class="tab-btn active" type="button" data-tab="graphPanel">
+                Graph
+              </button>
+              <button class="tab-btn" type="button" data-tab="tablePanel">
+                Table
+              </button>
+              <button class="tab-btn" type="button" data-tab="qualityPanel">
+                Estado
+              </button>
+            </div>
+
+            <div class="tab-panel active" id="graphPanel">
+              <div class="graph-stack">
+                <div class="chart-panel tall">
+                  <div class="chart-panel-header">
+                    <div>
+                      <h3>Precipitación acumulada por estación</h3>
+                      <span id="chartRangeLabel">Fecha observada</span>
+                    </div>
+                    <span>mm</span>
+                  </div>
+                  <div class="chart-wrap">
+                    <canvas id="rainChart"></canvas>
+                  </div>
+                </div>
+
+                <div class="chart-panel">
+                  <div class="chart-panel-header">
+                    <div>
+                      <h3>Comparación por fuente</h3>
+                      <span>INSIVUMEH · Vivamos Mejor · PWS</span>
+                    </div>
+                    <span>mm</span>
+                  </div>
+                  <div class="chart-wrap">
+                    <canvas id="sourceChart"></canvas>
+                  </div>
+                </div>
+
+                <div class="chart-panel">
+                  <div class="chart-panel-header">
+                    <div>
+                      <h3>Días con lluvia / días sin lluvia</h3>
+                      <span>cuando la fuente lo publica</span>
+                    </div>
+                    <span>días</span>
+                  </div>
+                  <div class="chart-wrap">
+                    <canvas id="daysChart"></canvas>
+                  </div>
+                </div>
+
+                <div class="chart-panel">
+                  <div class="chart-panel-header">
+                    <div>
+                      <h3>Estado de estaciones</h3>
+                      <span>online, históricas o pendientes</span>
+                    </div>
+                    <span>conteo</span>
+                  </div>
+                  <div class="chart-wrap">
+                    <canvas id="statusChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-panel" id="tablePanel">
+              <div class="data-table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Estación</th>
+                      <th>Municipio</th>
+                      <th>Institución / proveedor</th>
+                      <th>Precipitación</th>
+                      <th>Variable</th>
+                      <th>Estado</th>
+                      <th>Calidad</th>
+                      <th>Fuente</th>
+                      <th>Crédito</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dataTableBody">
+                    <tr>
+                      <td colspan="9">
+                        <div class="loading">
+                          <div>
+                            <div class="spinner"></div>
+                            Cargando datos de precipitación...
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="tab-panel" id="qualityPanel">
+              <div class="graph-stack">
+                <div class="card pad">
+                  <div class="section-head">
+                    <div>
+                      <span class="eyebrow">Control de calidad</span>
+                      <h2>Estado de la red</h2>
+                    </div>
+                    <p>
+                      Este panel no corrige ni promedia datos. Solo muestra trazabilidad,
+                      disponibilidad y estado de extracción por fuente.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="data-table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Estación</th>
+                        <th>Proveedor</th>
+                        <th>Estado online</th>
+                        <th>Disponibilidad</th>
+                        <th>Método</th>
+                        <th>URL</th>
+                      </tr>
+                    </thead>
+                    <tbody id="qualityTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Mapa operativo</span>
+              <h2>Estaciones de precipitación</h2>
+            </div>
+            <p>
+              Mapa de lectura rápida con estaciones oficiales, locales y complementarias.
+              Las coordenadas son aproximadas cuando la fuente no publica ubicación exacta.
+            </p>
+          </div>
+
+          <article class="card" style="position: relative;">
+            <div class="card-title">
+              <h3><i class="bi bi-geo-alt-fill"></i> Red de estaciones</h3>
+              <span class="card-subtitle">clic en cada punto para ver detalle</span>
+            </div>
+            <div id="stationMap"></div>
+            <div class="map-legend">
+              <h4>Leyenda</h4>
+              <div class="legend-row"><span class="legend-dot insivumeh"></span> INSIVUMEH / oficial</div>
+              <div class="legend-row"><span class="legend-dot local"></span> Vivamos Mejor / inventario</div>
+              <div class="legend-row"><span class="legend-dot pws"></span> PWS complementaria</div>
+              <div class="legend-row"><span class="legend-dot off"></span> sin dato actual / requiere parser</div>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <aside class="sidebar">
+        <section class="control-card">
+          <h3><i class="bi bi-sliders2-vertical"></i> Filtros</h3>
+
+          <div class="field">
+            <label for="searchInput">Buscar estación</label>
+            <input class="input" id="searchInput" type="search" placeholder="Panajachel, INSIVUMEH, PWS..." />
+          </div>
+
+          <div class="field">
+            <label for="sourceSelect">Fuente</label>
+            <select class="select" id="sourceSelect">
+              <option value="all">Todas</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="statusSelect">Estado</label>
+            <select class="select" id="statusSelect">
+              <option value="all">Todos</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="sortSelect">Ordenar</label>
+            <select class="select" id="sortSelect">
+              <option value="rain_desc">Mayor lluvia</option>
+              <option value="rain_asc">Menor lluvia</option>
+              <option value="name_asc">Nombre A-Z</option>
+              <option value="source_asc">Fuente A-Z</option>
+            </select>
+          </div>
+
+          <div class="button-row">
+            <button class="btn primary" type="button" id="applyFiltersBtn">
+              <i class="bi bi-funnel-fill"></i>
+              Aplicar
+            </button>
+            <button class="btn ghost" type="button" id="resetFiltersBtn">
+              <i class="bi bi-x-circle"></i>
+              Limpiar
+            </button>
+            <button class="btn soft" type="button" id="exportCsvBtn">
+              <i class="bi bi-download"></i>
+              CSV
+            </button>
+          </div>
+        </section>
+
+        <section class="control-card">
+          <h3><i class="bi bi-trophy-fill"></i> Ranking de lluvia</h3>
+          <div class="station-list" id="rankingList">
+            <div class="empty">
+              <i class="bi bi-cloud-arrow-down"></i>
+              Cargando estaciones...
+            </div>
+          </div>
+        </section>
+
+        <section class="control-card">
+          <h3><i class="bi bi-activity"></i> Estado rápido</h3>
+          <div class="status-grid">
+            <div class="status-row">
+              <span>Online</span>
+              <strong id="statusOnline">--</strong>
+            </div>
+            <div class="status-row">
+              <span>Con dato actual</span>
+              <strong id="statusWithData">--</strong>
+            </div>
+            <div class="status-row">
+              <span>Históricas</span>
+              <strong id="statusHistoric">--</strong>
+            </div>
+            <div class="status-row">
+              <span>Requiere parser</span>
+              <strong id="statusParser">--</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="control-card">
+          <h3><i class="bi bi-building-check"></i> Fuentes</h3>
+          <div class="source-card" id="sourceSummary"></div>
+        </section>
+
+        <section class="credit-box">
+          <h3><i class="bi bi-patch-check-fill"></i> Créditos y política</h3>
+          <ul>
+            <li>Datos oficiales: INSIVUMEH.</li>
+            <li>Inventario institucional: Asociación Vivamos Mejor.</li>
+            <li>Estaciones complementarias: Weather Underground / Ambient Weather cuando estén configuradas.</li>
+            <li>No se promedian observaciones crudas en esta página.</li>
+            <li>Los mapas y modelos derivados se generarán como productos separados.</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="stationModal" aria-hidden="true">
+    <article class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h3 id="modalTitle">Detalle de estación</h3>
+          <p id="modalSubtitle">Fuente y dato observado</p>
+        </div>
+        <button class="modal-close" type="button" id="modalCloseBtn" aria-label="Cerrar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </article>
+  </div>
+
+  <div class="toast" id="toast">Listo</div>
+
+  <script>
+    const DATA_URLS = {
+      actual: "../data/precipitaciones/actual.json",
+      inventory: "../data/precipitaciones/estaciones_precipitacion.json",
+      pws: "../data/precipitaciones/pws_precipitacion.json"
+    };
+
+    const STATION_COORDS = {
+      "el capitan": [14.758, -91.186],
+      "el capitán": [14.758, -91.186],
+      "el tablon": [14.783, -91.171],
+      "el tablón": [14.783, -91.171],
+      "santiago atitlan": [14.638, -91.229],
+      "santiago atitlán": [14.638, -91.229],
+      "pws panajachel": [14.741, -91.159],
+      "estacion oficina central": [14.741, -91.159],
+      "estación oficina central": [14.741, -91.159],
+      "vivamos mejor / casa santa rita": [14.771, -91.267],
+      "estacion casa santa rita": [14.771, -91.267],
+      "estación casa santa rita": [14.771, -91.267],
+      "asociacion vivamos mejor / coatitlan r.l.": [14.638, -91.229],
+      "asociación vivamos mejor / coatitlán r.l.": [14.638, -91.229],
+      "estacion coatitlan r.l.": [14.638, -91.229],
+      "estación coatitlán r.l.": [14.638, -91.229],
+      "vivamos mejor / tv cable santa clara": [14.713, -91.304],
+      "estacion santa clara tv cable": [14.713, -91.304],
+      "estación santa clara tv cable": [14.713, -91.304],
+      "pws santa catarina palopo": [14.722, -91.134],
+      "pws santa catarina palopó": [14.722, -91.134],
+      "vivamos mejor / chuitzanchaj / cedracc": [14.740, -91.205],
+      "estacion cedracc": [14.740, -91.205],
+      "estación cedracc": [14.740, -91.205],
+      "estacion lomas de atitlan": [14.742, -91.125],
+      "estación lomas de atitlán": [14.742, -91.125],
+      "caserio chuacruz": [14.806, -91.176],
+      "caserío chuacruz": [14.806, -91.176],
+      "estacion escuela de formacion agricola": [14.773, -91.183],
+      "estación escuela de formación agrícola": [14.773, -91.183]
+    };
+
+    const state = {
+      raw: {
+        actual: null,
+        inventory: null,
+        pws: null
+      },
+      mergedStations: [],
+      filteredStations: [],
+      charts: {},
+      map: null,
+      mapLayer: null
+    };
+
+    const els = {
+      updatedChip: document.getElementById("updatedChip"),
+      heroMaxRain: document.getElementById("heroMaxRain"),
+      heroMaxStation: document.getElementById("heroMaxStation"),
+      heroStations: document.getElementById("heroStations"),
+      heroSources: document.getElementById("heroSources"),
+      kpiMax: document.getElementById("kpiMax"),
+      kpiMaxLabel: document.getElementById("kpiMaxLabel"),
+      kpiWithData: document.getElementById("kpiWithData"),
+      kpiOnline: document.getElementById("kpiOnline"),
+      kpiRange: document.getElementById("kpiRange"),
+      chartRangeLabel: document.getElementById("chartRangeLabel"),
+      dataTableBody: document.getElementById("dataTableBody"),
+      qualityTableBody: document.getElementById("qualityTableBody"),
+      rankingList: document.getElementById("rankingList"),
+      sourceSummary: document.getElementById("sourceSummary"),
+      searchInput: document.getElementById("searchInput"),
+      sourceSelect: document.getElementById("sourceSelect"),
+      statusSelect: document.getElementById("statusSelect"),
+      sortSelect: document.getElementById("sortSelect"),
+      statusOnline: document.getElementById("statusOnline"),
+      statusWithData: document.getElementById("statusWithData"),
+      statusHistoric: document.getElementById("statusHistoric"),
+      statusParser: document.getElementById("statusParser"),
+      stationModal: document.getElementById("stationModal"),
+      modalTitle: document.getElementById("modalTitle"),
+      modalSubtitle: document.getElementById("modalSubtitle"),
+      modalBody: document.getElementById("modalBody"),
+      modalCloseBtn: document.getElementById("modalCloseBtn"),
+      toast: document.getElementById("toast")
+    };
+
+    const stripePlugin = {
+      id: "mtaStripes",
+      beforeDraw(chart, args, options) {
+        const { ctx, chartArea, scales } = chart;
+        if (!chartArea || !scales.x) return;
+
+        const xScale = scales.x;
+        const ticks = xScale.ticks || [];
+        const count = Math.max(ticks.length, 1);
+
+        ctx.save();
+
+        for (let i = 0; i < count; i += 1) {
+          if (i % 2 !== 0) continue;
+
+          const x0 = xScale.getPixelForTick(i) - ((chartArea.right - chartArea.left) / count) / 2;
+          const x1 = xScale.getPixelForTick(i + 1) || x0 + ((chartArea.right - chartArea.left) / count);
+          const w = Math.max(24, x1 - x0);
+
+          ctx.fillStyle = "rgba(31, 126, 193, 0.055)";
+          ctx.fillRect(x0, chartArea.top, w, chartArea.bottom - chartArea.top);
+        }
+
+        ctx.restore();
+      }
+    };
+
+    Chart.register(stripePlugin);
+
+    function normalize(value) {
+      return String(value ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function formatMm(value) {
+      if (value === null || value === undefined || Number.isNaN(Number(value))) return "--";
+      const num = Number(value);
+      if (num >= 100) return `${num.toFixed(0)} mm`;
+      if (num >= 10) return `${num.toFixed(1)} mm`;
+      return `${num.toFixed(2)} mm`;
+    }
+
+    function formatDate(value) {
+      if (!value) return "Sin fecha";
+      try {
+        const date = new Date(value);
+        return new Intl.DateTimeFormat("es-GT", {
+          dateStyle: "medium",
+          timeStyle: value.includes("T") ? "short" : undefined
+        }).format(date);
+      } catch {
+        return value;
+      }
+    }
+
+    function sourceKind(station) {
+      const text = normalize(`${station.institution} ${station.source_id} ${station.provider} ${station.quality_class}`);
+
+      if (text.includes("insivumeh") || text.includes("oficial")) return "official";
+      if (text.includes("vivamos mejor") && !text.includes("pws")) return "local";
+      if (text.includes("pws") || text.includes("wunderground") || text.includes("ambient")) return "pws";
+      return "local";
+    }
+
+    function sourceBadge(station) {
+      const kind = sourceKind(station);
+
+      if (kind === "official") return `<span class="badge official"><i class="bi bi-patch-check-fill"></i> Oficial</span>`;
+      if (kind === "pws") return `<span class="badge pws"><i class="bi bi-broadcast-pin"></i> PWS</span>`;
+      return `<span class="badge local"><i class="bi bi-building-check"></i> Local</span>`;
+    }
+
+    function statusBadge(status) {
+      const clean = normalize(status);
+
+      if (clean.includes("online")) {
+        return `<span class="badge online"><i class="bi bi-wifi"></i> ${status || "online"}</span>`;
+      }
+
+      if (clean.includes("historica") || clean.includes("inventario")) {
+        return `<span class="badge warn"><i class="bi bi-clock-history"></i> ${status || "histórica"}</span>`;
+      }
+
+      if (clean.includes("parser") || clean.includes("error") || clean.includes("offline")) {
+        return `<span class="badge off"><i class="bi bi-tools"></i> ${status || "pendiente"}</span>`;
+      }
+
+      return `<span class="badge warn"><i class="bi bi-question-circle"></i> ${status || "por verificar"}</span>`;
+    }
+
+    async function fetchJson(url) {
+      const bust = `?v=${Date.now()}`;
+      const response = await fetch(url + bust, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`No se pudo leer ${url}: ${response.status}`);
+      }
+      return response.json();
+    }
+
+    async function loadData() {
+      showToast("Cargando datos...");
+      const [actual, inventory, pws] = await Promise.allSettled([
+        fetchJson(DATA_URLS.actual),
+        fetchJson(DATA_URLS.inventory),
+        fetchJson(DATA_URLS.pws)
+      ]);
+
+      state.raw.actual = actual.status === "fulfilled" ? actual.value : null;
+      state.raw.inventory = inventory.status === "fulfilled" ? inventory.value : { stations: [] };
+      state.raw.pws = pws.status === "fulfilled" ? pws.value : { stations: [], station_extraction_results: [] };
+
+      buildMergedStations();
+      populateFilters();
+      applyFilters();
+      showToast("Datos actualizados");
+    }
+
+    function buildMergedStations() {
+      const records = state.raw.actual?.latest_records || [];
+      const inventoryStations = state.raw.inventory?.stations || [];
+
+      const rainByStation = new Map();
+      const extraByStation = new Map();
+
+      for (const record of records) {
+        const key = record.station_id || `${record.institution}_${record.station_name}`;
+
+        if (!extraByStation.has(key)) {
+          extraByStation.set(key, {});
+        }
+
+        if (record.variable === "precipitation_accumulated") {
+          rainByStation.set(key, record);
+        } else {
+          extraByStation.get(key)[record.variable] = record;
+        }
+      }
+
+      const stationMap = new Map();
+
+      for (const station of inventoryStations) {
+        const key = station.station_id || `${station.institution}_${station.station_name}`;
+        stationMap.set(key, {
+          ...station,
+          latest_precipitation_record: rainByStation.get(key) || null,
+          extra_records: extraByStation.get(key) || {}
+        });
+      }
+
+      for (const record of records) {
+        if (record.variable !== "precipitation_accumulated") continue;
+
+        const key = record.station_id || `${record.institution}_${record.station_name}`;
+
+        if (!stationMap.has(key)) {
+          stationMap.set(key, {
+            station_id: key,
+            station_name: record.station_name,
+            institution: record.institution,
+            source_id: record.source_id,
+            department: record.department,
+            municipality: null,
+            provider: null,
+            status: "extraido",
+            online_status: "online",
+            precipitation_available: "si_extraida",
+            quality_class: record.quality_flag?.includes("pws") ? "complementaria" : "oficial",
+            source_url: record.source_url,
+            station_url: record.source_url,
+            credit: record.credit,
+            latest_precipitation_record: record,
+            extra_records: extraByStation.get(key) || {}
+          });
+        }
+      }
+
+      state.mergedStations = [...stationMap.values()].map((station) => {
+        const coords = findCoords(station);
+        return {
+          ...station,
+          lat: coords?.[0] ?? null,
+          lng: coords?.[1] ?? null,
+          rain_mm: station.latest_precipitation_record
+            ? Number(station.latest_precipitation_record.value)
+            : null
+        };
+      });
+    }
+
+    function findCoords(station) {
+      const keys = [
+        normalize(station.station_name),
+        normalize(station.municipality),
+        normalize(`${station.station_name} ${station.municipality}`)
+      ];
+
+      for (const key of keys) {
+        if (STATION_COORDS[key]) return STATION_COORDS[key];
+      }
+
+      for (const [name, coords] of Object.entries(STATION_COORDS)) {
+        const stationName = normalize(station.station_name);
+        if (stationName.includes(name) || name.includes(stationName)) {
+          return coords;
+        }
+      }
+
+      return null;
+    }
+
+    function populateFilters() {
+      const sources = [...new Set(state.mergedStations.map(s => s.institution).filter(Boolean))].sort();
+      const statuses = [...new Set(state.mergedStations.map(s => s.online_status || s.status || "por_verificar"))].sort();
+
+      els.sourceSelect.innerHTML = `<option value="all">Todas</option>` + sources.map(source => {
+        return `<option value="${escapeAttr(source)}">${escapeHtml(source)}</option>`;
+      }).join("");
+
+      els.statusSelect.innerHTML = `<option value="all">Todos</option>` + statuses.map(status => {
+        return `<option value="${escapeAttr(status)}">${escapeHtml(status)}</option>`;
+      }).join("");
+    }
+
+    function applyFilters() {
+      const search = normalize(els.searchInput.value);
+      const source = els.sourceSelect.value;
+      const status = els.statusSelect.value;
+      const sort = els.sortSelect.value;
+
+      let stations = [...state.mergedStations];
+
+      if (search) {
+        stations = stations.filter(station => {
+          const haystack = normalize([
+            station.station_name,
+            station.municipality,
+            station.institution,
+            station.provider,
+            station.online_status,
+            station.quality_class
+          ].join(" "));
+          return haystack.includes(search);
+        });
+      }
+
+      if (source !== "all") {
+        stations = stations.filter(station => station.institution === source);
+      }
+
+      if (status !== "all") {
+        stations = stations.filter(station => (station.online_status || station.status || "por_verificar") === status);
+      }
+
+      stations.sort((a, b) => {
+        if (sort === "rain_asc") return (a.rain_mm ?? Infinity) - (b.rain_mm ?? Infinity);
+        if (sort === "name_asc") return String(a.station_name).localeCompare(String(b.station_name), "es");
+        if (sort === "source_asc") return String(a.institution).localeCompare(String(b.institution), "es");
+        return (b.rain_mm ?? -Infinity) - (a.rain_mm ?? -Infinity);
+      });
+
+      state.filteredStations = stations;
+
+      renderAll();
+    }
+
+    function renderAll() {
+      renderHeader();
+      renderKpis();
+      renderTables();
+      renderRanking();
+      renderSourceSummary();
+      renderStatusSummary();
+      renderCharts();
+      renderMap();
+    }
+
+    function renderHeader() {
+      const generated = state.raw.actual?.generated_at_gt || state.raw.actual?.generated_at_utc;
+      const observedDate = state.raw.actual?.observed_date;
+
+      els.updatedChip.innerHTML = `<i class="bi bi-clock-history"></i> ${generated ? formatDate(generated) : "Sin actualización"}`;
+      els.chartRangeLabel.textContent = observedDate ? `Fecha observada: ${observedDate}` : "Fecha observada no disponible";
+
+      const records = precipitationStations();
+      const max = records[0];
+
+      els.heroMaxRain.textContent = max ? formatMm(max.rain_mm) : "--";
+      els.heroMaxStation.textContent = max ? max.station_name : "Sin estación";
+      els.heroStations.textContent = String(state.mergedStations.length || 0);
+      els.heroSources.textContent = String(new Set(state.mergedStations.map(s => s.institution).filter(Boolean)).size || 0);
+    }
+
+    function precipitationStations() {
+      return state.filteredStations
+        .filter(station => Number.isFinite(station.rain_mm))
+        .sort((a, b) => b.rain_mm - a.rain_mm);
+    }
+
+    function renderKpis() {
+      const withData = precipitationStations();
+      const values = withData.map(s => s.rain_mm);
+      const max = withData[0];
+      const min = values.length ? Math.min(...values) : null;
+      const maxVal = values.length ? Math.max(...values) : null;
+
+      const onlineCount = state.filteredStations.filter(s => normalize(s.online_status).includes("online")).length;
+
+      els.kpiMax.textContent = max ? formatMm(max.rain_mm) : "--";
+      els.kpiMaxLabel.textContent = max ? max.station_name : "Sin dato";
+      els.kpiWithData.textContent = String(withData.length);
+      els.kpiOnline.textContent = String(onlineCount);
+      els.kpiRange.textContent = values.length ? `${formatMm(min)} – ${formatMm(maxVal)}` : "--";
+    }
+
+    function renderTables() {
+      const stations = state.filteredStations;
+
+      if (!stations.length) {
+        els.dataTableBody.innerHTML = `
+          <tr>
+            <td colspan="9">
+              <div class="empty">
+                <i class="bi bi-funnel"></i>
+                No hay estaciones con los filtros actuales.
+              </div>
+            </td>
+          </tr>
+        `;
+      } else {
+        els.dataTableBody.innerHTML = stations.map(station => {
+          const record = station.latest_precipitation_record;
+          const sourceUrl = record?.source_url || station.source_url || station.station_url || "#";
+          const credit = record?.credit || station.credit || "Crédito no disponible";
+          return `
+            <tr data-station="${escapeAttr(station.station_id)}">
+              <td>
+                <strong>${escapeHtml(station.station_name)}</strong><br />
+                ${sourceBadge(station)}
+              </td>
+              <td>${escapeHtml(station.municipality || "—")}</td>
+              <td>${escapeHtml(station.institution || "—")}</td>
+              <td><strong>${formatMm(station.rain_mm)}</strong></td>
+              <td>${escapeHtml(record?.variable || "precipitation")}</td>
+              <td>${statusBadge(station.online_status || station.status)}</td>
+              <td>${escapeHtml(station.quality_class || record?.quality_flag || "—")}</td>
+              <td>
+                ${sourceUrl && sourceUrl !== "#"
+                  ? `<a href="${escapeAttr(sourceUrl)}" target="_blank" rel="noopener">Abrir fuente</a>`
+                  : "—"
+                }
+              </td>
+              <td>${escapeHtml(credit)}</td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      els.qualityTableBody.innerHTML = stations.map(station => {
+        const url = station.source_url || station.station_url || "#";
+        return `
+          <tr>
+            <td><strong>${escapeHtml(station.station_name)}</strong></td>
+            <td>${escapeHtml(station.provider || station.institution || "—")}</td>
+            <td>${statusBadge(station.online_status || station.status)}</td>
+            <td>${escapeHtml(station.precipitation_available || "por_verificar")}</td>
+            <td>${escapeHtml(station.inventory_method || "—")}</td>
+            <td>
+              ${url && url !== "#"
+                ? `<a href="${escapeAttr(url)}" target="_blank" rel="noopener">Ver</a>`
+                : "—"
+              }
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      els.dataTableBody.querySelectorAll("tr[data-station]").forEach(row => {
+        row.addEventListener("click", () => {
+          const station = state.filteredStations.find(s => s.station_id === row.dataset.station);
+          if (station) openStationModal(station);
+        });
+      });
+    }
+
+    function renderRanking() {
+      const stations = precipitationStations();
+
+      if (!stations.length) {
+        els.rankingList.innerHTML = `
+          <div class="empty">
+            <i class="bi bi-cloud-slash"></i>
+            Sin datos numéricos con los filtros actuales.
+          </div>
+        `;
+        return;
+      }
+
+      els.rankingList.innerHTML = stations.map((station, index) => `
+        <button class="station-item" type="button" data-station="${escapeAttr(station.station_id)}">
+          <div>
+            <strong>${index + 1}. ${escapeHtml(station.station_name)}</strong>
+            <span>${escapeHtml(station.municipality || station.institution || "Sololá")} · ${escapeHtml(station.institution || "—")}</span>
+          </div>
+          <div class="rain-value">
+            ${formatMm(station.rain_mm)}
+            <small>lluvia</small>
+          </div>
+        </button>
+      `).join("");
+
+      els.rankingList.querySelectorAll("[data-station]").forEach(button => {
+        button.addEventListener("click", () => {
+          const station = state.filteredStations.find(s => s.station_id === button.dataset.station);
+          if (station) openStationModal(station);
+        });
+      });
+    }
+
+    function renderSourceSummary() {
+      const grouped = groupBy(state.filteredStations, station => station.institution || "Sin fuente");
+
+      els.sourceSummary.innerHTML = Object.entries(grouped).map(([source, stations]) => {
+        const withData = stations.filter(s => Number.isFinite(s.rain_mm)).length;
+        const total = stations.length;
+        const sum = stations.reduce((acc, s) => acc + (Number.isFinite(s.rain_mm) ? s.rain_mm : 0), 0);
+
+        return `
+          <div class="source-item">
+            <strong>
+              ${escapeHtml(source)}
+              <span>${withData}/${total}</span>
+            </strong>
+            <p>
+              ${withData} estaciones con dato numérico. Suma observada sin promediar:
+              <strong>${formatMm(sum)}</strong>.
+            </p>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderStatusSummary() {
+      const stations = state.filteredStations;
+
+      const online = stations.filter(s => normalize(s.online_status).includes("online")).length;
+      const withData = stations.filter(s => Number.isFinite(s.rain_mm)).length;
+      const historic = stations.filter(s => normalize(s.online_status).includes("historica")).length;
+      const parser = stations.filter(s => normalize(s.online_status).includes("parser")).length;
+
+      els.statusOnline.textContent = online;
+      els.statusWithData.textContent = withData;
+      els.statusHistoric.textContent = historic;
+      els.statusParser.textContent = parser;
+    }
+
+    function renderCharts() {
+      const stationsWithData = precipitationStations();
+      const labels = stationsWithData.map(s => shortLabel(s.station_name));
+      const rainData = stationsWithData.map(s => s.rain_mm);
+
+      drawChart("rainChart", {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Precipitación acumulada (mm)",
+              data: rainData,
+              borderWidth: 1,
+              borderRadius: 8,
+              backgroundColor: "rgba(31, 126, 193, 0.78)",
+              borderColor: "rgba(15, 58, 83, 0.72)"
+            }
+          ]
+        },
+        options: chartOptions({
+          yTitle: "mm",
+          indexAxis: labels.length > 8 ? "y" : "x"
+        })
+      });
+
+      const sourceGroups = groupBy(stationsWithData, s => s.institution || "Sin fuente");
+      const sourceLabels = Object.keys(sourceGroups);
+      const sourceSums = sourceLabels.map(source => {
+        return sourceGroups[source].reduce((acc, station) => acc + (station.rain_mm || 0), 0);
+      });
+
+      drawChart("sourceChart", {
+        type: "line",
+        data: {
+          labels: sourceLabels,
+          datasets: [
+            {
+              label: "Suma por fuente (mm, sin promediar)",
+              data: sourceSums,
+              borderWidth: 3,
+              borderColor: "rgba(47, 122, 98, 0.95)",
+              backgroundColor: "rgba(47, 122, 98, 0.16)",
+              pointRadius: 5,
+              pointHoverRadius: 7,
+              tension: 0.35,
+              fill: true
+            }
+          ]
+        },
+        options: chartOptions({ yTitle: "mm" })
+      });
+
+      const daysStations = state.filteredStations.filter(station => {
+        return station.extra_records?.rain_days || station.extra_records?.dry_days;
+      });
+
+      drawChart("daysChart", {
+        type: "bar",
+        data: {
+          labels: daysStations.map(s => shortLabel(s.station_name)),
+          datasets: [
+            {
+              label: "Días con lluvia",
+              data: daysStations.map(s => Number(s.extra_records?.rain_days?.value || 0)),
+              backgroundColor: "rgba(31, 126, 193, 0.76)",
+              borderRadius: 7
+            },
+            {
+              label: "Días sin lluvia",
+              data: daysStations.map(s => Number(s.extra_records?.dry_days?.value || 0)),
+              backgroundColor: "rgba(231, 185, 79, 0.82)",
+              borderRadius: 7
+            }
+          ]
+        },
+        options: chartOptions({ yTitle: "días" })
+      });
+
+      const statusGroups = groupBy(state.filteredStations, s => normalize(s.online_status || s.status || "por_verificar"));
+      const statusLabels = Object.keys(statusGroups).map(label => label || "por_verificar");
+      const statusValues = statusLabels.map(label => statusGroups[label]?.length || 0);
+
+      drawChart("statusChart", {
+        type: "bar",
+        data: {
+          labels: statusLabels.map(shortLabel),
+          datasets: [
+            {
+              label: "Estaciones",
+              data: statusValues,
+              backgroundColor: "rgba(97, 70, 166, 0.72)",
+              borderRadius: 8
+            }
+          ]
+        },
+        options: chartOptions({ yTitle: "estaciones" })
+      });
+    }
+
+    function drawChart(id, config) {
+      const ctx = document.getElementById(id);
+
+      if (state.charts[id]) {
+        state.charts[id].destroy();
+      }
+
+      state.charts[id] = new Chart(ctx, config);
+    }
+
+    function chartOptions({ yTitle = "", indexAxis = "x" } = {}) {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis,
+        plugins: {
+          legend: {
+            position: "bottom",
+            align: "end",
+            labels: {
+              boxWidth: 18,
+              boxHeight: 10,
+              color: "#0e2433",
+              font: {
+                family: "Inter",
+                size: 12,
+                weight: "700"
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: "rgba(8, 37, 55, 0.94)",
+            titleFont: { family: "Inter", weight: "800" },
+            bodyFont: { family: "Inter" },
+            padding: 12,
+            cornerRadius: 12,
+            callbacks: {
+              label(context) {
+                const label = context.dataset.label || "";
+                const value = context.parsed.y ?? context.parsed.x ?? context.raw;
+                return `${label}: ${typeof value === "number" ? value.toFixed(2) : value}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: {
+              color: "rgba(15, 58, 83, 0.08)"
+            },
+            ticks: {
+              color: "#3b5363",
+              font: {
+                family: "Inter",
+                size: 11,
+                weight: "700"
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: Boolean(yTitle),
+              text: yTitle,
+              color: "#3b5363",
+              font: {
+                family: "Inter",
+                size: 12,
+                weight: "800"
+              }
+            },
+            grid: {
+              color: "rgba(15, 58, 83, 0.09)"
+            },
+            ticks: {
+              color: "#3b5363",
+              font: {
+                family: "Inter",
+                size: 11,
+                weight: "700"
+              }
+            }
+          }
+        }
+      };
+    }
+
+    function renderMap() {
+      const mapEl = document.getElementById("stationMap");
+
+      if (!state.map) {
+        state.map = L.map(mapEl, {
+          scrollWheelZoom: false,
+          zoomControl: true
+        }).setView([14.72, -91.20], 10);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: "&copy; OpenStreetMap"
+        }).addTo(state.map);
+      }
+
+      if (state.mapLayer) {
+        state.map.removeLayer(state.mapLayer);
+      }
+
+      state.mapLayer = L.layerGroup().addTo(state.map);
+
+      const stationsWithCoords = state.filteredStations.filter(station => {
+        return Number.isFinite(station.lat) && Number.isFinite(station.lng);
+      });
+
+      for (const station of stationsWithCoords) {
+        const marker = L.circleMarker([station.lat, station.lng], {
+          radius: markerRadius(station),
+          color: markerColor(station),
+          fillColor: markerColor(station),
+          fillOpacity: 0.82,
+          weight: 2
+        }).addTo(state.mapLayer);
+
+        marker.bindPopup(`
+          <div style="min-width:220px">
+            <strong>${escapeHtml(station.station_name)}</strong><br />
+            <span>${escapeHtml(station.municipality || "Sololá")}</span><br />
+            <hr />
+            <strong>Precipitación:</strong> ${formatMm(station.rain_mm)}<br />
+            <strong>Fuente:</strong> ${escapeHtml(station.institution || "—")}<br />
+            <strong>Estado:</strong> ${escapeHtml(station.online_status || station.status || "—")}
+          </div>
+        `);
+      }
+
+      if (stationsWithCoords.length) {
+        const bounds = L.latLngBounds(stationsWithCoords.map(s => [s.lat, s.lng]));
+        state.map.fitBounds(bounds.pad(0.18));
+      }
+
+      setTimeout(() => state.map.invalidateSize(), 200);
+    }
+
+    function markerColor(station) {
+      const kind = sourceKind(station);
+      const status = normalize(station.online_status);
+
+      if (status.includes("parser") || status.includes("error") || status.includes("offline")) return "#d66a2a";
+      if (kind === "official") return "#176680";
+      if (kind === "pws") return "#6146a6";
+      return "#2f7a62";
+    }
+
+    function markerRadius(station) {
+      if (!Number.isFinite(station.rain_mm)) return 7;
+      return Math.min(18, Math.max(8, 7 + station.rain_mm / 6));
+    }
+
+    function openStationModal(station) {
+      const record = station.latest_precipitation_record;
+      const rainDays = station.extra_records?.rain_days?.value;
+      const dryDays = station.extra_records?.dry_days?.value;
+
+      els.modalTitle.textContent = station.station_name || "Estación";
+      els.modalSubtitle.textContent = `${station.municipality || "Sololá"} · ${station.institution || "Fuente no disponible"}`;
+
+      els.modalBody.innerHTML = `
+        <div class="detail-grid">
+          <div class="detail">
+            <span>Precipitación</span>
+            <strong>${formatMm(station.rain_mm)}</strong>
+          </div>
+          <div class="detail">
+            <span>Estado online</span>
+            <strong>${escapeHtml(station.online_status || station.status || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>Municipio</span>
+            <strong>${escapeHtml(station.municipality || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>Fuente</span>
+            <strong>${escapeHtml(station.institution || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>Proveedor</span>
+            <strong>${escapeHtml(station.provider || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>Calidad</span>
+            <strong>${escapeHtml(station.quality_class || record?.quality_flag || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>Días con lluvia</span>
+            <strong>${rainDays ?? "—"}</strong>
+          </div>
+          <div class="detail">
+            <span>Días sin lluvia</span>
+            <strong>${dryDays ?? "—"}</strong>
+          </div>
+          <div class="detail">
+            <span>Fecha observada</span>
+            <strong>${escapeHtml(record?.observed_date || state.raw.actual?.observed_date || "—")}</strong>
+          </div>
+          <div class="detail">
+            <span>Actualizado</span>
+            <strong>${escapeHtml(formatDate(record?.extracted_at_gt || state.raw.actual?.generated_at_gt))}</strong>
+          </div>
+        </div>
+
+        <div class="detail">
+          <span>Crédito</span>
+          <strong>${escapeHtml(record?.credit || station.credit || "Crédito no disponible")}</strong>
+        </div>
+
+        <div class="button-row">
+          ${record?.source_url || station.source_url || station.station_url
+            ? `<a class="btn primary" href="${escapeAttr(record?.source_url || station.source_url || station.station_url)}" target="_blank" rel="noopener">
+                <i class="bi bi-box-arrow-up-right"></i>
+                Abrir fuente
+              </a>`
+            : ""
+          }
+          <button class="btn ghost" type="button" onclick="copyStationJson('${escapeAttr(station.station_id)}')">
+            <i class="bi bi-clipboard"></i>
+            Copiar JSON
+          </button>
+        </div>
+      `;
+
+      els.stationModal.classList.add("open");
+      els.stationModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      els.stationModal.classList.remove("open");
+      els.stationModal.setAttribute("aria-hidden", "true");
+    }
+
+    function copyStationJson(stationId) {
+      const station = state.mergedStations.find(s => s.station_id === stationId);
+      if (!station) return;
+
+      navigator.clipboard.writeText(JSON.stringify(station, null, 2));
+      showToast("JSON de estación copiado");
+    }
+
+    function exportCsv() {
+      const rows = state.filteredStations.map(station => {
+        const record = station.latest_precipitation_record || {};
+        return {
+          station_name: station.station_name || "",
+          municipality: station.municipality || "",
+          institution: station.institution || "",
+          provider: station.provider || "",
+          precipitation_mm: Number.isFinite(station.rain_mm) ? station.rain_mm : "",
+          online_status: station.online_status || "",
+          quality_class: station.quality_class || record.quality_flag || "",
+          observed_date: record.observed_date || state.raw.actual?.observed_date || "",
+          source_url: record.source_url || station.source_url || station.station_url || "",
+          credit: record.credit || station.credit || ""
+        };
+      });
+
+      const headers = Object.keys(rows[0] || {
+        station_name: "",
+        municipality: "",
+        institution: "",
+        provider: "",
+        precipitation_mm: "",
+        online_status: "",
+        quality_class: "",
+        observed_date: "",
+        source_url: "",
+        credit: ""
+      });
+
+      const csv = [
+        headers.join(","),
+        ...rows.map(row => headers.map(header => csvCell(row[header])).join(","))
+      ].join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+
+      a.href = url;
+      a.download = `precipitaciones_solola_${state.raw.actual?.observed_date || "actual"}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      showToast("CSV descargado");
+    }
+
+    function csvCell(value) {
+      const text = String(value ?? "");
+      return `"${text.replace(/"/g, '""')}"`;
+    }
+
+    function groupBy(items, getter) {
+      return items.reduce((acc, item) => {
+        const key = getter(item);
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(item);
+        return acc;
+      }, {});
+    }
+
+    function shortLabel(label) {
+      const text = String(label || "");
+      if (text.length <= 28) return text;
+      return text.slice(0, 25) + "…";
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value).replaceAll("`", "&#096;");
+    }
+
+    function showToast(message) {
+      els.toast.textContent = message;
+      els.toast.classList.add("show");
+
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => {
+        els.toast.classList.remove("show");
+      }, 2200);
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
+
+        button.classList.add("active");
+        document.getElementById(button.dataset.tab).classList.add("active");
+
+        if (button.dataset.tab === "graphPanel") {
+          setTimeout(renderCharts, 80);
+        }
+
+        if (button.dataset.tab === "qualityPanel") {
+          setTimeout(renderMap, 80);
+        }
+      });
+    });
+
+    document.getElementById("applyFiltersBtn").addEventListener("click", applyFilters);
+    document.getElementById("resetFiltersBtn").addEventListener("click", () => {
+      els.searchInput.value = "";
+      els.sourceSelect.value = "all";
+      els.statusSelect.value = "all";
+      els.sortSelect.value = "rain_desc";
+      applyFilters();
+    });
+
+    document.getElementById("exportCsvBtn").addEventListener("click", exportCsv);
+    document.getElementById("refreshBtn").addEventListener("click", loadData);
+
+    els.searchInput.addEventListener("input", () => {
+      clearTimeout(els.searchInput.timer);
+      els.searchInput.timer = setTimeout(applyFilters, 250);
+    });
+
+    els.sourceSelect.addEventListener("change", applyFilters);
+    els.statusSelect.addEventListener("change", applyFilters);
+    els.sortSelect.addEventListener("change", applyFilters);
+
+    els.modalCloseBtn.addEventListener("click", closeModal);
+    els.stationModal.addEventListener("click", event => {
+      if (event.target === els.stationModal) closeModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeModal();
+    });
+
+    window.copyStationJson = copyStationJson;
+
+    loadData().catch(error => {
+      console.error(error);
+      showToast("No se pudieron cargar los datos");
+      els.dataTableBody.innerHTML = `
+        <tr>
+          <td colspan="9">
+            <div class="empty">
+              <i class="bi bi-exclamation-triangle"></i>
+              No se pudieron cargar los archivos JSON. Revisá que el Action haya generado
+              docs/data/precipitaciones/actual.json.
+            </div>
+          </td>
+        </tr>
+      `;
+    });
+  </script>
+</body>
+</html>
