@@ -1,14 +1,14 @@
 {
-  "schema": "mta_precipitacion_source_status_v1",
-  "generated_at_utc": "2026-05-19T00:19:05.081392+00:00",
-  "generated_at_gt": "2026-05-18T18:19:05.081392-06:00",
+  "schema": "mta_precipitacion_source_status_v3",
+  "generated_at_utc": "2026-05-19T00:31:59.648751+00:00",
+  "generated_at_gt": "2026-05-18T18:31:59.648751-06:00",
   "sources": [
     {
       "source_id": "insivumeh_precipitaciones_departamentos",
       "institution": "INSIVUMEH",
       "parser": "insivumeh_solola",
-      "checked_at_utc": "2026-05-19T00:19:05.081392+00:00",
-      "checked_at_gt": "2026-05-18T18:19:05.081392-06:00",
+      "checked_at_utc": "2026-05-19T00:31:59.648751+00:00",
+      "checked_at_gt": "2026-05-18T18:31:59.648751-06:00",
       "ok": true,
       "records_added": 9,
       "stations_found": 3,
@@ -28,8 +28,8 @@
       "source_id": "vivamos_mejor_estaciones",
       "institution": "Asociación Vivamos Mejor",
       "parser": "vivamos_mejor_precip",
-      "checked_at_utc": "2026-05-19T00:19:05.081392+00:00",
-      "checked_at_gt": "2026-05-18T18:19:05.081392-06:00",
+      "checked_at_utc": "2026-05-19T00:31:59.648751+00:00",
+      "checked_at_gt": "2026-05-18T18:31:59.648751-06:00",
       "ok": true,
       "records_added": 0,
       "stations_found": 8,
@@ -41,6 +41,67 @@
           "ssl_mode": "ssl_verificado",
           "content_length": 884906,
           "error": null
+        }
+      ],
+      "errors": []
+    },
+    {
+      "source_id": "pws_complementarias",
+      "institution": "Estaciones PWS complementarias",
+      "parser": "pws_precip",
+      "checked_at_utc": "2026-05-19T00:31:59.648751+00:00",
+      "checked_at_gt": "2026-05-18T18:31:59.648751-06:00",
+      "ok": true,
+      "records_added": 0,
+      "stations_found": 8,
+      "urls": [
+        {
+          "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
+          "ok": true,
+          "provider": "wunderground",
+          "station_code": "IPANAJ5"
+        },
+        {
+          "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
+          "ok": true,
+          "provider": "ambientweather",
+          "station_code": null
+        },
+        {
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+          "ok": true,
+          "provider": "wunderground",
+          "station_code": "ISANTA535"
+        },
+        {
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+          "ok": true,
+          "provider": "wunderground",
+          "station_code": "ISANTACL3"
+        },
+        {
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
+          "ok": true,
+          "provider": "wunderground",
+          "station_code": "ISANTI135"
+        },
+        {
+          "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
+          "ok": true,
+          "provider": "ambientweather",
+          "station_code": null
+        },
+        {
+          "url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
+          "ok": true,
+          "provider": "wunderground",
+          "station_code": "ISANAN84"
+        },
+        {
+          "url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
+          "ok": true,
+          "provider": "wunderground",
+          "station_code": "ISOLOL4"
         }
       ],
       "errors": []

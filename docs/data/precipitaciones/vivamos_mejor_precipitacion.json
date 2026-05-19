@@ -1,7 +1,7 @@
 {
-  "schema": "mta_precipitaciones_vivamos_mejor_v1",
-  "generated_at_utc": "2026-05-19T00:19:05.081392+00:00",
-  "generated_at_gt": "2026-05-18T18:19:05.081392-06:00",
+  "schema": "mta_precipitaciones_vivamos_mejor_v3",
+  "generated_at_utc": "2026-05-19T00:31:59.648751+00:00",
+  "generated_at_gt": "2026-05-18T18:31:59.648751-06:00",
   "department": "Sololá",
   "source": {
     "institution": "Asociación Vivamos Mejor",
@@ -10,58 +10,986 @@
   },
   "metadata": {
     "station_count": 8,
-    "access_links_found": 12,
-    "access_links": [
-      {
-        "label": "Estaciones meteorológicas >",
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones"
-      },
-      {
-        "label": "Estaciones meteorológicas >",
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones"
-      },
-      {
-        "label": "Estaciones meteorológicas >",
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones"
-      },
-      {
-        "label": "Estaciones meteorológicas >",
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones"
-      },
+    "all_links_found": 162,
+    "real_station_links_found": 8,
+    "real_station_links": [
       {
         "label": "Estación Oficina Central Panajachel",
-        "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5"
+        "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
+        "provider": "wunderground",
+        "station_code": "IPANAJ5"
       },
       {
         "label": "Estación CEDRACC Santa Cruz La Laguna",
-        "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706"
+        "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
+        "provider": "ambientweather",
+        "station_code": null
       },
       {
         "label": "Estación Casa Santa Rita Santa Lucía Utatlán",
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTA535"
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+        "provider": "wunderground",
+        "station_code": "ISANTA535"
       },
       {
         "label": "Estación Santa Clara TV Cable Santa Clara La Laguna",
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3"
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+        "provider": "wunderground",
+        "station_code": "ISANTACL3"
       },
       {
         "label": "Estación CoAtitlán R.L. Santiago Atitlán",
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTI135"
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
+        "provider": "wunderground",
+        "station_code": "ISANTI135"
+      },
+      {
+        "label": "Caserío Chuacruz Aldea Pujujil I, Sololá - En Mantenimiento",
+        "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
+        "provider": "ambientweather",
+        "station_code": null
       },
       {
         "label": "Estación Lomas de Atitlán San Andrés Semetabaj",
-        "url": "https://www.wunderground.com/dashboard/pws/ISANAN84"
+        "url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
+        "provider": "wunderground",
+        "station_code": "ISANAN84"
       },
       {
         "label": "Estación Escuela de Formación Agrícola Sololá",
-        "url": "https://www.wunderground.com/dashboard/pws/ISOLOL4"
+        "url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
+        "provider": "wunderground",
+        "station_code": "ISOLOL4"
+      }
+    ],
+    "ignored_links": [
+      {
+        "label": "Ir al contenido",
+        "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/#content",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Sobre nosotros",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Quienes somos",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#quienes-somos",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Liderazgo",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#liderazgo",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Equipo",
+        "url": "https://vivamosmejor.org.gt/equipo/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Aliados",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#aliados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Nuestra historia",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#historia",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas",
+        "url": "https://vivamosmejor.org.gt/programas/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas sub menu",
+        "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Ambiental",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Social",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-social/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "CEDRACC",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa un taller >",
+        "url": "https://vivamosmejor.org.gt/cedracc/#taller",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Análisis Territorial",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Estaciones meteorológicas >",
+        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto",
+        "url": "https://vivamosmejor.org.gt/impacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Involúcrate",
+        "url": "https://vivamosmejor.org.gt/involucrate/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Donaciones",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Productos y servicios",
+        "url": "https://vivamosmejor.org.gt/productos-y-servicios/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Oportunidades",
+        "url": "https://vivamosmejor.org.gt/involucrate/#oportunidades",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Contacto",
+        "url": "https://vivamosmejor.org.gt/contacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Español",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "English",
+        "url": "https://vivamosmejor.org.gt/dat/?lang=en",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Sobre nosotros",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Quienes somos",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#quienes-somos",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Liderazgo",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#liderazgo",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Equipo",
+        "url": "https://vivamosmejor.org.gt/equipo/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Aliados",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#aliados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Nuestra historia",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#historia",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas",
+        "url": "https://vivamosmejor.org.gt/programas/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas sub menu",
+        "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Ambiental",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Social",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-social/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "CEDRACC",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa un taller >",
+        "url": "https://vivamosmejor.org.gt/cedracc/#taller",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Análisis Territorial",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Estaciones meteorológicas >",
+        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto",
+        "url": "https://vivamosmejor.org.gt/impacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Involúcrate",
+        "url": "https://vivamosmejor.org.gt/involucrate/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Donaciones",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Productos y servicios",
+        "url": "https://vivamosmejor.org.gt/productos-y-servicios/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Oportunidades",
+        "url": "https://vivamosmejor.org.gt/involucrate/#oportunidades",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Contacto",
+        "url": "https://vivamosmejor.org.gt/contacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Español",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "English",
+        "url": "https://vivamosmejor.org.gt/dat/?lang=en",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Sobre nosotros",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Quienes somos",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#quienes-somos",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Liderazgo",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#liderazgo",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Equipo",
+        "url": "https://vivamosmejor.org.gt/equipo/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Aliados",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#aliados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Nuestra historia",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#historia",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas",
+        "url": "https://vivamosmejor.org.gt/programas/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas sub menu",
+        "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Ambiental",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Social",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-social/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "CEDRACC",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa un taller >",
+        "url": "https://vivamosmejor.org.gt/cedracc/#taller",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Análisis Territorial",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Estaciones meteorológicas >",
+        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto",
+        "url": "https://vivamosmejor.org.gt/impacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Involúcrate",
+        "url": "https://vivamosmejor.org.gt/involucrate/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Donaciones",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Productos y servicios",
+        "url": "https://vivamosmejor.org.gt/productos-y-servicios/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Oportunidades",
+        "url": "https://vivamosmejor.org.gt/involucrate/#oportunidades",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Contacto",
+        "url": "https://vivamosmejor.org.gt/contacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Español",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "English",
+        "url": "https://vivamosmejor.org.gt/dat/?lang=en",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Sobre nosotros",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Quienes somos",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#quienes-somos",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Liderazgo",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#liderazgo",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Equipo",
+        "url": "https://vivamosmejor.org.gt/equipo/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Aliados",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#aliados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Nuestra historia",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#historia",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas",
+        "url": "https://vivamosmejor.org.gt/programas/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programas sub menu",
+        "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Ambiental",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-ambiental/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa Social",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto >",
+        "url": "https://vivamosmejor.org.gt/programa-social/#resultados",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "CEDRACC",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Programa un taller >",
+        "url": "https://vivamosmejor.org.gt/cedracc/#taller",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Análisis Territorial",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Estaciones meteorológicas >",
+        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Impacto",
+        "url": "https://vivamosmejor.org.gt/impacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Involúcrate",
+        "url": "https://vivamosmejor.org.gt/involucrate/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Donaciones",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Productos y servicios",
+        "url": "https://vivamosmejor.org.gt/productos-y-servicios/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Oportunidades",
+        "url": "https://vivamosmejor.org.gt/involucrate/#oportunidades",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Contacto",
+        "url": "https://vivamosmejor.org.gt/contacto/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Español",
+        "url": "https://vivamosmejor.org.gt/dat/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "English",
+        "url": "https://vivamosmejor.org.gt/dat/?lang=en",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Dona aquí",
+        "url": "https://vivamosmejor.org.gt/donaciones/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Qué hacemos",
+        "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/#que-hacemos",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Metodologías",
+        "url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/#metodologias",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://b564026.smushcdn.com/564026/wp-content/uploads/sites/64/2025/12/IMG_20220305_150538-1-scaled.jpg?lossy=1&strip=1&webp=1",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Ver equipo",
+        "url": "https://vivamosmejor.org.gt/equipo/#DAT",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Llenar formulario",
+        "url": "javascript:void(0)",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Llenar formulario",
+        "url": "javascript:void(0)",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Llenar formulario",
+        "url": "javascript:void(0)",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://b564026.smushcdn.com/564026/wp-content/uploads/sites/64/2025/12/01-e1765299760236.jpg?lossy=1&strip=1&webp=1",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Ver reporte",
+        "url": "https://vivamosmejor-my.sharepoint.com/personal/d_pocop_vivamosmejor_org_gt/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fd%5Fpocop%5Fvivamosmejor%5Forg%5Fgt%2FDocuments%2FComunicaci%C3%B3n%202024%2FBolet%C3%ADn%20Clim%C3%A1tico%2FReporte%20Clima%CC%81tico%20%28abril%2C%20mayo%20y%20junio%2916%2D07%2D2024%20%2Epdf&parent=%2Fpersonal%2Fd%5Fpocop%5Fvivamosmejor%5Forg%5Fgt%2FDocuments%2FComunicaci%C3%B3n%202024%2FBolet%C3%ADn%20Clim%C3%A1tico&ga=1",
+        "provider": null,
+        "station_code": null
       },
       {
         "label": "Acceder a informes",
-        "url": "https://drive.google.com/drive/folders/1eN2qT29eTXJdKQPRW6F_BRhcz37m3Uak?usp=drive_link"
+        "url": "https://drive.google.com/drive/folders/1eN2qT29eTXJdKQPRW6F_BRhcz37m3Uak?usp=drive_link",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://b564026.smushcdn.com/564026/wp-content/uploads/sites/64/2025/12/IMG_20230602_093948-1024x768.jpg?lossy=1&strip=1&webp=1",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://b564026.smushcdn.com/564026/wp-content/uploads/sites/64/2025/12/IMG_20220305_150538-1-1024x768.jpg?lossy=1&strip=1&webp=1",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://b564026.smushcdn.com/564026/wp-content/uploads/sites/64/2025/11/20251007_145723-1024x768.jpg?lossy=1&strip=1&webp=1",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://b564026.smushcdn.com/564026/wp-content/uploads/sites/64/2025/12/15.-Monitoreo-Cuerpos-de-Agua-1024x683.jpg?lossy=1&strip=1&webp=1",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://b564026.smushcdn.com/564026/wp-content/uploads/sites/64/2025/12/Pagina-42-1024x686.jpg?lossy=1&strip=1&webp=1",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Conoce más razones",
+        "url": "https://vivamosmejor.org.gt/sobre-nosotros/#por-que",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "PROGRAMA AMBIENTAL",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "PROGRAMA SOCIAL",
+        "url": "https://vivamosmejor.org.gt/programa-social/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "CEDRACC",
+        "url": "https://vivamosmejor.org.gt/cedracc/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "@vivamosmejorgt",
+        "url": "https://www.instagram.com/vivamosmejorgt/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Vivamos Mejor GT",
+        "url": "https://www.linkedin.com/company/vivamos-mejor-gt/",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Vivamos Mejor GT",
+        "url": "https://www.facebook.com/vivamosmejorgt",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "(502) 7762 1093",
+        "url": "tel:(502)77621093",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "Weebir.com",
+        "url": "https://weebir.com",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "wpml.org",
+        "url": "https://wpml.org",
+        "provider": null,
+        "station_code": null
+      },
+      {
+        "label": "remove this banner",
+        "url": "https://wpml.org/faq/how-to-remove-the-this-site-is-registered-on-wpml-org-as-a-development-site-notice/?utm_source=plugin&utm_medium=gui&utm_campaign=wpml-core&utm_term=footer-notice",
+        "provider": null,
+        "station_code": null
       }
     ],
-    "inventory_method": "extracted_from_source_page"
+    "inventory_method": "extracted_from_source_page",
+    "note": "Se ignoran enlaces genéricos. Solo se usan enlaces reales de estación como Wunderground, Ambient Weather, WeatherLink o PWSWeather."
   },
   "stations": [
     {
@@ -73,9 +1001,11 @@
       "municipality": "Panajachel",
       "status": "por_verificar",
       "variable": "precipitation",
+      "provider": "wunderground",
+      "station_code": "IPANAJ5",
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
+      "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
@@ -88,9 +1018,11 @@
       "municipality": "Santa Cruz La Laguna",
       "status": "por_verificar",
       "variable": "precipitation",
+      "provider": "ambientweather",
+      "station_code": null,
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
+      "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
@@ -103,9 +1035,11 @@
       "municipality": "Santa Lucía Utatlán",
       "status": "por_verificar",
       "variable": "precipitation",
+      "provider": "wunderground",
+      "station_code": "ISANTA535",
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
@@ -118,9 +1052,11 @@
       "municipality": "Santa Clara La Laguna",
       "status": "por_verificar",
       "variable": "precipitation",
+      "provider": "wunderground",
+      "station_code": "ISANTACL3",
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
@@ -133,9 +1069,11 @@
       "municipality": "Santiago Atitlán",
       "status": "por_verificar",
       "variable": "precipitation",
+      "provider": "wunderground",
+      "station_code": "ISANTI135",
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
-      "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
@@ -148,6 +1086,8 @@
       "municipality": null,
       "status": "mantenimiento",
       "variable": "precipitation",
+      "provider": "ambientweather",
+      "station_code": null,
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
@@ -163,9 +1103,11 @@
       "municipality": "San Andrés Semetabaj",
       "status": "por_verificar",
       "variable": "precipitation",
+      "provider": "wunderground",
+      "station_code": "ISANAN84",
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     },
@@ -178,9 +1120,11 @@
       "municipality": "Sololá",
       "status": "por_verificar",
       "variable": "precipitation",
+      "provider": "wunderground",
+      "station_code": "ISOLOL4",
       "precipitation_available": "por_verificar",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     }
@@ -189,74 +1133,8 @@
     {
       "station_id": "asociacion_vivamos_mejor_estacion_oficina_central",
       "station_name": "Estación Oficina Central",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 884906,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_cedracc",
-      "station_name": "Estación CEDRACC",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 884906,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_casa_santa_rita",
-      "station_name": "Estación Casa Santa Rita",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 884906,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_santa_clara_tv_cable",
-      "station_name": "Estación Santa Clara TV Cable",
-      "station_url": "https://vivamosmejor.org.gt/dat/#estaciones",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://vivamosmejor.org.gt/dat/#estaciones",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 884906,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_coatitlan_r_l",
-      "station_name": "Estación CoAtitlán R.L.",
+      "provider": "wunderground",
+      "station_code": "IPANAJ5",
       "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
       "ok": true,
       "precipitation_found": false,
@@ -267,13 +1145,91 @@
         "ok": true,
         "status_code": 200,
         "ssl_mode": "ssl_verificado",
-        "content_length": 558041,
+        "content_length": 562346,
+        "error": null
+      }
+    },
+    {
+      "station_id": "asociacion_vivamos_mejor_estacion_cedracc",
+      "station_name": "Estación CEDRACC",
+      "provider": "ambientweather",
+      "station_code": null,
+      "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
+      "ok": false,
+      "precipitation_found": false,
+      "error": "404 Client Error: Not Found for url: https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
+      "matched_text": null,
+      "fetch_status": {
+        "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
+        "ok": false,
+        "status_code": null,
+        "ssl_mode": null,
+        "content_length": null,
+        "error": "404 Client Error: Not Found for url: https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706"
+      }
+    },
+    {
+      "station_id": "asociacion_vivamos_mejor_estacion_casa_santa_rita",
+      "station_name": "Estación Casa Santa Rita",
+      "provider": "wunderground",
+      "station_code": "ISANTA535",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+      "ok": true,
+      "precipitation_found": false,
+      "error": "precipitacion_no_detectada_en_html",
+      "matched_text": null,
+      "fetch_status": {
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+        "ok": true,
+        "status_code": 200,
+        "ssl_mode": "ssl_verificado",
+        "content_length": 444100,
+        "error": null
+      }
+    },
+    {
+      "station_id": "asociacion_vivamos_mejor_estacion_santa_clara_tv_cable",
+      "station_name": "Estación Santa Clara TV Cable",
+      "provider": "wunderground",
+      "station_code": "ISANTACL3",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+      "ok": true,
+      "precipitation_found": false,
+      "error": "precipitacion_no_detectada_en_html",
+      "matched_text": null,
+      "fetch_status": {
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+        "ok": true,
+        "status_code": 200,
+        "ssl_mode": "ssl_verificado",
+        "content_length": 229304,
+        "error": null
+      }
+    },
+    {
+      "station_id": "asociacion_vivamos_mejor_estacion_coatitlan_r_l",
+      "station_name": "Estación CoAtitlán R.L.",
+      "provider": "wunderground",
+      "station_code": "ISANTI135",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
+      "ok": true,
+      "precipitation_found": false,
+      "error": "precipitacion_no_detectada_en_html",
+      "matched_text": null,
+      "fetch_status": {
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
+        "ok": true,
+        "status_code": 200,
+        "ssl_mode": "ssl_verificado",
+        "content_length": 229278,
         "error": null
       }
     },
     {
       "station_id": "asociacion_vivamos_mejor_caserio_chuacruz",
       "station_name": "Caserío Chuacruz",
+      "provider": "ambientweather",
+      "station_code": null,
       "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
       "ok": false,
       "precipitation_found": false,
@@ -291,41 +1247,46 @@
     {
       "station_id": "asociacion_vivamos_mejor_estacion_lomas_de_atitlan",
       "station_name": "Estación Lomas de Atitlán",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+      "provider": "wunderground",
+      "station_code": "ISANAN84",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
       "ok": true,
       "precipitation_found": false,
       "error": "precipitacion_no_detectada_en_html",
       "matched_text": null,
       "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+        "url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
         "ok": true,
         "status_code": 200,
         "ssl_mode": "ssl_verificado",
-        "content_length": 446455,
+        "content_length": 229300,
         "error": null
       }
     },
     {
       "station_id": "asociacion_vivamos_mejor_estacion_escuela_de_formacion_agricola",
       "station_name": "Estación Escuela de Formación Agrícola",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+      "provider": "wunderground",
+      "station_code": "ISOLOL4",
+      "station_url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
       "ok": true,
       "precipitation_found": false,
       "error": "precipitacion_no_detectada_en_html",
       "matched_text": null,
       "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+        "url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
         "ok": true,
         "status_code": 200,
         "ssl_mode": "ssl_verificado",
-        "content_length": 229292,
+        "content_length": 229225,
         "error": null
       }
     }
   ],
   "notes": [
     "Se extrae inventario de estaciones desde la página pública autorizada.",
-    "Se intenta extraer precipitación desde cada enlace de estación cuando existe URL.",
-    "Si una estación requiere JavaScript o endpoint privado, quedará registrada como precipitacion_no_detectada_en_html hasta crear parser específico."
+    "Se filtran enlaces genéricos y se conservan solo enlaces reales de estación.",
+    "Se intenta extraer precipitación desde cada enlace real de estación.",
+    "Si una estación carga datos por JavaScript o servicio externo, queda registrada como precipitacion_no_detectada_en_html hasta crear parser específico o usar API."
   ]
 }
