@@ -1,4 +1,4 @@
-name: Actualizar precipitaciones
+name: Actualizar observaciones agroclimáticas
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  actualizar-precipitaciones:
+  actualizar-observaciones:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install beautifulsoup4 requests lxml certifi urllib3
 
-      - name: Extraer precipitaciones INSIVUMEH para Sololá
+      - name: Extraer y almacenar observaciones
         run: |
           python - <<'PY'
           from __future__ import annotations
@@ -37,6 +37,7 @@ jobs:
           import unicodedata
           from datetime import datetime, timezone
           from pathlib import Path
+          from zoneinfo import ZoneInfo
 
           import certifi
           import requests
@@ -44,18 +45,68 @@ jobs:
           from bs4 import BeautifulSoup
           from requests.exceptions import SSLError
 
-          SOURCE_URLS = [
-              "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html",
-              "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html",
+          GT = ZoneInfo("America/Guatemala")
+
+          ROOT = Path(".")
+          OUT_ROOT = ROOT / "docs" / "data" / "observaciones"
+          HIST_ROOT = OUT_ROOT / "historico"
+          PRECIP_ROOT = ROOT / "docs" / "data" / "precipitaciones"
+
+          OUT_ROOT.mkdir(parents=True, exist_ok=True)
+          HIST_ROOT.mkdir(parents=True, exist_ok=True)
+          PRECIP_ROOT.mkdir(parents=True, exist_ok=True)
+
+          ACTUAL_JSON = OUT_ROOT / "actual.json"
+          SOURCE_STATUS_JSON = OUT_ROOT / "source_status.json"
+
+          # Compatibilidad con el módulo actual de precipitaciones.
+          PRECIP_ACTUAL_JSON = PRECIP_ROOT / "insivumeh_solola.json"
+          PRECIP_ACTUAL_CSV = PRECIP_ROOT / "insivumeh_solola.csv"
+          PRECIP_RAW_TXT = PRECIP_ROOT / "insivumeh_solola_raw.txt"
+
+          SOURCES = [
+              {
+                  "source_id": "insivumeh_precipitaciones_departamentos",
+                  "institution": "INSIVUMEH",
+                  "kind": "observations",
+                  "parser": "insivumeh_precip_solola",
+                  "urls": [
+                      "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html",
+                      "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html",
+                  ],
+                  "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+              },
+              {
+                  "source_id": "vivamos_mejor_estaciones",
+                  "institution": "Asociación Vivamos Mejor",
+                  "kind": "source_monitor",
+                  "parser": "monitor_only",
+                  "urls": [
+                      "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
+                  ],
+                  "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+              },
+              {
+                  "source_id": "amsclae",
+                  "institution": "AMSCLAE",
+                  "kind": "source_monitor",
+                  "parser": "monitor_only",
+                  "urls": [
+                      "https://www.amsclae.gob.gt/",
+                  ],
+                  "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+              },
+              {
+                  "source_id": "icc_clima",
+                  "institution": "ICC",
+                  "kind": "source_monitor",
+                  "parser": "monitor_only",
+                  "urls": [
+                      "https://www.icc.org.gt/es/clima/",
+                  ],
+                  "credit": "Datos: ICC. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+              },
           ]
-
-          OUT_DIR = Path("docs/data/precipitaciones")
-          OUT_DIR.mkdir(parents=True, exist_ok=True)
-
-          JSON_OUT = OUT_DIR / "insivumeh_solola.json"
-          CSV_OUT = OUT_DIR / "insivumeh_solola.csv"
-          RAW_OUT = OUT_DIR / "insivumeh_solola_raw.txt"
-          DEBUG_OUT = OUT_DIR / "insivumeh_debug_text.txt"
 
           DEPARTAMENTOS = [
               "alta verapaz",
@@ -83,6 +134,11 @@ jobs:
               "region norte",
           ]
 
+          def now_times() -> tuple[datetime, datetime]:
+              utc = datetime.now(timezone.utc)
+              gt = utc.astimezone(GT)
+              return utc, gt
+
           def normalizar(texto: str) -> str:
               texto = texto.replace("\ufeff", " ")
               texto = texto.replace("\xa0", " ")
@@ -92,16 +148,19 @@ jobs:
               texto = texto.replace("#", " ")
               texto = texto.replace(":", " ")
               texto = re.sub(r"\s+", " ", texto)
-              texto = texto.strip()
-              return texto
+              return texto.strip()
+
+          def slug(texto: str) -> str:
+              limpio = normalizar(texto)
+              limpio = re.sub(r"[^a-z0-9]+", "_", limpio)
+              return limpio.strip("_")
 
           def es_solola(linea: str) -> bool:
               limpia = normalizar(linea)
               return limpia == "solola" or limpia.startswith("solola ") or " solola " in f" {limpia} "
 
           def es_departamento(linea: str) -> bool:
-              limpia = normalizar(linea)
-              return limpia in DEPARTAMENTOS
+              return normalizar(linea) in DEPARTAMENTOS
 
           def numero_mm(linea: str) -> float | None:
               match = re.search(
@@ -113,20 +172,35 @@ jobs:
                   return None
               return float(match.group(1).replace(",", "."))
 
-          def dias_lluvia(linea: str) -> tuple[int | None, int | None]:
-              limpia = normalizar(linea)
-              match = re.search(
-                  r"([0-9]+)\s*dias\s*con\s*lluvia.*?([0-9]+)\s*dias\s*sin\s*lluvia",
-                  limpia,
-              )
-              if not match:
-                  return None, None
-              return int(match.group(1)), int(match.group(2))
+          def buscar_dias_en_bloque(lineas: list[str]) -> tuple[int | None, int | None]:
+              texto = " | ".join(normalizar(x) for x in lineas)
 
-          def obtener_pagina(url: str) -> tuple[str, str]:
+              con_lluvia = None
+              sin_lluvia = None
+
+              match_con = re.search(r"([0-9]+)\s*dias?\s*con\s*lluvia", texto)
+              match_sin = re.search(r"([0-9]+)\s*dias?\s*sin\s*lluvia", texto)
+
+              if match_con:
+                  con_lluvia = int(match_con.group(1))
+              if match_sin:
+                  sin_lluvia = int(match_sin.group(1))
+
+              return con_lluvia, sin_lluvia
+
+          def fetch_url(url: str) -> tuple[str, dict]:
               headers = {
-                  "User-Agent": "MTA-Solola-Precipitaciones/0.3 (+https://github.com/geograficaaala/MTA)",
+                  "User-Agent": "MTA-Solola-Observaciones/0.4 (+https://github.com/geograficaaala/MTA)",
                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+              }
+
+              status = {
+                  "url": url,
+                  "ok": False,
+                  "status_code": None,
+                  "ssl_mode": None,
+                  "content_length": None,
+                  "error": None,
               }
 
               try:
@@ -138,7 +212,14 @@ jobs:
                   )
                   response.raise_for_status()
                   response.encoding = "utf-8"
-                  return response.text, "ssl_verificado"
+                  status.update({
+                      "ok": True,
+                      "status_code": response.status_code,
+                      "ssl_mode": "ssl_verificado",
+                      "content_length": len(response.text),
+                  })
+                  return response.text, status
+
               except SSLError:
                   urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
                   response = requests.get(
@@ -149,17 +230,23 @@ jobs:
                   )
                   response.raise_for_status()
                   response.encoding = "utf-8"
-                  return response.text, "ssl_no_verificado_por_certificado_fuente"
+                  status.update({
+                      "ok": True,
+                      "status_code": response.status_code,
+                      "ssl_mode": "ssl_no_verificado_por_certificado_fuente",
+                      "content_length": len(response.text),
+                  })
+                  return response.text, status
 
-          def html_a_lineas(html: str) -> list[str]:
+              except Exception as exc:
+                  status["error"] = str(exc)
+                  return "", status
+
+          def html_to_lines(html: str) -> list[str]:
               soup = BeautifulSoup(html, "lxml")
-
               for tag in soup(["script", "style", "noscript"]):
                   tag.decompose()
-
-              texto = soup.get_text("\n")
-              lineas = [line.strip() for line in texto.splitlines() if line.strip()]
-              return lineas
+              return [line.strip() for line in soup.get_text("\n").splitlines() if line.strip()]
 
           def obtener_seccion_solola(lines: list[str]) -> list[str]:
               inicio = None
@@ -170,10 +257,7 @@ jobs:
                       break
 
               if inicio is None:
-                  DEBUG_OUT.write_text("\n".join(lines[:500]), encoding="utf-8")
-                  raise RuntimeError(
-                      "No se encontró la sección de Sololá. Se guardó debug en docs/data/precipitaciones/insivumeh_debug_text.txt"
-                  )
+                  raise RuntimeError("No se encontró la sección de Sololá.")
 
               fin = len(lines)
 
@@ -184,146 +268,345 @@ jobs:
 
               return lines[inicio:fin]
 
-          def extraer_estaciones_resumen(seccion: list[str]) -> list[dict]:
-              estaciones = []
-              i = 0
+          def record(
+              *,
+              observed_date: str,
+              extracted_at_utc: str,
+              extracted_at_gt: str,
+              source_id: str,
+              institution: str,
+              station_name: str,
+              variable: str,
+              value: float | int,
+              unit: str,
+              source_url: str,
+              credit: str,
+              aggregation_period: str,
+              quality_flag: str = "raw_published",
+          ) -> dict:
+              station_id = f"{slug(institution)}_{slug(station_name)}"
+              variable_slug = slug(variable)
 
+              return {
+                  "record_id": f"{observed_date}_{source_id}_{station_id}_{variable_slug}",
+                  "observed_date": observed_date,
+                  "extracted_at_utc": extracted_at_utc,
+                  "extracted_at_gt": extracted_at_gt,
+                  "department": "Sololá",
+                  "station_id": station_id,
+                  "station_name": station_name,
+                  "institution": institution,
+                  "source_id": source_id,
+                  "variable": variable,
+                  "value": value,
+                  "unit": unit,
+                  "aggregation_period": aggregation_period,
+                  "data_type": "observado_publicado",
+                  "quality_flag": quality_flag,
+                  "source_url": source_url,
+                  "credit": credit,
+              }
+
+          def parse_insivumeh_precip(source: dict, html: str, source_url: str, extracted_at_utc: str, extracted_at_gt: str, observed_date: str) -> tuple[list[dict], list[dict], list[str]]:
+              lines = html_to_lines(html)
+              seccion = obtener_seccion_solola(lines)
+
+              records: list[dict] = []
+              station_rows: list[dict] = []
+
+              i = 0
               while i < len(seccion):
                   linea = seccion[i].strip()
-
-                  if not linea:
-                      i += 1
-                      continue
-
                   siguiente = seccion[i + 1].strip() if i + 1 < len(seccion) else ""
-                  valor = numero_mm(siguiente)
+                  valor_precip = numero_mm(siguiente)
 
-                  if valor is not None:
-                      nombre_estacion = linea
-                      rain_days = None
-                      dry_days = None
+                  if valor_precip is not None:
+                      station_name = linea
+                      bloque = seccion[i:i + 12]
+                      rain_days, dry_days = buscar_dias_en_bloque(bloque)
 
-                      for k in range(i + 2, min(i + 8, len(seccion))):
-                          rain_days, dry_days = dias_lluvia(seccion[k])
-                          if rain_days is not None:
-                              break
+                      records.append(record(
+                          observed_date=observed_date,
+                          extracted_at_utc=extracted_at_utc,
+                          extracted_at_gt=extracted_at_gt,
+                          source_id=source["source_id"],
+                          institution=source["institution"],
+                          station_name=station_name,
+                          variable="precipitation_accumulated",
+                          value=valor_precip,
+                          unit="mm",
+                          aggregation_period="periodo_publicado_por_fuente",
+                          source_url=source_url,
+                          credit=source["credit"],
+                      ))
 
-                      estaciones.append(
-                          {
-                              "station_id": normalizar(nombre_estacion).replace(" ", "_"),
-                              "station_name": nombre_estacion,
-                              "department": "Sololá",
-                              "institution": "INSIVUMEH",
-                              "precipitation_mm_accumulated": valor,
-                              "rain_days": rain_days,
-                              "dry_days": dry_days,
-                              "status": "extraido",
-                              "data_type": "observado_publicado",
-                              "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
-                          }
-                      )
+                      if rain_days is not None:
+                          records.append(record(
+                              observed_date=observed_date,
+                              extracted_at_utc=extracted_at_utc,
+                              extracted_at_gt=extracted_at_gt,
+                              source_id=source["source_id"],
+                              institution=source["institution"],
+                              station_name=station_name,
+                              variable="rain_days",
+                              value=rain_days,
+                              unit="days",
+                              aggregation_period="periodo_publicado_por_fuente",
+                              source_url=source_url,
+                              credit=source["credit"],
+                          ))
+
+                      if dry_days is not None:
+                          records.append(record(
+                              observed_date=observed_date,
+                              extracted_at_utc=extracted_at_utc,
+                              extracted_at_gt=extracted_at_gt,
+                              source_id=source["source_id"],
+                              institution=source["institution"],
+                              station_name=station_name,
+                              variable="dry_days",
+                              value=dry_days,
+                              unit="days",
+                              aggregation_period="periodo_publicado_por_fuente",
+                              source_url=source_url,
+                              credit=source["credit"],
+                          ))
+
+                      station_rows.append({
+                          "station_id": f"{slug(source['institution'])}_{slug(station_name)}",
+                          "station_name": station_name,
+                          "department": "Sololá",
+                          "institution": source["institution"],
+                          "precipitation_mm_accumulated": valor_precip,
+                          "rain_days": rain_days,
+                          "dry_days": dry_days,
+                          "status": "extraido",
+                          "data_type": "observado_publicado",
+                          "credit": source["credit"],
+                      })
 
                       i += 2
                       continue
 
                   i += 1
 
-              return estaciones
+              return records, station_rows, seccion
 
-          def extraer_desde_url(url: str) -> tuple[list[dict], list[str], str]:
-              html, ssl_mode = obtener_pagina(url)
-              lines = html_a_lineas(html)
-              seccion = obtener_seccion_solola(lines)
-              estaciones = extraer_estaciones_resumen(seccion)
-              return estaciones, seccion, ssl_mode
-
-          errores = []
-          estaciones = []
-          seccion_solola = []
-          url_usada = None
-          ssl_mode = None
-
-          for url in SOURCE_URLS:
+          def load_json(path: Path, default: dict) -> dict:
+              if not path.exists():
+                  return default
               try:
-                  estaciones, seccion_solola, ssl_mode = extraer_desde_url(url)
-                  if estaciones:
-                      url_usada = url
-                      break
-                  errores.append(f"{url}: se encontró Sololá, pero no estaciones.")
-              except Exception as exc:
-                  errores.append(f"{url}: {exc}")
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
 
-          if not estaciones:
-              DEBUG_OUT.write_text(
-                  "ERRORES:\n"
-                  + "\n".join(errores)
-                  + "\n\nNo se pudieron extraer estaciones.\n",
-                  encoding="utf-8",
-              )
-              raise RuntimeError(
-                  "No se pudieron extraer estaciones de Sololá. Revisar docs/data/precipitaciones/insivumeh_debug_text.txt"
-              )
+          def write_json(path: Path, data: dict) -> None:
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
-          generated_at = datetime.now(timezone.utc).isoformat()
+          def append_monthly_records(records: list[dict], gt_now: datetime) -> Path:
+              year = gt_now.strftime("%Y")
+              month = gt_now.strftime("%m")
+              monthly_dir = HIST_ROOT / year
+              monthly_dir.mkdir(parents=True, exist_ok=True)
 
-          data = {
-              "schema": "mta_precipitaciones_v0_3",
-              "generated_at_utc": generated_at,
+              monthly_path = monthly_dir / f"{year}-{month}.json"
+
+              monthly = load_json(monthly_path, {
+                  "schema": "mta_observaciones_mensuales_v1",
+                  "year": int(year),
+                  "month": int(month),
+                  "records": [],
+              })
+
+              existing = monthly.get("records", [])
+              new_ids = {r["record_id"] for r in records}
+
+              filtered = [r for r in existing if r.get("record_id") not in new_ids]
+              monthly["records"] = filtered + records
+              monthly["updated_at_utc"] = datetime.now(timezone.utc).isoformat()
+              monthly["record_count"] = len(monthly["records"])
+
+              write_json(monthly_path, monthly)
+              return monthly_path
+
+          def write_monthly_csv(monthly_json_path: Path) -> Path:
+              data = load_json(monthly_json_path, {"records": []})
+              csv_path = monthly_json_path.with_suffix(".csv")
+              records = data.get("records", [])
+
+              fields = [
+                  "record_id",
+                  "observed_date",
+                  "extracted_at_utc",
+                  "extracted_at_gt",
+                  "department",
+                  "station_id",
+                  "station_name",
+                  "institution",
+                  "source_id",
+                  "variable",
+                  "value",
+                  "unit",
+                  "aggregation_period",
+                  "data_type",
+                  "quality_flag",
+                  "source_url",
+                  "credit",
+              ]
+
+              with csv_path.open("w", encoding="utf-8", newline="") as f:
+                  writer = csv.DictWriter(f, fieldnames=fields)
+                  writer.writeheader()
+                  for row in records:
+                      writer.writerow({field: row.get(field) for field in fields})
+
+              return csv_path
+
+          utc_now, gt_now = now_times()
+          extracted_at_utc = utc_now.isoformat()
+          extracted_at_gt = gt_now.isoformat()
+          observed_date = gt_now.strftime("%Y-%m-%d")
+
+          all_records: list[dict] = []
+          source_status: list[dict] = []
+          precip_station_rows: list[dict] = []
+          precip_raw_section: list[str] = []
+
+          for source in SOURCES:
+              source_result = {
+                  "source_id": source["source_id"],
+                  "institution": source["institution"],
+                  "kind": source["kind"],
+                  "parser": source["parser"],
+                  "checked_at_utc": extracted_at_utc,
+                  "checked_at_gt": extracted_at_gt,
+                  "ok": False,
+                  "records_added": 0,
+                  "urls": [],
+                  "errors": [],
+              }
+
+              for url in source["urls"]:
+                  html, fetch_status = fetch_url(url)
+                  source_result["urls"].append(fetch_status)
+
+                  if not fetch_status["ok"]:
+                      source_result["errors"].append(f"{url}: {fetch_status.get('error')}")
+                      continue
+
+                  if source["parser"] == "insivumeh_precip_solola":
+                      try:
+                          records, station_rows, seccion = parse_insivumeh_precip(
+                              source,
+                              html,
+                              url,
+                              extracted_at_utc,
+                              extracted_at_gt,
+                              observed_date,
+                          )
+
+                          if records:
+                              all_records.extend(records)
+                              precip_station_rows = station_rows
+                              precip_raw_section = seccion
+                              source_result["ok"] = True
+                              source_result["records_added"] += len(records)
+                              break
+
+                      except Exception as exc:
+                          source_result["errors"].append(f"{url}: {exc}")
+
+                  elif source["parser"] == "monitor_only":
+                      # Estas fuentes quedan monitoreadas en el estado del sistema.
+                      # No se inventan observaciones: cuando tengamos parser confiable
+                      # para cada página, sus datos entrarán a records igual que INSIVUMEH.
+                      source_result["ok"] = True
+
+              source_status.append(source_result)
+
+          if not all_records:
+              raise RuntimeError("No se extrajo ninguna observación. Revisar source_status en el log.")
+
+          monthly_path = append_monthly_records(all_records, gt_now)
+          monthly_csv = write_monthly_csv(monthly_path)
+
+          actual_payload = {
+              "schema": "mta_observaciones_actuales_v1",
+              "generated_at_utc": extracted_at_utc,
+              "generated_at_gt": extracted_at_gt,
+              "observed_date": observed_date,
+              "department": "Sololá",
+              "policy": {
+                  "storage": "actual_json_mas_historico_mensual",
+                  "do_not_average_raw_stations": True,
+                  "note": "Las observaciones se conservan por estación, institución, variable, fecha y fuente. Los promedios o mapas se generarán como productos derivados separados.",
+              },
+              "latest_records": all_records,
+              "monthly_history": str(monthly_path),
+              "monthly_history_csv": str(monthly_csv),
+              "source_status_path": str(SOURCE_STATUS_JSON),
+          }
+
+          write_json(ACTUAL_JSON, actual_payload)
+
+          write_json(SOURCE_STATUS_JSON, {
+              "schema": "mta_source_status_v1",
+              "generated_at_utc": extracted_at_utc,
+              "generated_at_gt": extracted_at_gt,
+              "sources": source_status,
+          })
+
+          # Archivos de compatibilidad para el módulo de precipitaciones actual.
+          precip_payload = {
+              "schema": "mta_precipitaciones_insivumeh_actual_v1",
+              "generated_at_utc": extracted_at_utc,
+              "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
               "source": {
                   "institution": "INSIVUMEH",
-                  "url": url_usada,
-                  "ssl_mode": ssl_mode,
                   "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
               },
-              "notes": [
-                  "Extracción automática diaria desde página institucional autorizada.",
-                  "El campo precipitation_mm_accumulated corresponde al acumulado publicado por la fuente al momento de la consulta.",
-                  "Los datos deben mostrarse con fuente, fecha de consulta y crédito institucional.",
-              ],
-              "stations": estaciones,
+              "stations": precip_station_rows,
           }
 
-          JSON_OUT.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-          RAW_OUT.write_text("\n".join(seccion_solola), encoding="utf-8")
+          write_json(PRECIP_ACTUAL_JSON, precip_payload)
+          PRECIP_RAW_TXT.write_text("\n".join(precip_raw_section), encoding="utf-8")
 
-          with CSV_OUT.open("w", encoding="utf-8", newline="") as f:
-              writer = csv.DictWriter(
-                  f,
-                  fieldnames=[
-                      "station_id",
-                      "station_name",
-                      "department",
-                      "institution",
-                      "precipitation_mm_accumulated",
-                      "rain_days",
-                      "dry_days",
-                      "status",
-                      "data_type",
-                      "credit",
-                  ],
-              )
+          with PRECIP_ACTUAL_CSV.open("w", encoding="utf-8", newline="") as f:
+              fields = [
+                  "station_id",
+                  "station_name",
+                  "department",
+                  "institution",
+                  "precipitation_mm_accumulated",
+                  "rain_days",
+                  "dry_days",
+                  "status",
+                  "data_type",
+                  "credit",
+              ]
+              writer = csv.DictWriter(f, fieldnames=fields)
               writer.writeheader()
-              writer.writerows(estaciones)
+              writer.writerows(precip_station_rows)
 
-          print(f"OK: {len(estaciones)} estaciones extraídas para Sololá.")
-          print(f"URL usada: {url_usada}")
-          print(f"Modo SSL: {ssl_mode}")
-          print(JSON_OUT)
-          print(CSV_OUT)
-          PY
+          print(f"OK observaciones: {len(all_records)} registros nuevos.")
+          print(f"Histórico mensual: {monthly_path}")
+          print(f"CSV mensual: {monthly_csv}")
+          print(f"Actual: {ACTUAL_JSON}")
+          print(f"Estado de fuentes: {SOURCE_STATUS_JSON}")
 
       - name: Guardar cambios generados
-        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add docs/data/precipitaciones/ || true
+          git add docs/data/observaciones/
+          git add docs/data/precipitaciones/
 
           if git diff --cached --quiet; then
-            echo "No hay cambios nuevos en precipitaciones."
+            echo "No hay cambios nuevos en observaciones."
           else
-            git commit -m "Actualizar precipitaciones INSIVUMEH Solola"
+            git commit -m "Actualizar observaciones agroclimaticas"
             git push
           fi
