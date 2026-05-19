@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install beautifulsoup4 requests lxml certifi urllib3
 
-      - name: Extraer y almacenar observaciones
+      - name: Extraer observaciones, fuentes e inventario
         run: |
           python - <<'PY'
           from __future__ import annotations
@@ -38,6 +38,7 @@ jobs:
           from datetime import datetime, timezone
           from pathlib import Path
           from zoneinfo import ZoneInfo
+          from urllib.parse import urljoin
 
           import certifi
           import requests
@@ -48,18 +49,27 @@ jobs:
           GT = ZoneInfo("America/Guatemala")
 
           ROOT = Path(".")
-          OUT_ROOT = ROOT / "docs" / "data" / "observaciones"
-          HIST_ROOT = OUT_ROOT / "historico"
-          PRECIP_ROOT = ROOT / "docs" / "data" / "precipitaciones"
+          DATA_ROOT = ROOT / "docs" / "data"
 
-          OUT_ROOT.mkdir(parents=True, exist_ok=True)
-          HIST_ROOT.mkdir(parents=True, exist_ok=True)
-          PRECIP_ROOT.mkdir(parents=True, exist_ok=True)
+          OBS_ROOT = DATA_ROOT / "observaciones"
+          OBS_HIST_ROOT = OBS_ROOT / "historico"
 
-          ACTUAL_JSON = OUT_ROOT / "actual.json"
-          SOURCE_STATUS_JSON = OUT_ROOT / "source_status.json"
+          PRECIP_ROOT = DATA_ROOT / "precipitaciones"
+          FUENTES_ROOT = DATA_ROOT / "fuentes"
+          ESTACIONES_ROOT = DATA_ROOT / "estaciones"
 
-          # Compatibilidad con el módulo actual de precipitaciones.
+          for folder in [OBS_ROOT, OBS_HIST_ROOT, PRECIP_ROOT, FUENTES_ROOT, ESTACIONES_ROOT]:
+              folder.mkdir(parents=True, exist_ok=True)
+
+          OBS_ACTUAL_JSON = OBS_ROOT / "actual.json"
+          OBS_SOURCE_STATUS_JSON = OBS_ROOT / "source_status.json"
+
+          FUENTES_STATUS_JSON = FUENTES_ROOT / "source_status.json"
+          FUENTES_INSTITUCIONES_JSON = FUENTES_ROOT / "instituciones.json"
+
+          ESTACIONES_INVENTARIO_JSON = ESTACIONES_ROOT / "inventario.json"
+          ESTACIONES_INVENTARIO_CSV = ESTACIONES_ROOT / "inventario.csv"
+
           PRECIP_ACTUAL_JSON = PRECIP_ROOT / "insivumeh_solola.json"
           PRECIP_ACTUAL_CSV = PRECIP_ROOT / "insivumeh_solola.csv"
           PRECIP_RAW_TXT = PRECIP_ROOT / "insivumeh_solola_raw.txt"
@@ -75,36 +85,103 @@ jobs:
                       "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html",
                   ],
                   "credit": "Datos: INSIVUMEH. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  "variables_declared": ["precipitation_accumulated", "rain_days", "dry_days"],
               },
               {
                   "source_id": "vivamos_mejor_estaciones",
                   "institution": "Asociación Vivamos Mejor",
-                  "kind": "source_monitor",
-                  "parser": "monitor_only",
+                  "kind": "station_inventory",
+                  "parser": "vivamos_mejor_inventory",
                   "urls": [
                       "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
                   ],
                   "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  "variables_declared": ["precipitation", "temperature", "relative_humidity", "wind"],
               },
               {
-                  "source_id": "amsclae",
+                  "source_id": "amsclae_clima",
                   "institution": "AMSCLAE",
-                  "kind": "source_monitor",
-                  "parser": "monitor_only",
+                  "kind": "station_inventory_and_metadata",
+                  "parser": "amsclae_metadata",
                   "urls": [
-                      "https://www.amsclae.gob.gt/",
+                      "https://www.amsclae.gob.gt/clima/",
+                      "https://www.amsclae.gob.gt/clima/estacion-climatica.php",
+                      "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/",
                   ],
                   "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  "variables_declared": [
+                      "precipitation",
+                      "temperature",
+                      "relative_humidity",
+                      "wind_speed",
+                      "wind_direction",
+                      "solar_radiation",
+                      "uv_index",
+                  ],
               },
               {
-                  "source_id": "icc_clima",
+                  "source_id": "icc_redmet",
                   "institution": "ICC",
-                  "kind": "source_monitor",
-                  "parser": "monitor_only",
+                  "kind": "station_network_metadata",
+                  "parser": "icc_metadata",
                   "urls": [
                       "https://www.icc.org.gt/es/clima/",
+                      "https://icc.org.gt/es/estaciones/",
+                      "https://icc.org.gt/es/sistema-de-informacion-meteorologica-redmet/",
                   ],
                   "credit": "Datos: ICC. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  "variables_declared": [
+                      "precipitation",
+                      "temperature",
+                      "relative_humidity",
+                      "solar_radiation",
+                      "leaf_wetness",
+                      "wind_speed",
+                      "wind_direction",
+                  ],
+              },
+          ]
+
+          VIVAMOS_MEJOR_FALLBACK_STATIONS = [
+              {
+                  "station_name": "Estación Oficina Central",
+                  "municipality": "Panajachel",
+                  "status": "por_verificar",
+              },
+              {
+                  "station_name": "Estación Casa Santa Rita",
+                  "municipality": "Santa Lucía Utatlán",
+                  "status": "por_verificar",
+              },
+              {
+                  "station_name": "Estación CoAtitlán R.L.",
+                  "municipality": "Santiago Atitlán",
+                  "status": "por_verificar",
+              },
+              {
+                  "station_name": "Estación Lomas de Atitlán",
+                  "municipality": "San Andrés Semetabaj",
+                  "status": "por_verificar",
+              },
+              {
+                  "station_name": "Estación CEDRACC",
+                  "municipality": "Santa Cruz La Laguna",
+                  "status": "por_verificar",
+              },
+              {
+                  "station_name": "Estación Santa Clara TV Cable",
+                  "municipality": "Santa Clara La Laguna",
+                  "status": "por_verificar",
+              },
+              {
+                  "station_name": "Caserío Chuacruz",
+                  "municipality": "Aldea Pujujil I, Sololá",
+                  "status": "mantenimiento",
+              },
+              {
+                  "station_name": "Estación Escuela de Formación Agrícola",
+                  "municipality": "Sololá",
+                  "status": "por_verificar",
               },
           ]
 
@@ -140,6 +217,7 @@ jobs:
               return utc, gt
 
           def normalizar(texto: str) -> str:
+              texto = str(texto or "")
               texto = texto.replace("\ufeff", " ")
               texto = texto.replace("\xa0", " ")
               texto = texto.strip().lower()
@@ -190,7 +268,7 @@ jobs:
 
           def fetch_url(url: str) -> tuple[str, dict]:
               headers = {
-                  "User-Agent": "MTA-Solola-Observaciones/0.4 (+https://github.com/geograficaaala/MTA)",
+                  "User-Agent": "MTA-Solola-Observaciones/0.5 (+https://github.com/geograficaaala/MTA)",
                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
               }
 
@@ -211,7 +289,7 @@ jobs:
                       verify=certifi.where(),
                   )
                   response.raise_for_status()
-                  response.encoding = "utf-8"
+                  response.encoding = response.apparent_encoding or "utf-8"
                   status.update({
                       "ok": True,
                       "status_code": response.status_code,
@@ -221,54 +299,81 @@ jobs:
                   return response.text, status
 
               except SSLError:
-                  urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-                  response = requests.get(
-                      url,
-                      timeout=45,
-                      headers=headers,
-                      verify=False,
-                  )
-                  response.raise_for_status()
-                  response.encoding = "utf-8"
-                  status.update({
-                      "ok": True,
-                      "status_code": response.status_code,
-                      "ssl_mode": "ssl_no_verificado_por_certificado_fuente",
-                      "content_length": len(response.text),
-                  })
-                  return response.text, status
+                  try:
+                      urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+                      response = requests.get(
+                          url,
+                          timeout=45,
+                          headers=headers,
+                          verify=False,
+                      )
+                      response.raise_for_status()
+                      response.encoding = response.apparent_encoding or "utf-8"
+                      status.update({
+                          "ok": True,
+                          "status_code": response.status_code,
+                          "ssl_mode": "ssl_no_verificado_por_certificado_fuente",
+                          "content_length": len(response.text),
+                      })
+                      return response.text, status
+                  except Exception as exc:
+                      status["error"] = str(exc)
+                      return "", status
 
               except Exception as exc:
                   status["error"] = str(exc)
                   return "", status
 
-          def html_to_lines(html: str) -> list[str]:
+          def html_to_soup(html: str) -> BeautifulSoup:
               soup = BeautifulSoup(html, "lxml")
               for tag in soup(["script", "style", "noscript"]):
                   tag.decompose()
+              return soup
+
+          def soup_to_lines(soup: BeautifulSoup) -> list[str]:
               return [line.strip() for line in soup.get_text("\n").splitlines() if line.strip()]
 
-          def obtener_seccion_solola(lines: list[str]) -> list[str]:
-              inicio = None
+          def load_json(path: Path, default: dict) -> dict:
+              if not path.exists():
+                  return default
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
 
-              for i, line in enumerate(lines):
-                  if es_solola(line):
-                      inicio = i + 1
-                      break
+          def write_json(path: Path, data: dict) -> None:
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
-              if inicio is None:
-                  raise RuntimeError("No se encontró la sección de Sololá.")
+          def station_record(
+              *,
+              source_id: str,
+              institution: str,
+              station_name: str,
+              municipality: str | None,
+              status: str,
+              credit: str,
+              source_url: str,
+              variables_declared: list[str],
+              station_url: str | None = None,
+              inventory_method: str = "extracted",
+          ) -> dict:
+              return {
+                  "station_id": f"{slug(institution)}_{slug(station_name)}",
+                  "station_name": station_name,
+                  "institution": institution,
+                  "source_id": source_id,
+                  "department": "Sololá",
+                  "municipality": municipality,
+                  "status": status,
+                  "variables_declared": variables_declared,
+                  "source_url": source_url,
+                  "station_url": station_url,
+                  "inventory_method": inventory_method,
+                  "credit": credit,
+              }
 
-              fin = len(lines)
-
-              for j in range(inicio, len(lines)):
-                  if es_departamento(lines[j]) and not es_solola(lines[j]):
-                      fin = j
-                      break
-
-              return lines[inicio:fin]
-
-          def record(
+          def observation_record(
               *,
               observed_date: str,
               extracted_at_utc: str,
@@ -307,12 +412,40 @@ jobs:
                   "credit": credit,
               }
 
-          def parse_insivumeh_precip(source: dict, html: str, source_url: str, extracted_at_utc: str, extracted_at_gt: str, observed_date: str) -> tuple[list[dict], list[dict], list[str]]:
-              lines = html_to_lines(html)
+          def obtener_seccion_solola(lines: list[str]) -> list[str]:
+              inicio = None
+
+              for i, line in enumerate(lines):
+                  if es_solola(line):
+                      inicio = i + 1
+                      break
+
+              if inicio is None:
+                  raise RuntimeError("No se encontró la sección de Sololá.")
+
+              fin = len(lines)
+
+              for j in range(inicio, len(lines)):
+                  if es_departamento(lines[j]) and not es_solola(lines[j]):
+                      fin = j
+                      break
+
+              return lines[inicio:fin]
+
+          def parse_insivumeh_precip(
+              source: dict,
+              html: str,
+              source_url: str,
+              extracted_at_utc: str,
+              extracted_at_gt: str,
+              observed_date: str,
+          ) -> tuple[list[dict], list[dict], list[str]]:
+              soup = html_to_soup(html)
+              lines = soup_to_lines(soup)
               seccion = obtener_seccion_solola(lines)
 
-              records: list[dict] = []
-              station_rows: list[dict] = []
+              observations: list[dict] = []
+              precip_rows: list[dict] = []
 
               i = 0
               while i < len(seccion):
@@ -325,7 +458,7 @@ jobs:
                       bloque = seccion[i:i + 12]
                       rain_days, dry_days = buscar_dias_en_bloque(bloque)
 
-                      records.append(record(
+                      observations.append(observation_record(
                           observed_date=observed_date,
                           extracted_at_utc=extracted_at_utc,
                           extracted_at_gt=extracted_at_gt,
@@ -341,7 +474,7 @@ jobs:
                       ))
 
                       if rain_days is not None:
-                          records.append(record(
+                          observations.append(observation_record(
                               observed_date=observed_date,
                               extracted_at_utc=extracted_at_utc,
                               extracted_at_gt=extracted_at_gt,
@@ -357,7 +490,7 @@ jobs:
                           ))
 
                       if dry_days is not None:
-                          records.append(record(
+                          observations.append(observation_record(
                               observed_date=observed_date,
                               extracted_at_utc=extracted_at_utc,
                               extracted_at_gt=extracted_at_gt,
@@ -372,7 +505,7 @@ jobs:
                               credit=source["credit"],
                           ))
 
-                      station_rows.append({
+                      precip_rows.append({
                           "station_id": f"{slug(source['institution'])}_{slug(station_name)}",
                           "station_name": station_name,
                           "department": "Sololá",
@@ -390,24 +523,276 @@ jobs:
 
                   i += 1
 
-              return records, station_rows, seccion
+              stations = [
+                  station_record(
+                      source_id=source["source_id"],
+                      institution=source["institution"],
+                      station_name=row["station_name"],
+                      municipality=None,
+                      status="activa_por_verificar",
+                      credit=source["credit"],
+                      source_url=source_url,
+                      variables_declared=source["variables_declared"],
+                      inventory_method="from_observation_page",
+                  )
+                  for row in precip_rows
+              ]
 
-          def load_json(path: Path, default: dict) -> dict:
-              if not path.exists():
-                  return default
-              try:
-                  return json.loads(path.read_text(encoding="utf-8"))
-              except Exception:
-                  return default
+              return observations, stations, seccion
 
-          def write_json(path: Path, data: dict) -> None:
-              path.parent.mkdir(parents=True, exist_ok=True)
-              path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+          def parse_vivamos_mejor_inventory(source: dict, html: str, source_url: str) -> tuple[list[dict], dict]:
+              soup = html_to_soup(html)
+              lines = soup_to_lines(soup)
 
-          def append_monthly_records(records: list[dict], gt_now: datetime) -> Path:
+              accede_links = []
+              for a in soup.find_all("a"):
+                  label = a.get_text(" ", strip=True)
+                  href = a.get("href")
+                  if href and "accede" in normalizar(label):
+                      accede_links.append(urljoin(source_url, href))
+
+              parsed = []
+              i = 0
+              while i < len(lines):
+                  line = lines[i].strip()
+                  clean = normalizar(line)
+
+                  is_station = (
+                      clean.startswith("estacion ")
+                      or clean.startswith("estación ")
+                      or clean.startswith("caserio ")
+                      or clean.startswith("caserío ")
+                  )
+
+                  if is_station:
+                      station_name = line
+                      municipality = None
+                      status = "por_verificar"
+
+                      for j in range(i + 1, min(i + 5, len(lines))):
+                          candidate = lines[j].strip()
+                          candidate_clean = normalizar(candidate)
+                          if not candidate:
+                              continue
+                          if "accede aqui" in candidate_clean or "accede aqui" == candidate_clean:
+                              break
+                          if "mantenimiento" in candidate_clean:
+                              status = "mantenimiento"
+                              break
+                          if not candidate_clean.startswith("estacion") and not candidate_clean.startswith("estación"):
+                              municipality = candidate
+                              break
+
+                      parsed.append({
+                          "station_name": station_name,
+                          "municipality": municipality,
+                          "status": status,
+                      })
+
+                  i += 1
+
+              if not parsed:
+                  parsed = VIVAMOS_MEJOR_FALLBACK_STATIONS
+                  inventory_method = "fallback_from_known_public_listing"
+              else:
+                  inventory_method = "extracted_from_source_page"
+
+              stations = []
+              for idx, item in enumerate(parsed):
+                  station_url = accede_links[idx] if idx < len(accede_links) else None
+                  stations.append(station_record(
+                      source_id=source["source_id"],
+                      institution=source["institution"],
+                      station_name=item["station_name"],
+                      municipality=item.get("municipality"),
+                      status=item.get("status") or "por_verificar",
+                      credit=source["credit"],
+                      source_url=source_url,
+                      station_url=station_url,
+                      variables_declared=source["variables_declared"],
+                      inventory_method=inventory_method,
+                  ))
+
+              metadata = {
+                  "station_count": len(stations),
+                  "access_links_found": len(accede_links),
+                  "inventory_method": inventory_method,
+              }
+
+              return stations, metadata
+
+          def parse_amsclae_metadata(source: dict, pages: list[dict]) -> tuple[list[dict], dict]:
+              all_lines = []
+              select_options = []
+              iframe_sources = []
+              links = []
+              count_claims = []
+
+              for page in pages:
+                  html = page.get("html") or ""
+                  url = page["url"]
+                  if not html:
+                      continue
+
+                  soup = html_to_soup(html)
+                  lines = soup_to_lines(soup)
+                  all_lines.extend(lines)
+
+                  for option in soup.find_all("option"):
+                      text = option.get_text(" ", strip=True)
+                      value = option.get("value")
+                      if text and normalizar(text) not in {"select", "seleccione", "seleccionar"}:
+                          select_options.append({
+                              "text": text,
+                              "value": value,
+                              "source_url": url,
+                          })
+
+                  for iframe in soup.find_all("iframe"):
+                      src = iframe.get("src")
+                      if src:
+                          iframe_sources.append(urljoin(url, src))
+
+                  for a in soup.find_all("a"):
+                      href = a.get("href")
+                      text = a.get_text(" ", strip=True)
+                      if href:
+                          full = urljoin(url, href)
+                          if any(word in normalizar(text + " " + full) for word in ["clima", "estacion", "meteorologica", "meteorologico", "informe"]):
+                              links.append({"text": text, "url": full})
+
+                  text_joined = " ".join(lines)
+                  for match in re.finditer(r"(\d+)\s+estaciones?\s+(?:meteorologicas|meteorológicas|climaticas|climáticas)", text_joined, flags=re.I):
+                      count_claims.append({
+                          "count": int(match.group(1)),
+                          "source_url": url,
+                          "context": match.group(0),
+                      })
+
+              potential_station_names = []
+              for opt in select_options:
+                  txt = opt["text"].strip()
+                  clean = normalizar(txt)
+                  if len(txt) >= 3 and not any(w in clean for w in ["parametro", "parámetro", "generar", "ano", "año", "mes"]):
+                      potential_station_names.append(txt)
+
+              unique_potential = []
+              seen = set()
+              for name in potential_station_names:
+                  key = slug(name)
+                  if key and key not in seen:
+                      seen.add(key)
+                      unique_potential.append(name)
+
+              stations = []
+              for name in unique_potential:
+                  stations.append(station_record(
+                      source_id=source["source_id"],
+                      institution=source["institution"],
+                      station_name=name,
+                      municipality=None,
+                      status="por_verificar",
+                      credit=source["credit"],
+                      source_url=source["urls"][0],
+                      station_url=None,
+                      variables_declared=source["variables_declared"],
+                      inventory_method="potential_station_from_select_options",
+                  ))
+
+              metadata = {
+                  "count_claims": count_claims,
+                  "select_options_count": len(select_options),
+                  "potential_station_names": unique_potential,
+                  "iframe_sources": iframe_sources,
+                  "relevant_links": links[:50],
+                  "notes": [
+                      "AMSCLAE puede exponer datos mediante formularios, iframes o endpoints internos.",
+                      "Este paso captura inventario y metadatos; las observaciones numéricas entrarán cuando se identifique el endpoint estable.",
+                  ],
+              }
+
+              return stations, metadata
+
+          def parse_icc_metadata(source: dict, pages: list[dict]) -> tuple[list[dict], dict]:
+              all_lines = []
+              links = []
+              count_claims = []
+              variables_claims = []
+
+              for page in pages:
+                  html = page.get("html") or ""
+                  url = page["url"]
+                  if not html:
+                      continue
+
+                  soup = html_to_soup(html)
+                  lines = soup_to_lines(soup)
+                  all_lines.extend(lines)
+
+                  for a in soup.find_all("a"):
+                      href = a.get("href")
+                      text = a.get_text(" ", strip=True)
+                      if href:
+                          full = urljoin(url, href)
+                          if "redmet" in normalizar(full + " " + text) or "clima" in normalizar(text):
+                              links.append({"text": text, "url": full})
+
+                  text_joined = " ".join(lines)
+
+                  for match in re.finditer(r"(\d+)\s+estaciones?\s+(?:meteorologicas|meteorológicas|automaticas|automáticas)", text_joined, flags=re.I):
+                      count_claims.append({
+                          "count": int(match.group(1)),
+                          "source_url": url,
+                          "context": match.group(0),
+                      })
+
+                  variable_words = [
+                      "precipitación",
+                      "precipitacion",
+                      "temperatura",
+                      "humedad relativa",
+                      "radiación solar",
+                      "radiacion solar",
+                      "humedad de la hoja",
+                      "velocidad",
+                      "dirección del viento",
+                      "direccion del viento",
+                  ]
+
+                  for line in lines:
+                      clean = normalizar(line)
+                      if sum(1 for word in variable_words if normalizar(word) in clean) >= 3:
+                          variables_claims.append({
+                              "source_url": url,
+                              "text": line,
+                          })
+
+              metadata = {
+                  "count_claims": count_claims,
+                  "variables_claims": variables_claims,
+                  "redmet_links": links,
+                  "declared_variables": source["variables_declared"],
+                  "notes": [
+                      "ICC/REDMET documenta red de estaciones y variables.",
+                      "Este paso captura metadatos y enlaces; las observaciones numéricas entrarán cuando se identifique endpoint estable de REDMET.",
+                  ],
+              }
+
+              return [], metadata
+
+          def merge_station_inventory(existing: list[dict], incoming: list[dict]) -> list[dict]:
+              by_id = {item["station_id"]: item for item in existing if item.get("station_id")}
+              for item in incoming:
+                  by_id[item["station_id"]] = item
+              return sorted(by_id.values(), key=lambda x: (x.get("institution", ""), x.get("station_name", "")))
+
+          def append_monthly_records(records: list[dict], gt_now: datetime) -> Path | None:
+              if not records:
+                  return None
+
               year = gt_now.strftime("%Y")
               month = gt_now.strftime("%m")
-              monthly_dir = HIST_ROOT / year
+              monthly_dir = OBS_HIST_ROOT / year
               monthly_dir.mkdir(parents=True, exist_ok=True)
 
               monthly_path = monthly_dir / f"{year}-{month}.json"
@@ -430,7 +815,10 @@ jobs:
               write_json(monthly_path, monthly)
               return monthly_path
 
-          def write_monthly_csv(monthly_json_path: Path) -> Path:
+          def write_monthly_csv(monthly_json_path: Path | None) -> Path | None:
+              if monthly_json_path is None:
+                  return None
+
               data = load_json(monthly_json_path, {"records": []})
               csv_path = monthly_json_path.with_suffix(".csv")
               records = data.get("records", [])
@@ -463,13 +851,40 @@ jobs:
 
               return csv_path
 
+          def write_station_inventory_csv(stations: list[dict]) -> None:
+              fields = [
+                  "station_id",
+                  "station_name",
+                  "institution",
+                  "source_id",
+                  "department",
+                  "municipality",
+                  "status",
+                  "variables_declared",
+                  "source_url",
+                  "station_url",
+                  "inventory_method",
+                  "credit",
+              ]
+
+              with ESTACIONES_INVENTARIO_CSV.open("w", encoding="utf-8", newline="") as f:
+                  writer = csv.DictWriter(f, fieldnames=fields)
+                  writer.writeheader()
+                  for row in stations:
+                      out = dict(row)
+                      out["variables_declared"] = ", ".join(row.get("variables_declared") or [])
+                      writer.writerow({field: out.get(field) for field in fields})
+
           utc_now, gt_now = now_times()
           extracted_at_utc = utc_now.isoformat()
           extracted_at_gt = gt_now.isoformat()
           observed_date = gt_now.strftime("%Y-%m-%d")
 
-          all_records: list[dict] = []
+          all_observations: list[dict] = []
+          all_new_stations: list[dict] = []
           source_status: list[dict] = []
+          source_metadata_outputs: dict[str, dict] = {}
+
           precip_station_rows: list[dict] = []
           precip_raw_section: list[str] = []
 
@@ -482,10 +897,14 @@ jobs:
                   "checked_at_utc": extracted_at_utc,
                   "checked_at_gt": extracted_at_gt,
                   "ok": False,
-                  "records_added": 0,
+                  "observations_added": 0,
+                  "stations_added": 0,
+                  "metadata_path": None,
                   "urls": [],
                   "errors": [],
               }
+
+              fetched_pages = []
 
               for url in source["urls"]:
                   html, fetch_status = fetch_url(url)
@@ -495,9 +914,15 @@ jobs:
                       source_result["errors"].append(f"{url}: {fetch_status.get('error')}")
                       continue
 
+                  fetched_pages.append({
+                      "url": url,
+                      "html": html,
+                      "fetch_status": fetch_status,
+                  })
+
                   if source["parser"] == "insivumeh_precip_solola":
                       try:
-                          records, station_rows, seccion = parse_insivumeh_precip(
+                          observations, stations, seccion = parse_insivumeh_precip(
                               source,
                               html,
                               url,
@@ -506,33 +931,175 @@ jobs:
                               observed_date,
                           )
 
-                          if records:
-                              all_records.extend(records)
-                              precip_station_rows = station_rows
+                          if observations:
+                              all_observations.extend(observations)
+                              all_new_stations.extend(stations)
+                              precip_station_rows = [
+                                  {
+                                      "station_id": item["station_id"],
+                                      "station_name": item["station_name"],
+                                      "department": item["department"],
+                                      "institution": item["institution"],
+                                      "precipitation_mm_accumulated": next(
+                                          (
+                                              r["value"]
+                                              for r in observations
+                                              if r["station_id"] == item["station_id"]
+                                              and r["variable"] == "precipitation_accumulated"
+                                          ),
+                                          None,
+                                      ),
+                                      "rain_days": next(
+                                          (
+                                              r["value"]
+                                              for r in observations
+                                              if r["station_id"] == item["station_id"]
+                                              and r["variable"] == "rain_days"
+                                          ),
+                                          None,
+                                      ),
+                                      "dry_days": next(
+                                          (
+                                              r["value"]
+                                              for r in observations
+                                              if r["station_id"] == item["station_id"]
+                                              and r["variable"] == "dry_days"
+                                          ),
+                                          None,
+                                      ),
+                                      "status": "extraido",
+                                      "data_type": "observado_publicado",
+                                      "credit": item["credit"],
+                                  }
+                                  for item in stations
+                              ]
                               precip_raw_section = seccion
                               source_result["ok"] = True
-                              source_result["records_added"] += len(records)
+                              source_result["observations_added"] += len(observations)
+                              source_result["stations_added"] += len(stations)
                               break
 
                       except Exception as exc:
                           source_result["errors"].append(f"{url}: {exc}")
 
-                  elif source["parser"] == "monitor_only":
-                      # Estas fuentes quedan monitoreadas en el estado del sistema.
-                      # No se inventan observaciones: cuando tengamos parser confiable
-                      # para cada página, sus datos entrarán a records igual que INSIVUMEH.
-                      source_result["ok"] = True
+              if source["parser"] == "vivamos_mejor_inventory":
+                  stations = []
+                  metadata = {}
+
+                  if fetched_pages:
+                      try:
+                          stations, metadata = parse_vivamos_mejor_inventory(
+                              source,
+                              fetched_pages[0]["html"],
+                              fetched_pages[0]["url"],
+                          )
+                          source_result["ok"] = True
+                      except Exception as exc:
+                          source_result["errors"].append(str(exc))
+
+                  if not stations:
+                      fallback_url = source["urls"][0]
+                      stations = [
+                          station_record(
+                              source_id=source["source_id"],
+                              institution=source["institution"],
+                              station_name=item["station_name"],
+                              municipality=item.get("municipality"),
+                              status=item.get("status") or "por_verificar",
+                              credit=source["credit"],
+                              source_url=fallback_url,
+                              station_url=None,
+                              variables_declared=source["variables_declared"],
+                              inventory_method="fallback_from_known_public_listing",
+                          )
+                          for item in VIVAMOS_MEJOR_FALLBACK_STATIONS
+                      ]
+                      metadata = {
+                          "station_count": len(stations),
+                          "inventory_method": "fallback_from_known_public_listing",
+                          "note": "Se usó fallback porque la página no respondió o no pudo parsearse en esta corrida.",
+                      }
+
+                  all_new_stations.extend(stations)
+                  source_result["stations_added"] += len(stations)
+                  source_result["ok"] = True if stations else source_result["ok"]
+
+                  payload = {
+                      "schema": "mta_fuente_vivamos_mejor_estaciones_v1",
+                      "generated_at_utc": extracted_at_utc,
+                      "generated_at_gt": extracted_at_gt,
+                      "source": {
+                          "source_id": source["source_id"],
+                          "institution": source["institution"],
+                          "urls": source["urls"],
+                          "credit": source["credit"],
+                      },
+                      "metadata": metadata,
+                      "stations": stations,
+                  }
+
+                  output_path = FUENTES_ROOT / "vivamos_mejor_estaciones.json"
+                  write_json(output_path, payload)
+                  source_result["metadata_path"] = str(output_path)
+                  source_metadata_outputs[source["source_id"]] = payload
+
+              elif source["parser"] == "amsclae_metadata":
+                  stations, metadata = parse_amsclae_metadata(source, fetched_pages)
+                  all_new_stations.extend(stations)
+                  source_result["stations_added"] += len(stations)
+                  source_result["ok"] = True if fetched_pages else False
+
+                  payload = {
+                      "schema": "mta_fuente_amsclae_clima_v1",
+                      "generated_at_utc": extracted_at_utc,
+                      "generated_at_gt": extracted_at_gt,
+                      "source": {
+                          "source_id": source["source_id"],
+                          "institution": source["institution"],
+                          "urls": source["urls"],
+                          "credit": source["credit"],
+                      },
+                      "metadata": metadata,
+                      "stations": stations,
+                  }
+
+                  output_path = FUENTES_ROOT / "amsclae_clima.json"
+                  write_json(output_path, payload)
+                  source_result["metadata_path"] = str(output_path)
+                  source_metadata_outputs[source["source_id"]] = payload
+
+              elif source["parser"] == "icc_metadata":
+                  stations, metadata = parse_icc_metadata(source, fetched_pages)
+                  all_new_stations.extend(stations)
+                  source_result["stations_added"] += len(stations)
+                  source_result["ok"] = True if fetched_pages else False
+
+                  payload = {
+                      "schema": "mta_fuente_icc_redmet_v1",
+                      "generated_at_utc": extracted_at_utc,
+                      "generated_at_gt": extracted_at_gt,
+                      "source": {
+                          "source_id": source["source_id"],
+                          "institution": source["institution"],
+                          "urls": source["urls"],
+                          "credit": source["credit"],
+                      },
+                      "metadata": metadata,
+                      "stations": stations,
+                  }
+
+                  output_path = FUENTES_ROOT / "icc_redmet.json"
+                  write_json(output_path, payload)
+                  source_result["metadata_path"] = str(output_path)
+                  source_metadata_outputs[source["source_id"]] = payload
 
               source_status.append(source_result)
 
-          if not all_records:
-              raise RuntimeError("No se extrajo ninguna observación. Revisar source_status en el log.")
-
-          monthly_path = append_monthly_records(all_records, gt_now)
+          monthly_path = append_monthly_records(all_observations, gt_now)
           monthly_csv = write_monthly_csv(monthly_path)
 
           actual_payload = {
-              "schema": "mta_observaciones_actuales_v1",
+              "schema": "mta_observaciones_actuales_v2",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "observed_date": observed_date,
@@ -542,24 +1109,69 @@ jobs:
                   "do_not_average_raw_stations": True,
                   "note": "Las observaciones se conservan por estación, institución, variable, fecha y fuente. Los promedios o mapas se generarán como productos derivados separados.",
               },
-              "latest_records": all_records,
-              "monthly_history": str(monthly_path),
-              "monthly_history_csv": str(monthly_csv),
-              "source_status_path": str(SOURCE_STATUS_JSON),
+              "latest_records": all_observations,
+              "monthly_history": str(monthly_path) if monthly_path else None,
+              "monthly_history_csv": str(monthly_csv) if monthly_csv else None,
+              "source_status_path": str(OBS_SOURCE_STATUS_JSON),
+              "station_inventory_path": str(ESTACIONES_INVENTARIO_JSON),
           }
 
-          write_json(ACTUAL_JSON, actual_payload)
+          write_json(OBS_ACTUAL_JSON, actual_payload)
 
-          write_json(SOURCE_STATUS_JSON, {
-              "schema": "mta_source_status_v1",
+          status_payload = {
+              "schema": "mta_source_status_v2",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "sources": source_status,
+          }
+
+          write_json(OBS_SOURCE_STATUS_JSON, status_payload)
+          write_json(FUENTES_STATUS_JSON, status_payload)
+
+          instituciones_payload = {
+              "schema": "mta_instituciones_fuentes_v1",
+              "generated_at_utc": extracted_at_utc,
+              "generated_at_gt": extracted_at_gt,
+              "institutions": [
+                  {
+                      "source_id": source["source_id"],
+                      "institution": source["institution"],
+                      "kind": source["kind"],
+                      "parser": source["parser"],
+                      "urls": source["urls"],
+                      "variables_declared": source.get("variables_declared", []),
+                      "credit": source["credit"],
+                  }
+                  for source in SOURCES
+              ],
+          }
+
+          write_json(FUENTES_INSTITUCIONES_JSON, instituciones_payload)
+
+          existing_inventory_payload = load_json(ESTACIONES_INVENTARIO_JSON, {
+              "schema": "mta_estaciones_inventario_v1",
+              "stations": [],
           })
 
-          # Archivos de compatibilidad para el módulo de precipitaciones actual.
+          merged_stations = merge_station_inventory(
+              existing_inventory_payload.get("stations", []),
+              all_new_stations,
+          )
+
+          inventory_payload = {
+              "schema": "mta_estaciones_inventario_v1",
+              "generated_at_utc": extracted_at_utc,
+              "generated_at_gt": extracted_at_gt,
+              "department": "Sololá",
+              "station_count": len(merged_stations),
+              "stations": merged_stations,
+          }
+
+          write_json(ESTACIONES_INVENTARIO_JSON, inventory_payload)
+          write_station_inventory_csv(merged_stations)
+
           precip_payload = {
-              "schema": "mta_precipitaciones_insivumeh_actual_v1",
+              "schema": "mta_precipitaciones_insivumeh_actual_v2",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -590,23 +1202,27 @@ jobs:
               writer.writeheader()
               writer.writerows(precip_station_rows)
 
-          print(f"OK observaciones: {len(all_records)} registros nuevos.")
-          print(f"Histórico mensual: {monthly_path}")
-          print(f"CSV mensual: {monthly_csv}")
-          print(f"Actual: {ACTUAL_JSON}")
-          print(f"Estado de fuentes: {SOURCE_STATUS_JSON}")
+          print(f"OK observaciones: {len(all_observations)} registros.")
+          print(f"OK estaciones nuevas/actualizadas: {len(all_new_stations)} registros.")
+          print(f"Inventario consolidado: {len(merged_stations)} estaciones.")
+          print(f"Actual observaciones: {OBS_ACTUAL_JSON}")
+          print(f"Inventario estaciones: {ESTACIONES_INVENTARIO_JSON}")
+          print(f"Fuentes: {FUENTES_STATUS_JSON}")
+          if monthly_path:
+              print(f"Histórico mensual: {monthly_path}")
+          else:
+              print("Sin observaciones numéricas nuevas para histórico mensual.")
 
       - name: Guardar cambios generados
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add docs/data/observaciones/
-          git add docs/data/precipitaciones/
+          git add docs/data/
 
           if git diff --cached --quiet; then
-            echo "No hay cambios nuevos en observaciones."
+            echo "No hay cambios nuevos en datos."
           else
-            git commit -m "Actualizar observaciones agroclimaticas"
+            git commit -m "Actualizar observaciones fuentes e inventario"
             git push
           fi
