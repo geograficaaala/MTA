@@ -12,6 +12,29 @@ jobs:
   actualizar-precipitaciones:
     runs-on: ubuntu-latest
 
+    env:
+      # Opcional, para WeatherLink API.
+      # Crear en GitHub:
+      # Settings → Secrets and variables → Actions
+      # Secrets:
+      #   WEATHERLINK_API_KEY
+      #   WEATHERLINK_API_SECRET
+      #
+      # Variables:
+      #   WEATHERLINK_STATIONS_JSON
+      #
+      # Ejemplo de WEATHERLINK_STATIONS_JSON:
+      # [
+      #   {
+      #     "station_id": 123456,
+      #     "station_name": "WeatherLink Panajachel",
+      #     "municipality": "Panajachel"
+      #   }
+      # ]
+      WEATHERLINK_API_KEY: ${{ secrets.WEATHERLINK_API_KEY }}
+      WEATHERLINK_API_SECRET: ${{ secrets.WEATHERLINK_API_SECRET }}
+      WEATHERLINK_STATIONS_JSON: ${{ vars.WEATHERLINK_STATIONS_JSON }}
+
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
@@ -33,6 +56,7 @@ jobs:
 
           import csv
           import json
+          import os
           import re
           import unicodedata
           from datetime import datetime, timezone
@@ -69,8 +93,7 @@ jobs:
           VIVAMOS_MEJOR_JSON = DATA_ROOT / "vivamos_mejor_precipitacion.json"
           VIVAMOS_MEJOR_RAW_TXT = DATA_ROOT / "vivamos_mejor_raw.txt"
 
-          AMSCLAE_JSON = DATA_ROOT / "amsclae_precipitacion.json"
-          AMSCLAE_RAW_TXT = DATA_ROOT / "amsclae_raw.txt"
+          PWS_JSON = DATA_ROOT / "pws_precipitacion.json"
 
           SOURCES = [
               {
@@ -93,15 +116,11 @@ jobs:
                   "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
               },
               {
-                  "source_id": "amsclae_estaciones_climaticas",
-                  "institution": "AMSCLAE",
-                  "parser": "amsclae_precip",
-                  "urls": [
-                      "https://www.amsclae.gob.gt/clima/estacion-climatica.php",
-                      "https://www.amsclae.gob.gt/clima/",
-                      "https://www.amsclae.gob.gt/2024/04/09/mantenimiento-de-las-estaciones-meteorologicas/",
-                  ],
-                  "credit": "Datos: AMSCLAE. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  "source_id": "pws_complementarias",
+                  "institution": "Estaciones PWS complementarias",
+                  "parser": "pws_precip",
+                  "urls": [],
+                  "credit": "Datos: estación meteorológica complementaria pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
               },
           ]
 
@@ -116,29 +135,51 @@ jobs:
               {"station_name": "Estación Escuela de Formación Agrícola", "municipality": "Sololá", "status": "por_verificar"},
           ]
 
-          AMSCLAE_STATION_FALLBACK = [
-              "Barraneche",
-              "Cerro de Oro",
-              "Concepcion",
-              "El Tablon",
-              "Finca Santa Victoria",
-              "Los Saminez",
-              "Nahuala",
-              "Pamesebal",
-              "Panajachel",
-              "San Andres Semetabaj",
-              "San Antonio Palopo",
-              "San Jose Chacaya",
-              "San Juan La Laguna",
-              "San Lucas Toliman",
-              "San Marcos La Laguna",
-              "Santa Catarina Palopo",
-              "Santa Cruz La Laguna",
-              "Santa Lucia Utatlan",
-              "Santa Maria Visitacion",
-              "Santa Rita Nahuala",
-              "Santiago Atitlan",
-              "Solola",
+          # Lista blanca semilla de PWS observadas en enlaces públicos de Vivamos Mejor.
+          # Si Vivamos Mejor expone más enlaces reales, el extractor también los detecta automáticamente.
+          PWS_FALLBACK = [
+              {
+                  "provider": "wunderground",
+                  "station_code": "IPANAJ5",
+                  "station_name": "PWS Panajachel",
+                  "municipality": "Panajachel",
+                  "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
+              },
+              {
+                  "provider": "wunderground",
+                  "station_code": "ISANTA535",
+                  "station_name": "PWS Santa Lucía Utatlán",
+                  "municipality": "Santa Lucía Utatlán",
+                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
+              },
+              {
+                  "provider": "wunderground",
+                  "station_code": "ISANTACL3",
+                  "station_name": "PWS Santa Clara La Laguna",
+                  "municipality": "Santa Clara La Laguna",
+                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
+              },
+              {
+                  "provider": "wunderground",
+                  "station_code": "ISANTI135",
+                  "station_name": "PWS Santiago Atitlán",
+                  "municipality": "Santiago Atitlán",
+                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
+              },
+              {
+                  "provider": "wunderground",
+                  "station_code": "ISANAN84",
+                  "station_name": "PWS San Andrés Semetabaj",
+                  "municipality": "San Andrés Semetabaj",
+                  "station_url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
+              },
+              {
+                  "provider": "wunderground",
+                  "station_code": "ISOLOL4",
+                  "station_name": "PWS Sololá",
+                  "municipality": "Sololá",
+                  "station_url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
+              },
           ]
 
           DEPARTAMENTOS = [
@@ -166,28 +207,6 @@ jobs:
               "zacapa",
               "region norte",
           ]
-
-          EXCLUDE_OPTION_WORDS = {
-              "seleccione",
-              "seleccione estacion",
-              "seleccione estación",
-              "periodo",
-              "período",
-              "diario",
-              "mensual",
-              "generar",
-              "temperatura med",
-              "temperatura min",
-              "temperatura max",
-              "precipitacion",
-              "precipitación",
-              "humedad",
-              "radiacion solar",
-              "radiación solar",
-              "rad solar max abs",
-              "indice uv max abs",
-              "índice uv max abs",
-          }
 
           def now_times() -> tuple[datetime, datetime]:
               utc = datetime.now(timezone.utc)
@@ -231,6 +250,9 @@ jobs:
                   return None
               return float(match.group(1).replace(",", "."))
 
+          def pulgadas_a_mm(value: float) -> float:
+              return round(value * 25.4, 3)
+
           def buscar_dias_en_bloque(lineas: list[str]) -> tuple[int | None, int | None]:
               texto = " | ".join(normalizar(x) for x in lineas)
 
@@ -249,7 +271,7 @@ jobs:
 
           def fetch_url(url: str) -> tuple[str, dict]:
               headers = {
-                  "User-Agent": "MTA-Solola-Precipitaciones/0.7 (+https://github.com/geograficaaala/MTA)",
+                  "User-Agent": "MTA-Solola-Precipitaciones/0.8 (+https://github.com/geograficaaala/MTA)",
                   "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
               }
 
@@ -304,6 +326,32 @@ jobs:
               except Exception as exc:
                   status["error"] = str(exc)
                   return "", status
+
+          def fetch_json(url: str, headers: dict | None = None, params: dict | None = None) -> tuple[dict | None, dict]:
+              status = {
+                  "url": url,
+                  "ok": False,
+                  "status_code": None,
+                  "error": None,
+              }
+
+              try:
+                  response = requests.get(
+                      url,
+                      timeout=45,
+                      headers=headers or {},
+                      params=params or {},
+                      verify=certifi.where(),
+                  )
+                  response.raise_for_status()
+                  status.update({
+                      "ok": True,
+                      "status_code": response.status_code,
+                  })
+                  return response.json(), status
+              except Exception as exc:
+                  status["error"] = str(exc)
+                  return None, status
 
           def html_to_soup(html: str) -> BeautifulSoup:
               soup = BeautifulSoup(html, "lxml")
@@ -375,6 +423,8 @@ jobs:
               source_url: str,
               credit: str,
               station_url: str | None = None,
+              provider: str | None = None,
+              station_code: str | None = None,
               precipitation_available: str = "por_verificar",
               inventory_method: str = "extracted",
           ) -> dict:
@@ -387,6 +437,8 @@ jobs:
                   "municipality": municipality,
                   "status": status,
                   "variable": "precipitation",
+                  "provider": provider,
+                  "station_code": station_code,
                   "precipitation_available": precipitation_available,
                   "source_url": source_url,
                   "station_url": station_url,
@@ -496,6 +548,8 @@ jobs:
                           status="activa_por_verificar",
                           source_url=source_url,
                           station_url=None,
+                          provider="insivumeh",
+                          station_code=None,
                           credit=source["credit"],
                           precipitation_available="si",
                           inventory_method="from_precipitation_page",
@@ -530,6 +584,24 @@ jobs:
                   or "pwsweather" in clean
               )
 
+          def detect_provider_and_code(url: str) -> tuple[str | None, str | None]:
+              clean = url.strip()
+
+              match_wu = re.search(r"wunderground\.com/dashboard/pws/([A-Za-z0-9_-]+)", clean, flags=re.I)
+              if match_wu:
+                  return "wunderground", match_wu.group(1).upper()
+
+              if "ambientweather.net" in clean.lower():
+                  return "ambientweather", None
+
+              if "weatherlink.com" in clean.lower():
+                  return "weatherlink", None
+
+              if "pwsweather" in clean.lower():
+                  return "pwsweather", None
+
+              return None, None
+
           def parse_vivamos_mejor_inventory(source: dict, html: str, source_url: str) -> tuple[list[dict], list[dict], dict, str]:
               soup = html_to_soup(html)
               lines = soup_to_lines(soup)
@@ -545,7 +617,15 @@ jobs:
                       continue
 
                   full_url = urljoin(source_url, href)
-                  item = {"label": label, "url": full_url}
+                  provider, station_code = detect_provider_and_code(full_url)
+
+                  item = {
+                      "label": label,
+                      "url": full_url,
+                      "provider": provider,
+                      "station_code": station_code,
+                  }
+
                   all_links.append(item)
 
                   if is_real_station_link(full_url):
@@ -607,7 +687,11 @@ jobs:
 
               stations = []
               for idx, item in enumerate(parsed):
-                  station_url = station_links[idx]["url"] if idx < len(station_links) else None
+                  link = station_links[idx] if idx < len(station_links) else None
+                  station_url = link["url"] if link else None
+                  provider = link["provider"] if link else None
+                  station_code = link["station_code"] if link else None
+
                   stations.append(station_inventory_record(
                       source_id=source["source_id"],
                       institution=source["institution"],
@@ -616,6 +700,8 @@ jobs:
                       status=item.get("status") or "por_verificar",
                       source_url=source_url,
                       station_url=station_url,
+                      provider=provider,
+                      station_code=station_code,
                       credit=source["credit"],
                       precipitation_available="por_verificar",
                       inventory_method=inventory_method,
@@ -628,7 +714,7 @@ jobs:
                   "real_station_links": station_links,
                   "ignored_links": [x for x in all_links if not is_real_station_link(x["url"])],
                   "inventory_method": inventory_method,
-                  "note": "Se ignoran enlaces genéricos. Solo se usan enlaces reales de estación como Wunderground, Ambient Weather o WeatherLink.",
+                  "note": "Se ignoran enlaces genéricos. Solo se usan enlaces reales de estación como Wunderground, Ambient Weather, WeatherLink o PWSWeather.",
               }
 
               return stations, station_links, metadata, raw_text
@@ -660,7 +746,7 @@ jobs:
 
               keyword_pattern = r"(precipitaci[oó]n|lluvia|rain|rainfall|rain today|daily rain|precip)"
               match = re.search(
-                  keyword_pattern + r".{0,160}?([0-9]+(?:[.,][0-9]+)?)\s*mm",
+                  keyword_pattern + r".{0,200}?([0-9]+(?:[.,][0-9]+)?)\s*mm",
                   text,
                   flags=re.I | re.S,
               )
@@ -670,7 +756,7 @@ jobs:
 
               return None, None
 
-          def fetch_station_precip(
+          def fetch_public_station_precip(
               *,
               station: dict,
               source: dict,
@@ -683,6 +769,8 @@ jobs:
               result = {
                   "station_id": station["station_id"],
                   "station_name": station["station_name"],
+                  "provider": station.get("provider"),
+                  "station_code": station.get("station_code"),
                   "station_url": station_url,
                   "ok": False,
                   "precipitation_found": False,
@@ -718,137 +806,175 @@ jobs:
                   observed_date=observed_date,
                   extracted_at_utc=extracted_at_utc,
                   extracted_at_gt=extracted_at_gt,
-                  source_id=source["source_id"],
-                  institution=source["institution"],
+                  source_id=station.get("source_id") or source["source_id"],
+                  institution=station.get("institution") or source["institution"],
                   station_name=station["station_name"],
                   variable="precipitation_accumulated",
                   value=value,
                   unit="mm",
                   aggregation_period="periodo_publicado_por_fuente",
                   source_url=station_url,
-                  credit=source["credit"],
+                  credit=station.get("credit") or source["credit"],
                   quality_flag="raw_published_detected_from_station_page",
               )
 
               return record, result
 
-          def parse_amsclae_precip_inventory(source: dict, pages: list[dict]) -> tuple[list[dict], dict, str]:
-              all_lines = []
-              raw_parts = []
-              station_candidates = []
-              parameter_candidates = []
-              forms = []
-              links = []
+          def load_weatherlink_station_list() -> list[dict]:
+              raw = os.getenv("WEATHERLINK_STATIONS_JSON", "").strip()
+              if not raw:
+                  return []
 
-              for page in pages:
-                  html = page.get("html") or ""
-                  url = page.get("url")
-                  if not html:
-                      continue
+              try:
+                  data = json.loads(raw)
+                  if isinstance(data, list):
+                      return data
+                  return []
+              except Exception:
+                  return []
 
-                  soup = html_to_soup(html)
-                  lines = soup_to_lines(soup)
-                  all_lines.extend(lines)
-                  raw_parts.append(f"\n\n===== {url} =====\n" + "\n".join(lines))
+          def flatten_json(obj, prefix=""):
+              items = []
+              if isinstance(obj, dict):
+                  for key, value in obj.items():
+                      new_prefix = f"{prefix}.{key}" if prefix else str(key)
+                      items.extend(flatten_json(value, new_prefix))
+              elif isinstance(obj, list):
+                  for idx, value in enumerate(obj):
+                      new_prefix = f"{prefix}.{idx}" if prefix else str(idx)
+                      items.extend(flatten_json(value, new_prefix))
+              else:
+                  items.append((prefix, obj))
+              return items
 
-                  for form in soup.find_all("form"):
-                      forms.append({
-                          "source_url": url,
-                          "method": (form.get("method") or "GET").upper(),
-                          "action": urljoin(url, form.get("action") or ""),
-                          "inputs": [
-                              {
-                                  "name": input_tag.get("name"),
-                                  "id": input_tag.get("id"),
-                                  "type": input_tag.get("type"),
-                                  "value": input_tag.get("value"),
-                              }
-                              for input_tag in form.find_all(["input", "select", "button"])
-                          ],
-                      })
-
-                  for option in soup.find_all("option"):
-                      text = option.get_text(" ", strip=True)
-                      value = option.get("value")
-                      clean = normalizar(text)
-
-                      if not text:
-                          continue
-
-                      if clean in EXCLUDE_OPTION_WORDS:
-                          continue
-
-                      if any(word in clean for word in ["temperatura", "humedad", "radiacion", "uv", "precipitacion"]):
-                          parameter_candidates.append({"text": text, "value": value, "source_url": url})
-                          continue
-
-                      if len(text) >= 3:
-                          station_candidates.append({"name": text, "value": value, "source_url": url})
-
-                  for a in soup.find_all("a"):
-                      href = a.get("href")
-                      text = a.get_text(" ", strip=True)
-                      if href:
-                          full = urljoin(url, href)
-                          clean = normalizar(text + " " + full)
-                          if any(word in clean for word in ["clima", "precipitacion", "precipitación", "estacion", "meteorologica", "informe"]):
-                              links.append({"text": text, "url": full})
-
-              text_all = "\n".join(all_lines)
-              has_precipitation_parameter = "precipitación" in text_all.lower() or "precipitacion" in normalizar(text_all)
-
-              clean_station_names = []
-              seen = set()
-
-              for item in station_candidates:
-                  name = item["name"].strip()
-                  key = slug(name)
-
-                  if not key:
-                      continue
-
-                  if key in seen:
-                      continue
-
-                  if normalizar(name) in EXCLUDE_OPTION_WORDS:
-                      continue
-
-                  seen.add(key)
-                  clean_station_names.append(name)
-
-              if len(clean_station_names) < 5:
-                  clean_station_names = AMSCLAE_STATION_FALLBACK
-
-              stations = [
-                  station_inventory_record(
-                      source_id=source["source_id"],
-                      institution=source["institution"],
-                      station_name=name,
-                      municipality=name,
-                      status="por_verificar",
-                      source_url=source["urls"][0],
-                      station_url=None,
-                      credit=source["credit"],
-                      precipitation_available="parametro_precipitacion_disponible" if has_precipitation_parameter else "por_verificar",
-                      inventory_method="amsclae_climate_form_options",
-                  )
-                  for name in clean_station_names
+          def find_weatherlink_precip_value(payload: dict) -> tuple[float | None, str | None]:
+              candidates_mm = [
+                  "rainfall_daily_mm",
+                  "rain_day_mm",
+                  "rainfall_day_mm",
+                  "daily_rain_mm",
+                  "rain_storm_mm",
+                  "rainfall_monthly_mm",
               ]
 
-              metadata = {
-                  "station_count": len(stations),
-                  "has_precipitation_parameter": has_precipitation_parameter,
-                  "forms_found": forms,
-                  "relevant_links": links,
-                  "parameter_candidates": parameter_candidates,
-                  "notes": [
-                      "AMSCLAE se integra por ahora como inventario de estaciones de precipitación.",
-                      "La página pública expone el parámetro Precipitación, pero no se detectó todavía una tabla numérica directa en HTML.",
-                      "El siguiente paso será identificar el endpoint del formulario para extraer valores históricos o mensuales.",
-                  ],
+              candidates_in = [
+                  "rainfall_daily_in",
+                  "rain_day_in",
+                  "rainfall_day_in",
+                  "daily_rain_in",
+                  "rain_storm_in",
+              ]
+
+              flat = flatten_json(payload)
+
+              for key, value in flat:
+                  clean_key = normalizar(key).replace(" ", "_")
+                  try:
+                      numeric = float(value)
+                  except Exception:
+                      continue
+
+                  if any(candidate in clean_key for candidate in candidates_mm):
+                      return numeric, key
+
+              for key, value in flat:
+                  clean_key = normalizar(key).replace(" ", "_")
+                  try:
+                      numeric = float(value)
+                  except Exception:
+                      continue
+
+                  if any(candidate in clean_key for candidate in candidates_in):
+                      return pulgadas_a_mm(numeric), key
+
+              for key, value in flat:
+                  clean_key = normalizar(key)
+                  try:
+                      numeric = float(value)
+                  except Exception:
+                      continue
+
+                  if "rain" in clean_key and "rate" not in clean_key and ("daily" in clean_key or "day" in clean_key or "storm" in clean_key):
+                      if "in" in clean_key and "mm" not in clean_key:
+                          return pulgadas_a_mm(numeric), key
+                      return numeric, key
+
+              return None, None
+
+          def fetch_weatherlink_api_precip(
+              *,
+              station: dict,
+              source: dict,
+              observed_date: str,
+              extracted_at_utc: str,
+              extracted_at_gt: str,
+          ) -> tuple[dict | None, dict]:
+              api_key = os.getenv("WEATHERLINK_API_KEY", "").strip()
+              api_secret = os.getenv("WEATHERLINK_API_SECRET", "").strip()
+
+              result = {
+                  "provider": "weatherlink_api",
+                  "station_id": station.get("station_id"),
+                  "station_name": station.get("station_name"),
+                  "municipality": station.get("municipality"),
+                  "ok": False,
+                  "precipitation_found": False,
+                  "error": None,
+                  "matched_field": None,
               }
 
-              return stations, metadata, "\n".join(raw_parts)
+              if not api_key or not api_secret:
+                  result["error"] = "weatherlink_api_sin_credenciales"
+                  return None, result
+
+              wl_station_id = station.get("station_id")
+              if wl_station_id is None:
+                  result["error"] = "weatherlink_station_id_faltante"
+                  return None, result
+
+              url = f"https://api.weatherlink.com/v2/current/{wl_station_id}"
+
+              payload, status = fetch_json(
+                  url,
+                  headers={"X-Api-Secret": api_secret},
+                  params={"api-key": api_key},
+              )
+              result["fetch_status"] = status
+
+              if not status["ok"] or not payload:
+                  result["error"] = status.get("error") or "weatherlink_no_response"
+                  return None, result
+
+              value, matched_field = find_weatherlink_precip_value(payload)
+
+              if value is None:
+                  result["ok"] = True
+                  result["error"] = "precipitacion_no_detectada_en_weatherlink_payload"
+                  return None, result
+
+              result["ok"] = True
+              result["precipitation_found"] = True
+              result["matched_field"] = matched_field
+
+              station_name = station.get("station_name") or f"WeatherLink {wl_station_id}"
+
+              record = precipitation_record(
+                  observed_date=observed_date,
+                  extracted_at_utc=extracted_at_utc,
+                  extracted_at_gt=extracted_at_gt,
+                  source_id=source["source_id"],
+                  institution="WeatherLink",
+                  station_name=station_name,
+                  variable="precipitation_accumulated",
+                  value=value,
+                  unit="mm",
+                  aggregation_period=f"weatherlink_current_field:{matched_field}",
+                  source_url=url,
+                  credit="Datos: WeatherLink. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                  quality_flag="weatherlink_api_detected_field",
+              )
+
+              return record, result
 
           def merge_inventory(existing: list[dict], incoming: list[dict]) -> list[dict]:
               by_id = {item["station_id"]: item for item in existing if item.get("station_id")}
@@ -931,6 +1057,8 @@ jobs:
                   "municipality",
                   "status",
                   "variable",
+                  "provider",
+                  "station_code",
                   "precipitation_available",
                   "source_url",
                   "station_url",
@@ -961,9 +1089,8 @@ jobs:
           vivamos_mejor_metadata = {}
           vivamos_mejor_raw_text = ""
 
-          amsclae_inventory = []
-          amsclae_metadata = {}
-          amsclae_raw_text = ""
+          pws_inventory = []
+          pws_results = []
 
           for source in SOURCES:
               status = {
@@ -1050,6 +1177,8 @@ jobs:
                               status=item.get("status") or "por_verificar",
                               source_url=source["urls"][0],
                               station_url=None,
+                              provider=None,
+                              station_code=None,
                               credit=source["credit"],
                               precipitation_available="por_verificar",
                               inventory_method="fallback_from_known_public_listing",
@@ -1063,7 +1192,7 @@ jobs:
                       }
 
                   for station in vivamos_mejor_inventory:
-                      record, station_result = fetch_station_precip(
+                      record, station_result = fetch_public_station_precip(
                           station=station,
                           source=source,
                           observed_date=observed_date,
@@ -1081,31 +1210,108 @@ jobs:
                   all_inventory.extend(vivamos_mejor_inventory)
                   status["ok"] = True if vivamos_mejor_inventory else status["ok"]
 
-              elif source["parser"] == "amsclae_precip":
-                  pages = []
+              elif source["parser"] == "pws_precip":
+                  # 1. PWS detectadas desde Vivamos Mejor.
+                  detected_pws = []
+                  for station in vivamos_mejor_inventory:
+                      if station.get("station_url") and station.get("provider"):
+                          detected_pws.append({
+                              "provider": station.get("provider"),
+                              "station_code": station.get("station_code"),
+                              "station_name": station.get("station_name"),
+                              "municipality": station.get("municipality"),
+                              "station_url": station.get("station_url"),
+                              "credit": station.get("credit"),
+                          })
 
-                  for url in source["urls"]:
-                      html, fetch_status = fetch_url(url)
-                      status["urls"].append(fetch_status)
+                  # 2. Lista blanca semilla.
+                  detected_codes = {item.get("station_code") for item in detected_pws if item.get("station_code")}
+                  for item in PWS_FALLBACK:
+                      if item.get("station_code") not in detected_codes:
+                          detected_pws.append(item)
 
-                      if fetch_status["ok"]:
-                          pages.append({"url": url, "html": html})
-                      else:
-                          status["errors"].append(f"{url}: {fetch_status.get('error')}")
+                  # 3. WeatherLink API opcional.
+                  weatherlink_api_stations = load_weatherlink_station_list()
 
-                  try:
-                      stations, metadata, raw_text = parse_amsclae_precip_inventory(source, pages)
-                      amsclae_inventory = stations
-                      amsclae_metadata = metadata
-                      amsclae_raw_text = raw_text
+                  for item in detected_pws:
+                      station = station_inventory_record(
+                          source_id=source["source_id"],
+                          institution="Estación PWS complementaria",
+                          station_name=item.get("station_name") or item.get("station_code") or "PWS sin nombre",
+                          municipality=item.get("municipality"),
+                          status="complementaria_por_verificar",
+                          source_url=item.get("station_url"),
+                          station_url=item.get("station_url"),
+                          provider=item.get("provider"),
+                          station_code=item.get("station_code"),
+                          credit=item.get("credit") or source["credit"],
+                          precipitation_available="por_verificar",
+                          inventory_method="pws_whitelist_or_detected_from_vivamos_mejor",
+                      )
 
-                      all_inventory.extend(amsclae_inventory)
-                      status["ok"] = True if pages else False
-                      status["stations_found"] = len(amsclae_inventory)
-                      status["records_added"] = 0
+                      pws_inventory.append(station)
 
-                  except Exception as exc:
-                      status["errors"].append(f"parse_amsclae: {exc}")
+                      record, station_result = fetch_public_station_precip(
+                          station=station,
+                          source=source,
+                          observed_date=observed_date,
+                          extracted_at_utc=extracted_at_utc,
+                          extracted_at_gt=extracted_at_gt,
+                      )
+
+                      pws_results.append(station_result)
+
+                      if record:
+                          all_records.append(record)
+                          status["records_added"] += 1
+                          station["precipitation_available"] = "si_extraida_html"
+
+                  for wl_station in weatherlink_api_stations:
+                      wl_station_name = wl_station.get("station_name") or f"WeatherLink {wl_station.get('station_id')}"
+                      station = station_inventory_record(
+                          source_id=source["source_id"],
+                          institution="WeatherLink",
+                          station_name=wl_station_name,
+                          municipality=wl_station.get("municipality"),
+                          status="api_por_verificar",
+                          source_url=f"https://api.weatherlink.com/v2/current/{wl_station.get('station_id')}",
+                          station_url=None,
+                          provider="weatherlink_api",
+                          station_code=str(wl_station.get("station_id")),
+                          credit="Datos: WeatherLink. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
+                          precipitation_available="por_verificar",
+                          inventory_method="weatherlink_api_variable",
+                      )
+
+                      pws_inventory.append(station)
+
+                      record, station_result = fetch_weatherlink_api_precip(
+                          station=wl_station,
+                          source=source,
+                          observed_date=observed_date,
+                          extracted_at_utc=extracted_at_utc,
+                          extracted_at_gt=extracted_at_gt,
+                      )
+
+                      pws_results.append(station_result)
+
+                      if record:
+                          all_records.append(record)
+                          status["records_added"] += 1
+                          station["precipitation_available"] = "si_extraida_api"
+
+                  all_inventory.extend(pws_inventory)
+                  status["ok"] = True
+                  status["stations_found"] = len(pws_inventory)
+                  status["urls"] = [
+                      {
+                          "url": item.get("station_url") or item.get("source_url"),
+                          "ok": True,
+                          "provider": item.get("provider"),
+                          "station_code": item.get("station_code"),
+                      }
+                      for item in pws_inventory
+                  ]
 
               source_status.append(status)
 
@@ -1123,7 +1329,7 @@ jobs:
           )
 
           actual_payload = {
-              "schema": "mta_precipitaciones_actuales_v2",
+              "schema": "mta_precipitaciones_actuales_v3",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "observed_date": observed_date,
@@ -1132,7 +1338,16 @@ jobs:
                   "storage": "actual_json_mas_historico_mensual",
                   "only_precipitation": True,
                   "do_not_average_raw_stations": True,
-                  "note": "Las observaciones de precipitación se conservan por estación, institución, variable, fecha y fuente. Promedios o mapas se harán como productos derivados separados.",
+                  "included_sources": [
+                      "INSIVUMEH",
+                      "Asociación Vivamos Mejor",
+                      "Estaciones PWS complementarias",
+                      "WeatherLink API opcional si hay credenciales",
+                  ],
+                  "excluded_sources_for_now": [
+                      "AMSCLAE",
+                  ],
+                  "note": "Las observaciones de precipitación se conservan por estación, institución, proveedor, variable, fecha y fuente. Promedios o mapas se harán como productos derivados separados.",
               },
               "latest_records": all_records,
               "monthly_history": str(monthly_path) if monthly_path else None,
@@ -1144,14 +1359,14 @@ jobs:
           write_json(ACTUAL_JSON, actual_payload)
 
           write_json(SOURCE_STATUS_JSON, {
-              "schema": "mta_precipitacion_source_status_v2",
+              "schema": "mta_precipitacion_source_status_v3",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "sources": source_status,
           })
 
           inventory_payload = {
-              "schema": "mta_precipitacion_estaciones_v2",
+              "schema": "mta_precipitacion_estaciones_v3",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1163,7 +1378,7 @@ jobs:
           write_inventory_csv(merged_inventory)
 
           write_json(INSIVUMEH_COMPAT_JSON, {
-              "schema": "mta_precipitaciones_insivumeh_actual_v2",
+              "schema": "mta_precipitaciones_insivumeh_actual_v3",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1194,7 +1409,7 @@ jobs:
               writer.writerows(insivumeh_compat_rows)
 
           write_json(VIVAMOS_MEJOR_JSON, {
-              "schema": "mta_precipitaciones_vivamos_mejor_v2",
+              "schema": "mta_precipitaciones_vivamos_mejor_v3",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
@@ -1208,47 +1423,45 @@ jobs:
               "station_extraction_results": vivamos_mejor_station_results,
               "notes": [
                   "Se extrae inventario de estaciones desde la página pública autorizada.",
-                  "Se filtran enlaces genéricos y se conservan solo enlaces reales de estación cuando existen.",
+                  "Se filtran enlaces genéricos y se conservan solo enlaces reales de estación.",
                   "Se intenta extraer precipitación desde cada enlace real de estación.",
-                  "Si una estación carga datos por JavaScript o servicio externo, queda registrada como precipitacion_no_detectada_en_html hasta crear parser específico.",
+                  "Si una estación carga datos por JavaScript o servicio externo, queda registrada como precipitacion_no_detectada_en_html hasta crear parser específico o usar API.",
               ],
           })
 
           VIVAMOS_MEJOR_RAW_TXT.write_text(vivamos_mejor_raw_text, encoding="utf-8")
 
-          write_json(AMSCLAE_JSON, {
-              "schema": "mta_precipitaciones_amsclae_v1",
+          write_json(PWS_JSON, {
+              "schema": "mta_precipitaciones_pws_v1",
               "generated_at_utc": extracted_at_utc,
               "generated_at_gt": extracted_at_gt,
               "department": "Sololá",
               "source": {
-                  "institution": "AMSCLAE",
-                  "urls": SOURCES[2]["urls"],
-                  "credit": SOURCES[2]["credit"],
+                  "institution": "Estaciones PWS complementarias",
+                  "credit": "Datos: estación meteorológica complementaria pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá.",
               },
-              "metadata": amsclae_metadata,
-              "stations": amsclae_inventory,
-              "station_extraction_results": [],
+              "stations": pws_inventory,
+              "station_extraction_results": pws_results,
+              "weatherlink_api_enabled": bool(os.getenv("WEATHERLINK_API_KEY", "").strip() and os.getenv("WEATHERLINK_API_SECRET", "").strip()),
               "notes": [
-                  "Solo precipitación: AMSCLAE se integra inicialmente como inventario de estaciones con parámetro Precipitación disponible.",
-                  "No se guardan variables de temperatura, viento, humedad ni radiación.",
-                  "No se inventan valores numéricos si la página no entrega una tabla de precipitación directa.",
-                  "El siguiente paso será identificar el endpoint del formulario climático de AMSCLAE para extraer series de precipitación.",
+                  "AMSCLAE queda fuera del flujo automático de precipitación por ahora.",
+                  "INSIVUMEH se conserva como fuente oficial.",
+                  "Vivamos Mejor aporta inventario institucional local.",
+                  "PWS/Wunderground/WeatherLink se tratan como estaciones complementarias, no oficiales.",
+                  "No se promedian datos crudos en este Action.",
               ],
           })
-
-          AMSCLAE_RAW_TXT.write_text(amsclae_raw_text, encoding="utf-8")
 
           print(f"OK registros numéricos de precipitación: {len(all_records)}")
           print(f"OK inventario consolidado de estaciones de precipitación: {len(merged_inventory)}")
           print(f"INSIVUMEH filas compatibilidad: {len(insivumeh_compat_rows)}")
           print(f"Vivamos Mejor estaciones: {len(vivamos_mejor_inventory)}")
-          print(f"AMSCLAE estaciones/candidatas: {len(amsclae_inventory)}")
+          print(f"PWS complementarias: {len(pws_inventory)}")
           print(f"Actual: {ACTUAL_JSON}")
           print(f"Inventario: {INVENTARIO_JSON}")
           print(f"Histórico mensual: {monthly_path}")
           print(f"Vivamos Mejor: {VIVAMOS_MEJOR_JSON}")
-          print(f"AMSCLAE: {AMSCLAE_JSON}")
+          print(f"PWS: {PWS_JSON}")
 
       - name: Guardar cambios generados
         run: |
