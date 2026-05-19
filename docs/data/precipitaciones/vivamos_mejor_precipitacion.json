@@ -1,7 +1,7 @@
 {
-  "schema": "mta_precipitaciones_vivamos_mejor_v3",
-  "generated_at_utc": "2026-05-19T00:31:59.648751+00:00",
-  "generated_at_gt": "2026-05-18T18:31:59.648751-06:00",
+  "schema": "mta_precipitaciones_vivamos_mejor_v4",
+  "generated_at_utc": "2026-05-19T00:56:56.786784+00:00",
+  "generated_at_gt": "2026-05-18T18:56:56.786784-06:00",
   "department": "Sololá",
   "source": {
     "institution": "Asociación Vivamos Mejor",
@@ -989,7 +989,7 @@
       }
     ],
     "inventory_method": "extracted_from_source_page",
-    "note": "Se ignoran enlaces genéricos. Solo se usan enlaces reales de estación como Wunderground, Ambient Weather, WeatherLink o PWSWeather."
+    "note": "Inventario institucional de Vivamos Mejor. Para datos numéricos se usa pws_config.json cuando la estación tiene URL funcional."
   },
   "stations": [
     {
@@ -1004,6 +1004,8 @@
       "provider": "wunderground",
       "station_code": "IPANAJ5",
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
       "inventory_method": "extracted_from_source_page",
@@ -1021,6 +1023,8 @@
       "provider": "ambientweather",
       "station_code": null,
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
       "inventory_method": "extracted_from_source_page",
@@ -1038,6 +1042,8 @@
       "provider": "wunderground",
       "station_code": "ISANTA535",
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
       "inventory_method": "extracted_from_source_page",
@@ -1055,6 +1061,8 @@
       "provider": "wunderground",
       "station_code": "ISANTACL3",
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
       "inventory_method": "extracted_from_source_page",
@@ -1072,6 +1080,8 @@
       "provider": "wunderground",
       "station_code": "ISANTI135",
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
       "inventory_method": "extracted_from_source_page",
@@ -1089,6 +1099,8 @@
       "provider": "ambientweather",
       "station_code": null,
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
       "inventory_method": "extracted_from_source_page",
@@ -1106,6 +1118,8 @@
       "provider": "wunderground",
       "station_code": "ISANAN84",
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
       "inventory_method": "extracted_from_source_page",
@@ -1123,170 +1137,17 @@
       "provider": "wunderground",
       "station_code": "ISOLOL4",
       "precipitation_available": "por_verificar",
+      "online_status": "en_inventario",
+      "quality_class": "institucional_local",
       "source_url": "https://www.vivamosmejor.org.gt/sitio/estaciones-meteorologicas-solola/",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
       "inventory_method": "extracted_from_source_page",
       "credit": "Datos: Asociación Vivamos Mejor. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     }
   ],
-  "station_extraction_results": [
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_oficina_central",
-      "station_name": "Estación Oficina Central",
-      "provider": "wunderground",
-      "station_code": "IPANAJ5",
-      "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 562346,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_cedracc",
-      "station_name": "Estación CEDRACC",
-      "provider": "ambientweather",
-      "station_code": null,
-      "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
-      "ok": false,
-      "precipitation_found": false,
-      "error": "404 Client Error: Not Found for url: https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
-        "ok": false,
-        "status_code": null,
-        "ssl_mode": null,
-        "content_length": null,
-        "error": "404 Client Error: Not Found for url: https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706"
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_casa_santa_rita",
-      "station_name": "Estación Casa Santa Rita",
-      "provider": "wunderground",
-      "station_code": "ISANTA535",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 444100,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_santa_clara_tv_cable",
-      "station_name": "Estación Santa Clara TV Cable",
-      "provider": "wunderground",
-      "station_code": "ISANTACL3",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 229304,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_coatitlan_r_l",
-      "station_name": "Estación CoAtitlán R.L.",
-      "provider": "wunderground",
-      "station_code": "ISANTI135",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 229278,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_caserio_chuacruz",
-      "station_name": "Caserío Chuacruz",
-      "provider": "ambientweather",
-      "station_code": null,
-      "station_url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
-      "ok": false,
-      "precipitation_found": false,
-      "error": "404 Client Error: Not Found for url: https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706",
-        "ok": false,
-        "status_code": null,
-        "ssl_mode": null,
-        "content_length": null,
-        "error": "404 Client Error: Not Found for url: https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706"
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_lomas_de_atitlan",
-      "station_name": "Estación Lomas de Atitlán",
-      "provider": "wunderground",
-      "station_code": "ISANAN84",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANAN84",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 229300,
-        "error": null
-      }
-    },
-    {
-      "station_id": "asociacion_vivamos_mejor_estacion_escuela_de_formacion_agricola",
-      "station_name": "Estación Escuela de Formación Agrícola",
-      "provider": "wunderground",
-      "station_code": "ISOLOL4",
-      "station_url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
-      "ok": true,
-      "precipitation_found": false,
-      "error": "precipitacion_no_detectada_en_html",
-      "matched_text": null,
-      "fetch_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISOLOL4",
-        "ok": true,
-        "status_code": 200,
-        "ssl_mode": "ssl_verificado",
-        "content_length": 229225,
-        "error": null
-      }
-    }
-  ],
   "notes": [
-    "Se extrae inventario de estaciones desde la página pública autorizada.",
-    "Se filtran enlaces genéricos y se conservan solo enlaces reales de estación.",
-    "Se intenta extraer precipitación desde cada enlace real de estación.",
-    "Si una estación carga datos por JavaScript o servicio externo, queda registrada como precipitacion_no_detectada_en_html hasta crear parser específico o usar API."
+    "Vivamos Mejor se conserva como inventario institucional local.",
+    "La extracción numérica de las PWS se maneja mediante pws_config.json.",
+    "Solo se trabaja precipitación en esta etapa."
   ]
 }
