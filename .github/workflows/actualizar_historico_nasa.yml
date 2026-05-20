@@ -41,45 +41,40 @@ jobs:
           python-version: "3.11"
 
       # 3. Instalar dependencias
-      #    Solo se necesita 'requests'; el resto (json, os, time, sys,
-      #    datetime) son módulos estándar de Python.
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
           pip install requests
 
       # 4. Ejecutar el script de descarga
-      #    El script crea docs/data/precipitaciones/ si no existe
-      #    y escribe historico_municipios.json con los datos del periodo.
       - name: Ejecutar fetch_nasa_power.py
         run: python fetch_nasa_power.py
 
-      # 5. Verificar si el JSON cambió antes de commitear
-      #    Si el archivo es idéntico al anterior (sin nuevos días de datos)
-      #    el step de commit no hace nada y el workflow termina limpio.
+      # 5. Verificar cambios — git add primero para detectar
+      #    tanto archivos nuevos como modificados
       - name: Verificar cambios en el JSON
         id: check_changes
         run: |
-          git diff --quiet docs/data/precipitaciones/historico_municipios.json \
+          git add docs/data/precipitaciones/historico_municipios.json
+          git diff --cached --quiet \
             && echo "changed=false" >> $GITHUB_OUTPUT \
             || echo "changed=true"  >> $GITHUB_OUTPUT
 
-      # 6. Configurar identidad de Git para el commit automático
+      # 6. Configurar identidad de Git
       - name: Configurar identidad de Git
         if: steps.check_changes.outputs.changed == 'true'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      # 7. Hacer commit y push del JSON actualizado
+      # 7. Commitear y pushear — sin git add porque ya se hizo en el paso 5
       - name: Commitear JSON actualizado
         if: steps.check_changes.outputs.changed == 'true'
         run: |
-          git add docs/data/precipitaciones/historico_municipios.json
           git commit -m "data(nasa-power): actualizar precipitación histórica municipios Sololá — $(date -u +'%Y-%m-%d')"
           git push
 
-      # 8. Informar si no hubo cambios (el JSON ya estaba al día)
+      # 8. Informar si no hubo cambios
       - name: Sin cambios nuevos
         if: steps.check_changes.outputs.changed == 'false'
         run: |
