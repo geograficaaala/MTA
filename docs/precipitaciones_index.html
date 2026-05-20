@@ -5,66 +5,39 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0f3a53" />
   <title>Precipitaciones · Mesa Agroclimática de Sololá</title>
+  <meta name="description" content="Módulo de precipitaciones de la Mesa Técnica Agroclimática de Sololá. Consulta de lluvia observada, estaciones, fuentes, mapas, gráficas y datos históricos." />
 
-  <meta
-    name="description"
-    content="Módulo de precipitaciones de la Mesa Técnica Agroclimática de Sololá. Consulta de lluvia observada, estaciones, fuentes, mapas, gráficas y datos históricos."
-  />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
-  />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <style>
     :root {
+      --lake-950: #062233;
       --lake-900: #082537;
       --lake-800: #0f3a53;
-      --lake-700: #15506a;
-      --lake-600: #176680;
-      --lake-500: #247d98;
-      --lake-400: #2a9db7;
-      --lake-300: #6fc4d4;
-      --lake-200: #ccebf0;
-      --lake-100: #e8f7fa;
-
-      --rain-900: #073763;
-      --rain-800: #0f4d83;
-      --rain-700: #1769a8;
-      --rain-600: #1f7ec1;
-      --rain-500: #3299df;
-      --rain-300: #99d2f6;
-      --rain-100: #e8f4fd;
+      --lake-700: #176680;
+      --lake-600: #1f7ec1;
+      --lake-500: #2a9db7;
+      --lake-100: #e6f5f7;
 
       --forest-900: #163f37;
-      --forest-800: #1d584a;
       --forest-700: #2f7a62;
       --forest-500: #4aa982;
       --forest-100: #eaf7ef;
 
-      --maize-900: #7c5200;
       --maize-700: #9a6d0a;
       --maize-500: #e7b94f;
       --maize-100: #fff4d7;
 
-      --risk-800: #a84418;
-      --risk-600: #d66a2a;
+      --risk-700: #b75118;
+      --risk-500: #d66a2a;
       --risk-100: #fff0e6;
+
+      --rain-700: #1769a8;
+      --rain-500: #3299df;
+      --rain-100: #e8f4fd;
 
       --red-800: #8f1c1c;
       --red-100: #fce8e8;
@@ -74,54 +47,42 @@
       --ink-500: #587082;
       --ink-300: #8ca0ad;
 
-      --paper: #fbfcf8;
-      --surface: #f3f7f2;
-      --surface-2: #eef5f2;
-      --white: #ffffff;
+      --surface:   #f7faf6;
+      --surface-2: #edf5f2;
+      --paper:     #ffffff;
+      --paper-soft: rgba(255,255,255,0.84);
 
-      --border: rgba(15, 58, 83, 0.13);
-      --border-strong: rgba(15, 58, 83, 0.22);
+      --border:        rgba(15,58,83,0.12);
+      --border-strong: rgba(15,58,83,0.22);
 
-      --shadow-xs: 0 1px 6px rgba(14, 36, 51, 0.06);
-      --shadow-sm: 0 2px 14px rgba(14, 36, 51, 0.08);
-      --shadow-md: 0 12px 36px rgba(14, 36, 51, 0.13);
-      --shadow-lg: 0 24px 70px rgba(14, 36, 51, 0.17);
+      --shadow-xs: 0 1px 6px rgba(14,36,51,0.06);
+      --shadow-sm: 0 2px 14px rgba(14,36,51,0.08);
+      --shadow-md: 0 12px 36px rgba(14,36,51,0.13);
+      --shadow-lg: 0 24px 70px rgba(14,36,51,0.17);
 
-      --radius-xs: 0.55rem;
-      --radius-sm: 0.8rem;
-      --radius-md: 1.1rem;
-      --radius-lg: 1.55rem;
-      --radius-xl: 2.1rem;
-
-      --font-head: "DM Serif Display", Georgia, serif;
-      --font-body: "Inter", system-ui, sans-serif;
-      --font-mono: "JetBrains Mono", ui-monospace, monospace;
-
-      --max: 1380px;
-      --nav-h: 76px;
+      --max:   1280px;
+      --nav-h: 74px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html {
       scroll-behavior: smooth;
+      font-size: 12pt;
     }
 
     body {
       min-height: 100vh;
-      font-family: var(--font-body);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 12pt;
       color: var(--ink-900);
       background:
-        radial-gradient(circle at 7% 6%, rgba(42, 157, 183, 0.16), transparent 28%),
-        radial-gradient(circle at 88% 10%, rgba(47, 122, 98, 0.13), transparent 28%),
+        radial-gradient(circle at 7% 6%, rgba(42,157,183,0.16), transparent 28%),
+        radial-gradient(circle at 88% 10%, rgba(47,122,98,0.13), transparent 28%),
         linear-gradient(180deg, #fbfcf8 0%, var(--surface) 45%, var(--surface-2) 100%);
       padding-top: var(--nav-h);
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      text-align: justify;
     }
 
     body::before {
@@ -131,36 +92,28 @@
       z-index: -2;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(15, 58, 83, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 58, 83, 0.035) 1px, transparent 1px);
+        linear-gradient(rgba(15,58,83,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,58,83,0.035) 1px, transparent 1px);
       background-size: 46px 46px;
       mask-image: linear-gradient(to bottom, rgba(0,0,0,0.52), transparent 78%);
     }
 
-    a {
-      color: inherit;
-    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font-family: inherit; font-size: inherit; }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
+    .wrap { width: min(var(--max), calc(100% - 2rem)); margin-inline: auto; }
 
-    .wrap {
-      width: min(var(--max), calc(100% - 2rem));
-      margin-inline: auto;
-    }
-
+    /* ============================================================
+       NAVBAR — same as index.html
+    ============================================================ */
     .navbar {
       position: fixed;
       inset: 0 0 auto 0;
       height: var(--nav-h);
       z-index: 1000;
-      background: rgba(15, 58, 83, 0.96);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 2px 22px rgba(0,0,0,0.22);
-      backdrop-filter: blur(14px);
+      background: var(--lake-900);
+      border-bottom: 3px solid var(--maize-500);
+      box-shadow: 0 2px 28px rgba(0,0,0,0.22);
     }
 
     .navbar-inner {
@@ -169,17 +122,15 @@
       margin-inline: auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 1rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.82rem;
-      color: var(--white);
-      text-decoration: none;
-      min-width: 0;
+      gap: 0.9rem;
+      color: #ffffff;
     }
 
     .brand-mark {
@@ -188,213 +139,189 @@
       flex: 0 0 46px;
       display: grid;
       place-items: center;
-      border-radius: 1rem;
-      color: var(--lake-800);
-      background:
-        radial-gradient(circle at 72% 22%, var(--maize-500) 0 16%, transparent 17%),
-        linear-gradient(145deg, #ffffff, var(--rain-100));
-      font-weight: 900;
-      letter-spacing: -0.08em;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
-    }
-
-    .brand-title {
-      display: grid;
-      gap: 0.06rem;
-      min-width: 0;
-    }
-
-    .brand-title span {
-      color: rgba(255,255,255,0.72);
-      font-size: 0.73rem;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-
-    .brand-title strong {
-      color: var(--white);
-      font-size: 0.98rem;
-      font-weight: 800;
-      line-height: 1.1;
-      white-space: nowrap;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .nav-links a {
-      color: rgba(255,255,255,0.82);
-      text-decoration: none;
-      font-size: 0.88rem;
+      border-radius: 6px;
+      background: linear-gradient(145deg, #ffffff, #dceef7);
+      color: var(--lake-900);
+      font-family: "Times New Roman", Times, serif;
       font-weight: 700;
-      padding: 0.66rem 0.82rem;
-      border-radius: 999px;
-      transition: background 0.18s ease, transform 0.18s ease, color 0.18s ease;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    }
+
+    .brand-text { display: flex; flex-direction: column; gap: 0.1rem; }
+
+    .brand-sub {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-name {
+      color: #ffffff;
+      font-size: 0.97rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
       white-space: nowrap;
     }
 
-    .nav-links a:hover {
-      color: var(--white);
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-1px);
+    /* ============================================================
+       LOADER
+    ============================================================ */
+    .loader {
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      display: grid;
+      place-items: center;
+      z-index: 800;
+      background: rgba(246,248,243,0.88);
+      backdrop-filter: blur(10px);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .mobile-btn {
-      display: none;
+    .loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-card {
+      width: min(420px, calc(100% - 2rem));
+      padding: 1.4rem;
+      text-align: center;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .loader-card strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--lake-800);
+      margin-bottom: 0.4rem;
+    }
+
+    .loader-card p {
+      color: var(--ink-500);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .spinner {
       width: 42px;
       height: 42px;
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      color: var(--white);
-      cursor: pointer;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--lake-100);
+      border-top-color: var(--lake-500);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
     }
 
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      top: calc(var(--nav-h) + 10px);
-      left: 1rem;
-      right: 1rem;
-      padding: 0.7rem;
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,0.97);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-lg);
-      backdrop-filter: blur(16px);
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .mobile-menu.open {
-      display: grid;
-      gap: 0.45rem;
-      animation: sheetIn 0.24s ease both;
-    }
-
-    .mobile-menu a {
-      text-decoration: none;
-      color: var(--lake-800);
-      font-weight: 800;
-      padding: 0.9rem 1rem;
-      border-radius: var(--radius-md);
-      background: var(--surface);
-    }
-
-    @keyframes sheetIn {
-      from { opacity: 0; transform: translateY(-10px) scale(0.98); }
-      to { opacity: 1; transform: none; }
-    }
-
+    /* ============================================================
+       HERO
+    ============================================================ */
     .hero {
-      padding: clamp(2.2rem, 5vw, 4.4rem) 0 1.2rem;
+      padding: clamp(2rem, 5vw, 3.5rem) 0 0;
     }
 
-    .hero-grid {
+    .hero-wrap {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
-      gap: 1.1rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
       align-items: stretch;
     }
 
     .card {
       position: relative;
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,0.82);
+      border-radius: 8px;
+      background: var(--paper-soft);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
     }
 
     .hero-main {
-      padding: clamp(1.4rem, 3vw, 2.2rem);
-      min-height: 430px;
+      padding: clamp(1.4rem, 3vw, 2rem);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       background:
-        radial-gradient(circle at 88% 12%, rgba(231,185,79,0.18), transparent 28%),
-        radial-gradient(circle at 20% 14%, rgba(42,157,183,0.18), transparent 32%),
-        linear-gradient(145deg, rgba(255,255,255,0.96), rgba(255,255,255,0.7));
+        radial-gradient(circle at 88% 12%, rgba(231,185,79,0.14), transparent 28%),
+        radial-gradient(circle at 18% 14%, rgba(42,157,183,0.14), transparent 32%),
+        rgba(255,255,255,0.9);
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
+      gap: 0.5rem;
       color: var(--lake-600);
-      font-size: 0.76rem;
-      letter-spacing: 0.14em;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      font-weight: 900;
-      margin-bottom: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      text-align: left;
     }
 
     .eyebrow::before {
       content: "";
-      width: 34px;
+      width: 28px;
       height: 2px;
-      border-radius: 999px;
       background: var(--maize-500);
     }
 
-    h1,
-    h2,
-    h3 {
-      color: var(--lake-800);
-      letter-spacing: -0.035em;
-    }
-
     h1 {
-      max-width: 12ch;
-      font-family: var(--font-head);
-      font-size: clamp(3rem, 6.8vw, 6.2rem);
-      line-height: 0.96;
-      font-weight: 400;
-      margin-bottom: 1.1rem;
+      font-family: "Times New Roman", Times, serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      color: var(--lake-800);
+      margin-bottom: 0.9rem;
+      text-align: left;
     }
 
     .hero-copy {
-      max-width: 760px;
+      max-width: 680px;
       color: var(--ink-700);
-      font-size: clamp(1rem, 1.6vw, 1.16rem);
-      line-height: 1.75;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      text-align: justify;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.6rem;
+      gap: 0.65rem;
+      margin-top: 1.4rem;
+      text-align: left;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      min-height: 44px;
-      padding: 0.76rem 1.05rem;
-      border-radius: 999px;
+      gap: 0.45rem;
+      min-height: 42px;
+      padding: 0.62rem 1.1rem;
+      border-radius: 4px;
       border: 0;
-      text-decoration: none;
       cursor: pointer;
-      font-weight: 900;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
       white-space: nowrap;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
+    .btn:hover { transform: translateY(-2px); }
 
     .btn-primary {
-      color: var(--white);
-      background: linear-gradient(135deg, var(--lake-800), var(--lake-600));
-      box-shadow: var(--shadow-md);
+      color: #ffffff;
+      background: var(--lake-700);
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-soft {
@@ -405,507 +332,776 @@
 
     .btn-ghost {
       color: var(--ink-700);
-      background: rgba(255,255,255,0.65);
-      border: 1px solid var(--border);
+      background: transparent;
+      border: 1px solid var(--border-strong);
+    }
+
+    .diagnostic {
+      margin-top: 1.2rem;
+      padding: 0.9rem 1rem;
+      border-radius: 6px;
+      background: rgba(230,245,247,0.7);
+      border-left: 3px solid var(--lake-500);
+    }
+
+    .diagnostic h3 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--lake-800);
+      margin-bottom: 0.35rem;
+      text-align: left;
+    }
+
+    .diagnostic p {
+      font-size: 0.86rem;
+      color: var(--ink-700);
+      line-height: 1.65;
+      text-align: justify;
     }
 
     .hero-side {
       display: grid;
       grid-template-rows: auto 1fr;
-      min-height: 430px;
     }
 
     .status-panel {
       padding: 1.25rem;
       border-bottom: 1px solid var(--border);
-      background:
-        radial-gradient(circle at 90% 0%, rgba(42,157,183,0.18), transparent 34%),
-        linear-gradient(135deg, rgba(15,58,83,0.98), rgba(23,102,128,0.96));
-      color: var(--white);
-    }
-
-    .status-panel h2 {
-      color: var(--white);
-      font-family: var(--font-head);
-      font-weight: 400;
-      font-size: 1.85rem;
-      line-height: 1;
-      margin-bottom: 0.7rem;
-    }
-
-    .status-meta {
-      display: grid;
-      gap: 0.48rem;
-      color: rgba(255,255,255,0.74);
-      line-height: 1.55;
-      font-size: 0.88rem;
+      background: linear-gradient(135deg, var(--lake-900), var(--lake-700));
+      color: #ffffff;
     }
 
     .status-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      width: fit-content;
-      padding: 0.42rem 0.64rem;
-      margin-bottom: 0.9rem;
-      border-radius: 999px;
-      color: var(--white);
-      background: rgba(255,255,255,0.13);
-      border: 1px solid rgba(255,255,255,0.16);
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
+      gap: 0.4rem;
+      padding: 0.32rem 0.65rem;
+      margin-bottom: 0.8rem;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      text-align: left;
     }
 
     .status-pill::before {
       content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
       background: #6ee7b7;
-      box-shadow: 0 0 0 4px rgba(110,231,183,0.16);
+    }
+
+    .status-panel h2 {
+      color: #ffffff;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+      text-align: left;
+    }
+
+    .status-meta {
+      display: grid;
+      gap: 0.35rem;
+      color: rgba(255,255,255,0.68);
+      font-size: 0.84rem;
+      line-height: 1.5;
+      text-align: left;
     }
 
     .mini-kpis {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 0.75rem;
-      padding: 1rem;
+      padding: 0.9rem;
     }
 
     .mini-kpi {
-      min-height: 120px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1rem;
-      border-radius: var(--radius-md);
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(15,58,83,0.09);
+      gap: 0.3rem;
+      padding: 0.85rem;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--border);
+      min-height: 100px;
     }
 
-    .mini-kpi span {
+    .mini-kpi-label {
       color: var(--ink-500);
-      font-size: 0.68rem;
+      font-size: 0.64rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-weight: 900;
+      font-weight: 700;
+      text-align: left;
     }
 
-    .mini-kpi strong {
-      margin-top: 0.45rem;
+    .mini-kpi-value {
       color: var(--lake-800);
-      font-family: var(--font-mono);
+      font-family: "Courier New", Courier, monospace;
       font-size: 1.55rem;
+      font-weight: 700;
       line-height: 1;
       letter-spacing: -0.04em;
+      text-align: left;
     }
 
-    .mini-kpi small {
+    .mini-kpi-note {
       color: var(--ink-500);
-      line-height: 1.4;
+      font-size: 0.76rem;
+      line-height: 1.35;
+      text-align: left;
     }
 
-    .section {
-      padding: 1.1rem 0;
-    }
+    /* ============================================================
+       SECTIONS
+    ============================================================ */
+    .section { padding: 1.2rem 0; }
 
     .section-head {
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 1.25rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .section-head h2 {
-      font-family: var(--font-head);
-      font-size: clamp(1.8rem, 3.4vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1;
+      font-family: "Times New Roman", Times, serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--lake-800);
+      letter-spacing: -0.02em;
+      text-align: left;
     }
 
     .section-head p {
-      max-width: 680px;
-      color: var(--ink-700);
-      line-height: 1.68;
-      font-size: 0.95rem;
+      max-width: 540px;
+      color: var(--ink-500);
+      font-size: 0.86rem;
+      line-height: 1.7;
+      text-align: justify;
     }
 
+    /* ============================================================
+       TOOLBAR
+    ============================================================ */
     .toolbar {
       position: sticky;
-      top: calc(var(--nav-h) + 0.75rem);
+      top: calc(var(--nav-h) + 0.65rem);
       z-index: 100;
       display: grid;
-      grid-template-columns: 1.1fr repeat(4, minmax(145px, 0.72fr)) auto;
-      gap: 0.7rem;
-      padding: 0.72rem;
-      border-radius: var(--radius-lg);
+      grid-template-columns: 1.15fr repeat(4, minmax(130px, 0.75fr)) auto;
+      gap: 0.65rem;
+      padding: 0.7rem;
+      border-radius: 6px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.95);
       box-shadow: var(--shadow-sm);
       backdrop-filter: blur(14px);
-      margin-bottom: 1.1rem;
+      margin-bottom: 1.2rem;
     }
 
-    .field {
-      display: grid;
-      gap: 0.28rem;
-    }
+    .field { display: grid; gap: 0.22rem; }
 
     .field label {
       color: var(--ink-500);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-weight: 900;
-      padding-left: 0.25rem;
+      font-weight: 700;
+      padding-left: 0.2rem;
+      text-align: left;
     }
 
     .field input,
     .field select {
       width: 100%;
-      min-height: 42px;
-      border-radius: 999px;
+      min-height: 40px;
+      border-radius: 4px;
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--ink-900);
-      padding: 0 0.82rem;
+      padding: 0 0.75rem;
       outline: 0;
       font-weight: 700;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
     }
 
     .field input:focus,
     .field select:focus {
-      border-color: var(--lake-400);
-      box-shadow: 0 0 0 4px rgba(42,157,183,0.13);
+      border-color: var(--lake-500);
+      box-shadow: 0 0 0 3px rgba(42,157,183,0.12);
     }
 
     .toolbar-actions {
       display: flex;
-      align-items: end;
-      gap: 0.45rem;
+      align-items: flex-end;
+      gap: 0.4rem;
     }
 
     .icon-btn {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       display: grid;
       place-items: center;
-      border-radius: 999px;
+      border-radius: 4px;
       border: 1px solid var(--border);
-      background: var(--white);
+      background: var(--paper);
       color: var(--lake-700);
       cursor: pointer;
       transition: transform 0.18s ease, background 0.18s ease;
+      font-size: 1rem;
     }
 
-    .icon-btn:hover {
-      transform: translateY(-2px);
-      background: var(--lake-100);
-    }
+    .icon-btn:hover { transform: translateY(-2px); background: var(--lake-100); }
 
+    /* ============================================================
+       KPI CARDS
+    ============================================================ */
     .grid-kpis {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0.85rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.1rem;
     }
 
     .kpi {
       padding: 1rem;
-      min-height: 148px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      min-height: 140px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .kpi:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
+    .kpi:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
-    .kpi-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 1rem;
-    }
+    .kpi-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
 
     .kpi-label {
       color: var(--ink-500);
-      font-size: 0.68rem;
+      font-size: 0.64rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-weight: 900;
+      font-weight: 700;
       line-height: 1.3;
+      text-align: left;
     }
 
     .kpi-icon {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       display: grid;
       place-items: center;
-      border-radius: 1rem;
+      border-radius: 6px;
       background: var(--rain-100);
       color: var(--rain-700);
-      font-size: 1.15rem;
+      font-size: 1rem;
+      flex-shrink: 0;
     }
 
     .kpi-value {
       color: var(--lake-800);
-      font-family: var(--font-mono);
-      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(1.5rem, 2.8vw, 2rem);
       line-height: 1;
-      letter-spacing: -0.07em;
+      letter-spacing: -0.06em;
       font-weight: 700;
-      margin-top: 1rem;
+      margin-top: 0.75rem;
+      text-align: left;
     }
 
     .kpi-meta {
       color: var(--ink-500);
-      font-size: 0.82rem;
-      line-height: 1.45;
-      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      margin-top: 0.35rem;
+      text-align: left;
     }
 
+    /* ============================================================
+       SPLIT LAYOUT
+    ============================================================ */
     .split {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 1rem;
-      align-items: stretch;
+      align-items: start;
     }
 
-    .panel {
-      padding: 1rem;
-    }
+    .panel { padding: 1rem; }
 
     .panel-head {
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
-      align-items: start;
+      align-items: flex-start;
+      gap: 0.75rem;
       margin-bottom: 0.9rem;
     }
 
     .panel-head h3 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1rem;
+      font-weight: 700;
       color: var(--lake-800);
-      font-size: 1.12rem;
-      line-height: 1.12;
-      font-weight: 900;
-      letter-spacing: -0.04em;
+      line-height: 1.2;
+      text-align: left;
     }
 
     .panel-head p {
       color: var(--ink-500);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       line-height: 1.5;
-      margin-top: 0.3rem;
+      margin-top: 0.2rem;
+      text-align: left;
     }
 
-    .map-card {
-      min-height: 620px;
-    }
-
-    #map {
-      width: 100%;
-      height: 532px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      background: var(--lake-100);
-    }
-
-    .leaflet-popup-content-wrapper {
-      border-radius: 1rem;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .leaflet-popup-content {
-      margin: 0.9rem 1rem;
-      min-width: 240px;
-      font-family: var(--font-body);
-    }
-
-    .popup-title {
-      font-weight: 900;
-      color: var(--lake-800);
-      margin-bottom: 0.25rem;
-      line-height: 1.15;
-    }
-
-    .popup-meta {
-      color: var(--ink-500);
-      font-size: 0.8rem;
-      line-height: 1.45;
-      margin-bottom: 0.65rem;
-    }
-
-    .popup-value {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.42rem;
-      color: var(--white);
-      background: var(--rain-700);
-      border-radius: 999px;
-      padding: 0.42rem 0.62rem;
-      font-family: var(--font-mono);
-      font-weight: 800;
-      font-size: 0.86rem;
-    }
-
-    .legend-map {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-      color: var(--ink-500);
-      font-size: 0.8rem;
-    }
-
-    .legend-map span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.36rem 0.52rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid var(--border);
-      font-weight: 700;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      display: inline-block;
-    }
-
-    .dot.none { background: #a8b7c2; }
-    .dot.light { background: #66b7e8; }
-    .dot.moderate { background: #2a9db7; }
-    .dot.strong { background: #e7b94f; }
-    .dot.extreme { background: #d66a2a; }
-
-    .station-side {
-      display: grid;
-      gap: 0.8rem;
-      align-content: start;
-    }
-
-    .source-grid {
-      display: grid;
-      gap: 0.68rem;
-    }
+    /* ============================================================
+       SOURCE CARDS
+    ============================================================ */
+    .source-grid { display: grid; gap: 0.6rem; }
 
     .source-card {
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
-      gap: 0.8rem;
-      padding: 0.82rem;
-      border-radius: var(--radius-md);
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 6px;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,0.72);
+      background: rgba(255,255,255,0.75);
     }
 
     .source-icon {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       display: grid;
       place-items: center;
-      border-radius: 0.95rem;
+      border-radius: 6px;
       color: var(--lake-700);
       background: var(--lake-100);
-      font-size: 1.1rem;
+      font-size: 1rem;
+      flex-shrink: 0;
     }
 
     .source-card strong {
-      color: var(--lake-800);
       display: block;
-      font-weight: 900;
-      margin-bottom: 0.12rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--lake-800);
+      margin-bottom: 0.08rem;
+      text-align: left;
     }
 
     .source-card span {
       color: var(--ink-500);
-      font-size: 0.81rem;
+      font-size: 0.78rem;
+      text-align: left;
     }
 
+    /* ============================================================
+       BADGES
+    ============================================================ */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.36rem;
-      padding: 0.35rem 0.5rem;
-      border-radius: 999px;
-      font-size: 0.68rem;
+      gap: 0.3rem;
+      padding: 0.28rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.64rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      font-weight: 900;
+      font-weight: 700;
       white-space: nowrap;
     }
 
-    .badge.ok {
-      color: var(--forest-700);
-      background: var(--forest-100);
-    }
+    .badge.ok     { color: var(--forest-700); background: var(--forest-100); }
+    .badge.warn   { color: var(--maize-700);  background: var(--maize-100); }
+    .badge.bad    { color: var(--red-800);    background: var(--red-100); }
+    .badge.info   { color: var(--rain-700);   background: var(--rain-100); }
 
-    .badge.warn {
-      color: var(--maize-700);
-      background: var(--maize-100);
-    }
+    /* ============================================================
+       RANKING (Leaderboard)
+    ============================================================ */
+    .ranking-list { display: grid; gap: 0.5rem; }
 
-    .badge.bad {
-      color: var(--red-800);
-      background: var(--red-100);
-    }
-
-    .badge.info {
-      color: var(--rain-700);
-      background: var(--rain-100);
-    }
-
-    .charts-grid {
+    .ranking-row {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(350px, 0.9fr);
-      gap: 1rem;
-      margin-top: 1rem;
+      grid-template-columns: 2rem 1fr auto;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.72);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
+
+    .ranking-row:hover { transform: translateX(4px); box-shadow: var(--shadow-sm); }
+
+    .ranking-pos {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink-300);
+      text-align: center;
+    }
+
+    .ranking-pos.gold   { color: var(--maize-700); }
+    .ranking-pos.silver { color: var(--ink-500); }
+    .ranking-pos.bronze { color: var(--risk-700); }
+
+    .ranking-info { min-width: 0; }
+
+    .ranking-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--lake-800);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .ranking-meta {
+      font-size: 0.74rem;
+      color: var(--ink-500);
+      margin-top: 0.15rem;
+      text-align: left;
+    }
+
+    .ranking-bar-wrap {
+      margin-top: 0.3rem;
+      height: 4px;
+      background: rgba(15,58,83,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .ranking-bar {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--lake-500);
+      transition: width 0.5s ease;
+    }
+
+    .ranking-value {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--lake-800);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       MAP — FULL WIDTH WITH TABS
+    ============================================================ */
+    .map-full-section {
+      background: var(--lake-900);
+      color: #ffffff;
+      margin: 1.5rem 0 0;
+      padding: 0;
+    }
+
+    .map-section-head {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: 1.2rem 1rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .map-section-head h2 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      text-align: left;
+    }
+
+    .map-section-head p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.8rem;
+      text-align: left;
+    }
+
+    .map-tabs {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: 0.75rem 1rem 0;
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .map-tab {
+      padding: 0.52rem 1.1rem;
+      border-radius: 4px 4px 0 0;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-bottom: none;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.65);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.18s ease;
+      letter-spacing: 0.02em;
+      text-align: left;
+    }
+
+    .map-tab:hover { background: rgba(255,255,255,0.13); color: #ffffff; }
+
+    .map-tab.active {
+      background: rgba(255,255,255,0.14);
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .map-body {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: 0 1rem 1.2rem;
+    }
+
+    .map-pane { display: none; }
+    .map-pane.active { display: block; }
+
+    #map {
+      width: 100%;
+      height: 520px;
+      border-radius: 0 6px 6px 6px;
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow: hidden;
+      background: var(--lake-100);
+    }
+
+    .windy-wrap {
+      position: relative;
+      border-radius: 0 6px 6px 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .windy-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 520px;
+      border: 0;
+    }
+
+    .map-credits {
+      padding: 0.55rem 0.75rem;
+      background: rgba(0,0,0,0.25);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
+      text-align: right;
+    }
+
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      padding: 0.7rem 0 0;
+    }
+
+    .map-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .dot.none     { background: #a8b7c2; }
+    .dot.light    { background: #66b7e8; }
+    .dot.moderate { background: #2a9db7; }
+    .dot.strong   { background: #e7b94f; }
+    .dot.extreme  { background: #d66a2a; }
+
+    .map-count {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      padding-top: 0.5rem;
+      text-align: left;
+    }
+
+    /* Leaflet popup */
+    .leaflet-popup-content-wrapper {
+      border-radius: 6px;
+      box-shadow: var(--shadow-lg);
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    .leaflet-popup-content { margin: 0.9rem 1rem; min-width: 220px; }
+
+    .popup-title { font-weight: 700; color: var(--lake-800); margin-bottom: 0.2rem; text-align: left; }
+    .popup-meta  { color: var(--ink-500); font-size: 0.8rem; line-height: 1.45; margin-bottom: 0.55rem; text-align: left; }
+
+    .popup-value {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      color: #ffffff;
+      background: var(--rain-700);
+      border-radius: 3px;
+      padding: 0.38rem 0.6rem;
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    /* ============================================================
+       CHARTS — PROFESSIONAL METEOROLOGICAL STYLE
+    ============================================================ */
+    .charts-section { padding: 1.2rem 0; }
+
+    .charts-header {
+      margin-bottom: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .charts-header h2 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      font-weight: 700;
+      color: var(--lake-800);
+      letter-spacing: -0.02em;
+      text-align: left;
+    }
+
+    .charts-header p {
+      color: var(--ink-500);
+      font-size: 0.86rem;
+      line-height: 1.7;
+      margin-top: 0.3rem;
+      text-align: justify;
+    }
+
+    .chart-station-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .chart-station-selector label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--ink-500);
+    }
+
+    .chart-station-selector select {
+      min-height: 36px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-900);
+      padding: 0 0.65rem;
+      outline: 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    /* Multi-panel charts stacked like weather station */
+    .chart-panels { display: grid; gap: 0; }
 
     .chart-panel {
-      padding: 1rem;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-bottom: none;
+    }
+
+    .chart-panel:first-child { border-radius: 8px 8px 0 0; }
+    .chart-panel:last-child  { border-radius: 0 0 8px 8px; border-bottom: 1px solid var(--border); }
+    .chart-panel:only-child  { border-radius: 8px; border-bottom: 1px solid var(--border); }
+
+    .chart-panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.9rem;
+      border-bottom: 1px solid rgba(15,58,83,0.07);
+      background: var(--surface);
+    }
+
+    .chart-panel-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--lake-800);
+      letter-spacing: 0.02em;
+      text-align: left;
+    }
+
+    .chart-panel-meta {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.72rem;
+      color: var(--ink-500);
+      font-weight: 600;
     }
 
     .chart-box {
       position: relative;
-      min-height: 330px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(31,126,193,0.04) 0 44px,
-          rgba(255,255,255,0.0) 44px 88px
-        ),
-        rgba(255,255,255,0.76);
-      padding: 0.8rem;
-    }
-
-    .chart-box.small {
-      min-height: 260px;
+      padding: 0.5rem 0.5rem 0.75rem;
+      background: #ffffff;
     }
 
     .chart-box canvas {
       width: 100% !important;
-      height: 300px !important;
     }
 
-    .chart-box.small canvas {
-      height: 230px !important;
+    /* Side by side charts for donut/polar */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
     }
+
+    .chart-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* ============================================================
+       STATIONS — RANKING TABLE
+    ============================================================ */
+    .stations-section { padding: 1.2rem 0; }
 
     .station-grid {
       display: grid;
@@ -914,136 +1110,186 @@
     }
 
     .station-card {
-      padding: 0.95rem;
-      border-radius: var(--radius-lg);
+      padding: 0.9rem;
+      border-radius: 6px;
       border: 1px solid var(--border);
-      background:
-        radial-gradient(circle at 90% 0%, rgba(42,157,183,0.12), transparent 32%),
-        rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.82);
       box-shadow: var(--shadow-xs);
       transition: transform 0.18s ease, box-shadow 0.18s ease;
+      cursor: pointer;
     }
 
-    .station-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
+    .station-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
     .station-card-head {
       display: flex;
       justify-content: space-between;
-      gap: 0.8rem;
-      align-items: start;
-      margin-bottom: 0.8rem;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 0.65rem;
     }
 
     .station-card h3 {
-      font-size: 1.02rem;
-      line-height: 1.16;
-      font-weight: 900;
+      font-size: 0.92rem;
+      font-weight: 700;
       color: var(--lake-800);
+      line-height: 1.18;
+      text-align: left;
     }
 
     .station-card p {
-      margin-top: 0.3rem;
+      margin-top: 0.25rem;
       color: var(--ink-500);
-      font-size: 0.82rem;
-      line-height: 1.45;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      text-align: left;
     }
 
     .station-value {
       display: flex;
-      align-items: end;
-      gap: 0.35rem;
-      margin-top: 0.9rem;
+      align-items: baseline;
+      gap: 0.3rem;
+      margin-top: 0.75rem;
       color: var(--lake-800);
-      font-family: var(--font-mono);
-      font-size: 1.65rem;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
       line-height: 1;
-      font-weight: 800;
-      letter-spacing: -0.06em;
+      letter-spacing: -0.05em;
+      text-align: left;
     }
 
-    .station-value span {
+    .station-value .unit {
       color: var(--ink-500);
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       letter-spacing: 0;
-      padding-bottom: 0.12rem;
+      padding-bottom: 0.1rem;
     }
 
-    .station-meta {
+    .station-bar {
+      margin-top: 0.6rem;
+      height: 5px;
+      background: rgba(15,58,83,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .station-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--lake-500);
+    }
+
+    .station-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.9rem;
+      gap: 0.35rem;
+      margin-top: 0.6rem;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.32rem;
+      gap: 0.28rem;
       color: var(--ink-500);
       background: rgba(255,255,255,0.74);
       border: 1px solid rgba(15,58,83,0.09);
-      border-radius: 999px;
-      padding: 0.34rem 0.5rem;
-      font-size: 0.72rem;
-      font-weight: 800;
+      border-radius: 3px;
+      padding: 0.28rem 0.45rem;
+      font-size: 0.68rem;
+      font-weight: 700;
     }
 
-    .table-panel {
-      padding: 1rem;
-      margin-top: 1rem;
-    }
+    /* ============================================================
+       DATA TABLE — PROFESSIONAL, SORTABLE
+    ============================================================ */
+    .table-section { padding: 1.2rem 0; }
 
     .table-wrap {
-      max-height: 620px;
-      overflow: auto;
-      border-radius: var(--radius-md);
+      border-radius: 6px;
       border: 1px solid var(--border);
-      background: var(--white);
+      background: var(--paper);
+      overflow: hidden;
+    }
+
+    .table-scroll {
+      max-height: 580px;
+      overflow: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 980px;
-    }
-
-    th,
-    td {
-      padding: 0.75rem 0.78rem;
-      border-bottom: 1px solid rgba(15,58,83,0.09);
-      text-align: left;
-      vertical-align: top;
-      font-size: 0.84rem;
+      min-width: 900px;
     }
 
     th {
       position: sticky;
       top: 0;
       z-index: 2;
-      color: var(--lake-700);
-      background: var(--surface);
-      font-size: 0.68rem;
-      letter-spacing: 0.09em;
+      padding: 0.65rem 0.75rem;
+      background: var(--lake-900);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-weight: 900;
+      font-weight: 700;
+      border-bottom: 2px solid var(--maize-500);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      text-align: left;
     }
 
-    tbody tr:hover td {
-      background: var(--lake-100);
+    th:hover { background: var(--lake-700); color: #ffffff; }
+
+    th.sorted-asc::after  { content: " ↑"; color: var(--maize-500); }
+    th.sorted-desc::after { content: " ↓"; color: var(--maize-500); }
+
+    td {
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid rgba(15,58,83,0.07);
+      font-size: 0.84rem;
+      vertical-align: middle;
+      text-align: left;
     }
 
-    td strong {
-      color: var(--lake-800);
-    }
+    tbody tr:nth-child(even) td { background: rgba(230,245,247,0.25); }
+    tbody tr:hover td { background: var(--lake-100); }
+
+    td strong { color: var(--lake-800); display: block; font-weight: 700; text-align: left; }
 
     td.mono {
-      font-family: var(--font-mono);
+      font-family: "Courier New", Courier, monospace;
       font-weight: 700;
+      color: var(--lake-700);
     }
 
+    .td-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .td-bar {
+      flex: 1;
+      height: 5px;
+      background: rgba(15,58,83,0.1);
+      border-radius: 2px;
+      min-width: 40px;
+    }
+
+    .td-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: var(--lake-500);
+    }
+
+    .td-val { white-space: nowrap; font-family: "Courier New", Courier, monospace; font-weight: 700; }
+
+    /* ============================================================
+       CREDITS
+    ============================================================ */
     .credits-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1052,164 +1298,126 @@
 
     .credit-card {
       padding: 1rem;
-      border-radius: var(--radius-lg);
+      border-radius: 6px;
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.78);
       line-height: 1.65;
     }
 
     .credit-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.42rem;
-      font-weight: 900;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--lake-800);
+      margin-bottom: 0.4rem;
+      text-align: left;
     }
 
     .credit-card p {
       color: var(--ink-700);
-      font-size: 0.9rem;
+      font-size: 0.86rem;
+      text-align: justify;
     }
 
-    .diagnostic {
-      padding: 1rem;
-      margin-top: 1rem;
-      background:
-        linear-gradient(90deg, rgba(232,247,250,0.9), rgba(255,255,255,0.72));
-      border-left: 4px solid var(--lake-500);
-    }
-
-    .diagnostic h3 {
-      font-size: 1rem;
-      font-weight: 900;
-      margin-bottom: 0.45rem;
-    }
-
-    .diagnostic p {
-      color: var(--ink-700);
-      line-height: 1.65;
-      font-size: 0.9rem;
-    }
-
-    .footer {
+    /* ============================================================
+       FOOTER — same as index.html
+    ============================================================ */
+    footer {
+      background: var(--lake-950);
+      color: rgba(255,255,255,0.7);
       margin-top: 2rem;
-      padding: 2.3rem 0;
-      color: rgba(255,255,255,0.76);
-      background: linear-gradient(135deg, var(--lake-900), var(--lake-800));
     }
 
-    .footer-grid {
+    .footer-top {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: 3.5rem 1rem 2.5rem;
       display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 1.4rem;
+      grid-template-columns: 1.8fr 1fr 1fr;
+      gap: 3rem;
     }
 
-    .footer h2,
-    .footer h3 {
-      color: var(--white);
-    }
-
-    .footer h2 {
-      font-family: var(--font-head);
-      font-size: 2rem;
-      font-weight: 400;
-      margin-bottom: 0.65rem;
-    }
-
-    .footer p {
-      color: rgba(255,255,255,0.74);
-      line-height: 1.7;
-      max-width: 780px;
-    }
-
-    .footer-links {
-      display: grid;
-      gap: 0.48rem;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.78);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .footer-links a:hover {
-      color: var(--white);
-    }
-
-    .loader {
-      position: fixed;
-      inset: var(--nav-h) 0 0 0;
-      display: grid;
+    .footer-brand-mark {
+      display: inline-grid;
       place-items: center;
-      z-index: 800;
-      background: rgba(246,248,243,0.86);
-      backdrop-filter: blur(10px);
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #ffffff;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
     }
 
-    .loader.hidden {
-      opacity: 0;
-      visibility: hidden;
+    .footer-brand-name {
+      color: #ffffff;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      text-align: left;
     }
 
-    .loader-card {
-      width: min(430px, calc(100% - 2rem));
-      padding: 1.2rem;
-      text-align: center;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      background: var(--white);
-      box-shadow: var(--shadow-lg);
+    .footer-brand-desc {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.5);
+      text-align: justify;
     }
 
-    .spinner {
-      width: 44px;
-      height: 44px;
-      margin: 0 auto 0.9rem;
-      border: 4px solid var(--lake-100);
-      border-top-color: var(--lake-500);
-      border-radius: 999px;
-      animation: spin 0.9s linear infinite;
+    .footer-col-title {
+      color: rgba(255,255,255,0.34);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.55rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      text-align: left;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    .footer-nav-list { list-style: none; display: grid; gap: 0.55rem; }
 
-    .toast {
-      position: fixed;
-      right: 1rem;
-      bottom: 1rem;
-      z-index: 1300;
-      width: min(420px, calc(100% - 2rem));
-      padding: 1rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.95);
-      box-shadow: var(--shadow-lg);
-      transform: translateY(18px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.22s ease, transform 0.22s ease;
-    }
-
-    .toast.show {
-      transform: none;
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .toast strong {
+    .footer-nav-list a {
       display: block;
-      color: var(--lake-800);
-      margin-bottom: 0.25rem;
-    }
-
-    .toast p {
-      color: var(--ink-700);
-      line-height: 1.5;
+      color: rgba(255,255,255,0.58);
+      font-family: "Times New Roman", Times, serif;
       font-size: 0.9rem;
+      transition: color 0.18s ease;
+      text-align: left;
     }
 
+    .footer-nav-list a:hover { color: #ffffff; }
+
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); }
+
+    .footer-bottom-inner {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: 1.2rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .footer-copy, .footer-credits {
+      color: rgba(255,255,255,0.32);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.78rem;
+    }
+
+    .footer-credits { text-align: right; }
+
+    /* ============================================================
+       MODAL
+    ============================================================ */
     .modal {
       position: fixed;
       inset: 0;
@@ -1217,24 +1425,21 @@
       display: grid;
       place-items: center;
       padding: 1rem;
-      background: rgba(8,37,55,0.64);
+      background: rgba(8,37,55,0.65);
       backdrop-filter: blur(10px);
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.2s ease, visibility 0.2s ease;
+      transition: opacity 0.22s ease, visibility 0.22s ease;
     }
 
-    .modal.open {
-      opacity: 1;
-      visibility: visible;
-    }
+    .modal.open { opacity: 1; visibility: visible; }
 
     .modal-card {
-      width: min(980px, 100%);
+      width: min(940px, 100%);
       max-height: 90vh;
       overflow: auto;
-      border-radius: var(--radius-xl);
-      background: var(--white);
+      border-radius: 8px;
+      background: var(--paper);
       box-shadow: var(--shadow-lg);
       border: 1px solid var(--border);
     }
@@ -1245,310 +1450,220 @@
       z-index: 2;
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
       align-items: center;
+      gap: 1rem;
       padding: 1rem;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.95);
       border-bottom: 1px solid var(--border);
       backdrop-filter: blur(10px);
     }
 
     .modal-head h2 {
-      font-size: 1.25rem;
-      font-weight: 900;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--lake-800);
+      text-align: left;
     }
 
-    .modal-body {
-      padding: 1rem;
-    }
+    .modal-body { padding: 1rem; }
 
     .empty {
       padding: 1.2rem;
-      border-radius: var(--radius-md);
+      border-radius: 6px;
       border: 1px dashed var(--border-strong);
       color: var(--ink-500);
       background: rgba(255,255,255,0.58);
       text-align: center;
+      font-size: 0.88rem;
       line-height: 1.6;
     }
 
+    /* ============================================================
+       TOAST
+    ============================================================ */
+    .toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 1300;
+      width: min(380px, calc(100% - 2rem));
+      padding: 0.9rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.97);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .toast.show { transform: none; opacity: 1; pointer-events: auto; }
+
+    .toast strong { display: block; color: var(--lake-800); margin-bottom: 0.2rem; text-align: left; }
+    .toast p { color: var(--ink-700); font-size: 0.86rem; line-height: 1.5; text-align: justify; }
+
+    /* ============================================================
+       REVEAL ANIMATION
+    ============================================================ */
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1100px) {
+      .hero-wrap, .split { grid-template-columns: 1fr; }
+      .grid-kpis { grid-template-columns: repeat(2, 1fr); }
+      .station-grid { grid-template-columns: repeat(2, 1fr); }
+      .charts-row { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: repeat(3, 1fr); }
+      .toolbar-actions { grid-column: 1 / -1; justify-content: flex-end; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
     }
 
-    @media (max-width: 1180px) {
-      .hero-grid,
-      .split,
-      .charts-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .toolbar {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .toolbar-actions {
-        grid-column: 1 / -1;
-        justify-content: end;
-      }
-
-      .grid-kpis,
-      .station-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .map-card {
-        min-height: auto;
-      }
-    }
-
-    @media (max-width: 760px) {
-      :root {
-        --nav-h: 68px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-btn {
-        display: grid;
-        place-items: center;
-      }
-
-      .brand-title strong {
-        font-size: 0.86rem;
-      }
-
-      .brand-title span {
-        font-size: 0.66rem;
-      }
-
-      .hero-main,
-      .hero-side {
-        min-height: auto;
-      }
-
-      .hero-actions {
-        display: grid;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .mini-kpis,
-      .grid-kpis,
-      .station-grid,
-      .credits-grid,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .toolbar {
-        position: static;
-        grid-template-columns: 1fr;
-      }
-
-      .toolbar-actions {
-        justify-content: stretch;
-      }
-
-      .icon-btn {
-        flex: 1;
-      }
-
-      .section-head {
-        display: block;
-      }
-
-      .section-head p {
-        margin-top: 0.65rem;
-      }
-
-      #map {
-        height: 430px;
-      }
+    @media (max-width: 680px) {
+      :root { --nav-h: 66px; }
+      .brand-name { font-size: 0.85rem; }
+      .grid-kpis, .station-grid, .credits-grid { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; position: static; }
+      .toolbar-actions { justify-content: stretch; }
+      .icon-btn { flex: 1; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 0.6rem; }
+      #map, .windy-wrap iframe { height: 380px; }
+      .charts-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1rem 2rem; }
+      .footer-bottom-inner { flex-direction: column; }
+      .footer-credits { text-align: left; }
+      .hero-actions .btn { width: 100%; }
+      .mini-kpis { grid-template-columns: 1fr; }
     }
 
     @media print {
-      body {
-        background: #fff;
-        padding-top: 0;
-      }
-
-      .navbar,
-      .toolbar,
-      .hero-actions,
-      .footer,
-      .loader,
-      .toast {
-        display: none !important;
-      }
-
-      .card {
-        box-shadow: none;
-        break-inside: avoid;
-      }
-
-      .section {
-        page-break-inside: avoid;
-      }
+      body { background: #fff; padding-top: 0; }
+      .navbar, .toolbar, .hero-actions, footer, .loader, .toast { display: none !important; }
+      .card { box-shadow: none; break-inside: avoid; }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- ============================================================
+       NAVBAR — same as index.html
+  ============================================================ -->
   <header class="navbar">
     <div class="navbar-inner">
-      <a class="brand" href="../index.html" aria-label="Volver al inicio de la Plataforma Agroclimática">
+      <a class="brand" href="../index.html" aria-label="Volver al inicio">
         <span class="brand-mark">MTA</span>
-        <span class="brand-title">
-          <span>Sololá</span>
-          <strong>Módulo de Precipitaciones</strong>
+        <span class="brand-text">
+          <span class="brand-sub">Sololá, Guatemala</span>
+          <span class="brand-name">Módulo de Precipitaciones</span>
         </span>
       </a>
-
-      <nav class="nav-links" aria-label="Navegación del módulo">
-        <a href="#resumen">Resumen</a>
-        <a href="#mapa">Mapa</a>
-        <a href="#graficas">Gráficas</a>
-        <a href="#estaciones">Estaciones</a>
-        <a href="#creditos">Créditos</a>
-      </nav>
-
-      <button class="mobile-btn" type="button" aria-label="Abrir menú" data-mobile-btn>
-        <i class="bi bi-list"></i>
-      </button>
     </div>
   </header>
 
-  <nav class="mobile-menu" data-mobile-menu>
-    <a href="#resumen">Resumen</a>
-    <a href="#mapa">Mapa</a>
-    <a href="#graficas">Gráficas</a>
-    <a href="#estaciones">Estaciones</a>
-    <a href="#creditos">Créditos</a>
-  </nav>
-
+  <!-- LOADER -->
   <div class="loader" id="loader">
     <div class="loader-card">
       <div class="spinner"></div>
       <strong>Cargando precipitaciones</strong>
-      <p style="margin-top:.35rem;color:var(--ink-500);line-height:1.55;">
-        Leyendo datos generados por GitHub Actions desde las fuentes institucionales y estaciones complementarias.
-      </p>
+      <p>Leyendo datos generados por GitHub Actions desde fuentes institucionales y estaciones complementarias.</p>
     </div>
   </div>
 
   <main>
+
+    <!-- ============================================================
+         HERO
+    ============================================================ -->
     <section class="hero">
-      <div class="wrap hero-grid">
+      <div class="wrap hero-wrap">
+
         <article class="card hero-main reveal">
           <div>
-            <span class="eyebrow">Mesa Técnica Agroclimática</span>
+            <span class="eyebrow">Mesa Técnica Agroclimática · Sololá</span>
             <h1>Precipitaciones</h1>
             <p class="hero-copy">
               Consulta operativa de lluvia observada para el departamento de Sololá.
-              El módulo integra datos oficiales, estaciones locales y PWS complementarias,
-              conservando fuente, fecha de consulta, unidad, estado y crédito institucional.
+              El módulo integra datos oficiales (INSIVUMEH), estaciones locales (Vivamos Mejor)
+              y estaciones complementarias PWS, conservando fuente, fecha de consulta,
+              unidad, estado operativo y crédito institucional por cada registro.
             </p>
-
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#mapa">
-                <i class="bi bi-map-fill"></i>
-                Ver mapa interactivo
-              </a>
-              <a class="btn btn-soft" href="#graficas">
-                <i class="bi bi-graph-up-arrow"></i>
-                Ver gráficas
-              </a>
-              <button class="btn btn-ghost" type="button" id="btnRefresh">
-                <i class="bi bi-arrow-clockwise"></i>
-                Recargar datos
-              </button>
+              <a class="btn btn-primary" href="#mapa">Ver mapa</a>
+              <a class="btn btn-soft" href="#graficas">Ver gráficas</a>
+              <button class="btn btn-ghost" type="button" id="btnRefresh">Recargar datos</button>
             </div>
           </div>
-
           <div class="diagnostic" id="summaryText">
             <h3>Lectura técnica</h3>
-            <p>Esperando datos del Action de precipitaciones.</p>
+            <p>Esperando datos del workflow de precipitaciones.</p>
           </div>
         </article>
 
         <aside class="card hero-side reveal">
           <div class="status-panel">
-            <span class="status-pill">Actualización diaria</span>
+            <span class="status-pill">Actualización diaria — GitHub Actions</span>
             <h2 id="heroStatusTitle">Sin datos todavía</h2>
             <div class="status-meta">
-              <span id="heroDate">Fecha: —</span>
+              <span id="heroDate">Fecha observada: —</span>
               <span id="heroGenerated">Generado: —</span>
-              <span id="heroSources">Fuentes activas: —</span>
+              <span id="heroSources">Fuentes con dato: —</span>
             </div>
           </div>
-
           <div class="mini-kpis">
             <div class="mini-kpi">
-              <span>Máxima lluvia</span>
-              <strong id="sideMax">—</strong>
-              <small id="sideMaxStation">Estación pendiente</small>
+              <div class="mini-kpi-label">Lluvia máxima</div>
+              <div class="mini-kpi-value" id="sideMax">—</div>
+              <div class="mini-kpi-note" id="sideMaxStation">Estación pendiente</div>
             </div>
-
             <div class="mini-kpi">
-              <span>Estaciones con dato</span>
-              <strong id="sideStations">—</strong>
-              <small>Registros de precipitación acumulada</small>
+              <div class="mini-kpi-label">Estaciones con dato</div>
+              <div class="mini-kpi-value" id="sideStations">—</div>
+              <div class="mini-kpi-note">Precipitación acumulada numérica</div>
             </div>
-
             <div class="mini-kpi">
-              <span>Promedio simple</span>
-              <strong id="sideAverage">—</strong>
-              <small>No sustituye análisis técnico</small>
+              <div class="mini-kpi-label">Promedio simple</div>
+              <div class="mini-kpi-value" id="sideAverage">—</div>
+              <div class="mini-kpi-note">Referencia exploratoria</div>
             </div>
-
             <div class="mini-kpi">
-              <span>Estado red</span>
-              <strong id="sideOnline">—</strong>
-              <small>Online / histórica / parser</small>
+              <div class="mini-kpi-label">Estado de red</div>
+              <div class="mini-kpi-value" id="sideOnline">—</div>
+              <div class="mini-kpi-note">Online / histórica / parser</div>
             </div>
           </div>
         </aside>
+
       </div>
     </section>
 
+    <!-- ============================================================
+         RESUMEN + FILTROS + KPIs
+    ============================================================ -->
     <section class="section" id="resumen">
       <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <span class="eyebrow">Lectura rápida</span>
-            <h2>Resumen del día</h2>
-          </div>
-          <p>
-            Indicadores calculados únicamente con observaciones de precipitación acumulada.
-            Los días con lluvia y días sin lluvia de INSIVUMEH se muestran como variables separadas.
-          </p>
-        </div>
 
+        <!-- TOOLBAR -->
         <div class="toolbar reveal">
           <div class="field">
             <label for="searchInput">Buscar estación</label>
-            <input id="searchInput" type="search" placeholder="Panajachel, El Tablón, Santa Catarina..." />
+            <input id="searchInput" type="search" placeholder="Panajachel, Santiago, El Tablón…" />
           </div>
-
           <div class="field">
-            <label for="sourceFilter">Fuente</label>
-            <select id="sourceFilter">
-              <option value="all">Todas</option>
-            </select>
+            <label for="sourceFilter">Institución</label>
+            <select id="sourceFilter"><option value="all">Todas</option></select>
           </div>
-
           <div class="field">
             <label for="statusFilter">Estado</label>
             <select id="statusFilter">
@@ -1559,7 +1674,6 @@
               <option value="en_inventario">Inventario</option>
             </select>
           </div>
-
           <div class="field">
             <label for="classFilter">Tipo</label>
             <select id="classFilter">
@@ -1570,39 +1684,36 @@
               <option value="complementaria_historica">Complementaria histórica</option>
             </select>
           </div>
-
           <div class="field">
             <label for="rainFilter">Rango lluvia</label>
             <select id="rainFilter">
               <option value="all">Todos</option>
               <option value="dry">0 mm</option>
-              <option value="light">0.1 a 5 mm</option>
-              <option value="moderate">5 a 20 mm</option>
-              <option value="strong">20 a 50 mm</option>
+              <option value="light">0.1 – 5 mm</option>
+              <option value="moderate">5 – 20 mm</option>
+              <option value="strong">20 – 50 mm</option>
               <option value="extreme">Más de 50 mm</option>
             </select>
           </div>
-
           <div class="toolbar-actions">
-            <button class="icon-btn" id="btnDownloadCsv" title="Descargar CSV filtrado" type="button">
+            <button class="icon-btn" id="btnDownloadCsv" title="Descargar CSV" type="button">
               <i class="bi bi-download"></i>
             </button>
-            <button class="icon-btn" id="btnPrint" title="Imprimir vista" type="button">
+            <button class="icon-btn" id="btnPrint" title="Imprimir" type="button">
               <i class="bi bi-printer"></i>
             </button>
           </div>
         </div>
 
+        <!-- KPIs -->
         <div class="grid-kpis reveal">
           <article class="card kpi">
             <div class="kpi-top">
               <span class="kpi-label">Lluvia máxima observada</span>
               <span class="kpi-icon"><i class="bi bi-cloud-rain-heavy-fill"></i></span>
             </div>
-            <div>
-              <div class="kpi-value" id="kpiMax">—</div>
-              <div class="kpi-meta" id="kpiMaxMeta">Sin estación</div>
-            </div>
+            <div class="kpi-value" id="kpiMax">—</div>
+            <div class="kpi-meta" id="kpiMaxMeta">Sin estación</div>
           </article>
 
           <article class="card kpi">
@@ -1610,10 +1721,8 @@
               <span class="kpi-label">Estaciones con dato numérico</span>
               <span class="kpi-icon"><i class="bi bi-broadcast-pin"></i></span>
             </div>
-            <div>
-              <div class="kpi-value" id="kpiStations">—</div>
-              <div class="kpi-meta" id="kpiStationsMeta">Precipitación acumulada</div>
-            </div>
+            <div class="kpi-value" id="kpiStations">—</div>
+            <div class="kpi-meta" id="kpiStationsMeta">Precipitación acumulada</div>
           </article>
 
           <article class="card kpi">
@@ -1621,178 +1730,216 @@
               <span class="kpi-label">Promedio simple de estaciones</span>
               <span class="kpi-icon"><i class="bi bi-bar-chart-line-fill"></i></span>
             </div>
-            <div>
-              <div class="kpi-value" id="kpiAverage">—</div>
-              <div class="kpi-meta">Referencia exploratoria, no interpolación</div>
-            </div>
+            <div class="kpi-value" id="kpiAverage">—</div>
+            <div class="kpi-meta">Referencia exploratoria, no interpolación</div>
           </article>
 
           <article class="card kpi">
             <div class="kpi-top">
-              <span class="kpi-label">Fuentes con observación</span>
+              <span class="kpi-label">Fuentes activas</span>
               <span class="kpi-icon"><i class="bi bi-building-check"></i></span>
             </div>
-            <div>
-              <div class="kpi-value" id="kpiSources">—</div>
-              <div class="kpi-meta" id="kpiSourcesMeta">Fuentes activas</div>
-            </div>
+            <div class="kpi-value" id="kpiSources">—</div>
+            <div class="kpi-meta" id="kpiSourcesMeta">Instituciones / proveedores</div>
           </article>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="mapa">
-      <div class="wrap split">
-        <article class="card panel map-card reveal">
-          <div class="panel-head">
-            <div>
-              <h3>Mapa interactivo de estaciones</h3>
-              <p>
-                Puntos clicables por estación. Las coordenadas se usan como referencia visual
-                por municipio y deben afinarse cuando se disponga de coordenadas oficiales por estación.
-              </p>
-            </div>
-            <span class="badge info" id="mapCount">0 puntos</span>
-          </div>
-
-          <div id="map" aria-label="Mapa de estaciones de precipitación"></div>
-
-          <div class="legend-map">
-            <span><i class="dot none"></i>0 mm</span>
-            <span><i class="dot light"></i>Leve</span>
-            <span><i class="dot moderate"></i>Moderada</span>
-            <span><i class="dot strong"></i>Fuerte</span>
-            <span><i class="dot extreme"></i>Muy fuerte</span>
-          </div>
-        </article>
-
-        <aside class="station-side">
-          <article class="card panel reveal">
+        <!-- SPLIT: Fuentes + Ranking -->
+        <div class="split reveal">
+          <article class="card panel">
             <div class="panel-head">
               <div>
-                <h3>Fuentes de datos</h3>
-                <p>Estado operativo de fuentes que alimentan este módulo.</p>
+                <h3>Fuentes e instituciones</h3>
+                <p>Agrupación de estaciones por institución con conteo de datos disponibles.</p>
               </div>
             </div>
             <div class="source-grid" id="sourceCards"></div>
           </article>
 
-          <article class="card panel reveal">
+          <article class="card panel">
             <div class="panel-head">
               <div>
                 <h3>Ranking de lluvia</h3>
-                <p>Estaciones ordenadas de mayor a menor precipitación.</p>
+                <p>Estaciones ordenadas de mayor a menor precipitación acumulada registrada.</p>
               </div>
             </div>
-            <div class="source-grid" id="rankingList"></div>
+            <div class="ranking-list" id="rankingList"></div>
           </article>
-        </aside>
+        </div>
+
       </div>
     </section>
 
-    <section class="section" id="graficas">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <span class="eyebrow">Visualización</span>
-            <h2>Gráficas de precipitación</h2>
+    <!-- ============================================================
+         MAP — FULL WIDTH SECTION WITH TABS
+    ============================================================ -->
+    <div class="map-full-section" id="mapa">
+
+      <div class="map-section-head">
+        <div>
+          <h2>Mapa de precipitaciones</h2>
+          <p>Red de estaciones con observaciones actuales y capa de lluvia satelital ECMWF.</p>
+        </div>
+        <span style="color:rgba(255,255,255,0.45);font-size:0.78rem;font-family:'Courier New',monospace;" id="mapCount"></span>
+      </div>
+
+      <div class="map-tabs">
+        <button class="map-tab active" data-tab="leaflet" type="button">Red de estaciones</button>
+        <button class="map-tab" data-tab="windy" type="button">Lluvia satelital — Windy ECMWF</button>
+      </div>
+
+      <div class="map-body">
+
+        <div class="map-pane active" id="tab-leaflet">
+          <div id="map"></div>
+          <div class="map-legend">
+            <span class="map-legend-item"><span class="dot none"></span>Sin dato</span>
+            <span class="map-legend-item"><span class="dot light"></span>Leve (0.1–5 mm)</span>
+            <span class="map-legend-item"><span class="dot moderate"></span>Moderada (5–20 mm)</span>
+            <span class="map-legend-item"><span class="dot strong"></span>Fuerte (20–50 mm)</span>
+            <span class="map-legend-item"><span class="dot extreme"></span>Muy fuerte (&gt;50 mm)</span>
           </div>
+        </div>
+
+        <div class="map-pane" id="tab-windy">
+          <div class="windy-wrap">
+            <iframe
+              src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=10&overlay=rain&product=ecmwf&level=surface&lat=14.708&lon=-91.075"
+              title="Mapa de lluvia Windy — Sololá, Guatemala"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+            <div class="map-credits">
+              Datos de lluvia y modelo ECMWF: <strong style="color:rgba(255,255,255,0.7);">Windy.com</strong> &mdash;
+              Uso no comercial sujeto a los <a href="https://www.windy.com/about/privacy" target="_blank" rel="noreferrer" style="color:rgba(255,255,255,0.55);text-decoration:underline;">términos de Windy</a>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================================
+         CHARTS — PROFESSIONAL METEOROLOGICAL PANELS
+    ============================================================ -->
+    <section class="charts-section" id="graficas">
+      <div class="wrap">
+
+        <div class="charts-header reveal">
+          <h2>Gráficas de precipitación</h2>
           <p>
-            Las gráficas toman el estilo de paneles múltiples de estaciones meteorológicas:
-            ejes claros, franjas suaves y lectura rápida de acumulados.
+            Visualizaciones de estilo meteorológico profesional. El panel de acumulado muestra
+            el último corte disponible por estación. La serie temporal despliega el histórico
+            mensual almacenado en el repositorio. Los paneles de distribución desglosan
+            la participación por fuente y el estado operativo de la red.
           </p>
+          <div class="chart-station-selector">
+            <label for="chartStationSelect">Estación para comparación</label>
+            <select id="chartStationSelect"><option value="all">Todas las estaciones</option></select>
+          </div>
         </div>
 
-        <div class="charts-grid reveal">
-          <article class="card chart-panel">
-            <div class="panel-head">
-              <div>
-                <h3>Acumulado por estación</h3>
-                <p>Comparación de lluvia acumulada del último corte disponible.</p>
-              </div>
-              <span class="badge info">mm</span>
+        <!-- Panel 1: Acumulado por estación (horizontal bars) -->
+        <div class="chart-panels reveal">
+          <div class="chart-panel">
+            <div class="chart-panel-head">
+              <span class="chart-panel-title">Precipitación acumulada por estación (mm)</span>
+              <span class="chart-panel-meta" id="chartDate">—</span>
             </div>
-            <div class="chart-box">
-              <canvas id="barChart"></canvas>
+            <div class="chart-box" style="padding-bottom:1rem;">
+              <canvas id="barChart" style="height:320px!important;"></canvas>
             </div>
-          </article>
+          </div>
 
-          <article class="card chart-panel">
-            <div class="panel-head">
-              <div>
-                <h3>Distribución por fuente</h3>
-                <p>Participación de observaciones por institución o proveedor.</p>
-              </div>
+          <div class="chart-panel">
+            <div class="chart-panel-head">
+              <span class="chart-panel-title">Serie temporal — Histórico mensual disponible</span>
+              <span class="chart-panel-meta">Lecturas almacenadas por Actions</span>
             </div>
-            <div class="chart-box small">
-              <canvas id="sourceChart"></canvas>
+            <div class="chart-box" style="padding-bottom:1rem;">
+              <canvas id="timelineChart" style="height:260px!important;"></canvas>
             </div>
-          </article>
+          </div>
         </div>
 
-        <div class="charts-grid reveal">
-          <article class="card chart-panel">
-            <div class="panel-head">
-              <div>
-                <h3>Serie mensual disponible</h3>
-                <p>Lecturas históricas almacenadas en el JSON mensual generado por Actions.</p>
-              </div>
+        <!-- Row: Donut + Polar -->
+        <div class="charts-row reveal">
+          <div class="chart-card">
+            <div class="chart-panel-head">
+              <span class="chart-panel-title">Distribución de observaciones por fuente</span>
+              <span class="chart-panel-meta">% por institución</span>
             </div>
-            <div class="chart-box">
-              <canvas id="timelineChart"></canvas>
+            <div class="chart-box" style="padding-bottom:1rem;">
+              <canvas id="sourceChart" style="height:240px!important;"></canvas>
             </div>
-          </article>
+          </div>
 
-          <article class="card chart-panel">
-            <div class="panel-head">
-              <div>
-                <h3>Estado de estaciones</h3>
-                <p>Online, históricas, inventario o pendientes de parser.</p>
-              </div>
+          <div class="chart-card">
+            <div class="chart-panel-head">
+              <span class="chart-panel-title">Estado operativo de estaciones</span>
+              <span class="chart-panel-meta">Online / histórica / parser / inventario</span>
             </div>
-            <div class="chart-box small">
-              <canvas id="statusChart"></canvas>
+            <div class="chart-box" style="padding-bottom:1rem;">
+              <canvas id="statusChart" style="height:240px!important;"></canvas>
             </div>
-          </article>
+          </div>
         </div>
+
       </div>
     </section>
 
-    <section class="section" id="estaciones">
+    <!-- ============================================================
+         STATIONS
+    ============================================================ -->
+    <section class="stations-section" id="estaciones">
       <div class="wrap">
+
         <div class="section-head reveal">
           <div>
             <span class="eyebrow">Red de observación</span>
             <h2>Estaciones y lectura actual</h2>
           </div>
           <p>
-            Cada tarjeta conserva fuente, tipo de estación, estado operativo y crédito.
+            Cada tarjeta conserva fuente, tipo, estado operativo y crédito institucional.
             Las estaciones complementarias no sustituyen a fuentes oficiales.
           </p>
         </div>
 
         <div class="station-grid reveal" id="stationGrid"></div>
 
-        <article class="card table-panel reveal">
-          <div class="panel-head">
-            <div>
-              <h3>Tabla técnica de datos</h3>
-              <p>Vista tabular filtrable para auditoría rápida y descarga.</p>
-            </div>
-            <span class="badge info" id="tableCount">0 filas</span>
-          </div>
+      </div>
+    </section>
 
-          <div class="table-wrap">
-            <table>
+    <!-- ============================================================
+         DATA TABLE — PROFESSIONAL, SORTABLE
+    ============================================================ -->
+    <section class="table-section" id="tabla">
+      <div class="wrap">
+
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Datos técnicos</span>
+            <h2>Tabla técnica de datos</h2>
+          </div>
+          <p>
+            Vista tabular filtrable y ordenable por columna. Clic en el encabezado
+            para ordenar. Descarga disponible en CSV con los filtros activos.
+            <span class="badge info" id="tableCount" style="margin-left:0.5rem;vertical-align:middle;">0 filas</span>
+          </p>
+        </div>
+
+        <article class="card table-wrap reveal">
+          <div class="table-scroll">
+            <table id="mainTable">
               <thead>
                 <tr>
-                  <th>Estación</th>
-                  <th>Municipio</th>
-                  <th>Institución</th>
-                  <th>Proveedor</th>
-                  <th>Lluvia</th>
-                  <th>Estado</th>
-                  <th>Tipo</th>
+                  <th data-col="station_name">Estación</th>
+                  <th data-col="municipality">Municipio</th>
+                  <th data-col="institution">Institución</th>
+                  <th data-col="provider">Proveedor</th>
+                  <th data-col="value">Lluvia (mm)</th>
+                  <th data-col="online_status">Estado</th>
+                  <th data-col="quality_class">Tipo</th>
                   <th>Fuente</th>
                 </tr>
               </thead>
@@ -1800,65 +1947,94 @@
             </table>
           </div>
         </article>
+
       </div>
     </section>
 
+    <!-- ============================================================
+         CREDITS
+    ============================================================ -->
     <section class="section" id="creditos">
       <div class="wrap">
+
         <div class="section-head reveal">
           <div>
             <span class="eyebrow">Transparencia</span>
             <h2>Créditos y metodología</h2>
           </div>
           <p>
-            La plataforma no inventa datos ni promedia estaciones dentro del flujo automático.
-            Los productos derivados se calcularán aparte y siempre deberán conservar trazabilidad.
+            La plataforma no genera ni infiere valores. Cada registro conserva
+            la fuente original, institución, crédito y URL de consulta.
           </p>
         </div>
 
         <div class="credits-grid reveal" id="creditsGrid"></div>
 
-        <article class="card diagnostic reveal" id="diagnosticPanel">
+        <article class="card diagnostic reveal" id="diagnosticPanel" style="margin-top:1rem;">
           <h3>Diagnóstico del módulo</h3>
           <p>Esperando revisión de archivos de datos.</p>
         </article>
+
       </div>
     </section>
+
   </main>
 
-  <footer class="footer">
-    <div class="wrap footer-grid">
-      <div>
-        <h2>Módulo de Precipitaciones</h2>
-        <p>
-          Plataforma de consulta para lluvia observada, estaciones meteorológicas,
-          fuentes institucionales y estaciones complementarias de apoyo a la Mesa
-          Técnica Agroclimática de Sololá.
+  <!-- ============================================================
+       FOOTER — same as index.html
+  ============================================================ -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-mark">MTA</div>
+        <div class="footer-brand-name">Mesa Técnica Agroclimática de Sololá</div>
+        <p class="footer-brand-desc">
+          Módulo de precipitaciones para la consulta de lluvia observada,
+          estaciones meteorológicas, fuentes institucionales y
+          boletines agroclimáticos del departamento de Sololá, Guatemala.
         </p>
       </div>
-
       <div>
-        <h3 style="margin-bottom:.8rem;">Accesos</h3>
-        <div class="footer-links">
-          <a href="../index.html">Inicio de la plataforma</a>
-          <a href="#mapa">Mapa interactivo</a>
-          <a href="#graficas">Gráficas</a>
-          <a href="#estaciones">Estaciones</a>
-        </div>
+        <div class="footer-col-title">Navegación</div>
+        <ul class="footer-nav-list">
+          <li><a href="../index.html">Inicio de la plataforma</a></li>
+          <li><a href="#resumen">Resumen del corte</a></li>
+          <li><a href="#mapa">Mapa de estaciones</a></li>
+          <li><a href="#graficas">Gráficas</a></li>
+          <li><a href="#estaciones">Estaciones</a></li>
+          <li><a href="#creditos">Créditos</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Fuentes</div>
+        <ul class="footer-nav-list">
+          <li><a href="#">INSIVUMEH</a></li>
+          <li><a href="#">Vivamos Mejor</a></li>
+          <li><a href="#">Ambient Weather API</a></li>
+          <li><a href="https://www.windy.com" target="_blank" rel="noreferrer">Windy.com (mapa de lluvia)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">Mesa Técnica Agroclimática de Sololá, Guatemala.</p>
+        <p class="footer-credits">Datos con crédito a sus fuentes institucionales. Visualización: MTA Sololá.</p>
       </div>
     </div>
   </footer>
 
+  <!-- TOAST -->
   <div class="toast" id="toast">
     <strong id="toastTitle">Aviso</strong>
     <p id="toastText">Mensaje</p>
   </div>
 
+  <!-- MODAL -->
   <div class="modal" id="stationModal" aria-hidden="true">
     <div class="modal-card">
       <div class="modal-head">
         <h2 id="modalTitle">Detalle de estación</h2>
-        <button class="icon-btn" type="button" id="modalClose" aria-label="Cerrar detalle">
+        <button class="icon-btn" type="button" id="modalClose" aria-label="Cerrar">
           <i class="bi bi-x-lg"></i>
         </button>
       </div>
@@ -1866,157 +2042,169 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       SCRIPT
+  ============================================================ -->
   <script>
+    "use strict";
+
     const DATA_PATHS = {
-      actual: "./data/precipitaciones/actual.json",
+      actual:    "./data/precipitaciones/actual.json",
       inventory: "./data/precipitaciones/estaciones_precipitacion.json",
-      pws: "./data/precipitaciones/pws_precipitacion.json"
+      pws:       "./data/precipitaciones/pws_precipitacion.json"
     };
 
     const SOL_CENTER = [14.76, -91.18];
 
+    /* Known coordinates for station IDs */
     const COORDS = {
-      "el_capitan": [14.79, -91.18],
-      "el_tablon": [14.77, -91.15],
-      "santiago_atitlan": [14.64, -91.23],
-      "pws_panajachel": [14.7419, -91.1586],
-      "vivamos_mejor_casa_santa_rita": [14.772, -91.265],
-      "asociacion_vivamos_mejor_coatitlan_r_l": [14.638, -91.229],
-      "pws_santa_catarina_palopo": [14.723, -91.134],
-      "vivamos_mejor_tv_cable_santa_clara": [14.715, -91.303],
-      "vivamos_mejor_chuitzanchaj_cedracc": [14.732, -91.206],
-      "estacion_oficina_central": [14.7419, -91.1586],
-      "estacion_casa_santa_rita": [14.772, -91.265],
-      "estacion_coatitlan_r_l": [14.638, -91.229],
-      "estacion_lomas_de_atitlan": [14.746, -91.135],
-      "estacion_cedracc": [14.732, -91.206],
-      "estacion_santa_clara_tv_cable": [14.715, -91.303],
-      "caserio_chuacruz": [14.82, -91.2],
-      "estacion_escuela_de_formacion_agricola": [14.773, -91.183],
-      "panajachel": [14.7419, -91.1586],
-      "santa_lucia_utatlan": [14.772, -91.265],
-      "santiago_atitlan_municipio": [14.638, -91.229],
-      "santa_catarina_palopo": [14.723, -91.134],
-      "santa_clara_la_laguna": [14.715, -91.303],
-      "tzununa_santa_cruz_la_laguna": [14.732, -91.206],
-      "solola": [14.773, -91.183]
+      "el_capitan":                                [14.79, -91.18],
+      "el_tablon":                                 [14.77, -91.15],
+      "santiago_atitlan":                          [14.64, -91.23],
+      "pws_panajachel":                            [14.7419, -91.1586],
+      "vivamos_mejor_casa_santa_rita":             [14.772, -91.265],
+      "asociacion_vivamos_mejor_coatitlan_r_l":    [14.638, -91.229],
+      "pws_santa_catarina_palopo":                 [14.723, -91.134],
+      "vivamos_mejor_tv_cable_santa_clara":        [14.715, -91.303],
+      "vivamos_mejor_chuitzanchaj_cedracc":        [14.732, -91.206],
+      "estacion_oficina_central":                  [14.7419, -91.1586],
+      "estacion_casa_santa_rita":                  [14.772, -91.265],
+      "estacion_coatitlan_r_l":                    [14.638, -91.229],
+      "estacion_lomas_de_atitlan":                 [14.746, -91.135],
+      "estacion_cedracc":                          [14.732, -91.206],
+      "estacion_santa_clara_tv_cable":             [14.715, -91.303],
+      "caserio_chuacruz":                          [14.82, -91.2],
+      "estacion_escuela_de_formacion_agricola":    [14.773, -91.183],
+      "panajachel":                                [14.7419, -91.1586],
+      "santa_lucia_utatlan":                       [14.772, -91.265],
+      "santiago_atitlan_municipio":                [14.638, -91.229],
+      "santa_catarina_palopo":                     [14.723, -91.134],
+      "santa_clara_la_laguna":                     [14.715, -91.303],
+      "tzununa_santa_cruz_la_laguna":              [14.732, -91.206],
+      "solola":                                    [14.773, -91.183]
     };
 
     const state = {
-      actual: null,
-      inventory: null,
-      pws: null,
-      monthly: null,
-      records: [],
-      precipRecords: [],
-      inventoryStations: [],
-      stationRows: [],
-      filteredRows: [],
-      charts: {},
-      map: null,
-      markers: [],
-      filters: {
-        search: "",
-        source: "all",
-        status: "all",
-        quality: "all",
-        rain: "all"
-      }
+      actual: null, inventory: null, pws: null, monthly: null,
+      records: [], precipRecords: [], inventoryStations: [],
+      stationRows: [], filteredRows: [],
+      charts: {}, map: null, markers: [],
+      sortCol: "value", sortDir: "desc",
+      filters: { search: "", source: "all", status: "all", quality: "all", rain: "all" }
     };
 
     const els = {
-      loader: document.getElementById("loader"),
-      toast: document.getElementById("toast"),
-      toastTitle: document.getElementById("toastTitle"),
-      toastText: document.getElementById("toastText"),
-      searchInput: document.getElementById("searchInput"),
+      loader:       document.getElementById("loader"),
+      toast:        document.getElementById("toast"),
+      toastTitle:   document.getElementById("toastTitle"),
+      toastText:    document.getElementById("toastText"),
+      searchInput:  document.getElementById("searchInput"),
       sourceFilter: document.getElementById("sourceFilter"),
       statusFilter: document.getElementById("statusFilter"),
-      classFilter: document.getElementById("classFilter"),
-      rainFilter: document.getElementById("rainFilter")
+      classFilter:  document.getElementById("classFilter"),
+      rainFilter:   document.getElementById("rainFilter")
     };
 
+    /* ---- Utilities ---- */
     function slug(text) {
       return String(text || "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
+        .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+        .toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"");
     }
 
-    function formatNumber(value, digits = 1) {
-      if (value === null || value === undefined || Number.isNaN(Number(value))) return "—";
-      return Number(value).toLocaleString("es-GT", {
-        minimumFractionDigits: digits,
-        maximumFractionDigits: digits
-      });
+    function formatNumber(v, d = 1) {
+      if (v == null || Number.isNaN(Number(v))) return "—";
+      return Number(v).toLocaleString("es-GT", { minimumFractionDigits: d, maximumFractionDigits: d });
     }
 
-    function formatMm(value) {
-      if (value === null || value === undefined || Number.isNaN(Number(value))) return "Sin dato";
-      return `${formatNumber(value, value < 1 && value > 0 ? 3 : 1)} mm`;
+    function formatMm(v) {
+      if (v == null || Number.isNaN(Number(v))) return "Sin dato";
+      return `${formatNumber(v, (v < 1 && v > 0) ? 3 : 1)} mm`;
     }
 
     function shortDate(iso) {
       if (!iso) return "—";
       const d = new Date(iso);
       if (Number.isNaN(d.getTime())) return iso;
-      return d.toLocaleString("es-GT", {
-        dateStyle: "medium",
-        timeStyle: "short"
-      });
+      return d.toLocaleString("es-GT", { dateStyle: "medium", timeStyle: "short" });
     }
 
     function rainClass(mm) {
       const v = Number(mm || 0);
-      if (v <= 0) return "dry";
-      if (v <= 5) return "light";
-      if (v <= 20) return "moderate";
-      if (v <= 50) return "strong";
+      if (v <= 0)   return "dry";
+      if (v <= 5)   return "light";
+      if (v <= 20)  return "moderate";
+      if (v <= 50)  return "strong";
       return "extreme";
     }
 
     function rainLabel(mm) {
-      const c = rainClass(mm);
-      return {
-        dry: "Sin lluvia",
-        light: "Lluvia leve",
-        moderate: "Lluvia moderada",
-        strong: "Lluvia fuerte",
-        extreme: "Lluvia muy fuerte"
-      }[c];
+      return { dry:"Sin lluvia", light:"Lluvia leve", moderate:"Lluvia moderada",
+               strong:"Lluvia fuerte", extreme:"Lluvia muy fuerte" }[rainClass(mm)];
     }
 
     function markerColor(mm) {
-      const c = rainClass(mm);
-      return {
-        dry: "#a8b7c2",
-        light: "#66b7e8",
-        moderate: "#2a9db7",
-        strong: "#e7b94f",
-        extreme: "#d66a2a"
-      }[c];
+      return { dry:"#a8b7c2", light:"#66b7e8", moderate:"#2a9db7",
+               strong:"#e7b94f", extreme:"#d66a2a" }[rainClass(mm)];
     }
 
     function statusBadge(status) {
       const s = String(status || "").toLowerCase();
-      if (s.includes("online")) return `<span class="badge ok">Online</span>`;
-      if (s.includes("historica") || s.includes("histórica")) return `<span class="badge warn">Histórica</span>`;
-      if (s.includes("parser") || s.includes("error")) return `<span class="badge bad">Requiere parser</span>`;
-      if (s.includes("inventario")) return `<span class="badge info">Inventario</span>`;
-      return `<span class="badge info">${status || "Por verificar"}</span>`;
+      if (s.includes("online"))                          return `<span class="badge ok">Online</span>`;
+      if (s.includes("historica")||s.includes("histórica")) return `<span class="badge warn">Histórica</span>`;
+      if (s.includes("parser")||s.includes("error"))    return `<span class="badge bad">Requiere parser</span>`;
+      if (s.includes("inventario"))                      return `<span class="badge info">Inventario</span>`;
+      return `<span class="badge info">${escapeHtml(status || "Por verificar")}</span>`;
     }
 
     function rainBadge(mm) {
       const c = rainClass(mm);
-      if (c === "dry") return `<span class="badge info">0 mm</span>`;
-      if (c === "light") return `<span class="badge info">Leve</span>`;
+      if (c === "dry")      return `<span class="badge info">0 mm</span>`;
+      if (c === "light")    return `<span class="badge info">Leve</span>`;
       if (c === "moderate") return `<span class="badge ok">Moderada</span>`;
-      if (c === "strong") return `<span class="badge warn">Fuerte</span>`;
+      if (c === "strong")   return `<span class="badge warn">Fuerte</span>`;
       return `<span class="badge bad">Muy fuerte</span>`;
     }
 
+    function escapeHtml(v) {
+      return String(v ?? "")
+        .replaceAll("&","&amp;").replaceAll("<","&lt;")
+        .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    }
+
+    function escapeAttr(v) { return escapeHtml(v).replaceAll("`","&#096;"); }
+
+    function compactName(name) {
+      return String(name || "")
+        .replace("Asociación Vivamos Mejor / ","")
+        .replace("Vivamos Mejor / ","")
+        .replace("PWS ","").replace("Estación ","").trim();
+    }
+
+    function simplifyStatus(status) {
+      const s = slug(status);
+      if (s.includes("online"))    return "Online";
+      if (s.includes("historica")) return "Histórica";
+      if (s.includes("parser"))    return "Requiere parser";
+      if (s.includes("inventario"))return "Inventario";
+      return "Por verificar";
+    }
+
+    function groupBy(items, getter) {
+      return items.reduce((acc, item) => {
+        const k = getter(item); acc[k] ||= []; acc[k].push(item); return acc;
+      }, {});
+    }
+
+    function countBy(items, getter) {
+      return items.reduce((acc, item) => {
+        const k = getter(item); acc[k] = (acc[k] || 0) + 1; return acc;
+      }, {});
+    }
+
+    function csvCell(v) { const t = String(v ?? ""); return `"${t.replaceAll('"','""')}"`; }
+
+    /* ---- Data fetching ---- */
     async function fetchJson(path, required = true) {
       const res = await fetch(path, { cache: "no-store" });
       if (!res.ok) {
@@ -2029,22 +2217,10 @@
     function monthlyPathFromActual(path) {
       if (!path) return null;
       let clean = String(path).trim();
-
-      // Este archivo vive en docs/precipitaciones_index.html.
-      // Por eso los datos viven en ./data/precipitaciones/...
-      if (clean.startsWith("docs/data/")) clean = clean.replace("docs/data/", "./data/");
-      if (clean.startsWith("./docs/data/")) clean = clean.replace("./docs/data/", "./data/");
-      if (clean.startsWith("data/")) clean = "./" + clean;
-
+      if (clean.startsWith("docs/data/"))    clean = clean.replace("docs/data/","./data/");
+      if (clean.startsWith("./docs/data/"))  clean = clean.replace("./docs/data/","./data/");
+      if (clean.startsWith("data/"))         clean = "./" + clean;
       return clean;
-    }
-
-    function showToast(title, text) {
-      els.toastTitle.textContent = title;
-      els.toastText.textContent = text;
-      els.toast.classList.add("show");
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => els.toast.classList.remove("show"), 5200);
     }
 
     function getPrecipRecords(records) {
@@ -2054,318 +2230,283 @@
         .filter(r => Number.isFinite(r.value));
     }
 
+    /* ---- Station rows ---- */
+    function inferMunicipality(name) {
+      const n = slug(name);
+      if (n.includes("panajachel"))        return "Panajachel";
+      if (n.includes("santiago"))          return "Santiago Atitlán";
+      if (n.includes("santa_catarina"))    return "Santa Catarina Palopó";
+      if (n.includes("santa_clara"))       return "Santa Clara la Laguna";
+      if (n.includes("santa_lucia"))       return "Santa Lucía Utatlán";
+      if (n.includes("solola")||n.includes("sololá")) return "Sololá";
+      if (n.includes("tzununa")||n.includes("santa_cruz")) return "Santa Cruz la Laguna";
+      if (n.includes("chuacruz"))          return "San Marcos la Laguna";
+      return "Sololá";
+    }
+
+    function providerFromInstitution(institution) {
+      const s = slug(institution || "");
+      if (s.includes("insivumeh"))  return "INSIVUMEH";
+      if (s.includes("vivamos"))    return "Vivamos Mejor";
+      if (s.includes("ambient"))    return "Ambient Weather";
+      return null;
+    }
+
+    function qualityFromInstitution(institution) {
+      const s = slug(institution || "");
+      if (s.includes("insivumeh")) return "oficial";
+      if (s.includes("vivamos"))   return "institucional_local";
+      if (s.includes("ambient"))   return "complementaria";
+      return "complementaria";
+    }
+
+    function findCoords(station, record) {
+      const id = slug(station?.station_id || record?.station_id || "");
+      if (COORDS[id]) return COORDS[id];
+      const lat = parseFloat(station?.lat ?? station?.latitude ?? record?.lat ?? record?.latitude);
+      const lon = parseFloat(station?.lon ?? station?.longitude ?? record?.lon ?? record?.longitude);
+      if (!isNaN(lat) && !isNaN(lon)) return [lat, lon];
+      return null;
+    }
+
     function buildStationRows() {
       const precipByStation = new Map();
-
-      state.precipRecords.forEach(record => {
-        precipByStation.set(record.station_id, record);
-      });
-
+      state.precipRecords.forEach(r => precipByStation.set(r.station_id, r));
       const rows = [];
 
       state.inventoryStations.forEach(station => {
         const record = precipByStation.get(station.station_id);
-        const name = station.station_name || record?.station_name || "Estación sin nombre";
-        const municipality = station.municipality || inferMunicipality(name);
-        const coord = findCoords(station, record);
-
+        const name   = station.station_name || record?.station_name || "Estación sin nombre";
         rows.push({
-          station_id: station.station_id,
-          station_name: name,
-          municipality,
-          institution: station.institution || record?.institution || "Sin institución",
-          provider: station.provider || providerFromInstitution(record?.institution) || "—",
-          station_code: station.station_code || null,
-          source_id: station.source_id || record?.source_id || "sin_fuente",
-          source_url: station.source_url || record?.source_url || station.station_url || null,
-          station_url: station.station_url || null,
-          value: record ? Number(record.value) : null,
-          unit: record?.unit || "mm",
-          online_status: station.online_status || (record ? "online" : "por_verificar"),
-          precipitation_available: station.precipitation_available || (record ? "si" : "por_verificar"),
-          quality_class: station.quality_class || qualityFromInstitution(station.institution || record?.institution),
-          status: station.status || "por_verificar",
-          credit: station.credit || record?.credit || "Crédito pendiente",
-          record,
-          coord
+          station_id:             station.station_id,
+          station_name:           name,
+          municipality:           station.municipality || inferMunicipality(name),
+          institution:            station.institution  || record?.institution || "Sin institución",
+          provider:               station.provider || providerFromInstitution(record?.institution) || "—",
+          station_code:           station.station_code || null,
+          source_id:              station.source_id || record?.source_id || "sin_fuente",
+          source_url:             station.source_url || record?.source_url || station.station_url || null,
+          station_url:            station.station_url || null,
+          value:                  record ? Number(record.value) : null,
+          unit:                   record?.unit || "mm",
+          online_status:          station.online_status || (record ? "online" : "por_verificar"),
+          precipitation_available:station.precipitation_available || (record ? "si" : "por_verificar"),
+          quality_class:          station.quality_class || qualityFromInstitution(station.institution || record?.institution),
+          status:                 station.status || "por_verificar",
+          credit:                 station.credit || record?.credit || "Crédito pendiente",
+          record, coord: findCoords(station, record)
         });
       });
 
       state.precipRecords.forEach(record => {
-        if (!rows.some(row => row.station_id === record.station_id)) {
+        if (!rows.some(r => r.station_id === record.station_id)) {
           const name = record.station_name || "Estación sin nombre";
           rows.push({
-            station_id: record.station_id,
-            station_name: name,
+            station_id: record.station_id, station_name: name,
             municipality: inferMunicipality(name),
             institution: record.institution || "Sin institución",
-            provider: providerFromInstitution(record.institution),
-            station_code: null,
-            source_id: record.source_id,
-            source_url: record.source_url,
-            station_url: null,
-            value: Number(record.value),
-            unit: record.unit || "mm",
-            online_status: "online",
-            precipitation_available: "si",
+            provider: providerFromInstitution(record.institution) || "—",
+            station_code: null, source_id: record.source_id || "sin_fuente",
+            source_url: record.source_url || null, station_url: null,
+            value: Number(record.value), unit: record.unit || "mm",
+            online_status: "online", precipitation_available: "si",
             quality_class: qualityFromInstitution(record.institution),
-            status: "activa_por_verificar",
-            credit: record.credit || "Crédito pendiente",
-            record,
-            coord: findCoords(null, record)
+            status: "por_verificar", credit: record.credit || "Crédito pendiente",
+            record, coord: findCoords({}, record)
           });
         }
       });
 
-      return rows.sort((a, b) => {
-        const av = a.value ?? -1;
-        const bv = b.value ?? -1;
-        return bv - av;
-      });
+      return rows;
     }
 
-    function inferMunicipality(name) {
-      const n = slug(name);
-      if (n.includes("panajachel")) return "Panajachel";
-      if (n.includes("santa_rita") || n.includes("lucia")) return "Santa Lucía Utatlán";
-      if (n.includes("coatitlan") || n.includes("santiago")) return "Santiago Atitlán";
-      if (n.includes("santa_catarina")) return "Santa Catarina Palopó";
-      if (n.includes("santa_clara")) return "Santa Clara La Laguna";
-      if (n.includes("cedracc") || n.includes("chuitzanchaj") || n.includes("tzununa")) return "Tzununá, Santa Cruz La Laguna";
-      if (n.includes("tablon") || n.includes("capitan") || n.includes("solola")) return "Sololá";
-      return "Por verificar";
-    }
-
-    function providerFromInstitution(institution) {
-      const s = slug(institution);
-      if (s.includes("insivumeh")) return "insivumeh";
-      if (s.includes("ambient")) return "ambientweather";
-      if (s.includes("pws") || s.includes("vivamos")) return "wunderground / pws";
-      return "—";
-    }
-
-    function qualityFromInstitution(institution) {
-      const s = slug(institution);
-      if (s.includes("insivumeh")) return "oficial";
-      if (s.includes("vivamos")) return "institucional_local";
-      if (s.includes("pws") || s.includes("ambient")) return "complementaria";
-      return "por_verificar";
-    }
-
-    function findCoords(station, record) {
-      const candidates = [
-        slug(station?.station_name),
-        slug(record?.station_name),
-        slug(station?.municipality),
-        `${slug(station?.municipality)}_municipio`,
-        slug(record?.department)
-      ].filter(Boolean);
-
-      for (const key of candidates) {
-        if (COORDS[key]) return COORDS[key];
-      }
-
-      return null;
-    }
-
+    /* ---- Filters ---- */
     function applyFilters() {
-      const search = state.filters.search;
-      const source = state.filters.source;
-      const status = state.filters.status;
-      const quality = state.filters.quality;
-      const rain = state.filters.rain;
-
+      const { search, source, status, quality, rain } = state.filters;
       state.filteredRows = state.stationRows.filter(row => {
-        const haystack = slug([
-          row.station_name,
-          row.municipality,
-          row.institution,
-          row.provider,
-          row.station_code,
-          row.online_status,
-          row.quality_class
-        ].join(" "));
-
-        if (search && !haystack.includes(slug(search))) return false;
+        if (search) {
+          const q = slug(search);
+          if (!slug(row.station_name).includes(q) && !slug(row.municipality).includes(q) &&
+              !slug(row.institution).includes(q)) return false;
+        }
         if (source !== "all" && row.institution !== source) return false;
-
         if (status !== "all") {
           const s = slug(row.online_status);
-          if (status === "online" && !s.includes("online")) return false;
-          if (status === "historica" && !s.includes("historica")) return false;
-          if (status === "requiere_parser" && !s.includes("parser")) return false;
-          if (status === "en_inventario" && !s.includes("inventario")) return false;
+          if (status === "online"          && !s.includes("online"))     return false;
+          if (status === "historica"       && !s.includes("historica"))  return false;
+          if (status === "requiere_parser" && !s.includes("parser"))     return false;
+          if (status === "en_inventario"   && !s.includes("inventario")) return false;
         }
-
         if (quality !== "all" && row.quality_class !== quality) return false;
-
         if (rain !== "all") {
-          if (row.value === null || row.value === undefined) return false;
+          if (row.value == null) return false;
           if (rainClass(row.value) !== rain) return false;
         }
-
         return true;
       });
-
       renderAll(false);
     }
 
-    function renderHeroAndKpis() {
-      const precip = state.precipRecords;
-      const rowsWithValues = state.filteredRows.filter(r => Number.isFinite(r.value));
-      const allRowsWithValues = state.stationRows.filter(r => Number.isFinite(r.value));
-      const max = allRowsWithValues.length
-        ? [...allRowsWithValues].sort((a, b) => b.value - a.value)[0]
-        : null;
-      const avg = allRowsWithValues.length
-        ? allRowsWithValues.reduce((sum, r) => sum + r.value, 0) / allRowsWithValues.length
-        : null;
-      const sources = new Set(precip.map(r => r.institution).filter(Boolean));
-      const onlineCount = state.stationRows.filter(r => slug(r.online_status).includes("online")).length;
-
-      document.getElementById("heroStatusTitle").textContent = allRowsWithValues.length
-        ? `${allRowsWithValues.length} estaciones con lluvia observada`
-        : "Sin precipitación numérica";
-      document.getElementById("heroDate").textContent = `Fecha observada: ${state.actual?.observed_date || "—"}`;
-      document.getElementById("heroGenerated").textContent = `Generado: ${shortDate(state.actual?.generated_at_gt || state.actual?.generated_at_utc)}`;
-      document.getElementById("heroSources").textContent = `Fuentes con dato: ${sources.size || "—"}`;
-
-      document.getElementById("sideMax").textContent = max ? formatMm(max.value) : "—";
-      document.getElementById("sideMaxStation").textContent = max ? max.station_name : "Estación pendiente";
-      document.getElementById("sideStations").textContent = String(allRowsWithValues.length || "—");
-      document.getElementById("sideAverage").textContent = avg !== null ? formatMm(avg) : "—";
-      document.getElementById("sideOnline").textContent = `${onlineCount}/${state.stationRows.length || "—"}`;
-
-      document.getElementById("kpiMax").textContent = max ? formatMm(max.value) : "—";
-      document.getElementById("kpiMaxMeta").textContent = max ? `${max.station_name} · ${max.institution}` : "Sin estación";
-      document.getElementById("kpiStations").textContent = String(allRowsWithValues.length || 0);
-      document.getElementById("kpiStationsMeta").textContent = `${state.stationRows.length} estaciones en inventario`;
-      document.getElementById("kpiAverage").textContent = avg !== null ? formatMm(avg) : "—";
-      document.getElementById("kpiSources").textContent = String(sources.size || 0);
-      document.getElementById("kpiSourcesMeta").textContent = [...sources].join(" · ") || "Sin fuente activa";
-
-      const strongStations = allRowsWithValues.filter(r => r.value >= 20);
-      const pwsCount = allRowsWithValues.filter(r => slug(r.quality_class).includes("complementaria")).length;
-
-      document.getElementById("summaryText").innerHTML = `
-        <h3>Lectura técnica</h3>
-        <p>
-          El corte actual integra <strong>${allRowsWithValues.length}</strong> estaciones con precipitación numérica
-          y <strong>${state.stationRows.length}</strong> estaciones en inventario. La mayor lluvia reportada es
-          <strong>${max ? formatMm(max.value) : "sin dato"}</strong>${max ? ` en <strong>${max.station_name}</strong>` : ""}.
-        </p>
-        <p>
-          Hay <strong>${strongStations.length}</strong> estaciones con lluvia fuerte o muy fuerte,
-          y <strong>${pwsCount}</strong> registros provienen de estaciones complementarias.
-          Los promedios son exploratorios y no sustituyen interpolaciones ni validación técnica.
-        </p>
-      `;
-    }
-
+    /* ---- Populate filters ---- */
     function populateSourceFilter() {
       const select = els.sourceFilter;
       const current = select.value;
       const sources = [...new Set(state.stationRows.map(r => r.institution).filter(Boolean))].sort();
-
       select.innerHTML = `<option value="all">Todas</option>`;
-      sources.forEach(source => {
-        const option = document.createElement("option");
-        option.value = source;
-        option.textContent = source;
-        select.appendChild(option);
+      sources.forEach(src => {
+        const o = document.createElement("option");
+        o.value = src; o.textContent = src;
+        select.appendChild(o);
       });
-
       if ([...select.options].some(o => o.value === current)) select.value = current;
     }
 
+    function populateChartStationSelect() {
+      const select = document.getElementById("chartStationSelect");
+      if (!select) return;
+      const rows = state.stationRows.filter(r => Number.isFinite(r.value));
+      select.innerHTML = `<option value="all">Todas las estaciones</option>`;
+      rows.sort((a,b) => b.value - a.value).forEach(r => {
+        const o = document.createElement("option");
+        o.value = r.station_id;
+        o.textContent = compactName(r.station_name) + " — " + formatMm(r.value);
+        select.appendChild(o);
+      });
+    }
+
+    /* ---- Render hero + KPIs ---- */
+    function renderHeroAndKpis() {
+      const allWithValues = state.stationRows.filter(r => Number.isFinite(r.value));
+      const max   = allWithValues.length ? [...allWithValues].sort((a,b) => b.value - a.value)[0] : null;
+      const avg   = allWithValues.length ? allWithValues.reduce((s,r) => s + r.value, 0) / allWithValues.length : null;
+      const srcs  = new Set(state.precipRecords.map(r => r.institution).filter(Boolean));
+      const onl   = state.stationRows.filter(r => slug(r.online_status).includes("online")).length;
+      const strong = allWithValues.filter(r => r.value >= 20);
+      const pws   = allWithValues.filter(r => slug(r.quality_class).includes("complementaria")).length;
+
+      document.getElementById("heroStatusTitle").textContent = allWithValues.length
+        ? `${allWithValues.length} estaciones con precipitación observada`
+        : "Sin precipitación numérica";
+      document.getElementById("heroDate").textContent      = `Fecha observada: ${state.actual?.observed_date || "—"}`;
+      document.getElementById("heroGenerated").textContent = `Generado: ${shortDate(state.actual?.generated_at_gt || state.actual?.generated_at_utc)}`;
+      document.getElementById("heroSources").textContent   = `Fuentes con dato: ${srcs.size || "—"}`;
+
+      document.getElementById("sideMax").textContent         = max ? formatMm(max.value) : "—";
+      document.getElementById("sideMaxStation").textContent  = max ? max.station_name : "Estación pendiente";
+      document.getElementById("sideStations").textContent    = String(allWithValues.length || "—");
+      document.getElementById("sideAverage").textContent     = avg !== null ? formatMm(avg) : "—";
+      document.getElementById("sideOnline").textContent      = `${onl} / ${state.stationRows.length || "—"}`;
+
+      document.getElementById("kpiMax").textContent          = max ? formatMm(max.value) : "—";
+      document.getElementById("kpiMaxMeta").textContent      = max ? `${max.station_name} · ${max.institution}` : "Sin estación";
+      document.getElementById("kpiStations").textContent     = String(allWithValues.length || 0);
+      document.getElementById("kpiStationsMeta").textContent = `${state.stationRows.length} estaciones en inventario`;
+      document.getElementById("kpiAverage").textContent      = avg !== null ? formatMm(avg) : "—";
+      document.getElementById("kpiSources").textContent      = String(srcs.size || 0);
+      document.getElementById("kpiSourcesMeta").textContent  = [...srcs].join(" · ") || "Sin fuente activa";
+
+      document.getElementById("summaryText").innerHTML = `
+        <h3>Lectura técnica del corte actual</h3>
+        <p>El corte integra <strong>${allWithValues.length}</strong> estaciones con precipitación numérica
+           y <strong>${state.stationRows.length}</strong> estaciones en inventario.
+           La mayor lluvia reportada es <strong>${max ? formatMm(max.value) : "sin dato"}</strong>${max ? ` en <strong>${max.station_name}</strong>` : ""}.
+           Hay <strong>${strong.length}</strong> estaciones con lluvia fuerte o muy fuerte,
+           y <strong>${pws}</strong> registros provienen de estaciones complementarias.
+           El promedio simple es de <strong>${avg !== null ? formatMm(avg) : "—"}</strong>
+           y no sustituye interpolación ni análisis técnico formal.</p>
+      `;
+
+      const chartDateEl = document.getElementById("chartDate");
+      if (chartDateEl) chartDateEl.textContent = state.actual?.observed_date || "—";
+    }
+
+    /* ---- Source cards ---- */
     function renderSourceCards() {
       const container = document.getElementById("sourceCards");
       const groups = groupBy(state.stationRows, row => row.institution || "Sin institución");
-
-      container.innerHTML = Object.entries(groups).map(([source, rows]) => {
+      container.innerHTML = Object.entries(groups).map(([src, rows]) => {
         const numeric = rows.filter(r => Number.isFinite(r.value)).length;
-        const online = rows.filter(r => slug(r.online_status).includes("online")).length;
-        const badge = numeric > 0 ? "ok" : online > 0 ? "info" : "warn";
-
+        const online  = rows.filter(r => slug(r.online_status).includes("online")).length;
+        const badgeCls = numeric > 0 ? "ok" : online > 0 ? "info" : "warn";
         return `
           <article class="source-card">
-            <span class="source-icon">${sourceIcon(source)}</span>
+            <span class="source-icon">${sourceIcon(src)}</span>
             <div>
-              <strong>${escapeHtml(source)}</strong>
-              <span>${numeric} con dato · ${online} online · ${rows.length} total</span>
+              <strong>${escapeHtml(src)}</strong>
+              <span>${numeric} con dato &middot; ${online} online &middot; ${rows.length} total</span>
             </div>
-            <span class="badge ${badge}">${numeric > 0 ? "Con datos" : "Sin dato"}</span>
+            <span class="badge ${badgeCls}">${numeric > 0 ? "Con datos" : "Sin dato"}</span>
           </article>
         `;
       }).join("");
     }
 
-    function sourceIcon(source) {
-      const s = slug(source);
+    function sourceIcon(src) {
+      const s = slug(src);
       if (s.includes("insivumeh")) return `<i class="bi bi-building-fill-check"></i>`;
-      if (s.includes("vivamos")) return `<i class="bi bi-tree-fill"></i>`;
-      if (s.includes("ambient")) return `<i class="bi bi-router-fill"></i>`;
+      if (s.includes("vivamos"))   return `<i class="bi bi-tree-fill"></i>`;
+      if (s.includes("ambient"))   return `<i class="bi bi-router-fill"></i>`;
       return `<i class="bi bi-broadcast-pin"></i>`;
     }
 
+    /* ---- Ranking list ---- */
     function renderRanking() {
       const container = document.getElementById("rankingList");
       const rows = state.filteredRows
         .filter(r => Number.isFinite(r.value))
-        .sort((a, b) => b.value - a.value)
-        .slice(0, 8);
+        .sort((a,b) => b.value - a.value)
+        .slice(0, 10);
 
       if (!rows.length) {
         container.innerHTML = `<div class="empty">No hay estaciones con precipitación en el filtro actual.</div>`;
         return;
       }
 
-      container.innerHTML = rows.map((row, index) => `
-        <article class="source-card" role="button" tabindex="0" onclick="openStation('${row.station_id}')">
-          <span class="source-icon">${index + 1}</span>
-          <div>
-            <strong>${escapeHtml(row.station_name)}</strong>
-            <span>${escapeHtml(row.municipality || "Por verificar")} · ${escapeHtml(row.institution)}</span>
+      const maxVal = rows[0].value;
+      const posClass = i => i === 0 ? "gold" : i === 1 ? "silver" : i === 2 ? "bronze" : "";
+
+      container.innerHTML = rows.map((row, i) => `
+        <div class="ranking-row" role="button" tabindex="0" onclick="openStation('${escapeAttr(row.station_id)}')">
+          <span class="ranking-pos ${posClass(i)}">${i + 1}</span>
+          <div class="ranking-info">
+            <div class="ranking-name">${escapeHtml(compactName(row.station_name))}</div>
+            <div class="ranking-meta">${escapeHtml(row.municipality || "—")} &middot; ${escapeHtml(row.institution)}</div>
+            <div class="ranking-bar-wrap">
+              <div class="ranking-bar" style="width:${Math.round((row.value / maxVal) * 100)}%;background:${markerColor(row.value)};"></div>
+            </div>
           </div>
-          ${rainBadge(row.value)}
-        </article>
+          <div class="ranking-value">${formatMm(row.value)}</div>
+        </div>
       `).join("");
     }
 
+    /* ---- Map ---- */
     function initMap() {
       if (state.map) return;
-
-      state.map = L.map("map", {
-        zoomControl: true,
-        scrollWheelZoom: true
-      }).setView(SOL_CENTER, 10);
-
+      state.map = L.map("map", { zoomControl: true, scrollWheelZoom: true }).setView(SOL_CENTER, 10);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
-        attribution: "&copy; OpenStreetMap"
+        attribution: `&copy; <a href="https://openstreetmap.org">OpenStreetMap</a>`
       }).addTo(state.map);
     }
 
     function renderMap() {
       initMap();
-
-      state.markers.forEach(marker => marker.remove());
+      state.markers.forEach(m => m.remove());
       state.markers = [];
 
-      const rows = state.filteredRows.filter(row => row.coord);
-      document.getElementById("mapCount").textContent = `${rows.length} puntos`;
+      const rows = state.filteredRows.filter(r => r.coord);
+      const mapCount = document.getElementById("mapCount");
+      if (mapCount) mapCount.textContent = `${rows.length} estaciones`;
 
       rows.forEach(row => {
         const hasValue = Number.isFinite(row.value);
-        const color = hasValue ? markerColor(row.value) : "#8ca0ad";
-        const radius = hasValue ? Math.max(8, Math.min(24, 8 + row.value / 3)) : 7;
+        const color  = hasValue ? markerColor(row.value) : "#8ca0ad";
+        const radius = hasValue ? Math.max(8, Math.min(26, 8 + row.value / 3)) : 7;
 
         const marker = L.circleMarker(row.coord, {
-          radius,
-          color: "#ffffff",
-          weight: 2,
-          fillColor: color,
-          fillOpacity: 0.9
+          radius, color: "#ffffff", weight: 2.5,
+          fillColor: color, fillOpacity: 0.9
         }).addTo(state.map);
 
         marker.bindPopup(`
@@ -2391,90 +2532,126 @@
       }
     }
 
+    /* ---- Station cards ---- */
     function renderStationCards() {
       const container = document.getElementById("stationGrid");
       const rows = state.filteredRows;
 
       if (!rows.length) {
-        container.innerHTML = `<div class="empty" style="grid-column:1/-1;">No hay estaciones que coincidan con los filtros actuales.</div>`;
+        container.innerHTML = `<div class="empty" style="grid-column:1/-1;">No hay estaciones que coincidan con los filtros.</div>`;
         return;
       }
 
+      const withValues = rows.filter(r => Number.isFinite(r.value));
+      const maxVal = withValues.length ? Math.max(...withValues.map(r => r.value)) : 1;
+
       container.innerHTML = rows.map(row => {
         const hasValue = Number.isFinite(row.value);
+        const barPct   = hasValue ? Math.round((row.value / maxVal) * 100) : 0;
+        const barColor = hasValue ? markerColor(row.value) : "#a8b7c2";
         return `
-          <article class="station-card" onclick="openStation('${row.station_id}')" role="button" tabindex="0">
+          <article class="station-card" onclick="openStation('${escapeAttr(row.station_id)}')" role="button" tabindex="0">
             <div class="station-card-head">
               <div>
                 <h3>${escapeHtml(row.station_name)}</h3>
-                <p>${escapeHtml(row.municipality || "Municipio por verificar")} · ${escapeHtml(row.institution)}</p>
+                <p>${escapeHtml(row.municipality || "Por verificar")} &middot; ${escapeHtml(row.institution)}</p>
               </div>
               ${statusBadge(row.online_status)}
             </div>
-
             <div class="station-value">
-              ${hasValue ? formatNumber(row.value, row.value < 1 && row.value > 0 ? 3 : 1) : "—"}
-              <span>mm</span>
+              ${hasValue ? formatNumber(row.value, (row.value < 1 && row.value > 0) ? 3 : 1) : "—"}
+              <span class="unit">mm</span>
             </div>
-
-            <div class="station-meta">
-              ${hasValue ? rainBadge(row.value) : `<span class="pill"><i class="bi bi-dash-circle"></i>Sin dato numérico</span>`}
-              <span class="pill"><i class="bi bi-diagram-3"></i>${escapeHtml(row.quality_class || "por_verificar")}</span>
-              <span class="pill"><i class="bi bi-router"></i>${escapeHtml(row.provider || "—")}</span>
+            ${hasValue ? `
+              <div class="station-bar">
+                <div class="station-bar-fill" style="width:${barPct}%;background:${barColor};"></div>
+              </div>
+            ` : ""}
+            <div class="station-pills">
+              ${hasValue ? rainBadge(row.value) : `<span class="pill">Sin dato numérico</span>`}
+              <span class="pill">${escapeHtml(row.quality_class || "por_verificar")}</span>
+              <span class="pill">${escapeHtml(row.provider || "—")}</span>
             </div>
           </article>
         `;
       }).join("");
     }
 
+    /* ---- Data table (sortable) ---- */
+    let tableSortCol = "value";
+    let tableSortDir = "desc";
+
     function renderTable() {
       const tbody = document.getElementById("dataTable");
-      const rows = state.filteredRows;
+      const count = document.getElementById("tableCount");
+      const rows  = [...state.filteredRows];
 
-      document.getElementById("tableCount").textContent = `${rows.length} filas`;
+      // Sort
+      rows.sort((a, b) => {
+        let va = a[tableSortCol] ?? "";
+        let vb = b[tableSortCol] ?? "";
+        if (tableSortCol === "value") { va = Number(va ?? -1); vb = Number(vb ?? -1); }
+        else { va = String(va).toLowerCase(); vb = String(vb).toLowerCase(); }
+        return tableSortDir === "asc" ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+      });
 
-      tbody.innerHTML = rows.map(row => `
-        <tr>
-          <td>
-            <strong>${escapeHtml(row.station_name)}</strong><br>
-            <span class="pill">${escapeHtml(row.station_id)}</span>
-          </td>
-          <td>${escapeHtml(row.municipality || "Por verificar")}</td>
-          <td>${escapeHtml(row.institution)}</td>
-          <td>${escapeHtml(row.provider || "—")}</td>
-          <td class="mono">${Number.isFinite(row.value) ? formatMm(row.value) : "Sin dato"}</td>
-          <td>${statusBadge(row.online_status)}</td>
-          <td>${escapeHtml(row.quality_class || "por verificar")}</td>
-          <td>${row.source_url ? `<a href="${escapeAttr(row.source_url)}" target="_blank" rel="noreferrer noopener">Abrir fuente</a>` : "—"}</td>
-        </tr>
-      `).join("");
+      if (count) count.textContent = `${rows.length} filas`;
+
+      const withValues = rows.filter(r => Number.isFinite(r.value));
+      const maxVal = withValues.length ? Math.max(...withValues.map(r => r.value)) : 1;
+
+      tbody.innerHTML = rows.map(row => {
+        const hasVal  = Number.isFinite(row.value);
+        const barPct  = hasVal ? Math.round((row.value / maxVal) * 100) : 0;
+        const barClr  = hasVal ? markerColor(row.value) : "#a8b7c2";
+        return `
+          <tr>
+            <td>
+              <strong>${escapeHtml(row.station_name)}</strong>
+              <span style="display:block;font-family:'Courier New',monospace;font-size:0.72rem;color:var(--ink-500);margin-top:.12rem;">${escapeHtml(row.station_id)}</span>
+            </td>
+            <td>${escapeHtml(row.municipality || "Por verificar")}</td>
+            <td>${escapeHtml(row.institution)}</td>
+            <td>${escapeHtml(row.provider || "—")}</td>
+            <td>
+              <div class="td-bar-wrap">
+                <span class="td-val" style="color:${barClr};min-width:4.5rem;">${hasVal ? formatMm(row.value) : "—"}</span>
+                ${hasVal ? `<div class="td-bar"><div class="td-bar-fill" style="width:${barPct}%;background:${barClr};"></div></div>` : ""}
+              </div>
+            </td>
+            <td>${statusBadge(row.online_status)}</td>
+            <td style="font-size:0.78rem;">${escapeHtml(row.quality_class || "por verificar")}</td>
+            <td>${row.source_url ? `<a href="${escapeAttr(row.source_url)}" target="_blank" rel="noreferrer" style="color:var(--lake-600);text-decoration:underline;">Ver fuente</a>` : "—"}</td>
+          </tr>
+        `;
+      }).join("");
+
+      // Update header sort indicators
+      document.querySelectorAll("#mainTable th[data-col]").forEach(th => {
+        th.classList.remove("sorted-asc","sorted-desc");
+        if (th.dataset.col === tableSortCol) {
+          th.classList.add(tableSortDir === "asc" ? "sorted-asc" : "sorted-desc");
+        }
+      });
     }
 
+    /* ---- Credits ---- */
     function renderCredits() {
       const container = document.getElementById("creditsGrid");
       const credits = new Map();
-
       state.stationRows.forEach(row => {
-        const key = row.institution || "Sin institución";
-        if (!credits.has(key)) {
-          credits.set(key, {
-            institution: key,
-            credit: row.credit || "Crédito pendiente",
-            count: 0,
-            numeric: 0
-          });
-        }
-
-        const item = credits.get(key);
-        item.count += 1;
-        if (Number.isFinite(row.value)) item.numeric += 1;
+        const k = row.institution || "Sin institución";
+        if (!credits.has(k)) credits.set(k, { institution: k, credit: row.credit || "Crédito pendiente", count: 0, numeric: 0 });
+        const item = credits.get(k);
+        item.count++;
+        if (Number.isFinite(row.value)) item.numeric++;
       });
 
       container.innerHTML = [...credits.values()].map(item => `
         <article class="credit-card">
           <h3>${escapeHtml(item.institution)}</h3>
           <p>${escapeHtml(item.credit)}</p>
-          <p style="margin-top:.65rem;">
+          <p style="margin-top:.6rem;">
             <span class="pill">${item.count} estaciones</span>
             <span class="pill">${item.numeric} con dato numérico</span>
           </p>
@@ -2482,55 +2659,110 @@
       `).join("");
     }
 
-    function chartOptions(extra = {}) {
+    /* ---- Diagnostic ---- */
+    function renderDiagnostic() {
+      const actualOk = Boolean(state.actual);
+      const invOk    = Boolean(state.inventory);
+      const pwsOk    = Boolean(state.pws);
+      const pwsApi   = state.pws?.ambient_weather_api;
+      const stations = state.stationRows.length;
+      const numeric  = state.stationRows.filter(r => Number.isFinite(r.value)).length;
+      const parser   = state.stationRows.filter(r => slug(r.online_status).includes("parser")).length;
+      const hist     = state.stationRows.filter(r => slug(r.online_status).includes("historica")).length;
+
+      document.getElementById("diagnosticPanel").innerHTML = `
+        <h3>Diagnóstico del módulo</h3>
+        <p>
+          Archivos leídos: <strong>${actualOk ? "actual.json ✓" : "actual.json pendiente"}</strong>,
+          <strong>${invOk ? "estaciones_precipitacion.json ✓" : "inventario pendiente"}</strong> y
+          <strong>${pwsOk ? "pws_precipitacion.json ✓" : "PWS pendiente"}</strong>.
+        </p>
+        <p>
+          Inventario reconstruido: <strong>${stations}</strong> estaciones.
+          Con dato numérico: <strong>${numeric}</strong>.
+          Históricas: <strong>${hist}</strong>.
+          Requieren parser: <strong>${parser}</strong>.
+          Ambient Weather API: <strong>${pwsApi?.enabled ? "activa" : "no activa"}</strong>
+          ${pwsApi?.devices_seen !== undefined ? `· dispositivos vistos: <strong>${pwsApi.devices_seen}</strong>` : ""}.
+        </p>
+      `;
+    }
+
+    /* ---- Charts — Professional meteorological style ---- */
+    const FONT = "'Times New Roman', Times, serif";
+    const MONO = "'Courier New', Courier, monospace";
+
+    const PALETTE = [
+      "#176680","#1f7ec1","#2a9db7","#4aa982",
+      "#e7b94f","#d66a2a","#8f1c1c","#8ca0ad"
+    ];
+
+    /* Vertical background band plugin */
+    const bandPlugin = {
+      id: "bands",
+      beforeDraw(chart) {
+        const { ctx, chartArea } = chart;
+        if (!chartArea) return;
+        const w = chartArea.right - chartArea.left;
+        const bw = Math.max(28, w / 20);
+        ctx.save();
+        for (let x = chartArea.left; x < chartArea.right; x += bw * 2) {
+          ctx.fillStyle = "rgba(31,126,193,0.038)";
+          ctx.fillRect(x, chartArea.top, bw, chartArea.bottom - chartArea.top);
+        }
+        ctx.restore();
+      }
+    };
+
+    Chart.register(bandPlugin);
+
+    function baseOpts(extra = {}) {
       return {
         responsive: true,
         maintainAspectRatio: false,
-        animation: {
-          duration: 650
-        },
-        interaction: {
-          intersect: false,
-          mode: "index"
-        },
+        animation: { duration: 700 },
+        interaction: { intersect: false, mode: "index" },
         plugins: {
           legend: {
             labels: {
               usePointStyle: true,
               boxWidth: 8,
               color: "#2c4556",
-              font: {
-                family: "Inter",
-                weight: 700
-              }
+              font: { family: FONT, size: 11, weight: "700" },
+              padding: 14
             }
           },
           tooltip: {
-            backgroundColor: "rgba(8,37,55,0.94)",
-            titleFont: { family: "Inter", weight: 900 },
-            bodyFont: { family: "Inter", weight: 700 },
+            backgroundColor: "rgba(8,37,55,0.95)",
+            titleFont: { family: FONT, size: 12, weight: "700" },
+            bodyFont:  { family: MONO, size: 11, weight: "600" },
+            footerFont:{ family: FONT, size: 10 },
             padding: 12,
-            cornerRadius: 12
+            cornerRadius: 4,
+            displayColors: true,
+            callbacks: {
+              label: ctx => ` ${ctx.dataset.label || ""}: ${formatNumber(ctx.parsed.y)} mm`
+            }
           }
         },
         scales: {
           x: {
-            grid: {
-              color: "rgba(15,58,83,0.07)"
-            },
+            grid: { color: "rgba(15,58,83,0.07)", lineWidth: 1 },
+            border: { color: "rgba(15,58,83,0.15)" },
             ticks: {
               color: "#587082",
-              font: { family: "Inter", weight: 700 }
+              font: { family: FONT, size: 10, weight: "700" },
+              maxRotation: 45
             }
           },
           y: {
             beginAtZero: true,
-            grid: {
-              color: "rgba(15,58,83,0.08)"
-            },
+            grid: { color: "rgba(15,58,83,0.08)", lineWidth: 1 },
+            border: { color: "rgba(15,58,83,0.15)" },
             ticks: {
               color: "#587082",
-              font: { family: "JetBrains Mono", weight: 600 }
+              font: { family: MONO, size: 10, weight: "600" },
+              callback: v => `${v} mm`
             }
           }
         },
@@ -2538,38 +2770,18 @@
       };
     }
 
-    const backgroundBandsPlugin = {
-      id: "backgroundBands",
-      beforeDraw(chart) {
-        const { ctx, chartArea } = chart;
-        if (!chartArea) return;
-        const width = chartArea.right - chartArea.left;
-        const band = Math.max(32, width / 18);
-
-        ctx.save();
-        for (let x = chartArea.left; x < chartArea.right; x += band * 2) {
-          ctx.fillStyle = "rgba(31,126,193,0.045)";
-          ctx.fillRect(x, chartArea.top, band, chartArea.bottom - chartArea.top);
-        }
-        ctx.restore();
-      }
-    };
-
-    Chart.register(backgroundBandsPlugin);
-
     function destroyChart(id) {
-      if (state.charts[id]) {
-        state.charts[id].destroy();
-        state.charts[id] = null;
-      }
+      if (state.charts[id]) { state.charts[id].destroy(); state.charts[id] = null; }
     }
 
     function renderCharts() {
-      const rows = state.filteredRows.filter(r => Number.isFinite(r.value));
+      const rows   = state.filteredRows.filter(r => Number.isFinite(r.value)).sort((a,b) => b.value - a.value);
       const labels = rows.map(r => compactName(r.station_name));
       const values = rows.map(r => r.value);
       const colors = rows.map(r => markerColor(r.value));
+      const borders= rows.map(r => markerColor(r.value));
 
+      /* ---- Bar: acumulado por estación ---- */
       destroyChart("bar");
       state.charts.bar = new Chart(document.getElementById("barChart"), {
         type: "bar",
@@ -2578,21 +2790,29 @@
           datasets: [{
             label: "Precipitación acumulada (mm)",
             data: values,
-            backgroundColor: colors,
-            borderColor: "#ffffff",
-            borderWidth: 2,
-            borderRadius: 10,
-            barPercentage: 0.72
+            backgroundColor: colors.map(c => c + "cc"),
+            borderColor: borders,
+            borderWidth: 1.5,
+            borderRadius: 4,
+            barPercentage: 0.68
           }]
         },
-        options: chartOptions({
+        options: baseOpts({
           plugins: {
-            ...chartOptions().plugins,
-            legend: { display: false }
+            ...baseOpts().plugins,
+            legend: { display: false },
+            tooltip: {
+              ...baseOpts().plugins.tooltip,
+              callbacks: { label: ctx => ` ${formatMm(ctx.parsed.y)} — ${rainLabel(ctx.parsed.y)}` }
+            }
           }
         })
       });
 
+      /* ---- Timeline ---- */
+      renderTimelineChart();
+
+      /* ---- Donut: fuentes ---- */
       const sourceCounts = countBy(rows, r => r.institution || "Sin fuente");
       destroyChart("source");
       state.charts.source = new Chart(document.getElementById("sourceChart"), {
@@ -2601,30 +2821,35 @@
           labels: Object.keys(sourceCounts),
           datasets: [{
             data: Object.values(sourceCounts),
-            backgroundColor: ["#176680", "#2a9db7", "#4aa982", "#e7b94f", "#d66a2a", "#99d2f6"],
+            backgroundColor: PALETTE,
             borderColor: "#ffffff",
-            borderWidth: 3
+            borderWidth: 3,
+            hoverBorderWidth: 4
           }]
         },
-        options: chartOptions({
-          cutout: "62%",
-          scales: {},
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: "60%",
           plugins: {
-            ...chartOptions().plugins,
             legend: {
               position: "bottom",
               labels: {
-                usePointStyle: true,
-                color: "#2c4556",
-                font: { family: "Inter", weight: 700 }
+                usePointStyle: true, color: "#2c4556",
+                font: { family: FONT, size: 11, weight: "700" }, padding: 14
               }
+            },
+            tooltip: {
+              backgroundColor: "rgba(8,37,55,0.95)",
+              titleFont: { family: FONT, size: 12 },
+              bodyFont:  { family: MONO, size: 11 },
+              padding: 10, cornerRadius: 4
             }
           }
-        })
+        }
       });
 
-      renderTimelineChart();
-
+      /* ---- Polar: estado de estaciones ---- */
       const statusCounts = countBy(state.filteredRows, r => simplifyStatus(r.online_status));
       destroyChart("status");
       state.charts.status = new Chart(document.getElementById("statusChart"), {
@@ -2633,218 +2858,88 @@
           labels: Object.keys(statusCounts),
           datasets: [{
             data: Object.values(statusCounts),
-            backgroundColor: ["#2f7a62", "#1f7ec1", "#e7b94f", "#d66a2a", "#8ca0ad"],
-            borderColor: "#ffffff",
-            borderWidth: 2
+            backgroundColor: ["#2f7a62cc","#1f7ec1cc","#e7b94fcc","#d66a2acc","#8ca0adcc"],
+            borderColor: "#ffffff", borderWidth: 2
           }]
         },
-        options: chartOptions({
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             r: {
               beginAtZero: true,
               grid: { color: "rgba(15,58,83,0.08)" },
-              ticks: { display: false }
+              ticks: { display: false },
+              border: { color: "rgba(15,58,83,0.1)" }
             }
           },
           plugins: {
-            ...chartOptions().plugins,
             legend: {
               position: "bottom",
               labels: {
-                usePointStyle: true,
-                color: "#2c4556",
-                font: { family: "Inter", weight: 700 }
+                usePointStyle: true, color: "#2c4556",
+                font: { family: FONT, size: 11, weight: "700" }, padding: 14
               }
+            },
+            tooltip: {
+              backgroundColor: "rgba(8,37,55,0.95)",
+              titleFont: { family: FONT, size: 12 },
+              bodyFont:  { family: MONO, size: 11 },
+              padding: 10, cornerRadius: 4
             }
           }
-        })
+        }
       });
     }
 
     function renderTimelineChart() {
-      const monthlyRecords = getPrecipRecords(state.monthly?.records || []);
-      const canvas = document.getElementById("timelineChart");
-
+      const monthly = getPrecipRecords(state.monthly?.records || []);
+      const canvas  = document.getElementById("timelineChart");
       destroyChart("timeline");
 
-      if (!monthlyRecords.length) {
+      if (!monthly.length) {
+        /* Fallback: current reading as single point */
         state.charts.timeline = new Chart(canvas, {
           type: "line",
           data: {
-            labels: state.precipRecords.map(r => r.observed_date || state.actual?.observed_date || "actual"),
+            labels: state.precipRecords.map(r => compactName(r.station_name || "Estación")),
             datasets: [{
               label: "Lectura actual (mm)",
               data: state.precipRecords.map(r => r.value),
               borderColor: "#1f7ec1",
-              backgroundColor: "rgba(31,126,193,0.18)",
-              pointRadius: 5,
-              tension: 0.25
+              backgroundColor: "rgba(31,126,193,0.12)",
+              pointRadius: 5, pointHoverRadius: 7,
+              borderWidth: 2, tension: 0.32, fill: true
             }]
           },
-          options: chartOptions()
+          options: baseOpts()
         });
         return;
       }
 
-      const dates = [...new Set(monthlyRecords.map(r => r.observed_date))].sort();
-      const stationNames = [...new Set(monthlyRecords.map(r => r.station_name))].slice(0, 8);
+      const dates        = [...new Set(monthly.map(r => r.observed_date))].sort();
+      const stationNames = [...new Set(monthly.map(r => r.station_name))].slice(0, 8);
 
-      const palette = ["#176680", "#1f7ec1", "#2a9db7", "#4aa982", "#e7b94f", "#d66a2a", "#7a4b34", "#8ca0ad"];
-
-      const datasets = stationNames.map((name, index) => {
-        return {
-          label: compactName(name),
-          data: dates.map(date => {
-            const rec = monthlyRecords.find(r => r.observed_date === date && r.station_name === name);
-            return rec ? Number(rec.value || 0) : null;
-          }),
-          borderColor: palette[index % palette.length],
-          backgroundColor: palette[index % palette.length] + "33",
-          pointRadius: 4,
-          pointHoverRadius: 6,
-          tension: 0.28,
-          spanGaps: true
-        };
-      });
+      const datasets = stationNames.map((name, i) => ({
+        label: compactName(name),
+        data: dates.map(date => {
+          const rec = monthly.find(r => r.observed_date === date && r.station_name === name);
+          return rec ? Number(rec.value || 0) : null;
+        }),
+        borderColor:     PALETTE[i % PALETTE.length],
+        backgroundColor: PALETTE[i % PALETTE.length] + "20",
+        pointRadius: 3.5, pointHoverRadius: 6,
+        borderWidth: 2, tension: 0.3, spanGaps: true, fill: false
+      }));
 
       state.charts.timeline = new Chart(canvas, {
         type: "line",
         data: { labels: dates, datasets },
-        options: chartOptions()
+        options: baseOpts()
       });
     }
 
-    function renderDiagnostic() {
-      const actualOk = Boolean(state.actual);
-      const invOk = Boolean(state.inventory);
-      const pwsOk = Boolean(state.pws);
-      const pwsApi = state.pws?.ambient_weather_api;
-      const stations = state.stationRows.length;
-      const numeric = state.stationRows.filter(r => Number.isFinite(r.value)).length;
-      const parser = state.stationRows.filter(r => slug(r.online_status).includes("parser")).length;
-      const historical = state.stationRows.filter(r => slug(r.online_status).includes("historica")).length;
-
-      document.getElementById("diagnosticPanel").innerHTML = `
-        <h3>Diagnóstico del módulo</h3>
-        <p>
-          Archivos leídos:
-          <strong>${actualOk ? "actual.json" : "actual.json pendiente"}</strong>,
-          <strong>${invOk ? "estaciones_precipitacion.json" : "inventario pendiente"}</strong> y
-          <strong>${pwsOk ? "pws_precipitacion.json" : "PWS pendiente"}</strong>.
-        </p>
-        <p>
-          Inventario reconstruido: <strong>${stations}</strong> estaciones.
-          Estaciones con dato numérico: <strong>${numeric}</strong>.
-          Estaciones históricas: <strong>${historical}</strong>.
-          Estaciones que requieren parser: <strong>${parser}</strong>.
-        </p>
-        <p>
-          Ambient Weather API:
-          <strong>${pwsApi?.enabled ? "activa" : "no activa o sin lectura"}</strong>
-          ${pwsApi?.devices_seen !== undefined ? `· dispositivos vistos: <strong>${pwsApi.devices_seen}</strong>` : ""}.
-        </p>
-      `;
-    }
-
-    function renderAll(updateFilters = true) {
-      if (updateFilters) populateSourceFilter();
-      renderHeroAndKpis();
-      renderSourceCards();
-      renderRanking();
-      renderMap();
-      renderStationCards();
-      renderTable();
-      renderCredits();
-      renderCharts();
-      renderDiagnostic();
-    }
-
-    async function loadAll() {
-      els.loader.classList.remove("hidden");
-
-      try {
-        state.actual = await fetchJson(DATA_PATHS.actual, true);
-        state.inventory = await fetchJson(DATA_PATHS.inventory, false);
-        state.pws = await fetchJson(DATA_PATHS.pws, false);
-
-        const monthlyPath = monthlyPathFromActual(state.actual?.monthly_history);
-        state.monthly = monthlyPath ? await fetchJson(monthlyPath, false).catch(() => null) : null;
-
-        state.records = Array.isArray(state.actual?.latest_records) ? state.actual.latest_records : [];
-        state.precipRecords = getPrecipRecords(state.records);
-        state.inventoryStations = Array.isArray(state.inventory?.stations) ? state.inventory.stations : [];
-        state.stationRows = buildStationRows();
-        state.filteredRows = [...state.stationRows];
-
-        populateSourceFilter();
-        renderAll(false);
-        showToast("Datos cargados", `Se leyeron ${state.precipRecords.length} registros de precipitación acumulada.`);
-
-      } catch (error) {
-        console.error(error);
-        showToast("Error al cargar datos", error.message);
-        document.getElementById("summaryText").innerHTML = `
-          <h3>No se pudieron leer los datos</h3>
-          <p>
-            Revisá que existan los archivos en <strong>docs/data/precipitaciones/</strong>
-            y que GitHub Pages haya terminado de publicar la última corrida del Action.
-          </p>
-        `;
-      } finally {
-        setTimeout(() => els.loader.classList.add("hidden"), 350);
-      }
-    }
-
-    function compactName(name) {
-      const n = String(name || "");
-      return n
-        .replace("Asociación Vivamos Mejor / ", "")
-        .replace("Vivamos Mejor / ", "")
-        .replace("PWS ", "")
-        .replace("Estación ", "")
-        .trim();
-    }
-
-    function simplifyStatus(status) {
-      const s = slug(status);
-      if (s.includes("online")) return "Online";
-      if (s.includes("historica")) return "Histórica";
-      if (s.includes("parser")) return "Requiere parser";
-      if (s.includes("inventario")) return "Inventario";
-      if (s.includes("error")) return "Error";
-      return "Por verificar";
-    }
-
-    function groupBy(items, getter) {
-      return items.reduce((acc, item) => {
-        const key = getter(item);
-        acc[key] ||= [];
-        acc[key].push(item);
-        return acc;
-      }, {});
-    }
-
-    function countBy(items, getter) {
-      return items.reduce((acc, item) => {
-        const key = getter(item);
-        acc[key] = (acc[key] || 0) + 1;
-        return acc;
-      }, {});
-    }
-
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function escapeAttr(value) {
-      return escapeHtml(value).replaceAll("`", "&#096;");
-    }
-
+    /* ---- Modal ---- */
     function openStation(stationId) {
       const row = state.stationRows.find(r => r.station_id === stationId);
       if (!row) return;
@@ -2861,10 +2956,10 @@
             <td>${escapeHtml(r.quality_flag || "—")}</td>
           </tr>
         `).join("")
-        : `<tr><td colspan="4">Sin variables numéricas asociadas en actual.json.</td></tr>`;
+        : `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);">Sin variables numéricas asociadas en actual.json.</td></tr>`;
 
       document.getElementById("modalBody").innerHTML = `
-        <div class="grid-kpis" style="grid-template-columns:repeat(3,1fr);">
+        <div class="grid-kpis" style="grid-template-columns:repeat(3,1fr);margin-bottom:1rem;">
           <article class="card kpi">
             <div class="kpi-label">Precipitación</div>
             <div class="kpi-value">${Number.isFinite(row.value) ? formatMm(row.value) : "—"}</div>
@@ -2872,54 +2967,50 @@
           </article>
           <article class="card kpi">
             <div class="kpi-label">Estado</div>
-            <div class="kpi-value" style="font-size:1.2rem;letter-spacing:-.03em;">${escapeHtml(simplifyStatus(row.online_status))}</div>
+            <div class="kpi-value" style="font-size:1.1rem;">${escapeHtml(simplifyStatus(row.online_status))}</div>
             <div class="kpi-meta">${escapeHtml(row.status || "por verificar")}</div>
           </article>
           <article class="card kpi">
             <div class="kpi-label">Tipo</div>
-            <div class="kpi-value" style="font-size:1.05rem;letter-spacing:-.03em;">${escapeHtml(row.quality_class || "—")}</div>
+            <div class="kpi-value" style="font-size:1rem;">${escapeHtml(row.quality_class || "—")}</div>
             <div class="kpi-meta">${escapeHtml(row.provider || "—")}</div>
           </article>
         </div>
 
-        <article class="card panel" style="margin-top:1rem;">
+        <article class="card panel" style="margin-bottom:1rem;">
           <div class="panel-head">
             <div>
               <h3>Ficha de estación</h3>
-              <p>${escapeHtml(row.municipality || "Municipio por verificar")} · ${escapeHtml(row.institution)}</p>
+              <p>${escapeHtml(row.municipality || "Municipio por verificar")} &middot; ${escapeHtml(row.institution)}</p>
             </div>
             ${statusBadge(row.online_status)}
           </div>
-
-          <div class="table-wrap">
-            <table>
+          <div class="table-scroll" style="max-height:none;">
+            <table style="min-width:0;">
               <tbody>
-                <tr><th>Station ID</th><td>${escapeHtml(row.station_id)}</td></tr>
+                <tr><th>Station ID</th><td class="mono">${escapeHtml(row.station_id)}</td></tr>
                 <tr><th>Institución</th><td>${escapeHtml(row.institution)}</td></tr>
                 <tr><th>Proveedor</th><td>${escapeHtml(row.provider || "—")}</td></tr>
-                <tr><th>Código</th><td>${escapeHtml(row.station_code || "—")}</td></tr>
-                <tr><th>Fuente</th><td>${row.source_url ? `<a href="${escapeAttr(row.source_url)}" target="_blank" rel="noreferrer noopener">Abrir fuente original</a>` : "—"}</td></tr>
+                <tr><th>Código</th><td class="mono">${escapeHtml(row.station_code || "—")}</td></tr>
+                <tr><th>Fuente</th><td>${row.source_url ? `<a href="${escapeAttr(row.source_url)}" target="_blank" rel="noreferrer" style="color:var(--lake-600);text-decoration:underline;">Abrir fuente original</a>` : "—"}</td></tr>
                 <tr><th>Crédito</th><td>${escapeHtml(row.credit || "Crédito pendiente")}</td></tr>
               </tbody>
             </table>
           </div>
         </article>
 
-        <article class="card panel" style="margin-top:1rem;">
+        <article class="card panel">
           <div class="panel-head">
             <div>
               <h3>Variables del corte actual</h3>
               <p>Registros asociados a esta estación dentro de actual.json.</p>
             </div>
           </div>
-          <div class="table-wrap">
+          <div class="table-scroll">
             <table>
               <thead>
                 <tr>
-                  <th>Variable</th>
-                  <th>Valor</th>
-                  <th>Periodo</th>
-                  <th>Calidad</th>
+                  <th>Variable</th><th>Valor</th><th>Periodo</th><th>Calidad</th>
                 </tr>
               </thead>
               <tbody>${recordList}</tbody>
@@ -2929,49 +3020,29 @@
       `;
 
       document.getElementById("stationModal").classList.add("open");
-      document.getElementById("stationModal").setAttribute("aria-hidden", "false");
+      document.getElementById("stationModal").setAttribute("aria-hidden","false");
     }
 
     function closeModal() {
       document.getElementById("stationModal").classList.remove("open");
-      document.getElementById("stationModal").setAttribute("aria-hidden", "true");
+      document.getElementById("stationModal").setAttribute("aria-hidden","true");
     }
 
+    /* ---- CSV download ---- */
     function downloadCsv() {
-      const fields = [
-        "station_id",
-        "station_name",
-        "municipality",
-        "institution",
-        "provider",
-        "value_mm",
-        "online_status",
-        "quality_class",
-        "source_url",
-        "credit"
-      ];
-
+      const fields = ["station_id","station_name","municipality","institution","provider",
+                      "value_mm","online_status","quality_class","source_url","credit"];
       const rows = state.filteredRows.map(row => ({
-        station_id: row.station_id,
-        station_name: row.station_name,
-        municipality: row.municipality,
-        institution: row.institution,
-        provider: row.provider,
-        value_mm: Number.isFinite(row.value) ? row.value : "",
-        online_status: row.online_status,
-        quality_class: row.quality_class,
-        source_url: row.source_url,
-        credit: row.credit
+        station_id: row.station_id, station_name: row.station_name,
+        municipality: row.municipality, institution: row.institution,
+        provider: row.provider, value_mm: Number.isFinite(row.value) ? row.value : "",
+        online_status: row.online_status, quality_class: row.quality_class,
+        source_url: row.source_url, credit: row.credit
       }));
-
-      const csv = [
-        fields.join(","),
-        ...rows.map(row => fields.map(field => csvCell(row[field])).join(","))
-      ].join("\n");
-
+      const csv = [fields.join(","), ...rows.map(row => fields.map(f => csvCell(row[f])).join(","))].join("\n");
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
       a.href = url;
       a.download = `precipitaciones_solola_${state.actual?.observed_date || "actual"}.csv`;
       document.body.appendChild(a);
@@ -2980,75 +3051,117 @@
       URL.revokeObjectURL(url);
     }
 
-    function csvCell(value) {
-      const text = String(value ?? "");
-      return `"${text.replaceAll('"', '""')}"`;
+    /* ---- Toast ---- */
+    function showToast(title, text) {
+      els.toastTitle.textContent = title;
+      els.toastText.textContent  = text;
+      els.toast.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => els.toast.classList.remove("show"), 5500);
     }
 
+    /* ---- Render all ---- */
+    function renderAll(updateFilters = true) {
+      if (updateFilters) populateSourceFilter();
+      renderHeroAndKpis();
+      renderSourceCards();
+      renderRanking();
+      renderMap();
+      renderStationCards();
+      renderTable();
+      renderCredits();
+      renderCharts();
+      renderDiagnostic();
+    }
+
+    /* ---- Load all data ---- */
+    async function loadAll() {
+      els.loader.classList.remove("hidden");
+      try {
+        state.actual    = await fetchJson(DATA_PATHS.actual, true);
+        state.inventory = await fetchJson(DATA_PATHS.inventory, false);
+        state.pws       = await fetchJson(DATA_PATHS.pws, false);
+
+        const monthlyPath = monthlyPathFromActual(state.actual?.monthly_history);
+        state.monthly = monthlyPath ? await fetchJson(monthlyPath, false).catch(() => null) : null;
+
+        state.records           = Array.isArray(state.actual?.latest_records) ? state.actual.latest_records : [];
+        state.precipRecords     = getPrecipRecords(state.records);
+        state.inventoryStations = Array.isArray(state.inventory?.stations) ? state.inventory.stations : [];
+        state.stationRows       = buildStationRows();
+        state.filteredRows      = [...state.stationRows];
+
+        populateSourceFilter();
+        populateChartStationSelect();
+        renderAll(false);
+        showToast("Datos cargados", `Se leyeron ${state.precipRecords.length} registros de precipitación acumulada.`);
+
+      } catch (err) {
+        console.error(err);
+        showToast("Error al cargar datos", err.message);
+        document.getElementById("summaryText").innerHTML = `
+          <h3>No se pudieron leer los datos</h3>
+          <p>Verificá que existan los archivos en <strong>docs/data/precipitaciones/</strong>
+             y que GitHub Pages haya terminado de publicar la última corrida del Action.</p>
+        `;
+      } finally {
+        setTimeout(() => els.loader.classList.add("hidden"), 380);
+      }
+    }
+
+    /* ---- Events ---- */
     function setupEvents() {
-      document.querySelector("[data-mobile-btn]").addEventListener("click", () => {
-        document.querySelector("[data-mobile-menu]").classList.toggle("open");
-      });
-
-      document.querySelector("[data-mobile-menu]").addEventListener("click", event => {
-        if (event.target.matches("a")) {
-          document.querySelector("[data-mobile-menu]").classList.remove("open");
-        }
-      });
-
-      els.searchInput.addEventListener("input", event => {
-        state.filters.search = event.target.value.trim();
-        applyFilters();
-      });
-
-      els.sourceFilter.addEventListener("change", event => {
-        state.filters.source = event.target.value;
-        applyFilters();
-      });
-
-      els.statusFilter.addEventListener("change", event => {
-        state.filters.status = event.target.value;
-        applyFilters();
-      });
-
-      els.classFilter.addEventListener("change", event => {
-        state.filters.quality = event.target.value;
-        applyFilters();
-      });
-
-      els.rainFilter.addEventListener("change", event => {
-        state.filters.rain = event.target.value;
-        applyFilters();
-      });
+      els.searchInput.addEventListener("input",  e => { state.filters.search  = e.target.value.trim(); applyFilters(); });
+      els.sourceFilter.addEventListener("change",e => { state.filters.source  = e.target.value;        applyFilters(); });
+      els.statusFilter.addEventListener("change",e => { state.filters.status  = e.target.value;        applyFilters(); });
+      els.classFilter.addEventListener("change", e => { state.filters.quality = e.target.value;        applyFilters(); });
+      els.rainFilter.addEventListener("change",  e => { state.filters.rain    = e.target.value;        applyFilters(); });
 
       document.getElementById("btnRefresh").addEventListener("click", loadAll);
       document.getElementById("btnDownloadCsv").addEventListener("click", downloadCsv);
       document.getElementById("btnPrint").addEventListener("click", () => window.print());
       document.getElementById("modalClose").addEventListener("click", closeModal);
+      document.getElementById("stationModal").addEventListener("click", e => { if (e.target.id === "stationModal") closeModal(); });
+      window.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 
-      document.getElementById("stationModal").addEventListener("click", event => {
-        if (event.target.id === "stationModal") closeModal();
-      });
-
-      window.addEventListener("keydown", event => {
-        if (event.key === "Escape") closeModal();
-      });
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
+      /* Map tabs */
+      document.querySelectorAll(".map-tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".map-tab").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".map-pane").forEach(p => p.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+          /* Invalidate Leaflet size if switching back */
+          if (btn.dataset.tab === "leaflet" && state.map) {
+            setTimeout(() => state.map.invalidateSize(), 80);
+          }
         });
-      }, { threshold: 0.12 });
+      });
 
+      /* Table header sort */
+      document.querySelectorAll("#mainTable th[data-col]").forEach(th => {
+        th.addEventListener("click", () => {
+          if (tableSortCol === th.dataset.col) {
+            tableSortDir = tableSortDir === "asc" ? "desc" : "asc";
+          } else {
+            tableSortCol = th.dataset.col;
+            tableSortDir = "desc";
+          }
+          renderTable();
+        });
+      });
+
+      /* Reveal animations */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add("visible"); observer.unobserve(e.target); });
+      }, { threshold: 0.1 });
       document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
     }
 
     window.openStation = openStation;
-
     setupEvents();
     loadAll();
   </script>
+
 </body>
 </html>
