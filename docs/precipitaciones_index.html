@@ -1408,7 +1408,7 @@
 <body>
   <header class="navbar">
     <div class="navbar-inner">
-      <a class="brand" href="../" aria-label="Volver al inicio de la Plataforma Agroclimática">
+      <a class="brand" href="../index.html" aria-label="Volver al inicio de la Plataforma Agroclimática">
         <span class="brand-mark">MTA</span>
         <span class="brand-title">
           <span>Sololá</span>
@@ -1840,7 +1840,7 @@
       <div>
         <h3 style="margin-bottom:.8rem;">Accesos</h3>
         <div class="footer-links">
-          <a href="../">Inicio de la plataforma</a>
+          <a href="../index.html">Inicio de la plataforma</a>
           <a href="#mapa">Mapa interactivo</a>
           <a href="#graficas">Gráficas</a>
           <a href="#estaciones">Estaciones</a>
@@ -1868,9 +1868,9 @@
 
   <script>
     const DATA_PATHS = {
-      actual: "../data/precipitaciones/actual.json",
-      inventory: "../data/precipitaciones/estaciones_precipitacion.json",
-      pws: "../data/precipitaciones/pws_precipitacion.json"
+      actual: "./data/precipitaciones/actual.json",
+      inventory: "./data/precipitaciones/estaciones_precipitacion.json",
+      pws: "./data/precipitaciones/pws_precipitacion.json"
     };
 
     const SOL_CENTER = [14.76, -91.18];
@@ -2028,10 +2028,14 @@
 
     function monthlyPathFromActual(path) {
       if (!path) return null;
-      let clean = String(path);
-      clean = clean.replace(/^docs\//, "../");
-      if (clean.startsWith("data/")) clean = "../" + clean;
-      if (clean.startsWith("./docs/")) clean = clean.replace("./docs/", "../");
+      let clean = String(path).trim();
+
+      // Este archivo vive en docs/precipitaciones_index.html.
+      // Por eso los datos viven en ./data/precipitaciones/...
+      if (clean.startsWith("docs/data/")) clean = clean.replace("docs/data/", "./data/");
+      if (clean.startsWith("./docs/data/")) clean = clean.replace("./docs/data/", "./data/");
+      if (clean.startsWith("data/")) clean = "./" + clean;
+
       return clean;
     }
 
