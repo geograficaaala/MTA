@@ -2841,62 +2841,48 @@
     setupEvents();
     load();
     /* ============================================================
-       AWN — AMBIENT WEATHER NETWORK
+       AWN — LEE JSON LOCAL (generado por fetch_awn.py / GitHub Actions)
+       No llama la API desde el browser para evitar CORS
     ============================================================ */
-    const AWN_APP_KEY = "bcecf231a4454f01b5d5bb1d52cfd23ca3403d8b48954ca5ab7699b7ebf85c9c";
-    const AWN_API_KEY = "c797c082863c4f748e1acace9fab1ac4afc5f7c7f03049dcb529bc15f636ffe2";
-    const AWN_BASE    = "https://api.ambientweather.net/v1";
+    const AWN_JSON_URL = "./data/precipitaciones/awn_estacion.json";
 
     async function loadAwn() {
       const statusEl = document.getElementById("awnStatus");
       const bodyEl   = document.getElementById("awnBody");
       statusEl.className = "awn-status load";
-      statusEl.textContent = "Conectando...";
+      statusEl.textContent = "Cargando...";
 
       try {
-        /* 1. Get device list */
-        const devResp = await fetch(
-          `${AWN_BASE}/devices?applicationKey=${AWN_APP_KEY}&apiKey=${AWN_API_KEY}`,
-          { cache: "no-store" }
-        );
+        const resp = await fetch(`${AWN_JSON_URL}?v=${Date.now()}`, { cache: "no-store" });
 
-        if (!devResp.ok) throw new Error(`HTTP ${devResp.status}`);
-        const devices = await devResp.json();
+        if (!resp.ok) throw new Error(`HTTP ${resp.status} — archivo no generado aún`);
+        const data = await resp.json();
 
-        if (!devices.length) {
-          statusEl.className = "awn-status err";
-          statusEl.textContent = "Sin dispositivos";
-          bodyEl.innerHTML = `<div class="awn-loading">No se encontraron estaciones asociadas a esta cuenta AWN.</div>`;
-          document.getElementById("chipAwn").textContent = "AWN: sin dispositivos";
-          return;
-        }
+        const est  = data.estacion       || {};
+        const last = data.ultima_lectura || {};
+        const res  = data.resumen        || {};
 
-        const device = devices[0];
-        const last   = device.lastData || {};
-        const info   = device.info    || {};
-        const macAddress = device.macAddress;
-
-        /* Update chip in hero */
-        const chipAwn = document.getElementById("chipAwn");
-        chipAwn.textContent = `AWN: ${info.name || "Estación propia"} — ${last.dateutc ? new Date(last.dateutc).toLocaleDateString("es-GT") : "sin fecha"}`;
+        /* Chip en hero */
+        const chipEl = document.getElementById("chipAwn");
+        chipEl.textContent = `AWN: ${est.nombre || "Estación propia"} · ${est.municipio || "Sololá"}`;
 
         statusEl.className = "awn-status ok";
-        statusEl.textContent = "En línea";
+        statusEl.textContent = "Datos disponibles";
 
-        /* 2. Show latest readings */
-        const awnFields = [
-          { label: "Lluvia evento",  val: last.eventrainin != null ? `${last.eventrainin.toFixed(2)} mm` : "—",    note: "Evento actual" },
-          { label: "Lluvia diaria",  val: last.dailyrainin != null ? `${last.dailyrainin.toFixed(2)} mm` : "—",    note: "Acumulado hoy" },
-          { label: "Lluvia semanal", val: last.weeklyrainin != null ? `${last.weeklyrainin.toFixed(2)} mm` : "—",  note: "Últimos 7 días" },
-          { label: "Lluvia mensual", val: last.monthlyrainin != null ? `${last.monthlyrainin.toFixed(2)} mm` : "—",note: "Mes en curso" },
-          { label: "Temperatura",    val: last.tempf != null ? `${(((last.tempf - 32) * 5) / 9).toFixed(1)} °C` : "—", note: "Campo" },
-          { label: "Humedad rel.",   val: last.humidity != null ? `${last.humidity} %` : "—",                       note: "HR exterior" },
-          { label: "Presión atm.",   val: last.baromrelin != null ? `${(last.baromrelin * 33.8639).toFixed(1)} hPa` : "—", note: "hPa" },
-          { label: "Viento",         val: last.windspeedmph != null ? `${(last.windspeedmph * 1.60934).toFixed(1)} km/h` : "—", note: `Dir: ${last.winddir != null ? last.winddir + "°" : "—"}` },
-          { label: "Fecha lectura",  val: last.dateutc ? new Date(last.dateutc).toLocaleString("es-GT") : "—",     note: "UTC" },
+        /* KPIs de precipitación (solo lluvia) */
+        const fields = [
+          { label: "Lluvia diaria",   val: last.lluvia_diaria_mm  != null ? `${last.lluvia_diaria_mm} mm`  : "—", note: "Acumulado hoy" },
+          { label: "Lluvia evento",   val: last.lluvia_evento_mm  != null ? `${last.lluvia_evento_mm} mm`  : "—", note: "Evento actual" },
+          { label: "Lluvia semanal",  val: last.lluvia_semanal_mm != null ? `${last.lluvia_semanal_mm} mm` : "—", note: "Últimos 7 días" },
+          { label: "Lluvia mensual",  val: last.lluvia_mensual_mm != null ? `${last.lluvia_mensual_mm} mm` : "—", note: "Mes en curso" },
+          { label: "Total histórico", val: res.total_mm           != null ? `${res.total_mm} mm`           : "—", note: `desde ${est.activa_desde || "—"}` },
+          { label: "Máximo diario",   val: res.max_diario_mm      != null ? `${res.max_diario_mm} mm`      : "—", note: "Registrado en campo" },
+          { label: "Días con dato",   val: res.dias_con_dato      != null ? `${res.dias_con_dato}`          : "—", note: "Registros diarios" },
+          { label: "Días con lluvia", val: res.dias_con_lluvia    != null ? `${res.dias_con_lluvia}`        : "—", note: "P > 0 mm" },
+          { label: "Última lectura",  val: last.fecha_utc ? last.fecha_utc.replace("T"," ") : "—",               note: "Hora Guatemala" },
         ];
 
-        bodyEl.innerHTML = awnFields.map(f => `
+        bodyEl.innerHTML = fields.map(f => `
           <div class="awn-kpi">
             <div class="awn-kpi-label">${f.label}</div>
             <div class="awn-kpi-value">${f.val}</div>
@@ -2904,120 +2890,99 @@
           </div>
         `).join("");
 
-        /* 3. Get recent historical data (last 288 records = 24h at 5min) */
-        await renderAwnChart(macAddress);
+        /* Gráfica histórica de precipitación diaria */
+        renderAwnChart(data.historico_diario || []);
 
       } catch (err) {
-        console.error("AWN error:", err);
+        console.warn("AWN JSON:", err.message);
         statusEl.className = "awn-status err";
-        statusEl.textContent = "Error de conexión";
-        document.getElementById("awnBody").innerHTML =
-          `<div class="awn-loading">No se pudo conectar con la API de Ambient Weather Network. Verificar conectividad y claves. Error: ${err.message}</div>`;
-        document.getElementById("chipAwn").textContent = "AWN: sin conexión";
+        statusEl.textContent = "Sin datos";
+        document.getElementById("chipAwn").textContent = "AWN: pendiente de generar";
+        bodyEl.innerHTML = `
+          <div class="awn-loading">
+            El archivo <code>awn_estacion.json</code> no existe todavía.
+            Ejecutar <strong>fetch_awn.py</strong> localmente o agregar el workflow
+            de GitHub Actions correspondiente para generarlo.
+          </div>`;
       }
     }
 
-    async function renderAwnChart(macAddress) {
-      try {
-        /* Get last 288 readings (24h at 5min intervals, limit max 288) */
-        const now = Date.now();
-        const histResp = await fetch(
-          `${AWN_BASE}/devices/${macAddress}?applicationKey=${AWN_APP_KEY}&apiKey=${AWN_API_KEY}&endDate=${now}&limit=288`,
-          { cache: "no-store" }
-        );
+    function renderAwnChart(historico) {
+      if (!historico.length) return;
 
-        if (!histResp.ok) return;
-        const records = await histResp.json();
-        if (!Array.isArray(records) || !records.length) return;
+      const labels = historico.map(r => r.fecha);
+      const values = historico.map(r => r.lluvia_mm);
 
-        /* Reverse so oldest first */
-        const sorted = [...records].reverse();
-        const labels = sorted.map(r => {
-          const d = new Date(r.dateutc);
-          return `${d.getHours().toString().padStart(2,"0")}:${d.getMinutes().toString().padStart(2,"0")}`;
-        });
-        const rainVals = sorted.map(r => r.hourlyrainin != null ? parseFloat(r.hourlyrainin.toFixed(2)) : 0);
-        const tempVals = sorted.map(r => r.tempf != null ? parseFloat((((r.tempf - 32) * 5) / 9).toFixed(1)) : null);
+      destroyChart("awn");
+      const ctx = document.getElementById("awnChart").getContext("2d");
 
-        destroyChart("awn");
-        const ctx = document.getElementById("awnChart").getContext("2d");
-
-        S.charts.awn = new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels,
-            datasets: [
-              {
-                type: "bar",
-                label: "Lluvia horaria (mm)",
-                data: rainVals,
-                backgroundColor: rainVals.map(v => rainColor(v, 0.78)),
-                borderColor:     rainVals.map(v => rainColor(v, 1)),
-                borderWidth: 0.5,
-                borderRadius: 2,
-                yAxisID: "yRain",
-                order: 2
-              },
-              {
-                type: "line",
-                label: "Temperatura (°C)",
-                data: tempVals,
-                borderColor: "#d66a2a",
-                backgroundColor: "rgba(214,106,42,0.1)",
-                borderWidth: 2,
-                pointRadius: 0,
-                tension: 0.4,
-                fill: false,
-                yAxisID: "yTemp",
-                spanGaps: true,
-                order: 1
-              }
-            ]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: { duration: 500 },
-            plugins: {
-              legend: {
-                labels: { color: "#2c4556", font: { family: FONT, size: 11 }, padding: 12, usePointStyle: true }
-              },
-              tooltip: {
-                backgroundColor: "rgba(8,37,55,0.95)",
-                titleFont: { family: FONT, size: 11 },
-                bodyFont:  { family: MONO, size: 10 },
-                padding: 9, cornerRadius: 4
+      S.charts.awn = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [{
+            label: "Precipitación diaria observada (mm)",
+            data: values,
+            backgroundColor: values.map(v => rainColor(v, 0.82)),
+            borderColor:     values.map(v => rainColor(v, 1)),
+            borderWidth: 1,
+            borderRadius: 3,
+            barPercentage: 0.78
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 500 },
+          plugins: {
+            legend: {
+              labels: { color: "#2c4556", font: { family: FONT, size: 11 },
+                        padding: 12, usePointStyle: true }
+            },
+            tooltip: {
+              backgroundColor: "rgba(8,37,55,0.95)",
+              titleFont: { family: FONT, size: 11 },
+              bodyFont:  { family: MONO, size: 10 },
+              padding: 9, cornerRadius: 4,
+              callbacks: {
+                label: item => ` ${fmt(item.parsed.y, 2)} mm — ${rainCategory(item.parsed.y)}`
               }
             },
-            scales: {
-              x: {
-                grid: { color: "rgba(15,58,83,0.06)" },
-                ticks: { color: "#587082", font: { family: FONT, size: 9 }, maxRotation: 45,
-                         callback: (v, i) => i % 12 === 0 ? labels[i] : "" }
-              },
-              yRain: {
-                position: "left",
-                beginAtZero: true,
-                grid: { color: "rgba(15,58,83,0.07)" },
-                ticks: { color: "#587082", font: { family: MONO, size: 9 }, callback: v => `${v}mm` }
-              },
-              yTemp: {
-                position: "right",
-                grid: { display: false },
-                ticks: { color: "#d66a2a", font: { family: MONO, size: 9 }, callback: v => `${v}°C` }
+            annotation: {
+              annotations: {
+                l5: {
+                  type: "line", yMin: 5, yMax: 5,
+                  borderColor: "rgba(31,126,193,0.5)", borderWidth: 1,
+                  borderDash: [4, 4],
+                  label: { content: "5 mm", display: true, position: "end",
+                           font: { size: 9, family: FONT }, color: "#1f7ec1",
+                           backgroundColor: "rgba(255,255,255,0.75)" }
+                }
               }
             }
+          },
+          scales: {
+            x: {
+              grid: { color: "rgba(15,58,83,0.06)" },
+              ticks: { color: "#587082", font: { family: FONT, size: 9 }, maxRotation: 55,
+                callback: (v, i) => {
+                  const d = parseInt(labels[i]?.slice(8) || "0", 10);
+                  return d % 3 === 0 ? labels[i] : "";
+                }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: "rgba(15,58,83,0.07)" },
+              ticks: { color: "#587082", font: { family: MONO, size: 9 },
+                       callback: v => `${v} mm` },
+              title: { display: true, text: "mm / día",
+                       color: "#587082", font: { family: FONT, size: 10 } }
+            }
           }
-        });
-      } catch(e) {
-        console.warn("AWN chart error:", e);
-      }
+        }
+      });
     }
-
-    /* ============================================================
-       PREDICTIONS — OPEN-METEO (reads prediccion_mensual.json)
-    ============================================================ */
-    const PRED_URL = "./data/precipitaciones/prediccion_mensual.json";
 
     async function loadPredictions() {
       const noteEl = document.getElementById("predNote");
