@@ -11,17 +11,6 @@
     content="Plataforma digital de la Mesa Técnica Agroclimática de Sololá para consultar información climática, precipitación, estaciones meteorológicas y boletines agroclimáticos."
   />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-  />
-
   <style>
     :root {
       --lake-950: #062233;
@@ -83,18 +72,21 @@
 
     html {
       scroll-behavior: smooth;
+      font-size: 12pt;
     }
 
     body {
       min-height: 100vh;
       padding-top: var(--nav-h);
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 12pt;
       color: var(--text);
       background:
         radial-gradient(circle at 10% 8%, rgba(42, 157, 183, 0.14), transparent 28%),
         radial-gradient(circle at 92% 8%, rgba(231, 185, 79, 0.18), transparent 26%),
         linear-gradient(180deg, #fbfcf8 0%, var(--surface) 46%, var(--surface-2) 100%);
       overflow-x: hidden;
+      text-align: justify;
     }
 
     body::before {
@@ -119,6 +111,10 @@
       font: inherit;
     }
 
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+
     .navbar {
       position: fixed;
       top: 0;
@@ -126,31 +122,29 @@
       right: 0;
       z-index: 1000;
       min-height: var(--nav-h);
-      display: flex;
-      align-items: center;
-      background: rgba(15, 58, 83, 0.97);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(16px);
+      background: var(--lake-900);
+      border-bottom: 3px solid var(--maize-500);
+      box-shadow: 0 2px 28px rgba(0, 0, 0, 0.22);
     }
 
     .navbar-inner {
       width: 100%;
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 1.2rem;
+      padding: 0 1.5rem;
+      height: var(--nav-h);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 1rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      min-width: 0;
+      gap: 0.9rem;
       color: #ffffff;
+      text-decoration: none;
     }
 
     .brand-mark {
@@ -159,68 +153,52 @@
       flex: 0 0 46px;
       display: grid;
       place-items: center;
-      border-radius: 1rem;
-      background:
-        radial-gradient(circle at 70% 24%, var(--maize-500) 0 16%, transparent 17%),
-        linear-gradient(145deg, #ffffff, #e8f4fd);
+      border-radius: 6px;
+      background: linear-gradient(145deg, #ffffff, #dceef7);
       color: var(--lake-900);
-      font-weight: 900;
-      letter-spacing: -0.06em;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+      font-family: "Times New Roman", Times, serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
     }
 
     .brand-text {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 0.1rem;
-      min-width: 0;
     }
 
-    .brand-text span {
-      color: rgba(255, 255, 255, 0.68);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+    .brand-sub {
+      color: rgba(255, 255, 255, 0.55);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      font-weight: 800;
     }
 
-    .brand-text strong {
+    .brand-name {
       color: #ffffff;
-      font-size: 0.98rem;
-      line-height: 1.1;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.97rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
       white-space: nowrap;
     }
 
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
+    code {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.82rem;
+      background: rgba(15, 58, 83, 0.08);
+      color: var(--lake-700);
+      padding: 0.08em 0.32em;
+      border-radius: 3px;
+      border: 1px solid rgba(15, 58, 83, 0.12);
     }
 
-    .nav-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      min-height: 42px;
-      padding: 0.65rem 0.95rem;
-      color: rgba(255, 255, 255, 0.86);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      font-size: 0.86rem;
-      font-weight: 800;
-      transition: 0.2s ease;
-    }
-
-    .nav-pill:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.14);
-      transform: translateY(-1px);
-    }
-
-    .nav-pill.primary {
-      color: var(--lake-900);
-      background: #ffffff;
-    }
+    /* ============================================================
+       HERO
+    ============================================================ */
 
     .hero-wrap {
       position: relative;
@@ -237,23 +215,10 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.15), transparent 28%),
-        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
-      background-size: auto, 42px 42px, 42px 42px;
-      mask-image: linear-gradient(120deg, rgba(0, 0, 0, 0.88), transparent 94%);
-      pointer-events: none;
-    }
-
-    .hero-wrap::after {
-      content: "";
-      position: absolute;
-      width: 560px;
-      height: 560px;
-      right: -170px;
-      top: -130px;
-      border-radius: 50%;
-      border: 90px solid rgba(42, 157, 183, 0.08);
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(135deg, rgba(0, 0, 0, 0.7), transparent 80%);
       pointer-events: none;
     }
 
@@ -262,60 +227,22 @@
       z-index: 1;
       max-width: var(--max);
       margin: 0 auto;
-      padding: clamp(3.2rem, 8vw, 6.5rem) 1.2rem;
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 2.4rem;
-      align-items: center;
-    }
-
-    .hero-badges {
+      padding: clamp(4rem, 10vw, 8rem) 1.5rem;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .badge {
-      display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      min-height: 31px;
-      padding: 0.32rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-    }
-
-    .badge-green {
-      background: rgba(64, 163, 127, 0.2);
-      color: #8bf0d2;
-      border: 1px solid rgba(64, 163, 127, 0.32);
-    }
-
-    .badge-status {
-      background: rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-    }
-
-    .led {
-      width: 0.52rem;
-      height: 0.52rem;
-      border-radius: 50%;
-      background: #2fd08f;
-      box-shadow: 0 0 0 3px rgba(47, 208, 143, 0.22);
+      justify-content: center;
+      text-align: center;
     }
 
     .hero-title {
-      max-width: 11ch;
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(3.2rem, 7vw, 6.2rem);
-      font-weight: 400;
-      line-height: 0.98;
-      letter-spacing: -0.04em;
+      font-family: "Times New Roman", Times, serif;
+      font-size: clamp(2rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
       color: #ffffff;
+      text-align: center;
+      max-width: 900px;
     }
 
     .hero-title em {
@@ -323,280 +250,60 @@
       color: #8bf0d2;
     }
 
-    .hero-body {
-      max-width: 660px;
-      margin-top: 1.25rem;
-      color: rgba(255, 255, 255, 0.72);
-      font-size: clamp(1rem, 1.45vw, 1.12rem);
-      line-height: 1.75;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.8rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      min-height: 44px;
-      padding: 0.68rem 1rem;
-      border-radius: 999px;
-      border: 0;
-      cursor: pointer;
-      font-size: 0.88rem;
-      font-weight: 900;
-      transition: 0.18s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      color: var(--lake-900);
-      background: #ffffff;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-    }
-
-    .btn-soft {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-    }
-
-    .hero-cards {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-      margin-top: 2rem;
-      max-width: 650px;
-    }
-
-    .hcard {
-      padding: 1rem 1.1rem;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(10px);
-    }
-
-    .hcard-title {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-bottom: 0.55rem;
-      color: #8bf0d2;
-      font-size: 0.78rem;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .hcard ul {
-      list-style: none;
-      display: grid;
-      gap: 0.25rem;
-    }
-
-    .hcard li {
-      position: relative;
-      padding-left: 1rem;
-      color: rgba(255, 255, 255, 0.63);
-      font-size: 0.84rem;
-      line-height: 1.45;
-    }
-
-    .hcard li::before {
-      content: "›";
-      position: absolute;
-      left: 0;
-      color: var(--maize-500);
-      font-weight: 900;
-    }
-
-    .hero-panel {
-      position: relative;
-      overflow: hidden;
-      padding: 1.5rem;
-      border-radius: var(--radius-xl);
-      background: rgba(255, 255, 255, 0.075);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(12px);
-    }
-
-    .hero-panel::before {
-      content: "";
-      position: absolute;
-      inset: auto -20% -32% -20%;
-      height: 260px;
-      background:
-        radial-gradient(circle at 45% 35%, rgba(42, 157, 183, 0.76), transparent 18%),
-        linear-gradient(135deg, rgba(64, 163, 127, 0.45), rgba(31, 126, 193, 0.34));
-      border-radius: 48% 52% 58% 42% / 55% 38% 62% 45%;
-      transform: rotate(-4deg);
-      opacity: 0.9;
-    }
-
-    .panel-label {
-      position: relative;
-      z-index: 1;
-      color: #8bf0d2;
-      font-size: 0.72rem;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .panel-heading {
-      position: relative;
-      z-index: 1;
-      margin-top: 0.35rem;
-      font-family: "DM Serif Display", Georgia, serif;
-      color: #ffffff;
-      font-size: 1.55rem;
-      font-weight: 400;
-    }
-
-    .panel-sub {
-      position: relative;
-      z-index: 1;
-      margin-top: 0.3rem;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.84rem;
-      line-height: 1.55;
-    }
-
-    .panel-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 0.75rem;
-      margin-top: 1.2rem;
-    }
-
-    .panel-block {
-      padding: 0.95rem 1rem;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-
-    .panel-block-label {
-      color: rgba(255, 255, 255, 0.46);
-      font-size: 0.72rem;
-      font-weight: 800;
-    }
-
-    .panel-block-value {
-      margin-top: 0.25rem;
-      color: rgba(255, 255, 255, 0.9);
-      font-weight: 900;
-      font-size: 0.98rem;
-    }
-
-    .panel-block-note {
-      margin-top: 0.25rem;
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 0.78rem;
-      line-height: 1.45;
-    }
-
-    .mini-map {
-      position: relative;
-      z-index: 1;
-      height: 220px;
-      margin-top: 1.2rem;
-      border-radius: 1.2rem;
-      background:
-        radial-gradient(circle at 50% 48%, rgba(42, 157, 183, 0.82), transparent 17%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      overflow: hidden;
-    }
-
-    .mini-map::before {
-      content: "";
-      position: absolute;
-      inset: 38px 45px 48px 45px;
-      border-radius: 47% 53% 48% 52% / 55% 42% 58% 45%;
-      background:
-        radial-gradient(circle at 52% 48%, rgba(31, 126, 193, 0.92), transparent 18%),
-        linear-gradient(135deg, rgba(64, 163, 127, 0.6), rgba(42, 157, 183, 0.5));
-      border: 2px solid rgba(255, 255, 255, 0.18);
-      filter: drop-shadow(0 22px 42px rgba(0, 0, 0, 0.2));
-      animation: floatMap 8s ease-in-out infinite;
-    }
-
-    .rain-dot {
-      position: absolute;
-      width: 17px;
-      height: 17px;
-      border-radius: 999px;
-      background: var(--maize-500);
-      box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.84), 0 8px 20px rgba(0, 0, 0, 0.22);
-      animation: pulseDot 3.5s ease-in-out infinite;
-    }
-
-    .rain-dot:nth-child(1) { left: 22%; top: 28%; }
-    .rain-dot:nth-child(2) { left: 64%; top: 29%; animation-delay: 0.5s; }
-    .rain-dot:nth-child(3) { left: 42%; top: 58%; animation-delay: 1s; }
-    .rain-dot:nth-child(4) { left: 72%; top: 66%; animation-delay: 1.5s; }
-
-    @keyframes floatMap {
-      0%, 100% { transform: translateY(0) rotate(-1deg); }
-      50% { transform: translateY(-8px) rotate(1deg); }
-    }
-
-    @keyframes pulseDot {
-      0%, 100% { transform: scale(1); opacity: 0.94; }
-      50% { transform: scale(1.12); opacity: 1; }
-    }
+    /* ============================================================
+       SECTIONS
+    ============================================================ */
 
     .section-wrap {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 4rem 1.2rem;
+      padding: 4.5rem 1.5rem;
     }
 
     .section-header {
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .section-eyebrow {
       color: var(--lake-500);
-      font-size: 0.76rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.5rem;
+      text-align: left;
     }
 
     .section-title {
-      max-width: 760px;
+      max-width: 680px;
       color: var(--lake-900);
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(2rem, 4vw, 3.25rem);
-      font-weight: 400;
-      line-height: 1.06;
-      letter-spacing: -0.035em;
+      font-family: "Times New Roman", Times, serif;
+      font-size: clamp(1.55rem, 3.2vw, 2.45rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      text-align: left;
     }
 
     .section-sub {
-      max-width: 560px;
+      max-width: 500px;
       color: var(--text-soft);
-      line-height: 1.7;
-      font-size: 0.96rem;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      text-align: justify;
     }
+
+    /* ============================================================
+       MODULES GRID
+    ============================================================ */
 
     .modules-grid {
       display: grid;
@@ -609,8 +316,8 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      min-height: 370px;
-      border-radius: var(--radius-xl);
+      min-height: 290px;
+      border-radius: 8px;
       background: var(--paper-soft);
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
@@ -619,112 +326,78 @@
     }
 
     .mod-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-md);
       border-color: var(--border-strong);
     }
 
     .mod-card.is-active {
-      box-shadow: var(--shadow-lg);
+      box-shadow: var(--shadow-md);
     }
 
     .mod-card-accent {
-      height: 6px;
+      height: 5px;
+      flex-shrink: 0;
     }
 
-    .accent-blue {
-      background: linear-gradient(90deg, var(--lake-700), var(--lake-500));
-    }
-
-    .accent-green {
-      background: linear-gradient(90deg, var(--forest-700), var(--forest-500));
-    }
-
-    .accent-amber {
-      background: linear-gradient(90deg, var(--risk-500), var(--maize-500));
-    }
-
-    .accent-purple {
-      background: linear-gradient(90deg, var(--purple-700), #9a7be8);
-    }
+    .accent-blue   { background: linear-gradient(90deg, var(--lake-700), var(--lake-500)); }
+    .accent-green  { background: linear-gradient(90deg, var(--forest-700), var(--forest-500)); }
+    .accent-amber  { background: linear-gradient(90deg, var(--risk-500), var(--maize-500)); }
+    .accent-purple { background: linear-gradient(90deg, var(--purple-700), #9a7be8); }
 
     .mod-card-body {
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 1.35rem;
+      padding: 1.4rem 1.5rem;
     }
 
     .mod-icon {
-      width: 56px;
-      height: 56px;
+      width: 48px;
+      height: 48px;
       display: grid;
       place-items: center;
-      margin-bottom: 1.05rem;
-      border-radius: 1rem;
-      font-size: 1.5rem;
+      margin-bottom: 1.1rem;
+      border-radius: 6px;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
     }
 
-    .icon-blue {
-      color: var(--lake-700);
-      background: var(--lake-100);
-    }
-
-    .icon-green {
-      color: var(--forest-700);
-      background: var(--forest-100);
-    }
-
-    .icon-amber {
-      color: var(--risk-700);
-      background: var(--risk-100);
-    }
-
-    .icon-purple {
-      color: var(--purple-700);
-      background: var(--purple-100);
-    }
+    .icon-blue   { color: var(--lake-700);   background: var(--lake-100); }
+    .icon-green  { color: var(--forest-700); background: var(--forest-100); }
+    .icon-amber  { color: var(--risk-700);   background: var(--risk-100); }
+    .icon-purple { color: var(--purple-700); background: var(--purple-100); }
 
     .mod-title {
       color: var(--lake-900);
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: 1.45rem;
-      font-weight: 400;
-      line-height: 1.12;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+      line-height: 1.18;
       margin-bottom: 0.7rem;
+      text-align: left;
     }
 
     .mod-desc {
       color: var(--text-soft);
-      font-size: 0.9rem;
-      line-height: 1.65;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.88rem;
+      line-height: 1.72;
       flex: 1;
-    }
-
-    .mod-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin: 1rem 0;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.32rem;
-      padding: 0.32rem 0.55rem;
-      border-radius: 999px;
-      background: rgba(15, 58, 83, 0.055);
-      color: var(--text-mid);
-      font-size: 0.72rem;
-      font-weight: 800;
+      text-align: justify;
     }
 
     .mod-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 0.55rem;
-      margin-top: 0.5rem;
+      margin-top: 1.2rem;
+      text-align: left;
     }
 
     .btn-card {
@@ -732,32 +405,25 @@
       align-items: center;
       justify-content: center;
       gap: 0.4rem;
-      min-height: 40px;
-      padding: 0.58rem 0.85rem;
-      border-radius: 0.75rem;
-      font-size: 0.82rem;
-      font-weight: 900;
+      min-height: 38px;
+      padding: 0.5rem 1.05rem;
+      border-radius: 4px;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
       transition: 0.18s ease;
+      cursor: pointer;
+      border: 0;
     }
 
     .btn-card:hover {
       transform: translateY(-2px);
     }
 
-    .btn-card.primary {
-      color: #ffffff;
-      background: var(--lake-700);
-    }
-
-    .btn-card.green {
-      color: #ffffff;
-      background: var(--forest-700);
-    }
-
-    .btn-card.amber {
-      color: #ffffff;
-      background: var(--risk-500);
-    }
+    .btn-card.primary { color: #ffffff; background: var(--lake-700); }
+    .btn-card.green   { color: #ffffff; background: var(--forest-700); }
+    .btn-card.amber   { color: #ffffff; background: var(--risk-500); }
 
     .btn-card.ghost {
       color: var(--text-mid);
@@ -766,80 +432,14 @@
     }
 
     .btn-card.disabled {
-      opacity: 0.46;
+      opacity: 0.42;
       pointer-events: none;
-      filter: grayscale(0.35);
+      filter: grayscale(0.4);
     }
 
-    .kpi-section {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--lake-900) 0%, var(--forest-900) 100%);
-    }
-
-    .kpi-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 80% at 100% 50%, rgba(42, 157, 183, 0.18), transparent),
-        radial-gradient(ellipse 55% 70% at 0% 50%, rgba(231, 185, 79, 0.12), transparent);
-      pointer-events: none;
-    }
-
-    .kpi-inner {
-      position: relative;
-      z-index: 1;
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 3.2rem 1.2rem;
-    }
-
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .kpi-card {
-      padding: 1.35rem;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.075);
-      border: 1px solid rgba(255, 255, 255, 0.13);
-      transition: 0.18s ease;
-    }
-
-    .kpi-card:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.11);
-    }
-
-    .kpi-label {
-      color: rgba(255, 255, 255, 0.52);
-      font-size: 0.76rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-
-    .kpi-value {
-      color: #ffffff;
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(2.2rem, 4vw, 3.15rem);
-      line-height: 1;
-      font-weight: 400;
-    }
-
-    .kpi-source {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      margin-top: 0.55rem;
-      color: rgba(255, 255, 255, 0.45);
-      font-size: 0.78rem;
-      line-height: 1.45;
-    }
+    /* ============================================================
+       METHODOLOGY / WORKFLOW
+    ============================================================ */
 
     .workflow-grid {
       display: grid;
@@ -851,8 +451,8 @@
     .step-card {
       position: relative;
       min-height: 210px;
-      padding: 1.25rem;
-      border-radius: var(--radius-lg);
+      padding: 1.3rem;
+      border-radius: 8px;
       background: #ffffff;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
@@ -864,118 +464,219 @@
       content: "0" counter(step);
       position: absolute;
       right: 1rem;
-      top: 0.8rem;
-      color: rgba(15, 58, 83, 0.08);
+      top: 0.75rem;
+      color: rgba(15, 58, 83, 0.07);
+      font-family: "Times New Roman", Times, serif;
       font-size: 3.5rem;
-      font-weight: 900;
-      letter-spacing: -0.08em;
+      font-weight: 700;
+      letter-spacing: -0.05em;
     }
 
     .step-icon {
       position: relative;
       z-index: 1;
-      width: 46px;
-      height: 46px;
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
-      margin-bottom: 1rem;
-      border-radius: 1rem;
+      margin-bottom: 0.9rem;
+      border-radius: 6px;
       color: var(--lake-700);
       background: var(--lake-100);
-      font-size: 1.25rem;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      text-align: center;
     }
 
     .step-card h3 {
       position: relative;
       z-index: 1;
       color: var(--lake-900);
+      font-family: "Times New Roman", Times, serif;
       font-size: 1rem;
-      line-height: 1.25;
-      margin-bottom: 0.5rem;
+      font-weight: 700;
+      line-height: 1.28;
+      margin-bottom: 0.55rem;
+      text-align: left;
     }
 
     .step-card p {
       position: relative;
       z-index: 1;
       color: var(--text-soft);
-      font-size: 0.86rem;
-      line-height: 1.6;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.88rem;
+      line-height: 1.68;
+      text-align: justify;
     }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
 
     footer {
-      background: #ffffff;
-      border-top: 1px solid var(--border);
-      padding: 3rem 0 2rem;
+      background: var(--lake-950);
+      color: rgba(255, 255, 255, 0.7);
     }
 
-    .footer-inner {
+    .footer-top {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 1.2rem;
-      text-align: center;
+      padding: 3.8rem 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr;
+      gap: 3.5rem;
     }
 
-    .footer-title {
-      color: var(--lake-900);
-      font-weight: 900;
-      margin-bottom: 0.45rem;
+    .footer-brand-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
     }
 
-    .footer-sub {
-      max-width: 720px;
-      margin: 0 auto;
-      color: var(--text-soft);
-      line-height: 1.65;
-      font-size: 0.9rem;
+    .footer-brand-name {
+      color: #ffffff;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      text-align: left;
     }
 
-    .footer-update {
+    .footer-brand-desc {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: justify;
+    }
+
+    .footer-update-chip {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      margin-top: 1rem;
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      color: var(--lake-900);
-      background: var(--lake-100);
-      border: 1px solid rgba(42, 157, 183, 0.18);
+      margin-top: 1.4rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 3px;
+      background: rgba(42, 157, 183, 0.12);
+      border: 1px solid rgba(42, 157, 183, 0.2);
+      color: rgba(255, 255, 255, 0.58);
+      font-family: "Times New Roman", Times, serif;
       font-size: 0.78rem;
-      font-weight: 800;
     }
 
-    .footer-divider {
-      height: 1px;
-      margin: 1.8rem 0 1.2rem;
-      background: var(--border);
-      border: 0;
+    .footer-col-title {
+      color: rgba(255, 255, 255, 0.34);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: left;
+    }
+
+    .footer-nav-list {
+      list-style: none;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .footer-nav-list a {
+      display: block;
+      color: rgba(255, 255, 255, 0.58);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      transition: color 0.18s ease;
+      text-align: left;
+    }
+
+    .footer-nav-list a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .footer-bottom-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1.3rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
     .footer-copy {
-      color: var(--text-soft);
-      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.32);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.78rem;
+      text-align: left;
     }
+
+    .footer-credits {
+      color: rgba(255, 255, 255, 0.32);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 0.78rem;
+      text-align: right;
+    }
+
+    /* ============================================================
+       TO TOP
+    ============================================================ */
 
     .to-top {
       position: fixed;
-      right: 1.15rem;
-      bottom: 1.15rem;
+      right: 1.2rem;
+      bottom: 1.2rem;
       z-index: 1080;
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       display: none;
       align-items: center;
       justify-content: center;
       color: #ffffff;
       background: var(--lake-700);
       border: 0;
-      border-radius: 50%;
+      border-radius: 4px;
       cursor: pointer;
       box-shadow: var(--shadow-md);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: 0.18s ease;
+    }
+
+    .to-top:hover {
+      background: var(--lake-600);
+      transform: translateY(-2px);
     }
 
     .to-top.show {
       display: flex;
     }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
 
     .fade-up {
       opacity: 0;
@@ -983,9 +684,9 @@
       animation: fadeUp 0.65s ease forwards;
     }
 
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
+    .delay-1 { animation-delay: 0.12s; }
+    .delay-2 { animation-delay: 0.24s; }
+    .delay-3 { animation-delay: 0.36s; }
 
     @keyframes fadeUp {
       to {
@@ -994,17 +695,26 @@
       }
     }
 
-    @media (max-width: 980px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
 
+    @media (max-width: 1024px) {
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 980px) {
       .modules-grid {
         grid-template-columns: 1fr 1fr;
       }
 
-      .workflow-grid,
-      .kpi-grid {
+      .workflow-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -1013,58 +723,63 @@
       }
 
       .section-sub {
-        margin-top: 0.75rem;
+        margin-top: 0.8rem;
       }
     }
 
     @media (max-width: 680px) {
       :root {
-        --nav-h: 68px;
+        --nav-h: 66px;
       }
 
       .navbar-inner {
-        padding: 0 0.85rem;
+        padding: 0 1rem;
       }
 
-      .brand-text strong {
-        font-size: 0.82rem;
+      .brand-name {
+        font-size: 0.85rem;
       }
 
-      .brand-text span {
-        font-size: 0.62rem;
-      }
-
-      .nav-actions .nav-pill:not(.primary) {
+      .nav-links .nav-link:not(.primary) {
         display: none;
       }
 
       .hero-inner {
-        padding: 3rem 0.9rem;
+        padding: 3rem 1rem;
       }
 
       .hero-title {
-        font-size: clamp(2.85rem, 15vw, 4.2rem);
+        font-size: clamp(1.6rem, 9vw, 2.8rem);
       }
 
-      .hero-cards,
       .modules-grid,
-      .workflow-grid,
-      .kpi-grid {
+      .workflow-grid {
         grid-template-columns: 1fr;
       }
 
-      .section-wrap,
-      .kpi-inner {
-        padding-left: 0.9rem;
-        padding-right: 0.9rem;
+      .section-wrap {
+        padding-left: 1rem;
+        padding-right: 1rem;
       }
 
       .mod-card {
         min-height: auto;
       }
 
-      .hero-actions .btn {
-        width: 100%;
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2.5rem 1rem 2rem;
+      }
+
+      .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-copy,
+      .footer-credits {
+        text-align: center;
       }
     }
 
@@ -1082,175 +797,63 @@
 </head>
 
 <body>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
   <nav class="navbar">
     <div class="navbar-inner">
       <a class="brand" href="./" aria-label="Inicio de la Mesa Técnica Agroclimática">
         <span class="brand-mark">MTA</span>
         <span class="brand-text">
-          <span>Sololá, Guatemala</span>
-          <strong>Mesa Técnica Agroclimática</strong>
+          <span class="brand-sub">Sololá, Guatemala</span>
+          <span class="brand-name">Mesa Técnica Agroclimática</span>
         </span>
       </a>
 
-      <div class="nav-actions">
-        <a class="nav-pill" href="#modulos">
-          <i class="bi bi-grid-1x2-fill"></i>
-          Módulos
-        </a>
-        <a class="nav-pill" href="#metodologia">
-          <i class="bi bi-diagram-3-fill"></i>
-          Flujo
-        </a>
-        <a class="nav-pill primary" href="./docs/precipitaciones_index.html">
-          <i class="bi bi-cloud-rain-heavy-fill"></i>
-          Precipitaciones
-        </a>
-      </div>
+
     </div>
   </nav>
 
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
   <header class="hero-wrap">
-    <div class="hero-inner">
-      <div class="fade-up">
-        <div class="hero-badges">
-          <span class="badge badge-green">
-            <i class="bi bi-cloud-sun-fill"></i>
-            Portal agroclimático
-          </span>
-          <span class="badge badge-status">
-            <span class="led"></span>
-            <span id="chipEstadoTxt">Datos en línea</span>
-          </span>
-        </div>
-
-        <h1 class="hero-title">
-          Clima para decidir <em>mejor</em>
-        </h1>
-
-        <p class="hero-body">
-          Plataforma digital de la Mesa Técnica Agroclimática de Sololá para consultar
-          información de estaciones meteorológicas, precipitación observada, fuentes
-          institucionales, datos complementarios y futuros boletines agroclimáticos.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="./docs/precipitaciones_index.html">
-            <i class="bi bi-cloud-rain-heavy-fill"></i>
-            Abrir módulo de precipitación
-          </a>
-          <a class="btn btn-soft" href="./docs/data/precipitaciones/actual.json">
-            <i class="bi bi-braces"></i>
-            Ver datos JSON
-          </a>
-        </div>
-
-        <div class="hero-cards delay-1 fade-up">
-          <div class="hcard">
-            <div class="hcard-title">
-              <i class="bi bi-database-check"></i>
-              Datos que sirve
-            </div>
-            <ul>
-              <li>Precipitación observada por estación</li>
-              <li>Inventario institucional de estaciones</li>
-              <li>Histórico mensual en JSON y CSV</li>
-              <li>Créditos y fuente por cada registro</li>
-            </ul>
-          </div>
-
-          <div class="hcard">
-            <div class="hcard-title">
-              <i class="bi bi-compass-fill"></i>
-              Cobertura inicial
-            </div>
-            <ul>
-              <li>Departamento de Sololá</li>
-              <li>INSIVUMEH como fuente oficial</li>
-              <li>Vivamos Mejor y estaciones PWS</li>
-              <li>Ambient Weather cuando hay API activa</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-panel fade-up delay-2">
-        <div class="panel-label">Estado de la plataforma</div>
-        <div class="panel-heading">Módulo activo: Precipitaciones</div>
-        <p class="panel-sub">
-          La plataforma consulta fuentes autorizadas mediante tareas programadas,
-          guarda los datos con trazabilidad y los sirve desde archivos públicos del sitio.
-        </p>
-
-        <div class="panel-grid">
-          <div class="panel-block">
-            <div class="panel-block-label">Última actualización</div>
-            <div class="panel-block-value" id="lastUpdate">Consultando datos...</div>
-            <div class="panel-block-note">Tomado de docs/data/precipitaciones/actual.json</div>
-          </div>
-
-          <div class="panel-block">
-            <div class="panel-block-label">Registros actuales</div>
-            <div class="panel-block-value" id="recordCount">—</div>
-            <div class="panel-block-note">Solo registros de precipitación y variables asociadas.</div>
-          </div>
-
-          <div class="panel-block">
-            <div class="panel-block-label">Estaciones inventariadas</div>
-            <div class="panel-block-value" id="stationCount">—</div>
-            <div class="panel-block-note">Oficiales, institucionales y complementarias.</div>
-          </div>
-        </div>
-
-        <div class="mini-map" aria-label="Ilustración de estaciones en Sololá">
-          <span class="rain-dot"></span>
-          <span class="rain-dot"></span>
-          <span class="rain-dot"></span>
-          <span class="rain-dot"></span>
-        </div>
-      </div>
+    <div class="hero-inner fade-up">
+      <h1 class="hero-title">Mesa Agroclimática del departamento de Sololá.</h1>
     </div>
   </header>
 
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
   <main>
+
+    <!-- MÓDULOS -->
     <section class="section-wrap" id="modulos">
       <div class="section-header">
         <div>
           <div class="section-eyebrow">Módulos de la plataforma</div>
           <h2 class="section-title">Un portal de entrada para toda la información agroclimática.</h2>
         </div>
-        <p class="section-sub">
-          Por ahora el módulo funcional es precipitación. Los demás quedan preparados
-          como estructura visual para crecer sin romper la arquitectura del sitio.
-        </p>
+
       </div>
 
       <div class="modules-grid">
+
         <article class="mod-card is-active fade-up">
           <div class="mod-card-accent accent-blue"></div>
           <div class="mod-card-body">
-            <div class="mod-icon icon-blue">
-              <i class="bi bi-cloud-rain-heavy-fill"></i>
-            </div>
+            <div class="mod-icon icon-blue">Lluvia</div>
             <h3 class="mod-title">Precipitaciones</h3>
             <p class="mod-desc">
               Consulta lluvia observada por estación, ranking diario, fuentes,
               estado de extracción, inventario de estaciones y mapa interactivo.
               Este módulo ya está conectado a los datos generados por GitHub Actions.
             </p>
-            <div class="mod-meta">
-              <span class="tag"><i class="bi bi-check-circle-fill"></i> Activo</span>
-              <span class="tag"><i class="bi bi-database-fill"></i> JSON/CSV</span>
-              <span class="tag"><i class="bi bi-map-fill"></i> Mapa</span>
-            </div>
             <div class="mod-actions">
-              <a class="btn-card primary" href="./docs/precipitaciones_index.html">
-                <i class="bi bi-arrow-right-circle-fill"></i>
-                Abrir módulo
-              </a>
-              <a class="btn-card ghost" href="./docs/data/precipitaciones/actual.json">
-                <i class="bi bi-braces"></i>
-                Datos
-              </a>
+              <a class="btn-card primary" href="./docs/precipitaciones_index.html">Abrir módulo</a>
+              <a class="btn-card ghost" href="./docs/data/precipitaciones/actual.json">Datos</a>
             </div>
           </div>
         </article>
@@ -1258,24 +861,15 @@
         <article class="mod-card fade-up delay-1">
           <div class="mod-card-accent accent-amber"></div>
           <div class="mod-card-body">
-            <div class="mod-icon icon-amber">
-              <i class="bi bi-thermometer-sun"></i>
-            </div>
+            <div class="mod-icon icon-amber">Temp.</div>
             <h3 class="mod-title">Temperatura</h3>
             <p class="mod-desc">
               Espacio reservado para máximas, mínimas, promedios, anomalías y
               comportamiento térmico por estación. Se activará después de consolidar
               la arquitectura de precipitación.
             </p>
-            <div class="mod-meta">
-              <span class="tag"><i class="bi bi-hourglass-split"></i> Próximamente</span>
-              <span class="tag"><i class="bi bi-shield-check"></i> Misma lógica</span>
-            </div>
             <div class="mod-actions">
-              <span class="btn-card amber disabled">
-                <i class="bi bi-lock-fill"></i>
-                En preparación
-              </span>
+              <span class="btn-card amber disabled">En preparación</span>
             </div>
           </div>
         </article>
@@ -1283,23 +877,14 @@
         <article class="mod-card fade-up delay-2">
           <div class="mod-card-accent accent-green"></div>
           <div class="mod-card-body">
-            <div class="mod-icon icon-green">
-              <i class="bi bi-wind"></i>
-            </div>
+            <div class="mod-icon icon-green">Viento</div>
             <h3 class="mod-title">Viento y humedad</h3>
             <p class="mod-desc">
               Módulo futuro para velocidad del viento, dirección, rachas, humedad
               relativa y comportamiento horario cuando las fuentes estén configuradas.
             </p>
-            <div class="mod-meta">
-              <span class="tag"><i class="bi bi-hourglass-split"></i> Próximamente</span>
-              <span class="tag"><i class="bi bi-broadcast-pin"></i> PWS</span>
-            </div>
             <div class="mod-actions">
-              <span class="btn-card green disabled">
-                <i class="bi bi-lock-fill"></i>
-                En preparación
-              </span>
+              <span class="btn-card green disabled">En preparación</span>
             </div>
           </div>
         </article>
@@ -1307,23 +892,14 @@
         <article class="mod-card fade-up">
           <div class="mod-card-accent accent-purple"></div>
           <div class="mod-card-body">
-            <div class="mod-icon icon-purple">
-              <i class="bi bi-map-fill"></i>
-            </div>
+            <div class="mod-icon icon-purple">Mapas</div>
             <h3 class="mod-title">Mapas interactivos</h3>
             <p class="mod-desc">
               Futuro espacio para capas por municipio, acumulados, interpolaciones,
               zonas de interés, clasificación agroclimática y lectura territorial.
             </p>
-            <div class="mod-meta">
-              <span class="tag"><i class="bi bi-layers-fill"></i> Capas</span>
-              <span class="tag"><i class="bi bi-cursor-fill"></i> Clickeable</span>
-            </div>
             <div class="mod-actions">
-              <span class="btn-card ghost disabled">
-                <i class="bi bi-tools"></i>
-                Diseño pendiente
-              </span>
+              <span class="btn-card ghost disabled">Diseño pendiente</span>
             </div>
           </div>
         </article>
@@ -1331,23 +907,14 @@
         <article class="mod-card fade-up delay-1">
           <div class="mod-card-accent accent-blue"></div>
           <div class="mod-card-body">
-            <div class="mod-icon icon-blue">
-              <i class="bi bi-file-earmark-text-fill"></i>
-            </div>
+            <div class="mod-icon icon-blue">Bolet.</div>
             <h3 class="mod-title">Boletines agroclimáticos</h3>
             <p class="mod-desc">
               Área para generar boletines mensuales o por temporada con resúmenes,
               tablas, gráficas y alertas derivadas de la base climática.
             </p>
-            <div class="mod-meta">
-              <span class="tag"><i class="bi bi-filetype-pdf"></i> PDF futuro</span>
-              <span class="tag"><i class="bi bi-calendar3"></i> Mensual</span>
-            </div>
             <div class="mod-actions">
-              <span class="btn-card primary disabled">
-                <i class="bi bi-lock-fill"></i>
-                En preparación
-              </span>
+              <span class="btn-card primary disabled">En preparación</span>
             </div>
           </div>
         </article>
@@ -1355,183 +922,163 @@
         <article class="mod-card fade-up delay-2">
           <div class="mod-card-accent accent-green"></div>
           <div class="mod-card-body">
-            <div class="mod-icon icon-green">
-              <i class="bi bi-building-check"></i>
-            </div>
+            <div class="mod-icon icon-green">Fuent.</div>
             <h3 class="mod-title">Fuentes e instituciones</h3>
             <p class="mod-desc">
               Inventario de fuentes participantes, estado de disponibilidad,
               créditos, permisos de uso, enlaces institucionales y trazabilidad.
             </p>
-            <div class="mod-meta">
-              <span class="tag"><i class="bi bi-patch-check-fill"></i> Créditos</span>
-              <span class="tag"><i class="bi bi-diagram-3-fill"></i> Fuentes</span>
-            </div>
             <div class="mod-actions">
-              <a class="btn-card green" href="./docs/data/precipitaciones/estaciones_precipitacion.json">
-                <i class="bi bi-braces"></i>
-                Ver inventario
-              </a>
+              <a class="btn-card green" href="./docs/data/precipitaciones/estaciones_precipitacion.json">Ver inventario</a>
             </div>
           </div>
         </article>
+
       </div>
     </section>
 
-    <section class="kpi-section">
-      <div class="kpi-inner">
-        <div class="kpi-grid">
-          <article class="kpi-card">
-            <div class="kpi-label">Registros actuales</div>
-            <div class="kpi-value" id="kpiRecords">—</div>
-            <div class="kpi-source">
-              <i class="bi bi-database-fill"></i>
-              actual.json
-            </div>
-          </article>
-
-          <article class="kpi-card">
-            <div class="kpi-label">Estaciones</div>
-            <div class="kpi-value" id="kpiStations">—</div>
-            <div class="kpi-source">
-              <i class="bi bi-broadcast-pin"></i>
-              inventario consolidado
-            </div>
-          </article>
-
-          <article class="kpi-card">
-            <div class="kpi-label">Con lluvia numérica</div>
-            <div class="kpi-value" id="kpiRainStations">—</div>
-            <div class="kpi-source">
-              <i class="bi bi-cloud-rain-heavy-fill"></i>
-              precipitación acumulada
-            </div>
-          </article>
-
-          <article class="kpi-card">
-            <div class="kpi-label">Fuentes</div>
-            <div class="kpi-value" id="kpiSources">—</div>
-            <div class="kpi-source">
-              <i class="bi bi-building-check"></i>
-              instituciones/proveedores
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
+    <!-- METODOLOGÍA -->
     <section class="section-wrap" id="metodologia">
       <div class="section-header">
         <div>
           <div class="section-eyebrow">Arquitectura de datos</div>
-          <h2 class="section-title">La plataforma no consulta en vivo: actualiza, guarda y sirve.</h2>
+          <h2 class="section-title">Pipeline ETL asíncrono sobre repositorio estático con distribución vía CDN.</h2>
         </div>
         <p class="section-sub">
-          El sitio se alimenta de archivos generados automáticamente. Esto hace que
-          la página sea rápida, trazable y más resistente a fallos temporales de las fuentes.
+          La plataforma opera sobre un modelo de integración continua desacoplado del cliente.
+          Los workflows de GitHub Actions ejecutan jobs de extracción según schedules cron,
+          serializan los registros en esquemas JSON normalizados y los persisten directamente
+          en el repositorio. GitHub Pages sirve los archivos resultantes desde la red de
+          distribución de Fastly sobre HTTPS, sin backend de aplicación ni base de datos
+          relacional en la cadena de entrega.
         </p>
       </div>
 
       <div class="workflow-grid">
+
         <article class="step-card">
-          <div class="step-icon"><i class="bi bi-cloud-download-fill"></i></div>
-          <h3>Consulta programada</h3>
+          <div class="step-icon">Fetch</div>
+          <h3>Extracción programada por cron</h3>
           <p>
-            GitHub Actions visita las fuentes autorizadas de forma periódica y extrae
-            solo la información configurada.
+            Un workflow YAML define un schedule cron que dispara el job de extracción
+            en el runner de GitHub Actions. El script realiza peticiones HTTP a los
+            endpoints autorizados de cada fuente: API REST de Ambient Weather (v1),
+            portal de INSIVUMEH y endpoints de Vivamos Mejor. Las respuestas se
+            validan contra el esquema esperado antes de continuar el pipeline.
           </p>
         </article>
 
         <article class="step-card">
-          <div class="step-icon"><i class="bi bi-database-fill-check"></i></div>
-          <h3>Almacenamiento con fuente</h3>
+          <div class="step-icon">ETL</div>
+          <h3>Normalización y persistencia en repositorio</h3>
           <p>
-            Cada registro se guarda con fecha, estación, institución, variable, unidad,
-            enlace de origen y crédito.
+            Los registros obtenidos se transforman al esquema canónico de la plataforma:
+            <code>station_id</code>, <code>timestamp_utc</code>, <code>variable</code>,
+            <code>value</code>, <code>unit</code>, <code>source_url</code> e
+            <code>institution</code>. Los archivos <code>actual.json</code> y los históricos
+            CSV se sobreescriben en <code>docs/data/</code> mediante un commit automático
+            firmado por el runner, manteniendo trazabilidad completa en el historial de Git.
           </p>
         </article>
 
         <article class="step-card">
-          <div class="step-icon"><i class="bi bi-window-stack"></i></div>
-          <h3>Servicio desde la plataforma</h3>
+          <div class="step-icon">CDN</div>
+          <h3>Distribución estática desde GitHub Pages</h3>
           <p>
-            Las páginas leen JSON y CSV internos, evitando consultar fuentes externas
-            cada vez que alguien entra.
+            GitHub Pages publica el directorio <code>docs/</code> en la CDN de Fastly
+            con certificado TLS automático. El cliente ejecuta <code>fetch()</code> a
+            rutas relativas con cache-busting por querystring (<code>?v=timestamp</code>),
+            eliminando cualquier intermediario de backend. La latencia de respuesta
+            depende exclusivamente del edge node asignado por Fastly, no de un servidor
+            de aplicación.
           </p>
         </article>
 
         <article class="step-card">
-          <div class="step-icon"><i class="bi bi-file-earmark-bar-graph-fill"></i></div>
-          <h3>Productos derivados</h3>
+          <div class="step-icon">Post</div>
+          <h3>Generación de productos derivados</h3>
           <p>
-            Mapas, resúmenes, rankings y boletines se generan como productos derivados,
-            sin alterar los datos crudos.
+            Scripts de postprocesamiento consumen los archivos crudos en modo lectura
+            para generar rankings, agregaciones estadísticas, resúmenes por municipio
+            y estructuras de datos para visualizaciones. Los productos se escriben en
+            rutas separadas dentro de <code>docs/data/</code>, preservando la integridad
+            de los archivos de origen y permitiendo re-generación idempotente en cualquier
+            punto del historial.
           </p>
         </article>
+
       </div>
     </section>
+
   </main>
 
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
   <footer>
-    <div class="footer-inner">
-      <div class="footer-title">Mesa Técnica Agroclimática de Sololá</div>
-      <p class="footer-sub">
-        Plataforma en desarrollo para integrar datos climáticos autorizados,
-        información de estaciones meteorológicas, visualizaciones interactivas
-        y boletines para la toma de decisiones agroclimáticas.
-      </p>
+    <div class="footer-top">
 
-      <div class="footer-update" id="footerUpdate">
-        <i class="bi bi-clock-history"></i>
-        Consultando última actualización
+      <div class="footer-brand">
+        <div class="footer-brand-mark">MTA</div>
+        <div class="footer-brand-name">Mesa Técnica Agroclimática de Sololá</div>
+        <p class="footer-brand-desc">
+          Plataforma en desarrollo para integrar datos climáticos autorizados,
+          información de estaciones meteorológicas, visualizaciones interactivas
+          y boletines para la toma de decisiones agroclimáticas en el departamento
+          de Sololá, Guatemala.
+        </p>
+        <div class="footer-update-chip" id="footerUpdate">
+          Consultando última actualización&hellip;
+        </div>
       </div>
 
-      <hr class="footer-divider" />
+      <div class="footer-col">
+        <div class="footer-col-title">Navegación</div>
+        <ul class="footer-nav-list">
+          <li><a href="#modulos">Módulos</a></li>
+          <li><a href="#metodologia">Metodología</a></li>
+          <li><a href="./docs/precipitaciones_index.html">Precipitaciones</a></li>
+          <li><a href="./docs/data/precipitaciones/actual.json">Datos JSON</a></li>
+        </ul>
+      </div>
 
-      <p class="footer-copy">
-        Datos con créditos a sus fuentes institucionales. Visualización y procesamiento:
-        Mesa Técnica Agroclimática de Sololá.
-      </p>
+      <div class="footer-col">
+        <div class="footer-col-title">Institucional</div>
+        <ul class="footer-nav-list">
+          <li><a href="#">INSIVUMEH</a></li>
+          <li><a href="#">Vivamos Mejor</a></li>
+          <li><a href="#">Ambient Weather</a></li>
+          <li><a href="./docs/data/precipitaciones/estaciones_precipitacion.json">Inventario de estaciones</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p class="footer-copy">
+          Mesa Técnica Agroclimática de Sololá, Guatemala.
+        </p>
+        <p class="footer-credits">
+          Datos con créditos a sus fuentes institucionales. Visualización y procesamiento: MTA Sololá.
+        </p>
+      </div>
     </div>
   </footer>
 
-  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">
-    <i class="bi bi-arrow-up"></i>
-  </button>
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">&#8679;</button>
 
   <script>
-    const DATA_URLS = {
-      actual: "./docs/data/precipitaciones/actual.json",
-      inventory: "./docs/data/precipitaciones/estaciones_precipitacion.json",
-      pws: "./docs/data/precipitaciones/pws_precipitacion.json"
-    };
-
-    const els = {
-      lastUpdate: document.getElementById("lastUpdate"),
-      footerUpdate: document.getElementById("footerUpdate"),
-      recordCount: document.getElementById("recordCount"),
-      stationCount: document.getElementById("stationCount"),
-      kpiRecords: document.getElementById("kpiRecords"),
-      kpiStations: document.getElementById("kpiStations"),
-      kpiRainStations: document.getElementById("kpiRainStations"),
-      kpiSources: document.getElementById("kpiSources"),
-      chipEstadoTxt: document.getElementById("chipEstadoTxt"),
-      toTop: document.getElementById("toTop")
-    };
+    const DATA_URL_ACTUAL = "./docs/data/precipitaciones/actual.json";
 
     async function fetchJson(url) {
       const response = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" });
-
-      if (!response.ok) {
-        throw new Error(`No se pudo leer ${url}: ${response.status}`);
-      }
-
+      if (!response.ok) throw new Error(`No se pudo leer ${url}: ${response.status}`);
       return response.json();
     }
 
     function formatDate(value) {
       if (!value) return "Sin fecha";
-
       try {
         const date = new Date(value);
         return new Intl.DateTimeFormat("es-GT", {
@@ -1543,77 +1090,29 @@
       }
     }
 
-    function countSources(records, stations) {
-      const set = new Set();
-
-      for (const record of records) {
-        if (record.institution) set.add(record.institution);
-      }
-
-      for (const station of stations) {
-        if (station.institution) set.add(station.institution);
-        if (station.provider) set.add(station.provider);
-      }
-
-      return set.size;
-    }
-
-    async function loadDashboardStatus() {
+    async function loadFooterUpdate() {
+      const el = document.getElementById("footerUpdate");
       try {
-        const [actual, inventory, pws] = await Promise.all([
-          fetchJson(DATA_URLS.actual),
-          fetchJson(DATA_URLS.inventory),
-          fetchJson(DATA_URLS.pws).catch(() => null)
-        ]);
-
-        const records = actual.latest_records || [];
-        const stations = inventory.stations || [];
-        const rainStations = records.filter(record => record.variable === "precipitation_accumulated");
-        const sourceCount = countSources(records, stations);
-
+        const actual = await fetchJson(DATA_URL_ACTUAL);
         const updateText = formatDate(actual.generated_at_gt || actual.generated_at_utc);
-
-        els.lastUpdate.textContent = updateText;
-        els.footerUpdate.innerHTML = `<i class="bi bi-clock-history"></i> Última actualización: ${updateText}`;
-        els.recordCount.textContent = `${records.length} registros`;
-        els.stationCount.textContent = `${stations.length} estaciones`;
-        els.kpiRecords.textContent = records.length;
-        els.kpiStations.textContent = stations.length;
-        els.kpiRainStations.textContent = rainStations.length;
-        els.kpiSources.textContent = sourceCount;
-        els.chipEstadoTxt.textContent = "Datos actualizados";
-
-        if (pws?.ambient_weather_api?.enabled) {
-          els.chipEstadoTxt.textContent = "Datos y API en línea";
-        }
-      } catch (error) {
-        console.error(error);
-
-        els.lastUpdate.textContent = "Sin datos generados todavía";
-        els.footerUpdate.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Datos pendientes de generar`;
-        els.recordCount.textContent = "0 registros";
-        els.stationCount.textContent = "0 estaciones";
-        els.kpiRecords.textContent = "—";
-        els.kpiStations.textContent = "—";
-        els.kpiRainStations.textContent = "—";
-        els.kpiSources.textContent = "—";
-        els.chipEstadoTxt.textContent = "Pendiente de datos";
+        el.textContent = "Última actualización: " + updateText;
+      } catch {
+        el.textContent = "Datos pendientes de generar.";
       }
     }
+
+    const toTop = document.getElementById("toTop");
 
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 460) {
-        els.toTop.classList.add("show");
-      } else {
-        els.toTop.classList.remove("show");
-      }
+      toTop.classList.toggle("show", window.scrollY > 460);
     });
 
-    els.toTop.addEventListener("click", () => {
+    toTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    loadDashboardStatus();
+    loadFooterUpdate();
   </script>
+
 </body>
 </html>
