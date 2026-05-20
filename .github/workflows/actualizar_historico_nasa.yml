@@ -1,0 +1,86 @@
+# .github/workflows/actualizar_historico_nasa.yml
+# -------------------------------------------------------
+# Mesa Técnica Agroclimática de Sololá — MTA
+#
+# Descarga la precipitación diaria de los 19 municipios
+# de Sololá desde NASA POWER y actualiza el archivo
+# docs/data/precipitaciones/historico_municipios.json
+#
+# Disparadores:
+#   - Cron diario a las 06:00 UTC (00:00 hora Guatemala)
+#   - Manual desde la pestaña Actions de GitHub
+# -------------------------------------------------------
+
+name: Actualizar histórico NASA POWER — Sololá
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 06:00 UTC = 00:00 Guatemala (UTC-6)
+  workflow_dispatch:       # ejecución manual desde GitHub Actions
+
+permissions:
+  contents: write          # necesario para hacer el commit automático
+
+jobs:
+  fetch-and-commit:
+    name: Descargar precipitación y commitear JSON
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Clonar el repositorio completo
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      # 2. Configurar Python 3.11
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # 3. Instalar dependencias
+      #    Solo se necesita 'requests'; el resto (json, os, time, sys,
+      #    datetime) son módulos estándar de Python.
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      # 4. Ejecutar el script de descarga
+      #    El script crea docs/data/precipitaciones/ si no existe
+      #    y escribe historico_municipios.json con los datos del periodo.
+      - name: Ejecutar fetch_nasa_power.py
+        run: python fetch_nasa_power.py
+
+      # 5. Verificar si el JSON cambió antes de commitear
+      #    Si el archivo es idéntico al anterior (sin nuevos días de datos)
+      #    el step de commit no hace nada y el workflow termina limpio.
+      - name: Verificar cambios en el JSON
+        id: check_changes
+        run: |
+          git diff --quiet docs/data/precipitaciones/historico_municipios.json \
+            && echo "changed=false" >> $GITHUB_OUTPUT \
+            || echo "changed=true"  >> $GITHUB_OUTPUT
+
+      # 6. Configurar identidad de Git para el commit automático
+      - name: Configurar identidad de Git
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 7. Hacer commit y push del JSON actualizado
+      - name: Commitear JSON actualizado
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git add docs/data/precipitaciones/historico_municipios.json
+          git commit -m "data(nasa-power): actualizar precipitación histórica municipios Sololá — $(date -u +'%Y-%m-%d')"
+          git push
+
+      # 8. Informar si no hubo cambios (el JSON ya estaba al día)
+      - name: Sin cambios nuevos
+        if: steps.check_changes.outputs.changed == 'false'
+        run: |
+          echo "El archivo historico_municipios.json ya estaba al día. No se generó commit."
