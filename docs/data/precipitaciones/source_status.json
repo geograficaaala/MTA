@@ -1,7 +1,7 @@
 {
   "schema": "mta_precipitacion_source_status_v6",
-  "generated_at_utc": "2026-06-30T14:44:31.386174+00:00",
-  "generated_at_gt": "2026-06-30T08:44:31.386174-06:00",
+  "generated_at_utc": "2026-07-01T15:12:59.128708+00:00",
+  "generated_at_gt": "2026-07-01T09:12:59.128708-06:00",
   "ambient_weather_api": {
     "enabled": true,
     "devices_seen": 1,
@@ -16,8 +16,8 @@
       "source_id": "insivumeh_precipitaciones_departamentos",
       "institution": "INSIVUMEH",
       "parser": "insivumeh_solola",
-      "checked_at_utc": "2026-06-30T14:44:31.386174+00:00",
-      "checked_at_gt": "2026-06-30T08:44:31.386174-06:00",
+      "checked_at_utc": "2026-07-01T15:12:59.128708+00:00",
+      "checked_at_gt": "2026-07-01T09:12:59.128708-06:00",
       "ok": true,
       "records_added": 9,
       "stations_found": 3,
@@ -37,8 +37,8 @@
       "source_id": "vivamos_mejor_estaciones",
       "institution": "Asociación Vivamos Mejor",
       "parser": "vivamos_mejor_inventory",
-      "checked_at_utc": "2026-06-30T14:44:31.386174+00:00",
-      "checked_at_gt": "2026-06-30T08:44:31.386174-06:00",
+      "checked_at_utc": "2026-07-01T15:12:59.128708+00:00",
+      "checked_at_gt": "2026-07-01T09:12:59.128708-06:00",
       "ok": true,
       "records_added": 0,
       "stations_found": 8,
@@ -58,23 +58,23 @@
       "source_id": "pws_configuradas",
       "institution": "PWS configuradas manualmente",
       "parser": "pws_config",
-      "checked_at_utc": "2026-06-30T14:44:31.386174+00:00",
-      "checked_at_gt": "2026-06-30T08:44:31.386174-06:00",
+      "checked_at_utc": "2026-07-01T15:12:59.128708+00:00",
+      "checked_at_gt": "2026-07-01T09:12:59.128708-06:00",
       "ok": true,
-      "records_added": 4,
+      "records_added": 2,
       "stations_found": 6,
       "urls": [
         {
-          "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-06-30/2026-06-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-07-01/2026-07-01/monthly",
           "ok": true,
-          "online_status": "online",
+          "online_status": "online_sin_dato_detectado",
           "provider": "wunderground",
           "station_code": "IPANAJ5",
           "dashboard_id": null,
-          "error": null
+          "error": "precipitacion_no_detectada_en_tabla_renderizada"
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-06-30/2026-06-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-07-01/2026-07-01/monthly",
           "ok": true,
           "online_status": "online",
           "provider": "wunderground",
@@ -83,16 +83,16 @@
           "error": null
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-06-30/2026-06-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-07-01/2026-07-01/monthly",
           "ok": true,
-          "online_status": "online",
+          "online_status": "online_sin_dato_detectado",
           "provider": "wunderground",
           "station_code": "ISANTI135",
           "dashboard_id": null,
-          "error": null
+          "error": "precipitacion_no_detectada_en_tabla_renderizada"
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-06-30/2026-06-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-07-01/2026-07-01/monthly",
           "ok": false,
           "online_status": "historica_no_actual",
           "provider": "wunderground",
