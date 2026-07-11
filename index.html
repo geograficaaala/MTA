@@ -331,13 +331,11 @@
     }
 
     .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 1.5rem;
+      display: block;
       margin-bottom: 2.5rem;
       padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border);
+      text-align: center;
     }
 
     .section-eyebrow {
@@ -347,17 +345,19 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
-      text-align: left;
+      text-align: center;
     }
 
     .section-title {
-      max-width: 760px;
+      max-width: none;
+      margin: 0 auto;
       color: var(--leaf-950);
-      font-size: clamp(1.55rem, 3.2vw, 2.45rem);
+      font-size: clamp(1.35rem, 2.35vw, 2.1rem);
       font-weight: 700;
       line-height: 1.12;
       letter-spacing: -0.02em;
-      text-align: left;
+      text-align: center;
+      white-space: nowrap;
     }
 
     .section-sub {
@@ -372,88 +372,40 @@
        NOTICIAS / FACEBOOK
     ============================================================ */
 
-    .news-section {
+    .section-wrap.news-section {
+      width: 100%;
+      max-width: 100%;
+      padding-left: clamp(1rem, 3vw, 2.5rem);
+      padding-right: clamp(1rem, 3vw, 2.5rem);
       background: #ffffff;
     }
 
-    .news-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 0.88fr) minmax(320px, 1.12fr);
-      gap: 1.4rem;
-      align-items: stretch;
+    .news-section .section-header {
+      max-width: var(--max);
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .news-card,
+    .news-grid {
+      display: block;
+      width: 100%;
+    }
+
     .facebook-card {
-      border-radius: 18px;
+      width: 100%;
+      border-radius: 24px;
       background: #ffffff;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
-    }
-
-    .news-card {
-      position: relative;
-      padding: clamp(1.5rem, 3vw, 2.2rem);
-      background:
-        linear-gradient(135deg, rgba(237, 248, 232, 0.95), rgba(232, 247, 251, 0.94)),
-        #ffffff;
-    }
-
-    .news-card::after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      bottom: -80px;
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      background: rgba(240, 197, 62, 0.25);
-    }
-
-    .news-card h3 {
-      position: relative;
-      z-index: 1;
-      color: var(--leaf-950);
-      font-size: clamp(1.3rem, 2.4vw, 1.9rem);
-      line-height: 1.16;
-      margin-bottom: 0.85rem;
-      text-align: left;
-    }
-
-    .news-card p {
-      position: relative;
-      z-index: 1;
-      color: var(--text-mid);
-      font-size: 0.98rem;
-      line-height: 1.78;
-      text-align: justify;
-      margin-bottom: 1rem;
-    }
-
-    .news-actions {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 1.2rem;
-      text-align: left;
-    }
-
-    .facebook-card {
-      padding: 1rem;
-      background:
-        linear-gradient(180deg, rgba(42, 157, 183, 0.10), rgba(255, 255, 255, 1) 30%),
-        #ffffff;
+      padding: clamp(0.7rem, 1.5vw, 1.2rem);
     }
 
     .facebook-frame-wrap {
       width: 100%;
-      min-height: 620px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
+      min-height: 780px;
+      display: block;
+      border-radius: 18px;
       background: #ffffff;
       border: 1px solid rgba(42, 157, 183, 0.16);
       overflow: hidden;
@@ -461,18 +413,10 @@
 
     .facebook-frame-wrap iframe {
       width: 100%;
-      max-width: 500px;
-      min-height: 620px;
+      max-width: none;
+      min-height: 780px;
       border: 0;
       display: block;
-    }
-
-    .facebook-fallback {
-      margin-top: 0.8rem;
-      color: var(--text-soft);
-      font-size: 0.82rem;
-      line-height: 1.55;
-      text-align: center;
     }
 
     /* ============================================================
@@ -586,11 +530,12 @@
 
     .mod-title {
       color: var(--leaf-950);
-      font-size: 1.2rem;
+      font-size: clamp(1.02rem, 1.45vw, 1.2rem);
       font-weight: 700;
       line-height: 1.18;
       margin-bottom: 0.7rem;
       text-align: left;
+      white-space: nowrap;
     }
 
     .mod-desc {
@@ -798,46 +743,80 @@
     .footer-social {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 0.75rem;
-      text-align: right;
+      align-items: flex-start;
+      justify-self: end;
+      gap: 0.85rem;
+      text-align: left;
     }
 
     .footer-social-title {
-      color: rgba(255, 255, 255, 0.76);
-      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
     }
 
-    .footer-social-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 0.7rem;
+    .footer-social-list {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+      width: min(100%, 360px);
     }
 
     .footer-social-link {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 0.6rem 1rem;
-      border-radius: 999px;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      min-height: 58px;
+      padding: 0.65rem 0.9rem;
+      border-radius: 18px;
       color: #ffffff;
       background: rgba(255, 255, 255, 0.14);
       border: 1px solid rgba(255, 255, 255, 0.24);
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      transition: transform 0.18s ease, background 0.18s ease;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
 
     .footer-social-link:hover,
     .footer-social-link:focus-visible {
       transform: translateY(-2px);
       background: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.16);
       outline: none;
+    }
+
+    .footer-social-icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--leaf-950);
+      background: #ffffff;
+      font-weight: 800;
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
+    .footer-social-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .footer-social-label {
+      color: #ffffff;
+      font-size: 0.92rem;
+    }
+
+    .footer-social-value {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.82rem;
+      font-weight: 400;
+      word-break: break-word;
     }
 
     /* ============================================================
@@ -915,12 +894,9 @@
       }
 
       .footer-social {
+        justify-self: start;
         align-items: flex-start;
         text-align: left;
-      }
-
-      .footer-social-links {
-        justify-content: flex-start;
       }
     }
 
@@ -1011,6 +987,23 @@
       }
     }
 
+    @media (max-width: 720px) {
+      .section-title,
+      .mod-title {
+        white-space: normal;
+      }
+
+      .facebook-frame-wrap,
+      .facebook-frame-wrap iframe {
+        min-height: 620px;
+      }
+
+      .footer-social,
+      .footer-social-list {
+        width: 100%;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -1081,33 +1074,16 @@
           <div class="section-eyebrow">Noticias</div>
           <h2 class="section-title">Actualizaciones y publicaciones de la Mesa Técnica Agroclimática Sololá.</h2>
         </div>
-        <p class="section-sub">
-          Consulta las publicaciones recientes, avisos, actividades y comunicados compartidos desde la página oficial de Facebook de la Mesa.
-        </p>
       </div>
 
       <div class="news-grid">
-        <article class="news-card fade-up">
-          <h3>Comunicación directa con productores, técnicos e instituciones.</h3>
-          <p>
-            Este espacio integra la vista pública de Facebook para facilitar el acceso a noticias, convocatorias, boletines y actualizaciones relacionadas con la información agroclimática del departamento de Sololá.
-          </p>
-          <p>
-            Si la vista incrustada no aparece por configuración del navegador, puedes abrir la página oficial desde el botón siguiente.
-          </p>
-          <div class="news-actions">
-            <a class="btn-primary" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Abrir Facebook</a>
-            <a class="btn-outline" href="mailto:mtasolola@cunsol.edu.gt">Escribir por email</a>
-          </div>
-        </article>
-
-        <aside class="facebook-card fade-up delay-1" aria-label="Página de Facebook de la Mesa Técnica Agroclimática Sololá">
+        <aside class="facebook-card fade-up" aria-label="Página de Facebook de la Mesa Técnica Agroclimática Sololá">
           <div class="facebook-frame-wrap">
             <iframe
               title="Página de Facebook de la Mesa Técnica Agroclimática Sololá"
-              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMTASolola&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
-              width="500"
-              height="620"
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMTASolola&tabs=timeline&width=1200&height=780&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+              width="1200"
+              height="780"
               style="border:none;overflow:hidden"
               scrolling="no"
               frameborder="0"
@@ -1115,9 +1091,6 @@
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
             </iframe>
           </div>
-          <p class="facebook-fallback">
-            Vista incrustada desde Facebook: <a href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">MTASolola</a>.
-          </p>
         </aside>
       </div>
     </section>
@@ -1129,9 +1102,6 @@
           <div class="section-eyebrow">Módulos de la plataforma</div>
           <h2 class="section-title">Un portal de entrada para toda la información agroclimática.</h2>
         </div>
-        <p class="section-sub">
-          Haz clic sobre una tarjeta para girarla. Los módulos activos se abrirán automáticamente después de la animación.
-        </p>
       </div>
 
       <div class="modules-grid">
@@ -1326,11 +1296,27 @@
       </div>
 
       <div class="footer-social">
-        <div class="footer-social-title">Redes sociales de la mesa</div>
-        <div class="footer-social-links">
-          <a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
-          <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">mtasolola@cunsol.edu.gt</a>
-        </div>
+        <div class="footer-social-title">Visita nuestras redes sociales</div>
+        <ul class="footer-social-list" aria-label="Redes sociales y contacto de la Mesa Técnica Agroclimática Sololá">
+          <li>
+            <a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">
+              <span class="footer-social-icon" aria-hidden="true">f</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Facebook</span>
+                <span class="footer-social-value">Mesa Técnica Agroclimática Sololá</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
+              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Contáctanos</span>
+                <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
+              </span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </footer>
