@@ -522,6 +522,76 @@
       color: rgba(255, 255, 255, 0.7);
     }
 
+
+    .partners-ribbon-wrap {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(15, 58, 83, 0.12);
+    }
+
+    .partners-ribbon {
+      width: 100%;
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 1.15rem 1.25rem 1.05rem;
+      background: #ffffff;
+    }
+
+    .partners-ribbon-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .partners-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(0.8rem, 1.6vw, 1.75rem);
+      margin: 0 auto;
+    }
+
+    .partners-logo-row + .partners-logo-row {
+      margin-top: 0.95rem;
+    }
+
+    .partner-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 0.18rem;
+      border-radius: 6px;
+      transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+    }
+
+    .partner-logo:hover,
+    .partner-logo:focus-visible {
+      transform: translateY(-2px);
+      opacity: 0.86;
+      filter: saturate(1.08);
+      outline: none;
+    }
+
+    .partner-logo img {
+      display: block;
+      width: 100%;
+      height: clamp(44px, 5.2vw, 74px);
+      object-fit: contain;
+    }
+
+    .partner-logo.logo-xs { flex: 0 1 72px; }
+    .partner-logo.logo-sm { flex: 0 1 92px; }
+    .partner-logo.logo-md { flex: 0 1 124px; }
+    .partner-logo.logo-lg { flex: 0 1 168px; }
+    .partner-logo.logo-xl { flex: 0 1 218px; }
+    .partner-logo.logo-xxl { flex: 0 1 260px; }
+
     .footer-top {
       max-width: var(--max);
       margin: 0 auto;
@@ -700,6 +770,24 @@
     ============================================================ */
 
     @media (max-width: 1024px) {
+      .partners-logo-row {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .partner-logo.logo-xs,
+      .partner-logo.logo-sm,
+      .partner-logo.logo-md,
+      .partner-logo.logo-lg,
+      .partner-logo.logo-xl,
+      .partner-logo.logo-xxl {
+        flex-basis: clamp(76px, 18vw, 150px);
+      }
+
+      .partner-logo img {
+        height: clamp(42px, 8vw, 66px);
+      }
+
       .footer-top {
         grid-template-columns: 1fr 1fr;
         gap: 2.5rem;
@@ -728,6 +816,31 @@
     }
 
     @media (max-width: 680px) {
+      .partners-ribbon {
+        padding: 0.9rem 0.65rem;
+      }
+
+      .partners-logo-row {
+        gap: 0.65rem;
+      }
+
+      .partners-logo-row + .partners-logo-row {
+        margin-top: 0.65rem;
+      }
+
+      .partner-logo.logo-xs,
+      .partner-logo.logo-sm,
+      .partner-logo.logo-md,
+      .partner-logo.logo-lg,
+      .partner-logo.logo-xl,
+      .partner-logo.logo-xxl {
+        flex-basis: calc(33.333% - 0.7rem);
+      }
+
+      .partner-logo img {
+        height: 42px;
+      }
+
       :root {
         --nav-h: 66px;
       }
@@ -1016,6 +1129,36 @@
        FOOTER
   ============================================================ -->
   <footer>
+    <section class="partners-ribbon-wrap" aria-labelledby="partnersRibbonTitle">
+      <h2 class="partners-ribbon-title" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática de Sololá</h2>
+      <div class="partners-ribbon">
+        <div class="partners-logo-row partners-logo-row-top">
+          <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./docs/logos/MAGA.png" alt="MAGA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./docs/logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./docs/logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./docs/logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./docs/logos/FeedtheChildren.png" alt="Feed the Children" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Instituto Privado de Investigación sobre Cambio Climático"><img src="./docs/logos/ICC.png" alt="Instituto Privado de Investigación sobre Cambio Climático" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./docs/logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./docs/logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy" decoding="async"></a>
+        </div>
+
+        <div class="partners-logo-row partners-logo-row-bottom">
+          <a class="partner-logo logo-sm" href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./docs/logos/CERCAP.png" alt="CERCAP" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./docs/logos/Rikolto.png" alt="Rikolto" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Bélgica, socio para el desarrollo"><img src="./docs/logos/Belgica.png" alt="Bélgica, socio para el desarrollo" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./docs/logos/ICTA.png" alt="ICTA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./docs/logos/Anacafe.png" alt="Anacafé" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xs" href="https://altiplano.uvg.edu.gt/" target="_blank" rel="noopener noreferrer" aria-label="Universidad del Valle de Guatemala Altiplano"><img src="./docs/logos/UVG.png" alt="Universidad del Valle de Guatemala Altiplano" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./docs/logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./docs/logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./docs/logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="Ministerio de Ambiente y Recursos Naturales"><img src="./docs/logos/MARN.png" alt="Ministerio de Ambiente y Recursos Naturales" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./docs/logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy" decoding="async"></a>
+        </div>
+      </div>
+    </section>
+
     <div class="footer-top">
 
       <div class="footer-brand">
@@ -1045,9 +1188,9 @@
       <div class="footer-col">
         <div class="footer-col-title">Institucional</div>
         <ul class="footer-nav-list">
-          <li><a href="#">INSIVUMEH</a></li>
-          <li><a href="#">Vivamos Mejor</a></li>
-          <li><a href="#">Ambient Weather</a></li>
+          <li><a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer">MAGA</a></li>
+          <li><a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer">INSIVUMEH</a></li>
+          <li><a href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer">Vivamos Mejor</a></li>
           <li><a href="./docs/data/precipitaciones/estaciones_precipitacion.json">Inventario de estaciones</a></li>
         </ul>
       </div>
