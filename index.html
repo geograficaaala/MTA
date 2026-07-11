@@ -3,63 +3,52 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0f3a53" />
+  <meta name="theme-color" content="#2f7a62" />
 
-  <title>Mesa Técnica Agroclimática · Sololá</title>
+  <title>Mesa Técnica Agroclimática Sololá</title>
   <meta
     name="description"
-    content="Plataforma digital de la Mesa Técnica Agroclimática de Sololá para consultar información climática, precipitación, estaciones meteorológicas y boletines agroclimáticos."
+    content="Página oficial de la Mesa Técnica Agroclimática Sololá: información climática, noticias, módulos agroclimáticos, precipitaciones y enlaces institucionales."
   />
 
   <style>
     :root {
-      --lake-950: #062233;
-      --lake-900: #0f3a53;
-      --lake-800: #134a66;
-      --lake-700: #176680;
-      --lake-600: #1f7ec1;
-      --lake-500: #2a9db7;
-      --lake-100: #e6f5f7;
+      --sky-900: #165c77;
+      --sky-700: #2a9db7;
+      --sky-100: #e8f7fb;
 
-      --forest-900: #163f37;
-      --forest-700: #2f7a62;
-      --forest-500: #40a37f;
-      --forest-100: #eaf7ef;
+      --leaf-950: #11392f;
+      --leaf-800: #1f604d;
+      --leaf-700: #2f7a62;
+      --leaf-500: #6bbb52;
+      --leaf-100: #edf8e8;
 
-      --maize-700: #9a6d0a;
-      --maize-500: #e7b94f;
-      --maize-100: #fff4d7;
+      --sun-700: #b98916;
+      --sun-500: #f0c53e;
+      --sun-100: #fff6d8;
 
-      --risk-700: #b75118;
-      --risk-500: #d66a2a;
-      --risk-100: #fff0e6;
+      --earth-800: #6f4b22;
+      --earth-600: #9a6d35;
+      --earth-100: #f8efe2;
 
-      --purple-700: #6146a6;
-      --purple-100: #f0ecff;
-
-      --surface: #f7faf6;
-      --surface-2: #edf5f2;
       --paper: #ffffff;
-      --paper-soft: rgba(255, 255, 255, 0.84);
+      --soft: #f7fbf8;
+      --text: #17342d;
+      --text-mid: #415c55;
+      --text-soft: #6f817c;
+      --border: rgba(31, 96, 77, 0.16);
+      --border-strong: rgba(31, 96, 77, 0.28);
 
-      --text: #0e2433;
-      --text-mid: #3b5363;
-      --text-soft: #708391;
-
-      --border: rgba(15, 58, 83, 0.12);
-      --border-strong: rgba(15, 58, 83, 0.2);
-
-      --shadow-sm: 0 2px 12px rgba(14, 36, 51, 0.07);
-      --shadow-md: 0 10px 34px rgba(14, 36, 51, 0.12);
-      --shadow-lg: 0 24px 70px rgba(14, 36, 51, 0.16);
+      --shadow-sm: 0 8px 24px rgba(17, 57, 47, 0.08);
+      --shadow-md: 0 18px 46px rgba(17, 57, 47, 0.14);
+      --shadow-lg: 0 28px 80px rgba(17, 57, 47, 0.18);
 
       --radius-sm: 0.75rem;
       --radius-md: 1rem;
       --radius-lg: 1.5rem;
       --radius-xl: 2rem;
-
       --max: 1220px;
-      --nav-h: 74px;
+      --nav-h: 88px;
     }
 
     *,
@@ -81,25 +70,14 @@
       font-family: "Times New Roman", Times, serif;
       font-size: 12pt;
       color: var(--text);
-      background:
-        radial-gradient(circle at 10% 8%, rgba(42, 157, 183, 0.14), transparent 28%),
-        radial-gradient(circle at 92% 8%, rgba(231, 185, 79, 0.18), transparent 26%),
-        linear-gradient(180deg, #fbfcf8 0%, var(--surface) 46%, var(--surface-2) 100%);
+      background: #ffffff;
       overflow-x: hidden;
       text-align: justify;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(15, 58, 83, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 58, 83, 0.035) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.58), transparent 80%);
+    img,
+    iframe {
+      max-width: 100%;
     }
 
     a {
@@ -122,9 +100,20 @@
       right: 0;
       z-index: 1000;
       min-height: var(--nav-h);
-      background: var(--lake-900);
-      border-bottom: 3px solid var(--maize-500);
-      box-shadow: 0 2px 28px rgba(0, 0, 0, 0.22);
+      background:
+        linear-gradient(90deg, rgba(31, 96, 77, 0.98), rgba(42, 157, 183, 0.98) 58%, rgba(240, 197, 62, 0.96));
+      border-bottom: 4px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 30px rgba(17, 57, 47, 0.22);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--leaf-500), var(--sun-500), var(--sky-700), var(--earth-600));
     }
 
     .navbar-inner {
@@ -135,90 +124,112 @@
       height: var(--nav-h);
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
       gap: 1rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: 1rem;
       color: #ffffff;
       text-decoration: none;
     }
 
-    .brand-mark {
-      width: 46px;
-      height: 46px;
-      flex: 0 0 46px;
+    .brand-logo {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
       display: grid;
       place-items: center;
-      border-radius: 6px;
-      background: linear-gradient(145deg, #ffffff, #dceef7);
-      color: var(--lake-900);
-      font-family: "Times New Roman", Times, serif;
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.06em;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 20px rgba(17, 57, 47, 0.24);
+      overflow: hidden;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
-      gap: 0.1rem;
+      gap: 0.12rem;
+      text-shadow: 0 2px 10px rgba(17, 57, 47, 0.32);
     }
 
     .brand-sub {
-      color: rgba(255, 255, 255, 0.55);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
     .brand-name {
       color: #ffffff;
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.97rem;
+      font-size: clamp(1rem, 2vw, 1.3rem);
       font-weight: 700;
       letter-spacing: 0.01em;
       white-space: nowrap;
     }
 
-    code {
-      font-family: "Courier New", Courier, monospace;
+    .nav-social {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      color: #ffffff;
       font-size: 0.82rem;
-      background: rgba(15, 58, 83, 0.08);
-      color: var(--lake-700);
-      padding: 0.08em 0.32em;
-      border-radius: 3px;
-      border: 1px solid rgba(15, 58, 83, 0.12);
+      font-weight: 700;
+      transition: transform 0.18s ease, background 0.18s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-pill:hover,
+    .nav-pill:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.28);
+      outline: none;
     }
 
     /* ============================================================
-       HERO
+       HERO / DEFINICIÓN
     ============================================================ */
 
     .hero-wrap {
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(145deg, rgba(15, 58, 83, 0.98), rgba(22, 63, 55, 0.96)),
-        radial-gradient(circle at 20% 20%, rgba(42, 157, 183, 0.32), transparent 30%),
-        radial-gradient(circle at 86% 18%, rgba(231, 185, 79, 0.28), transparent 28%);
-      color: #ffffff;
+        radial-gradient(circle at 8% 15%, rgba(240, 197, 62, 0.20), transparent 28%),
+        radial-gradient(circle at 88% 8%, rgba(42, 157, 183, 0.18), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #ffffff 52%, var(--soft) 100%);
+      border-bottom: 1px solid var(--border);
     }
 
     .hero-wrap::before {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-image:
+        linear-gradient(rgba(31, 96, 77, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 96, 77, 0.035) 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: linear-gradient(135deg, rgba(0, 0, 0, 0.7), transparent 80%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.58), transparent 82%);
       pointer-events: none;
     }
 
@@ -227,27 +238,86 @@
       z-index: 1;
       max-width: var(--max);
       margin: 0 auto;
-      padding: clamp(4rem, 10vw, 8rem) 1.5rem;
-      display: flex;
+      padding: clamp(3.5rem, 7vw, 6.5rem) 1.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(250px, 0.65fr);
+      gap: clamp(2rem, 5vw, 4rem);
       align-items: center;
-      justify-content: center;
-      text-align: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      width: fit-content;
+      margin-bottom: 1rem;
+      padding: 0.42rem 0.85rem;
+      border-radius: 999px;
+      color: var(--leaf-800);
+      background: rgba(107, 187, 82, 0.12);
+      border: 1px solid rgba(107, 187, 82, 0.26);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: left;
     }
 
     .hero-title {
-      font-family: "Times New Roman", Times, serif;
-      font-size: clamp(2rem, 4.5vw, 3.8rem);
+      color: var(--leaf-950);
+      font-size: clamp(2rem, 4.8vw, 4rem);
       font-weight: 700;
-      line-height: 1.12;
-      letter-spacing: -0.01em;
-      color: #ffffff;
-      text-align: center;
-      max-width: 900px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      text-align: left;
+      margin-bottom: 1.25rem;
     }
 
-    .hero-title em {
-      font-style: italic;
-      color: #8bf0d2;
+    .hero-title span {
+      color: var(--sky-900);
+    }
+
+    .hero-definition {
+      max-width: 830px;
+      color: var(--text-mid);
+      font-size: clamp(1rem, 1.45vw, 1.12rem);
+      line-height: 1.85;
+      text-align: justify;
+    }
+
+    .hero-visual {
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-logo-card {
+      position: relative;
+      width: min(100%, 310px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 44%, #ffffff 0 42%, rgba(255, 255, 255, 0.76) 43% 62%, transparent 63%),
+        conic-gradient(from 25deg, rgba(240, 197, 62, 0.28), rgba(107, 187, 82, 0.28), rgba(42, 157, 183, 0.24), rgba(154, 109, 53, 0.20), rgba(240, 197, 62, 0.28));
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-logo-card::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(31, 96, 77, 0.14);
+    }
+
+    .hero-logo-card img {
+      position: relative;
+      z-index: 1;
+      width: 84%;
+      height: 84%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 14px rgba(17, 57, 47, 0.12));
     }
 
     /* ============================================================
@@ -271,9 +341,8 @@
     }
 
     .section-eyebrow {
-      color: var(--lake-500);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.7rem;
+      color: var(--sky-900);
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -282,9 +351,8 @@
     }
 
     .section-title {
-      max-width: 680px;
-      color: var(--lake-900);
-      font-family: "Times New Roman", Times, serif;
+      max-width: 760px;
+      color: var(--leaf-950);
       font-size: clamp(1.55rem, 3.2vw, 2.45rem);
       font-weight: 700;
       line-height: 1.12;
@@ -295,55 +363,199 @@
     .section-sub {
       max-width: 500px;
       color: var(--text-soft);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.8;
       text-align: justify;
     }
 
     /* ============================================================
-       MODULES GRID
+       NOTICIAS / FACEBOOK
+    ============================================================ */
+
+    .news-section {
+      background: #ffffff;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(320px, 1.12fr);
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .news-card,
+    .facebook-card {
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .news-card {
+      position: relative;
+      padding: clamp(1.5rem, 3vw, 2.2rem);
+      background:
+        linear-gradient(135deg, rgba(237, 248, 232, 0.95), rgba(232, 247, 251, 0.94)),
+        #ffffff;
+    }
+
+    .news-card::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -80px;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: rgba(240, 197, 62, 0.25);
+    }
+
+    .news-card h3 {
+      position: relative;
+      z-index: 1;
+      color: var(--leaf-950);
+      font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+      line-height: 1.16;
+      margin-bottom: 0.85rem;
+      text-align: left;
+    }
+
+    .news-card p {
+      position: relative;
+      z-index: 1;
+      color: var(--text-mid);
+      font-size: 0.98rem;
+      line-height: 1.78;
+      text-align: justify;
+      margin-bottom: 1rem;
+    }
+
+    .news-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+      text-align: left;
+    }
+
+    .facebook-card {
+      padding: 1rem;
+      background:
+        linear-gradient(180deg, rgba(42, 157, 183, 0.10), rgba(255, 255, 255, 1) 30%),
+        #ffffff;
+    }
+
+    .facebook-frame-wrap {
+      width: 100%;
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid rgba(42, 157, 183, 0.16);
+      overflow: hidden;
+    }
+
+    .facebook-frame-wrap iframe {
+      width: 100%;
+      max-width: 500px;
+      min-height: 620px;
+      border: 0;
+      display: block;
+    }
+
+    .facebook-fallback {
+      margin-top: 0.8rem;
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    /* ============================================================
+       MODULES GRID / FLIP CARDS
     ============================================================ */
 
     .modules-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.2rem;
+      perspective: 1200px;
     }
 
     .mod-card {
       position: relative;
+      min-height: 312px;
+      border: 0;
+      border-radius: 18px;
+      background: transparent;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.28s ease, filter 0.28s ease;
+    }
+
+    .mod-card:hover,
+    .mod-card:focus-visible {
+      transform: translateY(-10px) scale(1.012);
+      filter: drop-shadow(0 18px 28px rgba(17, 57, 47, 0.16));
+      outline: none;
+    }
+
+    .mod-card.is-flipped .mod-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .mod-card-inner {
+      position: relative;
+      width: 100%;
+      min-height: 312px;
+      transform-style: preserve-3d;
+      transition: transform 0.58s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .mod-card-face {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      min-height: 290px;
-      border-radius: 8px;
-      background: var(--paper-soft);
+      border-radius: 18px;
+      background: #ffffff;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
-      backdrop-filter: blur(14px);
-      transition: 0.24s ease;
+      backface-visibility: hidden;
     }
 
-    .mod-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--border-strong);
+    .mod-card-front {
+      z-index: 2;
     }
 
-    .mod-card.is-active {
+    .mod-card-back {
+      transform: rotateY(180deg);
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1.55rem;
+      background:
+        linear-gradient(135deg, rgba(237, 248, 232, 0.96), rgba(232, 247, 251, 0.96)),
+        #ffffff;
+    }
+
+    .mod-card.is-active .mod-card-face {
       box-shadow: var(--shadow-md);
     }
 
     .mod-card-accent {
-      height: 5px;
+      height: 6px;
       flex-shrink: 0;
     }
 
-    .accent-blue   { background: linear-gradient(90deg, var(--lake-700), var(--lake-500)); }
-    .accent-green  { background: linear-gradient(90deg, var(--forest-700), var(--forest-500)); }
-    .accent-amber  { background: linear-gradient(90deg, var(--risk-500), var(--maize-500)); }
-    .accent-purple { background: linear-gradient(90deg, var(--purple-700), #9a7be8); }
+    .accent-blue   { background: linear-gradient(90deg, var(--sky-900), var(--sky-700)); }
+    .accent-green  { background: linear-gradient(90deg, var(--leaf-800), var(--leaf-500)); }
+    .accent-amber  { background: linear-gradient(90deg, var(--earth-600), var(--sun-500)); }
+    .accent-purple { background: linear-gradient(90deg, var(--sky-700), var(--leaf-500), var(--sun-500)); }
 
     .mod-card-body {
       flex: 1;
@@ -353,14 +565,13 @@
     }
 
     .mod-icon {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       display: grid;
       place-items: center;
       margin-bottom: 1.1rem;
-      border-radius: 6px;
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.65rem;
+      border-radius: 14px;
+      font-size: 0.66rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -368,15 +579,14 @@
       line-height: 1.2;
     }
 
-    .icon-blue   { color: var(--lake-700);   background: var(--lake-100); }
-    .icon-green  { color: var(--forest-700); background: var(--forest-100); }
-    .icon-amber  { color: var(--risk-700);   background: var(--risk-100); }
-    .icon-purple { color: var(--purple-700); background: var(--purple-100); }
+    .icon-blue   { color: var(--sky-900);   background: var(--sky-100); }
+    .icon-green  { color: var(--leaf-800);  background: var(--leaf-100); }
+    .icon-amber  { color: var(--earth-800); background: var(--sun-100); }
+    .icon-purple { color: var(--leaf-800);  background: linear-gradient(135deg, var(--sky-100), var(--sun-100)); }
 
     .mod-title {
-      color: var(--lake-900);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 1.18rem;
+      color: var(--leaf-950);
+      font-size: 1.2rem;
       font-weight: 700;
       line-height: 1.18;
       margin-bottom: 0.7rem;
@@ -385,8 +595,7 @@
 
     .mod-desc {
       color: var(--text-soft);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       line-height: 1.72;
       flex: 1;
       text-align: justify;
@@ -400,139 +609,108 @@
       text-align: left;
     }
 
-    .btn-card {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      min-height: 38px;
-      padding: 0.5rem 1.05rem;
-      border-radius: 4px;
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.85rem;
+    .mod-back-kicker {
+      color: var(--sky-900);
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.02em;
-      transition: 0.18s ease;
-      cursor: pointer;
-      border: 0;
-    }
-
-    .btn-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-card.primary { color: #ffffff; background: var(--lake-700); }
-    .btn-card.green   { color: #ffffff; background: var(--forest-700); }
-    .btn-card.amber   { color: #ffffff; background: var(--risk-500); }
-
-    .btn-card.ghost {
-      color: var(--text-mid);
-      background: transparent;
-      border: 1px solid var(--border-strong);
-    }
-
-    .btn-card.disabled {
-      opacity: 0.42;
-      pointer-events: none;
-      filter: grayscale(0.4);
-    }
-
-    /* ============================================================
-       METHODOLOGY / WORKFLOW
-    ============================================================ */
-
-    .workflow-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-      counter-reset: step;
-    }
-
-    .step-card {
-      position: relative;
-      min-height: 210px;
-      padding: 1.3rem;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-    }
-
-    .step-card::before {
-      counter-increment: step;
-      content: "0" counter(step);
-      position: absolute;
-      right: 1rem;
-      top: 0.75rem;
-      color: rgba(15, 58, 83, 0.07);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: -0.05em;
-    }
-
-    .step-icon {
-      position: relative;
-      z-index: 1;
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 0.9rem;
-      border-radius: 6px;
-      color: var(--lake-700);
-      background: var(--lake-100);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.62rem;
-      font-weight: 700;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      text-align: center;
-    }
-
-    .step-card h3 {
-      position: relative;
-      z-index: 1;
-      color: var(--lake-900);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 1.28;
       margin-bottom: 0.55rem;
       text-align: left;
     }
 
-    .step-card p {
-      position: relative;
-      z-index: 1;
-      color: var(--text-soft);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.88rem;
-      line-height: 1.68;
+    .mod-back-title {
+      color: var(--leaf-950);
+      font-size: 1.35rem;
+      line-height: 1.18;
+      font-weight: 700;
+      text-align: left;
+      margin-bottom: 0.8rem;
+    }
+
+    .mod-back-desc {
+      color: var(--text-mid);
+      font-size: 0.93rem;
+      line-height: 1.7;
       text-align: justify;
+      margin-bottom: 1.1rem;
+    }
+
+    .btn-card,
+    .btn-primary,
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 40px;
+      padding: 0.55rem 1.05rem;
+      border-radius: 999px;
+      font-size: 0.87rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .btn-card:hover,
+    .btn-primary:hover,
+    .btn-outline:hover,
+    .btn-card:focus-visible,
+    .btn-primary:focus-visible,
+    .btn-outline:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn-card.primary,
+    .btn-primary {
+      color: #ffffff;
+      background: linear-gradient(90deg, var(--leaf-800), var(--sky-900));
+      box-shadow: 0 10px 20px rgba(31, 96, 77, 0.18);
+    }
+
+    .btn-card.green { color: #ffffff; background: var(--leaf-700); }
+    .btn-card.amber { color: #ffffff; background: var(--earth-600); }
+
+    .btn-card.ghost,
+    .btn-outline {
+      color: var(--leaf-800);
+      background: rgba(255, 255, 255, 0.64);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-card.disabled {
+      opacity: 0.58;
+      pointer-events: none;
+      filter: grayscale(0.3);
     }
 
     /* ============================================================
-       FOOTER
+       FOOTER / CINTILLO / REDES
     ============================================================ */
 
     footer {
-      background: var(--lake-950);
-      color: rgba(255, 255, 255, 0.7);
+      margin-top: 2rem;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(240, 197, 62, 0.28), transparent 32%),
+        radial-gradient(circle at 90% 0%, rgba(42, 157, 183, 0.28), transparent 32%),
+        linear-gradient(135deg, var(--leaf-950), var(--leaf-800) 46%, var(--earth-800));
     }
-
 
     .partners-ribbon-wrap {
       background: #ffffff;
-      border-bottom: 1px solid rgba(15, 58, 83, 0.12);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid rgba(31, 96, 77, 0.12);
     }
 
     .partners-ribbon {
       width: 100%;
-      max-width: 1560px;
+      max-width: 1660px;
       margin: 0 auto;
-      padding: 1.15rem 1.25rem 1.05rem;
+      padding: 1.45rem 1.25rem 1.35rem;
       background: #ffffff;
     }
 
@@ -552,12 +730,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: clamp(0.8rem, 1.6vw, 1.75rem);
+      gap: clamp(0.8rem, 1.6vw, 1.9rem);
       margin: 0 auto;
     }
 
     .partners-logo-row + .partners-logo-row {
-      margin-top: 0.95rem;
+      margin-top: 1.1rem;
     }
 
     .partner-logo {
@@ -565,15 +743,15 @@
       align-items: center;
       justify-content: center;
       min-width: 0;
-      padding: 0.18rem;
-      border-radius: 6px;
+      padding: 0.22rem;
+      border-radius: 8px;
       transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
     }
 
     .partner-logo:hover,
     .partner-logo:focus-visible {
-      transform: translateY(-2px);
-      opacity: 0.86;
+      transform: translateY(-4px);
+      opacity: 0.9;
       filter: saturate(1.08);
       outline: none;
     }
@@ -581,132 +759,85 @@
     .partner-logo img {
       display: block;
       width: 100%;
-      height: clamp(44px, 5.2vw, 74px);
+      height: clamp(56px, 6vw, 92px);
       object-fit: contain;
     }
 
-    .partner-logo.logo-xs { flex: 0 1 72px; }
-    .partner-logo.logo-sm { flex: 0 1 92px; }
-    .partner-logo.logo-md { flex: 0 1 124px; }
-    .partner-logo.logo-lg { flex: 0 1 168px; }
-    .partner-logo.logo-xl { flex: 0 1 218px; }
-    .partner-logo.logo-xxl { flex: 0 1 260px; }
+    .partner-logo.logo-xs { flex: 0 1 82px; }
+    .partner-logo.logo-sm { flex: 0 1 104px; }
+    .partner-logo.logo-md { flex: 0 1 136px; }
+    .partner-logo.logo-lg { flex: 0 1 180px; }
+    .partner-logo.logo-xl { flex: 0 1 232px; }
+    .partner-logo.logo-xxl { flex: 0 1 284px; }
 
-    .footer-top {
+    .footer-contact {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 3.8rem 1.5rem 3rem;
+      padding: 2.4rem 1.5rem 2.8rem;
       display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr;
-      gap: 3.5rem;
-    }
-
-    .footer-brand-mark {
-      display: inline-grid;
-      place-items: center;
-      width: 50px;
-      height: 50px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #ffffff;
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      margin-bottom: 1rem;
-    }
-
-    .footer-brand-name {
-      color: #ffffff;
-      font-family: "Times New Roman", Times, serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      text-align: left;
-    }
-
-    .footer-brand-desc {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.88rem;
-      line-height: 1.8;
-      color: rgba(255, 255, 255, 0.5);
-      text-align: justify;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
+      gap: 1.4rem;
+      align-items: center;
     }
 
     .footer-update-chip {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      margin-top: 1.4rem;
-      padding: 0.4rem 0.85rem;
-      border-radius: 3px;
-      background: rgba(42, 157, 183, 0.12);
-      border: 1px solid rgba(42, 157, 183, 0.2);
-      color: rgba(255, 255, 255, 0.58);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.78rem;
+      gap: 0.45rem;
+      width: fit-content;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+      text-align: left;
     }
 
-    .footer-col-title {
-      color: rgba(255, 255, 255, 0.34);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.66rem;
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+      text-align: right;
+    }
+
+    .footer-social-title {
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 1.1rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: left;
     }
 
-    .footer-nav-list {
-      list-style: none;
-      display: grid;
-      gap: 0.6rem;
-    }
-
-    .footer-nav-list a {
-      display: block;
-      color: rgba(255, 255, 255, 0.58);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      transition: color 0.18s ease;
-      text-align: left;
-    }
-
-    .footer-nav-list a:hover {
-      color: #ffffff;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
-    .footer-bottom-inner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 1.3rem 1.5rem;
+    .footer-social-links {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.7rem;
+    }
+
+    .footer-social-link {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: transform 0.18s ease, background 0.18s ease;
     }
 
-    .footer-copy {
-      color: rgba(255, 255, 255, 0.32);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.78rem;
-      text-align: left;
-    }
-
-    .footer-credits {
-      color: rgba(255, 255, 255, 0.32);
-      font-family: "Times New Roman", Times, serif;
-      font-size: 0.78rem;
-      text-align: right;
+    .footer-social-link:hover,
+    .footer-social-link:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.22);
+      outline: none;
     }
 
     /* ============================================================
@@ -718,25 +849,24 @@
       right: 1.2rem;
       bottom: 1.2rem;
       z-index: 1080;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       display: none;
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      background: var(--lake-700);
+      background: var(--leaf-800);
       border: 0;
-      border-radius: 4px;
+      border-radius: 50%;
       cursor: pointer;
       box-shadow: var(--shadow-md);
-      font-family: "Times New Roman", Times, serif;
       font-size: 1rem;
       font-weight: 700;
       transition: 0.18s ease;
     }
 
     .to-top:hover {
-      background: var(--lake-600);
+      background: var(--sky-900);
       transform: translateY(-2px);
     }
 
@@ -769,7 +899,44 @@
        RESPONSIVE
     ============================================================ */
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1080px) {
+      .hero-inner,
+      .news-grid,
+      .footer-contact {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .hero-logo-card {
+        width: min(100%, 220px);
+      }
+
+      .footer-social {
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .footer-social-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .modules-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .section-header {
+        display: block;
+      }
+
+      .section-sub {
+        margin-top: 0.8rem;
+      }
+
       .partners-logo-row {
         flex-wrap: wrap;
         justify-content: center;
@@ -781,118 +948,66 @@
       .partner-logo.logo-lg,
       .partner-logo.logo-xl,
       .partner-logo.logo-xxl {
-        flex-basis: clamp(76px, 18vw, 150px);
-      }
-
-      .partner-logo img {
-        height: clamp(42px, 8vw, 66px);
-      }
-
-      .footer-top {
-        grid-template-columns: 1fr 1fr;
-        gap: 2.5rem;
-      }
-      .footer-brand {
-        grid-column: 1 / -1;
+        flex: 0 1 132px;
       }
     }
 
-    @media (max-width: 980px) {
-      .modules-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .workflow-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .section-header {
-        display: block;
-      }
-
-      .section-sub {
-        margin-top: 0.8rem;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .partners-ribbon {
-        padding: 0.9rem 0.65rem;
-      }
-
-      .partners-logo-row {
-        gap: 0.65rem;
-      }
-
-      .partners-logo-row + .partners-logo-row {
-        margin-top: 0.65rem;
-      }
-
-      .partner-logo.logo-xs,
-      .partner-logo.logo-sm,
-      .partner-logo.logo-md,
-      .partner-logo.logo-lg,
-      .partner-logo.logo-xl,
-      .partner-logo.logo-xxl {
-        flex-basis: calc(33.333% - 0.7rem);
-      }
-
-      .partner-logo img {
-        height: 42px;
-      }
-
+    @media (max-width: 720px) {
       :root {
-        --nav-h: 66px;
+        --nav-h: 78px;
       }
 
       .navbar-inner {
         padding: 0 1rem;
       }
 
-      .brand-name {
-        font-size: 0.85rem;
+      .brand-logo {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
       }
 
-      .nav-links .nav-link:not(.primary) {
+      .brand-sub {
+        font-size: 0.62rem;
+      }
+
+      .brand-name {
+        font-size: 0.93rem;
+        white-space: normal;
+      }
+
+      .nav-social {
         display: none;
       }
 
-      .hero-inner {
-        padding: 3rem 1rem;
-      }
-
-      .hero-title {
-        font-size: clamp(1.6rem, 9vw, 2.8rem);
-      }
-
-      .modules-grid,
-      .workflow-grid {
-        grid-template-columns: 1fr;
-      }
-
+      .hero-inner,
       .section-wrap {
         padding-left: 1rem;
         padding-right: 1rem;
       }
 
-      .mod-card {
-        min-height: auto;
+      .hero-inner {
+        padding-top: 2.8rem;
+        padding-bottom: 3.2rem;
       }
 
-      .footer-top {
+      .modules-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 2.5rem 1rem 2rem;
       }
 
-      .footer-bottom-inner {
-        flex-direction: column;
-        text-align: center;
+      .mod-card,
+      .mod-card-inner {
+        min-height: 330px;
       }
 
-      .footer-copy,
-      .footer-credits {
-        text-align: center;
+      .facebook-frame-wrap,
+      .facebook-frame-wrap iframe {
+        min-height: 560px;
+      }
+
+      .footer-contact {
+        padding-left: 1rem;
+        padding-right: 1rem;
       }
     }
 
@@ -916,24 +1031,41 @@
   ============================================================ -->
   <nav class="navbar">
     <div class="navbar-inner">
-      <a class="brand" href="./" aria-label="Inicio de la Mesa Técnica Agroclimática">
-        <span class="brand-mark">MTA</span>
+      <a class="brand" href="./" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
+        <span class="brand-logo">
+          <img src="./docs/logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
+        </span>
         <span class="brand-text">
           <span class="brand-sub">Sololá, Guatemala</span>
-          <span class="brand-name">Mesa Técnica Agroclimática</span>
+          <span class="brand-name">Mesa Técnica Agroclimática Sololá</span>
         </span>
       </a>
 
-
+      <div class="nav-social" aria-label="Enlaces rápidos de la mesa">
+        <a class="nav-pill" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a class="nav-pill" href="mailto:mtasolola@cunsol.edu.gt">Email</a>
+      </div>
     </div>
   </nav>
 
   <!-- ============================================================
-       HERO
+       BIENVENIDA / DEFINICIÓN
   ============================================================ -->
   <header class="hero-wrap">
     <div class="hero-inner fade-up">
-      <h1 class="hero-title">Mesa Agroclimática del departamento de Sololá.</h1>
+      <div>
+        <div class="hero-kicker">Página oficial</div>
+        <h1 class="hero-title">Bienvenido a la <span>Mesa Técnica Agroclimática Sololá</span></h1>
+        <p class="hero-definition">
+          Las Mesas Técnicas Agroclimáticas son espacios de diálogo donde se analiza información climática y se generan orientaciones técnicas oportunas para los productores. En ellas se reúnen especialistas en clima, técnicos extensionistas, autoridades locales y actores del sector público y privado, quienes evalúan los escenarios para anticipar riesgos y reducir el impacto de la variabilidad y el cambio climático en la producción agrícola, pecuaria e hidrobiológica. El propósito central es traducir los pronósticos climáticos en acciones concretas que permitan a los productores prepararse, proteger sus cultivos y fortalecer la resiliencia de sus sistemas productivos.
+        </p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-logo-card">
+          <img src="./docs/logos/MTA_LOGO.png" alt="" />
+        </div>
+      </div>
     </div>
   </header>
 
@@ -942,6 +1074,54 @@
   ============================================================ -->
   <main>
 
+    <!-- NOTICIAS -->
+    <section class="section-wrap news-section" id="noticias">
+      <div class="section-header">
+        <div>
+          <div class="section-eyebrow">Noticias</div>
+          <h2 class="section-title">Actualizaciones y publicaciones de la Mesa Técnica Agroclimática Sololá.</h2>
+        </div>
+        <p class="section-sub">
+          Consulta las publicaciones recientes, avisos, actividades y comunicados compartidos desde la página oficial de Facebook de la Mesa.
+        </p>
+      </div>
+
+      <div class="news-grid">
+        <article class="news-card fade-up">
+          <h3>Comunicación directa con productores, técnicos e instituciones.</h3>
+          <p>
+            Este espacio integra la vista pública de Facebook para facilitar el acceso a noticias, convocatorias, boletines y actualizaciones relacionadas con la información agroclimática del departamento de Sololá.
+          </p>
+          <p>
+            Si la vista incrustada no aparece por configuración del navegador, puedes abrir la página oficial desde el botón siguiente.
+          </p>
+          <div class="news-actions">
+            <a class="btn-primary" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Abrir Facebook</a>
+            <a class="btn-outline" href="mailto:mtasolola@cunsol.edu.gt">Escribir por email</a>
+          </div>
+        </article>
+
+        <aside class="facebook-card fade-up delay-1" aria-label="Página de Facebook de la Mesa Técnica Agroclimática Sololá">
+          <div class="facebook-frame-wrap">
+            <iframe
+              title="Página de Facebook de la Mesa Técnica Agroclimática Sololá"
+              src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FMTASolola&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true"
+              width="500"
+              height="620"
+              style="border:none;overflow:hidden"
+              scrolling="no"
+              frameborder="0"
+              allowfullscreen="true"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+            </iframe>
+          </div>
+          <p class="facebook-fallback">
+            Vista incrustada desde Facebook: <a href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">MTASolola</a>.
+          </p>
+        </aside>
+      </div>
+    </section>
+
     <!-- MÓDULOS -->
     <section class="section-wrap" id="modulos">
       <div class="section-header">
@@ -949,175 +1129,156 @@
           <div class="section-eyebrow">Módulos de la plataforma</div>
           <h2 class="section-title">Un portal de entrada para toda la información agroclimática.</h2>
         </div>
-
+        <p class="section-sub">
+          Haz clic sobre una tarjeta para girarla. Los módulos activos se abrirán automáticamente después de la animación.
+        </p>
       </div>
 
       <div class="modules-grid">
 
-        <article class="mod-card is-active fade-up">
-          <div class="mod-card-accent accent-blue"></div>
-          <div class="mod-card-body">
-            <div class="mod-icon icon-blue">Lluvia</div>
-            <h3 class="mod-title">Precipitaciones</h3>
-            <p class="mod-desc">
-              Consulta lluvia observada por estación, ranking diario, fuentes,
-              estado de extracción, inventario de estaciones y mapa interactivo.
-              Este módulo ya está conectado a los datos generados por GitHub Actions.
-            </p>
-            <div class="mod-actions">
-              <a class="btn-card primary" href="./docs/precipitaciones_index.html">Abrir módulo</a>
-              <a class="btn-card ghost" href="./docs/data/precipitaciones/actual.json">Datos</a>
+        <article class="mod-card is-active fade-up" tabindex="0" role="link" data-href="./docs/precipitaciones_index.html" aria-label="Abrir módulo de Precipitaciones">
+          <div class="mod-card-inner">
+            <div class="mod-card-face mod-card-front">
+              <div class="mod-card-accent accent-blue"></div>
+              <div class="mod-card-body">
+                <div class="mod-icon icon-blue">Lluvia</div>
+                <h3 class="mod-title">Precipitaciones</h3>
+                <p class="mod-desc">
+                  Consulta lluvia observada por estación, ranking diario, fuentes, estado de extracción, inventario de estaciones y mapa interactivo.
+                </p>
+                <div class="mod-actions">
+                  <span class="btn-card primary">Abrir módulo</span>
+                  <a class="btn-card ghost" href="./docs/data/precipitaciones/actual.json" data-no-card-open>Datos</a>
+                </div>
+              </div>
+            </div>
+            <div class="mod-card-face mod-card-back">
+              <div class="mod-back-kicker">Abriendo módulo</div>
+              <h3 class="mod-back-title">Precipitaciones</h3>
+              <p class="mod-back-desc">Se abrirá el tablero de lluvia observada, estaciones, fuentes y datos actualizados.</p>
+              <span class="btn-card primary">Ir al módulo</span>
             </div>
           </div>
         </article>
 
-        <article class="mod-card fade-up delay-1">
-          <div class="mod-card-accent accent-amber"></div>
-          <div class="mod-card-body">
-            <div class="mod-icon icon-amber">Temp.</div>
-            <h3 class="mod-title">Temperatura</h3>
-            <p class="mod-desc">
-              Espacio reservado para máximas, mínimas, promedios, anomalías y
-              comportamiento térmico por estación. Se activará después de consolidar
-              la arquitectura de precipitación.
-            </p>
-            <div class="mod-actions">
+        <article class="mod-card fade-up delay-1" tabindex="0" aria-label="Módulo de Temperatura en preparación">
+          <div class="mod-card-inner">
+            <div class="mod-card-face mod-card-front">
+              <div class="mod-card-accent accent-amber"></div>
+              <div class="mod-card-body">
+                <div class="mod-icon icon-amber">Temp.</div>
+                <h3 class="mod-title">Temperatura</h3>
+                <p class="mod-desc">
+                  Espacio reservado para máximas, mínimas, promedios, anomalías y comportamiento térmico por estación.
+                </p>
+                <div class="mod-actions">
+                  <span class="btn-card amber disabled">En preparación</span>
+                </div>
+              </div>
+            </div>
+            <div class="mod-card-face mod-card-back">
+              <div class="mod-back-kicker">Próximamente</div>
+              <h3 class="mod-back-title">Temperatura</h3>
+              <p class="mod-back-desc">Este módulo se activará cuando se consoliden las fuentes y productos térmicos.</p>
               <span class="btn-card amber disabled">En preparación</span>
             </div>
           </div>
         </article>
 
-        <article class="mod-card fade-up delay-2">
-          <div class="mod-card-accent accent-green"></div>
-          <div class="mod-card-body">
-            <div class="mod-icon icon-green">Viento</div>
-            <h3 class="mod-title">Viento y humedad</h3>
-            <p class="mod-desc">
-              Módulo futuro para velocidad del viento, dirección, rachas, humedad
-              relativa y comportamiento horario cuando las fuentes estén configuradas.
-            </p>
-            <div class="mod-actions">
+        <article class="mod-card fade-up delay-2" tabindex="0" aria-label="Módulo de Viento y humedad en preparación">
+          <div class="mod-card-inner">
+            <div class="mod-card-face mod-card-front">
+              <div class="mod-card-accent accent-green"></div>
+              <div class="mod-card-body">
+                <div class="mod-icon icon-green">Viento</div>
+                <h3 class="mod-title">Viento y humedad</h3>
+                <p class="mod-desc">
+                  Módulo futuro para velocidad del viento, dirección, rachas, humedad relativa y comportamiento horario.
+                </p>
+                <div class="mod-actions">
+                  <span class="btn-card green disabled">En preparación</span>
+                </div>
+              </div>
+            </div>
+            <div class="mod-card-face mod-card-back">
+              <div class="mod-back-kicker">Próximamente</div>
+              <h3 class="mod-back-title">Viento y humedad</h3>
+              <p class="mod-back-desc">Se integrará cuando las fuentes horarias estén configuradas y validadas.</p>
               <span class="btn-card green disabled">En preparación</span>
             </div>
           </div>
         </article>
 
-        <article class="mod-card fade-up">
-          <div class="mod-card-accent accent-purple"></div>
-          <div class="mod-card-body">
-            <div class="mod-icon icon-purple">Mapas</div>
-            <h3 class="mod-title">Mapas interactivos</h3>
-            <p class="mod-desc">
-              Futuro espacio para capas por municipio, acumulados, interpolaciones,
-              zonas de interés, clasificación agroclimática y lectura territorial.
-            </p>
-            <div class="mod-actions">
+        <article class="mod-card fade-up" tabindex="0" aria-label="Módulo de Mapas interactivos en diseño">
+          <div class="mod-card-inner">
+            <div class="mod-card-face mod-card-front">
+              <div class="mod-card-accent accent-purple"></div>
+              <div class="mod-card-body">
+                <div class="mod-icon icon-purple">Mapas</div>
+                <h3 class="mod-title">Mapas interactivos</h3>
+                <p class="mod-desc">
+                  Futuro espacio para capas por municipio, acumulados, interpolaciones, zonas de interés y lectura territorial.
+                </p>
+                <div class="mod-actions">
+                  <span class="btn-card ghost disabled">Diseño pendiente</span>
+                </div>
+              </div>
+            </div>
+            <div class="mod-card-face mod-card-back">
+              <div class="mod-back-kicker">Diseño pendiente</div>
+              <h3 class="mod-back-title">Mapas interactivos</h3>
+              <p class="mod-back-desc">Este espacio permitirá explorar capas agroclimáticas y territoriales del departamento.</p>
               <span class="btn-card ghost disabled">Diseño pendiente</span>
             </div>
           </div>
         </article>
 
-        <article class="mod-card fade-up delay-1">
-          <div class="mod-card-accent accent-blue"></div>
-          <div class="mod-card-body">
-            <div class="mod-icon icon-blue">Bolet.</div>
-            <h3 class="mod-title">Boletines agroclimáticos</h3>
-            <p class="mod-desc">
-              Área para generar boletines mensuales o por temporada con resúmenes,
-              tablas, gráficas y alertas derivadas de la base climática.
-            </p>
-            <div class="mod-actions">
+        <article class="mod-card fade-up delay-1" tabindex="0" aria-label="Módulo de Boletines agroclimáticos en preparación">
+          <div class="mod-card-inner">
+            <div class="mod-card-face mod-card-front">
+              <div class="mod-card-accent accent-blue"></div>
+              <div class="mod-card-body">
+                <div class="mod-icon icon-blue">Bolet.</div>
+                <h3 class="mod-title">Boletines agroclimáticos</h3>
+                <p class="mod-desc">
+                  Área para generar boletines mensuales o por temporada con resúmenes, tablas, gráficas y alertas.
+                </p>
+                <div class="mod-actions">
+                  <span class="btn-card primary disabled">En preparación</span>
+                </div>
+              </div>
+            </div>
+            <div class="mod-card-face mod-card-back">
+              <div class="mod-back-kicker">Próximamente</div>
+              <h3 class="mod-back-title">Boletines agroclimáticos</h3>
+              <p class="mod-back-desc">Aquí se publicarán productos derivados para apoyar la toma de decisiones agroclimáticas.</p>
               <span class="btn-card primary disabled">En preparación</span>
             </div>
           </div>
         </article>
 
-        <article class="mod-card fade-up delay-2">
-          <div class="mod-card-accent accent-green"></div>
-          <div class="mod-card-body">
-            <div class="mod-icon icon-green">Fuent.</div>
-            <h3 class="mod-title">Fuentes e instituciones</h3>
-            <p class="mod-desc">
-              Inventario de fuentes participantes, estado de disponibilidad,
-              créditos, permisos de uso, enlaces institucionales y trazabilidad.
-            </p>
-            <div class="mod-actions">
-              <a class="btn-card green" href="./docs/data/precipitaciones/estaciones_precipitacion.json">Ver inventario</a>
+        <article class="mod-card fade-up delay-2" tabindex="0" role="link" data-href="./docs/data/precipitaciones/estaciones_precipitacion.json" aria-label="Abrir inventario de fuentes e instituciones">
+          <div class="mod-card-inner">
+            <div class="mod-card-face mod-card-front">
+              <div class="mod-card-accent accent-green"></div>
+              <div class="mod-card-body">
+                <div class="mod-icon icon-green">Fuent.</div>
+                <h3 class="mod-title">Fuentes e instituciones</h3>
+                <p class="mod-desc">
+                  Inventario de fuentes participantes, estado de disponibilidad, créditos, permisos de uso, enlaces y trazabilidad.
+                </p>
+                <div class="mod-actions">
+                  <span class="btn-card green">Ver inventario</span>
+                </div>
+              </div>
+            </div>
+            <div class="mod-card-face mod-card-back">
+              <div class="mod-back-kicker">Abriendo datos</div>
+              <h3 class="mod-back-title">Fuentes e instituciones</h3>
+              <p class="mod-back-desc">Se abrirá el inventario de estaciones y fuentes de precipitación.</p>
+              <span class="btn-card green">Ver inventario</span>
             </div>
           </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- METODOLOGÍA -->
-    <section class="section-wrap" id="metodologia">
-      <div class="section-header">
-        <div>
-          <div class="section-eyebrow">Arquitectura de datos</div>
-          <h2 class="section-title">Pipeline ETL asíncrono sobre repositorio estático con distribución vía CDN.</h2>
-        </div>
-        <p class="section-sub">
-          La plataforma opera sobre un modelo de integración continua desacoplado del cliente.
-          Los workflows de GitHub Actions ejecutan jobs de extracción según schedules cron,
-          serializan los registros en esquemas JSON normalizados y los persisten directamente
-          en el repositorio. GitHub Pages sirve los archivos resultantes desde la red de
-          distribución de Fastly sobre HTTPS, sin backend de aplicación ni base de datos
-          relacional en la cadena de entrega.
-        </p>
-      </div>
-
-      <div class="workflow-grid">
-
-        <article class="step-card">
-          <div class="step-icon">Fetch</div>
-          <h3>Extracción programada por cron</h3>
-          <p>
-            Un workflow YAML define un schedule cron que dispara el job de extracción
-            en el runner de GitHub Actions. El script realiza peticiones HTTP a los
-            endpoints autorizados de cada fuente: API REST de Ambient Weather (v1),
-            portal de INSIVUMEH y endpoints de Vivamos Mejor. Las respuestas se
-            validan contra el esquema esperado antes de continuar el pipeline.
-          </p>
-        </article>
-
-        <article class="step-card">
-          <div class="step-icon">ETL</div>
-          <h3>Normalización y persistencia en repositorio</h3>
-          <p>
-            Los registros obtenidos se transforman al esquema canónico de la plataforma:
-            <code>station_id</code>, <code>timestamp_utc</code>, <code>variable</code>,
-            <code>value</code>, <code>unit</code>, <code>source_url</code> e
-            <code>institution</code>. Los archivos <code>actual.json</code> y los históricos
-            CSV se sobreescriben en <code>docs/data/</code> mediante un commit automático
-            firmado por el runner, manteniendo trazabilidad completa en el historial de Git.
-          </p>
-        </article>
-
-        <article class="step-card">
-          <div class="step-icon">CDN</div>
-          <h3>Distribución estática desde GitHub Pages</h3>
-          <p>
-            GitHub Pages publica el directorio <code>docs/</code> en la CDN de Fastly
-            con certificado TLS automático. El cliente ejecuta <code>fetch()</code> a
-            rutas relativas con cache-busting por querystring (<code>?v=timestamp</code>),
-            eliminando cualquier intermediario de backend. La latencia de respuesta
-            depende exclusivamente del edge node asignado por Fastly, no de un servidor
-            de aplicación.
-          </p>
-        </article>
-
-        <article class="step-card">
-          <div class="step-icon">Post</div>
-          <h3>Generación de productos derivados</h3>
-          <p>
-            Scripts de postprocesamiento consumen los archivos crudos en modo lectura
-            para generar rankings, agregaciones estadísticas, resúmenes por municipio
-            y estructuras de datos para visualizaciones. Los productos se escriben en
-            rutas separadas dentro de <code>docs/data/</code>, preservando la integridad
-            de los archivos de origen y permitiendo re-generación idempotente en cualquier
-            punto del historial.
-          </p>
         </article>
 
       </div>
@@ -1130,7 +1291,7 @@
   ============================================================ -->
   <footer>
     <section class="partners-ribbon-wrap" aria-labelledby="partnersRibbonTitle">
-      <h2 class="partners-ribbon-title" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática de Sololá</h2>
+      <h2 class="partners-ribbon-title" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática Sololá</h2>
       <div class="partners-ribbon">
         <div class="partners-logo-row partners-logo-row-top">
           <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./docs/logos/MAGA.png" alt="MAGA" loading="lazy" decoding="async"></a>
@@ -1159,52 +1320,17 @@
       </div>
     </section>
 
-    <div class="footer-top">
+    <div class="footer-contact">
+      <div class="footer-update-chip" id="footerUpdate">
+        Consultando última actualización&hellip;
+      </div>
 
-      <div class="footer-brand">
-        <div class="footer-brand-mark">MTA</div>
-        <div class="footer-brand-name">Mesa Técnica Agroclimática de Sololá</div>
-        <p class="footer-brand-desc">
-          Plataforma en desarrollo para integrar datos climáticos autorizados,
-          información de estaciones meteorológicas, visualizaciones interactivas
-          y boletines para la toma de decisiones agroclimáticas en el departamento
-          de Sololá, Guatemala.
-        </p>
-        <div class="footer-update-chip" id="footerUpdate">
-          Consultando última actualización&hellip;
+      <div class="footer-social">
+        <div class="footer-social-title">Redes sociales de la mesa</div>
+        <div class="footer-social-links">
+          <a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">mtasolola@cunsol.edu.gt</a>
         </div>
-      </div>
-
-      <div class="footer-col">
-        <div class="footer-col-title">Navegación</div>
-        <ul class="footer-nav-list">
-          <li><a href="#modulos">Módulos</a></li>
-          <li><a href="#metodologia">Metodología</a></li>
-          <li><a href="./docs/precipitaciones_index.html">Precipitaciones</a></li>
-          <li><a href="./docs/data/precipitaciones/actual.json">Datos JSON</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <div class="footer-col-title">Institucional</div>
-        <ul class="footer-nav-list">
-          <li><a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer">MAGA</a></li>
-          <li><a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer">INSIVUMEH</a></li>
-          <li><a href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer">Vivamos Mejor</a></li>
-          <li><a href="./docs/data/precipitaciones/estaciones_precipitacion.json">Inventario de estaciones</a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <p class="footer-copy">
-          Mesa Técnica Agroclimática de Sololá, Guatemala.
-        </p>
-        <p class="footer-credits">
-          Datos con créditos a sus fuentes institucionales. Visualización y procesamiento: MTA Sololá.
-        </p>
       </div>
     </div>
   </footer>
@@ -1235,12 +1361,13 @@
 
     async function loadFooterUpdate() {
       const el = document.getElementById("footerUpdate");
+      if (!el) return;
       try {
         const actual = await fetchJson(DATA_URL_ACTUAL);
         const updateText = formatDate(actual.generated_at_gt || actual.generated_at_utc);
-        el.textContent = "Última actualización: " + updateText;
+        el.textContent = "Actualizado por última vez: " + updateText;
       } catch {
-        el.textContent = "Datos pendientes de generar.";
+        el.textContent = "Actualizado por última vez: datos pendientes de generar.";
       }
     }
 
@@ -1252,6 +1379,39 @@
 
     toTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.querySelectorAll(".mod-card").forEach((card) => {
+      let opening = false;
+
+      function activateCard(event) {
+        const target = event.target;
+        if (target && target.closest && target.closest("[data-no-card-open], a[href]")) return;
+        if (opening) return;
+
+        const href = card.dataset.href;
+        opening = true;
+        card.classList.add("is-flipped");
+
+        if (href) {
+          window.setTimeout(() => {
+            window.location.href = href;
+          }, 620);
+        } else {
+          window.setTimeout(() => {
+            opening = false;
+            card.classList.remove("is-flipped");
+          }, 1700);
+        }
+      }
+
+      card.addEventListener("click", activateCard);
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          activateCard(event);
+        }
+      });
     });
 
     loadFooterUpdate();
