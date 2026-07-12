@@ -15,57 +15,90 @@
        ROOT — VARIABLES
     ============================================================ */
     :root {
-      --lake-950: #062233;
-      --lake-900: #082537;
-      --lake-800: #0f3a53;
-      --lake-700: #176680;
-      --lake-600: #1f7ec1;
-      --lake-500: #2a9db7;
-      --lake-100: #e6f5f7;
+      --sky-900: #165c77;
+      --sky-700: #2a9db7;
+      --sky-100: #e8f7fb;
 
-      --forest-700: #2f7a62;
-      --forest-100: #eaf7ef;
+      --leaf-950: #11392f;
+      --leaf-900: #174638;
+      --leaf-800: #1f604d;
+      --leaf-700: #2f7a62;
+      --leaf-500: #6bbb52;
+      --leaf-100: #edf8e8;
 
-      --maize-700: #9a6d0a;
-      --maize-500: #e7b94f;
-      --maize-100: #fff4d7;
+      --sun-800: #9c7412;
+      --sun-700: #b98916;
+      --sun-500: #f0c53e;
+      --sun-100: #fff6d8;
+
+      --earth-900: #51361a;
+      --earth-800: #6f4b22;
+      --earth-600: #9a6d35;
+      --earth-100: #f8efe2;
+
+      --paper: #ffffff;
+      --soft: #f7fbf8;
+      --text: #17342d;
+      --text-mid: #415c55;
+      --text-soft: #6f817c;
+      --border: rgba(31, 96, 77, 0.16);
+      --border-strong: rgba(31, 96, 77, 0.28);
+
+      --shadow-xs: 0 1px 8px rgba(17, 57, 47, 0.06);
+      --shadow-sm: 0 8px 24px rgba(17, 57, 47, 0.08);
+      --shadow-md: 0 18px 46px rgba(17, 57, 47, 0.14);
+      --shadow-lg: 0 28px 80px rgba(17, 57, 47, 0.18);
+
+      --radius-md: 1rem;
+      --radius-lg: 1.5rem;
+      --radius-xl: 2rem;
+
+      --site-max: 1760px;
+      --content-pad: clamp(1rem, 2vw, 2rem);
+      --max: 1760px;
+      --nav-h: 88px;
+
+      /* Alias para conservar la lógica visual del módulo original con la paleta del index. */
+      --lake-950: var(--leaf-950);
+      --lake-900: var(--leaf-900);
+      --lake-800: var(--leaf-800);
+      --lake-700: var(--leaf-700);
+      --lake-600: var(--sky-900);
+      --lake-500: var(--sky-700);
+      --lake-100: var(--sky-100);
+
+      --forest-700: var(--leaf-700);
+      --forest-100: var(--leaf-100);
+
+      --maize-700: var(--sun-700);
+      --maize-500: var(--sun-500);
+      --maize-100: var(--sun-100);
 
       --risk-700: #b75118;
       --risk-500: #d66a2a;
       --risk-100: #fff0e6;
 
-      --ink-900: #0e2433;
-      --ink-700: #2c4556;
-      --ink-500: #587082;
+      --ink-900: var(--text);
+      --ink-700: var(--text-mid);
+      --ink-500: var(--text-soft);
       --ink-300: #8ca0ad;
 
-      --surface:    #f7faf6;
-      --surface-2:  #edf5f2;
-      --paper:      #ffffff;
-      --paper-soft: rgba(255,255,255,0.88);
-
-      --border:        rgba(15,58,83,0.11);
-      --border-strong: rgba(15,58,83,0.2);
-
-      --shadow-xs: 0 1px 6px rgba(14,36,51,0.06);
-      --shadow-sm: 0 2px 14px rgba(14,36,51,0.08);
-      --shadow-md: 0 10px 36px rgba(14,36,51,0.13);
-
-      --max:   1280px;
-      --nav-h: 74px;
+      --surface: #ffffff;
+      --surface-2: var(--soft);
+      --paper-soft: rgba(255,255,255,0.92);
 
       /* Rain intensity colors */
       --rain-none:     #d4dde2;
       --rain-trace:    #a8d8f0;
       --rain-light:    #4db8e8;
-      --rain-moderate: #1f7ec1;
-      --rain-strong:   #0f3a53;
+      --rain-moderate: #2a9db7;
+      --rain-strong:   #1f604d;
       --rain-extreme:  #8f1c1c;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; font-size: 12pt; }
+    html { scroll-behavior: smooth; font-size: 13.5pt; }
 
     body {
       min-height: 100vh;
@@ -73,25 +106,14 @@
       font-family: "Times New Roman", Times, serif;
       font-size: 12pt;
       color: var(--ink-900);
-      background:
-        radial-gradient(circle at 8% 5%, rgba(42,157,183,0.13), transparent 26%),
-        radial-gradient(circle at 90% 8%, rgba(47,122,98,0.1), transparent 26%),
-        linear-gradient(180deg, #fbfcf8 0%, var(--surface) 44%, var(--surface-2) 100%);
+      background: #ffffff;
       overflow-x: hidden;
       text-align: justify;
     }
 
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(15,58,83,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15,58,83,0.03) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 72%);
+      content: none;
+      display: none;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -102,50 +124,111 @@
       margin-inline: auto;
     }
 
+    .site-container {
+      width: 100%;
+      max-width: var(--site-max);
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+    }
+
     /* ============================================================
-       NAVBAR — same as index.html
+       NAVBAR — igual al index.html
     ============================================================ */
+
     .navbar {
       position: fixed;
       inset: 0 0 auto 0;
-      height: var(--nav-h);
       z-index: 1000;
-      background: var(--lake-900);
-      border-bottom: 3px solid var(--maize-500);
-      box-shadow: 0 2px 28px rgba(0,0,0,0.22);
+      min-height: var(--nav-h);
+      background:
+        linear-gradient(90deg, rgba(31, 96, 77, 0.98), rgba(42, 157, 183, 0.98) 58%, rgba(240, 197, 62, 0.96));
+      border-bottom: 4px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 30px rgba(17, 57, 47, 0.22);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--leaf-500), var(--sun-500), var(--sky-700), var(--earth-600));
     }
 
     .navbar-inner {
-      height: 100%;
-      width: min(var(--max), calc(100% - 2rem));
-      margin-inline: auto;
+      height: var(--nav-h);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
     }
 
-    .brand { display: flex; align-items: center; gap: 0.9rem; color: #fff; }
-
-    .brand-mark {
-      width: 46px; height: 46px; flex: 0 0 46px;
-      display: grid; place-items: center;
-      border-radius: 6px;
-      background: linear-gradient(145deg, #fff, #dceef7);
-      color: var(--lake-900);
-      font-weight: 700; font-size: 0.82rem; letter-spacing: 0.05em;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: #ffffff;
+      min-width: 0;
     }
 
-    .brand-text { display: flex; flex-direction: column; gap: 0.1rem; }
+    .brand-logo {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
+      display: block;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 6px 12px rgba(17, 57, 47, 0.22));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
 
     .brand-sub {
-      color: rgba(255,255,255,0.55);
-      font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     .brand-name {
-      color: #fff; font-size: 0.97rem; font-weight: 700;
-      letter-spacing: 0.01em; white-space: nowrap;
+      color: #ffffff;
+      font-size: clamp(1.05rem, 1.4vw, 1.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      white-space: nowrap;
+      text-shadow: 0 2px 12px rgba(17, 57, 47, 0.18);
+    }
+
+    .home-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      color: var(--leaf-950);
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(255,255,255,0.84);
+      box-shadow: 0 8px 18px rgba(17, 57, 47, 0.16);
+      font-size: 0.88rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .home-button:hover,
+    .home-button:focus-visible {
+      transform: translateY(-2px);
+      background: #ffffff;
+      box-shadow: 0 12px 26px rgba(17, 57, 47, 0.22);
+      outline: none;
     }
 
     /* ============================================================
@@ -156,7 +239,7 @@
       inset: var(--nav-h) 0 0 0;
       z-index: 800;
       display: grid; place-items: center;
-      background: rgba(246,248,243,0.9);
+      background: rgba(255,255,255,0.94);
       backdrop-filter: blur(12px);
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
@@ -192,23 +275,24 @@
     ============================================================ */
     .hero-section {
       background:
-        linear-gradient(145deg, rgba(8,37,55,0.97), rgba(15,58,83,0.95)),
-        radial-gradient(circle at 18% 20%, rgba(42,157,183,0.3), transparent 32%),
-        radial-gradient(circle at 85% 15%, rgba(231,185,79,0.22), transparent 28%);
-      color: #fff;
+        radial-gradient(circle at 12% 16%, rgba(107, 187, 82, 0.14), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(240, 197, 62, 0.18), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #fbfdf9 100%);
+      color: var(--text);
       padding: clamp(2.5rem, 6vw, 5rem) 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero-section .wrap { max-width: 860px; }
+    .hero-section .wrap { max-width: var(--max); }
 
     .hero-eyebrow {
       display: inline-block;
-      color: var(--maize-500);
+      color: var(--sky-900);
       font-size: 0.68rem; font-weight: 700;
       letter-spacing: 0.2em; text-transform: uppercase;
       margin-bottom: 1rem;
       padding-bottom: 0.4rem;
-      border-bottom: 1px solid rgba(231,185,79,0.32);
+      border-bottom: 1px solid rgba(42,157,183,0.28);
       text-align: left;
     }
 
@@ -216,14 +300,14 @@
       font-family: "Times New Roman", Times, serif;
       font-size: clamp(2.4rem, 5.5vw, 4.5rem);
       font-weight: 700; line-height: 1.05;
-      letter-spacing: -0.025em; color: #fff;
+      letter-spacing: -0.025em; color: var(--leaf-950);
       text-align: left;
     }
 
     .hero-section .sub {
       margin-top: 0.9rem;
-      color: rgba(255,255,255,0.62);
-      font-size: 0.9rem; line-height: 1.8;
+      color: var(--text-mid);
+      font-size: 0.98rem; line-height: 1.8;
       text-align: justify;
     }
 
@@ -236,12 +320,13 @@
     .meta-chip {
       display: inline-flex; align-items: center; gap: 0.35rem;
       padding: 0.38rem 0.75rem;
-      border-radius: 3px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.68);
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text-mid);
       font-size: 0.72rem; font-weight: 700;
       letter-spacing: 0.06em; text-transform: uppercase;
+      box-shadow: var(--shadow-sm);
     }
 
     /* ============================================================
@@ -782,75 +867,225 @@
     }
 
     /* ============================================================
-       FOOTER — same as index.html
+       FOOTER / CINTILLO / REDES — igual al index.html
     ============================================================ */
+
     footer {
-      background: var(--lake-950);
-      color: rgba(255,255,255,0.7);
-      margin-top: 2.5rem;
+      margin-top: 2rem;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(240, 197, 62, 0.28), transparent 32%),
+        radial-gradient(circle at 90% 0%, rgba(42, 157, 183, 0.28), transparent 32%),
+        linear-gradient(135deg, var(--leaf-950), var(--leaf-800) 46%, var(--earth-800));
     }
 
-    .footer-top {
-      max-width: var(--max); margin-inline: auto;
-      padding: 3.5rem 1rem 2.5rem;
+    .partners-ribbon-wrap {
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid rgba(31, 96, 77, 0.12);
+    }
+
+    .partners-ribbon {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 1.55rem clamp(0.7rem, 1.25vw, 1.35rem) 1.45rem;
+      background: #ffffff;
+    }
+
+    .partners-ribbon-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .partners-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.42rem, 0.95vw, 1.15rem);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .partners-logo-row + .partners-logo-row {
+      margin-top: 1.05rem;
+    }
+
+    .partner-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 0.16rem;
+      border-radius: 8px;
+      transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+    }
+
+    .partner-logo:hover,
+    .partner-logo:focus-visible {
+      transform: translateY(-4px);
+      opacity: 0.94;
+      filter: saturate(1.08);
+      outline: none;
+    }
+
+    .partner-logo img {
+      display: block;
+      width: 100%;
+      height: clamp(54px, 4.9vw, 90px);
+      object-fit: contain;
+    }
+
+    .partner-logo.logo-xs { flex: 0 1 78px; }
+    .partner-logo.logo-sm { flex: 0 1 100px; }
+    .partner-logo.logo-md { flex: 0 1 130px; }
+    .partner-logo.logo-lg { flex: 0 1 170px; }
+    .partner-logo.logo-xl { flex: 0 1 218px; }
+    .partner-logo.logo-xxl { flex: 0 1 270px; }
+    .partner-logo.logo-uvg { flex: 0 1 215px; }
+    .partner-logo.logo-uvg img { height: clamp(72px, 6.2vw, 112px); }
+
+    .footer-contact {
+      position: relative;
       display: grid;
-      grid-template-columns: 1.8fr 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: minmax(220px, 1fr) minmax(320px, 0.9fr) minmax(220px, 1fr);
+      gap: clamp(1rem, 3vw, 3rem);
+      align-items: end;
+      padding-block: 2.8rem 3.25rem;
     }
 
-    .footer-brand-mark {
-      display: inline-grid; place-items: center;
-      width: 48px; height: 48px; border-radius: 6px;
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: #fff; font-weight: 700;
-      font-size: 0.8rem; letter-spacing: 0.05em;
-      margin-bottom: 1rem;
-    }
-
-    .footer-brand-name {
-      color: #fff; font-size: 1rem; font-weight: 700;
-      margin-bottom: 0.75rem; text-align: left;
-    }
-
-    .footer-brand-desc {
-      font-size: 0.88rem; line-height: 1.8;
-      color: rgba(255,255,255,0.5); text-align: justify;
-    }
-
-    .footer-col-title {
-      color: rgba(255,255,255,0.34);
-      font-size: 0.66rem; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      margin-bottom: 1rem; padding-bottom: 0.55rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+    .footer-update-chip {
+      color: #ffffff;
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.5;
       text-align: left;
+      align-self: center;
     }
 
-    .footer-nav-list { list-style: none; display: grid; gap: 0.55rem; }
-
-    .footer-nav-list a {
-      display: block; color: rgba(255,255,255,0.58);
-      font-size: 0.9rem; transition: color 0.18s ease; text-align: left;
+    .footer-social {
+      justify-self: center;
+      width: min(100%, 420px);
+      color: #ffffff;
+      text-align: left;
+      align-self: center;
     }
 
-    .footer-nav-list a:hover { color: #fff; }
-
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); }
-
-    .footer-bottom-inner {
-      max-width: var(--max); margin-inline: auto;
-      padding: 1.2rem 1rem;
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 1rem;
+    .footer-social-title {
+      margin-bottom: 0.85rem;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
-    .footer-copy, .footer-credits {
-      color: rgba(255,255,255,0.32);
-      font-size: 0.78rem;
+    .footer-social-list {
+      list-style: none;
+      display: grid;
+      gap: 0.78rem;
     }
 
-    .footer-credits { text-align: right; }
+    .footer-social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: #ffffff;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .footer-social-link:hover,
+    .footer-social-link:focus-visible {
+      transform: translateX(4px);
+      opacity: 0.88;
+      outline: none;
+    }
+
+    .footer-social-icon {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .footer-social-copy {
+      display: grid;
+      gap: 0.08rem;
+    }
+
+    .footer-social-label {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .footer-social-value {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.96rem;
+    }
+
+    .footer-negative-logo {
+      justify-self: end;
+      align-self: end;
+      display: inline-flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      width: min(220px, 100%);
+    }
+
+    .footer-negative-logo img {
+      display: block;
+      width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
+    }
+
+    /* ============================================================
+       TO TOP
+    ============================================================ */
+
+    .to-top {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      z-index: 1080;
+      width: 44px;
+      height: 44px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: var(--leaf-700);
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      font-size: 1rem;
+      font-weight: 700;
+      transition: 0.18s ease;
+    }
+
+    .to-top:hover {
+      background: var(--sky-900);
+      transform: translateY(-2px);
+    }
+
+    .to-top.show {
+      display: flex;
+    }
 
     /* ============================================================
        REVEAL ANIMATIONS
@@ -887,12 +1122,56 @@
       .footer-bottom-inner { flex-direction: column; }
       .footer-credits { text-align: left; }
     }
+
+
+    @media (max-width: 980px) {
+      :root { --nav-h: 78px; }
+
+      .brand-logo {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+      }
+
+      .footer-contact {
+        grid-template-columns: 1fr;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-update-chip,
+      .footer-social,
+      .footer-negative-logo {
+        justify-self: center;
+      }
+
+      .footer-update-chip { text-align: center; }
+      .footer-negative-logo { width: min(190px, 58vw); }
+      .partners-logo-row { flex-wrap: wrap; justify-content: center; }
+    }
+
+    @media (max-width: 720px) {
+      :root { --nav-h: 72px; --content-pad: 1rem; }
+
+      .navbar-inner { gap: 0.75rem; }
+      .brand { gap: 0.8rem; }
+      .brand-logo {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+      }
+      .brand-sub { font-size: 0.58rem; }
+      .brand-name { font-size: 0.92rem; white-space: normal; }
+      .home-button { min-height: 36px; padding-inline: 0.72rem; font-size: 0.78rem; }
+    }
+
     /* ============================================================
        WINDY MAP — FULL WIDTH
     ============================================================ */
     .map-full-section {
-      background: var(--lake-900);
+      background: #ffffff;
       margin: 0;
+      border-bottom: 1px solid var(--border);
     }
 
     .map-section-inner {
@@ -902,7 +1181,7 @@
     }
 
     .map-section-label {
-      color: rgba(255,255,255,0.55);
+      color: var(--sky-900);
       font-size: 0.7rem; font-weight: 700;
       letter-spacing: 0.14em; text-transform: uppercase;
       padding-bottom: 0.7rem; text-align: left;
@@ -915,12 +1194,14 @@
 
     .map-credits {
       padding: 0.45rem 0.75rem;
-      background: rgba(0,0,0,0.3);
-      font-size: 0.7rem; color: rgba(255,255,255,0.45);
+      background: var(--soft);
+      font-size: 0.7rem; color: var(--text-soft);
       text-align: right; border-radius: 0 0 6px 6px; margin-bottom: 0.75rem;
+      border: 1px solid var(--border);
+      border-top: 0;
     }
 
-    .map-credits a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+    .map-credits a { color: var(--sky-900); text-decoration: underline; }
 
     /* ============================================================
        SECTION BADGES
@@ -1154,17 +1435,18 @@
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="../index.html" aria-label="Volver al inicio">
-        <span class="brand-mark">MTA</span>
+  <nav class="navbar" aria-label="Navegación principal">
+    <div class="navbar-inner site-container">
+      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
+        <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
         <span class="brand-text">
           <span class="brand-sub">Sololá, Guatemala</span>
-          <span class="brand-name">Análisis Pluviométrico — NASA POWER</span>
+          <span class="brand-name">Mesa Técnica Agroclimática Sololá</span>
         </span>
       </a>
+      <a class="home-button" href="../index.html" aria-label="Regresar al inicio">Regresar al inicio</a>
     </div>
-  </header>
+  </nav>
 
   <!-- LOADER -->
   <div class="loader" id="loader">
@@ -1517,257 +1799,6 @@
 
     </div>
 
-    <!-- SECTION 5: STATISTICAL ANALYSIS -->
-    <div class="stat-section wrap">
-
-      <div class="stat-section-head reveal">
-        <div class="stat-eyebrow">Estadística pluviométrica avanzada</div>
-        <h2>Análisis estadístico descriptivo del periodo</h2>
-        <p>
-          Los parámetros siguientes describen la distribución de la precipitación diaria para el
-          municipio activo en el periodo filtrado. Los índices de rachas (CSD, CWD) y los percentiles
-          de diseño (P90, P95) son indicadores estándar utilizados en climatología operativa,
-          hidrología estadística y diseño de obras de drenaje. El coeficiente de variación
-          permite comparar la variabilidad entre series con medias distintas.
-        </p>
-      </div>
-
-      <div class="stat-grid reveal">
-
-        <!-- Left: KPI grid -->
-        <div class="stat-kpis" id="statKpis"></div>
-
-        <!-- Right: MathML Formulas -->
-        <div class="formulas-panel">
-          <div class="formulas-head">Definiciones matemáticas y valores calculados — municipio activo</div>
-          <div class="formulas-body">
-
-            <div class="formula-group">
-              <div class="formula-group-title">Estadísticos de posición</div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Media aritmética</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <mi>μ</mi><mo>=</mo>
-                      <mfrac><mn>1</mn><mi>N</mi></mfrac>
-                      <munderover>
-                        <mo stretchy="false">∑</mo>
-                        <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
-                        <mi>N</mi>
-                      </munderover>
-                      <msub><mi>x</mi><mi>i</mi></msub>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fMean">—</span>
-              </div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Mediana</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <mi>M</mi><mi>d</mi><mo>=</mo>
-                      <msub><mi>x</mi>
-                        <mrow><mo>(</mo><mfrac><mrow><mi>N</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>)</mo></mrow>
-                      </msub>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fMedian">—</span>
-              </div>
-            </div>
-
-            <div class="formula-group">
-              <div class="formula-group-title">Estadísticos de dispersión</div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Desviación estándar</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <mi>σ</mi><mo>=</mo>
-                      <msqrt>
-                        <mfrac>
-                          <mrow>
-                            <munderover>
-                              <mo stretchy="false">∑</mo>
-                              <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
-                              <mi>N</mi>
-                            </munderover>
-                            <msup>
-                              <mrow><mo>(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mi>μ</mi><mo>)</mo></mrow>
-                              <mn>2</mn>
-                            </msup>
-                          </mrow>
-                          <mi>N</mi>
-                        </mfrac>
-                      </msqrt>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fStd">—</span>
-              </div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Varianza</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo>
-                      <mfrac><mn>1</mn><mi>N</mi></mfrac>
-                      <munderover>
-                        <mo stretchy="false">∑</mo>
-                        <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
-                        <mi>N</mi>
-                      </munderover>
-                      <msup>
-                        <mrow><mo>(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mi>μ</mi><mo>)</mo></mrow>
-                        <mn>2</mn>
-                      </msup>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fVar">—</span>
-              </div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Coeficiente de variación</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <mi>C</mi><mi>V</mi><mo>=</mo>
-                      <mfrac><mi>σ</mi><mi>μ</mi></mfrac>
-                      <mo>×</mo><mn>100</mn>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fCV">—</span>
-              </div>
-            </div>
-
-            <div class="formula-group">
-              <div class="formula-group-title">Estadísticos de forma</div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Asimetría de Pearson</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <mi>S</mi><mi>k</mi><mo>=</mo>
-                      <mfrac>
-                        <mrow><mn>3</mn><mo>(</mo><mi>μ</mi><mo>−</mo><mi>M</mi><mi>d</mi><mo>)</mo></mrow>
-                        <mi>σ</mi>
-                      </mfrac>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fSkew">—</span>
-              </div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Curtosis (exceso)</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <mi>K</mi><mi>u</mi><mo>=</mo>
-                      <mfrac>
-                        <mrow>
-                          <mfrac><mn>1</mn><mi>N</mi></mfrac>
-                          <munderover>
-                            <mo stretchy="false">∑</mo>
-                            <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow>
-                            <mi>N</mi>
-                          </munderover>
-                          <msup>
-                            <mrow><mo>(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mi>μ</mi><mo>)</mo></mrow>
-                            <mn>4</mn>
-                          </msup>
-                        </mrow>
-                        <msup><mi>σ</mi><mn>4</mn></msup>
-                      </mfrac>
-                      <mo>−</mo><mn>3</mn>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fKurt">—</span>
-              </div>
-            </div>
-
-            <div class="formula-group">
-              <div class="formula-group-title">Índices climatológicos</div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Intensidad media días lluviosos</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <msub><mi>I</mi><mi>m</mi></msub><mo>=</mo>
-                      <mfrac>
-                        <mrow><munder><mo stretchy="false">∑</mo><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn></mrow></munder><msub><mi>x</mi><mi>i</mi></msub></mrow>
-                        <msub><mi>N</mi><mrow><mi>P</mi><mn>1</mn></mrow></msub>
-                      </mfrac>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fIntensity">—</span>
-              </div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Racha seca máxima (CSD)</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <msub><mi>CSD</mi><mi>max</mi></msub><mo>=</mo>
-                      <mo>max</mo><mrow><mo>{</mo><mi>días consec.</mi><mo>:</mo><msub><mi>x</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn><mo>}</mo></mrow>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fCSD">—</span>
-              </div>
-
-              <div class="formula-row">
-                <div class="formula-left">
-                  <span class="formula-name">Racha húmeda máxima (CWD)</span>
-                  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" class="eq">
-                    <mrow>
-                      <msub><mi>CWD</mi><mi>max</mi></msub><mo>=</mo>
-                      <mo>max</mo><mrow><mo>{</mo><mi>días consec.</mi><mo>:</mo><msub><mi>x</mi><mi>i</mi></msub><mo>&gt;</mo><mn>0</mn><mo>}</mo></mrow>
-                    </mrow>
-                  </math>
-                </div>
-                <span class="formula-val" id="fCWD">—</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Percentile visualization -->
-      <div class="pctile-section reveal">
-        <div class="panel">
-          <div class="panel-head">
-            <div class="panel-title-block">
-              <div class="panel-title">Distribución de percentiles empíricos</div>
-              <div class="panel-subtitle">Interpolación lineal · Pₚ = x₍L₎ donde L = ⌈p · N / 100⌉</div>
-            </div>
-          </div>
-          <div class="panel-body" style="background:#fff; padding: 1rem;">
-            <div class="chart-container" style="height:200px;">
-              <canvas id="percentileChart"></canvas>
-            </div>
-          </div>
-          <div class="panel-foot">
-            Los percentiles P10–P90 delimitan el rango intercuartílico extendido. P95 se utiliza como referencia de diseño para eventos extremos. P50 coincide con la mediana de la distribución.
-          </div>
-        </div>
-      </div>
-
-    </div>
 
     <!-- SECTION 6: DATA TABLE -->
     <div class="table-panel wrap reveal">
@@ -1827,42 +1858,74 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-brand-mark">MTA</div>
-        <div class="footer-brand-name">Mesa Técnica Agroclimática de Sololá</div>
-        <p class="footer-brand-desc">
-          Módulo de análisis pluviométrico basado en datos NASA POWER MERRA-2.
-          Parte de la plataforma digital de la Mesa Técnica Agroclimática
-          del departamento de Sololá, Guatemala.
-        </p>
+    <section class="partners-ribbon-wrap" aria-labelledby="partnersRibbonTitle">
+      <h2 class="partners-ribbon-title" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática Sololá</h2>
+      <div class="partners-ribbon">
+        <div class="partners-logo-row partners-logo-row-top">
+          <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA 02"><img src="./logos/MAGA02.png" alt="MAGA 02" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH 02"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH 02" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./logos/FeedtheChildren.png" alt="Feed the Children" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Instituto Privado de Investigación sobre Cambio Climático"><img src="./logos/ICC.png" alt="Instituto Privado de Investigación sobre Cambio Climático" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy" decoding="async"></a>
+        </div>
+
+        <div class="partners-logo-row partners-logo-row-bottom">
+          <a class="partner-logo logo-sm" href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Bélgica, socio para el desarrollo"><img src="./logos/Belgica.png" alt="Bélgica, socio para el desarrollo" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg logo-uvg" href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán de la Universidad del Valle de Guatemala"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán - Universidad del Valle de Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="Ministerio de Ambiente y Recursos Naturales"><img src="./logos/MARN.png" alt="Ministerio de Ambiente y Recursos Naturales" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy" decoding="async"></a>
+        </div>
       </div>
-      <div>
-        <div class="footer-col-title">Navegación</div>
-        <ul class="footer-nav-list">
-          <li><a href="../index.html">Inicio de la plataforma</a></li>
-          <li><a href="./precipitaciones_index.html">Módulo de precipitaciones</a></li>
-          <li><a href="#pluviograma">Pluviograma diario</a></li>
-          <li><a href="./data/precipitaciones/historico_municipios.json">Datos JSON — NASA POWER</a></li>
+    </section>
+
+    <div class="footer-contact site-container">
+      <div class="footer-update-chip" id="footerUpdate">
+        Consultando última actualización&hellip;
+      </div>
+
+      <div class="footer-social">
+        <div class="footer-social-title">Visita nuestras redes sociales</div>
+        <ul class="footer-social-list" aria-label="Redes sociales y contacto de la Mesa Técnica Agroclimática Sololá">
+          <li>
+            <a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">
+              <span class="footer-social-icon" aria-hidden="true">f</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Facebook</span>
+                <span class="footer-social-value">Mesa Técnica Agroclimática Sololá</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
+              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Contáctanos</span>
+                <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
-      <div>
-        <div class="footer-col-title">Fuentes</div>
-        <ul class="footer-nav-list">
-          <li><a href="https://power.larc.nasa.gov" target="_blank" rel="noreferrer">NASA POWER API</a></li>
-          <li><a href="https://gmao.gsfc.nasa.gov/reanalysis/MERRA-2/" target="_blank" rel="noreferrer">MERRA-2 (NASA GMAO)</a></li>
-          <li><a href="#">INSIVUMEH</a></li>
-          <li><a href="#">Vivamos Mejor</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-inner">
-        <p class="footer-copy">Mesa Técnica Agroclimática de Sololá, Guatemala.</p>
-        <p class="footer-credits">Datos: NASA POWER MERRA-2 (dominio público). Análisis y visualización: MTA Sololá.</p>
-      </div>
+
+      <a class="footer-negative-logo" href="../index.html" aria-label="Mesa Técnica Agroclimática Sololá">
+        <img src="./logos/NEGATIVO.png" alt="Logo negativo de la Mesa Técnica Agroclimática Sololá" loading="lazy" decoding="async">
+      </a>
     </div>
   </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">&#8679;</button>
 
   <!-- ============================================================
        JAVASCRIPT
@@ -1872,6 +1935,8 @@
 
     /* ---- CONSTANTS ---- */
     const DATA_URL = "./data/precipitaciones/historico_municipios.json";
+    const DATA_URL_ACTUAL = "./data/precipitaciones/actual.json";
+    const PRED_URL = "./data/precipitaciones/prediccion_mensual.json";
 
     const MONTHS = ["", "Enero","Febrero","Marzo","Abril","Mayo","Junio",
                     "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
@@ -2538,40 +2603,50 @@
       document.getElementById("kCSD").textContent  = `${st.csdMax}d`;
       document.getElementById("kStd").textContent  = fmm(st.stddev, 2);
 
-      /* Formulas */
-      document.getElementById("fMean").textContent     = fmm(st.mean, 3);
-      document.getElementById("fMedian").textContent   = fmm(st.median, 3);
-      document.getElementById("fStd").textContent      = fmm(st.stddev, 3);
-      document.getElementById("fVar").textContent      = `${fmt(st.variance, 3)} mm²`;
-      document.getElementById("fCV").textContent       = `${fmt(st.cv, 1)} %`;
-      document.getElementById("fSkew").textContent     = fmt(st.skewness, 3);
-      document.getElementById("fKurt").textContent     = fmt(st.kurtosis, 3);
-      document.getElementById("fIntensity").textContent= fmm(st.wetIntensity, 2);
-      document.getElementById("fCSD").textContent      = `${st.csdMax} días`;
-      document.getElementById("fCWD").textContent      = `${st.cwdMax} días`;
+      /* La sección descriptiva avanzada fue retirada del HTML.
+         Estos guardados mantienen la lógica intacta si se vuelve a activar. */
+      const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      };
 
-      /* Stat KPI mini grid */
-      const kpiDefs = [
-        { label: "N (observaciones)",  val: `${st.n} días`,          note: "Total de registros diarios" },
-        { label: "Acumulado (Σx)",     val: fmm(st.sum, 1),          note: "Precipitación total" },
-        { label: "Máximo diario",      val: fmm(st.max, 2),          note: `Ocurrió el ${maxRec?.fecha || "—"}` },
-        { label: "Días lluviosos",     val: `${st.wetDays}`,         note: `${((st.wetDays / st.n) * 100).toFixed(1)} % del periodo` },
-        { label: "Días secos",         val: `${st.dryDays}`,         note: `${((st.dryDays / st.n) * 100).toFixed(1)} % del periodo` },
-        { label: "Intensidad media",   val: fmm(st.wetIntensity, 2), note: "mm/día lluv." },
-        { label: "P25 — P75 (IQR)",   val: `${fmt(st.p25,1)} – ${fmt(st.p75,1)} mm`, note: "Rango intercuartílico" },
-        { label: "Percentil P90",      val: fmm(st.p90, 2),          note: "Umbral de evento extremo" },
-        { label: "Percentil P95",      val: fmm(st.p95, 2),          note: "Precipitación de diseño" },
-      ];
+      setText("fMean", fmm(st.mean, 3));
+      setText("fMedian", fmm(st.median, 3));
+      setText("fStd", fmm(st.stddev, 3));
+      setText("fVar", `${fmt(st.variance, 3)} mm²`);
+      setText("fCV", `${fmt(st.cv, 1)} %`);
+      setText("fSkew", fmt(st.skewness, 3));
+      setText("fKurt", fmt(st.kurtosis, 3));
+      setText("fIntensity", fmm(st.wetIntensity, 2));
+      setText("fCSD", `${st.csdMax} días`);
+      setText("fCWD", `${st.cwdMax} días`);
 
-      document.getElementById("statKpis").innerHTML = kpiDefs.map(k => `
-        <div class="stat-kpi">
-          <div class="stat-kpi-label">${k.label}</div>
-          <div class="stat-kpi-value">${k.val}</div>
-          <div class="stat-kpi-note">${k.note}</div>
-        </div>
-      `).join("");
+      const statKpisEl = document.getElementById("statKpis");
+      const percentileCanvas = document.getElementById("percentileChart");
 
-      renderPercentileChart(st);
+      if (statKpisEl) {
+        const kpiDefs = [
+          { label: "N (observaciones)",  val: `${st.n} días`,          note: "Total de registros diarios" },
+          { label: "Acumulado (Σx)",     val: fmm(st.sum, 1),          note: "Precipitación total" },
+          { label: "Máximo diario",      val: fmm(st.max, 2),          note: `Ocurrió el ${maxRec?.fecha || "—"}` },
+          { label: "Días lluviosos",     val: `${st.wetDays}`,         note: `${((st.wetDays / st.n) * 100).toFixed(1)} % del periodo` },
+          { label: "Días secos",         val: `${st.dryDays}`,         note: `${((st.dryDays / st.n) * 100).toFixed(1)} % del periodo` },
+          { label: "Intensidad media",   val: fmm(st.wetIntensity, 2), note: "mm/día lluv." },
+          { label: "P25 — P75 (IQR)",   val: `${fmt(st.p25,1)} – ${fmt(st.p75,1)} mm`, note: "Rango intercuartílico" },
+          { label: "Percentil P90",      val: fmm(st.p90, 2),          note: "Umbral de evento extremo" },
+          { label: "Percentil P95",      val: fmm(st.p95, 2),          note: "Precipitación de diseño" },
+        ];
+
+        statKpisEl.innerHTML = kpiDefs.map(k => `
+          <div class="stat-kpi">
+            <div class="stat-kpi-label">${k.label}</div>
+            <div class="stat-kpi-value">${k.val}</div>
+            <div class="stat-kpi-note">${k.note}</div>
+          </div>
+        `).join("");
+      }
+
+      if (percentileCanvas) renderPercentileChart(st);
     }
 
     /* ============================================================
@@ -3117,6 +3192,52 @@
       updateAll();
     };
 
+
+    /* ============================================================
+       FOOTER UPDATE / TO TOP
+    ============================================================ */
+    async function fetchJson(url) {
+      const response = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`No se pudo leer ${url}: ${response.status}`);
+      return response.json();
+    }
+
+    function formatDate(value) {
+      if (!value) return "Sin fecha";
+      try {
+        const date = new Date(value);
+        return new Intl.DateTimeFormat("es-GT", {
+          dateStyle: "medium",
+          timeStyle: "short"
+        }).format(date);
+      } catch {
+        return value;
+      }
+    }
+
+    async function loadFooterUpdate() {
+      const el = document.getElementById("footerUpdate");
+      if (!el) return;
+      try {
+        const actual = await fetchJson(DATA_URL_ACTUAL);
+        const updateText = formatDate(actual.generated_at_gt || actual.generated_at_utc);
+        el.textContent = "Actualizado por última vez: " + updateText;
+      } catch {
+        el.textContent = "Actualizado por última vez: datos pendientes de generar.";
+      }
+    }
+
+    const toTop = document.getElementById("toTop");
+    if (toTop) {
+      window.addEventListener("scroll", () => {
+        toTop.classList.toggle("show", window.scrollY > 460);
+      });
+
+      toTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
     /* ============================================================
        UPDATE ALL (extended)
     ============================================================ */
@@ -3132,6 +3253,7 @@
       await _load();
       loadAwn();
       loadPredictions();
+      loadFooterUpdate();
     };
   </script>
 
