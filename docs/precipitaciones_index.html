@@ -552,6 +552,18 @@
       height: 100% !important;
     }
 
+    .chart-empty-note {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      color: var(--ink-500);
+      font-size: 1rem;
+      text-align: center;
+      pointer-events: none;
+    }
+
     .panel-foot {
       padding: 0.48rem 1rem;
       background: var(--surface);
@@ -1154,6 +1166,24 @@
       color: #ffffff;
     }
 
+    .chart-fullscreen-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .chart-fullscreen-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      padding: 0.22rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+
     .chart-fullscreen-title {
       font-size: clamp(1rem, 2vw, 1.35rem);
       font-weight: 700;
@@ -1725,13 +1755,13 @@
     <div class="section-block wrap reveal">
       <div class="section-label-bar">
         <span class="section-badge badge-pred">Predicción</span>
-        <span class="section-label-title">Pronóstico de precipitación — 30 días · Open-Meteo · Modelo ECMWF</span>
+        <span class="section-label-title">Pronóstico de precipitación — 16 días · Open-Meteo · Forecast API</span>
       </div>
       <div class="panel">
         <div class="panel-head">
           <div class="panel-title-block">
-            <div class="panel-title">Pronóstico pluviométrico mensual — Sololá (Cabecera)</div>
-            <div class="panel-subtitle">Precipitación estimada diaria (mm) · Modelo estacional ECMWF · Open-Meteo API gratuita</div>
+            <div class="panel-title">Pronóstico pluviométrico — Sololá (16 días)</div>
+            <div class="panel-subtitle">Precipitación estimada diaria (mm) · Open-Meteo Forecast API</div>
           </div>
           <span class="pred-note" id="predNote">Cargando pronóstico...</span>
         </div>
@@ -1741,7 +1771,7 @@
           </div>
         </div>
         <div class="panel-foot">
-          Pronóstico generado diariamente por GitHub Actions desde la API Open-Meteo (seasonal-api.open-meteo.com). Modelo ECMWF estacional. Los valores representan precipitación media estimada para el centroide del departamento. No sustituye boletines oficiales de INSIVUMEH.
+          Pronóstico generado diariamente por GitHub Actions desde Open-Meteo Forecast API. Horizonte operativo: 16 días. Los valores representan precipitación estimada para el centroide del departamento. No sustituye boletines oficiales de INSIVUMEH.
         </div>
       </div>
       <div class="pred-kpis" id="predKpis"></div>
@@ -1799,13 +1829,13 @@
         <div class="panel-head">
           <div class="panel-title-block">
             <div class="panel-title">Serie temporal con medias móviles</div>
-            <div class="panel-subtitle">Valores diarios + media móvil de 7 y 30 días para identificar tendencias estacionales</div>
+            <div class="panel-subtitle">Valores diarios + media móvil de 7 y 16 días para identificar tendencias estacionales</div>
           </div>
           <div class="panel-controls">
             <span class="pc-label">Ventana MA</span>
             <button class="pc-btn active" data-ma="7" type="button">7 días</button>
             <button class="pc-btn" data-ma="15" type="button">15 días</button>
-            <button class="pc-btn" data-ma="30" type="button">30 días</button>
+            <button class="pc-btn" data-ma="30" type="button">16 días</button>
           </div>
         </div>
         <div class="panel-body">
@@ -1814,7 +1844,7 @@
           </div>
         </div>
         <div class="panel-foot">
-          La media móvil suaviza la variabilidad de alta frecuencia para revelar la señal estacional. Una ventana de 7 días captura patrones semanales; 30 días refleja la variabilidad mensual.
+          La media móvil suaviza la variabilidad de alta frecuencia para revelar la señal estacional. Una ventana de 7 días captura patrones semanales; 16 días refleja la variabilidad mensual.
         </div>
       </div>
     </div>
@@ -2025,7 +2055,10 @@
   <div class="chart-fullscreen-overlay" id="chartFullscreen" aria-hidden="true">
     <div class="chart-fullscreen-card" role="dialog" aria-modal="true" aria-labelledby="chartFullscreenTitle">
       <div class="chart-fullscreen-head">
-        <div class="chart-fullscreen-title" id="chartFullscreenTitle">Gráfica ampliada</div>
+        <div class="chart-fullscreen-brand">
+          <img class="chart-fullscreen-logo" src="./logos/MTA_LOGO.png" alt="Mesa Técnica Agroclimática Sololá">
+          <div class="chart-fullscreen-title" id="chartFullscreenTitle">Gráfica ampliada</div>
+        </div>
         <button class="chart-fullscreen-close" id="chartFullscreenClose" type="button" aria-label="Cerrar gráfica ampliada">×</button>
       </div>
       <div class="chart-fullscreen-body">
@@ -2176,8 +2209,8 @@
             labels: {
               usePointStyle: true, boxWidth: 8,
               color: "#2c4556",
-              font: { family: FONT, size: 11, weight: "700" },
-              padding: 14
+              font: { family: FONT, size: 15, weight: "700" },
+              padding: 16
             }
           },
           tooltip: {
@@ -2191,7 +2224,7 @@
           x: {
             grid: { color: "rgba(15,58,83,0.07)", lineWidth: 1 },
             border: { color: "rgba(15,58,83,0.14)" },
-            ticks: { color: "#587082", font: { family: FONT, size: 10 }, maxRotation: 45 }
+            ticks: { color: "#587082", font: { family: FONT, size: 14 }, maxRotation: 45 }
           },
           y: {
             beginAtZero: true,
@@ -2199,7 +2232,7 @@
             border: { color: "rgba(15,58,83,0.14)" },
             ticks: {
               color: "#587082",
-              font: { family: MONO, size: 10, weight: "600" },
+              font: { family: MONO, size: 13, weight: "600" },
               callback: v => `${v} mm`
             }
           }
@@ -2291,7 +2324,7 @@
                   borderColor: "rgba(77,184,232,0.55)", borderWidth: 1,
                   borderDash: [5, 4],
                   label: { content: "2 mm", display: true, position: "end",
-                           font: { size: 9, family: FONT }, color: "#2a9db7",
+                           font: { size: 12, family: FONT }, color: "#2a9db7",
                            backgroundColor: "rgba(255,255,255,0.7)" }
                 },
                 l5: {
@@ -2299,7 +2332,7 @@
                   borderColor: "rgba(31,126,193,0.55)", borderWidth: 1,
                   borderDash: [5, 4],
                   label: { content: "5 mm", display: true, position: "end",
-                           font: { size: 9, family: FONT }, color: "#1f7ec1",
+                           font: { size: 12, family: FONT }, color: "#1f7ec1",
                            backgroundColor: "rgba(255,255,255,0.7)" }
                 },
                 l10: {
@@ -2307,7 +2340,7 @@
                   borderColor: "rgba(15,58,83,0.45)", borderWidth: 1.2,
                   borderDash: [5, 4],
                   label: { content: "10 mm", display: true, position: "end",
-                           font: { size: 9, family: FONT }, color: "#0f3a53",
+                           font: { size: 12, family: FONT }, color: "#0f3a53",
                            backgroundColor: "rgba(255,255,255,0.7)" }
                 }
               }
@@ -2329,7 +2362,7 @@
               ...baseOpts().scales.x,
               ticks: {
                 color: "#587082",
-                font: { family: FONT, size: 9 },
+                font: { family: FONT, size: 13 },
                 maxRotation: 60,
                 callback: (val, idx) => {
                   const lbl = labels[idx] || "";
@@ -2345,7 +2378,7 @@
               max: S.yFixed ? 25 : undefined,
               title: {
                 display: true, text: "mm / día",
-                color: "#587082", font: { family: FONT, size: 10 }
+                color: "#587082", font: { family: FONT, size: 14 }
               }
             }
           }
@@ -2408,7 +2441,7 @@
             x: {
               ...baseOpts().scales.x,
               ticks: {
-                color: "#587082", font: { family: FONT, size: 9 }, maxRotation: 55,
+                color: "#587082", font: { family: FONT, size: 13 }, maxRotation: 55,
                 callback: (val, idx) => {
                   const lbl = labels[idx] || "";
                   const day = parseInt(lbl.slice(8), 10);
@@ -2419,7 +2452,7 @@
             },
             y: {
               ...baseOpts().scales.y,
-              title: { display: true, text: "mm / día", color: "#587082", font: { family: FONT, size: 10 } }
+              title: { display: true, text: "mm / día", color: "#587082", font: { family: FONT, size: 14 } }
             }
           }
         }
@@ -2501,13 +2534,13 @@
                 ...baseOpts().scales.x.ticks,
                 callback: v => `${v} ${unitLabel}`
               },
-              title: { display: true, text: unitLabel, color: "#587082", font: { family: FONT, size: 10 } }
+              title: { display: true, text: unitLabel, color: "#587082", font: { family: FONT, size: 14 } }
             },
             y: {
               ...baseOpts().scales.y,
               beginAtZero: false,
               grid: { display: false },
-              ticks: { color: "#2c4556", font: { family: FONT, size: 10, weight: "700" } }
+              ticks: { color: "#2c4556", font: { family: FONT, size: 14, weight: "700" } }
             }
           }
         }
@@ -2568,12 +2601,12 @@
           scales: {
             x: {
               ...baseOpts().scales.x,
-              ticks: { color: "#587082", font: { family: FONT, size: 9 }, maxRotation: 35 }
+              ticks: { color: "#587082", font: { family: FONT, size: 13 }, maxRotation: 35 }
             },
             y: {
               ...baseOpts().scales.y,
-              ticks: { color: "#587082", font: { family: MONO, size: 10 }, callback: v => `${v} días` },
-              title: { display: true, text: "Núm. de días", color: "#587082", font: { family: FONT, size: 10 } }
+              ticks: { color: "#587082", font: { family: MONO, size: 13 }, callback: v => `${v} días` },
+              title: { display: true, text: "Núm. de días", color: "#587082", font: { family: FONT, size: 14 } }
             }
           }
         }
@@ -2631,7 +2664,7 @@
             x: { ...baseOpts().scales.x },
             y: {
               ...baseOpts().scales.y,
-              title: { display: true, text: "mm acumulado", color: "#587082", font: { family: FONT, size: 10 } }
+              title: { display: true, text: "mm acumulado", color: "#587082", font: { family: FONT, size: 14 } }
             }
           }
         }
@@ -2684,7 +2717,7 @@
             x: { ...baseOpts().scales.x },
             y: {
               ...baseOpts().scales.y,
-              title: { display: true, text: "mm", color: "#587082", font: { family: FONT, size: 10 } }
+              title: { display: true, text: "mm", color: "#587082", font: { family: FONT, size: 14 } }
             }
           }
         }
@@ -3155,9 +3188,10 @@
       document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
     }
 
-    /* ---- INIT ---- */
-    setupEvents();
-    load();
+    /* ---- INIT ----
+       Se ejecuta al final del script, después de declarar AWN y predicción.
+       Esto evita que esas secciones queden en "cargando".
+    */
     /* ============================================================
        AWN — LEE JSON LOCAL (generado por fetch_awn.py / GitHub Actions)
        No llama la API desde el browser para evitar CORS
@@ -3227,7 +3261,21 @@
     }
 
     function renderAwnChart(historico) {
-      if (!historico.length) return;
+      document.querySelectorAll("#awnChart + .chart-empty-note, #awnChart ~ .chart-empty-note").forEach(el => el.remove());
+
+      if (!historico.length) {
+        const canvas = document.getElementById("awnChart");
+        if (canvas) {
+          const wrap = canvas.closest(".chart-container");
+          if (wrap) {
+            const msg = document.createElement("div");
+            msg.className = "chart-empty-note";
+            msg.textContent = "Última lectura disponible. Aún no hay histórico diario suficiente para graficar.";
+            wrap.appendChild(msg);
+          }
+        }
+        return;
+      }
 
       const labels = historico.map(r => r.fecha);
       const values = historico.map(r => r.lluvia_mm);
@@ -3255,7 +3303,7 @@
           animation: { duration: 500 },
           plugins: {
             legend: {
-              labels: { color: "#2c4556", font: { family: FONT, size: 11 },
+              labels: { color: "#2c4556", font: { family: FONT, size: 14 },
                         padding: 12, usePointStyle: true }
             },
             tooltip: {
@@ -3274,7 +3322,7 @@
                   borderColor: "rgba(31,126,193,0.5)", borderWidth: 1,
                   borderDash: [4, 4],
                   label: { content: "5 mm", display: true, position: "end",
-                           font: { size: 9, family: FONT }, color: "#1f7ec1",
+                           font: { size: 12, family: FONT }, color: "#1f7ec1",
                            backgroundColor: "rgba(255,255,255,0.75)" }
                 }
               }
@@ -3283,7 +3331,7 @@
           scales: {
             x: {
               grid: { color: "rgba(15,58,83,0.06)" },
-              ticks: { color: "#587082", font: { family: FONT, size: 9 }, maxRotation: 55,
+              ticks: { color: "#587082", font: { family: FONT, size: 13 }, maxRotation: 55,
                 callback: (v, i) => {
                   const d = parseInt(labels[i]?.slice(8) || "0", 10);
                   return d % 3 === 0 ? labels[i] : "";
@@ -3293,10 +3341,10 @@
             y: {
               beginAtZero: true,
               grid: { color: "rgba(15,58,83,0.07)" },
-              ticks: { color: "#587082", font: { family: MONO, size: 9 },
+              ticks: { color: "#587082", font: { family: MONO, size: 13 },
                        callback: v => `${v} mm` },
               title: { display: true, text: "mm / día",
-                       color: "#587082", font: { family: FONT, size: 10 } }
+                       color: "#587082", font: { family: FONT, size: 14 } }
             }
           }
         }
@@ -3308,14 +3356,19 @@
       try {
         const resp = await fetch(`${PRED_URL}?v=${Date.now()}`, { cache: "no-store" });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const records = await resp.json();
 
-        if (!records.length) throw new Error("Archivo vacío");
+        const payload = await resp.json();
+        const records = Array.isArray(payload)
+          ? payload
+          : (payload.registros || payload.data || payload.forecast || []);
+
+        if (!records.length) throw new Error("Archivo vacío o sin registros");
 
         const labels = records.map(r => r.fecha);
-        const values = records.map(r => Number(r.lluvia_estimada_mm || 0));
+        const values = records.map(r => Number(r.lluvia_estimada_mm ?? r.precipitacion_mm ?? r.precipitation_mm ?? 0));
+        const horizon = payload.horizonte_dias || records.length;
 
-        noteEl.textContent = `${records.length} días · último: ${labels[labels.length - 1]}`;
+        noteEl.textContent = `${horizon} días · último: ${labels[labels.length - 1]}`;
 
         /* Pred KPIs */
         const total = values.reduce((a, b) => a + b, 0);
@@ -3325,7 +3378,7 @@
         const maxDate = labels[values.indexOf(maxV)];
 
         document.getElementById("predKpis").innerHTML = [
-          { label: "Acumulado pronosticado", val: `${total.toFixed(1)} mm`, note: `${records.length} días` },
+          { label: "Acumulado pronosticado", val: `${total.toFixed(1)} mm`, note: `${horizon} días` },
           { label: "Media diaria estimada",  val: `${mean.toFixed(2)} mm`,  note: "mm/día" },
           { label: "Máximo estimado",        val: `${maxV.toFixed(2)} mm`,  note: maxDate },
           { label: "Días con lluvia est.",   val: `${wetD}`,               note: `P > 0 mm` }
@@ -3379,11 +3432,11 @@
             },
             scales: {
               x: { ...baseOpts().scales.x,
-                ticks: { color: "#587082", font: { family: FONT, size: 9 }, maxRotation: 55,
+                ticks: { color: "#587082", font: { family: FONT, size: 13 }, maxRotation: 55,
                   callback: (v, i) => i % 5 === 0 ? labels[i] : "" }
               },
               y: { ...baseOpts().scales.y,
-                title: { display: true, text: "mm estimados", color: "#587082", font: { family: FONT, size: 10 } }
+                title: { display: true, text: "mm estimados", color: "#587082", font: { family: FONT, size: 14 } }
               }
             }
           }
@@ -3495,10 +3548,16 @@
     const _load = load;
     load = async function() {
       await _load();
-      loadAwn();
-      loadPredictions();
-      loadFooterUpdate();
+      await Promise.allSettled([
+        loadAwn(),
+        loadPredictions(),
+        loadFooterUpdate()
+      ]);
     };
+
+    /* ---- INIT FINAL ---- */
+    setupEvents();
+    load();
   </script>
 
 </body>
