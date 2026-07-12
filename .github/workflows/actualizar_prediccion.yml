@@ -1,0 +1,129 @@
+on:
+  workflow_dispatch:
+  schedule:
+    # Diario a las 06:35 de Guatemala. Guatemala = UTC-6, por eso 12:35 UTC.
+    - cron: "35 12 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-prediccion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Generate 16-day Open-Meteo forecast JSON
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          from datetime import datetime, timezone
+
+          import requests
+
+          OUTPUT_PATH = os.path.join("docs", "data", "precipitaciones", "prediccion_mensual.json")
+          URL = "https://api.open-meteo.com/v1/forecast"
+
+          # Centro aproximado de Sololá / cabecera departamental.
+          LAT = 14.772
+          LON = -91.183
+
+          params = {
+              "latitude": LAT,
+              "longitude": LON,
+              "daily": "precipitation_sum,precipitation_probability_max",
+              "forecast_days": 16,
+              "timezone": "America/Guatemala",
+          }
+
+          print("Consultando Open-Meteo Forecast API...")
+          print(f"  Coordenadas: lat={LAT}, lon={LON}")
+          print("  Horizonte: 16 días")
+
+          try:
+              response = requests.get(URL, params=params, timeout=30)
+              response.raise_for_status()
+          except requests.RequestException as exc:
+              print(f"ERROR: no se pudo consultar Open-Meteo: {exc}")
+              sys.exit(1)
+
+          data = response.json()
+          daily = data.get("daily", {})
+          fechas = daily.get("time", [])
+          lluvias = daily.get("precipitation_sum", [])
+          probabilidades = daily.get("precipitation_probability_max", [])
+
+          if not fechas or not lluvias:
+              print("ERROR: respuesta de Open-Meteo sin fechas o precipitación.")
+              print(json.dumps(data, ensure_ascii=False)[:800])
+              sys.exit(1)
+
+          def clean_float(value):
+              try:
+                  return round(max(0.0, float(value)), 2)
+              except (TypeError, ValueError):
+                  return 0.0
+
+          def clean_probability(value):
+              try:
+                  return int(round(max(0.0, min(100.0, float(value)))))
+              except (TypeError, ValueError):
+                  return None
+
+          registros = []
+          for index, fecha in enumerate(fechas):
+              prob = probabilidades[index] if index < len(probabilidades) else None
+              registros.append({
+                  "fecha": fecha,
+                  "lluvia_estimada_mm": clean_float(lluvias[index]),
+                  "probabilidad_precipitacion_pct": clean_probability(prob),
+                  "fuente": "Open-Meteo Forecast API",
+                  "modelo": "forecast_api",
+                  "tipo": "pronostico_16_dias",
+              })
+
+          output = {
+              "ok": True,
+              "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "fuente": "Open-Meteo Forecast API",
+              "horizonte_dias": len(registros),
+              "lat": LAT,
+              "lon": LON,
+              "unidad_precipitacion": "mm",
+              "registros": registros,
+          }
+
+          os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
+          with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print(f"Archivo guardado: {OUTPUT_PATH}")
+          print(f"Registros: {len(registros)}")
+          print(f"Acumulado estimado: {sum(r['lluvia_estimada_mm'] for r in registros):.2f} mm")
+          PY
+
+      - name: Commit forecast data if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/precipitaciones/prediccion_mensual.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios en prediccion_mensual.json."
+          else
+            git commit -m "Actualizar predicción Open-Meteo"
+            git push
+          fi
