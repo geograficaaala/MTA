@@ -1087,6 +1087,123 @@
       display: flex;
     }
 
+
+    /* ============================================================
+       CHART FULLSCREEN
+    ============================================================ */
+    .chart-expand-btn {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #ffffff;
+      color: var(--leaf-800);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    .chart-expand-btn:hover,
+    .chart-expand-btn:focus-visible {
+      transform: translateY(-2px);
+      background: var(--leaf-100);
+      box-shadow: var(--shadow-sm);
+      outline: none;
+    }
+
+    .chart-fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+      padding: clamp(0.8rem, 2vw, 1.6rem);
+      background: rgba(17, 57, 47, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .chart-fullscreen-overlay.open {
+      display: grid;
+      place-items: center;
+    }
+
+    .chart-fullscreen-card {
+      width: min(1500px, 96vw);
+      height: min(900px, 92vh);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.34);
+    }
+
+    .chart-fullscreen-head {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(90deg, var(--leaf-800), var(--sky-700), var(--sun-500));
+      color: #ffffff;
+    }
+
+    .chart-fullscreen-title {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .chart-fullscreen-close {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: var(--leaf-950);
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .chart-fullscreen-body {
+      flex: 1;
+      min-height: 0;
+      padding: 0.9rem;
+      background: #ffffff;
+    }
+
+    .chart-fullscreen-host {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .chart-container.is-fullscreen {
+      height: 100% !important;
+      min-height: 520px;
+      border-radius: 10px;
+      background:
+        linear-gradient(rgba(15,58,83,0.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,58,83,0.032) 1px, transparent 1px),
+        #ffffff;
+      background-size: 24px 24px;
+    }
+
+    body.chart-modal-open {
+      overflow: hidden;
+    }
+
     /* ============================================================
        REVEAL ANIMATIONS
     ============================================================ */
@@ -1462,7 +1579,6 @@
     <!-- HERO -->
     <section class="hero-section">
       <div class="wrap">
-        <span class="hero-eyebrow">Fuente: NASA POWER · MERRA-2 · Parámetro PRECTOTCORR · Comunidad AG</span>
         <h1>Análisis Pluviométrico</h1>
         <p class="sub">
           Análisis estadístico descriptivo de la precipitación pluvial diaria para los 19 municipios
@@ -1472,13 +1588,6 @@
           de 2026 y el último día disponible en el servidor de la NASA al momento de la última
           actualización automática del repositorio.
         </p>
-        <div class="hero-meta">
-          <span class="meta-chip" id="chipMunCount">19 municipios</span>
-          <span class="meta-chip" id="chipDays">-- días</span>
-          <span class="meta-chip" id="chipPeriod">1 ene 2026 → --</span>
-          <span class="meta-chip">Modelo MERRA-2</span>
-          <span class="meta-chip" id="chipAwn">Estación AWN: cargando...</span>
-        </div>
       </div>
     </section>
 
@@ -1660,11 +1769,6 @@
             <span class="pc-label">Mes</span>
             <select class="pc-select" id="pluvioMonth">
               <option value="all">Todo el periodo</option>
-              <option value="1">Enero</option>
-              <option value="2">Febrero</option>
-              <option value="3">Marzo</option>
-              <option value="4">Abril</option>
-              <option value="5">Mayo</option>
             </select>
             <span class="pc-label">Escala Y</span>
             <button class="pc-btn active" id="btnYAuto" type="button">Auto</button>
@@ -1731,11 +1835,6 @@
             <span class="pc-label">Mes</span>
             <select class="pc-select" id="compMonth">
               <option value="all">Todo el periodo</option>
-              <option value="1">Enero</option>
-              <option value="2">Febrero</option>
-              <option value="3">Marzo</option>
-              <option value="4">Abril</option>
-              <option value="5">Mayo</option>
             </select>
           </div>
         </div>
@@ -1762,11 +1861,6 @@
           <div class="panel-controls">
             <select class="pc-select" id="freqMonth">
               <option value="all">Todo el periodo</option>
-              <option value="1">Enero</option>
-              <option value="2">Febrero</option>
-              <option value="3">Marzo</option>
-              <option value="4">Abril</option>
-              <option value="5">Mayo</option>
             </select>
           </div>
         </div>
@@ -1926,6 +2020,19 @@
   </footer>
 
   <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">&#8679;</button>
+
+
+  <div class="chart-fullscreen-overlay" id="chartFullscreen" aria-hidden="true">
+    <div class="chart-fullscreen-card" role="dialog" aria-modal="true" aria-labelledby="chartFullscreenTitle">
+      <div class="chart-fullscreen-head">
+        <div class="chart-fullscreen-title" id="chartFullscreenTitle">Gráfica ampliada</div>
+        <button class="chart-fullscreen-close" id="chartFullscreenClose" type="button" aria-label="Cerrar gráfica ampliada">×</button>
+      </div>
+      <div class="chart-fullscreen-body">
+        <div class="chart-fullscreen-host" id="chartFullscreenHost"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ============================================================
        JAVASCRIPT
@@ -2743,17 +2850,150 @@
       URL.revokeObjectURL(url);
     }
 
+
     /* ============================================================
-       HEADER CHIPS
+       MONTH SELECTS — se generan desde las fechas reales del JSON
     ============================================================ */
-    function updateChips() {
-      const all = S.raw[S.mun] || [];
-      const filt = getRecords(S.mun, S.startDate, S.endDate);
-      if (all.length) {
-        document.getElementById("chipDays").textContent = `${filt.length} días filtrados`;
-        document.getElementById("chipPeriod").textContent = `${S.startDate} → ${S.endDate}`;
+    function getAvailableMonths() {
+      const months = new Set();
+      if (!S.raw) return [];
+      Object.values(S.raw).flat().forEach(r => {
+        if (!r || !r.fecha) return;
+        const m = parseInt(String(r.fecha).slice(5, 7), 10);
+        if (Number.isFinite(m) && m >= 1 && m <= 12) months.add(m);
+      });
+      return [...months].sort((a, b) => a - b);
+    }
+
+    function populateMonthSelects() {
+      const availableMonths = getAvailableMonths();
+      ["pluvioMonth", "compMonth", "freqMonth"].forEach(id => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        const previous = sel.value || "all";
+        sel.innerHTML = '<option value="all">Todo el periodo</option>';
+        availableMonths.forEach(m => {
+          const opt = document.createElement("option");
+          opt.value = String(m);
+          opt.textContent = MONTHS[m];
+          sel.appendChild(opt);
+        });
+        sel.value = previous !== "all" && availableMonths.includes(parseInt(previous, 10)) ? previous : "all";
+      });
+    }
+
+    /* ============================================================
+       CHART FULLSCREEN
+    ============================================================ */
+    const fullscreenState = {
+      container: null,
+      placeholder: null,
+      originalStyle: null,
+      lastFocus: null
+    };
+
+    function getChartInstanceFromContainer(container) {
+      const canvas = container ? container.querySelector("canvas") : null;
+      if (!canvas || typeof Chart === "undefined") return null;
+      return Chart.getChart(canvas) || null;
+    }
+
+    function resizeChartInContainer(container) {
+      const chart = getChartInstanceFromContainer(container);
+      if (chart) {
+        requestAnimationFrame(() => chart.resize());
+        setTimeout(() => chart.resize(), 120);
       }
     }
+
+    function openChartFullscreen(container, title, trigger) {
+      const overlay = document.getElementById("chartFullscreen");
+      const host = document.getElementById("chartFullscreenHost");
+      const titleEl = document.getElementById("chartFullscreenTitle");
+      if (!overlay || !host || !container || fullscreenState.container) return;
+
+      fullscreenState.container = container;
+      fullscreenState.placeholder = document.createComment("chart-fullscreen-placeholder");
+      fullscreenState.originalStyle = container.getAttribute("style") || "";
+      fullscreenState.lastFocus = trigger || document.activeElement;
+
+      container.parentNode.insertBefore(fullscreenState.placeholder, container);
+      titleEl.textContent = title || "Gráfica ampliada";
+      host.appendChild(container);
+      container.classList.add("is-fullscreen");
+      container.style.height = "100%";
+
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("chart-modal-open");
+      document.getElementById("chartFullscreenClose")?.focus();
+      resizeChartInContainer(container);
+    }
+
+    function closeChartFullscreen() {
+      const overlay = document.getElementById("chartFullscreen");
+      if (!fullscreenState.container || !fullscreenState.placeholder) return;
+
+      const container = fullscreenState.container;
+      container.classList.remove("is-fullscreen");
+      if (fullscreenState.originalStyle) container.setAttribute("style", fullscreenState.originalStyle);
+      else container.removeAttribute("style");
+      fullscreenState.placeholder.parentNode.replaceChild(container, fullscreenState.placeholder);
+
+      overlay?.classList.remove("open");
+      overlay?.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("chart-modal-open");
+      resizeChartInContainer(container);
+
+      const focusTarget = fullscreenState.lastFocus;
+      fullscreenState.container = null;
+      fullscreenState.placeholder = null;
+      fullscreenState.originalStyle = null;
+      fullscreenState.lastFocus = null;
+      if (focusTarget && typeof focusTarget.focus === "function") focusTarget.focus();
+    }
+
+    function setupChartFullscreenControls() {
+      document.querySelectorAll(".panel .chart-container canvas").forEach(canvas => {
+        const container = canvas.closest(".chart-container");
+        const panel = canvas.closest(".panel");
+        const head = panel?.querySelector(".panel-head");
+        if (!container || !panel || !head || panel.querySelector(`[data-chart-expand="${canvas.id}"]`)) return;
+
+        let controls = head.querySelector(".panel-controls");
+        if (!controls) {
+          controls = document.createElement("div");
+          controls.className = "panel-controls";
+          head.appendChild(controls);
+        }
+
+        const title = panel.querySelector(".panel-title")?.textContent?.trim() || "Gráfica ampliada";
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chart-expand-btn";
+        btn.dataset.chartExpand = canvas.id;
+        btn.setAttribute("aria-label", `Ampliar gráfica: ${title}`);
+        btn.title = "Ampliar gráfica";
+        btn.textContent = "⛶";
+        btn.addEventListener("click", () => openChartFullscreen(container, title, btn));
+        controls.appendChild(btn);
+      });
+
+      document.getElementById("chartFullscreenClose")?.addEventListener("click", closeChartFullscreen);
+      document.getElementById("chartFullscreen")?.addEventListener("click", event => {
+        if (event.target.id === "chartFullscreen") closeChartFullscreen();
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeChartFullscreen();
+      });
+    }
+
+    /* ============================================================
+       HEADER CHIPS
+       Los chips del encabezado fueron retirados del HTML. Se conserva
+       la función como no-op para no alterar el flujo de updateAll().
+    ============================================================ */
+    function updateChips() {}
 
     /* ============================================================
        UPDATE ALL
@@ -2809,6 +3049,7 @@
         document.getElementById("gEnd").max     = maxDate;
 
         populateMunicipalioSelect();
+        populateMonthSelects();
         updateAll();
 
       } catch (err) {
@@ -2905,6 +3146,8 @@
       /* CSV download */
       document.getElementById("btnCsv").addEventListener("click", downloadCsv);
 
+      setupChartFullscreenControls();
+
       /* Reveal on scroll */
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); }});
@@ -2937,9 +3180,9 @@
         const last = data.ultima_lectura || {};
         const res  = data.resumen        || {};
 
-        /* Chip en hero */
+        /* Chip retirado del encabezado; se conserva guard para compatibilidad. */
         const chipEl = document.getElementById("chipAwn");
-        chipEl.textContent = `AWN: ${est.nombre || "Estación propia"} · ${est.municipio || "Sololá"}`;
+        if (chipEl) chipEl.textContent = `AWN: ${est.nombre || "Estación propia"} · ${est.municipio || "Sololá"}`;
 
         statusEl.className = "awn-status ok";
         statusEl.textContent = "Datos disponibles";
@@ -2972,7 +3215,8 @@
         console.warn("AWN JSON:", err.message);
         statusEl.className = "awn-status err";
         statusEl.textContent = "Sin datos";
-        document.getElementById("chipAwn").textContent = "AWN: pendiente de generar";
+        const chipEl = document.getElementById("chipAwn");
+        if (chipEl) chipEl.textContent = "AWN: pendiente de generar";
         bodyEl.innerHTML = `
           <div class="awn-loading">
             El archivo <code>awn_estacion.json</code> no existe todavía.
