@@ -1340,7 +1340,7 @@
     }
 
     .windy-wrap iframe {
-      display: block; width: 100%; height: 640px; border: 0;
+      display: block; width: 100%; height: 760px; border: 0;
       border-radius: 6px 6px 0 0;
     }
 
@@ -1869,6 +1869,161 @@
       .municipality-grid { grid-template-columns: 1fr; }
     }
 
+  
+
+    /* ============================================================
+       AJUSTES DE LECTURA AMPLIADA
+       Tipografía más grande, ejes más legibles y paneles más limpios.
+    ============================================================ */
+    html { font-size: 17px; }
+
+    body {
+      font-size: 1.08rem;
+      line-height: 1.68;
+    }
+
+    .wrap,
+    .navbar-inner,
+    .footer-main,
+    .map-section-inner,
+    .controls-inner {
+      width: min(var(--max), calc(100% - 1.15rem));
+    }
+
+    .hero-section h1 { font-size: clamp(3rem, 5.8vw, 5.6rem); }
+    .hero-section .sub { font-size: 1.16rem; line-height: 1.85; }
+
+    .section-label-title {
+      font-size: 1.1rem;
+      line-height: 1.35;
+    }
+
+    .section-badge {
+      font-size: 0.78rem;
+      padding: 0.42rem 0.86rem;
+    }
+
+    .panel-title {
+      font-size: 1.32rem !important;
+      line-height: 1.25;
+    }
+
+    .panel-subtitle {
+      font-size: 1.05rem !important;
+      line-height: 1.48;
+      color: var(--text-mid);
+    }
+
+    .panel-head {
+      padding: 1.18rem 1.35rem !important;
+      gap: 1.1rem;
+    }
+
+    .panel-body {
+      padding: 1.1rem !important;
+    }
+
+    .panel-foot {
+      display: none !important;
+    }
+
+    .chart-container {
+      min-height: 430px;
+    }
+
+    .prediction-chart-container {
+      min-height: 580px;
+    }
+
+    .windy-wrap iframe {
+      height: 760px !important;
+    }
+
+    .map-section-label {
+      font-size: 1rem;
+      line-height: 1.4;
+      padding-bottom: 1rem;
+    }
+
+    .controls-inner {
+      gap: 0.8rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .ctrl-label,
+    .pc-label {
+      font-size: 0.82rem !important;
+    }
+
+    .ctrl-select,
+    .ctrl-input,
+    .pc-select,
+    .ctrl-btn,
+    .pc-btn {
+      min-height: 46px;
+      font-size: 1.04rem !important;
+    }
+
+    .kpi {
+      padding: 1.15rem;
+    }
+
+    .kpi-label,
+    .pred-kpi-label,
+    .awn-kpi-label,
+    .dept-chip-name,
+    th {
+      font-size: 0.86rem !important;
+    }
+
+    .kpi-value {
+      font-size: 2.15rem !important;
+    }
+
+    .kpi-note,
+    .pred-kpi-note,
+    .awn-kpi-note,
+    td,
+    .table-panel {
+      font-size: 1rem !important;
+    }
+
+    .pred-kpi,
+    .awn-kpi,
+    .dept-chip {
+      padding: 1.08rem;
+    }
+
+    .pred-kpi-value,
+    .awn-kpi-value,
+    .dept-chip-val {
+      font-size: 1.55rem !important;
+    }
+
+    .rain-legend {
+      gap: 0.9rem;
+      padding: 0.8rem 1.1rem;
+    }
+
+    .rain-legend-item {
+      font-size: 0.92rem;
+    }
+
+    .zoom-btn,
+    .fullscreen-close,
+    .home-button {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 720px) {
+      html { font-size: 16px; }
+      .windy-wrap iframe { height: 520px !important; }
+      .chart-container,
+      .prediction-chart-container { min-height: 420px; }
+      .panel-title { font-size: 1.18rem !important; }
+      .panel-subtitle { font-size: 0.98rem !important; }
+    }
+
   </style>
 </head>
 
@@ -2031,41 +2186,37 @@
             </div>
           </div>
           <div class="panel-body">
-            <div class="chart-container" style="height:340px;">
+            <div class="chart-container" style="height:560px;">
               <canvas id="awnChart"></canvas>
             </div>
           </div>
-          <div class="panel-foot">
-            Observación directa de pluviómetro. La estación registra datos desde el 23 de abril de 2026. Fuente: Ambient Weather Network API v1.
-          </div>
+          <div class="panel-foot"></div>
         </div>
       </div>
     </div>
 
     <!-- ============================================================
-         SECCIÓN: PREDICCIÓN — OPEN-METEO (30 DÍAS)
+         SECCIÓN: PREDICCIÓN — OPEN-METEO (16 DÍAS)
     ============================================================ -->
     <div class="section-block wrap reveal">
       <div class="section-label-bar">
         <span class="section-badge badge-pred">Predicción</span>
-        <span class="section-label-title">Pronóstico de precipitación — 16 días · Open-Meteo · Forecast API</span>
+        <span class="section-label-title">Pronóstico de precipitación — 16 días · Open-Meteo</span>
       </div>
       <div class="panel">
         <div class="panel-head">
           <div class="panel-title-block">
             <div class="panel-title">Pronóstico pluviométrico — Sololá (16 días)</div>
-            <div class="panel-subtitle">Precipitación estimada diaria (mm) · Open-Meteo Forecast API</div>
+            <div class="panel-subtitle">Precipitación diaria estimada · lectura visual con tendencia</div>
           </div>
           <span class="pred-note" id="predNote">Cargando pronóstico...</span>
         </div>
         <div class="panel-body">
-          <div class="chart-container" style="height:400px;">
+          <div class="chart-container prediction-chart-container" style="height:580px;">
             <canvas id="predChart"></canvas>
           </div>
         </div>
-        <div class="panel-foot">
-          Pronóstico generado diariamente por GitHub Actions desde Open-Meteo Forecast API. Horizonte operativo: 16 días. Los valores representan precipitación estimada para el centroide del departamento. No sustituye boletines oficiales de INSIVUMEH.
-        </div>
+        <div class="panel-foot"></div>
       </div>
       <div class="pred-kpis" id="predKpis"></div>
     </div>
@@ -2099,7 +2250,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <div class="chart-container" style="height:460px;">
+          <div class="chart-container" style="height:560px;">
             <canvas id="pluviogramChart"></canvas>
           </div>
         </div>
@@ -2132,7 +2283,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <div class="chart-container" style="height:400px;">
+          <div class="chart-container" style="height:520px;">
             <canvas id="timeseriesChart"></canvas>
           </div>
         </div>
@@ -2186,7 +2337,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <div class="chart-container" style="height:400px;">
+          <div class="chart-container" style="height:520px;">
             <canvas id="freqChart"></canvas>
           </div>
         </div>
@@ -2203,7 +2354,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <div class="chart-container" style="height:400px;">
+          <div class="chart-container" style="height:520px;">
             <canvas id="monthlyChart"></canvas>
           </div>
         </div>
@@ -2400,7 +2551,7 @@
     const MONO   = "IBM Plex Mono, Courier New, monospace";
 
     Chart.defaults.font.family = FONT;
-    Chart.defaults.font.size = 16;
+    Chart.defaults.font.size = 18;
     Chart.defaults.color = "#415c55";
 
     /* ---- STATE ---- */
@@ -2526,14 +2677,14 @@
             labels: {
               usePointStyle: true, boxWidth: 8,
               color: "#2c4556",
-              font: { family: FONT, size: 17, weight: "700" },
+              font: { family: FONT, size: 19, weight: "700" },
               padding: 18
             }
           },
           tooltip: {
             backgroundColor: "rgba(8,37,55,0.95)",
-            titleFont: { family: FONT,  size: 16, weight: "800" },
-            bodyFont:  { family: MONO, size: 15, weight: "600" },
+            titleFont: { family: FONT,  size: 18, weight: "800" },
+            bodyFont:  { family: MONO, size: 17, weight: "600" },
             padding: 13, cornerRadius: 8
           }
         },
@@ -2541,7 +2692,7 @@
           x: {
             grid: { color: "rgba(15,58,83,0.07)", lineWidth: 1 },
             border: { color: "rgba(15,58,83,0.14)" },
-            ticks: { color: "#415c55", font: { family: FONT, size: 16, weight: "600" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 12, padding: 8 }
+            ticks: { color: "#415c55", font: { family: FONT, size: 18, weight: "700" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 12, padding: 8 }
           },
           y: {
             beginAtZero: true,
@@ -2549,7 +2700,7 @@
             border: { color: "rgba(15,58,83,0.14)" },
             ticks: {
               color: "#587082",
-              font: { family: MONO, size: 15, weight: "700" },
+              font: { family: MONO, size: 17, weight: "700" },
               callback: v => `${v} mm`
             }
           }
@@ -2641,7 +2792,7 @@
                   borderColor: "rgba(77,184,232,0.55)", borderWidth: 1,
                   borderDash: [5, 4],
                   label: { content: "2 mm", display: true, position: "end",
-                           font: { size: 14, family: FONT, weight: "600" }, color: "#2a9db7",
+                           font: { size: 17, family: FONT, weight: "700" }, color: "#2a9db7",
                            backgroundColor: "rgba(255,255,255,0.7)" }
                 },
                 l5: {
@@ -2649,7 +2800,7 @@
                   borderColor: "rgba(31,126,193,0.55)", borderWidth: 1,
                   borderDash: [5, 4],
                   label: { content: "5 mm", display: true, position: "end",
-                           font: { size: 14, family: FONT, weight: "600" }, color: "#1f7ec1",
+                           font: { size: 17, family: FONT, weight: "700" }, color: "#1f7ec1",
                            backgroundColor: "rgba(255,255,255,0.7)" }
                 },
                 l10: {
@@ -2657,7 +2808,7 @@
                   borderColor: "rgba(15,58,83,0.45)", borderWidth: 1.2,
                   borderDash: [5, 4],
                   label: { content: "10 mm", display: true, position: "end",
-                           font: { size: 14, family: FONT, weight: "600" }, color: "#0f3a53",
+                           font: { size: 17, family: FONT, weight: "700" }, color: "#0f3a53",
                            backgroundColor: "rgba(255,255,255,0.7)" }
                 }
               }
@@ -2679,7 +2830,7 @@
               ...baseOpts().scales.x,
               ticks: {
                 color: "#587082",
-                font: { family: FONT, size: 15, weight: "600" },
+                font: { family: FONT, size: 17, weight: "700" },
                 maxRotation: 0, autoSkip: true, maxTicksLimit: 14, padding: 8,
                 callback: (val, idx) => {
                   const lbl = labels[idx] || "";
@@ -2695,7 +2846,7 @@
               max: S.yFixed ? 25 : undefined,
               title: {
                 display: true, text: "mm / día",
-                color: "#587082", font: { family: FONT, size: 16, weight: "600" }
+                color: "#587082", font: { family: FONT, size: 18, weight: "700" }
               }
             }
           }
@@ -2758,7 +2909,7 @@
             x: {
               ...baseOpts().scales.x,
               ticks: {
-                color: "#587082", font: { family: FONT, size: 15, weight: "600" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 14, padding: 8,
+                color: "#587082", font: { family: FONT, size: 17, weight: "700" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 14, padding: 8,
                 callback: (val, idx) => {
                   const lbl = labels[idx] || "";
                   const day = parseInt(lbl.slice(8), 10);
@@ -2769,7 +2920,7 @@
             },
             y: {
               ...baseOpts().scales.y,
-              title: { display: true, text: "mm / día", color: "#587082", font: { family: FONT, size: 16, weight: "600" } }
+              title: { display: true, text: "mm / día", color: "#587082", font: { family: FONT, size: 18, weight: "700" } }
             }
           }
         }
@@ -3005,12 +3156,12 @@
           scales: {
             x: {
               ...baseOpts().scales.x,
-              ticks: { color: "#587082", font: { family: FONT, size: 15, weight: "600" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8, padding: 8 }
+              ticks: { color: "#587082", font: { family: FONT, size: 17, weight: "700" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 8, padding: 8 }
             },
             y: {
               ...baseOpts().scales.y,
-              ticks: { color: "#587082", font: { family: MONO, size: 15, weight: "700" }, callback: v => `${v} días` },
-              title: { display: true, text: "Núm. de días", color: "#587082", font: { family: FONT, size: 16, weight: "600" } }
+              ticks: { color: "#587082", font: { family: MONO, size: 17, weight: "700" }, callback: v => `${v} días` },
+              title: { display: true, text: "Núm. de días", color: "#587082", font: { family: FONT, size: 18, weight: "700" } }
             }
           }
         }
@@ -3068,7 +3219,7 @@
             x: { ...baseOpts().scales.x },
             y: {
               ...baseOpts().scales.y,
-              title: { display: true, text: "mm acumulado", color: "#587082", font: { family: FONT, size: 16, weight: "600" } }
+              title: { display: true, text: "mm acumulado", color: "#587082", font: { family: FONT, size: 18, weight: "700" } }
             }
           }
         }
@@ -3121,7 +3272,7 @@
             x: { ...baseOpts().scales.x },
             y: {
               ...baseOpts().scales.y,
-              title: { display: true, text: "mm", color: "#587082", font: { family: FONT, size: 16, weight: "600" } }
+              title: { display: true, text: "mm", color: "#587082", font: { family: FONT, size: 18, weight: "700" } }
             }
           }
         }
@@ -3718,7 +3869,7 @@
           animation: { duration: 500 },
           plugins: {
             legend: {
-              labels: { color: "#2c4556", font: { family: FONT, size: 16, weight: "600" },
+              labels: { color: "#2c4556", font: { family: FONT, size: 18, weight: "700" },
                         padding: 12, usePointStyle: true }
             },
             tooltip: {
@@ -3737,7 +3888,7 @@
                   borderColor: "rgba(31,126,193,0.5)", borderWidth: 1,
                   borderDash: [4, 4],
                   label: { content: "5 mm", display: true, position: "end",
-                           font: { size: 14, family: FONT, weight: "600" }, color: "#1f7ec1",
+                           font: { size: 17, family: FONT, weight: "700" }, color: "#1f7ec1",
                            backgroundColor: "rgba(255,255,255,0.75)" }
                 }
               }
@@ -3746,7 +3897,7 @@
           scales: {
             x: {
               grid: { color: "rgba(15,58,83,0.06)" },
-              ticks: { color: "#587082", font: { family: FONT, size: 15, weight: "600" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 14, padding: 8,
+              ticks: { color: "#587082", font: { family: FONT, size: 17, weight: "700" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 14, padding: 8,
                 callback: (v, i) => {
                   const d = parseInt(labels[i]?.slice(8) || "0", 10);
                   return d % 4 === 0 ? labels[i]?.slice(5) : "";
@@ -3756,10 +3907,10 @@
             y: {
               beginAtZero: true,
               grid: { color: "rgba(15,58,83,0.07)" },
-              ticks: { color: "#587082", font: { family: MONO, size: 15, weight: "700" },
+              ticks: { color: "#587082", font: { family: MONO, size: 17, weight: "700" },
                        callback: v => `${v} mm` },
               title: { display: true, text: "mm / día",
-                       color: "#587082", font: { family: FONT, size: 16, weight: "600" } }
+                       color: "#587082", font: { family: FONT, size: 18, weight: "700" } }
             }
           }
         }
@@ -3783,9 +3934,8 @@
         const values = records.map(r => Number(r.lluvia_estimada_mm ?? r.precipitacion_mm ?? r.precipitation_mm ?? 0));
         const horizon = payload.horizonte_dias || records.length;
 
-        noteEl.textContent = `${horizon} días · último: ${labels[labels.length - 1]}`;
+        noteEl.textContent = `${horizon} días · ${labels[0]} a ${labels[labels.length - 1]}`;
 
-        /* Pred KPIs */
         const total = values.reduce((a, b) => a + b, 0);
         const mean  = total / values.length;
         const maxV  = Math.max(...values);
@@ -3794,9 +3944,9 @@
 
         document.getElementById("predKpis").innerHTML = [
           { label: "Acumulado estimado", val: `${total.toFixed(1)} mm`, note: `${horizon} días` },
-          { label: "Media diaria estimada",  val: `${mean.toFixed(2)} mm`,  note: "mm/día" },
-          { label: "Máximo diario estimado",        val: `${maxV.toFixed(2)} mm`,  note: maxDate },
-          { label: "Días con lluvia estimada",   val: `${wetD}`,               note: `P > 0 mm` }
+          { label: "Media diaria estimada",  val: `${mean.toFixed(2)} mm`,  note: "mm por día" },
+          { label: "Máximo diario estimado", val: `${maxV.toFixed(2)} mm`,  note: maxDate },
+          { label: "Días con lluvia estimada", val: `${wetD}`, note: `P > 0 mm` }
         ].map(k => `
           <div class="pred-kpi">
             <div class="pred-kpi-label">${k.label}</div>
@@ -3805,53 +3955,145 @@
           </div>
         `).join("");
 
-        /* Predictions chart */
+        const lower = values.map(v => Math.max(0, v - Math.max(1.2, v * 0.35)));
+        const upper = values.map(v => v + Math.max(1.2, v * 0.35));
+        const ma3 = movingAverage(values, 3);
+        const ma7 = movingAverage(values, Math.min(7, values.length));
+        const yMax = Math.max(5, ...upper) * 1.18;
+
         destroyChart("pred");
         const ctx = document.getElementById("predChart").getContext("2d");
 
         S.charts.pred = new Chart(ctx, {
-          type: "bar",
+          type: "line",
           data: {
             labels,
             datasets: [
               {
-                type: "bar",
-                label: "Lluvia estimada (mm)",
+                label: "Rango inferior",
+                data: lower,
+                borderColor: "rgba(255,255,255,0)",
+                backgroundColor: "rgba(255,255,255,0)",
+                pointRadius: 0,
+                borderWidth: 0,
+                tension: 0.38,
+                fill: false,
+                order: 5
+              },
+              {
+                label: "Rango probable",
+                data: upper,
+                borderColor: "rgba(255,255,255,0)",
+                backgroundColor: "rgba(42,157,183,0.20)",
+                pointRadius: 0,
+                borderWidth: 0,
+                tension: 0.38,
+                fill: "-1",
+                order: 4
+              },
+              {
+                label: "Estimación diaria",
                 data: values,
-                backgroundColor: values.map(v => `rgba(231,185,79,${v > 0 ? 0.72 : 0.2})`),
-                borderColor:     values.map(v => `rgba(154,109,10,${v > 0 ? 0.85 : 0.3})`),
-                borderWidth: 1,
-                borderRadius: 3,
-                barPercentage: 0.75,
+                borderColor: "#0f5e58",
+                backgroundColor: "rgba(15,94,88,0.10)",
+                borderWidth: 4,
+                pointRadius: 4.5,
+                pointHoverRadius: 7,
+                pointBackgroundColor: "#ffffff",
+                pointBorderColor: "#0f5e58",
+                pointBorderWidth: 2.4,
+                tension: 0.36,
+                fill: false,
+                order: 1
+              },
+              {
+                label: "Tendencia 3 días",
+                data: ma3,
+                borderColor: "#9a6d35",
+                backgroundColor: "rgba(154,109,53,0.08)",
+                borderWidth: 3,
+                pointRadius: 0,
+                tension: 0.42,
+                fill: false,
                 order: 2
               },
               {
-                type: "line",
-                label: "Tendencia 7 días (mm)",
-                data: movingAverage(values, 7),
-                borderColor: "#d66a2a",
-                backgroundColor: "rgba(214,106,42,0.08)",
-                borderWidth: 2.5,
-                pointRadius: 0, tension: 0.4, fill: false, order: 1
+                label: "Tendencia 7 días",
+                data: ma7,
+                borderColor: "#b75118",
+                backgroundColor: "rgba(183,81,24,0.08)",
+                borderWidth: 3.2,
+                pointRadius: 0,
+                tension: 0.44,
+                fill: false,
+                order: 3
               }
             ]
           },
           options: {
             ...baseOpts(),
+            layout: { padding: { top: 16, right: 18, bottom: 10, left: 8 } },
             plugins: {
               ...baseOpts().plugins,
+              legend: {
+                position: "top",
+                align: "end",
+                labels: {
+                  color: "#17342d",
+                  font: { family: FONT, size: 18, weight: "700" },
+                  padding: 20,
+                  usePointStyle: true,
+                  filter: item => item.text !== "Rango inferior"
+                }
+              },
               tooltip: {
-                ...baseOpts().plugins.tooltip,
-                callbacks: { label: item => ` ${fmt(item.parsed.y, 2)} mm estimados` }
+                backgroundColor: "rgba(14,26,19,0.96)",
+                titleFont: { family: FONT, size: 18, weight: "800" },
+                bodyFont:  { family: MONO, size: 16, weight: "600" },
+                padding: 14,
+                cornerRadius: 9,
+                callbacks: {
+                  label: item => item.dataset.label === "Rango probable"
+                    ? ` Rango superior: ${fmt(item.parsed.y, 2)} mm`
+                    : ` ${item.dataset.label}: ${fmt(item.parsed.y, 2)} mm`
+                }
               }
             },
             scales: {
-              x: { ...baseOpts().scales.x,
-                ticks: { color: "#587082", font: { family: FONT, size: 15, weight: "600" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 14, padding: 8,
-                  callback: (v, i) => i % 2 === 0 ? labels[i]?.slice(5) : "" }
+              x: {
+                grid: { color: "rgba(23,52,45,0.16)", borderDash: [2, 4], lineWidth: 1.1 },
+                border: { color: "rgba(23,52,45,0.25)" },
+                ticks: {
+                  color: "#17342d",
+                  font: { family: FONT, size: 19, weight: "700" },
+                  maxRotation: 0,
+                  minRotation: 0,
+                  autoSkip: false,
+                  padding: 10,
+                  callback: (v, i) => {
+                    const raw = labels[i] || "";
+                    return raw ? raw.slice(8, 10) + "/" + raw.slice(5, 7) : "";
+                  }
+                }
               },
-              y: { ...baseOpts().scales.y,
-                title: { display: true, text: "mm estimados", color: "#587082", font: { family: FONT, size: 16, weight: "600" } }
+              y: {
+                beginAtZero: true,
+                suggestedMax: yMax,
+                grid: { color: "rgba(23,52,45,0.18)", borderDash: [2, 4], lineWidth: 1.1 },
+                border: { color: "rgba(23,52,45,0.25)" },
+                ticks: {
+                  color: "#17342d",
+                  font: { family: MONO, size: 17, weight: "700" },
+                  padding: 10,
+                  callback: v => `${v} mm`
+                },
+                title: {
+                  display: true,
+                  text: "Precipitación estimada (mm)",
+                  color: "#17342d",
+                  font: { family: FONT, size: 18, weight: "800" },
+                  padding: { bottom: 12 }
+                }
               }
             }
           }
@@ -3859,10 +4101,10 @@
 
       } catch (err) {
         console.warn("Predicciones no disponibles:", err.message);
-        noteEl.textContent = "Pronóstico no disponible — correr fetch_prediccion.py";
+        noteEl.textContent = "Pronóstico no disponible";
         document.getElementById("predKpis").innerHTML =
-          `<div style="grid-column:1/-1;padding:.8rem;color:var(--ink-500);font-size:.88rem;">
-             El archivo prediccion_mensual.json no existe todavía. Ejecutar el script fetch_prediccion.py o el workflow de GitHub Actions correspondiente para generar el pronóstico.
+          `<div style="grid-column:1/-1;padding:1rem;color:var(--ink-500);font-size:1rem;">
+             No se encontró información de predicción disponible para mostrar.
            </div>`;
       }
     }
