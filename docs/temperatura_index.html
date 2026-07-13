@@ -2274,15 +2274,240 @@
     function renderMonthly() { const rec = currentRecords(); const grouped = {}; rec.forEach(r => { const m = parseInt(r.fecha.slice(5, 7), 10); grouped[m] ||= []; grouped[m].push(r); }); const months = Object.keys(grouped).map(Number).sort((a, b) => a - b); destroyChart("monthly"); S.charts.monthly = new Chart(document.getElementById("monthlyChart"), { type: "line", data: { labels: months.map(m => MONTHS[m]), datasets: [{ label: "Máxima promedio", data: months.map(m => mean(grouped[m].map(r => r.t_max_c))), borderColor: "rgba(214,106,42,0.95)", backgroundColor: "rgba(214,106,42,0.12)", borderWidth: 3, tension: 0.25, pointRadius: 4 }, { label: "Media promedio", data: months.map(m => mean(grouped[m].map(r => r.t_media_c))), borderColor: "rgba(47,122,98,0.95)", backgroundColor: "rgba(47,122,98,0.12)", borderWidth: 4, tension: 0.25, pointRadius: 4 }, { label: "Mínima promedio", data: months.map(m => mean(grouped[m].map(r => r.t_min_c))), borderColor: "rgba(22,92,119,0.95)", backgroundColor: "rgba(22,92,119,0.08)", borderWidth: 3, tension: 0.25, pointRadius: 4 }] }, options: baseOpts() }); }
     function renderTable() { const body = document.getElementById("dataTableBody"); const rec = [...currentRecords()].sort((a, b) => { const col = S.tableSortCol; const av = a[col], bv = b[col]; if (av === bv) return 0; const res = av > bv ? 1 : -1; return S.tableSortDir === "asc" ? res : -res; }); body.innerHTML = rec.map(r => `<tr><td>${r.fecha}</td><td class="mono">${fc(r.t_media_c)}</td><td class="mono">${fc(r.t_max_c)}</td><td class="mono">${fc(r.t_min_c)}</td><td class="mono">${fc(r.rango_c)}</td><td class="mono">${fp(r.humedad_relativa_pct)}</td></tr>`).join(""); document.querySelectorAll("th[data-sort]").forEach(th => { th.classList.toggle("sorted-asc", th.dataset.sort === S.tableSortCol && S.tableSortDir === "asc"); th.classList.toggle("sorted-desc", th.dataset.sort === S.tableSortCol && S.tableSortDir === "desc"); }); }
     function renderEmptyChart(canvasId, message) { const canvas = document.getElementById(canvasId); if (!canvas) return; const id = canvasId.replace("Chart", ""); destroyChart(id); const container = canvas.closest(".chart-container"); container.querySelectorAll(".chart-empty-note").forEach(n => n.remove()); const note = document.createElement("div"); note.className = "chart-empty-note"; note.textContent = message; container.appendChild(note); }
-    async function loadAwn() { const status = document.getElementById("awnStatus"), body = document.getElementById("awnBody"); try { const data = await fetchJson(AWN_URL); const latest = data.latest || data.ultima_lectura || data.current || data; const temp = latest.temperature_c ?? latest.temp_c ?? latest.temp_out_c ?? latest.tempf_c; const hum = latest.humidity ?? latest.humedad_relativa_pct ?? latest.humidity_pct; const feels = latest.feels_like_c ?? latest.sensacion_c ?? latest.feelsLike_c; const dew = latest.dew_point_c ?? latest.dewpoint_c ?? latest.rocio_c; status.textContent = "Conectada"; status.className = "awn-status ok"; body.innerHTML = `<div class="awn-kpi"><div class="awn-kpi-label">Temperatura</div><div class="awn-kpi-value">${fc(temp)}</div><div class="awn-kpi-note">Exterior</div></div><div class="awn-kpi"><div class="awn-kpi-label">Humedad</div><div class="awn-kpi-value">${fp(hum)}</div><div class="awn-kpi-note">Relativa</div></div><div class="awn-kpi"><div class="awn-kpi-label">Sensación</div><div class="awn-kpi-value">${fc(feels)}</div><div class="awn-kpi-note">Estimada</div></div><div class="awn-kpi"><div class="awn-kpi-label">Punto de rocío</div><div class="awn-kpi-value">${fc(dew)}</div><div class="awn-kpi-note">Estimado</div></div><div class="awn-kpi"><div class="awn-kpi-label">Actualizado</div><div class="awn-kpi-value" style="font-size:1rem!important;line-height:1.35;">${formatDateTime(data.generated_at_gt || latest.timestamp || latest.fecha)}</div><div class="awn-kpi-note">Hora local</div></div>`; const history = data.history || data.historico || data.registros || []; if (Array.isArray(history) && history.length) renderAwnChart(history); else renderEmptyChart("awnChart", "Aún no hay histórico de estación para graficar."); } catch (err) { status.textContent = "Pendiente"; status.className = "awn-status err"; body.innerHTML = `<div class="awn-loading">Archivo de estación pendiente de generar: <code>data/temperatura/awn_temperatura.json</code></div>`; renderEmptyChart("awnChart", "Cuando se genere awn_temperatura.json, esta gráfica se actualizará automáticamente."); } }
-    function renderAwnChart(history) { destroyChart("awn"); const labels = history.map(r => r.fecha || r.timestamp || r.date).slice(-48); const values = history.map(r => r.temperature_c ?? r.temp_c ?? r.temp_out_c).slice(-48); S.charts.awn = new Chart(document.getElementById("awnChart"), { type: "line", data: { labels, datasets: [{ label: "Temperatura estación", data: values, borderColor: "rgba(214,106,42,0.95)", backgroundColor: "rgba(214,106,42,0.14)", borderWidth: 4, pointRadius: 3, tension: 0.28, fill: true }] }, options: baseOpts() }); }
-    async function loadPred() { const note = document.getElementById("predNote"), kpis = document.getElementById("predKpis"); try { const data = await fetchJson(PRED_URL); const registros = data.registros || data.daily || data.prediccion || data; if (!Array.isArray(registros) || !registros.length) throw new Error("Sin registros de predicción"); const rows = registros.map(r => ({ fecha: r.fecha || r.date, max: r.t_max_c ?? r.temperature_2m_max ?? r.max_c, min: r.t_min_c ?? r.temperature_2m_min ?? r.min_c, mean: r.t_media_c ?? r.temperature_2m_mean ?? mean([r.t_max_c ?? r.temperature_2m_max, r.t_min_c ?? r.temperature_2m_min]) })); note.textContent = `Actualizado: ${formatDateTime(data.generated_at_gt || data.generated_at_utc)}`; kpis.innerHTML = `<div class="pred-kpi"><div class="pred-kpi-label">Media estimada</div><div class="pred-kpi-value">${fc(mean(rows.map(r => r.mean)))}</div><div class="pred-kpi-note">16 días</div></div><div class="pred-kpi"><div class="pred-kpi-label">Máxima estimada</div><div class="pred-kpi-value">${fc(maxValue(rows.map(r => r.max)))}</div><div class="pred-kpi-note">Valor más alto</div></div><div class="pred-kpi"><div class="pred-kpi-label">Mínima estimada</div><div class="pred-kpi-value">${fc(minValue(rows.map(r => r.min)))}</div><div class="pred-kpi-note">Valor más bajo</div></div><div class="pred-kpi"><div class="pred-kpi-label">Rango estimado</div><div class="pred-kpi-value">${fc((maxValue(rows.map(r => r.max)) || 0) - (minValue(rows.map(r => r.min)) || 0))}</div><div class="pred-kpi-note">Diferencia general</div></div>`; destroyChart("pred"); S.charts.pred = new Chart(document.getElementById("predChart"), { type: "line", data: { labels: rows.map(r => r.fecha), datasets: [{ label: "Máxima estimada", data: rows.map(r => r.max), borderColor: "rgba(214,106,42,0.95)", backgroundColor: "rgba(214,106,42,0.12)", borderWidth: 3, pointRadius: 4, tension: 0.3 }, { label: "Media estimada", data: rows.map(r => r.mean), borderColor: "rgba(47,122,98,0.95)", backgroundColor: "rgba(47,122,98,0.12)", borderWidth: 4, pointRadius: 4, tension: 0.3, fill: false }, { label: "Mínima estimada", data: rows.map(r => r.min), borderColor: "rgba(22,92,119,0.95)", backgroundColor: "rgba(22,92,119,0.10)", borderWidth: 3, pointRadius: 4, tension: 0.3, fill: "-1" }] }, options: baseOpts() }); } catch (err) { note.textContent = "Pronóstico pendiente"; kpis.innerHTML = ""; renderEmptyChart("predChart", "Cuando se genere prediccion_temperatura.json, esta gráfica se actualizará automáticamente."); } }
+    function valueAt(obj, paths) {
+      for (const path of paths) {
+        const parts = String(path).split(".");
+        let current = obj;
+        let ok = true;
+        for (const part of parts) {
+          if (current == null || !(part in current)) { ok = false; break; }
+          current = current[part];
+        }
+        if (ok && current !== undefined && current !== null && current !== "") return current;
+      }
+      return null;
+    }
+
+    function asNumber(value) {
+      if (value === null || value === undefined || value === "") return null;
+      const n = Number(value);
+      return Number.isFinite(n) ? n : null;
+    }
+
+    function normalizeAwnReading(reading) {
+      const r = reading || {};
+      const temp = asNumber(valueAt(r, ["temperature_c", "temp_c", "temp_out_c", "tempf_c", "outdoor.temperature_c"]));
+      const hum = asNumber(valueAt(r, ["humidity", "humidity_pct", "humedad_relativa_pct", "relative_humidity", "outdoor.humidity"]));
+      const feels = asNumber(valueAt(r, ["feels_like_c", "sensacion_c", "feelsLike_c", "apparent_temperature_c"]));
+      const dew = asNumber(valueAt(r, ["dew_point_c", "dewpoint_c", "rocio_c", "dewPoint_c"]));
+      return {
+        fecha: valueAt(r, ["fecha", "timestamp", "date", "time", "created_at"]),
+        temperature_c: temp,
+        humidity: hum,
+        feels_like_c: feels,
+        dew_point_c: dew,
+        heat_index_c: asNumber(valueAt(r, ["heat_index_c", "heatIndex_c"])),
+        wind_chill_c: asNumber(valueAt(r, ["wind_chill_c", "windChill_c"]))
+      };
+    }
+
+    function pickAwnLatest(data) {
+      return valueAt(data, ["latest", "ultima_lectura", "current", "actual", "station.latest", "observacion"]) || data;
+    }
+
+    function pickAwnHistory(data) {
+      const candidates = [data.history, data.historico, data.registros, data.lecturas, data.data, data.observaciones];
+      for (const candidate of candidates) {
+        if (Array.isArray(candidate) && candidate.length) return candidate;
+      }
+      return [];
+    }
+
+    async function loadAwn() {
+      const status = document.getElementById("awnStatus");
+      const body = document.getElementById("awnBody");
+      if (!status || !body) return;
+
+      try {
+        status.textContent = "Leyendo archivo";
+        status.className = "awn-status load";
+
+        const data = await fetchJson(AWN_URL);
+        const rawLatest = pickAwnLatest(data);
+        const latest = normalizeAwnReading(rawLatest);
+        const station = data.station || data.estacion || {};
+        const stationName = station.name || station.nombre || data.station_name || "Estación AWN";
+
+        status.textContent = "Conectada";
+        status.className = "awn-status ok";
+
+        body.innerHTML = `
+          <div class="awn-kpi"><div class="awn-kpi-label">Temperatura</div><div class="awn-kpi-value">${fc(latest.temperature_c)}</div><div class="awn-kpi-note">${stationName}</div></div>
+          <div class="awn-kpi"><div class="awn-kpi-label">Humedad</div><div class="awn-kpi-value">${fp(latest.humidity)}</div><div class="awn-kpi-note">Relativa</div></div>
+          <div class="awn-kpi"><div class="awn-kpi-label">Sensación</div><div class="awn-kpi-value">${fc(latest.feels_like_c)}</div><div class="awn-kpi-note">Estimada</div></div>
+          <div class="awn-kpi"><div class="awn-kpi-label">Punto de rocío</div><div class="awn-kpi-value">${fc(latest.dew_point_c)}</div><div class="awn-kpi-note">Calculado</div></div>
+          <div class="awn-kpi"><div class="awn-kpi-label">Actualizado</div><div class="awn-kpi-value" style="font-size:1rem!important;line-height:1.35;">${formatDateTime(data.generated_at_gt || data.generated_at_utc || latest.fecha)}</div><div class="awn-kpi-note">Hora local</div></div>
+        `;
+
+        const history = pickAwnHistory(data);
+        if (history.length) renderAwnChart(history);
+        else if (rawLatest) renderAwnChart([rawLatest]);
+        else renderEmptyChart("awnChart", "El archivo AWN existe, pero no trae lecturas de temperatura.");
+      } catch (err) {
+        console.error("Error cargando AWN temperatura:", err);
+        status.textContent = "Error";
+        status.className = "awn-status err";
+        body.innerHTML = `<div class="awn-loading">No se pudo leer <code>${AWN_URL}</code><br>${err.message || err}</div>`;
+        renderEmptyChart("awnChart", "No se pudo cargar el archivo awn_temperatura.json.");
+      }
+    }
+
+    function renderAwnChart(history) {
+      const rows = (history || []).map(normalizeAwnReading).filter(r => r.temperature_c !== null);
+      if (!rows.length) {
+        renderEmptyChart("awnChart", "El archivo AWN existe, pero no trae temperatura válida para graficar.");
+        return;
+      }
+
+      destroyChart("awn");
+      const labels = rows.map(r => r.fecha || "Lectura").slice(-72);
+      const values = rows.map(r => r.temperature_c).slice(-72);
+      S.charts.awn = new Chart(document.getElementById("awnChart"), {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: "Temperatura estación",
+            data: values,
+            borderColor: "rgba(214,106,42,0.95)",
+            backgroundColor: "rgba(214,106,42,0.14)",
+            borderWidth: 4,
+            pointRadius: values.length <= 48 ? 3 : 0,
+            tension: 0.28,
+            fill: true
+          }]
+        },
+        options: baseOpts()
+      });
+    }
+
+    function pickPredictionRows(data) {
+      if (Array.isArray(data)) return data;
+      const candidates = [data.registros, data.daily, data.prediccion, data.forecast, data.data, data.dias];
+      for (const candidate of candidates) {
+        if (Array.isArray(candidate) && candidate.length) return candidate;
+      }
+
+      // Compatibilidad con formato Open-Meteo daily en arreglos paralelos.
+      const daily = data.daily || {};
+      if (daily.time && Array.isArray(daily.time)) {
+        return daily.time.map((fecha, i) => ({
+          fecha,
+          t_max_c: daily.temperature_2m_max?.[i],
+          t_min_c: daily.temperature_2m_min?.[i],
+          t_media_c: daily.temperature_2m_mean?.[i],
+          humedad_relativa_pct: daily.relative_humidity_2m_mean?.[i]
+        }));
+      }
+
+      return [];
+    }
+
+    function normalizePredictionRow(row) {
+      const r = row || {};
+      const max = asNumber(valueAt(r, ["t_max_c", "temperature_2m_max", "max_c", "temp_max_c", "max"]));
+      const min = asNumber(valueAt(r, ["t_min_c", "temperature_2m_min", "min_c", "temp_min_c", "min"]));
+      let avgTemp = asNumber(valueAt(r, ["t_media_c", "temperature_2m_mean", "mean_c", "temp_mean_c", "media_c", "mean"]));
+      if (avgTemp === null && max !== null && min !== null) avgTemp = (max + min) / 2;
+      return {
+        fecha: valueAt(r, ["fecha", "date", "time", "dia"]),
+        max,
+        min,
+        mean: avgTemp,
+        humidity: asNumber(valueAt(r, ["humedad_relativa_pct", "relative_humidity_2m_mean", "humidity", "humidity_pct"])),
+        feels: asNumber(valueAt(r, ["sensacion_media_c", "apparent_temperature_mean", "feels_like_c"])),
+        dew: asNumber(valueAt(r, ["dew_point_c", "dewpoint_c"]))
+      };
+    }
+
+    async function loadPred() {
+      const note = document.getElementById("predNote");
+      const kpis = document.getElementById("predKpis");
+      if (!note || !kpis) return;
+
+      try {
+        note.textContent = "Leyendo archivo de pronóstico...";
+        const data = await fetchJson(PRED_URL);
+        const rows = pickPredictionRows(data).map(normalizePredictionRow).filter(r => r.fecha && (r.max !== null || r.min !== null || r.mean !== null));
+        if (!rows.length) throw new Error("El JSON existe, pero no trae registros diarios de temperatura compatibles.");
+
+        const maxGeneral = maxValue(rows.map(r => r.max));
+        const minGeneral = minValue(rows.map(r => r.min));
+        const meanGeneral = mean(rows.map(r => r.mean));
+
+        note.textContent = `Actualizado: ${formatDateTime(data.generated_at_gt || data.generated_at_utc || data.generated_at)}`;
+        kpis.innerHTML = `
+          <div class="pred-kpi"><div class="pred-kpi-label">Media estimada</div><div class="pred-kpi-value">${fc(meanGeneral)}</div><div class="pred-kpi-note">${rows.length} días</div></div>
+          <div class="pred-kpi"><div class="pred-kpi-label">Máxima estimada</div><div class="pred-kpi-value">${fc(maxGeneral)}</div><div class="pred-kpi-note">Valor más alto</div></div>
+          <div class="pred-kpi"><div class="pred-kpi-label">Mínima estimada</div><div class="pred-kpi-value">${fc(minGeneral)}</div><div class="pred-kpi-note">Valor más bajo</div></div>
+          <div class="pred-kpi"><div class="pred-kpi-label">Rango estimado</div><div class="pred-kpi-value">${fc(maxGeneral !== null && minGeneral !== null ? maxGeneral - minGeneral : null)}</div><div class="pred-kpi-note">Diferencia general</div></div>
+        `;
+
+        destroyChart("pred");
+        S.charts.pred = new Chart(document.getElementById("predChart"), {
+          type: "line",
+          data: {
+            labels: rows.map(r => r.fecha),
+            datasets: [
+              {
+                label: "Rango térmico estimado",
+                data: rows.map(r => r.max),
+                borderColor: "rgba(214,106,42,0.85)",
+                backgroundColor: "rgba(214,106,42,0.16)",
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.34,
+                fill: "+1"
+              },
+              {
+                label: "Mínima estimada",
+                data: rows.map(r => r.min),
+                borderColor: "rgba(22,92,119,0.85)",
+                backgroundColor: "rgba(22,92,119,0.06)",
+                borderWidth: 2,
+                pointRadius: 0,
+                tension: 0.34,
+                fill: false
+              },
+              {
+                label: "Media estimada",
+                data: rows.map(r => r.mean),
+                borderColor: "rgba(47,122,98,0.98)",
+                backgroundColor: "rgba(47,122,98,0.12)",
+                borderWidth: 5,
+                pointRadius: 4,
+                tension: 0.34,
+                fill: false
+              }
+            ]
+          },
+          options: baseOpts()
+        });
+      } catch (err) {
+        console.error("Error cargando predicción temperatura:", err);
+        note.textContent = "Error al cargar pronóstico";
+        kpis.innerHTML = `<div class="pred-kpi"><div class="pred-kpi-label">Archivo</div><div class="pred-kpi-value" style="font-size:1rem!important;line-height:1.35;">No leído</div><div class="pred-kpi-note">${err.message || err}</div></div>`;
+        renderEmptyChart("predChart", `No se pudo cargar ${PRED_URL}.`);
+      }
+    }
+
     function renderAll(renderDept = true) { renderKPIs(); if (renderDept) renderDeptSummary(); renderTempDaily(); renderTimeSeries(); renderMunicipalityGrid(); renderFrequency(); renderMonthly(); renderTable(); addExpandButtons(); }
     function setupEvents() { document.getElementById("btnApply").addEventListener("click", () => { S.mun = document.getElementById("gMunicipio").value; S.startDate = document.getElementById("gStart").value || S.allDates[0]; S.endDate = document.getElementById("gEnd").value || S.allDates[S.allDates.length - 1]; renderAll(); }); document.getElementById("btnReset").addEventListener("click", () => { S.startDate = S.allDates[0]; S.endDate = S.allDates[S.allDates.length - 1]; document.getElementById("gStart").value = S.startDate; document.getElementById("gEnd").value = S.endDate; renderAll(); }); document.getElementById("gMunicipio").addEventListener("change", e => { S.mun = e.target.value; renderAll(); }); document.getElementById("tempDailyMonth").addEventListener("change", renderTempDaily); document.getElementById("freqMonth").addEventListener("change", renderFrequency); document.getElementById("compMonth").addEventListener("change", renderMunicipalityGrid); document.querySelectorAll("[data-ma]").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll("[data-ma]").forEach(b => b.classList.remove("active")); btn.classList.add("active"); S.maWindow = parseInt(btn.dataset.ma, 10); renderTimeSeries(); })); document.querySelectorAll("[data-metric]").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll("[data-metric]").forEach(b => b.classList.remove("active")); btn.classList.add("active"); S.compMetric = btn.dataset.metric; renderMunicipalityGrid(); })); document.querySelectorAll("th[data-sort]").forEach(th => th.addEventListener("click", () => { const col = th.dataset.sort; if (S.tableSortCol === col) S.tableSortDir = S.tableSortDir === "asc" ? "desc" : "asc"; else { S.tableSortCol = col; S.tableSortDir = "asc"; } renderTable(); })); document.getElementById("municipalityRadarClose").addEventListener("click", closeMunicipalityRadar); document.getElementById("municipalityRadarOverlay").addEventListener("click", e => { if (e.target.id === "municipalityRadarOverlay") closeMunicipalityRadar(); }); }
     async function loadFooterUpdate() { const el = document.getElementById("footerUpdate"); if (!el) return; try { const data = S.payload || await fetchJson(DATA_URL); const updateText = formatDateTime(data.generated_at_gt || data.generated_at_utc); el.textContent = "Actualizado por última vez: " + updateText; } catch { el.textContent = "Actualización pendiente."; } }
     async function load() { try { const data = await fetchJson(DATA_URL); S.payload = data; S.raw = {}; (data.municipios || []).forEach(m => { S.raw[m.nombre] = (m.registros || []).map(r => ({ fecha: r.fecha, t_media_c: r.t_media_c, t_max_c: r.t_max_c, t_min_c: r.t_min_c, rango_c: r.rango_c, humedad_relativa_pct: r.humedad_relativa_pct })); }); S.allDates = [...new Set(Object.values(S.raw).flat().map(r => r.fecha))].sort(); const municipios = Object.keys(S.raw).sort(); S.mun = municipios.includes("Sololá") ? "Sololá" : municipios[0]; S.startDate = S.allDates[0]; S.endDate = S.allDates[S.allDates.length - 1]; const sel = document.getElementById("gMunicipio"); sel.innerHTML = municipios.map(m => `<option value="${m}">${m}</option>`).join(""); sel.value = S.mun; document.getElementById("gStart").value = S.startDate; document.getElementById("gEnd").value = S.endDate; fillMonthSelects(); setupEvents(); setupFullscreen(); renderAll(); await Promise.allSettled([loadAwn(), loadPred(), loadFooterUpdate()]); document.getElementById("loader").classList.add("hidden"); } catch (err) { document.querySelector(".loader-card strong").textContent = "No se pudieron cargar los datos"; document.querySelector(".loader-card p").textContent = err.message; } }
     const toTop = document.getElementById("toTop"); window.addEventListener("scroll", () => { toTop.classList.toggle("show", window.scrollY > 460); }); toTop.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); }); const revealObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); }); }, { threshold: 0.08 }); document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
     load();
+    setTimeout(() => { loadAwn(); loadPred(); }, 1800);
   </script>
 </body>
 </html>
