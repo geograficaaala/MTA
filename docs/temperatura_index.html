@@ -1,0 +1,2288 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1f604d" />
+  <title>Análisis de Temperatura · Mesa Técnica Agroclimática Sololá</title>
+  <meta name="description" content="Análisis de temperatura diaria para los 19 municipios del departamento de Sololá, Guatemala. Datos NASA POWER para temperatura media, máxima, mínima, rango térmico y humedad relativa." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+
+<style>
+    /* ============================================================
+       ROOT — VARIABLES
+    ============================================================ */
+    :root {
+      --sky-900: #165c77;
+      --sky-700: #2a9db7;
+      --sky-100: #e8f7fb;
+
+      --leaf-950: #11392f;
+      --leaf-900: #174638;
+      --leaf-800: #1f604d;
+      --leaf-700: #2f7a62;
+      --leaf-500: #6bbb52;
+      --leaf-100: #edf8e8;
+
+      --sun-800: #9c7412;
+      --sun-700: #b98916;
+      --sun-500: #f0c53e;
+      --sun-100: #fff6d8;
+
+      --earth-900: #51361a;
+      --earth-800: #6f4b22;
+      --earth-600: #9a6d35;
+      --earth-100: #f8efe2;
+
+      --paper: #ffffff;
+      --soft: #f7fbf8;
+      --text: #17342d;
+      --text-mid: #415c55;
+      --text-soft: #6f817c;
+      --border: rgba(31, 96, 77, 0.16);
+      --border-strong: rgba(31, 96, 77, 0.28);
+
+      --shadow-xs: 0 1px 8px rgba(17, 57, 47, 0.06);
+      --shadow-sm: 0 8px 24px rgba(17, 57, 47, 0.08);
+      --shadow-md: 0 18px 46px rgba(17, 57, 47, 0.14);
+      --shadow-lg: 0 28px 80px rgba(17, 57, 47, 0.18);
+
+      --radius-md: 1rem;
+      --radius-lg: 1.5rem;
+      --radius-xl: 2rem;
+
+      --site-max: 1760px;
+      --content-pad: clamp(1rem, 2vw, 2rem);
+      --max: 1760px;
+      --nav-h: 88px;
+
+      /* Alias para conservar la lógica visual del módulo original con la paleta del index. */
+      --lake-950: var(--leaf-950);
+      --lake-900: var(--leaf-900);
+      --lake-800: var(--leaf-800);
+      --lake-700: var(--leaf-700);
+      --lake-600: var(--sky-900);
+      --lake-500: var(--sky-700);
+      --lake-100: var(--sky-100);
+
+      --forest-700: var(--leaf-700);
+      --forest-100: var(--leaf-100);
+
+      --maize-700: var(--sun-700);
+      --maize-500: var(--sun-500);
+      --maize-100: var(--sun-100);
+
+      --risk-700: #b75118;
+      --risk-500: #d66a2a;
+      --risk-100: #fff0e6;
+
+      --ink-900: var(--text);
+      --ink-700: var(--text-mid);
+      --ink-500: var(--text-soft);
+      --ink-300: #8ca0ad;
+
+      --surface: #ffffff;
+      --surface-2: var(--soft);
+      --paper-soft: rgba(255,255,255,0.92);
+
+      /* Rain intensity colors */
+      --rain-none:     #d4dde2;
+      --rain-trace:    #a8d8f0;
+      --rain-light:    #4db8e8;
+      --rain-moderate: #2a9db7;
+      --rain-strong:   #1f604d;
+      --rain-extreme:  #8f1c1c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 15px; }
+
+    body {
+      min-height: 100vh;
+      padding-top: var(--nav-h);
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 1rem;
+      color: var(--ink-900);
+      background: #ffffff;
+      overflow-x: hidden;
+      text-align: justify;
+    }
+
+    body::before {
+      content: none;
+      display: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, select, input { font-family: inherit; font-size: inherit; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    .site-container {
+      width: 100%;
+      max-width: var(--site-max);
+      margin-inline: auto;
+      padding-inline: var(--content-pad);
+    }
+
+    /* ============================================================
+       NAVBAR — igual al index.html
+    ============================================================ */
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      min-height: var(--nav-h);
+      background:
+        linear-gradient(90deg, rgba(31, 96, 77, 0.98), rgba(42, 157, 183, 0.98) 58%, rgba(240, 197, 62, 0.96));
+      border-bottom: 4px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 30px rgba(17, 57, 47, 0.22);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--leaf-500), var(--sun-500), var(--sky-700), var(--earth-600));
+    }
+
+    .navbar-inner {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: #ffffff;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
+      display: block;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 6px 12px rgba(17, 57, 47, 0.22));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+
+    .brand-sub {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-name {
+      color: #ffffff;
+      font-size: clamp(1.05rem, 1.4vw, 1.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      white-space: nowrap;
+      text-shadow: 0 2px 12px rgba(17, 57, 47, 0.18);
+    }
+
+    .home-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      color: var(--leaf-950);
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(255,255,255,0.84);
+      box-shadow: 0 8px 18px rgba(17, 57, 47, 0.16);
+      font-size: 0.88rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .home-button:hover,
+    .home-button:focus-visible {
+      transform: translateY(-2px);
+      background: #ffffff;
+      box-shadow: 0 12px 26px rgba(17, 57, 47, 0.22);
+      outline: none;
+    }
+
+    /* ============================================================
+       LOADER
+    ============================================================ */
+    .loader {
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      z-index: 800;
+      display: grid; place-items: center;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-card {
+      width: min(460px, calc(100% - 2rem));
+      padding: 1.5rem; text-align: center;
+      border-radius: 8px; border: 1px solid var(--border);
+      background: var(--paper); box-shadow: var(--shadow-md);
+    }
+
+    .loader-card strong {
+      display: block; font-size: 1rem;
+      color: var(--lake-800); margin-bottom: 0.4rem;
+    }
+
+    .loader-card p { color: var(--ink-500); font-size: 0.88rem; line-height: 1.6; }
+
+    .spinner {
+      width: 40px; height: 40px; margin: 0 auto 1rem;
+      border: 3px solid var(--lake-100);
+      border-top-color: var(--lake-500);
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero-section {
+      background:
+        radial-gradient(circle at 12% 16%, rgba(107, 187, 82, 0.14), transparent 30%),
+        radial-gradient(circle at 88% 8%, rgba(240, 197, 62, 0.18), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #fbfdf9 100%);
+      color: var(--text);
+      padding: clamp(2.5rem, 6vw, 5rem) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-section .wrap { max-width: var(--max); }
+
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--sky-900);
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(42,157,183,0.28);
+      text-align: left;
+    }
+
+    .hero-section h1 {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+      font-weight: 700; line-height: 1.05;
+      letter-spacing: -0.025em; color: var(--leaf-950);
+      text-align: left;
+    }
+
+    .hero-section .sub {
+      margin-top: 0.9rem;
+      color: var(--text-mid);
+      font-size: 0.98rem; line-height: 1.8;
+      text-align: justify;
+    }
+
+    .hero-meta {
+      margin-top: 1.4rem;
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      text-align: left;
+    }
+
+    .meta-chip {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.38rem 0.75rem;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ============================================================
+       GLOBAL CONTROLS
+    ============================================================ */
+    .controls-bar {
+      position: sticky;
+      top: calc(var(--nav-h) + 0.6rem);
+      z-index: 100;
+      margin: 1.2rem 0 0;
+    }
+
+    .controls-inner {
+      width: min(var(--max), calc(100% - 2rem));
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr auto auto;
+      gap: 0.55rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.97);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(16px);
+    }
+
+    .ctrl-field { display: grid; gap: 0.2rem; }
+
+    .ctrl-label {
+      color: var(--ink-500); font-size: 0.58rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 700; padding-left: 0.2rem;
+      text-align: left;
+    }
+
+    .ctrl-select, .ctrl-input {
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--surface);
+      color: var(--ink-900);
+      padding: 0 0.7rem;
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      outline: none;
+      width: 100%;
+    }
+
+    .ctrl-select:focus, .ctrl-input:focus {
+      border-color: var(--lake-500);
+      box-shadow: 0 0 0 3px rgba(42,157,183,0.1);
+    }
+
+    .ctrl-actions { display: flex; align-items: flex-end; gap: 0.4rem; }
+
+    .ctrl-btn {
+      height: 38px; padding: 0 1rem;
+      border-radius: 4px; border: 1px solid var(--border);
+      background: var(--lake-700); color: #fff;
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; transition: 0.15s ease; white-space: nowrap;
+    }
+
+    .ctrl-btn:hover { background: var(--lake-600); }
+
+    .ctrl-btn.secondary {
+      background: transparent;
+      color: var(--ink-700);
+      border-color: var(--border-strong);
+    }
+
+    .ctrl-btn.secondary:hover { background: var(--lake-100); }
+
+    /* ============================================================
+       KPI STRIP
+    ============================================================ */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.65rem;
+      padding: 1.2rem 0 0;
+    }
+
+    .kpi {
+      padding: 0.9rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--paper-soft);
+      box-shadow: var(--shadow-xs);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .kpi:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+
+    .kpi-label {
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700;
+      color: var(--ink-500); margin-bottom: 0.5rem; text-align: left;
+    }
+
+    .kpi-value {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 1.4rem; font-weight: 700;
+      line-height: 1; letter-spacing: -0.05em;
+      color: var(--lake-800); text-align: left;
+    }
+
+    .kpi-note {
+      font-size: 0.72rem; color: var(--ink-500);
+      margin-top: 0.3rem; line-height: 1.35; text-align: left;
+    }
+
+    /* ============================================================
+       PANELS — CHART BLOCKS
+    ============================================================ */
+    .section-block {
+      margin-top: 1.5rem;
+    }
+
+    .section-block.wrap {}
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 0.7rem 1rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-title-block {}
+
+    .panel-title {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--lake-800);
+      line-height: 1.2; text-align: left;
+    }
+
+    .panel-subtitle {
+      font-size: 0.72rem; color: var(--ink-500);
+      margin-top: 0.15rem; text-align: left;
+    }
+
+    .panel-controls {
+      display: flex; align-items: center;
+      gap: 0.4rem; flex-wrap: wrap;
+    }
+
+    .pc-label {
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700;
+      color: var(--ink-500);
+    }
+
+    .pc-select {
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--ink-900);
+      padding: 0 0.55rem;
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      outline: none; cursor: pointer;
+    }
+
+    .pc-select:focus {
+      border-color: var(--lake-500);
+      box-shadow: 0 0 0 2px rgba(42,157,183,0.1);
+    }
+
+    .pc-btn {
+      height: 32px; padding: 0 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: var(--paper);
+      color: var(--lake-700);
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      cursor: pointer; transition: 0.15s ease;
+    }
+
+    .pc-btn:hover, .pc-btn.active {
+      background: var(--lake-100);
+      border-color: var(--lake-500);
+    }
+
+    /* Graph paper texture */
+    .panel-body {
+      padding: 0.6rem;
+      background:
+        linear-gradient(rgba(15,58,83,0.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,58,83,0.032) 1px, transparent 1px),
+        #ffffff;
+      background-size: 24px 24px;
+    }
+
+    /* chart-container: altura fija anclada al padre — evita que Chart.js
+       corrompa dimensiones al destruir y recrear el canvas */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .chart-container canvas {
+      display: block !important;
+      position: absolute !important;
+      top: 0; left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .chart-empty-note {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      color: var(--ink-500);
+      font-size: 1rem;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .panel-foot {
+      padding: 0.48rem 1rem;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 0.68rem; font-style: italic;
+      color: var(--ink-500); line-height: 1.5;
+      text-align: left;
+    }
+
+    /* ============================================================
+       PANEL LEGEND STRIP (rain categories)
+    ============================================================ */
+    .rain-legend {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      padding: 0.55rem 1rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .rain-legend-item {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.68rem; font-weight: 700; color: var(--ink-500);
+    }
+
+    .swatch {
+      width: 14px; height: 8px; border-radius: 2px;
+      display: inline-block; flex-shrink: 0;
+    }
+
+    /* ============================================================
+       TWO-COLUMN GRID FOR CHARTS
+    ============================================================ */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* ============================================================
+       STATISTICAL ANALYSIS SECTION
+    ============================================================ */
+    .stat-section {
+      margin-top: 2rem;
+    }
+
+    .stat-section-head {
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-eyebrow {
+      color: var(--lake-500);
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 0.5rem; text-align: left;
+    }
+
+    .stat-section-head h2 {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      font-weight: 700; color: var(--lake-800);
+      line-height: 1.1; letter-spacing: -0.02em;
+      text-align: left;
+    }
+
+    .stat-section-head p {
+      margin-top: 0.55rem;
+      color: var(--ink-700); font-size: 0.9rem;
+      line-height: 1.8; max-width: 820px;
+      text-align: justify;
+    }
+
+    /* Stat grid */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* KPI mini grid for stats */
+    .stat-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+    }
+
+    .stat-kpi {
+      padding: 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.8);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .stat-kpi-label {
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700;
+      color: var(--ink-500); margin-bottom: 0.4rem; text-align: left;
+    }
+
+    .stat-kpi-value {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--lake-800); letter-spacing: -0.04em;
+      text-align: left;
+    }
+
+    .stat-kpi-note {
+      font-size: 0.7rem; color: var(--ink-500);
+      margin-top: 0.25rem; text-align: left;
+    }
+
+    /* Formulas panel */
+    .formulas-panel {
+      background: var(--lake-900);
+      color: rgba(255,255,255,0.85);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .formulas-head {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); text-align: left;
+    }
+
+    .formulas-body { padding: 1rem; }
+
+    .formula-group {
+      margin-bottom: 1.1rem;
+    }
+
+    .formula-group:last-child { margin-bottom: 0; }
+
+    .formula-group-title {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--maize-500);
+      margin-bottom: 0.55rem; text-align: left;
+    }
+
+    .formula-row {
+      display: grid;
+      grid-template-columns: 1.1fr 2fr 0.9fr;
+      gap: 0.6rem;
+      align-items: baseline;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .formula-row:last-child { border-bottom: none; }
+
+    .formula-name {
+      font-size: 0.78rem; color: rgba(255,255,255,0.62);
+      text-align: left; line-height: 1.3;
+    }
+
+    .formula-eq {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.82rem; color: rgba(255,255,255,0.88);
+      letter-spacing: 0.01em; text-align: left; line-height: 1.4;
+    }
+
+    .formula-val {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.88rem; font-weight: 700;
+      color: #8bf0d2; text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Percentile visualization */
+    .pctile-section {
+      margin-top: 1rem;
+    }
+
+    .pctile-section h3 {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 0.92rem; font-weight: 700;
+      color: var(--lake-800); margin-bottom: 0.75rem;
+      text-align: left;
+    }
+
+    .boxplot-wrap {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.4rem 1.4rem 1rem;
+    }
+
+    .boxplot-track {
+      position: relative;
+      height: 44px;
+      background: rgba(15,58,83,0.05);
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      margin: 0.6rem 0 2rem;
+    }
+
+    .boxplot-iqr {
+      position: absolute;
+      top: 8px; height: 28px;
+      background: var(--lake-500);
+      opacity: 0.55;
+      border-radius: 3px;
+    }
+
+    .boxplot-median {
+      position: absolute;
+      top: 4px; height: 36px; width: 3px;
+      background: var(--lake-900);
+      border-radius: 2px;
+    }
+
+    .boxplot-p10, .boxplot-p90 {
+      position: absolute;
+      top: 14px; height: 16px; width: 2px;
+      background: var(--risk-500);
+      border-radius: 1px;
+    }
+
+    .boxplot-whisker {
+      position: absolute;
+      top: 21px; height: 2px;
+      background: var(--ink-500);
+    }
+
+    .boxplot-labels {
+      display: flex; justify-content: space-between;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.7rem; color: var(--ink-500);
+      font-weight: 700; text-align: center;
+    }
+
+    .boxplot-label { min-width: 50px; }
+
+    /* ============================================================
+       DATA TABLE
+    ============================================================ */
+    .table-panel {
+      margin-top: 1.5rem;
+    }
+
+    .table-scroll {
+      max-height: 520px; overflow: auto;
+    }
+
+    table {
+      width: 100%; border-collapse: collapse;
+      min-width: 700px; font-size: 0.86rem;
+    }
+
+    th {
+      position: sticky; top: 0; z-index: 2;
+      padding: 0.62rem 0.75rem;
+      background: var(--lake-900);
+      color: rgba(255,255,255,0.82);
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700;
+      border-bottom: 2px solid var(--maize-500);
+      white-space: nowrap; cursor: pointer; user-select: none;
+      text-align: left;
+    }
+
+    th:hover { background: var(--lake-700); color: #fff; }
+
+    th.sorted-asc::after  { content: " \2191"; color: var(--maize-500); }
+    th.sorted-desc::after { content: " \2193"; color: var(--maize-500); }
+
+    td {
+      padding: 0.55rem 0.75rem;
+      border-bottom: 1px solid rgba(15,58,83,0.07);
+      vertical-align: middle; text-align: left;
+    }
+
+    td.mono {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-weight: 700; color: var(--lake-700);
+    }
+
+    tbody tr:nth-child(even) td { background: rgba(230,245,247,0.25); }
+    tbody tr:hover td { background: var(--lake-100); cursor: default; }
+
+    .bar-td { display: flex; align-items: center; gap: 0.5rem; }
+    .bar-td-track {
+      flex: 1; height: 6px; background: rgba(15,58,83,0.1);
+      border-radius: 3px; min-width: 40px;
+    }
+    .bar-td-fill { height: 100%; border-radius: 3px; }
+
+    /* ============================================================
+       METHODOLOGY NOTICE
+    ============================================================ */
+    .method-notice {
+      margin-top: 2rem;
+      padding: 1.1rem 1.3rem;
+      border-radius: 6px;
+      border-left: 4px solid var(--lake-500);
+      background: rgba(230,245,247,0.55);
+    }
+
+    .method-notice h3 {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--lake-800); margin-bottom: 0.4rem; text-align: left;
+    }
+
+    .method-notice p {
+      color: var(--ink-700); font-size: 0.88rem;
+      line-height: 1.75; text-align: justify;
+    }
+
+    /* ============================================================
+       FOOTER / CINTILLO / REDES — igual al index.html
+    ============================================================ */
+
+    footer {
+      margin-top: 2rem;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(240, 197, 62, 0.28), transparent 32%),
+        radial-gradient(circle at 90% 0%, rgba(42, 157, 183, 0.28), transparent 32%),
+        linear-gradient(135deg, var(--leaf-950), var(--leaf-800) 46%, var(--earth-800));
+    }
+
+    .partners-ribbon-wrap {
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid rgba(31, 96, 77, 0.12);
+    }
+
+    .partners-ribbon {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 1.55rem clamp(0.7rem, 1.25vw, 1.35rem) 1.45rem;
+      background: #ffffff;
+    }
+
+    .partners-ribbon-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .partners-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.42rem, 0.95vw, 1.15rem);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .partners-logo-row + .partners-logo-row {
+      margin-top: 1.05rem;
+    }
+
+    .partner-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 0.16rem;
+      border-radius: 8px;
+      transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+    }
+
+    .partner-logo:hover,
+    .partner-logo:focus-visible {
+      transform: translateY(-4px);
+      opacity: 0.94;
+      filter: saturate(1.08);
+      outline: none;
+    }
+
+    .partner-logo img {
+      display: block;
+      width: 100%;
+      height: clamp(54px, 4.9vw, 90px);
+      object-fit: contain;
+    }
+
+    .partner-logo.logo-xs { flex: 0 1 78px; }
+    .partner-logo.logo-sm { flex: 0 1 100px; }
+    .partner-logo.logo-md { flex: 0 1 130px; }
+    .partner-logo.logo-lg { flex: 0 1 170px; }
+    .partner-logo.logo-xl { flex: 0 1 218px; }
+    .partner-logo.logo-xxl { flex: 0 1 270px; }
+    .partner-logo.logo-uvg { flex: 0 1 215px; }
+    .partner-logo.logo-uvg img { height: clamp(72px, 6.2vw, 112px); }
+
+    .footer-contact {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(320px, 0.9fr) minmax(220px, 1fr);
+      gap: clamp(1rem, 3vw, 3rem);
+      align-items: end;
+      padding-block: 2.8rem 3.25rem;
+    }
+
+    .footer-update-chip {
+      color: #ffffff;
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: left;
+      align-self: center;
+    }
+
+    .footer-social {
+      justify-self: center;
+      width: min(100%, 420px);
+      color: #ffffff;
+      text-align: left;
+      align-self: center;
+    }
+
+    .footer-social-title {
+      margin-bottom: 0.85rem;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-social-list {
+      list-style: none;
+      display: grid;
+      gap: 0.78rem;
+    }
+
+    .footer-social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: #ffffff;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .footer-social-link:hover,
+    .footer-social-link:focus-visible {
+      transform: translateX(4px);
+      opacity: 0.88;
+      outline: none;
+    }
+
+    .footer-social-icon {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .footer-social-copy {
+      display: grid;
+      gap: 0.08rem;
+    }
+
+    .footer-social-label {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .footer-social-value {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.96rem;
+    }
+
+    .footer-negative-logo {
+      justify-self: end;
+      align-self: end;
+      display: inline-flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      width: min(220px, 100%);
+    }
+
+    .footer-negative-logo img {
+      display: block;
+      width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
+    }
+
+    /* ============================================================
+       TO TOP
+    ============================================================ */
+
+    .to-top {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      z-index: 1080;
+      width: 44px;
+      height: 44px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: var(--leaf-700);
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      font-size: 1rem;
+      font-weight: 700;
+      transition: 0.18s ease;
+    }
+
+    .to-top:hover {
+      background: var(--sky-900);
+      transform: translateY(-2px);
+    }
+
+    .to-top.show {
+      display: flex;
+    }
+
+
+    /* ============================================================
+       CHART FULLSCREEN
+    ============================================================ */
+    .chart-expand-btn {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: #ffffff;
+      color: var(--leaf-800);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    .chart-expand-btn:hover,
+    .chart-expand-btn:focus-visible {
+      transform: translateY(-2px);
+      background: var(--leaf-100);
+      box-shadow: var(--shadow-sm);
+      outline: none;
+    }
+
+    .chart-fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: none;
+      padding: clamp(0.8rem, 2vw, 1.6rem);
+      background: rgba(17, 57, 47, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .chart-fullscreen-overlay.open {
+      display: grid;
+      place-items: center;
+    }
+
+    .chart-fullscreen-card {
+      width: min(1500px, 96vw);
+      height: min(900px, 92vh);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(255,255,255,0.65);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.34);
+    }
+
+    .chart-fullscreen-head {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(90deg, var(--leaf-800), var(--sky-700), var(--sun-500));
+      color: #ffffff;
+    }
+
+    .chart-fullscreen-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .chart-fullscreen-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      padding: 0.22rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+
+    .chart-fullscreen-title {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .chart-fullscreen-close {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: var(--leaf-950);
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .chart-fullscreen-body {
+      flex: 1;
+      min-height: 0;
+      padding: 0.9rem;
+      background: #ffffff;
+    }
+
+    .chart-fullscreen-host {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+    }
+
+    .chart-container.is-fullscreen {
+      height: 100% !important;
+      min-height: 520px;
+      border-radius: 10px;
+      background:
+        linear-gradient(rgba(15,58,83,0.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,58,83,0.032) 1px, transparent 1px),
+        #ffffff;
+      background-size: 24px 24px;
+    }
+
+    body.chart-modal-open {
+      overflow: hidden;
+    }
+
+    /* ============================================================
+       REVEAL ANIMATIONS
+    ============================================================ */
+    .reveal {
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1100px) {
+      .controls-inner { grid-template-columns: 1fr 1fr 1fr; }
+      .ctrl-actions { grid-column: 1 / -1; justify-content: flex-end; }
+      .kpi-strip { grid-template-columns: repeat(3, 1fr); }
+      .stat-grid { grid-template-columns: 1fr; }
+      .stat-kpis { grid-template-columns: repeat(3, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 720px) {
+      :root { --nav-h: 66px; }
+      .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .stat-kpis { grid-template-columns: repeat(2, 1fr); }
+      .controls-inner { grid-template-columns: 1fr; position: static; }
+      .formula-row { grid-template-columns: 1fr; gap: 0.2rem; }
+      .formula-val { text-align: left; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1rem 2rem; }
+      .footer-bottom-inner { flex-direction: column; }
+      .footer-credits { text-align: left; }
+    }
+
+
+    @media (max-width: 980px) {
+      :root { --nav-h: 78px; }
+
+      .brand-logo {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+      }
+
+      .footer-contact {
+        grid-template-columns: 1fr;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-update-chip,
+      .footer-social,
+      .footer-negative-logo {
+        justify-self: center;
+      }
+
+      .footer-update-chip { text-align: center; }
+      .footer-negative-logo { width: min(190px, 58vw); }
+      .partners-logo-row { flex-wrap: wrap; justify-content: center; }
+    }
+
+    @media (max-width: 720px) {
+      :root { --nav-h: 72px; --content-pad: 1rem; }
+
+      .navbar-inner { gap: 0.75rem; }
+      .brand { gap: 0.8rem; }
+      .brand-logo {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+      }
+      .brand-sub { font-size: 0.58rem; }
+      .brand-name { font-size: 0.92rem; white-space: normal; }
+      .home-button { min-height: 36px; padding-inline: 0.72rem; font-size: 0.78rem; }
+    }
+
+    /* ============================================================
+       WINDY MAP — FULL WIDTH
+    ============================================================ */
+    .map-full-section {
+      background: #ffffff;
+      margin: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .map-section-inner {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding: 1rem 1rem 0;
+    }
+
+    .map-section-label {
+      color: var(--sky-900);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding-bottom: 0.7rem; text-align: left;
+    }
+
+    .windy-wrap iframe {
+      display: block; width: 100%; height: 760px; border: 0;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .map-credits {
+      padding: 0.45rem 0.75rem;
+      background: var(--soft);
+      font-size: 0.7rem; color: var(--text-soft);
+      text-align: right; border-radius: 0 0 6px 6px; margin-bottom: 0.75rem;
+      border: 1px solid var(--border);
+      border-top: 0;
+    }
+
+    .map-credits a { color: var(--sky-900); text-decoration: underline; }
+
+    /* ============================================================
+       SECTION BADGES
+    ============================================================ */
+    .section-label-bar {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-badge {
+      display: inline-flex; align-items: center;
+      padding: 0.28rem 0.65rem;
+      border-radius: 3px;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .badge-hist { background: var(--lake-100);   color: var(--lake-800); border: 1px solid rgba(15,58,83,0.2); }
+    .badge-actual{ background: var(--forest-100); color: var(--forest-700); border: 1px solid rgba(47,122,98,0.2); }
+    .badge-pred { background: var(--maize-100);  color: var(--maize-700); border: 1px solid rgba(154,109,10,0.2); }
+
+    .section-label-title {
+      color: var(--ink-700);
+      font-size: 0.88rem; font-weight: 700; text-align: left;
+    }
+
+    /* ============================================================
+       DEPARTMENT SUMMARY
+    ============================================================ */
+    .dept-head {
+      margin-bottom: 0.9rem;
+    }
+
+    .dept-eyebrow {
+      color: var(--lake-500); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      display: block; margin-bottom: 0.35rem; text-align: left;
+    }
+
+    .dept-title {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+      font-weight: 700; color: var(--lake-800);
+      letter-spacing: -0.015em; text-align: left;
+    }
+
+    .dept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .dept-chip {
+      padding: 0.55rem 0.75rem;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .dept-chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .dept-chip.active-mun { border-color: var(--maize-500); background: var(--maize-100); }
+
+    .dept-chip-name {
+      font-size: 0.74rem; font-weight: 700; color: var(--lake-800);
+      margin-bottom: 0.2rem; text-align: left; line-height: 1.2;
+    }
+
+    .dept-chip-val {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 1rem; font-weight: 700;
+      color: var(--lake-700); text-align: left;
+    }
+
+    .dept-chip-bar {
+      margin-top: 0.3rem; height: 3px;
+      background: rgba(15,58,83,0.1); border-radius: 2px;
+    }
+
+    .dept-chip-fill { height: 100%; border-radius: 2px; }
+
+    /* ============================================================
+       AWN STATION SECTION
+    ============================================================ */
+    .awn-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1rem;
+    }
+
+    .awn-body {
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+
+    .awn-loading {
+      grid-column: 1 / -1;
+      color: var(--ink-500); font-size: 0.88rem;
+      padding: 1rem 0; text-align: center;
+    }
+
+    .awn-kpi {
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .awn-kpi-label {
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700;
+      color: var(--ink-500); margin-bottom: 0.35rem; text-align: left;
+    }
+
+    .awn-kpi-value {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--lake-800); text-align: left;
+    }
+
+    .awn-kpi-note {
+      font-size: 0.68rem; color: var(--ink-500);
+      margin-top: 0.2rem; text-align: left;
+    }
+
+    .awn-status {
+      padding: 0.28rem 0.6rem;
+      border-radius: 3px;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    .awn-status.ok   { background: var(--forest-100); color: var(--forest-700); }
+    .awn-status.err  { background: var(--risk-100);   color: var(--risk-700); }
+    .awn-status.load { background: var(--lake-100);   color: var(--lake-700); }
+
+    /* ============================================================
+       PREDICTIONS SECTION
+    ============================================================ */
+    .pred-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.65rem;
+      margin-top: 0.8rem;
+    }
+
+    .pred-kpi {
+      padding: 0.85rem;
+      border-radius: 5px;
+      border: 1px solid rgba(154,109,10,0.2);
+      background: var(--maize-100);
+    }
+
+    .pred-kpi-label {
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 700;
+      color: var(--maize-700); margin-bottom: 0.35rem; text-align: left;
+    }
+
+    .pred-kpi-value {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--lake-800); text-align: left;
+    }
+
+    .pred-kpi-note { font-size: 0.7rem; color: var(--ink-500); margin-top: 0.2rem; text-align: left; }
+
+    .pred-note {
+      font-size: 0.72rem; color: var(--ink-500);
+      font-style: italic; text-align: right;
+    }
+
+    /* ============================================================
+       MATHML EQUATIONS STYLING
+    ============================================================ */
+    .formula-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .formula-row:last-child { border-bottom: none; }
+
+    .formula-left { display: flex; flex-direction: column; gap: 0.15rem; }
+
+    .formula-name {
+      font-size: 0.72rem; color: rgba(255,255,255,0.55); text-align: left;
+    }
+
+    math.eq {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.92);
+      margin: 0.15rem 0;
+      text-align: left;
+      display: block;
+    }
+
+    /* Fallback for browsers without MathML */
+    @supports not (display: math) {
+      math.eq {
+        font-family: 'IBM Plex Mono', 'Courier New', monospace;
+        font-size: 0.82rem;
+        white-space: pre;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .awn-grid { grid-template-columns: 1fr; }
+      .pred-kpis { grid-template-columns: repeat(2, 1fr); }
+      .dept-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .awn-body { grid-template-columns: repeat(2, 1fr); }
+      .pred-kpis { grid-template-columns: 1fr 1fr; }
+      .windy-wrap iframe { height: 430px; }
+    }
+
+
+    /* ============================================================
+       LEGIBILIDAD GENERAL Y MUNICIPIOS
+    ============================================================ */
+    body,
+    button,
+    input,
+    select,
+    textarea,
+    .panel-title,
+    .panel-subtitle,
+    .section-label-title,
+    .hero-section,
+    .dept-title,
+    .dept-chip-name,
+    .footer-social-title,
+    .footer-social-label,
+    .footer-social-value {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif !important;
+      letter-spacing: 0.005em;
+    }
+
+    code,
+    .kpi-value,
+    .dept-chip-val,
+    .pred-kpi-value,
+    .awn-kpi-value,
+    .ctrl-label,
+    .pc-label,
+    .footer-update-text,
+    .panel-foot {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace !important;
+    }
+
+    .panel-title { font-size: 1.05rem; }
+    .panel-subtitle { font-size: 0.86rem; line-height: 1.45; }
+    .panel-head { padding: 0.95rem 1.1rem; }
+    .panel-foot { font-size: 0.78rem; }
+    .pc-label, .ctrl-label { font-size: 0.68rem; }
+    .pc-select, .pc-btn, .ctrl-select, .ctrl-input, .ctrl-btn { font-size: 0.92rem; }
+
+    .chart-container { min-height: 320px; }
+
+    .comparison-panel-body {
+      background: #ffffff;
+      padding: 1rem;
+    }
+
+    .municipality-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .municipality-card {
+      position: relative;
+      overflow: hidden;
+      padding: 1rem 1rem 0.9rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff, #fbfdf9);
+      box-shadow: var(--shadow-xs);
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      text-align: left;
+    }
+
+    .municipality-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--leaf-500), var(--sky-700), var(--sun-500));
+      opacity: 0.85;
+    }
+
+    .municipality-card:hover,
+    .municipality-card:focus-visible {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--leaf-700);
+      outline: none;
+    }
+
+    .municipality-card.active {
+      border-color: var(--sun-500);
+      background: linear-gradient(180deg, #fffdf4, #ffffff);
+    }
+
+    .municipality-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--leaf-900);
+      line-height: 1.2;
+      margin-bottom: 0.7rem;
+    }
+
+    .municipality-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 0.38rem;
+    }
+
+    .municipality-k {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .municipality-v {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--leaf-800);
+      white-space: nowrap;
+    }
+
+    .municipality-bar {
+      height: 7px;
+      margin: 0.55rem 0 0.35rem;
+      border-radius: 999px;
+      background: rgba(31, 96, 77, 0.09);
+      overflow: hidden;
+    }
+
+    .municipality-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--sky-700), var(--leaf-500));
+      min-width: 3%;
+    }
+
+    .municipality-hint {
+      margin-top: 0.65rem;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.66rem;
+      color: var(--text-soft);
+    }
+
+    .municipality-radar-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 2vw, 2rem);
+      background: rgba(17, 57, 47, 0.74);
+      backdrop-filter: blur(8px);
+    }
+
+    .municipality-radar-overlay.open { display: flex; }
+
+    .municipality-radar-card {
+      width: min(960px, 96vw);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: 0 28px 90px rgba(0,0,0,0.32);
+      border: 1px solid rgba(255,255,255,0.65);
+    }
+
+    .municipality-radar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1.1rem;
+      background: linear-gradient(90deg, var(--leaf-900), var(--sky-700), var(--sun-500));
+      color: #ffffff;
+    }
+
+    .municipality-radar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      min-width: 0;
+    }
+
+    .municipality-radar-logo {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.95);
+      padding: 0.25rem;
+      flex: 0 0 auto;
+    }
+
+    .municipality-radar-title {
+      font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .municipality-radar-subtitle {
+      margin-top: 0.1rem;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.72rem;
+      opacity: 0.82;
+      letter-spacing: 0.03em;
+    }
+
+    .municipality-radar-close {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: var(--leaf-950);
+      font-size: 1.25rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .municipality-radar-body {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.1rem;
+      padding: 1.1rem;
+      align-items: stretch;
+    }
+
+    .municipality-radar-chart {
+      min-height: 520px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(rgba(31,96,77,0.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31,96,77,0.032) 1px, transparent 1px),
+        #ffffff;
+      background-size: 24px 24px;
+      padding: 0.8rem;
+    }
+
+    .municipality-radar-chart canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .municipality-radar-stats {
+      display: grid;
+      gap: 0.75rem;
+      align-content: start;
+    }
+
+    .municipality-radar-stat {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0.9rem;
+      background: #fbfdf9;
+    }
+
+    .municipality-radar-stat span {
+      display: block;
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 0.28rem;
+    }
+
+    .municipality-radar-stat strong {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1;
+      color: var(--leaf-800);
+    }
+
+    @media (max-width: 860px) {
+      .municipality-radar-body { grid-template-columns: 1fr; }
+      .municipality-radar-chart { min-height: 420px; }
+      .municipality-grid { grid-template-columns: 1fr; }
+    }
+
+  
+
+    /* ============================================================
+       AJUSTES DE LECTURA AMPLIADA
+       Tipografía más grande, ejes más legibles y paneles más limpios.
+    ============================================================ */
+    html { font-size: 17px; }
+
+    body {
+      font-size: 1.08rem;
+      line-height: 1.68;
+    }
+
+    .wrap,
+    .navbar-inner,
+    .footer-main,
+    .map-section-inner,
+    .controls-inner {
+      width: min(var(--max), calc(100% - 1.15rem));
+    }
+
+    .hero-section h1 { font-size: clamp(3rem, 5.8vw, 5.6rem); }
+    .hero-section .sub { font-size: 1.16rem; line-height: 1.85; }
+
+    .section-label-title {
+      font-size: 1.1rem;
+      line-height: 1.35;
+    }
+
+    .section-badge {
+      font-size: 0.78rem;
+      padding: 0.42rem 0.86rem;
+    }
+
+    .panel-title {
+      font-size: 1.32rem !important;
+      line-height: 1.25;
+    }
+
+    .panel-subtitle {
+      font-size: 1.05rem !important;
+      line-height: 1.48;
+      color: var(--text-mid);
+    }
+
+    .panel-head {
+      padding: 1.18rem 1.35rem !important;
+      gap: 1.1rem;
+    }
+
+    .panel-body {
+      padding: 1.1rem !important;
+    }
+
+    .panel-foot {
+      display: none !important;
+    }
+
+    .chart-container {
+      min-height: 430px;
+    }
+
+    .prediction-chart-container {
+      min-height: 580px;
+    }
+
+    .windy-wrap iframe {
+      height: 760px !important;
+    }
+
+    .map-section-label {
+      font-size: 1rem;
+      line-height: 1.4;
+      padding-bottom: 1rem;
+    }
+
+    .controls-inner {
+      gap: 0.8rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .ctrl-label,
+    .pc-label {
+      font-size: 0.82rem !important;
+    }
+
+    .ctrl-select,
+    .ctrl-input,
+    .pc-select,
+    .ctrl-btn,
+    .pc-btn {
+      min-height: 46px;
+      font-size: 1.04rem !important;
+    }
+
+    .kpi {
+      padding: 1.15rem;
+    }
+
+    .kpi-label,
+    .pred-kpi-label,
+    .awn-kpi-label,
+    .dept-chip-name,
+    th {
+      font-size: 0.86rem !important;
+    }
+
+    .kpi-value {
+      font-size: 2.15rem !important;
+    }
+
+    .kpi-note,
+    .pred-kpi-note,
+    .awn-kpi-note,
+    td,
+    .table-panel {
+      font-size: 1rem !important;
+    }
+
+    .pred-kpi,
+    .awn-kpi,
+    .dept-chip {
+      padding: 1.08rem;
+    }
+
+    .pred-kpi-value,
+    .awn-kpi-value,
+    .dept-chip-val {
+      font-size: 1.55rem !important;
+    }
+
+    .rain-legend {
+      gap: 0.9rem;
+      padding: 0.8rem 1.1rem;
+    }
+
+    .rain-legend-item {
+      font-size: 0.92rem;
+    }
+
+    .zoom-btn,
+    .fullscreen-close,
+    .home-button {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 720px) {
+      html { font-size: 16px; }
+      .windy-wrap iframe { height: 520px !important; }
+      .chart-container,
+      .prediction-chart-container { min-height: 420px; }
+      .panel-title { font-size: 1.18rem !important; }
+      .panel-subtitle { font-size: 0.98rem !important; }
+    }
+
+  
+
+    /* ============================================================
+       AJUSTES ESPECÍFICOS — TEMPERATURA
+    ============================================================ */
+    :root {
+      --temp-cold: #2a9db7;
+      --temp-soft: #6bbb52;
+      --temp-warm: #f0c53e;
+      --temp-hot: #d66a2a;
+      --temp-high: #b75118;
+      --temp-low: #165c77;
+    }
+
+    .temp-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; padding: 0.8rem 1.1rem; border-top: 1px solid var(--border); background: var(--surface); }
+    .temp-legend-item { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.94rem; font-weight: 800; color: var(--text-mid); }
+    .temp-gradient-chip { width: 34px; height: 10px; border-radius: 999px; background: linear-gradient(90deg, var(--temp-low), var(--temp-soft), var(--temp-warm), var(--temp-hot)); display: inline-block; flex-shrink: 0; }
+    .temperature-card::before { background: linear-gradient(90deg, var(--temp-low), var(--temp-soft), var(--temp-warm), var(--temp-hot)); }
+    .map-credits { display: none; }
+    .chart-container.temperature-main, .chart-container.temperature-time, .chart-container.temperature-combo, .chart-container.temperature-dist, .chart-container.temperature-monthly { min-height: 560px; }
+    .chart-container.temperature-pred { min-height: 600px; }
+    .empty-panel-message { padding: 2rem; color: var(--text-mid); font-size: 1.1rem; font-weight: 700; text-align: center; }
+    @media (max-width: 720px) { .chart-container.temperature-main, .chart-container.temperature-time, .chart-container.temperature-combo, .chart-container.temperature-dist, .chart-container.temperature-monthly, .chart-container.temperature-pred { min-height: 430px; } }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Navegación principal">
+    <div class="navbar-inner site-container">
+      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
+        <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
+        <span class="brand-text">
+          <span class="brand-sub">Sololá, Guatemala</span>
+          <span class="brand-name">Mesa Técnica Agroclimática Sololá</span>
+        </span>
+      </a>
+      <a class="home-button" href="../index.html" aria-label="Regresar al inicio">Regresar al inicio</a>
+    </div>
+  </nav>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-card">
+      <div class="spinner"></div>
+      <strong>Cargando datos de temperatura</strong>
+      <p>Leyendo serie histórica NASA POWER para los 19 municipios del departamento de Sololá.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero-section">
+      <div class="wrap">
+        <h1>Análisis de Temperatura</h1>
+        <p class="sub">
+          Módulo de consulta para temperatura media, máxima, mínima, rango térmico y humedad relativa diaria en los 19 municipios de Sololá.
+          La información histórica proviene de NASA POWER y se actualiza automáticamente desde el repositorio.
+        </p>
+      </div>
+    </section>
+
+    <!-- MAPA DE TEMPERATURA -->
+    <div class="map-full-section">
+      <div class="map-section-inner">
+        <div class="map-section-label">Mapa de temperatura — Sololá, Guatemala</div>
+        <div class="windy-wrap">
+          <iframe src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricTemp=default&metricWind=default&zoom=10&overlay=temp&product=ecmwf&level=surface&lat=14.708&lon=-91.075" title="Mapa de temperatura ECMWF — Sololá, Guatemala" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="map-credits"></div>
+      </div>
+    </div>
+
+    <!-- GLOBAL CONTROLS -->
+    <div class="controls-bar"><div class="controls-inner">
+      <div class="ctrl-field"><label class="ctrl-label" for="gMunicipio">Municipio activo</label><select class="ctrl-select" id="gMunicipio"></select></div>
+      <div class="ctrl-field"><label class="ctrl-label" for="gStart">Fecha inicio</label><input class="ctrl-input" type="date" id="gStart" /></div>
+      <div class="ctrl-field"><label class="ctrl-label" for="gEnd">Fecha fin</label><input class="ctrl-input" type="date" id="gEnd" /></div>
+      <div class="ctrl-actions"><button class="ctrl-btn" id="btnApply" type="button">Aplicar</button><button class="ctrl-btn secondary" id="btnReset" type="button">Limpiar filtros</button></div>
+    </div></div>
+
+    <!-- KPI STRIP -->
+    <div class="wrap"><div class="kpi-strip reveal">
+      <div class="kpi"><div class="kpi-label">Temperatura media</div><div class="kpi-value" id="kMean">—</div><div class="kpi-note">Promedio del periodo filtrado</div></div>
+      <div class="kpi"><div class="kpi-label">Máxima diaria</div><div class="kpi-value" id="kMax">—</div><div class="kpi-note" id="kMaxDate">—</div></div>
+      <div class="kpi"><div class="kpi-label">Mínima diaria</div><div class="kpi-value" id="kMin">—</div><div class="kpi-note" id="kMinDate">—</div></div>
+      <div class="kpi"><div class="kpi-label">Rango térmico</div><div class="kpi-value" id="kRange">—</div><div class="kpi-note">Promedio diario</div></div>
+      <div class="kpi"><div class="kpi-label">Humedad relativa</div><div class="kpi-value" id="kHumidity">—</div><div class="kpi-note">Promedio del periodo</div></div>
+      <div class="kpi"><div class="kpi-label">Desv. estándar</div><div class="kpi-value" id="kStd">—</div><div class="kpi-note">Variabilidad térmica</div></div>
+    </div></div>
+
+    <!-- RESUMEN DEPARTAMENTAL -->
+    <div class="wrap reveal" id="deptSummary"><div class="dept-head"><span class="dept-eyebrow">Resumen departamental</span><h2 class="dept-title">Sololá — temperatura media por municipio en el periodo completo</h2></div><div class="dept-grid" id="deptGrid"></div></div>
+
+    <!-- ESTACIÓN METEOROLÓGICA -->
+    <div class="section-block wrap reveal"><div class="section-label-bar"><span class="section-badge badge-actual">Actual</span><span class="section-label-title">Observación de campo — Estación AWN · Santa Catarina Palopó</span></div><div class="awn-grid">
+      <div class="awn-card panel" id="awnCard"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Última lectura — Temperatura de estación propia</div><div class="panel-subtitle">Lectura directa desde Ambient Weather Network cuando el archivo esté disponible</div></div><span class="awn-status load" id="awnStatus">Conectando...</span></div><div class="awn-body" id="awnBody"><div class="awn-loading">Consultando datos de estación...</div></div></div>
+      <div class="panel awn-chart-panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Temperatura reciente — últimas lecturas de la estación</div><div class="panel-subtitle">Serie observada en campo cuando exista histórico horario o diario</div></div></div><div class="panel-body"><div class="chart-container temperature-combo" style="height:560px;"><canvas id="awnChart"></canvas></div></div><div class="panel-foot"></div></div>
+    </div></div>
+
+    <!-- PREDICCIÓN -->
+    <div class="section-block wrap reveal"><div class="section-label-bar"><span class="section-badge badge-pred">Predicción</span><span class="section-label-title">Pronóstico de temperatura — 16 días · Open-Meteo</span></div><div class="panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Pronóstico térmico — Sololá (16 días)</div><div class="panel-subtitle">Temperatura máxima, mínima y media estimada</div></div><span class="pred-note" id="predNote">Cargando pronóstico...</span></div><div class="panel-body"><div class="chart-container temperature-pred" style="height:600px;"><canvas id="predChart"></canvas></div></div><div class="panel-foot"></div></div><div class="pred-kpis" id="predKpis"></div></div>
+
+    <!-- HISTÓRICO NASA POWER -->
+    <div class="wrap" style="margin-top:1.5rem;"><div class="section-label-bar"><span class="section-badge badge-hist">Histórico</span><span class="section-label-title">Serie histórica NASA POWER · temperatura diaria · 19 municipios</span></div></div>
+
+    <!-- TEMPERATURA DIARIA -->
+    <div class="section-block wrap reveal"><div class="panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Temperatura diaria</div><div class="panel-subtitle">Temperatura media diaria con máximas y mínimas</div></div><div class="panel-controls"><span class="pc-label">Mes</span><select class="pc-select" id="tempDailyMonth"><option value="all">Todo el periodo</option></select></div></div><div class="panel-body"><div class="chart-container temperature-main" style="height:560px;"><canvas id="tempDailyChart"></canvas></div></div><div class="temp-legend"><span class="temp-legend-item"><span class="temp-gradient-chip"></span>Escala térmica de menor a mayor temperatura</span><span class="temp-legend-item"><span class="swatch" style="background:rgba(22,92,119,.85);"></span>Mínima</span><span class="temp-legend-item"><span class="swatch" style="background:rgba(47,122,98,.9);"></span>Media</span><span class="temp-legend-item"><span class="swatch" style="background:rgba(214,106,42,.9);"></span>Máxima</span></div><div class="panel-foot"></div></div></div>
+
+    <!-- SERIE TEMPORAL -->
+    <div class="section-block wrap reveal"><div class="panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Serie temporal con medias móviles</div><div class="panel-subtitle">Temperatura media diaria + suavizado para observar tendencia térmica</div></div><div class="panel-controls"><span class="pc-label">Ventana MA</span><button class="pc-btn active" data-ma="7" type="button">7 días</button><button class="pc-btn" data-ma="15" type="button">15 días</button><button class="pc-btn" data-ma="30" type="button">30 días</button></div></div><div class="panel-body"><div class="chart-container temperature-time" style="height:540px;"><canvas id="timeseriesChart"></canvas></div></div><div class="panel-foot"></div></div></div>
+
+    <!-- COMPARACIÓN MUNICIPAL -->
+    <div class="section-block wrap reveal"><div class="panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Comparación multimunicipal — 19 municipios de Sololá</div><div class="panel-subtitle">Tarjetas térmicas por municipio en el periodo filtrado</div></div><div class="panel-controls"><span class="pc-label">Métrica</span><button class="pc-btn active" data-metric="mean" type="button">Media</button><button class="pc-btn" data-metric="max" type="button">Máxima</button><button class="pc-btn" data-metric="min" type="button">Mínima</button><span class="pc-label">Mes</span><select class="pc-select" id="compMonth"><option value="all">Todo el periodo</option></select></div></div><div class="panel-body comparison-panel-body"><div class="municipality-grid" id="municipalityGrid"></div></div><div class="panel-foot"></div></div></div>
+
+    <!-- DISTRIBUCIÓN + MENSUAL -->
+    <div class="section-block wrap two-col reveal">
+      <div class="panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Distribución de temperatura</div><div class="panel-subtitle">Conteo de días por rango térmico del municipio activo</div></div><div class="panel-controls"><select class="pc-select" id="freqMonth"><option value="all">Todo el periodo</option></select></div></div><div class="panel-body"><div class="chart-container temperature-dist" style="height:540px;"><canvas id="freqChart"></canvas></div></div><div class="panel-foot"></div></div>
+      <div class="panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Promedios mensuales</div><div class="panel-subtitle">Temperatura media, máxima y mínima por mes</div></div></div><div class="panel-body"><div class="chart-container temperature-monthly" style="height:540px;"><canvas id="monthlyChart"></canvas></div></div><div class="panel-foot"></div></div>
+    </div>
+
+    <!-- TABLA -->
+    <div class="section-block wrap reveal table-panel"><div class="panel"><div class="panel-head"><div class="panel-title-block"><div class="panel-title">Tabla de datos diarios</div><div class="panel-subtitle">Registros filtrados del municipio activo</div></div></div><div class="table-scroll"><table><thead><tr><th data-sort="fecha">Fecha</th><th data-sort="t_media_c">Media</th><th data-sort="t_max_c">Máxima</th><th data-sort="t_min_c">Mínima</th><th data-sort="rango_c">Rango</th><th data-sort="humedad_relativa_pct">Humedad</th></tr></thead><tbody id="dataTableBody"></tbody></table></div></div></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <section class="partners-ribbon-wrap" aria-labelledby="partnersRibbonTitle">
+      <h2 class="partners-ribbon-title" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática Sololá</h2>
+      <div class="partners-ribbon">
+        <div class="partners-logo-row partners-logo-row-top">
+          <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA 02"><img src="./logos/MAGA02.png" alt="MAGA 02" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH 02"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH 02" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./logos/FeedtheChildren.png" alt="Feed the Children" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Instituto Privado de Investigación sobre Cambio Climático"><img src="./logos/ICC.png" alt="Instituto Privado de Investigación sobre Cambio Climático" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy" decoding="async"></a>
+        </div>
+
+        <div class="partners-logo-row partners-logo-row-bottom">
+          <a class="partner-logo logo-sm" href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Bélgica, socio para el desarrollo"><img src="./logos/Belgica.png" alt="Bélgica, socio para el desarrollo" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg logo-uvg" href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán de la Universidad del Valle de Guatemala"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán - Universidad del Valle de Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="Ministerio de Ambiente y Recursos Naturales"><img src="./logos/MARN.png" alt="Ministerio de Ambiente y Recursos Naturales" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy" decoding="async"></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-contact site-container">
+      <div class="footer-update-chip" id="footerUpdate">
+        Consultando última actualización&hellip;
+      </div>
+
+      <div class="footer-social">
+        <div class="footer-social-title">Visita nuestras redes sociales</div>
+        <ul class="footer-social-list" aria-label="Redes sociales y contacto de la Mesa Técnica Agroclimática Sololá">
+          <li>
+            <a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">
+              <span class="footer-social-icon" aria-hidden="true">f</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Facebook</span>
+                <span class="footer-social-value">Mesa Técnica Agroclimática Sololá</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
+              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Contáctanos</span>
+                <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="footer-negative-logo" href="../index.html" aria-label="Mesa Técnica Agroclimática Sololá">
+        <img src="./logos/NEGATIVO.png" alt="Logo negativo de la Mesa Técnica Agroclimática Sololá" loading="lazy" decoding="async">
+      </a>
+    </div>
+  </footer>
+
+
+
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">&#8679;</button>
+
+  <div class="chart-fullscreen-overlay" id="chartFullscreen" aria-hidden="true"><div class="chart-fullscreen-card" role="dialog" aria-modal="true" aria-label="Gráfica ampliada"><div class="chart-fullscreen-head"><div class="chart-fullscreen-brand"><img class="chart-fullscreen-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><div class="chart-fullscreen-title" id="chartFullscreenTitle">Gráfica ampliada</div></div><button class="chart-fullscreen-close" id="chartFullscreenClose" type="button" aria-label="Cerrar">×</button></div><div class="chart-fullscreen-body"><div class="chart-fullscreen-host" id="chartFullscreenHost"></div></div></div></div>
+
+  <div class="municipality-radar-overlay" id="municipalityRadarOverlay" aria-hidden="true"><div class="municipality-radar-card" role="dialog" aria-modal="true" aria-label="Perfil térmico municipal"><div class="municipality-radar-head"><div class="municipality-radar-brand"><img class="municipality-radar-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><div><div class="municipality-radar-title" id="municipalityRadarTitle">Municipio</div><div class="municipality-radar-subtitle" id="municipalityRadarSubtitle">Perfil térmico</div></div></div><button class="municipality-radar-close" id="municipalityRadarClose" type="button" aria-label="Cerrar">×</button></div><div class="municipality-radar-body"><div class="municipality-radar-chart"><canvas id="municipalityRadarChart"></canvas></div><div class="municipality-radar-stats" id="municipalityRadarStats"></div></div></div></div>
+
+  <script>
+    "use strict";
+
+    const DATA_URL = "./data/temperatura/historico_municipios.json";
+    const AWN_URL = "./data/temperatura/awn_temperatura.json";
+    const PRED_URL = "./data/temperatura/prediccion_temperatura.json";
+    const MONTHS = ["", "Enero","Febrero","Marzo","Abril","Mayo","Junio", "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    const FONT = "Outfit, Segoe UI, Arial, sans-serif";
+    const MONO = "IBM Plex Mono, Courier New, monospace";
+    Chart.defaults.font.family = FONT; Chart.defaults.font.size = 18; Chart.defaults.color = "#415c55";
+    const S = { payload: null, raw: null, mun: null, startDate: null, endDate: null, allDates: null, charts: {}, tableSortCol: "fecha", tableSortDir: "asc", maWindow: 7, compMetric: "mean", fullscreen: null, radarChart: null };
+    const fmt = (v, d = 1) => v == null || isNaN(v) ? "—" : Number(v).toFixed(d);
+    const fc = (v, d = 1) => v == null || isNaN(v) ? "—" : `${fmt(v, d)} °C`;
+    const fp = (v, d = 0) => v == null || isNaN(v) ? "—" : `${fmt(v, d)} %`;
+    async function fetchJson(url) { const response = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" }); if (!response.ok) throw new Error(`No se pudo leer ${url}: ${response.status}`); return response.json(); }
+    function formatDateTime(value) { if (!value) return "Sin fecha"; try { return new Intl.DateTimeFormat("es-GT", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value)); } catch { return value; } }
+    function mean(values) { const clean = values.filter(v => v != null && !isNaN(v)); return clean.length ? clean.reduce((a, b) => a + b, 0) / clean.length : null; }
+    function stddev(values) { const clean = values.filter(v => v != null && !isNaN(v)); if (!clean.length) return null; const m = mean(clean); return Math.sqrt(clean.reduce((a, b) => a + (b - m) ** 2, 0) / clean.length); }
+    function minValue(values) { const clean = values.filter(v => v != null && !isNaN(v)); return clean.length ? Math.min(...clean) : null; }
+    function maxValue(values) { const clean = values.filter(v => v != null && !isNaN(v)); return clean.length ? Math.max(...clean) : null; }
+    function movingAverage(values, w) { return values.map((_, i) => { const slice = values.slice(Math.max(0, i - w + 1), i + 1).filter(v => v != null && !isNaN(v)); return slice.length ? slice.reduce((a, b) => a + b, 0) / slice.length : null; }); }
+    function tempColor(c, alpha = 0.85) { if (c == null || isNaN(c)) return `rgba(200,210,218,0.35)`; if (c < 10) return `rgba(22,92,119,${alpha})`; if (c < 14) return `rgba(42,157,183,${alpha})`; if (c < 18) return `rgba(47,122,98,${alpha})`; if (c < 22) return `rgba(240,197,62,${alpha})`; if (c < 26) return `rgba(214,106,42,${alpha})`; return `rgba(183,81,24,${alpha})`; }
+    function getRecords(municipio, startDate, endDate, month = "all") { const raw = S.raw[municipio] || []; return raw.filter(r => { if (startDate && r.fecha < startDate) return false; if (endDate && r.fecha > endDate) return false; if (month !== "all") { const m = parseInt(r.fecha.slice(5, 7), 10); if (m !== parseInt(month, 10)) return false; } return true; }); }
+    function currentRecords(month = "all") { return getRecords(S.mun, S.startDate, S.endDate, month); }
+    function baseOpts(extra = {}) { return { responsive: true, maintainAspectRatio: false, animation: { duration: 550 }, interaction: { intersect: false, mode: "index" }, plugins: { legend: { labels: { usePointStyle: true, boxWidth: 8, color: "#2c4556", font: { family: FONT, size: 19, weight: "700" }, padding: 18 } }, tooltip: { backgroundColor: "rgba(8,37,55,0.95)", titleFont: { family: FONT, size: 18, weight: "800" }, bodyFont: { family: MONO, size: 17, weight: "600" }, padding: 13, cornerRadius: 8 } }, scales: { x: { grid: { color: "rgba(15,58,83,0.07)", lineWidth: 1 }, border: { color: "rgba(15,58,83,0.14)" }, ticks: { color: "#415c55", font: { family: FONT, size: 18, weight: "700" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 12, padding: 8 } }, y: { grid: { color: "rgba(15,58,83,0.07)", lineWidth: 1 }, border: { color: "rgba(15,58,83,0.14)" }, ticks: { color: "#587082", font: { family: MONO, size: 17, weight: "700" }, callback: v => `${v} °C` } } }, ...extra }; }
+    function destroyChart(id) { if (S.charts[id]) { S.charts[id].destroy(); S.charts[id] = null; } }
+    function chartTitleFromCanvas(canvas) { const panel = canvas.closest(".panel"); return panel?.querySelector(".panel-title")?.textContent?.trim() || "Gráfica"; }
+    function addExpandButtons() { document.querySelectorAll(".panel .chart-container canvas").forEach(canvas => { const panel = canvas.closest(".panel"); const head = panel?.querySelector(".panel-head"); if (!head || head.querySelector(".chart-expand-btn")) return; const btn = document.createElement("button"); btn.className = "chart-expand-btn"; btn.type = "button"; btn.title = "Ampliar gráfica"; btn.setAttribute("aria-label", "Ampliar gráfica"); btn.textContent = "⛶"; btn.addEventListener("click", () => openChartFullscreen(canvas.closest(".chart-container"), chartTitleFromCanvas(canvas))); head.appendChild(btn); }); }
+    function openChartFullscreen(container, title) { if (!container) return; const overlay = document.getElementById("chartFullscreen"); const host = document.getElementById("chartFullscreenHost"); document.getElementById("chartFullscreenTitle").textContent = title; S.fullscreen = { container, parent: container.parentNode, next: container.nextSibling, height: container.style.height }; host.appendChild(container); container.classList.add("is-fullscreen"); overlay.classList.add("open"); overlay.setAttribute("aria-hidden", "false"); document.body.classList.add("chart-modal-open"); Object.values(S.charts).forEach(ch => ch && setTimeout(() => ch.resize(), 80)); }
+    function closeChartFullscreen() { const overlay = document.getElementById("chartFullscreen"); if (!S.fullscreen) return; const { container, parent, next, height } = S.fullscreen; container.classList.remove("is-fullscreen"); container.style.height = height || container.style.height; if (next) parent.insertBefore(container, next); else parent.appendChild(container); S.fullscreen = null; overlay.classList.remove("open"); overlay.setAttribute("aria-hidden", "true"); document.body.classList.remove("chart-modal-open"); Object.values(S.charts).forEach(ch => ch && setTimeout(() => ch.resize(), 80)); }
+    function setupFullscreen() { document.getElementById("chartFullscreenClose").addEventListener("click", closeChartFullscreen); document.getElementById("chartFullscreen").addEventListener("click", e => { if (e.target.id === "chartFullscreen") closeChartFullscreen(); }); document.addEventListener("keydown", e => { if (e.key === "Escape") { closeChartFullscreen(); closeMunicipalityRadar(); } }); }
+    function availableMonths() { return [...new Set((S.allDates || []).map(d => parseInt(d.slice(5, 7), 10)))].sort((a, b) => a - b); }
+    function fillMonthSelects() { ["tempDailyMonth", "compMonth", "freqMonth"].forEach(id => { const sel = document.getElementById(id); if (!sel) return; const current = sel.value || "all"; sel.innerHTML = `<option value="all">Todo el periodo</option>`; availableMonths().forEach(m => { const opt = document.createElement("option"); opt.value = String(m); opt.textContent = MONTHS[m]; sel.appendChild(opt); }); if ([...sel.options].some(o => o.value === current)) sel.value = current; }); }
+    function renderKPIs() { const rec = currentRecords(); const media = rec.map(r => r.t_media_c), maxs = rec.map(r => r.t_max_c), mins = rec.map(r => r.t_min_c), ranges = rec.map(r => r.rango_c), rhs = rec.map(r => r.humedad_relativa_pct); const maxTemp = maxValue(maxs), minTemp = minValue(mins); const maxRec = rec.find(r => r.t_max_c === maxTemp), minRec = rec.find(r => r.t_min_c === minTemp); document.getElementById("kMean").textContent = fc(mean(media)); document.getElementById("kMax").textContent = fc(maxTemp); document.getElementById("kMaxDate").textContent = maxRec ? maxRec.fecha : "—"; document.getElementById("kMin").textContent = fc(minTemp); document.getElementById("kMinDate").textContent = minRec ? minRec.fecha : "—"; document.getElementById("kRange").textContent = fc(mean(ranges)); document.getElementById("kHumidity").textContent = fp(mean(rhs)); document.getElementById("kStd").textContent = fc(stddev(media)); }
+    function renderDeptSummary() { const grid = document.getElementById("deptGrid"); const rows = Object.keys(S.raw).map(mun => { const rec = S.raw[mun] || []; return { mun, val: mean(rec.map(r => r.t_media_c)), max: maxValue(rec.map(r => r.t_max_c)), min: minValue(rec.map(r => r.t_min_c)) }; }).sort((a, b) => (b.val ?? -999) - (a.val ?? -999)); const maxMean = Math.max(...rows.map(r => r.val || 0), 1); grid.innerHTML = rows.map(r => `<div class="dept-chip ${r.mun === S.mun ? "active-mun" : ""}" data-mun="${r.mun}"><div class="dept-chip-name">${r.mun}</div><div class="dept-chip-val">${fc(r.val)}</div><div class="dept-chip-bar"><div class="dept-chip-fill" style="width:${Math.max(3, ((r.val || 0) / maxMean) * 100)}%;background:${tempColor(r.val, 0.9)}"></div></div></div>`).join(""); grid.querySelectorAll(".dept-chip").forEach(chip => { chip.addEventListener("click", () => { S.mun = chip.dataset.mun; document.getElementById("gMunicipio").value = S.mun; renderAll(); }); }); }
+    function renderTempDaily() { const month = document.getElementById("tempDailyMonth").value || "all"; const rec = currentRecords(month); destroyChart("tempDaily"); S.charts.tempDaily = new Chart(document.getElementById("tempDailyChart"), { type: "line", data: { labels: rec.map(r => r.fecha), datasets: [{ label: "Temperatura máxima", data: rec.map(r => r.t_max_c), borderColor: "rgba(214,106,42,0.95)", backgroundColor: "rgba(214,106,42,0.12)", pointRadius: 2, borderWidth: 3, tension: 0.28, fill: false }, { label: "Temperatura media", data: rec.map(r => r.t_media_c), borderColor: "rgba(47,122,98,0.95)", backgroundColor: "rgba(47,122,98,0.12)", pointRadius: 2, borderWidth: 4, tension: 0.28, fill: false }, { label: "Temperatura mínima", data: rec.map(r => r.t_min_c), borderColor: "rgba(22,92,119,0.95)", backgroundColor: "rgba(22,92,119,0.10)", pointRadius: 2, borderWidth: 3, tension: 0.28, fill: "-1" }] }, options: baseOpts() }); }
+    function renderTimeSeries() { const rec = currentRecords(); const values = rec.map(r => r.t_media_c); destroyChart("timeseries"); S.charts.timeseries = new Chart(document.getElementById("timeseriesChart"), { type: "line", data: { labels: rec.map(r => r.fecha), datasets: [{ label: "Temperatura media diaria", data: values, borderColor: "rgba(47,122,98,0.35)", backgroundColor: "rgba(47,122,98,0.08)", borderWidth: 2, pointRadius: 0, tension: 0.2 }, { label: `Media móvil ${S.maWindow} días`, data: movingAverage(values, S.maWindow), borderColor: "rgba(240,197,62,0.95)", backgroundColor: "rgba(240,197,62,0.12)", borderWidth: 4, pointRadius: 0, tension: 0.32 }] }, options: baseOpts() }); }
+    function municipalityStats(mun, month = "all") { const rec = getRecords(mun, S.startDate, S.endDate, month); return { mun, n: rec.length, mean: mean(rec.map(r => r.t_media_c)), max: maxValue(rec.map(r => r.t_max_c)), min: minValue(rec.map(r => r.t_min_c)), range: mean(rec.map(r => r.rango_c)), humidity: mean(rec.map(r => r.humedad_relativa_pct)), std: stddev(rec.map(r => r.t_media_c)) }; }
+    function renderMunicipalityGrid() { const month = document.getElementById("compMonth").value || "all"; const grid = document.getElementById("municipalityGrid"); const rows = Object.keys(S.raw).map(m => municipalityStats(m, month)); const metricKey = S.compMetric; rows.sort((a, b) => (b[metricKey] ?? -999) - (a[metricKey] ?? -999)); const maxMetric = Math.max(...rows.map(r => r[metricKey] || 0), 1); const label = metricKey === "max" ? "Máxima" : metricKey === "min" ? "Mínima" : "Media"; grid.innerHTML = rows.map(r => `<article class="municipality-card temperature-card ${r.mun === S.mun ? "active" : ""}" tabindex="0" data-mun="${r.mun}"><div class="municipality-name">${r.mun}</div><div class="municipality-row"><span class="municipality-k">${label}</span><span class="municipality-v">${fc(r[metricKey])}</span></div><div class="municipality-row"><span class="municipality-k">Máxima</span><span class="municipality-v">${fc(r.max)}</span></div><div class="municipality-row"><span class="municipality-k">Mínima</span><span class="municipality-v">${fc(r.min)}</span></div><div class="municipality-bar"><div class="municipality-fill" style="width:${Math.max(3, ((r[metricKey] || 0) / maxMetric) * 100)}%;background:${tempColor(r[metricKey], 0.9)}"></div></div><div class="municipality-hint">Clic para abrir perfil térmico</div></article>`).join(""); grid.querySelectorAll(".municipality-card").forEach(card => { const open = () => { S.mun = card.dataset.mun; document.getElementById("gMunicipio").value = S.mun; renderAll(false); openMunicipalityRadar(S.mun, month); }; card.addEventListener("click", open); card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } }); }); }
+    function normalize(value, min, max) { if (value == null || isNaN(value)) return 0; return Math.max(0, Math.min(100, ((value - min) / (max - min)) * 100)); }
+    function openMunicipalityRadar(mun, month = "all") { const st = municipalityStats(mun, month); document.getElementById("municipalityRadarTitle").textContent = mun; document.getElementById("municipalityRadarSubtitle").textContent = "Perfil térmico municipal"; document.getElementById("municipalityRadarStats").innerHTML = `<div class="municipality-radar-stat"><span>Temperatura media</span><strong>${fc(st.mean)}</strong></div><div class="municipality-radar-stat"><span>Temperatura máxima</span><strong>${fc(st.max)}</strong></div><div class="municipality-radar-stat"><span>Temperatura mínima</span><strong>${fc(st.min)}</strong></div><div class="municipality-radar-stat"><span>Rango térmico</span><strong>${fc(st.range)}</strong></div><div class="municipality-radar-stat"><span>Humedad relativa</span><strong>${fp(st.humidity)}</strong></div><div class="municipality-radar-stat"><span>Días analizados</span><strong>${st.n}</strong></div>`; const values = [normalize(st.mean, 8, 28), normalize(st.max, 10, 32), normalize(32 - (st.min ?? 0), 8, 28), normalize(st.range, 0, 18), normalize(st.humidity, 30, 100), normalize(st.std, 0, 6)]; if (S.radarChart) S.radarChart.destroy(); S.radarChart = new Chart(document.getElementById("municipalityRadarChart"), { type: "radar", data: { labels: ["Media", "Máxima", "Frescura", "Rango", "Humedad", "Variabilidad"], datasets: [{ label: mun, data: values, backgroundColor: "rgba(47,122,98,0.22)", borderColor: "rgba(47,122,98,0.95)", pointBackgroundColor: "rgba(240,197,62,0.95)", borderWidth: 3, pointRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { r: { min: 0, max: 100, ticks: { display: false }, pointLabels: { font: { family: FONT, size: 17, weight: "800" }, color: "#17342d" }, grid: { color: "rgba(31,96,77,0.14)" }, angleLines: { color: "rgba(31,96,77,0.14)" } } } } }); document.getElementById("municipalityRadarOverlay").classList.add("open"); document.getElementById("municipalityRadarOverlay").setAttribute("aria-hidden", "false"); document.body.classList.add("chart-modal-open"); }
+    function closeMunicipalityRadar() { document.getElementById("municipalityRadarOverlay").classList.remove("open"); document.getElementById("municipalityRadarOverlay").setAttribute("aria-hidden", "true"); if (!document.getElementById("chartFullscreen").classList.contains("open")) document.body.classList.remove("chart-modal-open"); }
+    function renderFrequency() { const month = document.getElementById("freqMonth").value || "all"; const rec = currentRecords(month); const vals = rec.map(r => r.t_media_c).filter(v => v != null && !isNaN(v)); const min = Math.floor((minValue(vals) ?? 0) - 0.5); const max = Math.ceil((maxValue(vals) ?? 1) + 0.5); const step = Math.max(1, Math.ceil((max - min) / 6)); const bins = []; for (let a = min; a < max; a += step) bins.push({ label: `${a}–${a + step} °C`, min: a, max: a + step, count: 0 }); vals.forEach(v => { const b = bins.find((bin, idx) => v >= bin.min && (v < bin.max || idx === bins.length - 1)); if (b) b.count++; }); destroyChart("frequency"); S.charts.frequency = new Chart(document.getElementById("freqChart"), { type: "bar", data: { labels: bins.map(b => b.label), datasets: [{ label: "Días", data: bins.map(b => b.count), backgroundColor: bins.map(b => tempColor((b.min + b.max) / 2, 0.82)), borderColor: "rgba(17,57,47,0.18)", borderWidth: 1, borderRadius: 8 }] }, options: baseOpts({ scales: { y: { beginAtZero: true, ticks: { color: "#587082", font: { family: MONO, size: 17, weight: "700" }, callback: v => `${v}` } } } }) }); }
+    function renderMonthly() { const rec = currentRecords(); const grouped = {}; rec.forEach(r => { const m = parseInt(r.fecha.slice(5, 7), 10); grouped[m] ||= []; grouped[m].push(r); }); const months = Object.keys(grouped).map(Number).sort((a, b) => a - b); destroyChart("monthly"); S.charts.monthly = new Chart(document.getElementById("monthlyChart"), { type: "line", data: { labels: months.map(m => MONTHS[m]), datasets: [{ label: "Máxima promedio", data: months.map(m => mean(grouped[m].map(r => r.t_max_c))), borderColor: "rgba(214,106,42,0.95)", backgroundColor: "rgba(214,106,42,0.12)", borderWidth: 3, tension: 0.25, pointRadius: 4 }, { label: "Media promedio", data: months.map(m => mean(grouped[m].map(r => r.t_media_c))), borderColor: "rgba(47,122,98,0.95)", backgroundColor: "rgba(47,122,98,0.12)", borderWidth: 4, tension: 0.25, pointRadius: 4 }, { label: "Mínima promedio", data: months.map(m => mean(grouped[m].map(r => r.t_min_c))), borderColor: "rgba(22,92,119,0.95)", backgroundColor: "rgba(22,92,119,0.08)", borderWidth: 3, tension: 0.25, pointRadius: 4 }] }, options: baseOpts() }); }
+    function renderTable() { const body = document.getElementById("dataTableBody"); const rec = [...currentRecords()].sort((a, b) => { const col = S.tableSortCol; const av = a[col], bv = b[col]; if (av === bv) return 0; const res = av > bv ? 1 : -1; return S.tableSortDir === "asc" ? res : -res; }); body.innerHTML = rec.map(r => `<tr><td>${r.fecha}</td><td class="mono">${fc(r.t_media_c)}</td><td class="mono">${fc(r.t_max_c)}</td><td class="mono">${fc(r.t_min_c)}</td><td class="mono">${fc(r.rango_c)}</td><td class="mono">${fp(r.humedad_relativa_pct)}</td></tr>`).join(""); document.querySelectorAll("th[data-sort]").forEach(th => { th.classList.toggle("sorted-asc", th.dataset.sort === S.tableSortCol && S.tableSortDir === "asc"); th.classList.toggle("sorted-desc", th.dataset.sort === S.tableSortCol && S.tableSortDir === "desc"); }); }
+    function renderEmptyChart(canvasId, message) { const canvas = document.getElementById(canvasId); if (!canvas) return; const id = canvasId.replace("Chart", ""); destroyChart(id); const container = canvas.closest(".chart-container"); container.querySelectorAll(".chart-empty-note").forEach(n => n.remove()); const note = document.createElement("div"); note.className = "chart-empty-note"; note.textContent = message; container.appendChild(note); }
+    async function loadAwn() { const status = document.getElementById("awnStatus"), body = document.getElementById("awnBody"); try { const data = await fetchJson(AWN_URL); const latest = data.latest || data.ultima_lectura || data.current || data; const temp = latest.temperature_c ?? latest.temp_c ?? latest.temp_out_c ?? latest.tempf_c; const hum = latest.humidity ?? latest.humedad_relativa_pct ?? latest.humidity_pct; const feels = latest.feels_like_c ?? latest.sensacion_c ?? latest.feelsLike_c; const dew = latest.dew_point_c ?? latest.dewpoint_c ?? latest.rocio_c; status.textContent = "Conectada"; status.className = "awn-status ok"; body.innerHTML = `<div class="awn-kpi"><div class="awn-kpi-label">Temperatura</div><div class="awn-kpi-value">${fc(temp)}</div><div class="awn-kpi-note">Exterior</div></div><div class="awn-kpi"><div class="awn-kpi-label">Humedad</div><div class="awn-kpi-value">${fp(hum)}</div><div class="awn-kpi-note">Relativa</div></div><div class="awn-kpi"><div class="awn-kpi-label">Sensación</div><div class="awn-kpi-value">${fc(feels)}</div><div class="awn-kpi-note">Estimada</div></div><div class="awn-kpi"><div class="awn-kpi-label">Punto de rocío</div><div class="awn-kpi-value">${fc(dew)}</div><div class="awn-kpi-note">Estimado</div></div><div class="awn-kpi"><div class="awn-kpi-label">Actualizado</div><div class="awn-kpi-value" style="font-size:1rem!important;line-height:1.35;">${formatDateTime(data.generated_at_gt || latest.timestamp || latest.fecha)}</div><div class="awn-kpi-note">Hora local</div></div>`; const history = data.history || data.historico || data.registros || []; if (Array.isArray(history) && history.length) renderAwnChart(history); else renderEmptyChart("awnChart", "Aún no hay histórico de estación para graficar."); } catch (err) { status.textContent = "Pendiente"; status.className = "awn-status err"; body.innerHTML = `<div class="awn-loading">Archivo de estación pendiente de generar: <code>data/temperatura/awn_temperatura.json</code></div>`; renderEmptyChart("awnChart", "Cuando se genere awn_temperatura.json, esta gráfica se actualizará automáticamente."); } }
+    function renderAwnChart(history) { destroyChart("awn"); const labels = history.map(r => r.fecha || r.timestamp || r.date).slice(-48); const values = history.map(r => r.temperature_c ?? r.temp_c ?? r.temp_out_c).slice(-48); S.charts.awn = new Chart(document.getElementById("awnChart"), { type: "line", data: { labels, datasets: [{ label: "Temperatura estación", data: values, borderColor: "rgba(214,106,42,0.95)", backgroundColor: "rgba(214,106,42,0.14)", borderWidth: 4, pointRadius: 3, tension: 0.28, fill: true }] }, options: baseOpts() }); }
+    async function loadPred() { const note = document.getElementById("predNote"), kpis = document.getElementById("predKpis"); try { const data = await fetchJson(PRED_URL); const registros = data.registros || data.daily || data.prediccion || data; if (!Array.isArray(registros) || !registros.length) throw new Error("Sin registros de predicción"); const rows = registros.map(r => ({ fecha: r.fecha || r.date, max: r.t_max_c ?? r.temperature_2m_max ?? r.max_c, min: r.t_min_c ?? r.temperature_2m_min ?? r.min_c, mean: r.t_media_c ?? r.temperature_2m_mean ?? mean([r.t_max_c ?? r.temperature_2m_max, r.t_min_c ?? r.temperature_2m_min]) })); note.textContent = `Actualizado: ${formatDateTime(data.generated_at_gt || data.generated_at_utc)}`; kpis.innerHTML = `<div class="pred-kpi"><div class="pred-kpi-label">Media estimada</div><div class="pred-kpi-value">${fc(mean(rows.map(r => r.mean)))}</div><div class="pred-kpi-note">16 días</div></div><div class="pred-kpi"><div class="pred-kpi-label">Máxima estimada</div><div class="pred-kpi-value">${fc(maxValue(rows.map(r => r.max)))}</div><div class="pred-kpi-note">Valor más alto</div></div><div class="pred-kpi"><div class="pred-kpi-label">Mínima estimada</div><div class="pred-kpi-value">${fc(minValue(rows.map(r => r.min)))}</div><div class="pred-kpi-note">Valor más bajo</div></div><div class="pred-kpi"><div class="pred-kpi-label">Rango estimado</div><div class="pred-kpi-value">${fc((maxValue(rows.map(r => r.max)) || 0) - (minValue(rows.map(r => r.min)) || 0))}</div><div class="pred-kpi-note">Diferencia general</div></div>`; destroyChart("pred"); S.charts.pred = new Chart(document.getElementById("predChart"), { type: "line", data: { labels: rows.map(r => r.fecha), datasets: [{ label: "Máxima estimada", data: rows.map(r => r.max), borderColor: "rgba(214,106,42,0.95)", backgroundColor: "rgba(214,106,42,0.12)", borderWidth: 3, pointRadius: 4, tension: 0.3 }, { label: "Media estimada", data: rows.map(r => r.mean), borderColor: "rgba(47,122,98,0.95)", backgroundColor: "rgba(47,122,98,0.12)", borderWidth: 4, pointRadius: 4, tension: 0.3, fill: false }, { label: "Mínima estimada", data: rows.map(r => r.min), borderColor: "rgba(22,92,119,0.95)", backgroundColor: "rgba(22,92,119,0.10)", borderWidth: 3, pointRadius: 4, tension: 0.3, fill: "-1" }] }, options: baseOpts() }); } catch (err) { note.textContent = "Pronóstico pendiente"; kpis.innerHTML = ""; renderEmptyChart("predChart", "Cuando se genere prediccion_temperatura.json, esta gráfica se actualizará automáticamente."); } }
+    function renderAll(renderDept = true) { renderKPIs(); if (renderDept) renderDeptSummary(); renderTempDaily(); renderTimeSeries(); renderMunicipalityGrid(); renderFrequency(); renderMonthly(); renderTable(); addExpandButtons(); }
+    function setupEvents() { document.getElementById("btnApply").addEventListener("click", () => { S.mun = document.getElementById("gMunicipio").value; S.startDate = document.getElementById("gStart").value || S.allDates[0]; S.endDate = document.getElementById("gEnd").value || S.allDates[S.allDates.length - 1]; renderAll(); }); document.getElementById("btnReset").addEventListener("click", () => { S.startDate = S.allDates[0]; S.endDate = S.allDates[S.allDates.length - 1]; document.getElementById("gStart").value = S.startDate; document.getElementById("gEnd").value = S.endDate; renderAll(); }); document.getElementById("gMunicipio").addEventListener("change", e => { S.mun = e.target.value; renderAll(); }); document.getElementById("tempDailyMonth").addEventListener("change", renderTempDaily); document.getElementById("freqMonth").addEventListener("change", renderFrequency); document.getElementById("compMonth").addEventListener("change", renderMunicipalityGrid); document.querySelectorAll("[data-ma]").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll("[data-ma]").forEach(b => b.classList.remove("active")); btn.classList.add("active"); S.maWindow = parseInt(btn.dataset.ma, 10); renderTimeSeries(); })); document.querySelectorAll("[data-metric]").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll("[data-metric]").forEach(b => b.classList.remove("active")); btn.classList.add("active"); S.compMetric = btn.dataset.metric; renderMunicipalityGrid(); })); document.querySelectorAll("th[data-sort]").forEach(th => th.addEventListener("click", () => { const col = th.dataset.sort; if (S.tableSortCol === col) S.tableSortDir = S.tableSortDir === "asc" ? "desc" : "asc"; else { S.tableSortCol = col; S.tableSortDir = "asc"; } renderTable(); })); document.getElementById("municipalityRadarClose").addEventListener("click", closeMunicipalityRadar); document.getElementById("municipalityRadarOverlay").addEventListener("click", e => { if (e.target.id === "municipalityRadarOverlay") closeMunicipalityRadar(); }); }
+    async function loadFooterUpdate() { const el = document.getElementById("footerUpdate"); if (!el) return; try { const data = S.payload || await fetchJson(DATA_URL); const updateText = formatDateTime(data.generated_at_gt || data.generated_at_utc); el.textContent = "Actualizado por última vez: " + updateText; } catch { el.textContent = "Actualización pendiente."; } }
+    async function load() { try { const data = await fetchJson(DATA_URL); S.payload = data; S.raw = {}; (data.municipios || []).forEach(m => { S.raw[m.nombre] = (m.registros || []).map(r => ({ fecha: r.fecha, t_media_c: r.t_media_c, t_max_c: r.t_max_c, t_min_c: r.t_min_c, rango_c: r.rango_c, humedad_relativa_pct: r.humedad_relativa_pct })); }); S.allDates = [...new Set(Object.values(S.raw).flat().map(r => r.fecha))].sort(); const municipios = Object.keys(S.raw).sort(); S.mun = municipios.includes("Sololá") ? "Sololá" : municipios[0]; S.startDate = S.allDates[0]; S.endDate = S.allDates[S.allDates.length - 1]; const sel = document.getElementById("gMunicipio"); sel.innerHTML = municipios.map(m => `<option value="${m}">${m}</option>`).join(""); sel.value = S.mun; document.getElementById("gStart").value = S.startDate; document.getElementById("gEnd").value = S.endDate; fillMonthSelects(); setupEvents(); setupFullscreen(); renderAll(); await Promise.allSettled([loadAwn(), loadPred(), loadFooterUpdate()]); document.getElementById("loader").classList.add("hidden"); } catch (err) { document.querySelector(".loader-card strong").textContent = "No se pudieron cargar los datos"; document.querySelector(".loader-card p").textContent = err.message; } }
+    const toTop = document.getElementById("toTop"); window.addEventListener("scroll", () => { toTop.classList.toggle("show", window.scrollY > 460); }); toTop.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); }); const revealObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); }); }, { threshold: 0.08 }); document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+    load();
+  </script>
+</body>
+</html>
