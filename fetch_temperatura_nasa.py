@@ -1,292 +1,233 @@
-Fuente    : NASA POWER Agroclimatology API — https://power.larc.nasa.gov
-Variables :
-    T2M       Temperatura media diaria a 2 metros (°C)
-    T2M_MAX   Temperatura máxima diaria a 2 metros (°C)
-    T2M_MIN   Temperatura mínima diaria a 2 metros (°C)
-    T2M_RANGE Rango térmico diario (°C)
-    RH2M      Humedad relativa media diaria a 2 metros (%)
-Comunidad : AG (Agroclimatología)
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Descarga datos diarios de temperatura y humedad relativa para los 19 municipios
+de Sololá usando NASA POWER Agroclimatology API.
 
 Salida:
-    docs/data/temperatura/historico_municipios.json
+  docs/data/temperatura/historico_municipios.json
 
-Uso:
-    python fetch_temperatura_nasa.py
+Variables NASA POWER:
+  T2M       Temperatura media a 2 m, grados Celsius
+  T2M_MAX   Temperatura máxima a 2 m, grados Celsius
+  T2M_MIN   Temperatura mínima a 2 m, grados Celsius
+  T2M_RANGE Rango térmico diario, grados Celsius
+  RH2M      Humedad relativa a 2 m, porcentaje
 """
 
 from __future__ import annotations
 
 import json
-import os
-import sys
 import time
-from datetime import date, datetime, timedelta, timezone
-from typing import Any
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 import requests
+from zoneinfo import ZoneInfo
 
 
-# ---------------------------------------------------------------------------
-# CONFIGURACIÓN
-# ---------------------------------------------------------------------------
-
-OUTPUT_PATH = os.path.join("docs", "data", "temperatura", "historico_municipios.json")
-NASA_POWER_URL = "https://power.larc.nasa.gov/api/temporal/daily/point"
-
+API_URL = "https://power.larc.nasa.gov/api/temporal/daily/point"
+OUTPUT_PATH = Path("docs/data/temperatura/historico_municipios.json")
+START_DATE = "20260101"
 PARAMETERS = ["T2M", "T2M_MAX", "T2M_MIN", "T2M_RANGE", "RH2M"]
-COMMUNITY = "AG"
 
-# Mantiene el mismo inicio operativo usado en el módulo de lluvia.
-START_DATE = date(2026, 1, 1)
-
-# NASA POWER puede tener 1–3 días de retraso; usar ayer evita pedir datos aún no consolidados.
-END_DATE = date.today() - timedelta(days=1)
-
-DELAY_SECONDS = 0.6
-FILL_THRESHOLD = -900.0
-
-
-# ---------------------------------------------------------------------------
-# MUNICIPIOS — 19 municipios de Sololá
-# ---------------------------------------------------------------------------
-
-MUNICIPIOS = {
-    "Sololá (Cabecera)":         {"lat": 14.772, "lon": -91.183},
-    "Concepción":                {"lat": 14.783, "lon": -91.147},
-    "Panajachel":                {"lat": 14.742, "lon": -91.155},
-    "San Andrés Semetabaj":      {"lat": 14.744, "lon": -91.131},
-    "San Antonio Palopó":        {"lat": 14.695, "lon": -91.112},
-    "Santa Catarina Palopó":     {"lat": 14.724, "lon": -91.135},
-    "San José Chacayá":          {"lat": 14.771, "lon": -91.213},
-    "Santa Lucía Utatlán":       {"lat": 14.775, "lon": -91.264},
-    "Santa María Visitación":    {"lat": 14.717, "lon": -91.315},
-    "Santa Cruz La Laguna":      {"lat": 14.744, "lon": -91.205},
-    "San Marcos La Laguna":      {"lat": 14.724, "lon": -91.263},
-    "San Pablo La Laguna":       {"lat": 14.721, "lon": -91.274},
-    "San Juan La Laguna":        {"lat": 14.701, "lon": -91.288},
-    "San Pedro La Laguna":       {"lat": 14.693, "lon": -91.268},
-    "Santiago Atitlán":          {"lat": 14.639, "lon": -91.229},
-    "San Lucas Tolimán":         {"lat": 14.632, "lon": -91.144},
-    "Nahualá":                   {"lat": 14.843, "lon": -91.318},
-    "Santa Catarina Ixtahuacán": {"lat": 14.853, "lon": -91.359},
-    "Santa Clara La Laguna":     {"lat": 14.713, "lon": -91.303},
-}
+# Coordenadas aproximadas de cabeceras/centroides municipales de Sololá.
+MUNICIPIOS = [
+    {"id": "solola", "nombre": "Sololá", "lat": 14.7739, "lon": -91.1833},
+    {"id": "concepcion", "nombre": "Concepción", "lat": 14.7833, "lon": -91.1500},
+    {"id": "nahuala", "nombre": "Nahualá", "lat": 14.8417, "lon": -91.3167},
+    {"id": "panajachel", "nombre": "Panajachel", "lat": 14.7419, "lon": -91.1592},
+    {"id": "san_andres_semetabaj", "nombre": "San Andrés Semetabaj", "lat": 14.7444, "lon": -91.1333},
+    {"id": "san_antonio_palopo", "nombre": "San Antonio Palopó", "lat": 14.6925, "lon": -91.1167},
+    {"id": "san_jose_chacaya", "nombre": "San José Chacayá", "lat": 14.7714, "lon": -91.2144},
+    {"id": "san_juan_la_laguna", "nombre": "San Juan La Laguna", "lat": 14.6947, "lon": -91.2867},
+    {"id": "san_lucas_toliman", "nombre": "San Lucas Tolimán", "lat": 14.6319, "lon": -91.1425},
+    {"id": "san_marcos_la_laguna", "nombre": "San Marcos La Laguna", "lat": 14.7250, "lon": -91.2583},
+    {"id": "san_pablo_la_laguna", "nombre": "San Pablo La Laguna", "lat": 14.7208, "lon": -91.2722},
+    {"id": "san_pedro_la_laguna", "nombre": "San Pedro La Laguna", "lat": 14.6928, "lon": -91.2722},
+    {"id": "santa_catarina_ixtahuacan", "nombre": "Santa Catarina Ixtahuacán", "lat": 14.7972, "lon": -91.3608},
+    {"id": "santa_catarina_palopo", "nombre": "Santa Catarina Palopó", "lat": 14.7236, "lon": -91.1347},
+    {"id": "santa_clara_la_laguna", "nombre": "Santa Clara La Laguna", "lat": 14.7153, "lon": -91.3036},
+    {"id": "santa_cruz_la_laguna", "nombre": "Santa Cruz La Laguna", "lat": 14.7431, "lon": -91.2072},
+    {"id": "santa_lucia_utatlan", "nombre": "Santa Lucía Utatlán", "lat": 14.7700, "lon": -91.2667},
+    {"id": "santa_maria_visitacion", "nombre": "Santa María Visitación", "lat": 14.7178, "lon": -91.3089},
+    {"id": "santiago_atitlan", "nombre": "Santiago Atitlán", "lat": 14.6386, "lon": -91.2292},
+]
 
 
-# ---------------------------------------------------------------------------
-# FUNCIONES AUXILIARES
-# ---------------------------------------------------------------------------
-
-def format_date_for_api(d: date) -> str:
-    """Convierte date a YYYYMMDD para NASA POWER."""
-    return d.strftime("%Y%m%d")
+def gt_now() -> datetime:
+    return datetime.now(ZoneInfo("America/Guatemala"))
 
 
-def parse_nasa_date(nasa_key: str) -> str:
-    """Convierte YYYYMMDD a YYYY-MM-DD."""
-    return f"{nasa_key[:4]}-{nasa_key[4:6]}-{nasa_key[6:8]}"
+def nasa_end_date() -> str:
+    """NASA POWER puede tener rezago. Usamos ayer como fecha final inicial."""
+    return (gt_now().date() - timedelta(days=1)).strftime("%Y%m%d")
 
 
-def clean_number(raw_value: Any, decimals: int = 2) -> float | None:
-    """
-    Limpia valores numéricos de NASA.
+def clean_number(value: Any) -> Optional[float]:
+    if value is None:
+        return None
 
-    NASA usa valores centinela cercanos a -999 cuando el dato no existe.
-    En temperatura no se deben convertir valores negativos reales a cero, por eso
-    solo se descartan valores menores a FILL_THRESHOLD.
-    """
     try:
-        value = float(raw_value)
+        number = float(value)
     except (TypeError, ValueError):
         return None
 
-    if value < FILL_THRESHOLD:
+    # NASA POWER usa valores tipo -999 cuando falta información.
+    if number <= -900:
         return None
 
-    return round(value, decimals)
+    return round(number, 2)
 
 
-def clean_humidity(raw_value: Any) -> float | None:
-    """Limpia humedad relativa y limita valores válidos a 0–100 %."""
-    value = clean_number(raw_value, 1)
-    if value is None:
-        return None
-    return round(max(0.0, min(100.0, value)), 1)
+def iso_date(yyyymmdd: str) -> str:
+    return f"{yyyymmdd[0:4]}-{yyyymmdd[4:6]}-{yyyymmdd[6:8]}"
 
 
-def fetch_municipio(nombre: str, lat: float, lon: float) -> list[dict[str, Any]] | None:
-    """
-    Consulta NASA POWER para un municipio.
-
-    Retorna una lista de registros diarios:
-    {
-      "fecha": "YYYY-MM-DD",
-      "t_media_c": float | null,
-      "t_max_c": float | null,
-      "t_min_c": float | null,
-      "rango_c": float | null,
-      "humedad_relativa_pct": float | null
-    }
-    """
+def fetch_municipio(mun: Dict[str, Any], end_date: str) -> Dict[str, Any]:
     params = {
         "parameters": ",".join(PARAMETERS),
-        "community": COMMUNITY,
-        "longitude": lon,
-        "latitude": lat,
-        "start": format_date_for_api(START_DATE),
-        "end": format_date_for_api(END_DATE),
+        "community": "AG",
+        "longitude": mun["lon"],
+        "latitude": mun["lat"],
+        "start": START_DATE,
+        "end": end_date,
         "format": "JSON",
+        "time-standard": "UTC",
     }
 
-    try:
-        response = requests.get(NASA_POWER_URL, params=params, timeout=45)
-        response.raise_for_status()
-    except requests.exceptions.HTTPError:
-        print(f"  [ERROR] HTTP {response.status_code} para '{nombre}': {response.text[:240]}")
-        return None
-    except requests.exceptions.Timeout:
-        print(f"  [ERROR] Tiempo de espera agotado para '{nombre}'.")
-        return None
-    except requests.exceptions.RequestException as exc:
-        print(f"  [ERROR] Error de red para '{nombre}': {exc}")
-        return None
+    last_error: Optional[str] = None
 
-    try:
-        data = response.json()
-        raw_parameters = data["properties"]["parameter"]
-    except (ValueError, KeyError, TypeError) as exc:
-        print(f"  [ERROR] Estructura inesperada en la respuesta para '{nombre}': {exc}")
-        return None
+    for attempt in range(1, 4):
+        try:
+            response = requests.get(API_URL, params=params, timeout=40)
+            response.raise_for_status()
+            payload = response.json()
 
-    # Crear unión de fechas disponibles para no depender de una sola variable.
-    fechas: set[str] = set()
-    for parameter in PARAMETERS:
-        series = raw_parameters.get(parameter, {})
-        if isinstance(series, dict):
-            fechas.update(series.keys())
+            parameter_data = payload.get("properties", {}).get("parameter", {})
+            if not parameter_data:
+                raise RuntimeError("La respuesta de NASA POWER no contiene properties.parameter")
 
-    if not fechas:
-        print(f"  [AVISO] Serie vacía para '{nombre}'.")
-        return []
+            fechas = sorted({
+                fecha
+                for serie in parameter_data.values()
+                for fecha in serie.keys()
+            })
 
-    registros: list[dict[str, Any]] = []
-    for fecha_raw in sorted(fechas):
-        t_media = clean_number(raw_parameters.get("T2M", {}).get(fecha_raw))
-        t_max = clean_number(raw_parameters.get("T2M_MAX", {}).get(fecha_raw))
-        t_min = clean_number(raw_parameters.get("T2M_MIN", {}).get(fecha_raw))
-        rango = clean_number(raw_parameters.get("T2M_RANGE", {}).get(fecha_raw))
-        humedad = clean_humidity(raw_parameters.get("RH2M", {}).get(fecha_raw))
+            registros: List[Dict[str, Any]] = []
 
-        # Si NASA no trae T2M_RANGE pero sí max/min, se calcula como respaldo.
-        if rango is None and t_max is not None and t_min is not None:
-            rango = round(t_max - t_min, 2)
+            for fecha in fechas:
+                t_media = clean_number(parameter_data.get("T2M", {}).get(fecha))
+                t_max = clean_number(parameter_data.get("T2M_MAX", {}).get(fecha))
+                t_min = clean_number(parameter_data.get("T2M_MIN", {}).get(fecha))
+                rango = clean_number(parameter_data.get("T2M_RANGE", {}).get(fecha))
+                rh = clean_number(parameter_data.get("RH2M", {}).get(fecha))
 
-        registros.append({
-            "fecha": parse_nasa_date(fecha_raw),
-            "t_media_c": t_media,
-            "t_max_c": t_max,
-            "t_min_c": t_min,
-            "rango_c": rango,
-            "humedad_relativa_pct": humedad,
-        })
+                # No guardar filas completamente vacías.
+                if all(v is None for v in [t_media, t_max, t_min, rango, rh]):
+                    continue
 
-    return registros
+                registros.append({
+                    "fecha": iso_date(fecha),
+                    "t_media_c": t_media,
+                    "t_max_c": t_max,
+                    "t_min_c": t_min,
+                    "rango_c": rango,
+                    "humedad_relativa_pct": rh,
+                })
 
+            return {
+                "id": mun["id"],
+                "nombre": mun["nombre"],
+                "lat": mun["lat"],
+                "lon": mun["lon"],
+                "registros": registros,
+                "status": "ok",
+                "error": None,
+            }
 
-def ensure_output_dir(path: str) -> None:
-    directory = os.path.dirname(path)
-    if directory:
-        os.makedirs(directory, exist_ok=True)
+        except Exception as exc:
+            last_error = str(exc)
+            print(f"Intento {attempt}/3 falló para {mun['nombre']}: {last_error}")
+            time.sleep(2 * attempt)
 
-
-def save_json(data: dict[str, Any], path: str) -> None:
-    ensure_output_dir(path)
-    with open(path, "w", encoding="utf-8") as file:
-        json.dump(data, file, ensure_ascii=False, indent=2)
-    print(f"\n✓ Archivo guardado en: {path}")
+    return {
+        "id": mun["id"],
+        "nombre": mun["nombre"],
+        "lat": mun["lat"],
+        "lon": mun["lon"],
+        "registros": [],
+        "status": "error",
+        "error": last_error or "Error desconocido",
+    }
 
 
-def summarize_records(registros: list[dict[str, Any]]) -> tuple[int, float | None, float | None, float | None]:
-    medias = [r["t_media_c"] for r in registros if r.get("t_media_c") is not None]
-    maximas = [r["t_max_c"] for r in registros if r.get("t_max_c") is not None]
-    minimas = [r["t_min_c"] for r in registros if r.get("t_min_c") is not None]
+def build_resumen(municipios: List[Dict[str, Any]]) -> Dict[str, Any]:
+    all_dates = sorted({
+        r["fecha"]
+        for m in municipios
+        for r in m.get("registros", [])
+    })
 
-    mean_temp = round(sum(medias) / len(medias), 2) if medias else None
-    max_temp = max(maximas) if maximas else None
-    min_temp = min(minimas) if minimas else None
-    return len(registros), mean_temp, max_temp, min_temp
+    ok_count = sum(
+        1
+        for m in municipios
+        if m.get("status") == "ok" and m.get("registros")
+    )
 
+    return {
+        "municipios_total": len(municipios),
+        "municipios_con_datos": ok_count,
+        "fecha_inicio": all_dates[0] if all_dates else None,
+        "fecha_fin": all_dates[-1] if all_dates else None,
+        "dias": len(all_dates),
+        "variables": {
+            "t_media_c": "Temperatura media diaria a 2 m en grados Celsius",
+            "t_max_c": "Temperatura máxima diaria a 2 m en grados Celsius",
+            "t_min_c": "Temperatura mínima diaria a 2 m en grados Celsius",
+            "rango_c": "Rango térmico diario en grados Celsius",
+            "humedad_relativa_pct": "Humedad relativa diaria a 2 m en porcentaje",
+        },
+    }
 
-# ---------------------------------------------------------------------------
-# PROGRAMA PRINCIPAL
-# ---------------------------------------------------------------------------
 
 def main() -> None:
-    print("=" * 72)
-    print("  NASA POWER — Temperatura diaria, Sololá")
-    print(f"  Periodo: {START_DATE} → {END_DATE}")
-    print(f"  Variables: {', '.join(PARAMETERS)}")
-    print(f"  Municipios: {len(MUNICIPIOS)}")
-    print("=" * 72)
+    generated_at_gt = gt_now().isoformat(timespec="seconds")
+    generated_at_utc = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    end_date = nasa_end_date()
 
-    if END_DATE < START_DATE:
-        print("\n[AVISO] La fecha de fin es anterior a la fecha de inicio. No hay datos que descargar aún.")
-        sys.exit(0)
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-    resultado: dict[str, Any] = {
-        "metadata": {
-            "fuente": "NASA POWER",
-            "comunidad": COMMUNITY,
-            "endpoint": NASA_POWER_URL,
-            "variables": PARAMETERS,
-            "unidades": {
-                "t_media_c": "°C",
-                "t_max_c": "°C",
-                "t_min_c": "°C",
-                "rango_c": "°C",
-                "humedad_relativa_pct": "%",
-            },
-            "fecha_inicio": START_DATE.isoformat(),
-            "fecha_fin": END_DATE.isoformat(),
-            "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+    municipios_out: List[Dict[str, Any]] = []
+
+    for idx, municipio in enumerate(MUNICIPIOS, start=1):
+        print(f"[{idx:02d}/{len(MUNICIPIOS)}] Descargando temperatura NASA POWER: {municipio['nombre']}")
+        municipios_out.append(fetch_municipio(municipio, end_date))
+
+    payload = {
+        "ok": any(m.get("registros") for m in municipios_out),
+        "generated_at_gt": generated_at_gt,
+        "generated_at_utc": generated_at_utc,
+        "source": {
+            "name": "NASA POWER Agroclimatology API",
+            "url": API_URL,
+            "community": "AG",
+            "parameters": PARAMETERS,
+            "start": START_DATE,
+            "end": end_date,
         },
-        "municipios": {},
+        "resumen": build_resumen(municipios_out),
+        "municipios": municipios_out,
     }
 
-    exitosos = 0
-    fallidos = 0
+    OUTPUT_PATH.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
 
-    for idx, (nombre, coords) in enumerate(MUNICIPIOS.items(), start=1):
-        print(f"\n[{idx:02d}/{len(MUNICIPIOS)}] {nombre} (lat={coords['lat']}, lon={coords['lon']})")
-        registros = fetch_municipio(nombre, coords["lat"], coords["lon"])
-
-        if registros is None:
-            resultado["municipios"][nombre] = []
-            fallidos += 1
-        else:
-            resultado["municipios"][nombre] = registros
-            exitosos += 1
-            dias, t_media, t_max, t_min = summarize_records(registros)
-            print(
-                f"  ✓ {dias} días — media: {t_media if t_media is not None else 's/d'} °C, "
-                f"máx.: {t_max if t_max is not None else 's/d'} °C, "
-                f"mín.: {t_min if t_min is not None else 's/d'} °C"
-            )
-
-        if idx < len(MUNICIPIOS):
-            time.sleep(DELAY_SECONDS)
-
-    save_json(resultado, OUTPUT_PATH)
-
-    print("\n" + "=" * 72)
-    print(f"  Municipios con datos : {exitosos}")
-    print(f"  Municipios fallidos  : {fallidos}")
-    print(f"  Archivo de salida    : {OUTPUT_PATH}")
-    print("=" * 72)
-
-    if fallidos > 0:
-        print(f"\n[AVISO] {fallidos} municipio(s) no pudieron descargarse. Reintentá ejecutando el workflow otra vez.")
-        sys.exit(1)
+    print(f"OK temperatura NASA POWER escrita en: {OUTPUT_PATH}")
+    print(json.dumps(payload["resumen"], ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
