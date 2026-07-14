@@ -1,0 +1,74 @@
+name: actualizar-viento-awn
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Cada hora, minuto 25 UTC.
+    - cron: "25 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-viento-awn
+  cancel-in-progress: false
+
+jobs:
+  actualizar-viento-awn:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Verificar secrets Ambient Weather
+        env:
+          API_KEY: ${{ secrets.AMBIENT_WEATHER_API_KEY }}
+          APP_KEY: ${{ secrets.AMBIENT_WEATHER_APPLICATION_KEY }}
+        run: |
+          if [ -z "$API_KEY" ] || [ -z "$APP_KEY" ]; then
+            echo "Faltan los secrets AMBIENT_WEATHER_API_KEY y/o AMBIENT_WEATHER_APPLICATION_KEY."
+            exit 1
+          fi
+
+          echo "Secrets Ambient Weather disponibles."
+
+      - name: Ejecutar descarga Ambient Weather viento
+        env:
+          AMBIENT_WEATHER_API_KEY: ${{ secrets.AMBIENT_WEATHER_API_KEY }}
+          AMBIENT_WEATHER_APPLICATION_KEY: ${{ secrets.AMBIENT_WEATHER_APPLICATION_KEY }}
+          AMBIENT_WEATHER_MAC_ADDRESS: ${{ secrets.AMBIENT_WEATHER_MAC_ADDRESS }}
+          AMBIENT_WEATHER_STATION_NAME: ${{ secrets.AMBIENT_WEATHER_STATION_NAME }}
+          AMBIENT_WEATHER_HISTORY_LIMIT: "288"
+        run: |
+          python fetch_viento_awn.py
+
+      - name: Validar archivo generado
+        run: |
+          test -f docs/data/viento/awn_viento.json
+          python -m json.tool docs/data/viento/awn_viento.json > /dev/null
+          echo "OK: docs/data/viento/awn_viento.json generado y validado"
+
+      - name: Guardar cambios en el repositorio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add docs/data/viento/awn_viento.json
+
+          if git diff --cached --quiet; then
+            echo "Sin cambios para commitear."
+          else
+            git commit -m "Actualizar viento Ambient Weather"
+            git push
+          fi
