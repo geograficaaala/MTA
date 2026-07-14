@@ -8,8 +8,12 @@
   <title>Mesa Técnica Agroclimática Sololá</title>
   <meta
     name="description"
-    content="Página oficial de la Mesa Técnica Agroclimática Sololá: información climática, noticias, módulos agroclimáticos, precipitaciones y enlaces institucionales."
+    content="Página oficial de la Mesa Técnica Agroclimática Sololá: información climática, módulos de precipitación, temperatura, viento y balance hídrico."
   />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -65,13 +69,15 @@
 
     html {
       scroll-behavior: smooth;
-      font-size: 13.5pt;
+      font-size: 17px;
     }
 
     body {
       min-height: 100vh;
       padding-top: var(--nav-h);
-      font-family: "Times New Roman", Times, serif;
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.68;
       color: var(--text);
       background: #ffffff;
       overflow-x: hidden;
@@ -87,8 +93,21 @@
       text-decoration: none;
     }
 
-    button {
-      font: inherit;
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .brand-sub,
+    .hero-kicker,
+    .section-eyebrow,
+    .mod-icon,
+    .mod-back-kicker,
+    .footer-update-chip {
+      font-family: 'IBM Plex Mono', 'Courier New', monospace;
     }
 
     .site-container {
@@ -761,6 +780,10 @@
     }
 
     @media (max-width: 720px) {
+      html {
+        font-size: 16px;
+      }
+
       :root {
         --nav-h: 72px;
         --content-pad: 1rem;
@@ -940,26 +963,27 @@
           </div>
         </article>
 
-        <article class="mod-card fade-up" tabindex="0" aria-label="Módulo de Mapas interactivos en diseño">
+        <article class="mod-card is-active fade-up" tabindex="0" role="link" data-href="./docs/agroclima_index.html" aria-label="Abrir módulo de Agroclima y balance hídrico">
           <div class="mod-card-inner">
             <div class="mod-card-face mod-card-front">
               <div class="mod-card-accent accent-purple"></div>
               <div class="mod-card-body">
-                <div class="mod-icon icon-purple">Mapas</div>
-                <h3 class="mod-title">Mapas interactivos</h3>
+                <div class="mod-icon icon-purple">Agro.</div>
+                <h3 class="mod-title">Agroclima y balance hídrico</h3>
                 <p class="mod-desc">
-                  Futuro espacio para capas por municipio, acumulados, interpolaciones, zonas de interés y lectura territorial.
+                  Integra precipitación, evapotranspiración, humedad y temperatura del suelo, radiación solar, VPD, estrés hídrico, comparación municipal, mapas y pronóstico.
                 </p>
                 <div class="mod-actions">
-                  <span class="btn-card ghost disabled">Diseño pendiente</span>
+                  <span class="btn-card primary">Abrir módulo</span>
+                  <span class="btn-card ghost">Balance hídrico</span>
                 </div>
               </div>
             </div>
             <div class="mod-card-face mod-card-back">
-              <div class="mod-back-kicker">Diseño pendiente</div>
-              <h3 class="mod-back-title">Mapas interactivos</h3>
-              <p class="mod-back-desc">Este espacio permitirá explorar capas agroclimáticas y territoriales del departamento.</p>
-              <span class="btn-card ghost disabled">Diseño pendiente</span>
+              <div class="mod-back-kicker">Módulo activo</div>
+              <h3 class="mod-back-title">Agroclima y balance hídrico</h3>
+              <p class="mod-back-desc">Se abrirá el tablero integrado de disponibilidad de agua, suelo, radiación, demanda atmosférica y estrés agrícola.</p>
+              <span class="btn-card primary">Abrir módulo</span>
             </div>
           </div>
         </article>
@@ -988,31 +1012,7 @@
           </div>
         </article>
 
-        <article class="mod-card fade-up delay-2" tabindex="0" role="link" data-href="./docs/data/precipitaciones/estaciones_precipitacion.json" aria-label="Abrir inventario de fuentes e instituciones">
-          <div class="mod-card-inner">
-            <div class="mod-card-face mod-card-front">
-              <div class="mod-card-accent accent-green"></div>
-              <div class="mod-card-body">
-                <div class="mod-icon icon-green">Fuent.</div>
-                <h3 class="mod-title">Fuentes e instituciones</h3>
-                <p class="mod-desc">
-                  Inventario de fuentes participantes, estado de disponibilidad, créditos, permisos de uso, enlaces y trazabilidad.
-                </p>
-                <div class="mod-actions">
-                  <span class="btn-card green">Ver inventario</span>
-                </div>
-              </div>
-            </div>
-            <div class="mod-card-face mod-card-back">
-              <div class="mod-back-kicker">Abriendo datos</div>
-              <h3 class="mod-back-title">Fuentes e instituciones</h3>
-              <p class="mod-back-desc">Se abrirá el inventario de estaciones y fuentes de precipitación.</p>
-              <span class="btn-card green">Ver inventario</span>
-            </div>
-          </div>
-        </article>
-
-      </div>
+</div>
     </section>
 
   </main>
