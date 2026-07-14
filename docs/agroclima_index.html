@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2f7a62" />
+  <title>Agroclima y Balance Hídrico · MTA Sololá</title>
+  <meta name="description" content="Dashboard agroclimático municipal de Sololá con balance hídrico, evapotranspiración, humedad del suelo, VPD, radiación solar y pronóstico." />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+
+  <style>
+    :root {
+      --sky-900:#165c77; --sky-700:#2a9db7; --sky-100:#e8f7fb;
+      --leaf-950:#11392f; --leaf-900:#174638; --leaf-800:#1f604d;
+      --leaf-700:#2f7a62; --leaf-500:#6bbb52; --leaf-100:#edf8e8;
+      --sun-800:#9c7412; --sun-700:#b98916; --sun-500:#f0c53e; --sun-100:#fff6d8;
+      --earth-900:#51361a; --earth-800:#6f4b22; --earth-600:#9a6d35; --earth-100:#f8efe2;
+      --danger:#b94f3c; --danger-soft:#fff0ec; --purple:#7053a4; --purple-soft:#f1edfb;
+      --paper:#fff; --soft:#f7fbf8; --text:#17342d; --text-mid:#415c55; --text-soft:#6f817c;
+      --border:rgba(31,96,77,.16); --border-strong:rgba(31,96,77,.3);
+      --shadow-sm:0 8px 24px rgba(17,57,47,.08);
+      --shadow-md:0 18px 46px rgba(17,57,47,.14);
+      --shadow-lg:0 28px 80px rgba(17,57,47,.2);
+      --radius-sm:.75rem; --radius-md:1rem; --radius-lg:1.5rem; --radius-xl:2rem;
+      --site-max:1760px; --content-pad:clamp(1rem,2vw,2rem); --nav-h:88px;
+      --font:"Times New Roman",Times,serif;
+      --mono:"Courier New",monospace;
+    }
+
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:13.5pt}
+    body{min-height:100vh;padding-top:var(--nav-h);font-family:var(--font);color:var(--text);background:#fff;overflow-x:hidden}
+    body.modal-open{overflow:hidden}
+    img,iframe{max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .site-container{width:100%;max-width:var(--site-max);margin-inline:auto;padding-inline:var(--content-pad)}
+    .hidden{display:none!important}
+
+    .navbar{position:fixed;inset:0 0 auto 0;z-index:1100;min-height:var(--nav-h);background:linear-gradient(90deg,rgba(31,96,77,.98),rgba(42,157,183,.98) 58%,rgba(240,197,62,.96));border-bottom:4px solid rgba(255,255,255,.85);box-shadow:0 8px 30px rgba(17,57,47,.22)}
+    .navbar::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:4px;background:linear-gradient(90deg,var(--leaf-500),var(--sun-500),var(--sky-700),var(--earth-600))}
+    .navbar-inner{min-height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .brand{display:inline-flex;align-items:center;gap:1rem;color:#fff;min-width:0}
+    .brand-logo{width:68px;height:68px;flex:0 0 68px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 6px 12px rgba(17,57,47,.22))}
+    .brand-text{display:flex;flex-direction:column;gap:.12rem;min-width:0}
+    .brand-sub{color:rgba(255,255,255,.82);font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .brand-name{font-size:clamp(1rem,1.35vw,1.45rem);font-weight:700;line-height:1.05;white-space:nowrap;text-shadow:0 2px 12px rgba(17,57,47,.18)}
+    .nav-actions{display:flex;align-items:center;gap:.65rem;flex:0 0 auto}
+    .home-link{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:42px;padding:.55rem 1rem;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.42);border-radius:999px;font-size:.92rem;font-weight:700;transition:.18s ease}
+    .home-link:hover,.home-link:focus-visible{background:rgba(255,255,255,.24);transform:translateY(-1px);outline:none}
+
+    .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 12% 20%,rgba(107,187,82,.2),transparent 34%),radial-gradient(circle at 88% 6%,rgba(240,197,62,.23),transparent 30%),linear-gradient(180deg,#fff 0%,#f8fcf9 100%);border-bottom:1px solid var(--border)}
+    .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(31,96,77,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(31,96,77,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 90%)}
+    .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.52fr);align-items:center;gap:clamp(2rem,4vw,5rem);padding-block:clamp(2.8rem,5.5vw,5.5rem)}
+    .hero-kicker{margin-bottom:.75rem;color:var(--sky-900);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+    .hero-title{margin-bottom:1rem;color:var(--leaf-950);font-size:clamp(2rem,3.2vw,3.8rem);line-height:1.04;letter-spacing:-.025em}
+    .hero-title span{color:var(--leaf-700)}
+    .hero-copy{max-width:1020px;color:var(--text-mid);font-size:clamp(1.02rem,1.16vw,1.25rem);line-height:1.7;text-align:justify}
+    .hero-pills{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.3rem}
+    .hero-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem .8rem;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.84);box-shadow:var(--shadow-sm);font-size:.84rem;font-weight:700;color:var(--text-mid)}
+    .hero-pill::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--leaf-500)}
+    .hero-visual{display:grid;place-items:center}
+    .hero-logo{width:clamp(250px,25vw,420px);aspect-ratio:1;object-fit:contain;filter:drop-shadow(0 16px 28px rgba(17,57,47,.16))}
+
+    .data-status{border-bottom:1px solid var(--border);background:#fff}
+    .status-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.8rem;color:var(--text-mid);font-size:.86rem}
+    .status-badges{display:flex;flex-wrap:wrap;gap:.55rem}
+    .status-badge{display:inline-flex;align-items:center;gap:.38rem;padding:.34rem .62rem;border-radius:999px;background:var(--soft);border:1px solid var(--border);font-weight:700}
+    .status-dot{width:8px;height:8px;border-radius:50%;background:var(--sun-500)}
+    .status-badge.ok .status-dot{background:var(--leaf-500)}
+    .status-badge.error .status-dot{background:var(--danger)}
+
+    .dashboard{padding-block:clamp(2rem,3.4vw,3.6rem)}
+    .section-block{margin-top:clamp(1.3rem,2.6vw,2.6rem)}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+    .section-eyebrow{margin-bottom:.35rem;color:var(--sky-900);font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .section-title{color:var(--leaf-950);font-size:clamp(1.38rem,1.9vw,2.15rem);line-height:1.12}
+    .section-copy{max-width:760px;color:var(--text-soft);font-size:.92rem;line-height:1.55;text-align:right}
+
+    .filter-panel{position:relative;z-index:600;padding:1rem;border:1px solid var(--border);border-radius:var(--radius-lg);background:linear-gradient(135deg,#fff,var(--soft));box-shadow:var(--shadow-sm)}
+    .filters-grid{display:grid;grid-template-columns:minmax(180px,1.1fr) repeat(2,minmax(150px,.75fr)) auto auto;gap:.8rem;align-items:end}
+    .field{display:grid;gap:.34rem}
+    .field label{color:var(--text-mid);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .control{width:100%;min-height:44px;padding:.55rem .75rem;color:var(--text);background:#fff;border:1px solid var(--border-strong);border-radius:.75rem;outline:none;transition:.16s ease}
+    .control:focus{border-color:var(--sky-700);box-shadow:0 0 0 3px rgba(42,157,183,.14)}
+    .btn{min-height:44px;padding:.55rem 1rem;border:0;border-radius:.75rem;font-weight:700;transition:.16s ease}
+    .btn-primary{color:#fff;background:var(--leaf-700)}
+    .btn-secondary{color:var(--text-mid);background:#fff;border:1px solid var(--border-strong)}
+    .btn:hover,.btn:focus-visible{transform:translateY(-1px);box-shadow:var(--shadow-sm);outline:none}
+
+    .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.8rem}
+    .kpi{position:relative;overflow:hidden;min-height:132px;padding:1rem;border:1px solid var(--border);border-radius:var(--radius-md);background:#fff;box-shadow:var(--shadow-sm)}
+    .kpi::after{content:"";position:absolute;right:-20px;bottom:-24px;width:78px;height:78px;border-radius:50%;background:var(--kpi-soft,var(--leaf-100));opacity:.78}
+    .kpi-label{position:relative;z-index:1;color:var(--text-soft);font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+    .kpi-value{position:relative;z-index:1;margin:.45rem 0 .25rem;color:var(--kpi-color,var(--leaf-800));font-size:clamp(1.35rem,1.8vw,2rem);font-weight:700;line-height:1}
+    .kpi-detail{position:relative;z-index:1;color:var(--text-mid);font-size:.78rem;line-height:1.35}
+
+    .panel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+    .panel-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .panel{min-width:0;overflow:hidden;border:1px solid var(--border);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm)}
+    .panel.wide{grid-column:1/-1}
+    .panel-head{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:1rem 1.05rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#fff,#fbfdfb)}
+    .panel-title{color:var(--leaf-950);font-size:1.08rem;font-weight:700;line-height:1.15}
+    .panel-subtitle{margin-top:.2rem;color:var(--text-soft);font-size:.76rem;line-height:1.4}
+    .panel-actions{display:flex;align-items:center;gap:.5rem;flex:0 0 auto}
+    .panel-select{max-width:210px;min-height:36px;padding:.35rem .55rem;border:1px solid var(--border-strong);border-radius:.6rem;background:#fff;color:var(--text-mid);font-size:.78rem}
+    .zoom-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border-strong);border-radius:.6rem;color:var(--leaf-700);background:#fff;font-weight:700;transition:.16s ease}
+    .zoom-btn:hover,.zoom-btn:focus-visible{color:#fff;background:var(--leaf-700);outline:none}
+    .panel-body{position:relative;padding:.85rem 1rem 1rem}
+    .chart-container{position:relative;width:100%;height:480px;min-height:260px}
+    .chart-container.medium{height:420px}
+    .chart-container.small{height:360px}
+    .chart-empty{position:absolute;inset:0;display:grid;place-items:center;padding:1rem;color:var(--text-soft);text-align:center;background:rgba(255,255,255,.92);border-radius:.75rem}
+    .panel-note{padding:.7rem 1rem;border-top:1px solid var(--border);color:var(--text-soft);font-size:.72rem;line-height:1.45;background:var(--soft)}
+
+    #agroMap{height:540px;border-radius:.9rem;z-index:1}
+    .map-legend{display:grid;gap:.35rem;margin-top:.75rem;padding:.75rem;border:1px solid var(--border);border-radius:.75rem;background:var(--soft);font-size:.75rem;color:var(--text-mid)}
+    .legend-gradient{height:12px;border-radius:999px;background:linear-gradient(90deg,#b94f3c,#f0c53e,#6bbb52,#2a9db7)}
+    .legend-labels{display:flex;justify-content:space-between;gap:.5rem}
+
+    .forecast-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.5fr);gap:1rem}
+    .forecast-cards{display:grid;gap:.75rem;align-content:start}
+    .forecast-card{padding:.85rem;border:1px solid var(--border);border-radius:.9rem;background:#fff;box-shadow:var(--shadow-sm)}
+    .forecast-date{color:var(--sky-900);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+    .forecast-main{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin:.32rem 0}
+    .forecast-balance{font-size:1.45rem;font-weight:700}
+    .forecast-tag{padding:.22rem .5rem;border-radius:999px;font-size:.68rem;font-weight:700;text-transform:capitalize}
+    .tag-low{color:var(--leaf-800);background:var(--leaf-100)}
+    .tag-moderate{color:var(--sun-800);background:var(--sun-100)}
+    .tag-high{color:var(--danger);background:var(--danger-soft)}
+    .forecast-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.25rem .6rem;color:var(--text-soft);font-size:.72rem;line-height:1.35}
+
+    .municipality-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem}
+    .mun-card{padding:1rem;border:1px solid var(--border);border-radius:var(--radius-md);background:#fff;box-shadow:var(--shadow-sm);transition:.16s ease}
+    .mun-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+    .mun-name{color:var(--leaf-950);font-size:1rem;font-weight:700}
+    .mun-period{margin-top:.18rem;color:var(--text-soft);font-size:.7rem}
+    .mun-balance{margin:.62rem 0 .35rem;font-size:1.55rem;font-weight:700}
+    .mun-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem;margin-top:.55rem}
+    .mun-stat{padding:.42rem;border-radius:.55rem;background:var(--soft);font-size:.68rem;color:var(--text-soft)}
+    .mun-stat strong{display:block;margin-top:.1rem;color:var(--text);font-size:.82rem}
+    .mun-open{width:100%;margin-top:.65rem;padding:.45rem;border:1px solid var(--border-strong);border-radius:.6rem;background:#fff;color:var(--leaf-700);font-size:.72rem;font-weight:700}
+
+    .table-wrap{overflow:auto;max-height:620px;border:1px solid var(--border);border-radius:.9rem}
+    table{width:100%;border-collapse:collapse;min-width:1180px;background:#fff}
+    th,td{padding:.65rem .7rem;border-bottom:1px solid var(--border);text-align:right;font-size:.75rem;white-space:nowrap}
+    th{position:sticky;top:0;z-index:2;color:#fff;background:var(--leaf-800);font-weight:700}
+    th:first-child,td:first-child{text-align:left;position:sticky;left:0}
+    td:first-child{z-index:1;background:#fff}
+    tbody tr:hover td{background:var(--leaf-100)}
+    tbody tr:hover td:first-child{background:var(--leaf-100)}
+    .cell-positive{color:var(--sky-900);font-weight:700}
+    .cell-negative{color:var(--danger);font-weight:700}
+
+    .method-note{padding:1rem;border:1px solid rgba(185,137,22,.3);border-radius:var(--radius-md);background:var(--sun-100);color:var(--earth-900);font-size:.82rem;line-height:1.55}
+    .method-note strong{color:var(--earth-800)}
+
+    footer{margin-top:3rem;color:#fff;background:radial-gradient(circle at 10% 0%,rgba(240,197,62,.28),transparent 32%),radial-gradient(circle at 90% 0%,rgba(42,157,183,.28),transparent 32%),linear-gradient(135deg,var(--leaf-950),var(--leaf-800) 46%,var(--earth-800))}
+    .partners-ribbon-wrap{width:100%;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid rgba(31,96,77,.12)}
+    .partners-ribbon{width:100%;padding:1.45rem clamp(.7rem,1.25vw,1.35rem);background:#fff}
+    .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .partners-logo-row{display:flex;align-items:center;justify-content:center;gap:clamp(.4rem,.9vw,1.1rem);width:100%}
+    .partners-logo-row+.partners-logo-row{margin-top:1rem}
+    .partner-logo{display:inline-flex;align-items:center;justify-content:center;min-width:0;padding:.15rem;border-radius:8px;transition:.18s ease}
+    .partner-logo:hover,.partner-logo:focus-visible{transform:translateY(-3px);outline:none}
+    .partner-logo img{display:block;width:100%;height:clamp(50px,4.6vw,86px);object-fit:contain}
+    .logo-xs{flex:0 1 78px}.logo-sm{flex:0 1 100px}.logo-md{flex:0 1 130px}.logo-lg{flex:0 1 170px}.logo-xl{flex:0 1 218px}.logo-xxl{flex:0 1 270px}.logo-uvg{flex:0 1 215px}.logo-uvg img{height:clamp(68px,5.9vw,108px)}
+    .footer-contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.55fr);gap:1.4rem;align-items:center;padding-block:2.5rem 3rem}
+    .footer-update{font-size:1.04rem;font-weight:700;line-height:1.5}
+    .footer-social{justify-self:end;width:min(100%,370px)}
+    .footer-social-title{margin-bottom:.8rem;font-size:1.05rem;font-weight:700}
+    .footer-social-list{list-style:none;display:grid;gap:.75rem}
+    .footer-social-link{display:flex;align-items:center;gap:.8rem;transition:.18s ease}
+    .footer-social-link:hover{transform:translateX(4px);opacity:.88}
+    .footer-social-icon{width:28px;height:28px;display:grid;place-items:center;border:1.5px solid rgba(255,255,255,.78);border-radius:50%;font-weight:700}
+    .footer-social-copy{display:grid;gap:.06rem}.footer-social-label{font-size:.92rem;font-weight:700}.footer-social-value{color:rgba(255,255,255,.86);font-size:.9rem}
+
+    .loader{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:1rem;background:rgba(247,251,248,.96);backdrop-filter:blur(8px)}
+    .loader-card{width:min(440px,100%);padding:1.5rem;border:1px solid var(--border);border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-lg);text-align:center}
+    .spinner{width:46px;height:46px;margin:0 auto 1rem;border:5px solid var(--leaf-100);border-top-color:var(--leaf-700);border-radius:50%;animation:spin .8s linear infinite}
+    .loader-card strong{display:block;margin-bottom:.35rem;font-size:1.15rem;color:var(--leaf-950)}
+    .loader-card p{color:var(--text-soft);font-size:.85rem;line-height:1.45}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .chart-modal{position:fixed;inset:0;z-index:2600;display:none;place-items:center;padding:1rem;background:rgba(8,31,25,.84);backdrop-filter:blur(6px)}
+    .chart-modal.open{display:grid}
+    .chart-modal-card{width:min(1500px,98vw);height:min(900px,94vh);display:grid;grid-template-rows:auto 1fr;border-radius:var(--radius-lg);overflow:hidden;background:#fff;box-shadow:var(--shadow-lg)}
+    .chart-modal-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;color:#fff;background:linear-gradient(90deg,var(--leaf-800),var(--sky-900))}
+    .chart-modal-title{display:flex;align-items:center;gap:.7rem;font-size:1rem;font-weight:700}
+    .chart-modal-logo{width:42px;height:42px;object-fit:contain;border-radius:50%;background:#fff}
+    .chart-modal-close{width:40px;height:40px;border:1px solid rgba(255,255,255,.5);border-radius:50%;color:#fff;background:transparent;font-size:1.4rem;line-height:1}
+    .chart-modal-body{min-height:0;padding:1rem;background:#fff}
+    .chart-modal-host{height:100%;min-height:0}
+    .chart-modal-host .chart-container{height:100%!important;min-height:0!important}
+
+    .to-top{position:fixed;right:1rem;bottom:1rem;z-index:1200;width:44px;height:44px;display:none;align-items:center;justify-content:center;color:#fff;background:var(--leaf-700);border:0;border-radius:50%;box-shadow:var(--shadow-md);font-weight:700}
+    .to-top.show{display:flex}
+
+    @media(max-width:1450px){.kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.municipality-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(max-width:1120px){.hero-inner{grid-template-columns:1fr;text-align:center}.hero-copy{text-align:justify}.hero-visual{display:none}.filters-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.filters-grid .btn{width:100%}.panel-grid.three{grid-template-columns:1fr 1fr}.panel-grid.three .panel:last-child{grid-column:1/-1}.forecast-grid{grid-template-columns:1fr}.forecast-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.municipality-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-contact{grid-template-columns:1fr}.footer-social{justify-self:start}.partners-logo-row{flex-wrap:wrap}}
+    @media(max-width:760px){
+      :root{--nav-h:72px;--content-pad:.8rem}
+      html{font-size:12.5pt}
+      .navbar-inner{gap:.5rem}.brand{gap:.6rem}.brand-logo{width:52px;height:52px;flex-basis:52px}.brand-sub{font-size:.52rem}.brand-name{font-size:.86rem;white-space:normal}.home-link{width:40px;height:40px;min-height:40px;padding:0;font-size:0}.home-link::before{content:"⌂";font-size:1.15rem}
+      .hero-inner{padding-block:2rem}.hero-title{font-size:2rem}.hero-copy{font-size:.93rem;line-height:1.58}.hero-pills{gap:.4rem}.hero-pill{font-size:.7rem;padding:.38rem .58rem}
+      .status-inner{align-items:flex-start;flex-direction:column}.status-badges{gap:.35rem}.status-badge{font-size:.7rem}
+      .dashboard{padding-block:1.4rem}.section-block{margin-top:1.5rem}.section-head{align-items:flex-start;flex-direction:column}.section-copy{text-align:left;font-size:.8rem}
+      .filter-panel{padding:.75rem}.filters-grid{grid-template-columns:1fr 1fr;gap:.55rem}.filters-grid .field:first-child{grid-column:1/-1}.control,.btn{min-height:42px;font-size:.82rem;padding:.48rem .6rem}
+      .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.kpi{min-height:112px;padding:.75rem}.kpi-label{font-size:.61rem}.kpi-value{font-size:1.35rem}.kpi-detail{font-size:.66rem}
+      .panel-grid,.panel-grid.three{grid-template-columns:1fr;gap:.75rem}.panel-grid.three .panel:last-child{grid-column:auto}.panel-head{align-items:flex-start;padding:.75rem;gap:.4rem}.panel-title{font-size:.94rem}.panel-subtitle{font-size:.67rem}.panel-actions{gap:.3rem}.panel-select{max-width:150px;font-size:.68rem}.zoom-btn{width:32px;height:32px}.panel-body{padding:.55rem}.chart-container{height:330px}.chart-container.medium{height:300px}.chart-container.small{height:280px}.panel-note{padding:.55rem .7rem;font-size:.62rem}
+      #agroMap{height:390px}.forecast-cards{grid-template-columns:1fr 1fr;gap:.55rem}.forecast-card{padding:.65rem}.forecast-meta{font-size:.64rem}.municipality-grid{grid-template-columns:1fr 1fr;gap:.55rem}.mun-card{padding:.72rem}.mun-name{font-size:.84rem}.mun-balance{font-size:1.2rem}.mun-stat{font-size:.6rem}.mun-stat strong{font-size:.72rem}
+      .table-wrap{max-height:500px}th,td{padding:.5rem;font-size:.65rem}
+      .partners-ribbon{padding:1rem .5rem}.partner-logo img{height:46px}.footer-contact{padding-block:1.8rem 2.2rem}.footer-update{font-size:.86rem}.chart-modal{padding:.35rem}.chart-modal-card{width:100%;height:96vh;border-radius:.9rem}.chart-modal-body{padding:.45rem}
+    }
+    @media(max-width:480px){.kpi-grid{grid-template-columns:1fr 1fr}.forecast-cards,.municipality-grid{grid-template-columns:1fr}.filters-grid{grid-template-columns:1fr}.filters-grid .field:first-child{grid-column:auto}.chart-container{height:300px}.panel-actions .panel-select{display:none}.hero-title{font-size:1.72rem}.brand-name{font-size:.74rem}.brand-sub{display:none}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <nav class="navbar" aria-label="Navegación principal">
+    <div class="navbar-inner site-container">
+      <a class="brand" href="../index.html" aria-label="Volver a la página principal">
+        <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
+        <span class="brand-text"><span class="brand-sub">Sololá, Guatemala</span><span class="brand-name">Mesa Técnica Agroclimática Sololá</span></span>
+      </a>
+      <div class="nav-actions"><a class="home-link" href="../index.html">Volver al inicio</a></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner site-container">
+      <div>
+        <div class="hero-kicker">Módulo integrado</div>
+        <h1 class="hero-title">Agroclima, <span>balance hídrico</span> y estrés agrícola</h1>
+        <p class="hero-copy">Integra precipitación, evapotranspiración de referencia, humedad y temperatura del suelo, déficit de presión de vapor, radiación solar y días secos para apoyar la lectura agroclimática municipal. Los indicadores son orientativos y deben interpretarse según cultivo, etapa fenológica, tipo de suelo y manejo local.</p>
+        <div class="hero-pills"><span class="hero-pill">Histórico municipal</span><span class="hero-pill">Pronóstico hasta 16 días</span><span class="hero-pill">19 municipios</span><span class="hero-pill">Open-Meteo</span></div>
+      </div>
+      <div class="hero-visual"><img class="hero-logo" src="./logos/MTANIMADO.gif" alt="" aria-hidden="true" /></div>
+    </div>
+  </header>
+
+  <div class="data-status">
+    <div class="status-inner site-container">
+      <div id="statusText">Preparando fuentes agroclimáticas…</div>
+      <div class="status-badges"><span class="status-badge" id="histBadge"><span class="status-dot"></span>Histórico</span><span class="status-badge" id="predBadge"><span class="status-dot"></span>Pronóstico</span></div>
+    </div>
+  </div>
+
+  <main class="dashboard site-container">
+    <section class="filter-panel" aria-label="Filtros del dashboard">
+      <div class="filters-grid">
+        <div class="field"><label for="municipioSelect">Municipio</label><select class="control" id="municipioSelect"></select></div>
+        <div class="field"><label for="fechaInicio">Fecha inicial</label><input class="control" id="fechaInicio" type="date" /></div>
+        <div class="field"><label for="fechaFin">Fecha final</label><input class="control" id="fechaFin" type="date" /></div>
+        <button class="btn btn-primary" id="aplicarFiltros" type="button">Aplicar</button>
+        <button class="btn btn-secondary" id="restablecerFiltros" type="button">Restablecer</button>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head"><div><div class="section-eyebrow">Resumen del periodo</div><h2 class="section-title" id="summaryTitle">Indicadores agroclimáticos</h2></div><p class="section-copy" id="summaryPeriod">Cargando periodo disponible…</p></div>
+      <div class="kpi-grid">
+        <article class="kpi" style="--kpi-color:var(--sky-900);--kpi-soft:var(--sky-100)"><div class="kpi-label">Precipitación</div><div class="kpi-value" id="kpiRain">—</div><div class="kpi-detail">Total en el periodo</div></article>
+        <article class="kpi" style="--kpi-color:var(--earth-800);--kpi-soft:var(--earth-100)"><div class="kpi-label">ET₀</div><div class="kpi-value" id="kpiEt0">—</div><div class="kpi-detail">Demanda atmosférica acumulada</div></article>
+        <article class="kpi" style="--kpi-color:var(--leaf-800);--kpi-soft:var(--leaf-100)"><div class="kpi-label">Balance P − ET₀</div><div class="kpi-value" id="kpiBalance">—</div><div class="kpi-detail" id="kpiBalanceDetail">Resultado climático simple</div></article>
+        <article class="kpi" style="--kpi-color:var(--purple);--kpi-soft:var(--purple-soft)"><div class="kpi-label">Humedad del suelo</div><div class="kpi-value" id="kpiSoil">—</div><div class="kpi-detail">Media estimada del perfil</div></article>
+        <article class="kpi" style="--kpi-color:var(--danger);--kpi-soft:var(--danger-soft)"><div class="kpi-label">VPD máximo</div><div class="kpi-value" id="kpiVpd">—</div><div class="kpi-detail">Máximo diario del periodo</div></article>
+        <article class="kpi" style="--kpi-color:var(--sun-800);--kpi-soft:var(--sun-100)"><div class="kpi-label">Racha seca</div><div class="kpi-value" id="kpiDry">—</div><div class="kpi-detail">Máximo de días consecutivos</div></article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head"><div><div class="section-eyebrow">Histórico</div><h2 class="section-title">Agua disponible y demanda atmosférica</h2></div><p class="section-copy">Las gráficas responden al municipio y rango de fechas seleccionados.</p></div>
+      <div class="panel-grid">
+        <article class="panel wide">
+          <div class="panel-head"><div><div class="panel-title">Precipitación, ET₀ y balance diario</div><div class="panel-subtitle">Comparación diaria en milímetros</div></div><div class="panel-actions"><button class="zoom-btn" data-zoom="waterChartBox" data-title="Precipitación, ET₀ y balance diario" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container" id="waterChartBox"><canvas id="waterChart"></canvas></div></div>
+          <div class="panel-note">Balance climático simple = precipitación − ET₀. No representa por sí solo el agua realmente disponible para un cultivo.</div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><div class="panel-title">Balance hídrico acumulado</div><div class="panel-subtitle">Evolución acumulada del déficit o exceso</div></div><div class="panel-actions"><button class="zoom-btn" data-zoom="cumulativeChartBox" data-title="Balance hídrico acumulado" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="cumulativeChartBox"><canvas id="cumulativeChart"></canvas></div></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><div class="panel-title">Humedad del suelo por profundidad</div><div class="panel-subtitle">Contenido volumétrico estimado por el modelo</div></div><div class="panel-actions"><button class="zoom-btn" data-zoom="soilChartBox" data-title="Humedad del suelo por profundidad" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="soilChartBox"><canvas id="soilChart"></canvas></div></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><div class="panel-title">VPD y temperatura del suelo</div><div class="panel-subtitle">Demanda de vapor y temperatura media del perfil</div></div><div class="panel-actions"><button class="zoom-btn" data-zoom="stressChartBox" data-title="VPD y temperatura del suelo" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="stressChartBox"><canvas id="stressChart"></canvas></div></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><div class="panel-title">Radiación solar y horas de sol</div><div class="panel-subtitle">Energía solar diaria y duración estimada</div></div><div class="panel-actions"><button class="zoom-btn" data-zoom="solarChartBox" data-title="Radiación solar y horas de sol" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="solarChartBox"><canvas id="solarChart"></canvas></div></div>
+        </article>
+        <article class="panel wide">
+          <div class="panel-head"><div><div class="panel-title">Patrón mensual</div><div class="panel-subtitle">Totales de precipitación y ET₀, con balance por mes</div></div><div class="panel-actions"><button class="zoom-btn" data-zoom="monthlyChartBox" data-title="Patrón agroclimático mensual" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="monthlyChartBox"><canvas id="monthlyChart"></canvas></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head"><div><div class="section-eyebrow">Territorio</div><h2 class="section-title">Comparación y mapa municipal</h2></div><p class="section-copy">Los valores se calculan con el mismo rango de fechas para todos los municipios.</p></div>
+      <div class="panel-grid">
+        <article class="panel">
+          <div class="panel-head"><div><div class="panel-title">Comparación municipal</div><div class="panel-subtitle">Ranking según el indicador seleccionado</div></div><div class="panel-actions"><select class="panel-select" id="comparisonMetric"><option value="balance">Balance total</option><option value="soil">Humedad del perfil</option><option value="vpd">VPD máximo</option><option value="dry">Días secos consecutivos</option><option value="rain">Precipitación total</option><option value="et0">ET₀ total</option></select><button class="zoom-btn" data-zoom="comparisonChartBox" data-title="Comparación municipal" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container" id="comparisonChartBox"><canvas id="comparisonChart"></canvas></div></div>
+        </article>
+        <article class="panel">
+          <div class="panel-head"><div><div class="panel-title">Mapa agroclimático municipal</div><div class="panel-subtitle">Puntos municipales coloreados según el indicador</div></div><div class="panel-actions"><select class="panel-select" id="mapMetric"><option value="balance">Balance histórico</option><option value="soil">Humedad del suelo</option><option value="vpd">VPD histórico</option><option value="forecastBalance">Balance pronosticado</option><option value="forecastStress">Estrés pronosticado</option></select></div></div>
+          <div class="panel-body"><div id="agroMap" aria-label="Mapa municipal agroclimático"></div><div class="map-legend"><div class="legend-gradient" id="mapGradient"></div><div class="legend-labels"><span id="legendMin">Menor</span><span id="legendMid">Intermedio</span><span id="legendMax">Mayor</span></div></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head"><div><div class="section-eyebrow">Pronóstico</div><h2 class="section-title">Balance y estrés agrícola previsto</h2></div><p class="section-copy" id="forecastPeriod">Pronóstico municipal de Open-Meteo.</p></div>
+      <div class="forecast-grid">
+        <article class="panel">
+          <div class="panel-head"><div><div class="panel-title">Pronóstico diario integrado</div><div class="panel-subtitle">Lluvia, ET₀, balance y humedad del perfil</div></div><div class="panel-actions"><button class="zoom-btn" data-zoom="forecastChartBox" data-title="Pronóstico agroclimático integrado" aria-label="Ampliar gráfica">⛶</button></div></div>
+          <div class="panel-body"><div class="chart-container" id="forecastChartBox"><canvas id="forecastChart"></canvas></div></div>
+          <div class="panel-note">El nivel de estrés es orientativo y combina balance P−ET₀, VPD y días secos; no sustituye una recomendación agronómica específica.</div>
+        </article>
+        <div class="forecast-cards" id="forecastCards"></div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head"><div><div class="section-eyebrow">19 municipios</div><h2 class="section-title">Tarjetas agroclimáticas municipales</h2></div><p class="section-copy">Selecciona una tarjeta para llevar el dashboard a ese municipio.</p></div>
+      <div class="municipality-grid" id="municipalityCards"></div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head"><div><div class="section-eyebrow">Detalle</div><h2 class="section-title">Registros diarios del periodo seleccionado</h2></div><p class="section-copy">Desplázate horizontalmente en dispositivos pequeños.</p></div>
+      <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Precipitación</th><th>ET₀</th><th>Balance</th><th>Balance acum.</th><th>Humedad 0–7 cm</th><th>Humedad perfil</th><th>VPD máx.</th><th>Radiación</th><th>Horas de sol</th><th>Días secos</th></tr></thead><tbody id="detailTable"></tbody></table></div>
+    </section>
+
+    <section class="section-block"><div class="method-note"><strong>Nota metodológica:</strong> los datos provienen de modelos meteorológicos y reanálisis de Open-Meteo. El balance mostrado es una resta climática simple entre precipitación y ET₀; no incluye coeficiente de cultivo, escorrentía, infiltración, textura del suelo, profundidad radicular, riego ni almacenamiento real. La humedad del suelo y los indicadores de estrés deben contrastarse con observaciones de campo.</div></section>
+  </main>
+
+  <footer>
+    <section class="partners-ribbon-wrap" aria-labelledby="partnersRibbonTitle">
+      <h2 class="visually-hidden" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática Sololá</h2>
+      <div class="partners-ribbon">
+        <div class="partners-logo-row">
+          <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy"></a>
+          <a class="partner-logo logo-xl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/MAGA02.png" alt="MAGA 02" loading="lazy"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH 02" loading="lazy"></a>
+          <a class="partner-logo logo-sm" href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy"></a>
+          <a class="partner-logo logo-lg" href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy"></a>
+          <a class="partner-logo logo-lg" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer"><img src="./logos/FeedtheChildren.png" alt="Feed the Children" loading="lazy"></a>
+          <a class="partner-logo logo-xl" href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/ICC.png" alt="ICC" loading="lazy"></a>
+          <a class="partner-logo logo-md" href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy"></a>
+          <a class="partner-logo logo-xl" href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy"></a>
+        </div>
+        <div class="partners-logo-row">
+          <a class="partner-logo logo-sm" href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy"></a>
+          <a class="partner-logo logo-md" href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy"></a>
+          <a class="partner-logo logo-md" href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer"><img src="./logos/Belgica.png" alt="Bélgica, socio para el desarrollo" loading="lazy"></a>
+          <a class="partner-logo logo-md" href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy"></a>
+          <a class="partner-logo logo-lg" href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy"></a>
+          <a class="partner-logo logo-lg logo-uvg" href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán - UVG" loading="lazy"></a>
+          <a class="partner-logo logo-lg" href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy"></a>
+          <a class="partner-logo logo-lg" href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy"></a>
+          <a class="partner-logo logo-md" href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy"></a>
+          <a class="partner-logo logo-xl" href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/MARN.png" alt="Ministerio de Ambiente y Recursos Naturales" loading="lazy"></a>
+          <a class="partner-logo logo-sm" href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy"></a>
+        </div>
+      </div>
+    </section>
+    <div class="footer-contact site-container">
+      <div class="footer-update" id="footerUpdate">Consultando última actualización…</div>
+      <div class="footer-social"><div class="footer-social-title">Visita nuestras redes sociales</div><ul class="footer-social-list"><li><a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer"><span class="footer-social-icon">f</span><span class="footer-social-copy"><span class="footer-social-label">Facebook</span><span class="footer-social-value">Mesa Técnica Agroclimática Sololá</span></span></a></li><li><a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt"><span class="footer-social-icon">✉</span><span class="footer-social-copy"><span class="footer-social-label">Contáctanos</span><span class="footer-social-value">mtasolola@cunsol.edu.gt</span></span></a></li></ul></div>
+    </div>
+  </footer>
+
+  <div class="loader" id="loader"><div class="loader-card"><div class="spinner"></div><strong>Cargando módulo agroclimático</strong><p id="loaderMessage">Leyendo histórico municipal y pronóstico…</p></div></div>
+  <div class="chart-modal" id="chartModal" aria-hidden="true"><div class="chart-modal-card" role="dialog" aria-modal="true"><div class="chart-modal-head"><div class="chart-modal-title"><img class="chart-modal-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><span id="chartModalTitle">Gráfica ampliada</span></div><button class="chart-modal-close" id="chartModalClose" type="button" aria-label="Cerrar">×</button></div><div class="chart-modal-body"><div class="chart-modal-host" id="chartModalHost"></div></div></div></div>
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">⇧</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    "use strict";
+
+    const HIST_URL = "./data/agroclima/historico_municipios.json";
+    const PRED_URL = "./data/agroclima/prediccion_balance_hidrico.json";
+    const IS_MOBILE = window.matchMedia("(max-width: 760px)").matches;
+    const FONT = '"Times New Roman", Times, serif';
+    const MONTHS = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+    Chart.defaults.font.family = FONT;
+    Chart.defaults.font.size = IS_MOBILE ? 11 : 15;
+    Chart.defaults.color = "#415c55";
+
+    const STATE = {
+      hist: null, pred: null, municipalities: [], selected: null,
+      start: null, end: null, charts: {}, map: null, mapLayer: null,
+      fullscreen: null, resizeTimer: null
+    };
+
+    const COLORS = {
+      green: "rgba(47,122,98,.95)", greenSoft: "rgba(47,122,98,.16)",
+      blue: "rgba(22,92,119,.95)", blueSoft: "rgba(42,157,183,.18)",
+      yellow: "rgba(240,197,62,.95)", yellowSoft: "rgba(240,197,62,.2)",
+      brown: "rgba(154,109,53,.95)", brownSoft: "rgba(154,109,53,.16)",
+      red: "rgba(185,79,60,.95)", redSoft: "rgba(185,79,60,.16)",
+      purple: "rgba(112,83,164,.95)", purpleSoft: "rgba(112,83,164,.16)"
+    };
+
+    async function fetchJson(url) {
+      const response = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`No se pudo leer ${url}: ${response.status}`);
+      const data = await response.json();
+      if (!data || typeof data !== "object") throw new Error(`El archivo ${url} no contiene JSON válido.`);
+      return data;
+    }
+
+    const valid = value => value !== null && value !== undefined && Number.isFinite(Number(value));
+    const number = value => valid(value) ? Number(value) : null;
+    const sum = values => { const v = values.filter(valid).map(Number); return v.length ? v.reduce((a,b)=>a+b,0) : null; };
+    const mean = values => { const v = values.filter(valid).map(Number); return v.length ? v.reduce((a,b)=>a+b,0)/v.length : null; };
+    const max = values => { const v = values.filter(valid).map(Number); return v.length ? Math.max(...v) : null; };
+    const min = values => { const v = values.filter(valid).map(Number); return v.length ? Math.min(...v) : null; };
+    const round = (value, digits=2) => valid(value) ? Number(Number(value).toFixed(digits)) : null;
+    const fmt = (value, digits=1, suffix="") => valid(value) ? `${Number(value).toLocaleString("es-GT", {minimumFractionDigits:digits,maximumFractionDigits:digits})}${suffix}` : "—";
+    const fmtDate = value => { if (!value) return "—"; const d = new Date(`${String(value).slice(0,10)}T12:00:00`); return Number.isNaN(d.getTime()) ? value : new Intl.DateTimeFormat("es-GT", {day:"2-digit",month:"short",year:"numeric"}).format(d); };
+    const fmtDateTime = value => { if (!value) return "—"; const d = new Date(value); return Number.isNaN(d.getTime()) ? value : new Intl.DateTimeFormat("es-GT", {dateStyle:"medium",timeStyle:"short"}).format(d); };
+    const escapeHtml = value => String(value ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
+
+    function balanceLabel(value) {
+      if (!valid(value)) return "Sin datos";
+      if (value <= -5) return "Déficit alto";
+      if (value < -2) return "Déficit moderado";
+      if (value <= 2) return "Equilibrado";
+      if (value < 10) return "Exceso moderado";
+      return "Exceso alto";
+    }
+
+    function stressClass(level) {
+      const text = String(level || "").toLowerCase();
+      if (text.includes("alto")) return "tag-high";
+      if (text.includes("moderado")) return "tag-moderate";
+      return "tag-low";
+    }
+
+    function balanceColor(value, alpha=.9) {
+      if (!valid(value)) return `rgba(111,129,124,${alpha})`;
+      if (value <= -5) return `rgba(185,79,60,${alpha})`;
+      if (value < -2) return `rgba(209,126,59,${alpha})`;
+      if (value <= 2) return `rgba(240,197,62,${alpha})`;
+      if (value < 10) return `rgba(107,187,82,${alpha})`;
+      return `rgba(42,157,183,${alpha})`;
+    }
+
+    function currentHistMunicipality(name=STATE.selected) { return (STATE.hist?.municipios || []).find(m => m.nombre === name) || null; }
+    function currentPredMunicipality(name=STATE.selected) { return (STATE.pred?.municipios || []).find(m => m.nombre === name) || null; }
+
+    function filterRecords(records, start=STATE.start, end=STATE.end) {
+      return (records || []).filter(r => (!start || r.fecha >= start) && (!end || r.fecha <= end));
+    }
+
+    function filteredHist(name=STATE.selected) { return filterRecords(currentHistMunicipality(name)?.registros || []); }
+    function predRecords(name=STATE.selected) { return currentPredMunicipality(name)?.registros || []; }
+
+    function statsFor(name) {
+      const records = filteredHist(name);
+      return {
+        records,
+        rain: sum(records.map(r=>r.precipitacion_mm)),
+        et0: sum(records.map(r=>r.et0_mm)),
+        balance: sum(records.map(r=>r.balance_hidrico_mm)),
+        soil: mean(records.map(r=>r.humedad_suelo_0_100cm_m3_m3)),
+        vpd: max(records.map(r=>r.vpd_max_kpa)),
+        dry: max(records.map(r=>r.dias_secos_consecutivos)) || 0,
+        radiation: sum(records.map(r=>r.radiacion_solar_mj_m2)),
+        sunshine: sum(records.map(r=>r.horas_sol))
+      };
+    }
+
+    function predStatsFor(name) {
+      const m = currentPredMunicipality(name);
+      const r = m?.resumen || {};
+      return {
+        balance: number(r.balance_hidrico_total_mm),
+        soil: number(r.humedad_suelo_perfil_media_m3_m3),
+        vpd: number(r.vpd_maximo_kpa),
+        dry: number(r.max_dias_secos_consecutivos),
+        stressHigh: number(r.dias_estres_alto_orientativo)
+      };
+    }
+
+    function baseOptions(extra={}) {
+      return {
+        responsive:true,
+        maintainAspectRatio:false,
+        interaction:{mode:"index",intersect:false},
+        animation:{duration:IS_MOBILE?0:500},
+        plugins:{
+          legend:{position:"top",labels:{usePointStyle:true,boxWidth:10,padding:IS_MOBILE?10:18,font:{family:FONT,size:IS_MOBILE?10:14,weight:"700"}}},
+          tooltip:{backgroundColor:"rgba(17,57,47,.96)",titleFont:{family:FONT,size:14},bodyFont:{family:FONT,size:13},padding:10,cornerRadius:8}
+        },
+        scales:{
+          x:{grid:{display:false},ticks:{maxRotation:0,autoSkip:true,maxTicksLimit:IS_MOBILE?6:12,font:{family:FONT,size:IS_MOBILE?9:12}}},
+          y:{beginAtZero:false,grid:{color:"rgba(31,96,77,.1)"},ticks:{font:{family:FONT,size:IS_MOBILE?9:12}}}
+        },
+        ...extra
+      };
+    }
+
+    function destroyChart(key) { if (STATE.charts[key]) { STATE.charts[key].destroy(); delete STATE.charts[key]; } }
+    function clearEmpty(containerId) { document.getElementById(containerId)?.querySelectorAll(".chart-empty").forEach(n=>n.remove()); }
+    function emptyChart(key, containerId, message) { destroyChart(key); clearEmpty(containerId); const box=document.getElementById(containerId); if (!box) return; const note=document.createElement("div"); note.className="chart-empty"; note.textContent=message; box.appendChild(note); }
+
+    function renderKpis() {
+      const st = statsFor(STATE.selected);
+      document.getElementById("summaryTitle").textContent = `Indicadores agroclimáticos · ${STATE.selected || "Municipio"}`;
+      document.getElementById("summaryPeriod").textContent = st.records.length ? `${fmtDate(st.records[0].fecha)} al ${fmtDate(st.records.at(-1).fecha)} · ${st.records.length} días` : "Sin registros en el periodo seleccionado";
+      document.getElementById("kpiRain").textContent = fmt(st.rain,1," mm");
+      document.getElementById("kpiEt0").textContent = fmt(st.et0,1," mm");
+      const balanceEl = document.getElementById("kpiBalance"); balanceEl.textContent = fmt(st.balance,1," mm"); balanceEl.style.color = balanceColor(st.balance,1);
+      document.getElementById("kpiBalanceDetail").textContent = balanceLabel(st.balance);
+      document.getElementById("kpiSoil").textContent = fmt(st.soil,3," m³/m³");
+      document.getElementById("kpiVpd").textContent = fmt(st.vpd,2," kPa");
+      document.getElementById("kpiDry").textContent = fmt(st.dry,0," días");
+    }
+
+    function renderWaterChart() {
+      const rec = filteredHist(); const key="water"; const box="waterChartBox"; clearEmpty(box);
+      if (!rec.length) return emptyChart(key,box,"No hay registros históricos para este filtro.");
+      destroyChart(key);
+      STATE.charts[key] = new Chart(document.getElementById("waterChart"), {
+        type:"bar",
+        data:{labels:rec.map(r=>r.fecha),datasets:[
+          {label:"Precipitación",data:rec.map(r=>r.precipitacion_mm),backgroundColor:COLORS.blueSoft,borderColor:COLORS.blue,borderWidth:1.5,borderRadius:4,yAxisID:"y"},
+          {label:"ET₀",data:rec.map(r=>r.et0_mm),backgroundColor:COLORS.brownSoft,borderColor:COLORS.brown,borderWidth:1.5,borderRadius:4,yAxisID:"y"},
+          {type:"line",label:"Balance P−ET₀",data:rec.map(r=>r.balance_hidrico_mm),borderColor:COLORS.green,backgroundColor:COLORS.greenSoft,borderWidth:3,pointRadius:IS_MOBILE?0:2,tension:.2,fill:false,yAxisID:"y"}
+        ]},
+        options:baseOptions({scales:{x:{stacked:false,grid:{display:false},ticks:{maxTicksLimit:IS_MOBILE?6:14}},y:{title:{display:true,text:"Milímetros"},grid:{color:"rgba(31,96,77,.1)"}}}})
+      });
+    }
+
+    function renderCumulativeChart() {
+      const rec=filteredHist(); const key="cumulative",box="cumulativeChartBox"; clearEmpty(box);
+      if (!rec.length) return emptyChart(key,box,"No hay datos para calcular el balance acumulado.");
+      let accumulated=0; const values=rec.map(r=>{ if(valid(r.balance_hidrico_mm)) accumulated+=Number(r.balance_hidrico_mm); return round(accumulated,2); });
+      destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("cumulativeChart"),{type:"line",data:{labels:rec.map(r=>r.fecha),datasets:[{label:"Balance acumulado",data:values,borderColor:COLORS.green,backgroundColor:COLORS.greenSoft,borderWidth:4,pointRadius:0,tension:.22,fill:"origin",segment:{borderColor:ctx=>ctx.p1.parsed.y<0?COLORS.red:COLORS.green,backgroundColor:ctx=>ctx.p1.parsed.y<0?COLORS.redSoft:COLORS.greenSoft}}]},options:baseOptions({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:IS_MOBILE?6:12}},y:{title:{display:true,text:"mm acumulados"},grid:{color:"rgba(31,96,77,.1)"}}}})});
+    }
+
+    function renderSoilChart() {
+      const rec=filteredHist(); const key="soil",box="soilChartBox"; clearEmpty(box);
+      if (!rec.some(r=>valid(r.humedad_suelo_0_7cm_m3_m3)||valid(r.humedad_suelo_0_100cm_m3_m3))) return emptyChart(key,box,"Las variables de humedad del suelo no están disponibles en este periodo.");
+      destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("soilChart"),{type:"line",data:{labels:rec.map(r=>r.fecha),datasets:[
+        {label:"0–7 cm",data:rec.map(r=>r.humedad_suelo_0_7cm_m3_m3),borderColor:COLORS.blue,borderWidth:2.5,pointRadius:0,tension:.25},
+        {label:"7–28 cm",data:rec.map(r=>r.humedad_suelo_7_28cm_m3_m3),borderColor:COLORS.green,borderWidth:2.5,pointRadius:0,tension:.25},
+        {label:"28–100 cm",data:rec.map(r=>r.humedad_suelo_28_100cm_m3_m3),borderColor:COLORS.brown,borderWidth:2.5,pointRadius:0,tension:.25},
+        {label:"Perfil 0–100 cm",data:rec.map(r=>r.humedad_suelo_0_100cm_m3_m3),borderColor:COLORS.purple,backgroundColor:COLORS.purpleSoft,borderWidth:4,pointRadius:0,tension:.25,fill:false}
+      ]},options:baseOptions({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:IS_MOBILE?6:12}},y:{title:{display:true,text:"m³/m³"},grid:{color:"rgba(31,96,77,.1)"}}}})});
+    }
+
+    function renderStressChart() {
+      const rec=filteredHist(); const key="stress",box="stressChartBox"; clearEmpty(box);
+      if (!rec.some(r=>valid(r.vpd_max_kpa)||valid(r.temperatura_suelo_0_100cm_c))) return emptyChart(key,box,"No hay VPD o temperatura del suelo para este filtro.");
+      destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("stressChart"),{type:"line",data:{labels:rec.map(r=>r.fecha),datasets:[
+        {label:"VPD máximo",data:rec.map(r=>r.vpd_max_kpa),borderColor:COLORS.red,backgroundColor:COLORS.redSoft,borderWidth:3,pointRadius:0,tension:.22,yAxisID:"y"},
+        {label:"Temperatura perfil suelo",data:rec.map(r=>r.temperatura_suelo_0_100cm_c),borderColor:COLORS.brown,backgroundColor:COLORS.brownSoft,borderWidth:3,pointRadius:0,tension:.22,yAxisID:"y1"}
+      ]},options:baseOptions({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:IS_MOBILE?6:12}},y:{position:"left",title:{display:true,text:"VPD (kPa)"},grid:{color:"rgba(31,96,77,.1)"}},y1:{position:"right",title:{display:true,text:"Temperatura (°C)"},grid:{display:false}}}})});
+    }
+
+    function renderSolarChart() {
+      const rec=filteredHist(); const key="solar",box="solarChartBox"; clearEmpty(box);
+      if (!rec.some(r=>valid(r.radiacion_solar_mj_m2)||valid(r.horas_sol))) return emptyChart(key,box,"No hay radiación solar u horas de sol disponibles.");
+      destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("solarChart"),{type:"bar",data:{labels:rec.map(r=>r.fecha),datasets:[
+        {label:"Radiación solar",data:rec.map(r=>r.radiacion_solar_mj_m2),backgroundColor:COLORS.yellowSoft,borderColor:COLORS.yellow,borderWidth:1.5,borderRadius:4,yAxisID:"y"},
+        {type:"line",label:"Horas de sol",data:rec.map(r=>r.horas_sol),borderColor:COLORS.brown,backgroundColor:COLORS.brownSoft,borderWidth:3,pointRadius:0,tension:.22,yAxisID:"y1"}
+      ]},options:baseOptions({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:IS_MOBILE?6:12}},y:{position:"left",title:{display:true,text:"MJ/m²"},grid:{color:"rgba(31,96,77,.1)"}},y1:{position:"right",title:{display:true,text:"Horas"},grid:{display:false},beginAtZero:true}}})});
+    }
+
+    function renderMonthlyChart() {
+      const rec=filteredHist(); const key="monthly",box="monthlyChartBox"; clearEmpty(box);
+      if (!rec.length) return emptyChart(key,box,"No hay datos para el patrón mensual.");
+      const groups={}; rec.forEach(r=>{const key=r.fecha.slice(0,7);(groups[key] ||= []).push(r)}); const keys=Object.keys(groups).sort();
+      destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("monthlyChart"),{type:"bar",data:{labels:keys.map(k=>`${MONTHS[Number(k.slice(5,7))]} ${k.slice(0,4)}`),datasets:[
+        {label:"Precipitación",data:keys.map(k=>sum(groups[k].map(r=>r.precipitacion_mm))),backgroundColor:COLORS.blueSoft,borderColor:COLORS.blue,borderWidth:1.5,borderRadius:6},
+        {label:"ET₀",data:keys.map(k=>sum(groups[k].map(r=>r.et0_mm))),backgroundColor:COLORS.brownSoft,borderColor:COLORS.brown,borderWidth:1.5,borderRadius:6},
+        {type:"line",label:"Balance",data:keys.map(k=>sum(groups[k].map(r=>r.balance_hidrico_mm))),borderColor:COLORS.green,backgroundColor:COLORS.greenSoft,borderWidth:4,pointRadius:4,tension:.2}
+      ]},options:baseOptions({scales:{x:{grid:{display:false}},y:{title:{display:true,text:"Milímetros"},grid:{color:"rgba(31,96,77,.1)"}}}})});
+    }
+
+    function comparisonData(metric) {
+      return STATE.municipalities.map(name=>{const st=statsFor(name); const value={balance:st.balance,soil:st.soil,vpd:st.vpd,dry:st.dry,rain:st.rain,et0:st.et0}[metric]; return {name,value};}).filter(x=>valid(x.value)).sort((a,b)=>Number(b.value)-Number(a.value));
+    }
+
+    function renderComparison() {
+      const metric=document.getElementById("comparisonMetric").value; const data=comparisonData(metric); const key="comparison",box="comparisonChartBox"; clearEmpty(box);
+      if (!data.length) return emptyChart(key,box,"No hay valores municipales para comparar.");
+      const meta={balance:["Balance total","mm"],soil:["Humedad del perfil","m³/m³"],vpd:["VPD máximo","kPa"],dry:["Racha seca","días"],rain:["Precipitación total","mm"],et0:["ET₀ total","mm"]}[metric];
+      destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("comparisonChart"),{type:"bar",data:{labels:data.map(x=>x.name),datasets:[{label:meta[0],data:data.map(x=>x.value),backgroundColor:data.map(x=>metric==="balance"?balanceColor(x.value,.78):COLORS.greenSoft),borderColor:data.map(x=>metric==="balance"?balanceColor(x.value,1):COLORS.green),borderWidth:1.5,borderRadius:6}]},options:baseOptions({indexAxis:"y",scales:{x:{title:{display:true,text:meta[1]},grid:{color:"rgba(31,96,77,.1)"}},y:{grid:{display:false},ticks:{autoSkip:false,font:{size:IS_MOBILE?9:12}}}}})});
+    }
+
+    function initMap() {
+      if (!window.L) return;
+      STATE.map=L.map("agroMap",{scrollWheelZoom:false}).setView([14.73,-91.21],10);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(STATE.map);
+      STATE.mapLayer=L.layerGroup().addTo(STATE.map);
+      setTimeout(()=>STATE.map.invalidateSize(),200);
+    }
+
+    function mapData(metric) {
+      return STATE.municipalities.map(name=>{
+        const h=currentHistMunicipality(name); const st=statsFor(name); const ps=predStatsFor(name);
+        let value,label;
+        if(metric==="balance"){value=st.balance;label=`Balance histórico: ${fmt(value,1," mm")}`}
+        if(metric==="soil"){value=st.soil;label=`Humedad perfil: ${fmt(value,3," m³/m³")}`}
+        if(metric==="vpd"){value=st.vpd;label=`VPD máximo: ${fmt(value,2," kPa")}`}
+        if(metric==="forecastBalance"){value=ps.balance;label=`Balance pronosticado: ${fmt(value,1," mm")}`}
+        if(metric==="forecastStress"){value=ps.stressHigh;label=`Días con estrés alto: ${fmt(value,0," días")}`}
+        return {name,lat:h?.lat,lon:h?.lon,value,label};
+      }).filter(x=>valid(x.lat)&&valid(x.lon)&&valid(x.value));
+    }
+
+    function interpolateColor(t) {
+      t=Math.max(0,Math.min(1,t));
+      const stops=[[185,79,60],[240,197,62],[107,187,82],[42,157,183]]; const p=t*(stops.length-1); const i=Math.min(stops.length-2,Math.floor(p)); const f=p-i; const c=stops[i].map((v,j)=>Math.round(v+(stops[i+1][j]-v)*f)); return `rgb(${c.join(",")})`;
+    }
+
+    function renderMap() {
+      if(!STATE.map) return; const metric=document.getElementById("mapMetric").value; const data=mapData(metric); STATE.mapLayer.clearLayers();
+      if(!data.length) return;
+      const values=data.map(x=>Number(x.value)); const lo=min(values),hi=max(values); const range=(hi-lo)||1;
+      data.forEach(item=>{const t=(item.value-lo)/range; const marker=L.circleMarker([item.lat,item.lon],{radius:item.name===STATE.selected?13:10,color:"#fff",weight:2,fillColor:interpolateColor(t),fillOpacity:.92}).addTo(STATE.mapLayer); marker.bindTooltip(`<strong>${escapeHtml(item.name)}</strong><br>${escapeHtml(item.label)}`); marker.on("click",()=>selectMunicipality(item.name));});
+      const labels={balance:["Déficit","Equilibrio","Exceso"],soil:["Más seco","Intermedio","Más húmedo"],vpd:["Menor demanda","Intermedio","Mayor demanda"],forecastBalance:["Déficit previsto","Equilibrio","Exceso previsto"],forecastStress:["Menor riesgo","Intermedio","Mayor riesgo"]}[metric];
+      document.getElementById("legendMin").textContent=labels[0]; document.getElementById("legendMid").textContent=labels[1]; document.getElementById("legendMax").textContent=labels[2];
+    }
+
+    function renderForecast() {
+      const rec=predRecords(); const key="forecast",box="forecastChartBox"; clearEmpty(box);
+      const pred=currentPredMunicipality(); const period=document.getElementById("forecastPeriod");
+      period.textContent=rec.length?`${STATE.selected}: ${fmtDate(rec[0].fecha)} al ${fmtDate(rec.at(-1).fecha)} · ${rec.length} días`:`No hay pronóstico para ${STATE.selected || "el municipio"}`;
+      if(!rec.length){emptyChart(key,box,"No hay registros de pronóstico para este municipio.");document.getElementById("forecastCards").innerHTML='<div class="forecast-card">Pronóstico pendiente de generar.</div>';return;}
+      destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("forecastChart"),{type:"bar",data:{labels:rec.map(r=>r.fecha),datasets:[
+        {label:"Precipitación",data:rec.map(r=>r.precipitacion_mm),backgroundColor:COLORS.blueSoft,borderColor:COLORS.blue,borderWidth:1.5,borderRadius:5,yAxisID:"y"},
+        {label:"ET₀",data:rec.map(r=>r.et0_mm),backgroundColor:COLORS.brownSoft,borderColor:COLORS.brown,borderWidth:1.5,borderRadius:5,yAxisID:"y"},
+        {type:"line",label:"Balance",data:rec.map(r=>r.balance_hidrico_mm),borderColor:COLORS.green,backgroundColor:COLORS.greenSoft,borderWidth:4,pointRadius:3,tension:.2,yAxisID:"y"},
+        {type:"line",label:"Humedad perfil",data:rec.map(r=>r.humedad_suelo_0_81cm_m3_m3),borderColor:COLORS.purple,backgroundColor:COLORS.purpleSoft,borderWidth:3,pointRadius:2,tension:.22,yAxisID:"y1"}
+      ]},options:baseOptions({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:IS_MOBILE?6:16}},y:{position:"left",title:{display:true,text:"Milímetros"},grid:{color:"rgba(31,96,77,.1)"}},y1:{position:"right",title:{display:true,text:"Humedad m³/m³"},grid:{display:false}}}})});
+      document.getElementById("forecastCards").innerHTML=rec.slice(0,IS_MOBILE?4:6).map(r=>{
+        const level=r.nivel_estres_hidrico_orientativo || "bajo"; const bal=number(r.balance_hidrico_mm); return `<article class="forecast-card"><div class="forecast-date">${escapeHtml(fmtDate(r.fecha))}</div><div class="forecast-main"><span class="forecast-balance" style="color:${balanceColor(bal,1)}">${fmt(bal,1," mm")}</span><span class="forecast-tag ${stressClass(level)}">Estrés ${escapeHtml(level)}</span></div><div class="forecast-meta"><span>Lluvia: <strong>${fmt(r.precipitacion_mm,1," mm")}</strong></span><span>ET₀: <strong>${fmt(r.et0_mm,1," mm")}</strong></span><span>Prob. lluvia: <strong>${fmt(r.probabilidad_precipitacion_max_pct,0," %")}</strong></span><span>VPD: <strong>${fmt(r.vpd_max_kpa,2," kPa")}</strong></span><span>Humedad: <strong>${fmt(r.humedad_suelo_0_81cm_m3_m3,3)}</strong></span><span>Días secos: <strong>${fmt(r.dias_secos_consecutivos,0)}</strong></span></div></article>`;
+      }).join("");
+    }
+
+    function renderMunicipalityCards() {
+      const cards=STATE.municipalities.map(name=>{const st=statsFor(name);return `<article class="mun-card"><div class="mun-name">${escapeHtml(name)}</div><div class="mun-period">${st.records.length} días analizados</div><div class="mun-balance" style="color:${balanceColor(st.balance,1)}">${fmt(st.balance,1," mm")}</div><div class="forecast-tag ${st.balance< -2?'tag-high':st.balance>2?'tag-low':'tag-moderate'}">${escapeHtml(balanceLabel(st.balance))}</div><div class="mun-stats"><div class="mun-stat">Lluvia<strong>${fmt(st.rain,1," mm")}</strong></div><div class="mun-stat">ET₀<strong>${fmt(st.et0,1," mm")}</strong></div><div class="mun-stat">Humedad perfil<strong>${fmt(st.soil,3)}</strong></div><div class="mun-stat">VPD máximo<strong>${fmt(st.vpd,2," kPa")}</strong></div></div><button class="mun-open" type="button" data-municipio="${escapeHtml(name)}">Ver municipio</button></article>`}).join("");
+      document.getElementById("municipalityCards").innerHTML=cards;
+      document.querySelectorAll(".mun-open").forEach(btn=>btn.addEventListener("click",()=>selectMunicipality(btn.dataset.municipio)));
+    }
+
+    function renderTable() {
+      const rec=filteredHist(); const tbody=document.getElementById("detailTable");
+      if(!rec.length){tbody.innerHTML='<tr><td colspan="11" style="text-align:center">Sin registros para el filtro seleccionado.</td></tr>';return;}
+      tbody.innerHTML=rec.map(r=>`<tr><td>${escapeHtml(fmtDate(r.fecha))}</td><td>${fmt(r.precipitacion_mm,2," mm")}</td><td>${fmt(r.et0_mm,2," mm")}</td><td class="${number(r.balance_hidrico_mm)<0?'cell-negative':'cell-positive'}">${fmt(r.balance_hidrico_mm,2," mm")}</td><td class="${number(r.balance_hidrico_acumulado_mm)<0?'cell-negative':'cell-positive'}">${fmt(r.balance_hidrico_acumulado_mm,2," mm")}</td><td>${fmt(r.humedad_suelo_0_7cm_m3_m3,3)}</td><td>${fmt(r.humedad_suelo_0_100cm_m3_m3,3)}</td><td>${fmt(r.vpd_max_kpa,2," kPa")}</td><td>${fmt(r.radiacion_solar_mj_m2,2," MJ/m²")}</td><td>${fmt(r.horas_sol,2," h")}</td><td>${fmt(r.dias_secos_consecutivos,0)}</td></tr>`).join("");
+    }
+
+    function renderAll() {
+      renderKpis(); renderWaterChart(); renderCumulativeChart(); renderSoilChart(); renderStressChart(); renderSolarChart(); renderMonthlyChart(); renderComparison(); renderMap(); renderForecast(); renderMunicipalityCards(); renderTable();
+    }
+
+    function selectMunicipality(name) {
+      if(!STATE.municipalities.includes(name)) return; STATE.selected=name; document.getElementById("municipioSelect").value=name; renderAll(); window.scrollTo({top:document.querySelector(".filter-panel").offsetTop-100,behavior:"smooth"});
+    }
+
+    function setupFilters() {
+      document.getElementById("aplicarFiltros").addEventListener("click",()=>{
+        STATE.selected=document.getElementById("municipioSelect").value; STATE.start=document.getElementById("fechaInicio").value||null; STATE.end=document.getElementById("fechaFin").value||null;
+        if(STATE.start&&STATE.end&&STATE.start>STATE.end){[STATE.start,STATE.end]=[STATE.end,STATE.start];document.getElementById("fechaInicio").value=STATE.start;document.getElementById("fechaFin").value=STATE.end;}
+        renderAll();
+      });
+      document.getElementById("restablecerFiltros").addEventListener("click",()=>{const dates=(STATE.hist?.municipios||[]).flatMap(m=>(m.registros||[]).map(r=>r.fecha)).sort();STATE.start=dates[0]||null;STATE.end=dates.at(-1)||null;document.getElementById("fechaInicio").value=STATE.start||"";document.getElementById("fechaFin").value=STATE.end||"";renderAll();});
+      document.getElementById("comparisonMetric").addEventListener("change",renderComparison);
+      document.getElementById("mapMetric").addEventListener("change",renderMap);
+    }
+
+    function openChartModal(containerId,title) {
+      const container=document.getElementById(containerId); if(!container||STATE.fullscreen) return; const parent=container.parentNode; const next=container.nextSibling; const oldHeight=container.style.height;
+      STATE.fullscreen={container,parent,next,oldHeight}; document.getElementById("chartModalTitle").textContent=title; document.getElementById("chartModalHost").appendChild(container); container.style.height="100%"; document.getElementById("chartModal").classList.add("open");document.getElementById("chartModal").setAttribute("aria-hidden","false");document.body.classList.add("modal-open");setTimeout(()=>Object.values(STATE.charts).forEach(ch=>ch?.resize()),100);
+    }
+    function closeChartModal() { if(!STATE.fullscreen) return; const {container,parent,next,oldHeight}=STATE.fullscreen; if(next) parent.insertBefore(container,next); else parent.appendChild(container); container.style.height=oldHeight; STATE.fullscreen=null; document.getElementById("chartModal").classList.remove("open");document.getElementById("chartModal").setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");setTimeout(()=>Object.values(STATE.charts).forEach(ch=>ch?.resize()),100); }
+    function setupModal() { document.querySelectorAll(".zoom-btn").forEach(btn=>btn.addEventListener("click",()=>openChartModal(btn.dataset.zoom,btn.dataset.title)));document.getElementById("chartModalClose").addEventListener("click",closeChartModal);document.getElementById("chartModal").addEventListener("click",e=>{if(e.target.id==="chartModal")closeChartModal()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeChartModal()}); }
+
+    function updateStatus(histOk,predOk) {
+      const histBadge=document.getElementById("histBadge"),predBadge=document.getElementById("predBadge");histBadge.classList.toggle("ok",histOk);histBadge.classList.toggle("error",!histOk);predBadge.classList.toggle("ok",predOk);predBadge.classList.toggle("error",!predOk);
+      document.getElementById("statusText").textContent=`Histórico: ${histOk?"disponible":"no disponible"} · Pronóstico: ${predOk?"disponible":"no disponible"}`;
+    }
+
+    async function load() {
+      let histError=null,predError=null;
+      const [histResult,predResult]=await Promise.allSettled([fetchJson(HIST_URL),fetchJson(PRED_URL)]);
+      if(histResult.status==="fulfilled") STATE.hist=histResult.value; else histError=histResult.reason;
+      if(predResult.status==="fulfilled") STATE.pred=predResult.value; else predError=predResult.reason;
+      updateStatus(Boolean(STATE.hist?.ok),Boolean(STATE.pred?.ok));
+      if(!STATE.hist?.municipios?.length) throw new Error(histError?.message || "El histórico municipal no contiene municipios.");
+      STATE.municipalities=STATE.hist.municipios.filter(m=>(m.registros||[]).length).map(m=>m.nombre).sort((a,b)=>a.localeCompare(b,"es"));
+      STATE.selected=STATE.municipalities.includes("Sololá")?"Sololá":STATE.municipalities[0];
+      const allDates=STATE.hist.municipios.flatMap(m=>(m.registros||[]).map(r=>r.fecha)).sort(); STATE.start=allDates[0]||null;STATE.end=allDates.at(-1)||null;
+      const select=document.getElementById("municipioSelect");select.innerHTML=STATE.municipalities.map(name=>`<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("");select.value=STATE.selected;
+      document.getElementById("fechaInicio").value=STATE.start||"";document.getElementById("fechaFin").value=STATE.end||"";document.getElementById("fechaInicio").min=STATE.start||"";document.getElementById("fechaFin").max=STATE.end||"";
+      setupFilters();setupModal();initMap();renderAll();
+      const latest=[STATE.hist?.generated_at_gt,STATE.pred?.generated_at_gt].filter(Boolean).sort().at(-1);document.getElementById("footerUpdate").textContent=`Actualizado por última vez: ${fmtDateTime(latest)}`;
+      if(predError) console.warn("Pronóstico no disponible:",predError);
+      document.getElementById("loader").classList.add("hidden");
+    }
+
+    const toTop=document.getElementById("toTop");window.addEventListener("scroll",()=>toTop.classList.toggle("show",window.scrollY>500));toTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+    window.addEventListener("resize",()=>{clearTimeout(STATE.resizeTimer);STATE.resizeTimer=setTimeout(()=>{Object.values(STATE.charts).forEach(ch=>ch?.resize());STATE.map?.invalidateSize()},180)});
+
+    load().catch(error=>{console.error(error);document.querySelector(".loader-card strong").textContent="No se pudieron cargar los datos";document.getElementById("loaderMessage").textContent=error.message;updateStatus(Boolean(STATE.hist?.ok),Boolean(STATE.pred?.ok));});
+  </script>
+</body>
+</html>
