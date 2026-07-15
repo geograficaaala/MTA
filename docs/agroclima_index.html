@@ -7,6 +7,10 @@
   <title>Agroclima y Balance Hídrico · MTA Sololá</title>
   <meta name="description" content="Dashboard agroclimático municipal de Sololá con balance hídrico, evapotranspiración, humedad del suelo, VPD, radiación solar y pronóstico." />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
@@ -263,9 +267,12 @@
     .partner-logo:hover,.partner-logo:focus-visible{transform:translateY(-3px);outline:none}
     .partner-logo img{display:block;width:100%;height:clamp(50px,4.6vw,86px);object-fit:contain}
     .logo-xs{flex:0 1 78px}.logo-sm{flex:0 1 100px}.logo-md{flex:0 1 130px}.logo-lg{flex:0 1 170px}.logo-xl{flex:0 1 218px}.logo-xxl{flex:0 1 270px}.logo-uvg{flex:0 1 215px}.logo-uvg img{height:clamp(68px,5.9vw,108px)}
-    .footer-contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.55fr);gap:1.4rem;align-items:center;padding-block:2.5rem 3rem}
-    .footer-update{font-size:1.04rem;font-weight:700;line-height:1.5}
-    .footer-social{justify-self:end;width:min(100%,370px)}
+    .footer-contact{position:relative;display:grid;grid-template-columns:minmax(220px,1fr) minmax(300px,.9fr) minmax(190px,.75fr);gap:clamp(1rem,3vw,3rem);align-items:end;padding-block:2.8rem 3.25rem}
+    .footer-update{align-self:center;font-size:1.04rem;font-weight:700;line-height:1.5}
+    .footer-social{justify-self:center;align-self:center;width:min(100%,390px)}
+    .footer-negative-logo{justify-self:end;align-self:end;display:inline-flex;align-items:flex-end;justify-content:flex-end;width:min(220px,100%);transition:transform .18s ease,opacity .18s ease}
+    .footer-negative-logo:hover,.footer-negative-logo:focus-visible{transform:translateY(-3px);opacity:.92;outline:none}
+    .footer-negative-logo img{display:block;width:100%;max-height:150px;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,0,0,.18))}
     .footer-social-title{margin-bottom:.8rem;font-size:1.05rem;font-weight:700}
     .footer-social-list{list-style:none;display:grid;gap:.75rem}
     .footer-social-link{display:flex;align-items:center;gap:.8rem;transition:.18s ease}
@@ -295,7 +302,7 @@
     .to-top.show{display:flex}
 
     @media(max-width:1450px){.kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.municipality-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media(max-width:1120px){.hero-inner{grid-template-columns:1fr;text-align:center}.hero-copy{text-align:justify}.hero-visual{display:none}.filters-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.filters-grid .btn{width:100%}.panel-grid.three{grid-template-columns:1fr 1fr}.panel-grid.three .panel:last-child{grid-column:1/-1}.forecast-grid{grid-template-columns:1fr}.forecast-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.municipality-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-contact{grid-template-columns:1fr}.footer-social{justify-self:start}.partners-logo-row{flex-wrap:wrap}}
+    @media(max-width:1120px){.hero-inner{grid-template-columns:1fr;text-align:center}.hero-copy{text-align:justify}.hero-visual{display:none}.filters-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.filters-grid .btn{width:100%}.panel-grid.three{grid-template-columns:1fr 1fr}.panel-grid.three .panel:last-child{grid-column:1/-1}.forecast-grid{grid-template-columns:1fr}.forecast-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.municipality-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-contact{grid-template-columns:1fr;align-items:center;text-align:center}.footer-update,.footer-social,.footer-negative-logo{justify-self:center}.footer-social{width:min(100%,420px)}.footer-negative-logo{width:min(190px,58vw)}.partners-logo-row{flex-wrap:wrap}}
     @media(max-width:760px){
       :root{--nav-h:72px;--content-pad:.8rem}
       html{font-size:12.5pt}
@@ -308,20 +315,362 @@
       .panel-grid,.panel-grid.three{grid-template-columns:1fr;gap:.75rem}.panel-grid.three .panel:last-child{grid-column:auto}.panel-head{align-items:flex-start;padding:.75rem;gap:.4rem}.panel-title{font-size:.94rem}.panel-subtitle{font-size:.67rem}.panel-actions{gap:.3rem;flex-wrap:wrap;justify-content:flex-end}.panel-select{max-width:150px;font-size:.68rem}.zoom-btn{width:32px;height:32px}.info-btn,.png-btn{min-height:32px;padding:.3rem .48rem;font-size:.62rem}.panel-body{padding:.55rem}.chart-container{height:330px}.chart-container.medium{height:300px}.chart-container.small{height:280px}.panel-note{padding:.55rem .7rem;font-size:.62rem}.explain-head{padding:.75rem;gap:.55rem}.explain-title{font-size:1rem}.explain-subtitle{font-size:.67rem}.flip-back-btn{min-height:34px;padding:.35rem .58rem;font-size:.64rem}.explain-body{padding:.72rem}.explain-grid{grid-template-columns:1fr;gap:.52rem}.explain-block{padding:.68rem}.explain-block h4{font-size:.75rem}.explain-block p,.explain-block li{font-size:.66rem;line-height:1.42}
       #agroMap{height:390px}.forecast-cards{grid-template-columns:1fr 1fr;gap:.55rem}.forecast-card{padding:.65rem}.forecast-meta{font-size:.64rem}.municipality-grid{grid-template-columns:1fr 1fr;gap:.55rem}.mun-card{padding:.72rem}.mun-name{font-size:.84rem}.mun-balance{font-size:1.2rem}.mun-stat{font-size:.6rem}.mun-stat strong{font-size:.72rem}.radar-modal{padding:.35rem}.radar-modal-card{width:100%;max-height:97vh;border-radius:.9rem}.radar-modal-body{padding:.55rem}.radar-layout{grid-template-columns:1fr}.radar-chart-box{min-height:390px}.radar-metrics{grid-template-columns:1fr 1fr}.chart-touch-hint{right:.45rem;bottom:.4rem;font-size:.56rem}
       .table-wrap{max-height:500px}th,td{padding:.5rem;font-size:.65rem}
-      .partners-ribbon{padding:1rem .5rem}.partner-logo img{height:46px}.footer-contact{padding-block:1.8rem 2.2rem}.footer-update{font-size:.86rem}.chart-modal{padding:.35rem}.chart-modal-card{width:100%;height:96vh;border-radius:.9rem}.chart-modal-body{padding:.45rem}
+      .partners-ribbon{padding:1rem .5rem}.partner-logo img{height:46px}.footer-contact{padding-block:1.8rem 2.2rem}.footer-update{font-size:.86rem;text-align:center}.footer-negative-logo{width:min(170px,58vw)}.chart-modal{padding:.35rem}.chart-modal-card{width:100%;height:96vh;border-radius:.9rem}.chart-modal-body{padding:.45rem}
     }
     @media(max-width:480px){.kpi-grid{grid-template-columns:1fr 1fr}.forecast-cards,.municipality-grid{grid-template-columns:1fr}.filters-grid{grid-template-columns:1fr}.filters-grid .field:first-child{grid-column:auto}.filter-actions{display:grid;grid-template-columns:1fr}.chart-container{height:300px}.panel-actions .panel-select{display:none}.hero-title{font-size:1.72rem}.brand-name{font-size:.74rem}.brand-sub{display:none}.radar-chart-box{min-height:340px}.radar-metrics{grid-template-columns:1fr}.chart-touch-hint{display:none}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+  
+    /* ============================================================
+       HEADER Y FOOTER COPIADOS DEL MÓDULO DE TEMPERATURA
+    ============================================================ */
+    .navbar,
+    footer {
+      font-family: 'Outfit', 'Segoe UI', Arial, sans-serif;
+    }
+
+
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      min-height: var(--nav-h);
+      background:
+        linear-gradient(90deg, rgba(31, 96, 77, 0.98), rgba(42, 157, 183, 0.98) 58%, rgba(240, 197, 62, 0.96));
+      border-bottom: 4px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 30px rgba(17, 57, 47, 0.22);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--leaf-500), var(--sun-500), var(--sky-700), var(--earth-600));
+    }
+
+    .navbar-inner {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: #ffffff;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
+      display: block;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 6px 12px rgba(17, 57, 47, 0.22));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+
+    .brand-sub {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-name {
+      color: #ffffff;
+      font-size: clamp(1.05rem, 1.4vw, 1.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      white-space: nowrap;
+      text-shadow: 0 2px 12px rgba(17, 57, 47, 0.18);
+    }
+
+    .home-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      color: var(--leaf-950);
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(255,255,255,0.84);
+      box-shadow: 0 8px 18px rgba(17, 57, 47, 0.16);
+      font-size: 0.88rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .home-button:hover,
+    .home-button:focus-visible {
+      transform: translateY(-2px);
+      background: #ffffff;
+      box-shadow: 0 12px 26px rgba(17, 57, 47, 0.22);
+      outline: none;
+    }
+
+    
+
+
+
+    footer {
+      margin-top: 2rem;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(240, 197, 62, 0.28), transparent 32%),
+        radial-gradient(circle at 90% 0%, rgba(42, 157, 183, 0.28), transparent 32%),
+        linear-gradient(135deg, var(--leaf-950), var(--leaf-800) 46%, var(--earth-800));
+    }
+
+    .partners-ribbon-wrap {
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid rgba(31, 96, 77, 0.12);
+    }
+
+    .partners-ribbon {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 1.55rem clamp(0.7rem, 1.25vw, 1.35rem) 1.45rem;
+      background: #ffffff;
+    }
+
+    .partners-ribbon-title {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .partners-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.42rem, 0.95vw, 1.15rem);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .partners-logo-row + .partners-logo-row {
+      margin-top: 1.05rem;
+    }
+
+    .partner-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 0.16rem;
+      border-radius: 8px;
+      transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+    }
+
+    .partner-logo:hover,
+    .partner-logo:focus-visible {
+      transform: translateY(-4px);
+      opacity: 0.94;
+      filter: saturate(1.08);
+      outline: none;
+    }
+
+    .partner-logo img {
+      display: block;
+      width: 100%;
+      height: clamp(54px, 4.9vw, 90px);
+      object-fit: contain;
+    }
+
+    .partner-logo.logo-xs { flex: 0 1 78px; }
+    .partner-logo.logo-sm { flex: 0 1 100px; }
+    .partner-logo.logo-md { flex: 0 1 130px; }
+    .partner-logo.logo-lg { flex: 0 1 170px; }
+    .partner-logo.logo-xl { flex: 0 1 218px; }
+    .partner-logo.logo-xxl { flex: 0 1 270px; }
+    .partner-logo.logo-uvg { flex: 0 1 215px; }
+    .partner-logo.logo-uvg img { height: clamp(72px, 6.2vw, 112px); }
+
+    .footer-contact {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(320px, 0.9fr) minmax(220px, 1fr);
+      gap: clamp(1rem, 3vw, 3rem);
+      align-items: end;
+      padding-block: 2.8rem 3.25rem;
+    }
+
+    .footer-update-chip {
+      color: #ffffff;
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.5;
+      text-align: left;
+      align-self: center;
+    }
+
+    .footer-social {
+      justify-self: center;
+      width: min(100%, 420px);
+      color: #ffffff;
+      text-align: left;
+      align-self: center;
+    }
+
+    .footer-social-title {
+      margin-bottom: 0.85rem;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-social-list {
+      list-style: none;
+      display: grid;
+      gap: 0.78rem;
+    }
+
+    .footer-social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: #ffffff;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .footer-social-link:hover,
+    .footer-social-link:focus-visible {
+      transform: translateX(4px);
+      opacity: 0.88;
+      outline: none;
+    }
+
+    .footer-social-icon {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .footer-social-copy {
+      display: grid;
+      gap: 0.08rem;
+    }
+
+    .footer-social-label {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .footer-social-value {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.96rem;
+    }
+
+    .footer-negative-logo {
+      justify-self: end;
+      align-self: end;
+      display: inline-flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      width: min(220px, 100%);
+    }
+
+    .footer-negative-logo img {
+      display: block;
+      width: 100%;
+      max-height: 150px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
+    }
+
+    
+
+
+    @media (max-width: 980px) {
+      :root { --nav-h: 78px; }
+
+      .brand-logo {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+      }
+
+      .footer-contact {
+        grid-template-columns: 1fr;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-update-chip,
+      .footer-social,
+      .footer-negative-logo {
+        justify-self: center;
+      }
+
+      .footer-update-chip { text-align: center; }
+      .footer-negative-logo { width: min(190px, 58vw); }
+      .partners-logo-row { flex-wrap: wrap; justify-content: center; }
+    }
+
+    @media (max-width: 720px) {
+      :root { --nav-h: 72px; --content-pad: 1rem; }
+
+      .navbar-inner { gap: 0.75rem; }
+      .brand { gap: 0.8rem; }
+      .brand-logo {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+      }
+      .brand-sub { font-size: 0.58rem; }
+      .brand-name { font-size: 0.92rem; white-space: normal; }
+      .home-button { min-height: 36px; padding-inline: 0.72rem; font-size: 0.78rem; }
+    }
+
+
   </style>
 </head>
 <body>
   <nav class="navbar" aria-label="Navegación principal">
     <div class="navbar-inner site-container">
-      <a class="brand" href="../index.html" aria-label="Volver a la página principal">
+      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
         <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
-        <span class="brand-text"><span class="brand-sub">Sololá, Guatemala</span><span class="brand-name">Mesa Técnica Agroclimática Sololá</span></span>
+        <span class="brand-text">
+          <span class="brand-sub">Sololá, Guatemala</span>
+          <span class="brand-name">Mesa Técnica Agroclimática Sololá</span>
+        </span>
       </a>
-      <div class="nav-actions"><a class="home-link" href="../index.html">Volver al inicio</a></div>
+      <a class="home-button" href="../index.html" aria-label="Regresar al inicio">Regresar al inicio</a>
     </div>
   </nav>
 
@@ -757,38 +1106,69 @@
 
   <footer>
     <section class="partners-ribbon-wrap" aria-labelledby="partnersRibbonTitle">
-      <h2 class="visually-hidden" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática Sololá</h2>
+      <h2 class="partners-ribbon-title" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática Sololá</h2>
       <div class="partners-ribbon">
-        <div class="partners-logo-row">
-          <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy"></a>
-          <a class="partner-logo logo-xl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/MAGA02.png" alt="MAGA 02" loading="lazy"></a>
-          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy"></a>
-          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH 02" loading="lazy"></a>
-          <a class="partner-logo logo-sm" href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy"></a>
-          <a class="partner-logo logo-lg" href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy"></a>
-          <a class="partner-logo logo-lg" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer"><img src="./logos/FeedtheChildren.png" alt="Feed the Children" loading="lazy"></a>
-          <a class="partner-logo logo-xl" href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/ICC.png" alt="ICC" loading="lazy"></a>
-          <a class="partner-logo logo-md" href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy"></a>
-          <a class="partner-logo logo-xl" href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy"></a>
+        <div class="partners-logo-row partners-logo-row-top">
+          <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA 02"><img src="./logos/MAGA02.png" alt="MAGA 02" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH 02"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH 02" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./logos/FeedtheChildren.png" alt="Feed the Children" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Instituto Privado de Investigación sobre Cambio Climático"><img src="./logos/ICC.png" alt="Instituto Privado de Investigación sobre Cambio Climático" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy" decoding="async"></a>
         </div>
-        <div class="partners-logo-row">
-          <a class="partner-logo logo-sm" href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy"></a>
-          <a class="partner-logo logo-md" href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy"></a>
-          <a class="partner-logo logo-md" href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer"><img src="./logos/Belgica.png" alt="Bélgica, socio para el desarrollo" loading="lazy"></a>
-          <a class="partner-logo logo-md" href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy"></a>
-          <a class="partner-logo logo-lg" href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy"></a>
-          <a class="partner-logo logo-lg logo-uvg" href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán - UVG" loading="lazy"></a>
-          <a class="partner-logo logo-lg" href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy"></a>
-          <a class="partner-logo logo-lg" href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy"></a>
-          <a class="partner-logo logo-md" href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy"></a>
-          <a class="partner-logo logo-xl" href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer"><img src="./logos/MARN.png" alt="Ministerio de Ambiente y Recursos Naturales" loading="lazy"></a>
-          <a class="partner-logo logo-sm" href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy"></a>
+
+        <div class="partners-logo-row partners-logo-row-bottom">
+          <a class="partner-logo logo-sm" href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Bélgica, socio para el desarrollo"><img src="./logos/Belgica.png" alt="Bélgica, socio para el desarrollo" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg logo-uvg" href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán de la Universidad del Valle de Guatemala"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán - Universidad del Valle de Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-lg" href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-md" href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-xl" href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="Ministerio de Ambiente y Recursos Naturales"><img src="./logos/MARN.png" alt="Ministerio de Ambiente y Recursos Naturales" loading="lazy" decoding="async"></a>
+          <a class="partner-logo logo-sm" href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy" decoding="async"></a>
         </div>
       </div>
     </section>
+
     <div class="footer-contact site-container">
-      <div class="footer-update" id="footerUpdate">Consultando última actualización…</div>
-      <div class="footer-social"><div class="footer-social-title">Visita nuestras redes sociales</div><ul class="footer-social-list"><li><a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer"><span class="footer-social-icon">f</span><span class="footer-social-copy"><span class="footer-social-label">Facebook</span><span class="footer-social-value">Mesa Técnica Agroclimática Sololá</span></span></a></li><li><a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt"><span class="footer-social-icon">✉</span><span class="footer-social-copy"><span class="footer-social-label">Contáctanos</span><span class="footer-social-value">mtasolola@cunsol.edu.gt</span></span></a></li></ul></div>
+      <div class="footer-update-chip" id="footerUpdate">
+        Consultando última actualización&hellip;
+      </div>
+
+      <div class="footer-social">
+        <div class="footer-social-title">Visita nuestras redes sociales</div>
+        <ul class="footer-social-list" aria-label="Redes sociales y contacto de la Mesa Técnica Agroclimática Sololá">
+          <li>
+            <a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">
+              <span class="footer-social-icon" aria-hidden="true">f</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Facebook</span>
+                <span class="footer-social-value">Mesa Técnica Agroclimática Sololá</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
+              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-copy">
+                <span class="footer-social-label">Contáctanos</span>
+                <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="footer-negative-logo" href="../index.html" aria-label="Mesa Técnica Agroclimática Sololá">
+        <img src="./logos/NEGATIVO.png" alt="Logo negativo de la Mesa Técnica Agroclimática Sololá" loading="lazy" decoding="async">
+      </a>
     </div>
   </footer>
 
