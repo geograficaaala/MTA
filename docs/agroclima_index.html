@@ -92,6 +92,78 @@
     .png-btn{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:.35rem .58rem;border:1px solid var(--border-strong);border-radius:.6rem;color:var(--sky-900);background:#fff;font-size:.7rem;font-weight:700;letter-spacing:.04em;transition:.16s ease}
     .png-btn:hover,.png-btn:focus-visible{color:#fff;background:var(--sky-900);outline:none}
 
+    .info-btn{
+      display:inline-flex;align-items:center;justify-content:center;min-height:36px;
+      padding:.35rem .62rem;border:1px solid rgba(112,83,164,.35);border-radius:.6rem;
+      color:var(--purple);background:var(--purple-soft);font-size:.7rem;font-weight:700;
+      letter-spacing:.03em;transition:.16s ease
+    }
+    .info-btn:hover,.info-btn:focus-visible{color:#fff;background:var(--purple);outline:none}
+
+    .chart-flip-card{
+      position:relative;overflow:visible;border:0;background:transparent;
+      box-shadow:none;perspective:1800px
+    }
+    .chart-flip-inner{
+      position:relative;width:100%;transform-style:preserve-3d;
+      transition:transform .76s cubic-bezier(.2,.75,.2,1)
+    }
+    .chart-flip-card.is-flipped .chart-flip-inner{transform:rotateY(180deg)}
+    .chart-face{
+      width:100%;overflow:hidden;border:1px solid var(--border);
+      border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-sm);
+      backface-visibility:hidden;-webkit-backface-visibility:hidden
+    }
+    .chart-front{position:relative;transform:rotateY(0deg)}
+    .chart-back{
+      position:absolute;inset:0;transform:rotateY(180deg);overflow:auto;
+      color:var(--text);background:
+        radial-gradient(circle at 92% 8%,rgba(240,197,62,.18),transparent 28%),
+        radial-gradient(circle at 8% 92%,rgba(42,157,183,.13),transparent 30%),
+        linear-gradient(145deg,#fff,#f7fbf8)
+    }
+    .explain-head{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;
+      padding:1rem 1.1rem;border-bottom:1px solid var(--border);
+      background:linear-gradient(90deg,rgba(31,96,77,.08),rgba(42,157,183,.08))
+    }
+    .explain-kicker{
+      margin-bottom:.28rem;color:var(--purple);font-family:var(--mono);
+      font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase
+    }
+    .explain-title{color:var(--leaf-950);font-size:1.16rem;line-height:1.15}
+    .explain-subtitle{margin-top:.28rem;color:var(--text-soft);font-size:.76rem;line-height:1.4}
+    .flip-back-btn{
+      flex:0 0 auto;min-height:38px;padding:.4rem .75rem;border:1px solid var(--border-strong);
+      border-radius:.65rem;color:#fff;background:var(--leaf-700);font-size:.72rem;font-weight:700
+    }
+    .flip-back-btn:hover,.flip-back-btn:focus-visible{background:var(--sky-900);outline:none}
+    .explain-body{padding:1rem 1.1rem 1.15rem}
+    .explain-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+    .explain-block{
+      padding:.85rem;border:1px solid var(--border);border-radius:.85rem;
+      background:rgba(255,255,255,.88)
+    }
+    .explain-block h4{
+      margin-bottom:.45rem;color:var(--leaf-800);font-size:.82rem;
+      letter-spacing:.02em
+    }
+    .explain-block p,.explain-block li{
+      color:var(--text-mid);font-size:.74rem;line-height:1.48
+    }
+    .explain-block ul{display:grid;gap:.32rem;padding-left:1.05rem}
+    .explain-caution{border-color:rgba(185,137,22,.34);background:var(--sun-100)}
+    .explain-caution h4{color:var(--earth-800)}
+    .explain-formula{
+      display:inline-block;margin:.18rem 0 .42rem;padding:.35rem .52rem;
+      border-radius:.55rem;color:var(--leaf-950);background:var(--leaf-100);
+      font-family:var(--mono);font-size:.7rem;font-weight:700
+    }
+    .chart-flip-card.is-flipped .chart-front{pointer-events:none}
+    .chart-flip-card:not(.is-flipped) .chart-back{pointer-events:none}
+    .chart-front .panel-body,.chart-front .panel-title{cursor:pointer}
+    .chart-front .panel-body:focus-visible,.chart-front .panel-title:focus-visible{outline:3px solid rgba(112,83,164,.28);outline-offset:-3px}
+    .chart-touch-hint{position:absolute;right:.75rem;bottom:.65rem;z-index:4;padding:.3rem .52rem;border:1px solid rgba(112,83,164,.28);border-radius:999px;color:var(--purple);background:rgba(241,237,251,.92);font-size:.62rem;font-weight:700;pointer-events:none;box-shadow:0 4px 12px rgba(17,57,47,.08)}
 
     .kpi-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.8rem}
     .kpi{position:relative;overflow:hidden;min-height:132px;padding:1rem;border:1px solid var(--border);border-radius:var(--radius-md);background:#fff;box-shadow:var(--shadow-sm)}
@@ -144,7 +216,28 @@
     .mun-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem;margin-top:.55rem}
     .mun-stat{padding:.42rem;border-radius:.55rem;background:var(--soft);font-size:.68rem;color:var(--text-soft)}
     .mun-stat strong{display:block;margin-top:.1rem;color:var(--text);font-size:.82rem}
-    .mun-open{width:100%;margin-top:.65rem;padding:.45rem;border:1px solid var(--border-strong);border-radius:.6rem;background:#fff;color:var(--leaf-700);font-size:.72rem;font-weight:700}
+    .mun-card[role="button"]{cursor:pointer}
+    .mun-card:focus-visible{outline:3px solid rgba(42,157,183,.24);outline-offset:2px}
+    .mun-open{width:100%;margin-top:.65rem;padding:.48rem;border:1px solid var(--border-strong);border-radius:.6rem;background:#fff;color:var(--leaf-700);font-size:.72rem;font-weight:700;transition:.16s ease}
+    .mun-open:hover,.mun-open:focus-visible{color:#fff;background:var(--leaf-700);outline:none}
+
+    .radar-modal{position:fixed;inset:0;z-index:2700;display:none;place-items:center;padding:1rem;background:rgba(8,31,25,.86);backdrop-filter:blur(7px)}
+    .radar-modal.open{display:grid}
+    .radar-modal-card{width:min(1120px,97vw);max-height:94vh;display:grid;grid-template-rows:auto minmax(0,1fr);overflow:hidden;border-radius:var(--radius-lg);background:#fff;box-shadow:var(--shadow-lg)}
+    .radar-modal-body{min-height:0;overflow:auto;padding:1rem;background:linear-gradient(180deg,#fff,#f8fcf9)}
+    .radar-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:1rem;align-items:stretch}
+    .radar-chart-box{position:relative;min-height:520px;padding:.75rem;border:1px solid var(--border);border-radius:1rem;background:#fff}
+    .radar-side{display:grid;gap:.75rem;align-content:start}
+    .radar-intro{padding:.85rem;border:1px solid rgba(42,157,183,.25);border-radius:.85rem;background:var(--sky-100);color:var(--text-mid);font-size:.75rem;line-height:1.48}
+    .radar-metrics{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
+    .radar-metric{padding:.7rem;border:1px solid var(--border);border-radius:.75rem;background:#fff}
+    .radar-metric-label{color:var(--text-soft);font-size:.63rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+    .radar-metric-value{margin-top:.22rem;color:var(--leaf-950);font-size:1rem;font-weight:700}
+    .radar-metric-average{margin-top:.12rem;color:var(--text-soft);font-size:.64rem;line-height:1.35}
+    .radar-note{padding:.75rem;border:1px solid rgba(185,137,22,.3);border-radius:.8rem;background:var(--sun-100);color:var(--earth-900);font-size:.7rem;line-height:1.48}
+    .radar-actions{display:grid;grid-template-columns:1fr;gap:.5rem}
+    .radar-apply{min-height:42px;padding:.55rem .8rem;border:0;border-radius:.72rem;color:#fff;background:var(--leaf-700);font-weight:700}
+    .radar-apply:hover,.radar-apply:focus-visible{background:var(--sky-900);outline:none}
 
     .table-wrap{overflow:auto;max-height:620px;border:1px solid var(--border);border-radius:.9rem}
     table{width:100%;border-collapse:collapse;min-width:1180px;background:#fff}
@@ -212,12 +305,12 @@
       .dashboard{padding-block:1.4rem}.section-block{margin-top:1.5rem}.section-head{align-items:flex-start;flex-direction:column}.section-copy{text-align:left;font-size:.8rem}
       .filter-panel{padding:.75rem}.filters-grid{grid-template-columns:1fr 1fr;gap:.55rem}.filters-grid .field:first-child{grid-column:1/-1}.control,.btn{min-height:42px;font-size:.82rem;padding:.48rem .6rem}.filter-actions{justify-content:stretch}.filter-actions .btn{flex:1 1 140px}.png-btn{min-height:32px;padding:.3rem .48rem;font-size:.62rem}
       .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.kpi{min-height:112px;padding:.75rem}.kpi-label{font-size:.61rem}.kpi-value{font-size:1.35rem}.kpi-detail{font-size:.66rem}
-      .panel-grid,.panel-grid.three{grid-template-columns:1fr;gap:.75rem}.panel-grid.three .panel:last-child{grid-column:auto}.panel-head{align-items:flex-start;padding:.75rem;gap:.4rem}.panel-title{font-size:.94rem}.panel-subtitle{font-size:.67rem}.panel-actions{gap:.3rem}.panel-select{max-width:150px;font-size:.68rem}.zoom-btn{width:32px;height:32px}.panel-body{padding:.55rem}.chart-container{height:330px}.chart-container.medium{height:300px}.chart-container.small{height:280px}.panel-note{padding:.55rem .7rem;font-size:.62rem}
-      #agroMap{height:390px}.forecast-cards{grid-template-columns:1fr 1fr;gap:.55rem}.forecast-card{padding:.65rem}.forecast-meta{font-size:.64rem}.municipality-grid{grid-template-columns:1fr 1fr;gap:.55rem}.mun-card{padding:.72rem}.mun-name{font-size:.84rem}.mun-balance{font-size:1.2rem}.mun-stat{font-size:.6rem}.mun-stat strong{font-size:.72rem}
+      .panel-grid,.panel-grid.three{grid-template-columns:1fr;gap:.75rem}.panel-grid.three .panel:last-child{grid-column:auto}.panel-head{align-items:flex-start;padding:.75rem;gap:.4rem}.panel-title{font-size:.94rem}.panel-subtitle{font-size:.67rem}.panel-actions{gap:.3rem;flex-wrap:wrap;justify-content:flex-end}.panel-select{max-width:150px;font-size:.68rem}.zoom-btn{width:32px;height:32px}.info-btn,.png-btn{min-height:32px;padding:.3rem .48rem;font-size:.62rem}.panel-body{padding:.55rem}.chart-container{height:330px}.chart-container.medium{height:300px}.chart-container.small{height:280px}.panel-note{padding:.55rem .7rem;font-size:.62rem}.explain-head{padding:.75rem;gap:.55rem}.explain-title{font-size:1rem}.explain-subtitle{font-size:.67rem}.flip-back-btn{min-height:34px;padding:.35rem .58rem;font-size:.64rem}.explain-body{padding:.72rem}.explain-grid{grid-template-columns:1fr;gap:.52rem}.explain-block{padding:.68rem}.explain-block h4{font-size:.75rem}.explain-block p,.explain-block li{font-size:.66rem;line-height:1.42}
+      #agroMap{height:390px}.forecast-cards{grid-template-columns:1fr 1fr;gap:.55rem}.forecast-card{padding:.65rem}.forecast-meta{font-size:.64rem}.municipality-grid{grid-template-columns:1fr 1fr;gap:.55rem}.mun-card{padding:.72rem}.mun-name{font-size:.84rem}.mun-balance{font-size:1.2rem}.mun-stat{font-size:.6rem}.mun-stat strong{font-size:.72rem}.radar-modal{padding:.35rem}.radar-modal-card{width:100%;max-height:97vh;border-radius:.9rem}.radar-modal-body{padding:.55rem}.radar-layout{grid-template-columns:1fr}.radar-chart-box{min-height:390px}.radar-metrics{grid-template-columns:1fr 1fr}.chart-touch-hint{right:.45rem;bottom:.4rem;font-size:.56rem}
       .table-wrap{max-height:500px}th,td{padding:.5rem;font-size:.65rem}
       .partners-ribbon{padding:1rem .5rem}.partner-logo img{height:46px}.footer-contact{padding-block:1.8rem 2.2rem}.footer-update{font-size:.86rem}.chart-modal{padding:.35rem}.chart-modal-card{width:100%;height:96vh;border-radius:.9rem}.chart-modal-body{padding:.45rem}
     }
-    @media(max-width:480px){.kpi-grid{grid-template-columns:1fr 1fr}.forecast-cards,.municipality-grid{grid-template-columns:1fr}.filters-grid{grid-template-columns:1fr}.filters-grid .field:first-child{grid-column:auto}.filter-actions{display:grid;grid-template-columns:1fr}.chart-container{height:300px}.panel-actions .panel-select{display:none}.hero-title{font-size:1.72rem}.brand-name{font-size:.74rem}.brand-sub{display:none}}
+    @media(max-width:480px){.kpi-grid{grid-template-columns:1fr 1fr}.forecast-cards,.municipality-grid{grid-template-columns:1fr}.filters-grid{grid-template-columns:1fr}.filters-grid .field:first-child{grid-column:auto}.filter-actions{display:grid;grid-template-columns:1fr}.chart-container{height:300px}.panel-actions .panel-select{display:none}.hero-title{font-size:1.72rem}.brand-name{font-size:.74rem}.brand-sub{display:none}.radar-chart-box{min-height:340px}.radar-metrics{grid-template-columns:1fr}.chart-touch-hint{display:none}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
   </style>
 </head>
@@ -253,7 +346,7 @@
     <section class="filter-panel" aria-label="Filtros del dashboard">
       <div class="filters-grid">
         <div class="field">
-          <label for="municipioSelect">Municipio</label>
+          <label for="municipioSelect">Ámbito territorial</label>
           <select class="control" id="municipioSelect"></select>
         </div>
         <div class="field">
@@ -329,43 +422,274 @@
     </section>
 
     <section class="section-block">
-      <div class="section-head"><div><div class="section-eyebrow">Histórico</div><h2 class="section-title">Agua disponible y demanda atmosférica</h2></div><p class="section-copy">Las gráficas responden al municipio y rango de fechas seleccionados.</p></div>
+      <div class="section-head"><div><div class="section-eyebrow">Histórico</div><h2 class="section-title">Agua disponible y demanda atmosférica</h2></div><p class="section-copy">Las gráficas responden a los filtros. Toca directamente una gráfica, su título o el botón “Guía” para ver cálculo, interpretación y precauciones.</p></div>
       <div class="panel-grid">
-        <article class="panel wide">
-          <div class="panel-head"><div><div class="panel-title">Precipitación, ET₀ y balance diario</div><div class="panel-subtitle">Comparación diaria en milímetros</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="water" data-title="Precipitación, ET₀ y balance diario" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="waterChartBox" data-title="Precipitación, ET₀ y balance diario" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container" id="waterChartBox"><canvas id="waterChart"></canvas></div></div>
+        <article class="panel chart-flip-card wide" data-chart-card="water">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">Precipitación, ET₀ y balance diario</div><div class="panel-subtitle">Comparación diaria en milímetros</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="water" data-title="Precipitación, ET₀ y balance diario" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="waterChartBox" data-title="Precipitación, ET₀ y balance diario" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Precipitación, ET₀ y balance diario">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container" id="waterChartBox"><canvas id="waterChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
           <div class="panel-note">Balance climático simple = precipitación − ET₀. No representa por sí solo el agua realmente disponible para un cultivo.</div>
-        </article>
-        <article class="panel">
-          <div class="panel-head"><div><div class="panel-title">Balance hídrico acumulado</div><div class="panel-subtitle">Evolución acumulada del déficit o exceso</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="cumulative" data-title="Balance hídrico acumulado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="cumulativeChartBox" data-title="Balance hídrico acumulado" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container medium" id="cumulativeChartBox"><canvas id="cumulativeChart"></canvas></div></div>
-        </article>
-        <article class="panel">
-          <div class="panel-head"><div><div class="panel-title">Humedad del suelo por profundidad</div><div class="panel-subtitle">Contenido volumétrico estimado por el modelo</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="soil" data-title="Humedad del suelo por profundidad" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="soilChartBox" data-title="Humedad del suelo por profundidad" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container medium" id="soilChartBox"><canvas id="soilChart"></canvas></div></div>
-        </article>
-        <article class="panel">
-          <div class="panel-head"><div><div class="panel-title">VPD y temperatura del suelo</div><div class="panel-subtitle">Demanda de vapor y temperatura media del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="stress" data-title="VPD y temperatura del suelo" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="stressChartBox" data-title="VPD y temperatura del suelo" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container medium" id="stressChartBox"><canvas id="stressChart"></canvas></div></div>
-        </article>
-        <article class="panel">
-          <div class="panel-head"><div><div class="panel-title">Radiación solar y horas de sol</div><div class="panel-subtitle">Energía solar diaria y duración estimada</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="solar" data-title="Radiación solar y horas de sol" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="solarChartBox" data-title="Radiación solar y horas de sol" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container medium" id="solarChartBox"><canvas id="solarChart"></canvas></div></div>
-        </article>
-        <article class="panel wide">
-          <div class="panel-head"><div><div class="panel-title">Patrón mensual</div><div class="panel-subtitle">Totales de precipitación y ET₀, con balance por mes</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="monthly" data-title="Patrón agroclimático mensual" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="monthlyChartBox" data-title="Patrón agroclimático mensual" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container medium" id="monthlyChartBox"><canvas id="monthlyChart"></canvas></div></div>
-        </article>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">Precipitación, ET₀ y balance diario</h3>
+                <p class="explain-subtitle">Entrada de agua frente a demanda atmosférica.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">Balance diario = precipitación − ET₀</div>
+                  <ul><li>La precipitación representa el agua diaria estimada por el modelo.</li><li>La ET₀ estima la demanda de evaporación y transpiración de una superficie de referencia.</li><li>Al agrupar por semana o mes se suman la precipitación, la ET₀ y el balance.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>Un balance positivo indica que la lluvia superó la demanda climática de referencia.</li><li>Un balance negativo señala una demanda atmosférica mayor que la lluvia recibida.</li><li>Observe la duración de los déficits, no solamente un día aislado.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>No incorpora riego, escorrentía, infiltración, drenaje ni almacenamiento del suelo.</li><li>No usa coeficiente de cultivo, etapa fenológica o profundidad radicular.</li><li>No equivale al agua realmente disponible para una parcela.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+        <article class="panel chart-flip-card" data-chart-card="cumulative">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">Balance hídrico acumulado</div><div class="panel-subtitle">Evolución acumulada del déficit o exceso</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="cumulative" data-title="Balance hídrico acumulado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="cumulativeChartBox" data-title="Balance hídrico acumulado" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Balance hídrico acumulado">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="cumulativeChartBox"><canvas id="cumulativeChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">Balance hídrico acumulado</h3>
+                <p class="explain-subtitle">Suma progresiva de los balances desde el inicio del filtro.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">Acumuladoₙ = Σ (precipitación − ET₀)</div>
+                  <ul><li>La serie comienza en cero en la primera fecha seleccionada.</li><li>Cada día agrega su balance P−ET₀ al valor anterior.</li><li>Los valores semanales o mensuales conservan la suma total del periodo.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>Una pendiente ascendente representa acumulación de excedentes climáticos.</li><li>Una pendiente descendente representa acumulación de déficit.</li><li>Los cambios de pendiente ayudan a identificar transiciones húmedas y secas.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>El resultado depende mucho de la fecha inicial escogida.</li><li>No limita el almacenamiento máximo del suelo ni descuenta drenaje o escorrentía.</li><li>No debe interpretarse por sí solo como índice oficial de sequía.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+        <article class="panel chart-flip-card" data-chart-card="soil">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">Humedad del suelo por profundidad</div><div class="panel-subtitle">Contenido volumétrico estimado por el modelo</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="soil" data-title="Humedad del suelo por profundidad" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="soilChartBox" data-title="Humedad del suelo por profundidad" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Humedad del suelo por profundidad">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="soilChartBox"><canvas id="soilChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">Humedad del suelo por profundidad</h3>
+                <p class="explain-subtitle">Contenido volumétrico modelado en diferentes capas.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">m³/m³ = volumen de agua ÷ volumen de suelo</div>
+                  <ul><li>Cada línea representa la humedad estimada para una capa del suelo.</li><li>La vista resumida muestra superficie y perfil; la completa añade capas intermedias.</li><li>Al agrupar se utiliza el promedio de cada periodo.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>La capa superficial suele responder rápidamente a lluvia y evaporación.</li><li>Las capas profundas cambian más lentamente y aproximan reservas de mayor duración.</li><li>Una caída simultánea en varias capas puede indicar agotamiento progresivo.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>Son estimaciones de modelo, no mediciones de un sensor dentro de la parcela.</li><li>Los umbrales útiles dependen de textura, cultivo, raíces y capacidad de campo.</li><li>La topografía y los suelos volcánicos locales pueden diferir de la celda modelada.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+        <article class="panel chart-flip-card" data-chart-card="stress">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">VPD y temperatura del suelo</div><div class="panel-subtitle">Demanda de vapor y temperatura media del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="stress" data-title="VPD y temperatura del suelo" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="stressChartBox" data-title="VPD y temperatura del suelo" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de VPD y temperatura del suelo">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="stressChartBox"><canvas id="stressChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">VPD y temperatura del suelo</h3>
+                <p class="explain-subtitle">Demanda atmosférica y condiciones térmicas de la zona radicular.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">VPD = presión de vapor saturado − presión de vapor real</div>
+                  <ul><li>El VPD combina temperatura y humedad del aire; aquí se muestra el máximo diario.</li><li>La temperatura corresponde a la media estimada del perfil de suelo.</li><li>Al agrupar se conservan máximos de VPD y promedios térmicos.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>VPD alto implica aire más seco y mayor demanda potencial de transpiración.</li><li>VPD bajo implica menor demanda, aunque puede favorecer humedad foliar y enfermedades.</li><li>La temperatura del suelo influye en germinación, raíces y actividad biológica.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>Los límites de estrés cambian según cultivo, variedad y etapa fenológica.</li><li>El microclima del dosel puede diferir de la estimación meteorológica.</li><li>VPD alto no confirma estrés si el suelo tiene agua suficiente; debe leerse junto con humedad.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+        <article class="panel chart-flip-card" data-chart-card="solar">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">Radiación solar y horas de sol</div><div class="panel-subtitle">Energía solar diaria y duración estimada</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="solar" data-title="Radiación solar y horas de sol" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="solarChartBox" data-title="Radiación solar y horas de sol" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Radiación solar y horas de sol">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="solarChartBox"><canvas id="solarChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">Radiación solar y horas de sol</h3>
+                <p class="explain-subtitle">Energía solar recibida y duración estimada de insolación.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">Radiación diaria = energía solar acumulada por m²</div>
+                  <ul><li>La radiación se expresa en megajulios por metro cuadrado y día.</li><li>Las horas de sol representan duración estimada de condiciones soleadas.</li><li>En periodos agrupados se suma la radiación y la duración.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>Mayor radiación suele aumentar fotosíntesis potencial y también ET₀.</li><li>Valores bajos pueden asociarse con nubosidad persistente.</li><li>Cambios prolongados ayudan a explicar variaciones de demanda de agua.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>La radiación global no es exactamente radiación fotosintéticamente activa.</li><li>Sombras de relieve, árboles, invernaderos o nubes locales pueden no estar representadas.</li><li>Más radiación no siempre significa mejor rendimiento si hay calor o falta de agua.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
+        <article class="panel chart-flip-card wide" data-chart-card="monthly">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">Patrón mensual</div><div class="panel-subtitle">Totales de precipitación y ET₀, con balance por mes</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="monthly" data-title="Patrón agroclimático mensual" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="monthlyChartBox" data-title="Patrón agroclimático mensual" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Patrón mensual">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container medium" id="monthlyChartBox"><canvas id="monthlyChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">Patrón agroclimático mensual</h3>
+                <p class="explain-subtitle">Resumen estacional de precipitación, ET₀ y balance.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">Balance mensual = Σ precipitación − Σ ET₀</div>
+                  <ul><li>Se agrupan todos los registros por mes calendario.</li><li>La precipitación y ET₀ se suman; el balance es la diferencia de esos totales.</li><li>La serie permite comparar la estacionalidad dentro del rango seleccionado.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>Ayuda a reconocer inicio, intensidad y retiro de la temporada lluviosa.</li><li>Meses con déficit persistente requieren mayor atención a reservas y riego.</li><li>Compare varios meses consecutivos para identificar patrones, no eventos aislados.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>Un mes incompleto no debe compararse directamente con meses completos.</li><li>La agregación mensual oculta tormentas intensas, pausas secas y extremos diarios.</li><li>Para comparar años use periodos equivalentes y revise la cantidad de días disponibles.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
       </div>
     </section>
 
     <section class="section-block">
       <div class="section-head"><div><div class="section-eyebrow">Territorio</div><h2 class="section-title">Comparación y mapa municipal</h2></div><p class="section-copy">Los valores se calculan con el mismo rango de fechas para todos los municipios.</p></div>
       <div class="panel-grid">
-        <article class="panel">
-          <div class="panel-head"><div><div class="panel-title">Comparación municipal</div><div class="panel-subtitle">Ranking según el indicador seleccionado</div></div><div class="panel-actions"><select class="panel-select" id="comparisonMetric"><option value="balance">Balance total</option><option value="soil">Humedad del perfil</option><option value="vpd">VPD máximo</option><option value="dry">Días secos consecutivos</option><option value="rain">Precipitación total</option><option value="et0">ET₀ total</option></select><button class="png-btn" type="button" data-chart-download="comparison" data-title="Comparación municipal" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="comparisonChartBox" data-title="Comparación municipal" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container" id="comparisonChartBox"><canvas id="comparisonChart"></canvas></div></div>
-        </article>
+        <article class="panel chart-flip-card" data-chart-card="comparison">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">Comparación municipal</div><div class="panel-subtitle">Ranking según el indicador seleccionado</div></div><div class="panel-actions"><select class="panel-select" id="comparisonMetric"><option value="balance">Balance total</option><option value="soil">Humedad del perfil</option><option value="vpd">VPD máximo</option><option value="dry">Días secos consecutivos</option><option value="rain">Precipitación total</option><option value="et0">ET₀ total</option></select><button class="png-btn" type="button" data-chart-download="comparison" data-title="Comparación municipal" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="comparisonChartBox" data-title="Comparación municipal" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Comparación municipal">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container" id="comparisonChartBox"><canvas id="comparisonChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">Comparación municipal</h3>
+                <p class="explain-subtitle">Ranking relativo usando el mismo periodo e indicador.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">Indicador municipal = estadístico del periodo filtrado</div>
+                  <ul><li>Todos los municipios utilizan las mismas fechas seleccionadas.</li><li>El cálculo cambia según el indicador: suma, promedio o máximo.</li><li>El filtro Top 5, Top 10 o 19 solo limita la cantidad mostrada, no los datos base.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>Sirve para detectar contrastes territoriales y priorizar revisión.</li><li>Lea siempre la unidad y el sentido del indicador seleccionado.</li><li>Un balance alto puede ser favorable o implicar exceso; depende del contexto.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>Cada municipio se representa mediante coordenadas de referencia, no por toda su superficie.</li><li>Microclimas, elevación, orientación y cercanía al lago pueden variar dentro del municipio.</li><li>Un ranking no demuestra causalidad ni sustituye observaciones locales.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
         <article class="panel">
           <div class="panel-head"><div><div class="panel-title">Mapa agroclimático municipal</div><div class="panel-subtitle">Puntos municipales coloreados según el indicador</div></div><div class="panel-actions"><select class="panel-select" id="mapMetric"><option value="balance">Balance histórico</option><option value="soil">Humedad del suelo</option><option value="vpd">VPD histórico</option><option value="forecastBalance">Balance pronosticado</option><option value="forecastStress">Estrés pronosticado</option></select></div></div>
           <div class="panel-body"><div id="agroMap" aria-label="Mapa municipal agroclimático"></div><div class="map-legend"><div class="legend-gradient" id="mapGradient"></div><div class="legend-labels"><span id="legendMin">Menor</span><span id="legendMid">Intermedio</span><span id="legendMax">Mayor</span></div></div></div>
@@ -376,11 +700,44 @@
     <section class="section-block">
       <div class="section-head"><div><div class="section-eyebrow">Pronóstico</div><h2 class="section-title">Balance y estrés agrícola previsto</h2></div><p class="section-copy" id="forecastPeriod">Pronóstico municipal de Open-Meteo.</p></div>
       <div class="forecast-grid">
-        <article class="panel">
-          <div class="panel-head"><div><div class="panel-title">Pronóstico diario integrado</div><div class="panel-subtitle">Lluvia, ET₀, balance y humedad del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="forecast" data-title="Pronóstico agroclimático integrado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="forecastChartBox" data-title="Pronóstico agroclimático integrado" aria-label="Ampliar gráfica">⛶</button></div></div>
-          <div class="panel-body"><div class="chart-container" id="forecastChartBox"><canvas id="forecastChart"></canvas></div></div>
+        <article class="panel chart-flip-card" data-chart-card="forecast">
+        <div class="chart-flip-inner">
+          <section class="chart-face chart-front" aria-hidden="false">
+          <div class="panel-head"><div><div class="panel-title">Pronóstico diario integrado</div><div class="panel-subtitle">Lluvia, ET₀, balance y humedad del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="forecast" data-title="Pronóstico agroclimático integrado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="forecastChartBox" data-title="Pronóstico agroclimático integrado" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Pronóstico diario integrado">Guía</button></div></div>
+          <div class="panel-body"><div class="chart-container" id="forecastChartBox"><canvas id="forecastChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
           <div class="panel-note">El nivel de estrés es orientativo y combina balance P−ET₀, VPD y días secos; no sustituye una recomendación agronómica específica.</div>
-        </article>
+        
+          </section>
+
+          <section class="chart-face chart-back" aria-hidden="true">
+            <div class="explain-head">
+              <div>
+                <div class="explain-kicker">Guía de lectura</div>
+                <h3 class="explain-title">Pronóstico diario integrado</h3>
+                <p class="explain-subtitle">Escenario previsto de lluvia, ET₀, balance y humedad del suelo.</p>
+              </div>
+              <button class="flip-back-btn" type="button" data-chart-flip aria-expanded="true">Volver a la gráfica</button>
+            </div>
+            <div class="explain-body">
+              <div class="explain-grid">
+                <section class="explain-block">
+                  <h4>Cómo se calcula</h4>
+                  <div class="explain-formula">Balance previsto = precipitación prevista − ET₀ prevista</div>
+                  <ul><li>Integra variables diarias del pronóstico de Open-Meteo.</li><li>El nivel de estrés es una clasificación orientativa que combina balance, VPD y días secos.</li><li>El selector permite mostrar 7, 10 o hasta 16 días.</li></ul>
+                </section>
+                <section class="explain-block">
+                  <h4>Cómo interpretarla</h4>
+                  <ul><li>Secuencias de balance negativo, VPD alto y días secos sugieren mayor vigilancia.</li><li>Lluvias previstas pueden aliviar el déficit, pero importe también su distribución temporal.</li><li>Use los primeros días para decisiones operativas y los posteriores para planificación.</li></ul>
+                </section>
+                <section class="explain-block explain-caution">
+                  <h4>Precauciones de uso</h4>
+                  <ul><li>La incertidumbre aumenta conforme se aleja la fecha pronosticada.</li><li>No es una predicción determinista ni una recomendación automática de riego.</li><li>Debe actualizarse frecuentemente y contrastarse con avisos oficiales y condiciones de campo.</li></ul>
+                </section>
+              </div>
+            </div>
+          </section>
+        </div>
+      </article>
         <div class="forecast-cards" id="forecastCards"></div>
       </div>
     </section>
@@ -391,11 +748,11 @@
     </section>
 
     <section class="section-block">
-      <div class="section-head"><div><div class="section-eyebrow">Detalle</div><h2 class="section-title">Registros diarios del periodo seleccionado</h2></div><p class="section-copy">Desplázate horizontalmente en dispositivos pequeños.</p></div>
+      <div class="section-head"><div><div class="section-eyebrow">Detalle</div><h2 class="section-title">Registros diarios del periodo seleccionado</h2></div><p class="section-copy">En la vista departamental, cada fila representa el promedio diario de los municipios con datos. Desplázate horizontalmente en dispositivos pequeños.</p></div>
       <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Precipitación</th><th>ET₀</th><th>Balance</th><th>Balance acum.</th><th>Humedad 0–7 cm</th><th>Humedad perfil</th><th>VPD máx.</th><th>Radiación</th><th>Horas de sol</th><th>Días secos</th></tr></thead><tbody id="detailTable"></tbody></table></div>
     </section>
 
-    <section class="section-block"><div class="method-note"><strong>Nota metodológica:</strong> los datos provienen de modelos meteorológicos y reanálisis de Open-Meteo. El balance mostrado es una resta climática simple entre precipitación y ET₀; no incluye coeficiente de cultivo, escorrentía, infiltración, textura del suelo, profundidad radicular, riego ni almacenamiento real. La humedad del suelo y los indicadores de estrés deben contrastarse con observaciones de campo.</div></section>
+    <section class="section-block"><div class="method-note"><strong>Nota metodológica:</strong> los datos provienen de modelos meteorológicos y reanálisis de Open-Meteo. El balance mostrado es una resta climática simple entre precipitación y ET₀; no incluye coeficiente de cultivo, escorrentía, infiltración, textura del suelo, profundidad radicular, riego ni almacenamiento real. La humedad del suelo y los indicadores de estrés deben contrastarse con observaciones de campo. En la vista “Todo el departamento”, las series diarias son promedios de los municipios con datos disponibles y no sumas departamentales.</div></section>
   </main>
 
   <footer>
@@ -437,6 +794,27 @@
 
   <div class="loader" id="loader"><div class="loader-card"><div class="spinner"></div><strong>Cargando módulo agroclimático</strong><p id="loaderMessage">Leyendo histórico municipal y pronóstico…</p></div></div>
   <div class="chart-modal" id="chartModal" aria-hidden="true"><div class="chart-modal-card" role="dialog" aria-modal="true"><div class="chart-modal-head"><div class="chart-modal-title"><img class="chart-modal-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><span id="chartModalTitle">Gráfica ampliada</span></div><button class="chart-modal-close" id="chartModalClose" type="button" aria-label="Cerrar">×</button></div><div class="chart-modal-body"><div class="chart-modal-host" id="chartModalHost"></div></div></div></div>
+
+  <div class="radar-modal" id="municipalityRadarModal" aria-hidden="true">
+    <div class="radar-modal-card" role="dialog" aria-modal="true" aria-labelledby="municipalityRadarTitle">
+      <div class="chart-modal-head">
+        <div class="chart-modal-title"><img class="chart-modal-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><span id="municipalityRadarTitle">Perfil agroclimático municipal</span></div>
+        <button class="chart-modal-close" id="municipalityRadarClose" type="button" aria-label="Cerrar perfil municipal">×</button>
+      </div>
+      <div class="radar-modal-body">
+        <div class="radar-layout">
+          <div class="radar-chart-box"><canvas id="municipalityRadarChart"></canvas></div>
+          <aside class="radar-side">
+            <div class="radar-intro">La tela de araña compara el municipio seleccionado con el promedio departamental durante el mismo periodo. La escala 0–100 es relativa al rango de los municipios y no representa una calificación de calidad.</div>
+            <div class="radar-metrics" id="municipalityRadarMetrics"></div>
+            <div class="radar-note"><strong>Precaución:</strong> un valor alto no siempre es favorable. ET₀, VPD o días secos altos representan mayor demanda o sequedad. Revise siempre los valores reales y el contexto agrícola local.</div>
+            <div class="radar-actions"><button class="radar-apply" id="municipalityRadarApply" type="button">Usar este municipio en el dashboard</button></div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">⇧</button>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -450,6 +828,7 @@
     const IS_MOBILE = window.matchMedia("(max-width: 760px)").matches;
     const FONT = '"Times New Roman", Times, serif';
     const MONTHS = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+    const DEPARTMENT_SCOPE = "__DEPARTAMENTO__";
 
     Chart.defaults.font.family = FONT;
     Chart.defaults.font.size = IS_MOBILE ? 11 : 15;
@@ -459,7 +838,8 @@
       hist: null, pred: null, municipalities: [], selected: null,
       start: null, end: null, charts: {}, map: null, mapLayer: null,
       aggregation: "auto", forecastDays: 16, comparisonLimit: 10,
-      soilSeries: "summary", fullscreen: null, resizeTimer: null
+      soilSeries: "summary", fullscreen: null, resizeTimer: null,
+      radarChart: null, radarMunicipality: null
     };
 
     const COLORS = {
@@ -516,19 +896,104 @@
       return `rgba(42,157,183,${alpha})`;
     }
 
-    function currentHistMunicipality(name=STATE.selected) { return (STATE.hist?.municipios || []).find(m => m.nombre === name) || null; }
-    function currentPredMunicipality(name=STATE.selected) { return (STATE.pred?.municipios || []).find(m => m.nombre === name) || null; }
+    function selectedScopeLabel(name=STATE.selected) {
+      return name===DEPARTMENT_SCOPE ? "Todo el departamento" : (name || "Municipio");
+    }
+
+    function currentHistMunicipality(name=STATE.selected) {
+      return (STATE.hist?.municipios || []).find(m => m.nombre === name) || null;
+    }
+
+    function currentPredMunicipality(name=STATE.selected) {
+      return (STATE.pred?.municipios || []).find(m => m.nombre === name) || null;
+    }
 
     function filterRecords(records, start=STATE.start, end=STATE.end) {
       return (records || []).filter(r => (!start || r.fecha >= start) && (!end || r.fecha <= end));
     }
 
-    function filteredHist(name=STATE.selected) { return filterRecords(currentHistMunicipality(name)?.registros || []); }
+    function departmentHistoricalRecords() {
+      const groups=new Map();
+      (STATE.hist?.municipios || []).forEach(municipality=>{
+        filterRecords(municipality.registros || []).forEach(record=>{
+          if(!record?.fecha) return;
+          if(!groups.has(record.fecha)) groups.set(record.fecha,[]);
+          groups.get(record.fecha).push(record);
+        });
+      });
+
+      let accumulated=0;
+      return [...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([fecha,rows])=>{
+        const avg=key=>mean(rows.map(row=>row[key]));
+        const balance=avg("balance_hidrico_mm");
+        if(valid(balance)) accumulated+=Number(balance);
+        return {
+          fecha,
+          precipitacion_mm:avg("precipitacion_mm"),
+          et0_mm:avg("et0_mm"),
+          balance_hidrico_mm:balance,
+          balance_hidrico_acumulado_mm:round(accumulated,2),
+          humedad_suelo_0_7cm_m3_m3:avg("humedad_suelo_0_7cm_m3_m3"),
+          humedad_suelo_7_28cm_m3_m3:avg("humedad_suelo_7_28cm_m3_m3"),
+          humedad_suelo_28_100cm_m3_m3:avg("humedad_suelo_28_100cm_m3_m3"),
+          humedad_suelo_0_100cm_m3_m3:avg("humedad_suelo_0_100cm_m3_m3"),
+          temperatura_suelo_0_100cm_c:avg("temperatura_suelo_0_100cm_c"),
+          vpd_max_kpa:avg("vpd_max_kpa"),
+          radiacion_solar_mj_m2:avg("radiacion_solar_mj_m2"),
+          horas_sol:avg("horas_sol"),
+          dias_secos_consecutivos:avg("dias_secos_consecutivos"),
+          municipios_con_datos:rows.length
+        };
+      });
+    }
+
+    function filteredHist(name=STATE.selected) {
+      if(name===DEPARTMENT_SCOPE) return departmentHistoricalRecords();
+      return filterRecords(currentHistMunicipality(name)?.registros || []);
+    }
+
+    function dominantStress(values) {
+      const counts={alto:0,moderado:0,bajo:0};
+      values.forEach(value=>{
+        const text=String(value || "").toLowerCase();
+        if(text.includes("alto")) counts.alto++;
+        else if(text.includes("moderado")) counts.moderado++;
+        else counts.bajo++;
+      });
+      return Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]?.[0] || "bajo";
+    }
+
+    function departmentPredictionRecords() {
+      const groups=new Map();
+      (STATE.pred?.municipios || []).forEach(municipality=>{
+        (municipality.registros || []).forEach(record=>{
+          if(!record?.fecha) return;
+          if(!groups.has(record.fecha)) groups.set(record.fecha,[]);
+          groups.get(record.fecha).push(record);
+        });
+      });
+      return [...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([fecha,rows])=>{
+        const avg=key=>mean(rows.map(row=>row[key]));
+        return {
+          fecha,
+          precipitacion_mm:avg("precipitacion_mm"),
+          probabilidad_precipitacion_max_pct:avg("probabilidad_precipitacion_max_pct"),
+          et0_mm:avg("et0_mm"),
+          balance_hidrico_mm:avg("balance_hidrico_mm"),
+          humedad_suelo_0_81cm_m3_m3:avg("humedad_suelo_0_81cm_m3_m3"),
+          vpd_max_kpa:avg("vpd_max_kpa"),
+          dias_secos_consecutivos:avg("dias_secos_consecutivos"),
+          nivel_estres_hidrico_orientativo:dominantStress(rows.map(row=>row.nivel_estres_hidrico_orientativo)),
+          municipios_con_datos:rows.length
+        };
+      });
+    }
+
     function predRecords(name=STATE.selected) {
-      return (currentPredMunicipality(name)?.registros || [])
-        .slice()
-        .sort((a,b)=>String(a.fecha).localeCompare(String(b.fecha)))
-        .slice(0, STATE.forecastDays);
+      const records=name===DEPARTMENT_SCOPE
+        ? departmentPredictionRecords()
+        : (currentPredMunicipality(name)?.registros || []).slice().sort((a,b)=>String(a.fecha).localeCompare(String(b.fecha)));
+      return records.slice(0,STATE.forecastDays);
     }
 
     function isoDay(date) {
@@ -602,30 +1067,40 @@
       return aggregateChartRecords(filteredHist(name));
     }
 
-    function statsFor(name) {
-      const records = filteredHist(name);
+    function statsFor(name=STATE.selected) {
+      const records=filteredHist(name);
       return {
         records,
-        rain: sum(records.map(r=>r.precipitacion_mm)),
-        et0: sum(records.map(r=>r.et0_mm)),
-        balance: sum(records.map(r=>r.balance_hidrico_mm)),
-        soil: mean(records.map(r=>r.humedad_suelo_0_100cm_m3_m3)),
-        vpd: max(records.map(r=>r.vpd_max_kpa)),
-        dry: max(records.map(r=>r.dias_secos_consecutivos)) || 0,
-        radiation: sum(records.map(r=>r.radiacion_solar_mj_m2)),
-        sunshine: sum(records.map(r=>r.horas_sol))
+        rain:sum(records.map(r=>r.precipitacion_mm)),
+        et0:sum(records.map(r=>r.et0_mm)),
+        balance:sum(records.map(r=>r.balance_hidrico_mm)),
+        soil:mean(records.map(r=>r.humedad_suelo_0_100cm_m3_m3)),
+        vpd:max(records.map(r=>r.vpd_max_kpa)),
+        dry:max(records.map(r=>r.dias_secos_consecutivos)) || 0,
+        radiation:sum(records.map(r=>r.radiacion_solar_mj_m2)),
+        sunshine:sum(records.map(r=>r.horas_sol))
       };
     }
 
     function predStatsFor(name) {
-      const m = currentPredMunicipality(name);
-      const r = m?.resumen || {};
+      if(name===DEPARTMENT_SCOPE){
+        const records=predRecords(name);
+        return {
+          balance:sum(records.map(r=>r.balance_hidrico_mm)),
+          soil:mean(records.map(r=>r.humedad_suelo_0_81cm_m3_m3)),
+          vpd:max(records.map(r=>r.vpd_max_kpa)),
+          dry:max(records.map(r=>r.dias_secos_consecutivos)),
+          stressHigh:records.filter(r=>String(r.nivel_estres_hidrico_orientativo).toLowerCase().includes("alto")).length
+        };
+      }
+      const m=currentPredMunicipality(name);
+      const r=m?.resumen || {};
       return {
-        balance: number(r.balance_hidrico_total_mm),
-        soil: number(r.humedad_suelo_perfil_media_m3_m3),
-        vpd: number(r.vpd_maximo_kpa),
-        dry: number(r.max_dias_secos_consecutivos),
-        stressHigh: number(r.dias_estres_alto_orientativo)
+        balance:number(r.balance_hidrico_total_mm),
+        soil:number(r.humedad_suelo_perfil_media_m3_m3),
+        vpd:number(r.vpd_maximo_kpa),
+        dry:number(r.max_dias_secos_consecutivos),
+        stressHigh:number(r.dias_estres_alto_orientativo)
       };
     }
 
@@ -653,8 +1128,10 @@
 
     function renderKpis() {
       const st = statsFor(STATE.selected);
-      document.getElementById("summaryTitle").textContent = `Indicadores agroclimáticos · ${STATE.selected || "Municipio"}`;
-      document.getElementById("summaryPeriod").textContent = st.records.length ? `${fmtDate(st.records[0].fecha)} al ${fmtDate(st.records.at(-1).fecha)} · ${st.records.length} días` : "Sin registros en el periodo seleccionado";
+      const scope=selectedScopeLabel();
+      document.getElementById("summaryTitle").textContent = `Indicadores agroclimáticos · ${scope}`;
+      const detail=STATE.selected===DEPARTMENT_SCOPE ? "promedios diarios departamentales" : "registros diarios";
+      document.getElementById("summaryPeriod").textContent = st.records.length ? `${fmtDate(st.records[0].fecha)} al ${fmtDate(st.records.at(-1).fecha)} · ${st.records.length} días · ${detail}` : "Sin registros en el periodo seleccionado";
       document.getElementById("kpiRain").textContent = fmt(st.rain,1," mm");
       document.getElementById("kpiEt0").textContent = fmt(st.et0,1," mm");
       const balanceEl = document.getElementById("kpiBalance"); balanceEl.textContent = fmt(st.balance,1," mm"); balanceEl.style.color = balanceColor(st.balance,1);
@@ -779,9 +1256,10 @@
 
     function renderForecast() {
       const rec=predRecords(); const key="forecast",box="forecastChartBox"; clearEmpty(box);
-      const pred=currentPredMunicipality(); const period=document.getElementById("forecastPeriod");
-      period.textContent=rec.length?`${STATE.selected}: ${fmtDate(rec[0].fecha)} al ${fmtDate(rec.at(-1).fecha)} · ${rec.length} días`:`No hay pronóstico para ${STATE.selected || "el municipio"}`;
-      if(!rec.length){emptyChart(key,box,"No hay registros de pronóstico para este municipio.");document.getElementById("forecastCards").innerHTML='<div class="forecast-card">Pronóstico pendiente de generar.</div>';return;}
+      const period=document.getElementById("forecastPeriod");
+      const scope=selectedScopeLabel();
+      period.textContent=rec.length?`${scope}: ${fmtDate(rec[0].fecha)} al ${fmtDate(rec.at(-1).fecha)} · ${rec.length} días`:`No hay pronóstico para ${scope}`;
+      if(!rec.length){emptyChart(key,box,"No hay registros de pronóstico para el ámbito seleccionado.");document.getElementById("forecastCards").innerHTML='<div class="forecast-card">Pronóstico pendiente de generar.</div>';return;}
       destroyChart(key); STATE.charts[key]=new Chart(document.getElementById("forecastChart"),{type:"bar",data:{labels:rec.map(r=>r.fecha),datasets:[
         {label:"Precipitación",data:rec.map(r=>r.precipitacion_mm),backgroundColor:COLORS.blueSoft,borderColor:COLORS.blue,borderWidth:1.5,borderRadius:5,yAxisID:"y"},
         {label:"ET₀",data:rec.map(r=>r.et0_mm),backgroundColor:COLORS.brownSoft,borderColor:COLORS.brown,borderWidth:1.5,borderRadius:5,yAxisID:"y"},
@@ -793,10 +1271,86 @@
       }).join("");
     }
 
+    const RADAR_METRICS = [
+      {key:"rain",label:"Precipitación",unit:" mm",digits:1},
+      {key:"et0",label:"ET₀",unit:" mm",digits:1},
+      {key:"balance",label:"Balance P−ET₀",unit:" mm",digits:1},
+      {key:"soil",label:"Humedad del suelo",unit:" m³/m³",digits:3},
+      {key:"vpd",label:"VPD máximo",unit:" kPa",digits:2},
+      {key:"dry",label:"Racha seca",unit:" días",digits:0}
+    ];
+
+    function radarDepartmentData() {
+      const rows=STATE.municipalities.map(name=>({name,stats:statsFor(name)}));
+      const ranges={};
+      RADAR_METRICS.forEach(metric=>{
+        const values=rows.map(row=>row.stats[metric.key]).filter(valid).map(Number);
+        ranges[metric.key]={
+          min:values.length?Math.min(...values):0,
+          max:values.length?Math.max(...values):0,
+          average:values.length?values.reduce((a,b)=>a+b,0)/values.length:null
+        };
+      });
+      return {rows,ranges};
+    }
+
+    function normalizeRadarValue(value,range) {
+      if(!valid(value)||!range) return 0;
+      const lo=Number(range.min),hi=Number(range.max);
+      if(!Number.isFinite(lo)||!Number.isFinite(hi)||hi===lo) return 50;
+      return Math.max(0,Math.min(100,((Number(value)-lo)/(hi-lo))*100));
+    }
+
+    function closeMunicipalityRadar() {
+      if(STATE.radarChart){STATE.radarChart.destroy();STATE.radarChart=null}
+      STATE.radarMunicipality=null;
+      const modal=document.getElementById("municipalityRadarModal");
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden","true");
+      document.body.classList.remove("modal-open");
+    }
+
+    function openMunicipalityRadar(name) {
+      if(!STATE.municipalities.includes(name)) return;
+      if(STATE.radarChart){STATE.radarChart.destroy();STATE.radarChart=null}
+      STATE.radarMunicipality=name;
+      const municipalityStats=statsFor(name);
+      const {ranges}=radarDepartmentData();
+      const municipalityNormalized=RADAR_METRICS.map(metric=>round(normalizeRadarValue(municipalityStats[metric.key],ranges[metric.key]),1));
+      const averageNormalized=RADAR_METRICS.map(metric=>round(normalizeRadarValue(ranges[metric.key].average,ranges[metric.key]),1));
+
+      document.getElementById("municipalityRadarTitle").textContent=`Perfil agroclimático · ${name}`;
+      document.getElementById("municipalityRadarMetrics").innerHTML=RADAR_METRICS.map(metric=>`<div class="radar-metric"><div class="radar-metric-label">${escapeHtml(metric.label)}</div><div class="radar-metric-value">${fmt(municipalityStats[metric.key],metric.digits,metric.unit)}</div><div class="radar-metric-average">Promedio departamental: ${fmt(ranges[metric.key].average,metric.digits,metric.unit)}</div></div>`).join("");
+
+      STATE.radarChart=new Chart(document.getElementById("municipalityRadarChart"),{
+        type:"radar",
+        data:{labels:RADAR_METRICS.map(metric=>metric.label),datasets:[
+          {label:name,data:municipalityNormalized,rawValues:RADAR_METRICS.map(metric=>municipalityStats[metric.key]),borderColor:COLORS.green,backgroundColor:COLORS.greenSoft,pointBackgroundColor:COLORS.green,pointBorderColor:"#fff",pointRadius:4,borderWidth:3},
+          {label:"Promedio departamental",data:averageNormalized,rawValues:RADAR_METRICS.map(metric=>ranges[metric.key].average),borderColor:COLORS.blue,backgroundColor:"rgba(42,157,183,.06)",pointBackgroundColor:COLORS.blue,pointBorderColor:"#fff",pointRadius:3,borderWidth:2}
+        ]},
+        options:{responsive:true,maintainAspectRatio:false,animation:{duration:IS_MOBILE?0:450},plugins:{legend:{position:"top",labels:{usePointStyle:true,font:{family:FONT,size:IS_MOBILE?11:14,weight:"700"}}},tooltip:{backgroundColor:"rgba(17,57,47,.96)",padding:10,callbacks:{label(context){const metric=RADAR_METRICS[context.dataIndex];const raw=context.dataset.rawValues?.[context.dataIndex];return `${context.dataset.label}: ${fmt(raw,metric.digits,metric.unit)} · posición relativa ${Math.round(context.raw)}/100`;}}}},scales:{r:{min:0,max:100,beginAtZero:true,ticks:{display:false,stepSize:20},grid:{color:"rgba(31,96,77,.14)"},angleLines:{color:"rgba(31,96,77,.16)"},pointLabels:{color:"#17342d",font:{family:FONT,size:IS_MOBILE?10:13,weight:"700"}}}}}
+      });
+
+      const modal=document.getElementById("municipalityRadarModal");
+      modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");
+      setTimeout(()=>STATE.radarChart?.resize(),80);
+    }
+
+    function setupMunicipalityRadar() {
+      document.getElementById("municipalityRadarClose").addEventListener("click",closeMunicipalityRadar);
+      document.getElementById("municipalityRadarModal").addEventListener("click",event=>{if(event.target.id==="municipalityRadarModal")closeMunicipalityRadar()});
+      document.getElementById("municipalityRadarApply").addEventListener("click",()=>{const name=STATE.radarMunicipality;closeMunicipalityRadar();if(name)selectMunicipality(name)});
+      document.addEventListener("keydown",event=>{if(event.key==="Escape"&&document.getElementById("municipalityRadarModal").classList.contains("open"))closeMunicipalityRadar()});
+    }
+
     function renderMunicipalityCards() {
-      const cards=STATE.municipalities.map(name=>{const st=statsFor(name);return `<article class="mun-card"><div class="mun-name">${escapeHtml(name)}</div><div class="mun-period">${st.records.length} días analizados</div><div class="mun-balance" style="color:${balanceColor(st.balance,1)}">${fmt(st.balance,1," mm")}</div><div class="forecast-tag ${st.balance< -2?'tag-high':st.balance>2?'tag-low':'tag-moderate'}">${escapeHtml(balanceLabel(st.balance))}</div><div class="mun-stats"><div class="mun-stat">Lluvia<strong>${fmt(st.rain,1," mm")}</strong></div><div class="mun-stat">ET₀<strong>${fmt(st.et0,1," mm")}</strong></div><div class="mun-stat">Humedad perfil<strong>${fmt(st.soil,3)}</strong></div><div class="mun-stat">VPD máximo<strong>${fmt(st.vpd,2," kPa")}</strong></div></div><button class="mun-open" type="button" data-municipio="${escapeHtml(name)}">Ver municipio</button></article>`}).join("");
+      const cards=STATE.municipalities.map(name=>{const st=statsFor(name);return `<article class="mun-card" tabindex="0" role="button" data-radar-municipio="${escapeHtml(name)}" aria-label="Abrir perfil agroclimático de ${escapeHtml(name)}"><div class="mun-name">${escapeHtml(name)}</div><div class="mun-period">${st.records.length} días analizados</div><div class="mun-balance" style="color:${balanceColor(st.balance,1)}">${fmt(st.balance,1," mm")}</div><div class="forecast-tag ${st.balance< -2?'tag-high':st.balance>2?'tag-low':'tag-moderate'}">${escapeHtml(balanceLabel(st.balance))}</div><div class="mun-stats"><div class="mun-stat">Lluvia<strong>${fmt(st.rain,1," mm")}</strong></div><div class="mun-stat">ET₀<strong>${fmt(st.et0,1," mm")}</strong></div><div class="mun-stat">Humedad perfil<strong>${fmt(st.soil,3)}</strong></div><div class="mun-stat">VPD máximo<strong>${fmt(st.vpd,2," kPa")}</strong></div></div><button class="mun-open" type="button" data-radar-button="${escapeHtml(name)}">Ver perfil agroclimático</button></article>`}).join("");
       document.getElementById("municipalityCards").innerHTML=cards;
-      document.querySelectorAll(".mun-open").forEach(btn=>btn.addEventListener("click",()=>selectMunicipality(btn.dataset.municipio)));
+      document.querySelectorAll("[data-radar-municipio]").forEach(card=>{
+        card.addEventListener("click",event=>{if(event.target.closest("button"))return;openMunicipalityRadar(card.dataset.radarMunicipio)});
+        card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();openMunicipalityRadar(card.dataset.radarMunicipio)}});
+      });
+      document.querySelectorAll("[data-radar-button]").forEach(button=>button.addEventListener("click",event=>{event.stopPropagation();openMunicipalityRadar(button.dataset.radarButton)}));
     }
 
     function renderTable() {
@@ -808,7 +1362,7 @@
     function renderAll() {
       const grouped=chartHistRecords();
       const note=document.getElementById("filterNote");
-      if (note) note.textContent=`Gráficas históricas en resolución ${periodDescriptor(grouped.mode)} · ${grouped.records.length} puntos visibles. La tabla y el Excel conservan los registros diarios.`;
+      if (note) {const scope=STATE.selected===DEPARTMENT_SCOPE?"promedios departamentales":"datos municipales";note.textContent=`Gráficas históricas en resolución ${periodDescriptor(grouped.mode)} · ${grouped.records.length} puntos visibles · ${scope}. La tabla y el Excel conservan los registros diarios.`;}
       renderKpis(); renderWaterChart(); renderCumulativeChart(); renderSoilChart(); renderStressChart(); renderSolarChart(); renderMonthlyChart(); renderComparison(); renderMap(); renderForecast(); renderMunicipalityCards(); renderTable();
     }
 
@@ -857,7 +1411,9 @@
     function resetFilterControls() {
       const dates=availableDates();
       STATE.start=dates[0] || null; STATE.end=dates.at(-1) || null;
+      STATE.selected=DEPARTMENT_SCOPE;
       STATE.aggregation="auto"; STATE.forecastDays=16; STATE.comparisonLimit=10; STATE.soilSeries="summary";
+      document.getElementById("municipioSelect").value=STATE.selected;
       document.getElementById("periodoRapido").value="all";
       document.getElementById("fechaInicio").value=STATE.start || "";
       document.getElementById("fechaFin").value=STATE.end || "";
@@ -910,7 +1466,7 @@
         const link=document.createElement("a");
         const period=[STATE.start,STATE.end].filter(Boolean).join("_");
         link.href=url;
-        link.download=`${safeFilename(title)}_${safeFilename(STATE.selected)}_${period || "periodo"}.png`;
+        link.download=`${safeFilename(title)}_${safeFilename(selectedScopeLabel())}_${period || "periodo"}.png`;
         document.body.appendChild(link);
         link.click();
         link.remove();
@@ -943,10 +1499,10 @@
       const forecast=predRecords().slice().sort((a,b)=>String(a.fecha).localeCompare(String(b.fecha)));
       const stats=statsFor(STATE.selected);
       const workbook=XLSX.utils.book_new();
-      workbook.Props={Title:"Agroclima y balance hídrico",Subject:STATE.selected,Author:"Mesa Técnica Agroclimática Sololá",CreatedDate:new Date()};
+      workbook.Props={Title:"Agroclima y balance hídrico",Subject:selectedScopeLabel(),Author:"Mesa Técnica Agroclimática Sololá",CreatedDate:new Date()};
 
       const summaryRows=[
-        {Campo:"Municipio",Valor:STATE.selected},
+        {Campo:"Ámbito",Valor:selectedScopeLabel()},
         {Campo:"Fecha inicial",Valor:STATE.start || ""},
         {Campo:"Fecha final",Valor:STATE.end || ""},
         {Campo:"Registros históricos",Valor:historic.length},
@@ -1006,7 +1562,7 @@
       appendJsonSheet(workbook,"Pronóstico",forecastRows);
       appendJsonSheet(workbook,"Comparación municipal",comparisonRows);
 
-      const file=`agroclima_${safeFilename(STATE.selected)}_${STATE.start || "inicio"}_${STATE.end || "fin"}.xlsx`;
+      const file=`agroclima_${safeFilename(selectedScopeLabel())}_${STATE.start || "inicio"}_${STATE.end || "fin"}.xlsx`;
       XLSX.writeFile(workbook,file,{compression:true});
     }
 
@@ -1015,6 +1571,50 @@
         button.addEventListener("click",()=>downloadChartPng(button.dataset.chartDownload,button.dataset.title));
       });
       document.querySelectorAll("[data-export-excel]").forEach(button=>button.addEventListener("click",exportExcel));
+    }
+
+    function setChartFlip(card, flipped, focusTarget=true) {
+      if (!card) return;
+      card.classList.toggle("is-flipped", flipped);
+      const front=card.querySelector(".chart-front");
+      const back=card.querySelector(".chart-back");
+      front?.setAttribute("aria-hidden", String(flipped));
+      back?.setAttribute("aria-hidden", String(!flipped));
+      card.querySelectorAll("[data-chart-flip]").forEach(button=>{
+        button.setAttribute("aria-expanded", String(flipped));
+      });
+      if (focusTarget) {
+        const target=flipped ? card.querySelector(".flip-back-btn") : card.querySelector(".info-btn");
+        window.setTimeout(()=>target?.focus(), 390);
+      }
+    }
+
+    function setupChartFlips() {
+      document.querySelectorAll("[data-chart-card]").forEach(card=>{
+        card.querySelectorAll("[data-chart-flip]").forEach(button=>{
+          button.addEventListener("click",event=>{event.preventDefault();event.stopPropagation();setChartFlip(card,!card.classList.contains("is-flipped"))});
+        });
+
+        const title=card.querySelector(".chart-front .panel-title");
+        const body=card.querySelector(".chart-front .panel-body");
+        [title,body].filter(Boolean).forEach(target=>{
+          target.tabIndex=0;
+          target.setAttribute("role","button");
+          target.setAttribute("aria-label","Mostrar guía de cálculo, interpretación y precauciones");
+          target.addEventListener("click",event=>{
+            if(STATE.fullscreen||event.target.closest("button,select,input,a")) return;
+            setChartFlip(card,true);
+          });
+          target.addEventListener("keydown",event=>{
+            if((event.key==="Enter"||event.key===" ")&&!STATE.fullscreen){event.preventDefault();setChartFlip(card,true)}
+          });
+        });
+      });
+
+      document.addEventListener("keydown",event=>{
+        if(event.key!=="Escape") return;
+        document.querySelectorAll("[data-chart-card].is-flipped").forEach(card=>setChartFlip(card,false,false));
+      });
     }
 
     function updateStatus(histOk,predOk) {
@@ -1030,12 +1630,12 @@
       updateStatus(Boolean(STATE.hist?.ok),Boolean(STATE.pred?.ok));
       if(!STATE.hist?.municipios?.length) throw new Error(histError?.message || "El histórico municipal no contiene municipios.");
       STATE.municipalities=STATE.hist.municipios.filter(m=>(m.registros||[]).length).map(m=>m.nombre).sort((a,b)=>a.localeCompare(b,"es"));
-      STATE.selected=STATE.municipalities.includes("Sololá")?"Sololá":STATE.municipalities[0];
+      STATE.selected=DEPARTMENT_SCOPE;
       const allDates=STATE.hist.municipios.flatMap(m=>(m.registros||[]).map(r=>r.fecha)).sort(); STATE.start=allDates[0]||null;STATE.end=allDates.at(-1)||null;
-      const select=document.getElementById("municipioSelect");select.innerHTML=STATE.municipalities.map(name=>`<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("");select.value=STATE.selected;
+      const select=document.getElementById("municipioSelect");select.innerHTML=`<option value="${DEPARTMENT_SCOPE}">Todo el departamento</option>`+STATE.municipalities.map(name=>`<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join("");select.value=STATE.selected;
       document.getElementById("fechaInicio").value=STATE.start||"";document.getElementById("fechaFin").value=STATE.end||"";document.getElementById("fechaInicio").min=STATE.start||"";document.getElementById("fechaInicio").max=STATE.end||"";document.getElementById("fechaFin").min=STATE.start||"";document.getElementById("fechaFin").max=STATE.end||"";
       document.getElementById("agrupacionSelect").value=STATE.aggregation;document.getElementById("forecastDaysSelect").value=String(STATE.forecastDays);document.getElementById("comparisonLimitSelect").value=String(STATE.comparisonLimit);document.getElementById("soilSeriesSelect").value=STATE.soilSeries;
-      setupFilters();setupModal();setupDownloads();initMap();renderAll();
+      setupFilters();setupModal();setupDownloads();setupChartFlips();setupMunicipalityRadar();initMap();renderAll();
       const latest=[STATE.hist?.generated_at_gt,STATE.pred?.generated_at_gt].filter(Boolean).sort().at(-1);document.getElementById("footerUpdate").textContent=`Actualizado por última vez: ${fmtDateTime(latest)}`;
       if(predError) console.warn("Pronóstico no disponible:",predError);
       document.getElementById("loader").classList.add("hidden");
