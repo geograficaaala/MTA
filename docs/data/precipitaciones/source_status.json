@@ -1,7 +1,7 @@
 {
   "schema": "mta_precipitacion_source_status_v6",
-  "generated_at_utc": "2026-07-17T14:04:15.567676+00:00",
-  "generated_at_gt": "2026-07-17T08:04:15.567676-06:00",
+  "generated_at_utc": "2026-07-18T13:50:54.914968+00:00",
+  "generated_at_gt": "2026-07-18T07:50:54.914968-06:00",
   "ambient_weather_api": {
     "enabled": true,
     "devices_seen": 1,
@@ -16,29 +16,40 @@
       "source_id": "insivumeh_precipitaciones_departamentos",
       "institution": "INSIVUMEH",
       "parser": "insivumeh_solola",
-      "checked_at_utc": "2026-07-17T14:04:15.567676+00:00",
-      "checked_at_gt": "2026-07-17T08:04:15.567676-06:00",
-      "ok": true,
-      "records_added": 9,
-      "stations_found": 3,
+      "checked_at_utc": "2026-07-18T13:50:54.914968+00:00",
+      "checked_at_gt": "2026-07-18T07:50:54.914968-06:00",
+      "ok": false,
+      "records_added": 0,
+      "stations_found": 0,
       "urls": [
         {
           "url": "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html",
-          "ok": true,
-          "status_code": 200,
-          "ssl_mode": "ssl_verificado",
-          "content_length": 52030,
-          "error": null
+          "ok": false,
+          "status_code": null,
+          "ssl_mode": null,
+          "content_length": null,
+          "error": "403 Client Error: Forbidden for url: https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html"
+        },
+        {
+          "url": "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html",
+          "ok": false,
+          "status_code": null,
+          "ssl_mode": null,
+          "content_length": null,
+          "error": "403 Client Error: Forbidden for url: https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html"
         }
       ],
-      "errors": []
+      "errors": [
+        "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html: 403 Client Error: Forbidden for url: https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Departamentos.html",
+        "https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html: 403 Client Error: Forbidden for url: https://insivumeh.gob.gt/img/MAPAS_24H/Sin_Lluvia/Resumen_Cronologico.html"
+      ]
     },
     {
       "source_id": "vivamos_mejor_estaciones",
       "institution": "Asociación Vivamos Mejor",
       "parser": "vivamos_mejor_inventory",
-      "checked_at_utc": "2026-07-17T14:04:15.567676+00:00",
-      "checked_at_gt": "2026-07-17T08:04:15.567676-06:00",
+      "checked_at_utc": "2026-07-18T13:50:54.914968+00:00",
+      "checked_at_gt": "2026-07-18T07:50:54.914968-06:00",
       "ok": true,
       "records_added": 0,
       "stations_found": 8,
@@ -58,14 +69,14 @@
       "source_id": "pws_configuradas",
       "institution": "PWS configuradas manualmente",
       "parser": "pws_config",
-      "checked_at_utc": "2026-07-17T14:04:15.567676+00:00",
-      "checked_at_gt": "2026-07-17T08:04:15.567676-06:00",
+      "checked_at_utc": "2026-07-18T13:50:54.914968+00:00",
+      "checked_at_gt": "2026-07-18T07:50:54.914968-06:00",
       "ok": true,
       "records_added": 4,
       "stations_found": 6,
       "urls": [
         {
-          "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-07-17/2026-07-17/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-07-18/2026-07-18/monthly",
           "ok": true,
           "online_status": "online",
           "provider": "wunderground",
@@ -74,7 +85,7 @@
           "error": null
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-07-17/2026-07-17/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-07-18/2026-07-18/monthly",
           "ok": true,
           "online_status": "online",
           "provider": "wunderground",
@@ -83,7 +94,7 @@
           "error": null
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-07-17/2026-07-17/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-07-18/2026-07-18/monthly",
           "ok": true,
           "online_status": "online",
           "provider": "wunderground",
@@ -92,7 +103,7 @@
           "error": null
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-07-17/2026-07-17/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-07-18/2026-07-18/monthly",
           "ok": false,
           "online_status": "historica_no_actual",
           "provider": "wunderground",
