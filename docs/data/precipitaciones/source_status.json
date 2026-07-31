@@ -1,14 +1,14 @@
 {
   "schema": "mta_precipitacion_source_status_v6",
-  "generated_at_utc": "2026-07-30T14:33:17.835365+00:00",
-  "generated_at_gt": "2026-07-30T08:33:17.835365-06:00",
+  "generated_at_utc": "2026-07-31T14:37:01.215897+00:00",
+  "generated_at_gt": "2026-07-31T08:37:01.215897-06:00",
   "ambient_weather_api": {
     "enabled": true,
-    "devices_seen": 1,
+    "devices_seen": 0,
     "status": {
-      "ok": true,
-      "status_code": 200,
-      "error": null
+      "ok": false,
+      "status_code": 503,
+      "error": "503 Server Error: Service Unavailable for url: https://api.ambientweather.net/v1/devices?apiKey=c797c082863c4f748e1acace9fab1ac4afc5f7c7f03049dcb529bc15f636ffe2&applicationKey=bcecf231a4454f01b5d5bb1d52cfd23ca3403d8b48954ca5ab7699b7ebf85c9c"
     }
   },
   "sources": [
@@ -16,8 +16,8 @@
       "source_id": "insivumeh_precipitaciones_departamentos",
       "institution": "INSIVUMEH",
       "parser": "insivumeh_solola",
-      "checked_at_utc": "2026-07-30T14:33:17.835365+00:00",
-      "checked_at_gt": "2026-07-30T08:33:17.835365-06:00",
+      "checked_at_utc": "2026-07-31T14:37:01.215897+00:00",
+      "checked_at_gt": "2026-07-31T08:37:01.215897-06:00",
       "ok": true,
       "records_added": 9,
       "stations_found": 3,
@@ -37,8 +37,8 @@
       "source_id": "vivamos_mejor_estaciones",
       "institution": "Asociación Vivamos Mejor",
       "parser": "vivamos_mejor_inventory",
-      "checked_at_utc": "2026-07-30T14:33:17.835365+00:00",
-      "checked_at_gt": "2026-07-30T08:33:17.835365-06:00",
+      "checked_at_utc": "2026-07-31T14:37:01.215897+00:00",
+      "checked_at_gt": "2026-07-31T08:37:01.215897-06:00",
       "ok": true,
       "records_added": 0,
       "stations_found": 8,
@@ -58,14 +58,14 @@
       "source_id": "pws_configuradas",
       "institution": "PWS configuradas manualmente",
       "parser": "pws_config",
-      "checked_at_utc": "2026-07-30T14:33:17.835365+00:00",
-      "checked_at_gt": "2026-07-30T08:33:17.835365-06:00",
+      "checked_at_utc": "2026-07-31T14:37:01.215897+00:00",
+      "checked_at_gt": "2026-07-31T08:37:01.215897-06:00",
       "ok": true,
-      "records_added": 4,
+      "records_added": 3,
       "stations_found": 6,
       "urls": [
         {
-          "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-07-30/2026-07-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-07-31/2026-07-31/monthly",
           "ok": true,
           "online_status": "online",
           "provider": "wunderground",
@@ -74,7 +74,7 @@
           "error": null
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-07-30/2026-07-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-07-31/2026-07-31/monthly",
           "ok": true,
           "online_status": "online",
           "provider": "wunderground",
@@ -83,7 +83,7 @@
           "error": null
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-07-30/2026-07-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-07-31/2026-07-31/monthly",
           "ok": true,
           "online_status": "online",
           "provider": "wunderground",
@@ -92,7 +92,7 @@
           "error": null
         },
         {
-          "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-07-30/2026-07-30/monthly",
+          "url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-07-31/2026-07-31/monthly",
           "ok": false,
           "online_status": "historica_no_actual",
           "provider": "wunderground",
@@ -102,12 +102,12 @@
         },
         {
           "url": "https://ambientweather.net/dashboard/4bd244f9e8c5b0cb889ba4cbb1a463c3/graphs",
-          "ok": true,
-          "online_status": "online",
+          "ok": false,
+          "online_status": "api_error",
           "provider": "ambientweather",
           "station_code": null,
           "dashboard_id": "4bd244f9e8c5b0cb889ba4cbb1a463c3",
-          "error": null
+          "error": "503 Server Error: Service Unavailable for url: https://api.ambientweather.net/v1/devices?apiKey=c797c082863c4f748e1acace9fab1ac4afc5f7c7f03049dcb529bc15f636ffe2&applicationKey=bcecf231a4454f01b5d5bb1d52cfd23ca3403d8b48954ca5ab7699b7ebf85c9c"
         },
         {
           "url": "https://ambientweather.net/dashboard/89771072704b24646d105a0dec52f706/graphs",
