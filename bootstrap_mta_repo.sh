@@ -985,7 +985,7 @@ reports/*.json
 EOF
 
 echo ""
-echo "✅ Repo semilla creada."
+echo "Repo semilla creada."
 echo ""
 echo "Siguiente:"
 echo "  python3 -m http.server 8080 -d docs"
