@@ -203,7 +203,7 @@ def save_json(data: dict, path: str) -> None:
     ensure_output_dir(path)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"\n✓ Archivo guardado en: {path}")
+    print(f"\nArchivo guardado en: {path}")
 
 
 # ---------------------------------------------------------------------------
@@ -248,7 +248,7 @@ def main() -> None:
             dias = len(registros)
             total_lluvia = sum(r["lluvia"] for r in registros)
             print(
-                f"  ✓ {dias} días descargados — "
+                f"  {dias} días descargados - "
                 f"acumulado total: {total_lluvia:.1f} mm"
             )
 
