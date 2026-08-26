@@ -41,7 +41,7 @@ a{color:inherit}
 body.has-scrolled .site-header{box-shadow:0 10px 30px rgba(10,28,43,.18)}
 .site-header-inner{width:min(var(--mta-max),calc(100% - 40px));min-height:78px;margin:0 auto;display:flex;align-items:center;gap:26px}
 .site-brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:250px}
-.site-brand img{width:50px;height:50px;object-fit:contain;filter:brightness(0) invert(1)}
+.site-brand img{width:50px;height:50px;object-fit:contain}
 .site-brand-copy{display:flex;flex-direction:column;line-height:1.15}
 .site-brand-name{font-size:.95rem;font-weight:700;letter-spacing:-.015em;color:#fff}
 .site-brand-place{margin-top:4px;font-size:.72rem;font-weight:500;color:rgba(255,255,255,.72)}
@@ -105,12 +105,10 @@ button{font-family:"Inter",system-ui,sans-serif}
 .mta-button:hover,.mta-button:focus-visible{transform:translateY(-2px);background:var(--mta-surface-soft);outline:none;box-shadow:var(--mta-shadow-soft)}
 .mta-button-primary{background:linear-gradient(135deg,var(--mta-primary) 0%,var(--mta-header-2) 100%);border-color:transparent;color:#fff}
 .mta-button-primary:hover,.mta-button-primary:focus-visible{background:linear-gradient(135deg,var(--mta-primary-dark) 0%,var(--mta-header) 100%);border-color:transparent}
-.home-hero-card{background:linear-gradient(145deg,var(--mta-header) 0%,#1a5177 52%,#1e6b77 100%);border:1px solid rgba(255,255,255,.08);border-radius:30px;padding:34px;box-shadow:0 25px 65px rgba(18,49,77,.18);display:flex;align-items:center;justify-content:center;min-height:360px;position:relative;overflow:hidden}
-.home-hero-card::before,.home-hero-card::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08);filter:blur(2px)}
-.home-hero-card::before{width:180px;height:180px;top:-28px;right:-34px}
-.home-hero-card::after{width:120px;height:120px;bottom:-16px;left:-24px}
+.home-hero-card{background:transparent;border:0;border-radius:0;padding:18px;box-shadow:none;display:flex;align-items:center;justify-content:center;min-height:320px;position:relative;overflow:visible}
+.home-hero-card::before,.home-hero-card::after{content:none}
 .hero-panel-mark{width:100%;height:100%;display:flex;align-items:center;justify-content:center;animation:heroFloat 6s ease-in-out infinite}
-.hero-panel-mark img{width:min(270px,78%);max-height:240px;object-fit:contain;filter:brightness(0) invert(1)}
+.hero-panel-mark img{width:min(300px,82%);max-height:260px;object-fit:contain}
 @keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .home-section{padding:64px 0;position:relative}
 .home-section-soft{background:linear-gradient(180deg,rgba(232,240,248,.38) 0%,rgba(255,255,255,0) 100%)}
