@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
@@ -2220,23 +2220,59 @@
   }
 </style>
 
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
 </head>
 <body>
-  <nav class="navbar" aria-label="Navegación principal">
-    <div class="navbar-inner site-container">
-      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
-        <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
-        <span class="brand-text"><span class="brand-sub">Sololá, Guatemala</span><span class="brand-name">Mesa Técnica Agroclimática Sololá</span></span>
-      </a>
-      <a class="home-button" href="../index.html" aria-label="Regresar al inicio">Regresar al inicio</a>
-    </div>
-  </nav>
+  <header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
+      <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá">
+      <span class="site-brand-copy"><span class="site-brand-name">Mesa Técnica Agroclimática Sololá</span><span class="site-brand-place">Sololá, Guatemala</span></span>
+    </a>
+    <button class="site-mobile-toggle" type="button" data-mobile-toggle aria-expanded="false" aria-label="Abrir menú"><span class="site-mobile-toggle-lines"></span></button>
+    <nav class="site-nav" data-site-nav aria-label="Navegación principal">
+      <a class="site-nav-link" href="../index.html">Inicio</a>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">La MTA</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="../index.html#la-mta"><strong>Qué es la MTA</strong><span>Propósito y alcance territorial</span></a>
+          <a class="site-menu-link" href="../index.html#objetivos"><strong>Objetivos</strong><span>Uso de información para la toma de decisiones</span></a>
+          <a class="site-menu-link" href="../index.html#instituciones"><strong>Instituciones integrantes</strong><span>Organizaciones que participan en la mesa</span></a>
+        </div></div>
+      </div>
+      <div class="site-nav-item site-dropdown site-dropdown-wide is-active">
+        <button class="site-dropdown-toggle" type="button">Áreas técnicas</button>
+        <div class="site-dropdown-panel">
+          <div class="site-menu-group"><span class="site-menu-title">Clima</span>
+            <a class="site-menu-link" href="./clima_index.html"><strong>Clima</strong><span>Acceso general al área meteorológica</span></a>
+            <a class="site-menu-link" href="./precipitaciones_index.html"><strong>Precipitación</strong><span>Observación, pronóstico e histórico</span></a>
+            <a class="site-menu-link" href="./temperatura_index.html"><strong>Temperatura</strong><span>Condiciones térmicas y comparación municipal</span></a>
+            <a class="site-menu-link" href="./viento_index.html"><strong>Viento</strong><span>Velocidad, dirección, rachas y pronóstico</span></a>
+          </div>
+          <div class="site-menu-group"><span class="site-menu-title">Agroclima</span><a class="site-menu-link" href="./agroclima_index.html"><strong>Agroclima y balance hídrico</strong><span>Agua, suelo, demanda atmosférica y estrés agrícola</span></a></div>
+        </div>
+      </div>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">Productos</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="./clima_index.html"><strong>Pronósticos</strong><span>Acceso a los módulos con predicción</span></a>
+          <a class="site-menu-link" href="./clima_index.html"><strong>Mapas interactivos</strong><span>Visualización territorial de variables</span></a>
+          <a class="site-menu-link" href="../index.html#productos"><strong>Datos y estaciones</strong><span>Fuentes y observación disponible</span></a>
+          <a class="site-menu-link" href="../index.html#boletines"><strong>Boletines agroclimáticos</strong><span>Productos de síntesis de la MTA</span></a>
+        </div></div>
+      </div>
+      <a class="site-nav-link" href="../index.html#contacto">Contacto</a>
+      <button class="site-search-button" type="button" data-search-open>Buscar</button>
+    </nav>
+  </div>
+</header>
 
   <div class="loader" id="loader">
     <div class="loader-card"><div class="spinner"></div><strong>Cargando datos de viento</strong><p>Leyendo histórico NASA POWER, observación AWN y pronóstico Open-Meteo.</p></div>
   </div>
 
-  <main>
+  <div class="page-context"><div class="breadcrumbs" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span class="breadcrumbs-separator"></span><a href="./clima_index.html">Clima</a><span class="breadcrumbs-separator"></span><span>Viento</span></div><div class="module-switcher" aria-label="Módulos relacionados"><a href="./precipitaciones_index.html">Precipitación</a><a href="./temperatura_index.html">Temperatura</a><a href="./viento_index.html" aria-current="page">Viento</a></div></div>
+<main>
     <section class="hero-section"><div class="wrap">
       <h1>Análisis de Viento</h1>
       <p class="sub">Módulo de consulta para velocidad media, máximos diarios, dirección predominante y condiciones cercanas al cultivo en los 19 municipios de Sololá. Integra histórico NASA POWER, estación Ambient Weather, pronóstico Open-Meteo y mapa Windy.</p>
@@ -2349,7 +2385,7 @@
           </li>
           <li>
             <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
-              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-icon" aria-hidden="true">Correo</span>
               <span class="footer-social-copy">
                 <span class="footer-social-label">Contáctanos</span>
                 <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
@@ -2365,7 +2401,7 @@
     </div>
   </footer>
 
-  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">&#8679;</button>
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">Arriba</button>
   <div class="chart-fullscreen-overlay" id="chartFullscreen" aria-hidden="true"><div class="chart-fullscreen-card" role="dialog" aria-modal="true" aria-label="Gráfica ampliada"><div class="chart-fullscreen-head"><div class="chart-fullscreen-brand"><img class="chart-fullscreen-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><div class="chart-fullscreen-title" id="chartFullscreenTitle">Gráfica ampliada</div></div><button class="chart-fullscreen-close" id="chartFullscreenClose" type="button" aria-label="Cerrar">×</button></div><div class="chart-fullscreen-body"><div class="chart-fullscreen-host" id="chartFullscreenHost"></div></div></div></div>
   <div class="municipality-radar-overlay" id="municipalityRadarOverlay" aria-hidden="true"><div class="municipality-radar-card" role="dialog" aria-modal="true" aria-label="Perfil municipal de viento"><div class="municipality-radar-head"><div class="municipality-radar-brand"><img class="municipality-radar-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><div><div class="municipality-radar-title" id="municipalityRadarTitle">Municipio</div><div class="municipality-radar-subtitle" id="municipalityRadarSubtitle">Perfil de viento</div></div></div><button class="municipality-radar-close" id="municipalityRadarClose" type="button" aria-label="Cerrar">×</button></div><div class="municipality-radar-body"><div class="municipality-radar-chart"><canvas id="municipalityRadarChart"></canvas></div><div class="municipality-radar-stats" id="municipalityRadarStats"></div></div></div></div>
 
@@ -2376,8 +2412,8 @@ const AWN_URL = "./data/viento/awn_viento.json";
 const PRED_URL = "./data/viento/prediccion_viento.json";
 const MONTHS = ["", "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 const DIRS = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSO","SO","OSO","O","ONO","NO","NNO"];
-const FONT = "Outfit, Segoe UI, Arial, sans-serif";
-const MONO = "IBM Plex Mono, Courier New, monospace";
+const FONT = "Inter, Segoe UI, Arial, sans-serif";
+const MONO = "Inter, Segoe UI, Arial, sans-serif";
 const MOBILE_QUERY = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 900px)");
 function detectMobileLayout(){
   const touchPhone = navigator.maxTouchPoints > 0 && Math.min(window.screen.width, window.screen.height) <= 900;
@@ -2464,7 +2500,7 @@ function openMunicipalityProfile(mun,month="all"){ const st=stats(getRecords(mun
 function closeMunicipalityProfile(){ const o=document.getElementById("municipalityRadarOverlay"); o.classList.remove("open"); o.setAttribute("aria-hidden","true"); if(!document.getElementById("chartFullscreen").classList.contains("open"))document.body.classList.remove("chart-modal-open"); }
 function openFullscreen(container,title){ if(S.fullscreen)return; const placeholder=document.createComment("chart-placeholder"); const parent=container.parentNode; parent.insertBefore(placeholder,container); document.getElementById("chartFullscreenHost").appendChild(container); document.getElementById("chartFullscreenTitle").textContent=title; const overlay=document.getElementById("chartFullscreen"); overlay.classList.add("open"); overlay.setAttribute("aria-hidden","false"); document.body.classList.add("chart-modal-open"); S.fullscreen={container,placeholder,parent}; setTimeout(()=>Chart.getChart(container.querySelector("canvas"))?.resize(),100); }
 function closeFullscreen(){ if(!S.fullscreen)return; const {container,placeholder,parent}=S.fullscreen; parent.insertBefore(container,placeholder); placeholder.remove(); const overlay=document.getElementById("chartFullscreen"); overlay.classList.remove("open"); overlay.setAttribute("aria-hidden","true"); S.fullscreen=null; if(!document.getElementById("municipalityRadarOverlay").classList.contains("open"))document.body.classList.remove("chart-modal-open"); setTimeout(()=>Chart.getChart(container.querySelector("canvas"))?.resize(),100); }
-function addExpandButtons(){ document.querySelectorAll(".panel .chart-container canvas").forEach(canvas=>{const panel=canvas.closest(".panel"),head=panel?.querySelector(".panel-head"); if(!head||head.querySelector(`[data-chart-expand="${canvas.id}"]`))return; const b=document.createElement("button"); b.className="chart-expand-btn"; b.type="button"; b.dataset.chartExpand=canvas.id; b.title="Ampliar gráfica"; b.setAttribute("aria-label","Ampliar gráfica"); b.textContent="⛶"; b.addEventListener("click",()=>openFullscreen(canvas.closest(".chart-container"),panel.querySelector(".panel-title")?.textContent||"Gráfica")); head.appendChild(b);}); }
+function addExpandButtons(){ document.querySelectorAll(".panel .chart-container canvas").forEach(canvas=>{const panel=canvas.closest(".panel"),head=panel?.querySelector(".panel-head"); if(!head||head.querySelector(`[data-chart-expand="${canvas.id}"]`))return; const b=document.createElement("button"); b.className="chart-expand-btn"; b.type="button"; b.dataset.chartExpand=canvas.id; b.title="Ampliar gráfica"; b.setAttribute("aria-label","Ampliar gráfica"); b.textContent="Ampliar"; b.addEventListener("click",()=>openFullscreen(canvas.closest(".chart-container"),panel.querySelector(".panel-title")?.textContent||"Gráfica")); head.appendChild(b);}); }
 function normalizeAwnRow(r={}){ return {fecha:r.fecha||r.timestamp||null,velocidad_kmh:r.velocidad_viento_kmh??r.velocidad_promedio_10min_kmh??null,racha_kmh:r.racha_viento_kmh??null,racha_max_diaria_kmh:r.racha_maxima_diaria_kmh??null,direccion_grados:r.direccion_viento_grados??r.direccion_promedio_10min_grados??null}; }
 async function loadAwn(){ const status=document.getElementById("awnStatus"),body=document.getElementById("awnBody"); try{const d=await fetchJson(AWN_URL); const latest=normalizeAwnRow(d.latest||{}),history=(d.history||d.registros||[]).map(normalizeAwnRow); if(d.ok===false)throw new Error("Archivo AWN pendiente"); status.textContent="En línea"; status.className="awn-status ok"; const dir=latest.direccion_grados; body.innerHTML=`<div class="awn-reading-grid"><div class="awn-reading"><span>Velocidad</span><strong>${fk(latest.velocidad_kmh)}</strong></div><div class="awn-reading"><span>Racha</span><strong>${fk(latest.racha_kmh)}</strong></div><div class="awn-reading"><span>Máxima del día</span><strong>${fk(latest.racha_max_diaria_kmh)}</strong></div><div class="awn-reading"><span>Dirección</span><strong>${dir==null?'—':cardinal(dir)+' · '+fd(dir)}</strong></div></div><div class="awn-meta">${d.station?.name||'Estación AWN'} · ${formatDateTime(latest.fecha||d.generated_at_gt)}</div>`; renderAwnChart(history);}catch(e){status.textContent="Pendiente";status.className="awn-status warn";body.innerHTML='<div class="empty-panel-message">El archivo AWN se generará al ejecutar el workflow con los secrets configurados.</div>'; emptyChart("awnChart","Datos de estación aún no disponibles.");}}
 function renderAwnChart(rows){ const h=rows.filter(r=>r&&r.fecha); clearEmpty("awnChart"); if(!h.length){emptyChart("awnChart","Sin histórico reciente de estación.");return;} destroyChart("awn"); S.charts.awn=new Chart(document.getElementById("awnChart"),{type:"line",data:{labels:h.map(r=>new Date(r.fecha).toLocaleString("es-GT",{month:"short",day:"2-digit",hour:"2-digit",minute:"2-digit"})),datasets:[{label:"Velocidad",data:h.map(r=>r.velocidad_kmh),borderColor:"rgba(47,122,98,.95)",backgroundColor:"rgba(47,122,98,.1)",borderWidth:3,pointRadius:1,tension:.2,yAxisID:"y"},{label:"Racha",data:h.map(r=>r.racha_kmh),borderColor:"rgba(154,109,53,.95)",backgroundColor:"rgba(240,197,62,.12)",borderWidth:3,pointRadius:1,tension:.18,yAxisID:"y"},{label:"Dirección",data:h.map(r=>r.direccion_grados),borderColor:"rgba(42,157,183,.7)",borderDash:[6,5],borderWidth:2,pointRadius:0,yAxisID:"y1"}]},options:baseOpts({scales:{y:{beginAtZero:true,position:"left",ticks:{callback:v=>`${v} km/h`}},y1:{min:0,max:360,position:"right",grid:{drawOnChartArea:false},ticks:{stepSize:90,callback:v=>cardinal(v)}}}})}); }
@@ -2499,5 +2535,6 @@ function normalizeNasaRow(r={}){
 async function load(){ try{const data=await fetchJson(DATA_URL); S.payload=data; (data.municipios||[]).forEach(m=>{S.raw[m.nombre]=(m.registros||[]).map(normalizeNasaRow).filter(r=>r.fecha);}); S.allDates=[...new Set(Object.values(S.raw).flat().map(r=>r.fecha).filter(Boolean))].sort(); const municipios=Object.keys(S.raw).sort((a,b)=>a.localeCompare(b,"es")); S.mun=municipios.includes("Sololá")?"Sololá":municipios[0]||null; S.startDate=S.allDates[0]||null; S.endDate=S.allDates.at(-1)||null; const sel=document.getElementById("gMunicipio"); sel.innerHTML=municipios.map(m=>`<option value="${m}">${m}</option>`).join("")||'<option value="">Datos pendientes</option>'; sel.value=S.mun||""; document.getElementById("gStart").value=S.startDate||""; document.getElementById("gEnd").value=S.endDate||""; [sel,document.getElementById("gStart"),document.getElementById("gEnd"),document.getElementById("btnApply"),document.getElementById("btnReset")].forEach(el=>el.disabled=!S.allDates.length); fillMonthSelects(); setupEvents(); renderAll(); await Promise.allSettled([loadAwn(),loadPred(),loadFooterUpdate()]); document.getElementById("loader").classList.add("hidden");}catch(err){document.querySelector(".loader-card strong").textContent="No se pudieron cargar los datos";document.querySelector(".loader-card p").textContent=err.message;}}
 load();
 </script>
+  <script src="../assets/js/site-shell.js"></script>
 </body>
 </html>

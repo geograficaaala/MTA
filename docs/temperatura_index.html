@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
@@ -2048,23 +2048,55 @@
     @media (max-width: 720px) { .chart-container.temperature-main, .chart-container.temperature-time, .chart-container.temperature-combo, .chart-container.temperature-dist, .chart-container.temperature-monthly, .chart-container.temperature-pred { min-height: 430px; } }
 
   </style>
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar" aria-label="Navegación principal">
-    <div class="navbar-inner site-container">
-      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
-        <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
-        <span class="brand-text">
-          <span class="brand-sub">Sololá, Guatemala</span>
-          <span class="brand-name">Mesa Técnica Agroclimática Sololá</span>
-        </span>
-      </a>
-      <a class="home-button" href="../index.html" aria-label="Regresar al inicio">Regresar al inicio</a>
-    </div>
-  </nav>
+  <header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
+      <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá">
+      <span class="site-brand-copy"><span class="site-brand-name">Mesa Técnica Agroclimática Sololá</span><span class="site-brand-place">Sololá, Guatemala</span></span>
+    </a>
+    <button class="site-mobile-toggle" type="button" data-mobile-toggle aria-expanded="false" aria-label="Abrir menú"><span class="site-mobile-toggle-lines"></span></button>
+    <nav class="site-nav" data-site-nav aria-label="Navegación principal">
+      <a class="site-nav-link" href="../index.html">Inicio</a>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">La MTA</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="../index.html#la-mta"><strong>Qué es la MTA</strong><span>Propósito y alcance territorial</span></a>
+          <a class="site-menu-link" href="../index.html#objetivos"><strong>Objetivos</strong><span>Uso de información para la toma de decisiones</span></a>
+          <a class="site-menu-link" href="../index.html#instituciones"><strong>Instituciones integrantes</strong><span>Organizaciones que participan en la mesa</span></a>
+        </div></div>
+      </div>
+      <div class="site-nav-item site-dropdown site-dropdown-wide is-active">
+        <button class="site-dropdown-toggle" type="button">Áreas técnicas</button>
+        <div class="site-dropdown-panel">
+          <div class="site-menu-group"><span class="site-menu-title">Clima</span>
+            <a class="site-menu-link" href="./clima_index.html"><strong>Clima</strong><span>Acceso general al área meteorológica</span></a>
+            <a class="site-menu-link" href="./precipitaciones_index.html"><strong>Precipitación</strong><span>Observación, pronóstico e histórico</span></a>
+            <a class="site-menu-link" href="./temperatura_index.html"><strong>Temperatura</strong><span>Condiciones térmicas y comparación municipal</span></a>
+            <a class="site-menu-link" href="./viento_index.html"><strong>Viento</strong><span>Velocidad, dirección, rachas y pronóstico</span></a>
+          </div>
+          <div class="site-menu-group"><span class="site-menu-title">Agroclima</span><a class="site-menu-link" href="./agroclima_index.html"><strong>Agroclima y balance hídrico</strong><span>Agua, suelo, demanda atmosférica y estrés agrícola</span></a></div>
+        </div>
+      </div>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">Productos</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="./clima_index.html"><strong>Pronósticos</strong><span>Acceso a los módulos con predicción</span></a>
+          <a class="site-menu-link" href="./clima_index.html"><strong>Mapas interactivos</strong><span>Visualización territorial de variables</span></a>
+          <a class="site-menu-link" href="../index.html#productos"><strong>Datos y estaciones</strong><span>Fuentes y observación disponible</span></a>
+          <a class="site-menu-link" href="../index.html#boletines"><strong>Boletines agroclimáticos</strong><span>Productos de síntesis de la MTA</span></a>
+        </div></div>
+      </div>
+      <a class="site-nav-link" href="../index.html#contacto">Contacto</a>
+      <button class="site-search-button" type="button" data-search-open>Buscar</button>
+    </nav>
+  </div>
+</header>
 
   <!-- LOADER -->
   <div class="loader" id="loader">
@@ -2075,7 +2107,8 @@
     </div>
   </div>
 
-  <main>
+  <div class="page-context"><div class="breadcrumbs" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span class="breadcrumbs-separator"></span><a href="./clima_index.html">Clima</a><span class="breadcrumbs-separator"></span><span>Temperatura</span></div><div class="module-switcher" aria-label="Módulos relacionados"><a href="./precipitaciones_index.html">Precipitación</a><a href="./temperatura_index.html" aria-current="page">Temperatura</a><a href="./viento_index.html">Viento</a></div></div>
+<main>
 
     <!-- HERO -->
     <section class="hero-section">
@@ -2204,7 +2237,7 @@
           </li>
           <li>
             <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
-              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-icon" aria-hidden="true">Correo</span>
               <span class="footer-social-copy">
                 <span class="footer-social-label">Contáctanos</span>
                 <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
@@ -2222,7 +2255,7 @@
 
 
 
-  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">&#8679;</button>
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">Arriba</button>
 
   <div class="chart-fullscreen-overlay" id="chartFullscreen" aria-hidden="true"><div class="chart-fullscreen-card" role="dialog" aria-modal="true" aria-label="Gráfica ampliada"><div class="chart-fullscreen-head"><div class="chart-fullscreen-brand"><img class="chart-fullscreen-logo" src="./logos/MTA_LOGO.png" alt="Logo MTA"><div class="chart-fullscreen-title" id="chartFullscreenTitle">Gráfica ampliada</div></div><button class="chart-fullscreen-close" id="chartFullscreenClose" type="button" aria-label="Cerrar">×</button></div><div class="chart-fullscreen-body"><div class="chart-fullscreen-host" id="chartFullscreenHost"></div></div></div></div>
 
@@ -2235,8 +2268,8 @@
     const AWN_URL = "./data/temperatura/awn_temperatura.json";
     const PRED_URL = "./data/temperatura/prediccion_temperatura.json";
     const MONTHS = ["", "Enero","Febrero","Marzo","Abril","Mayo","Junio", "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-    const FONT = "Outfit, Segoe UI, Arial, sans-serif";
-    const MONO = "IBM Plex Mono, Courier New, monospace";
+    const FONT = "Inter, Segoe UI, Arial, sans-serif";
+    const MONO = "Inter, Segoe UI, Arial, sans-serif";
     Chart.defaults.font.family = FONT; Chart.defaults.font.size = 18; Chart.defaults.color = "#415c55";
     const S = { payload: null, raw: null, mun: null, startDate: null, endDate: null, allDates: null, charts: {}, tableSortCol: "fecha", tableSortDir: "asc", maWindow: 7, compMetric: "mean", fullscreen: null, radarChart: null };
     const fmt = (v, d = 1) => v == null || isNaN(v) ? "—" : Number(v).toFixed(d);
@@ -2255,7 +2288,7 @@
     function baseOpts(extra = {}) { return { responsive: true, maintainAspectRatio: false, animation: { duration: 550 }, interaction: { intersect: false, mode: "index" }, plugins: { legend: { labels: { usePointStyle: true, boxWidth: 8, color: "#2c4556", font: { family: FONT, size: 19, weight: "700" }, padding: 18 } }, tooltip: { backgroundColor: "rgba(8,37,55,0.95)", titleFont: { family: FONT, size: 18, weight: "800" }, bodyFont: { family: MONO, size: 17, weight: "600" }, padding: 13, cornerRadius: 8 } }, scales: { x: { grid: { color: "rgba(15,58,83,0.07)", lineWidth: 1 }, border: { color: "rgba(15,58,83,0.14)" }, ticks: { color: "#415c55", font: { family: FONT, size: 18, weight: "700" }, maxRotation: 0, autoSkip: true, maxTicksLimit: 12, padding: 8 } }, y: { grid: { color: "rgba(15,58,83,0.07)", lineWidth: 1 }, border: { color: "rgba(15,58,83,0.14)" }, ticks: { color: "#587082", font: { family: MONO, size: 17, weight: "700" }, callback: v => `${v} °C` } } }, ...extra }; }
     function destroyChart(id) { if (S.charts[id]) { S.charts[id].destroy(); S.charts[id] = null; } }
     function chartTitleFromCanvas(canvas) { const panel = canvas.closest(".panel"); return panel?.querySelector(".panel-title")?.textContent?.trim() || "Gráfica"; }
-    function addExpandButtons() { document.querySelectorAll(".panel .chart-container canvas").forEach(canvas => { const panel = canvas.closest(".panel"); const head = panel?.querySelector(".panel-head"); if (!head || head.querySelector(".chart-expand-btn")) return; const btn = document.createElement("button"); btn.className = "chart-expand-btn"; btn.type = "button"; btn.title = "Ampliar gráfica"; btn.setAttribute("aria-label", "Ampliar gráfica"); btn.textContent = "⛶"; btn.addEventListener("click", () => openChartFullscreen(canvas.closest(".chart-container"), chartTitleFromCanvas(canvas))); head.appendChild(btn); }); }
+    function addExpandButtons() { document.querySelectorAll(".panel .chart-container canvas").forEach(canvas => { const panel = canvas.closest(".panel"); const head = panel?.querySelector(".panel-head"); if (!head || head.querySelector(".chart-expand-btn")) return; const btn = document.createElement("button"); btn.className = "chart-expand-btn"; btn.type = "button"; btn.title = "Ampliar gráfica"; btn.setAttribute("aria-label", "Ampliar gráfica"); btn.textContent = "Ampliar"; btn.addEventListener("click", () => openChartFullscreen(canvas.closest(".chart-container"), chartTitleFromCanvas(canvas))); head.appendChild(btn); }); }
     function openChartFullscreen(container, title) { if (!container) return; const overlay = document.getElementById("chartFullscreen"); const host = document.getElementById("chartFullscreenHost"); document.getElementById("chartFullscreenTitle").textContent = title; S.fullscreen = { container, parent: container.parentNode, next: container.nextSibling, height: container.style.height }; host.appendChild(container); container.classList.add("is-fullscreen"); overlay.classList.add("open"); overlay.setAttribute("aria-hidden", "false"); document.body.classList.add("chart-modal-open"); Object.values(S.charts).forEach(ch => ch && setTimeout(() => ch.resize(), 80)); }
     function closeChartFullscreen() { const overlay = document.getElementById("chartFullscreen"); if (!S.fullscreen) return; const { container, parent, next, height } = S.fullscreen; container.classList.remove("is-fullscreen"); container.style.height = height || container.style.height; if (next) parent.insertBefore(container, next); else parent.appendChild(container); S.fullscreen = null; overlay.classList.remove("open"); overlay.setAttribute("aria-hidden", "true"); document.body.classList.remove("chart-modal-open"); Object.values(S.charts).forEach(ch => ch && setTimeout(() => ch.resize(), 80)); }
     function setupFullscreen() { document.getElementById("chartFullscreenClose").addEventListener("click", closeChartFullscreen); document.getElementById("chartFullscreen").addEventListener("click", e => { if (e.target.id === "chartFullscreen") closeChartFullscreen(); }); document.addEventListener("keydown", e => { if (e.key === "Escape") { closeChartFullscreen(); closeMunicipalityRadar(); } }); }
@@ -2509,5 +2542,6 @@
     load();
     setTimeout(() => { loadAwn(); loadPred(); }, 1800);
   </script>
+  <script src="../assets/js/site-shell.js"></script>
 </body>
 </html>

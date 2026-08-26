@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
@@ -2025,23 +2025,55 @@
     }
 
   </style>
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar" aria-label="Navegación principal">
-    <div class="navbar-inner site-container">
-      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
-        <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
-        <span class="brand-text">
-          <span class="brand-sub">Sololá, Guatemala</span>
-          <span class="brand-name">Mesa Técnica Agroclimática Sololá</span>
-        </span>
-      </a>
-      <a class="home-button" href="../index.html" aria-label="Regresar al inicio">Regresar al inicio</a>
-    </div>
-  </nav>
+  <header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
+      <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá">
+      <span class="site-brand-copy"><span class="site-brand-name">Mesa Técnica Agroclimática Sololá</span><span class="site-brand-place">Sololá, Guatemala</span></span>
+    </a>
+    <button class="site-mobile-toggle" type="button" data-mobile-toggle aria-expanded="false" aria-label="Abrir menú"><span class="site-mobile-toggle-lines"></span></button>
+    <nav class="site-nav" data-site-nav aria-label="Navegación principal">
+      <a class="site-nav-link" href="../index.html">Inicio</a>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">La MTA</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="../index.html#la-mta"><strong>Qué es la MTA</strong><span>Propósito y alcance territorial</span></a>
+          <a class="site-menu-link" href="../index.html#objetivos"><strong>Objetivos</strong><span>Uso de información para la toma de decisiones</span></a>
+          <a class="site-menu-link" href="../index.html#instituciones"><strong>Instituciones integrantes</strong><span>Organizaciones que participan en la mesa</span></a>
+        </div></div>
+      </div>
+      <div class="site-nav-item site-dropdown site-dropdown-wide is-active">
+        <button class="site-dropdown-toggle" type="button">Áreas técnicas</button>
+        <div class="site-dropdown-panel">
+          <div class="site-menu-group"><span class="site-menu-title">Clima</span>
+            <a class="site-menu-link" href="./clima_index.html"><strong>Clima</strong><span>Acceso general al área meteorológica</span></a>
+            <a class="site-menu-link" href="./precipitaciones_index.html"><strong>Precipitación</strong><span>Observación, pronóstico e histórico</span></a>
+            <a class="site-menu-link" href="./temperatura_index.html"><strong>Temperatura</strong><span>Condiciones térmicas y comparación municipal</span></a>
+            <a class="site-menu-link" href="./viento_index.html"><strong>Viento</strong><span>Velocidad, dirección, rachas y pronóstico</span></a>
+          </div>
+          <div class="site-menu-group"><span class="site-menu-title">Agroclima</span><a class="site-menu-link" href="./agroclima_index.html"><strong>Agroclima y balance hídrico</strong><span>Agua, suelo, demanda atmosférica y estrés agrícola</span></a></div>
+        </div>
+      </div>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">Productos</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="./clima_index.html"><strong>Pronósticos</strong><span>Acceso a los módulos con predicción</span></a>
+          <a class="site-menu-link" href="./clima_index.html"><strong>Mapas interactivos</strong><span>Visualización territorial de variables</span></a>
+          <a class="site-menu-link" href="../index.html#productos"><strong>Datos y estaciones</strong><span>Fuentes y observación disponible</span></a>
+          <a class="site-menu-link" href="../index.html#boletines"><strong>Boletines agroclimáticos</strong><span>Productos de síntesis de la MTA</span></a>
+        </div></div>
+      </div>
+      <a class="site-nav-link" href="../index.html#contacto">Contacto</a>
+      <button class="site-search-button" type="button" data-search-open>Buscar</button>
+    </nav>
+  </div>
+</header>
 
   <!-- LOADER -->
   <div class="loader" id="loader">
@@ -2052,7 +2084,8 @@
     </div>
   </div>
 
-  <main>
+  <div class="page-context"><div class="breadcrumbs" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span class="breadcrumbs-separator"></span><a href="./clima_index.html">Clima</a><span class="breadcrumbs-separator"></span><span>Precipitación</span></div><div class="module-switcher" aria-label="Módulos relacionados"><a href="./precipitaciones_index.html" aria-current="page">Precipitación</a><a href="./temperatura_index.html">Temperatura</a><a href="./viento_index.html">Viento</a></div></div>
+<main>
 
     <!-- HERO -->
     <section class="hero-section">
@@ -2227,7 +2260,7 @@
     <div class="wrap" style="margin-top:1.5rem;">
       <div class="section-label-bar">
         <span class="section-badge badge-hist">Histórico</span>
-        <span class="section-label-title">Serie histórica NASA POWER MERRA-2 · 1 enero 2026 → hoy · 19 municipios</span>
+        <span class="section-label-title">Serie histórica NASA POWER MERRA-2 · 1 enero 2026 a hoy · 19 municipios</span>
       </div>
     </div>
 
@@ -2475,7 +2508,7 @@
           </li>
           <li>
             <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
-              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-icon" aria-hidden="true">Correo</span>
               <span class="footer-social-copy">
                 <span class="footer-social-label">Contáctanos</span>
                 <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
@@ -2491,7 +2524,7 @@
     </div>
   </footer>
 
-  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">&#8679;</button>
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">Arriba</button>
 
 
   <div class="chart-fullscreen-overlay" id="chartFullscreen" aria-hidden="true">
@@ -2547,8 +2580,8 @@
 
     const DAYS   = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
 
-    const FONT   = "Outfit, Segoe UI, Arial, sans-serif";
-    const MONO   = "IBM Plex Mono, Courier New, monospace";
+    const FONT   = "Inter, Segoe UI, Arial, sans-serif";
+    const MONO   = "Inter, Segoe UI, Arial, sans-serif";
 
     Chart.defaults.font.family = FONT;
     Chart.defaults.font.size = 18;
@@ -3562,7 +3595,7 @@
         btn.dataset.chartExpand = canvas.id;
         btn.setAttribute("aria-label", `Ampliar gráfica: ${title}`);
         btn.title = "Ampliar gráfica";
-        btn.textContent = "⛶";
+        btn.textContent = "Ampliar";
         btn.addEventListener("click", () => openChartFullscreen(container, title, btn));
         controls.appendChild(btn);
       });
@@ -4218,5 +4251,6 @@
     load();
   </script>
 
+  <script src="../assets/js/site-shell.js"></script>
 </body>
 </html>

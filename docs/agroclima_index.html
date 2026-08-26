@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://unpkg.com" />
@@ -30,8 +30,8 @@
       --shadow-lg:0 28px 80px rgba(17,57,47,.2);
       --radius-sm:.75rem; --radius-md:1rem; --radius-lg:1.5rem; --radius-xl:2rem;
       --site-max:1760px; --content-pad:clamp(1rem,2vw,2rem); --nav-h:88px;
-      --font:"Times New Roman",Times,serif;
-      --mono:"Courier New",monospace;
+      --font:"Inter","Segoe UI",Arial,sans-serif;
+      --mono:"Inter","Segoe UI",Arial,sans-serif;
     }
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -306,7 +306,7 @@
     @media(max-width:760px){
       :root{--nav-h:72px;--content-pad:.8rem}
       html{font-size:12.5pt}
-      .navbar-inner{gap:.5rem}.brand{gap:.6rem}.brand-logo{width:52px;height:52px;flex-basis:52px}.brand-sub{font-size:.52rem}.brand-name{font-size:.86rem;white-space:normal}.home-link{width:40px;height:40px;min-height:40px;padding:0;font-size:0}.home-link::before{content:"⌂";font-size:1.15rem}
+      .navbar-inner{gap:.5rem}.brand{gap:.6rem}.brand-logo{width:52px;height:52px;flex-basis:52px}.brand-sub{font-size:.52rem}.brand-name{font-size:.86rem;white-space:normal}.home-link{width:40px;height:40px;min-height:40px;padding:0;font-size:0}.home-link::before{content:"Inicio";font-size:1.15rem}
       .hero-inner{padding-block:2rem}.hero-title{font-size:2rem}.hero-copy{font-size:.93rem;line-height:1.58}
       .status-inner{align-items:flex-start;flex-direction:column}.status-badges{gap:.35rem}.status-badge{font-size:.7rem}
       .dashboard{padding-block:1.4rem}.section-block{margin-top:1.5rem}.section-head{align-items:flex-start;flex-direction:column}.section-copy{text-align:left;font-size:.8rem}
@@ -659,22 +659,55 @@
 
 
   </style>
+  <link rel="stylesheet" href="../assets/css/site-shell.css">
 </head>
 <body>
-  <nav class="navbar" aria-label="Navegación principal">
-    <div class="navbar-inner site-container">
-      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
-        <img class="brand-logo" src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá" />
-        <span class="brand-text">
-          <span class="brand-sub">Sololá, Guatemala</span>
-          <span class="brand-name">Mesa Técnica Agroclimática Sololá</span>
-        </span>
-      </a>
-      <a class="home-button" href="../index.html" aria-label="Regresar al inicio">Regresar al inicio</a>
-    </div>
-  </nav>
+  <header class="site-header">
+  <div class="site-header-inner">
+    <a class="site-brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
+      <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá">
+      <span class="site-brand-copy"><span class="site-brand-name">Mesa Técnica Agroclimática Sololá</span><span class="site-brand-place">Sololá, Guatemala</span></span>
+    </a>
+    <button class="site-mobile-toggle" type="button" data-mobile-toggle aria-expanded="false" aria-label="Abrir menú"><span class="site-mobile-toggle-lines"></span></button>
+    <nav class="site-nav" data-site-nav aria-label="Navegación principal">
+      <a class="site-nav-link" href="../index.html">Inicio</a>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">La MTA</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="../index.html#la-mta"><strong>Qué es la MTA</strong><span>Propósito y alcance territorial</span></a>
+          <a class="site-menu-link" href="../index.html#objetivos"><strong>Objetivos</strong><span>Uso de información para la toma de decisiones</span></a>
+          <a class="site-menu-link" href="../index.html#instituciones"><strong>Instituciones integrantes</strong><span>Organizaciones que participan en la mesa</span></a>
+        </div></div>
+      </div>
+      <div class="site-nav-item site-dropdown site-dropdown-wide is-active">
+        <button class="site-dropdown-toggle" type="button">Áreas técnicas</button>
+        <div class="site-dropdown-panel">
+          <div class="site-menu-group"><span class="site-menu-title">Clima</span>
+            <a class="site-menu-link" href="./clima_index.html"><strong>Clima</strong><span>Acceso general al área meteorológica</span></a>
+            <a class="site-menu-link" href="./precipitaciones_index.html"><strong>Precipitación</strong><span>Observación, pronóstico e histórico</span></a>
+            <a class="site-menu-link" href="./temperatura_index.html"><strong>Temperatura</strong><span>Condiciones térmicas y comparación municipal</span></a>
+            <a class="site-menu-link" href="./viento_index.html"><strong>Viento</strong><span>Velocidad, dirección, rachas y pronóstico</span></a>
+          </div>
+          <div class="site-menu-group"><span class="site-menu-title">Agroclima</span><a class="site-menu-link" href="./agroclima_index.html"><strong>Agroclima y balance hídrico</strong><span>Agua, suelo, demanda atmosférica y estrés agrícola</span></a></div>
+        </div>
+      </div>
+      <div class="site-nav-item site-dropdown">
+        <button class="site-dropdown-toggle" type="button">Productos</button>
+        <div class="site-dropdown-panel"><div class="site-menu-group">
+          <a class="site-menu-link" href="./clima_index.html"><strong>Pronósticos</strong><span>Acceso a los módulos con predicción</span></a>
+          <a class="site-menu-link" href="./clima_index.html"><strong>Mapas interactivos</strong><span>Visualización territorial de variables</span></a>
+          <a class="site-menu-link" href="../index.html#productos"><strong>Datos y estaciones</strong><span>Fuentes y observación disponible</span></a>
+          <a class="site-menu-link" href="../index.html#boletines"><strong>Boletines agroclimáticos</strong><span>Productos de síntesis de la MTA</span></a>
+        </div></div>
+      </div>
+      <a class="site-nav-link" href="../index.html#contacto">Contacto</a>
+      <button class="site-search-button" type="button" data-search-open>Buscar</button>
+    </nav>
+  </div>
+</header>
 
-  <header class="hero">
+  <div class="page-context"><div class="breadcrumbs" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span class="breadcrumbs-separator"></span><span>Áreas técnicas</span><span class="breadcrumbs-separator"></span><span>Agroclima</span></div><div class="module-switcher" aria-label="Módulos relacionados"><a href="./agroclima_index.html" aria-current="page">Agroclima</a><a href="./clima_index.html">Clima</a></div></div>
+<header class="hero">
     <div class="hero-inner site-container">
       <div>
         <div class="hero-kicker">Módulo integrado</div>
@@ -776,7 +809,7 @@
         <article class="panel chart-flip-card wide" data-chart-card="water">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">Precipitación, ET₀ y balance diario</div><div class="panel-subtitle">Comparación diaria en milímetros</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="water" data-title="Precipitación, ET₀ y balance diario" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="waterChartBox" data-title="Precipitación, ET₀ y balance diario" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Precipitación, ET₀ y balance diario">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">Precipitación, ET₀ y balance diario</div><div class="panel-subtitle">Comparación diaria en milímetros</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="water" data-title="Precipitación, ET₀ y balance diario" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="waterChartBox" data-title="Precipitación, ET₀ y balance diario" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Precipitación, ET₀ y balance diario">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container" id="waterChartBox"><canvas id="waterChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
           <div class="panel-note">Balance climático simple = precipitación − ET₀. No representa por sí solo el agua realmente disponible para un cultivo.</div>
         
@@ -814,7 +847,7 @@
         <article class="panel chart-flip-card" data-chart-card="cumulative">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">Balance hídrico acumulado</div><div class="panel-subtitle">Evolución acumulada del déficit o exceso</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="cumulative" data-title="Balance hídrico acumulado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="cumulativeChartBox" data-title="Balance hídrico acumulado" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Balance hídrico acumulado">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">Balance hídrico acumulado</div><div class="panel-subtitle">Evolución acumulada del déficit o exceso</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="cumulative" data-title="Balance hídrico acumulado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="cumulativeChartBox" data-title="Balance hídrico acumulado" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Balance hídrico acumulado">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container medium" id="cumulativeChartBox"><canvas id="cumulativeChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
         
           </section>
@@ -851,7 +884,7 @@
         <article class="panel chart-flip-card" data-chart-card="soil">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">Humedad del suelo por profundidad</div><div class="panel-subtitle">Contenido volumétrico estimado por el modelo</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="soil" data-title="Humedad del suelo por profundidad" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="soilChartBox" data-title="Humedad del suelo por profundidad" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Humedad del suelo por profundidad">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">Humedad del suelo por profundidad</div><div class="panel-subtitle">Contenido volumétrico estimado por el modelo</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="soil" data-title="Humedad del suelo por profundidad" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="soilChartBox" data-title="Humedad del suelo por profundidad" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Humedad del suelo por profundidad">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container medium" id="soilChartBox"><canvas id="soilChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
         
           </section>
@@ -888,7 +921,7 @@
         <article class="panel chart-flip-card" data-chart-card="stress">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">VPD y temperatura del suelo</div><div class="panel-subtitle">Demanda de vapor y temperatura media del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="stress" data-title="VPD y temperatura del suelo" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="stressChartBox" data-title="VPD y temperatura del suelo" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de VPD y temperatura del suelo">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">VPD y temperatura del suelo</div><div class="panel-subtitle">Demanda de vapor y temperatura media del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="stress" data-title="VPD y temperatura del suelo" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="stressChartBox" data-title="VPD y temperatura del suelo" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de VPD y temperatura del suelo">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container medium" id="stressChartBox"><canvas id="stressChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
         
           </section>
@@ -925,7 +958,7 @@
         <article class="panel chart-flip-card" data-chart-card="solar">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">Radiación solar y horas de sol</div><div class="panel-subtitle">Energía solar diaria y duración estimada</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="solar" data-title="Radiación solar y horas de sol" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="solarChartBox" data-title="Radiación solar y horas de sol" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Radiación solar y horas de sol">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">Radiación solar y horas de sol</div><div class="panel-subtitle">Energía solar diaria y duración estimada</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="solar" data-title="Radiación solar y horas de sol" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="solarChartBox" data-title="Radiación solar y horas de sol" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Radiación solar y horas de sol">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container medium" id="solarChartBox"><canvas id="solarChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
         
           </section>
@@ -962,7 +995,7 @@
         <article class="panel chart-flip-card wide" data-chart-card="monthly">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">Patrón mensual</div><div class="panel-subtitle">Totales de precipitación y ET₀, con balance por mes</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="monthly" data-title="Patrón agroclimático mensual" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="monthlyChartBox" data-title="Patrón agroclimático mensual" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Patrón mensual">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">Patrón mensual</div><div class="panel-subtitle">Totales de precipitación y ET₀, con balance por mes</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="monthly" data-title="Patrón agroclimático mensual" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="monthlyChartBox" data-title="Patrón agroclimático mensual" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Patrón mensual">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container medium" id="monthlyChartBox"><canvas id="monthlyChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
         
           </section>
@@ -1005,7 +1038,7 @@
         <article class="panel chart-flip-card" data-chart-card="comparison">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">Comparación municipal</div><div class="panel-subtitle">Ranking según el indicador seleccionado</div></div><div class="panel-actions"><select class="panel-select" id="comparisonMetric"><option value="balance">Balance total</option><option value="soil">Humedad del perfil</option><option value="vpd">VPD máximo</option><option value="dry">Días secos consecutivos</option><option value="rain">Precipitación total</option><option value="et0">ET₀ total</option></select><button class="png-btn" type="button" data-chart-download="comparison" data-title="Comparación municipal" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="comparisonChartBox" data-title="Comparación municipal" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Comparación municipal">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">Comparación municipal</div><div class="panel-subtitle">Ranking según el indicador seleccionado</div></div><div class="panel-actions"><select class="panel-select" id="comparisonMetric"><option value="balance">Balance total</option><option value="soil">Humedad del perfil</option><option value="vpd">VPD máximo</option><option value="dry">Días secos consecutivos</option><option value="rain">Precipitación total</option><option value="et0">ET₀ total</option></select><button class="png-btn" type="button" data-chart-download="comparison" data-title="Comparación municipal" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="comparisonChartBox" data-title="Comparación municipal" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Comparación municipal">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container" id="comparisonChartBox"><canvas id="comparisonChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
         
           </section>
@@ -1052,7 +1085,7 @@
         <article class="panel chart-flip-card" data-chart-card="forecast">
         <div class="chart-flip-inner">
           <section class="chart-face chart-front" aria-hidden="false">
-          <div class="panel-head"><div><div class="panel-title">Pronóstico diario integrado</div><div class="panel-subtitle">Lluvia, ET₀, balance y humedad del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="forecast" data-title="Pronóstico agroclimático integrado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="forecastChartBox" data-title="Pronóstico agroclimático integrado" aria-label="Ampliar gráfica">⛶</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Pronóstico diario integrado">Guía</button></div></div>
+          <div class="panel-head"><div><div class="panel-title">Pronóstico diario integrado</div><div class="panel-subtitle">Lluvia, ET₀, balance y humedad del perfil</div></div><div class="panel-actions"><button class="png-btn" type="button" data-chart-download="forecast" data-title="Pronóstico agroclimático integrado" aria-label="Descargar gráfica como PNG">PNG</button><button class="zoom-btn" data-zoom="forecastChartBox" data-title="Pronóstico agroclimático integrado" aria-label="Ampliar gráfica">Ampliar</button><button class="info-btn" type="button" data-chart-flip aria-expanded="false" aria-label="Mostrar guía de cálculo e interpretación de Pronóstico diario integrado">Guía</button></div></div>
           <div class="panel-body"><div class="chart-container" id="forecastChartBox"><canvas id="forecastChart"></canvas><span class="chart-touch-hint">Toca para ver la guía</span></div></div>
           <div class="panel-note">El nivel de estrés es orientativo y combina balance P−ET₀, VPD y días secos; no sustituye una recomendación agronómica específica.</div>
         
@@ -1156,7 +1189,7 @@
           </li>
           <li>
             <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
-              <span class="footer-social-icon" aria-hidden="true">✉</span>
+              <span class="footer-social-icon" aria-hidden="true">Correo</span>
               <span class="footer-social-copy">
                 <span class="footer-social-label">Contáctanos</span>
                 <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
@@ -1195,7 +1228,7 @@
     </div>
   </div>
 
-  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">⇧</button>
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">Arriba</button>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
@@ -1206,7 +1239,7 @@
     const HIST_URL = "./data/agroclima/historico_municipios.json";
     const PRED_URL = "./data/agroclima/prediccion_balance_hidrico.json";
     const IS_MOBILE = window.matchMedia("(max-width: 760px)").matches;
-    const FONT = '"Times New Roman", Times, serif';
+    const FONT = "Inter, Segoe UI, Arial, sans-serif";
     const MONTHS = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
     const DEPARTMENT_SCOPE = "__DEPARTAMENTO__";
 
@@ -2026,5 +2059,6 @@
 
     load().catch(error=>{console.error(error);document.querySelector(".loader-card strong").textContent="No se pudieron cargar los datos";document.getElementById("loaderMessage").textContent=error.message;updateStatus(Boolean(STATE.hist?.ok),Boolean(STATE.pred?.ok));});
   </script>
+  <script src="../assets/js/site-shell.js"></script>
 </body>
 </html>
