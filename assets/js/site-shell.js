@@ -2,9 +2,7 @@
   const mobileToggle=document.querySelector("[data-mobile-toggle]");
   const nav=document.querySelector("[data-site-nav]");
   const dropdowns=[...document.querySelectorAll(".site-dropdown")];
-  const closeMenus=()=>{
-    dropdowns.forEach(item=>item.classList.remove("is-open"));
-  };
+  const closeMenus=()=>{dropdowns.forEach(item=>item.classList.remove("is-open"));};
   if(mobileToggle&&nav){
     mobileToggle.addEventListener("click",()=>{
       const open=mobileToggle.getAttribute("aria-expanded")==="true";
@@ -36,10 +34,13 @@
   document.addEventListener("click",event=>{
     if(!event.target.closest(".site-header"))closeMenus();
   });
-  const revealTargets=[...document.querySelectorAll(".home-section,.area-card,.product-card,.climate-card,main .panel,main .section-block")];
+  const onScroll=()=>document.body.classList.toggle("has-scrolled",window.scrollY>8);
+  onScroll();
+  window.addEventListener("scroll",onScroll,{passive:true});
+  const revealTargets=[...document.querySelectorAll(".home-hero > *, .home-section, .area-card, .product-card, .info-card, .feature-card, .flow-card, .climate-card, .partner-grid a, main .panel, main .section-block")];
   revealTargets.forEach((element,index)=>{
     element.setAttribute("data-reveal","");
-    element.style.transitionDelay=`${Math.min(index%4,3)*45}ms`;
+    element.style.transitionDelay=`${Math.min(index%6,5)*55}ms`;
   });
   if("IntersectionObserver" in window&&window.matchMedia("(prefers-reduced-motion: no-preference)").matches){
     const observer=new IntersectionObserver(entries=>{
@@ -49,7 +50,7 @@
           observer.unobserve(entry.target);
         }
       });
-    },{threshold:.08,rootMargin:"0px 0px -35px 0px"});
+    },{threshold:.08,rootMargin:"0px 0px -40px 0px"});
     revealTargets.forEach(element=>observer.observe(element));
   }else{
     revealTargets.forEach(element=>element.classList.add("is-visible"));
@@ -58,12 +59,14 @@
   const root=inDocs?"../":"./";
   const destinations=[
     ["Inicio","Portada de la Mesa Técnica Agroclimática",`${root}index.html`],
+    ["La MTA","Información institucional y objetivos",`${root}index.html#la-mta`],
+    ["Funcionamiento","Cómo opera la mesa técnica",`${root}index.html#funcionamiento`],
     ["Clima","Precipitación, temperatura y viento",`${root}docs/clima_index.html`],
     ["Precipitación","Observación, pronóstico e histórico",`${root}docs/precipitaciones_index.html`],
     ["Temperatura","Observación, pronóstico e histórico",`${root}docs/temperatura_index.html`],
     ["Viento","Observación, pronóstico e histórico",`${root}docs/viento_index.html`],
     ["Agroclima","Balance hídrico, suelo y estrés agrícola",`${root}docs/agroclima_index.html`],
-    ["Boletines agroclimáticos","Producto en preparación",`${root}index.html#boletines`],
+    ["Boletines agroclimáticos","Producto de síntesis y recomendaciones",`${root}index.html#boletines`],
     ["Datos y estaciones","Fuentes y observación meteorológica",`${root}index.html#productos`],
     ["Instituciones","Integrantes de la MTA Sololá",`${root}index.html#instituciones`],
     ["Contacto","Canales de contacto",`${root}index.html#contacto`]
@@ -77,7 +80,7 @@
   const results=overlay.querySelector(".site-search-results");
   const renderResults=query=>{
     const normalized=query.trim().toLocaleLowerCase("es");
-    const filtered=normalized?destinations.filter(item=>`${item[0]} ${item[1]}`.toLocaleLowerCase("es").includes(normalized)):destinations.slice(0,6);
+    const filtered=normalized?destinations.filter(item=>`${item[0]} ${item[1]}`.toLocaleLowerCase("es").includes(normalized)):destinations.slice(0,8);
     results.innerHTML=filtered.length?filtered.map(item=>`<a class="site-search-result" href="${item[2]}"><strong>${item[0]}</strong><span>${item[1]}</span></a>`).join(""):'<div class="site-search-empty">No se encontraron resultados.</div>';
   };
   const openSearch=()=>{
