@@ -1,26 +1,8 @@
 {
-  "schema": "mta_precipitaciones_actuales_v6",
-  "generated_at_utc": "2026-09-01T16:41:44.604386+00:00",
-  "generated_at_gt": "2026-09-01T10:41:44.604386-06:00",
-  "observed_date": "2026-09-01",
-  "department": "Sololá",
-  "policy": {
-    "storage": "actual_json_mas_historico_mensual",
-    "only_precipitation": true,
-    "do_not_average_raw_stations": true,
-    "inventory_rebuild_policy": "reconstruido_desde_cero_en_cada_corrida",
-    "included_sources": [
-      "INSIVUMEH",
-      "Asociación Vivamos Mejor",
-      "PWS configuradas manualmente",
-      "Ambient Weather API para Santa Catarina Palopó si hay secrets"
-    ],
-    "excluded_sources_for_now": [
-      "AMSCLAE"
-    ],
-    "note": "Las observaciones de precipitación se conservan por estación, institución, proveedor, variable, fecha y fuente. Promedios o mapas se harán como productos derivados separados."
-  },
-  "latest_records": [
+  "schema": "mta_precipitaciones_mensuales_v1",
+  "year": 2026,
+  "month": 9,
+  "records": [
     {
       "record_id": "2026-09-01_insivumeh_precipitaciones_departamentos_insivumeh_ins071301cv_precipitation_accumulated",
       "observed_date": "2026-09-01",
@@ -117,9 +99,6 @@
       "credit": "Datos: Ambient Weather / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
     }
   ],
-  "monthly_history": "docs/data/precipitaciones/historico/2026/2026-09.json",
-  "monthly_history_csv": "docs/data/precipitaciones/historico/2026/2026-09.csv",
-  "station_inventory_path": "docs/data/precipitaciones/estaciones_precipitacion.json",
-  "source_status_path": "docs/data/precipitaciones/source_status.json",
-  "pws_config_path": "docs/data/precipitaciones/pws_config.json"
+  "updated_at_utc": "2026-09-01T16:43:13.727247+00:00",
+  "record_count": 5
 }
