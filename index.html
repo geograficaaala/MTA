@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f7f3e8">
+  <meta name="theme-color" content="#2f4535">
   <title>Mesa Técnica Agroclimática de Sololá</title>
   <meta name="description" content="Portal de información climática y agroclimática de la Mesa Técnica Agroclimática de Sololá, Guatemala.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -21,17 +21,24 @@
       --forest-2:#40563e;
       --lake:#326875;
       --lake-deep:#214f5b;
-      --gold:#b58235;
+      --gold:#9a6c2f;
+      --sage:#879784;
+      --sand:#efe2bf;
+      --mist:#dbe5df;
       --line:rgba(36,52,43,.16);
       --white:#fff;
       --max:1440px;
-      --display:"Libre Caslon Display", Georgia, "Times New Roman", serif;
-      --sans:"DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans:"Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:96px}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    h1,h2,h3,p,a,span{overflow-wrap:break-word}
+    h1,h2,h3{ text-wrap:balance }
+    p{ text-wrap:pretty }
+    main>*{min-width:0}
     body.search-open,body.menu-open{overflow:hidden}
     img{max-width:100%;display:block}
     a{color:inherit}
@@ -64,8 +71,8 @@
     /* TYPE + BUTTONS */
     .eyebrow{margin:0 0 22px;font-size:.69rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
     .display{font-family:var(--display);font-weight:400;letter-spacing:-.028em}
-    .section-title{margin:0;font-size:clamp(2.15rem,4.1vw,4.45rem);line-height:1.03;max-width:1000px}
-    .section-copy{margin:24px 0 0;max-width:670px;color:var(--ink-2);font-size:clamp(.88rem,1.05vw,.98rem);line-height:1.8}
+    .section-title{margin:0;font-size:clamp(2rem,3.4vw,3.85rem);line-height:1.02;max-width:980px}
+    .section-copy{margin:22px 0 0;max-width:720px;color:var(--ink-2);font-size:clamp(.82rem,.9vw,.92rem);line-height:1.75}
     .btn-row{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:34px}
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border:1px solid var(--forest);background:var(--forest);color:#fff;text-decoration:none;font-size:.76rem;font-weight:700;letter-spacing:.01em;transition:transform .2s ease,background .2s ease,color .2s ease}
     .btn:hover,.btn:focus-visible{transform:translateY(-2px);background:var(--forest-2);outline:none}
@@ -76,56 +83,71 @@
     .text-link:hover::after{transform:translateX(4px)}
 
     /* PLACEHOLDERS */
-    .photo-placeholder{position:relative;min-height:560px;overflow:hidden;background:linear-gradient(145deg,#8fa6a5 0%,#4f7478 52%,#274f58 100%);isolation:isolate}
-    .photo-placeholder::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0 42%,rgba(255,255,255,.1) 42% 43%,transparent 43% 100%),linear-gradient(30deg,transparent 0 62%,rgba(255,255,255,.08) 62% 63%,transparent 63% 100%);z-index:-1}
-    .photo-placeholder::after{content:"";position:absolute;width:52%;aspect-ratio:1;border:1px solid rgba(255,255,255,.27);border-radius:50%;right:-13%;bottom:-24%}
-    .placeholder-label{position:absolute;left:28px;bottom:26px;color:rgba(255,255,255,.82);font-size:.66rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-    .photo-placeholder.warm{background:linear-gradient(145deg,#a7956d 0%,#6d694d 48%,#3a4837 100%)}
-    .photo-placeholder.green{background:linear-gradient(145deg,#7d987a 0%,#4f6951 50%,#304731 100%)}
-    .photo-placeholder.gold{background:linear-gradient(145deg,#c7ad70 0%,#96773d 50%,#55482f 100%)}
+    .photo-placeholder{position:relative;min-height:560px;overflow:hidden;background:#55727a;border:0}
+    .photo-placeholder::before{content:"";position:absolute;inset:22px;border:1px solid rgba(255,255,255,.26);pointer-events:none}
+    .placeholder-label{position:absolute;left:30px;bottom:27px;color:rgba(255,255,255,.9);font-size:.62rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+    .photo-placeholder.warm{background:#8b7758}
+    .photo-placeholder.green{background:#63765f}
+    .photo-placeholder.gold{background:#9c814c}
+    .photo-fill{width:100%;height:100%;min-height:inherit;object-fit:cover;object-position:center;display:block}
+    .split-media,.hero-media{overflow:hidden}
+    .hero-media.photo-real,.split-media.photo-real{position:relative}
+    .hero-media.photo-real img,.split-media.photo-real img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* HERO */
-    .hero{background:var(--cream);min-height:calc(100vh - 92px);display:grid;grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr);align-items:stretch}
-    .hero-copy{padding:clamp(70px,8vw,132px) clamp(54px,7vw,124px);display:flex;flex-direction:column;justify-content:center}
+    .hero{background:#f2e7c8;min-height:calc(100vh - 92px);display:grid;grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr);align-items:stretch}
+    .hero-copy{min-width:0;padding:clamp(70px,8vw,132px) clamp(54px,7vw,124px);display:flex;flex-direction:column;justify-content:center}
     .hero .eyebrow{color:#7d5d25}
-    .hero-title{margin:0;max-width:900px;font-family:var(--display);font-weight:400;font-size:clamp(3rem,6.2vw,6.6rem);line-height:.98;letter-spacing:-.035em;color:#384432}
-    .hero-lead{margin:28px 0 0;max-width:720px;color:#4c5548;font-size:clamp(.9rem,1.05vw,1rem);line-height:1.8}
+    .hero-title{margin:0;max-width:850px;font-family:var(--display);font-weight:500;font-size:clamp(2.9rem,5.15vw,5.6rem);line-height:.94;letter-spacing:-.025em;color:#384432}
+    .hero-lead{margin:25px 0 0;max-width:700px;color:#4c5548;font-size:clamp(.82rem,.92vw,.94rem);line-height:1.75}
     .hero-media{min-height:620px}
 
     /* INTRO STRIP */
     .intro-strip{padding:92px 0 86px;background:var(--paper)}
     .intro-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:80px;align-items:end}
-    .intro-large{margin:0;font-family:var(--display);font-size:clamp(2.35rem,4.7vw,5rem);line-height:1.04;letter-spacing:-.03em;color:#364333}
-    .intro-side{margin:0;color:var(--ink-2);font-size:.9rem;line-height:1.85}
+    .intro-large{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(2.15rem,3.9vw,4.2rem);line-height:1.02;letter-spacing:-.02em;color:#364333}
+    .intro-side{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.75}
 
     /* SPLIT SECTIONS */
     .split{display:grid;grid-template-columns:1fr 1fr;min-height:680px}
     .split.reverse .split-copy{order:2}
     .split.reverse .split-media{order:1}
-    .split-copy{padding:clamp(64px,7vw,116px) clamp(44px,7vw,112px);display:flex;flex-direction:column;justify-content:center}
-    .split-copy.dark{background:var(--forest);color:#f9f1d9}
+    .split-copy{min-width:0;padding:clamp(64px,7vw,116px) clamp(44px,7vw,112px);display:flex;flex-direction:column;justify-content:center}
+    .split-copy.dark{background:#2f4535;color:#f9f1d9}
     .split-copy.dark .eyebrow{color:#edcc90}
     .split-copy.dark .section-copy{color:rgba(249,241,217,.82)}
     .split-copy.dark .btn{border-color:#f5e8c6;background:#f5e8c6;color:var(--forest)}
     .split-copy.dark .btn:hover{background:#fff}
-    .split-copy.blue{background:var(--lake-deep);color:#f8f2de}
+    .split-copy.blue{background:#315f65;color:#f8f2de}
     .split-copy.blue .eyebrow{color:#dfc98e}
     .split-copy.blue .section-copy{color:rgba(248,242,222,.82)}
     .split-copy.blue .btn{border-color:#f8f2de;background:#f8f2de;color:var(--lake-deep)}
     .split-media>.photo-placeholder{height:100%;min-height:680px}
 
-    /* BULLETIN */
-    .bulletin{padding:110px 0;background:var(--cream-soft)}
-    .bulletin-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.42fr);gap:64px;align-items:end;margin-bottom:58px}
-    .bulletin-note{margin:0;color:#665c4b;font-size:.82rem;line-height:1.75}
-    .bulletin-card{display:grid;grid-template-columns:minmax(300px,.62fr) minmax(0,1.38fr);background:#fff;border:1px solid rgba(68,63,48,.16)}
-    .bulletin-cover{min-height:430px;background:linear-gradient(145deg,#d8c79b,#8b9b82 58%,#4d6854);position:relative;overflow:hidden}
-    .bulletin-cover::before{content:"BOLETÍN\A AGROCLIMÁTICO";white-space:pre;position:absolute;left:32px;top:34px;color:#fff;font-family:var(--display);font-size:clamp(2rem,3vw,3.5rem);line-height:1.02;letter-spacing:-.03em}
-    .bulletin-cover::after{content:"Portada del boletín más reciente";position:absolute;left:34px;bottom:30px;color:rgba(255,255,255,.82);font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700}
-    .bulletin-body{padding:clamp(44px,6vw,82px);display:flex;flex-direction:column;justify-content:center}
-    .bulletin-period{margin:0 0 16px;font-size:.69rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
-    .bulletin-title{margin:0;font-family:var(--display);font-size:clamp(2.2rem,4vw,4.1rem);font-weight:400;line-height:1.04;letter-spacing:-.03em}
-    .bulletin-body p{margin:22px 0 0;color:var(--ink-2);font-size:.9rem;line-height:1.8;max-width:720px}
+    /* BULLETIN / CAROUSEL */
+    .bulletin{padding:104px 0;background:#eee3c8}
+    .bulletin-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.42fr);gap:58px;align-items:end;margin-bottom:48px}
+    .bulletin-note{margin:0;color:#61594a;font-size:.78rem;line-height:1.7}
+    .bulletin-carousel{position:relative}
+    .bulletin-viewport{overflow:hidden;border:1px solid rgba(68,63,48,.18);background:#fff}
+    .bulletin-track{display:flex;transition:transform .42s ease}
+    .bulletin-slide{min-width:100%;display:grid;grid-template-columns:minmax(330px,.64fr) minmax(0,1.36fr);background:#fff}
+    .bulletin-cover{position:relative;min-height:520px;background:#d8d0bc;border-right:1px solid var(--line);overflow:hidden}
+    .bulletin-pdf{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+    .bulletin-pdf-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:34px;text-align:center;background:#d8d0bc;color:var(--ink);font-size:.8rem;line-height:1.6}
+    .bulletin-body{min-width:0;padding:clamp(42px,5.4vw,76px);display:flex;flex-direction:column;justify-content:center;min-width:0}
+    .bulletin-period{margin:0 0 14px;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .bulletin-title{margin:0;font-family:var(--display);font-size:clamp(2rem,3.1vw,3.5rem);font-weight:500;line-height:1.02;letter-spacing:-.02em;max-width:760px}
+    .bulletin-body p{margin:20px 0 0;color:var(--ink-2);font-size:.84rem;line-height:1.75;max-width:720px}
+    .bulletin-controls{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:22px}
+    .bulletin-nav{display:flex;align-items:center;gap:10px}
+    .carousel-btn{width:42px;height:42px;border:1px solid rgba(47,69,53,.35);background:transparent;color:var(--forest);cursor:pointer;display:grid;place-items:center;font-size:1rem;transition:background .2s ease,color .2s ease}
+    .carousel-btn:hover:not(:disabled),.carousel-btn:focus-visible:not(:disabled){background:var(--forest);color:#fff;outline:none}
+    .carousel-btn:disabled{opacity:.32;cursor:default}
+    .carousel-status{font-size:.68rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#6e6555;white-space:nowrap}
+    .carousel-dots{display:flex;align-items:center;gap:8px}
+    .carousel-dot{width:24px;height:2px;border:0;background:rgba(47,69,53,.26);padding:0;cursor:pointer}
+    .carousel-dot.active{background:var(--forest)}
 
     /* RESOURCES */
     .resources{padding:110px 0 118px;background:var(--paper)}
@@ -143,14 +165,14 @@
 
     /* MTA STORY */
     .story-title-wrap{padding:96px 0 72px}
-    .story-title{margin:0;font-family:var(--display);font-size:clamp(2.7rem,5vw,5.5rem);font-weight:400;line-height:1.02;letter-spacing:-.03em;max-width:1150px}
+    .story-title{margin:0;font-family:var(--display);font-size:clamp(2.35rem,4vw,4.55rem);font-weight:500;line-height:1.02;letter-spacing:-.02em;max-width:1150px}
     .story-visuals{display:grid;grid-template-columns:repeat(3,1fr);min-height:500px}
     .story-visuals .photo-placeholder{min-height:500px;border-right:1px solid rgba(255,255,255,.18)}
     .story-visuals .photo-placeholder:last-child{border-right:0}
     .story-copy{padding:88px 0 98px}
     .story-copy-grid{display:grid;grid-template-columns:minmax(0,.74fr) minmax(0,1.26fr);gap:86px;align-items:start}
-    .story-copy h2{margin:0;font-family:var(--display);font-size:clamp(2.1rem,3.4vw,3.6rem);font-weight:400;line-height:1.08}
-    .story-copy p{margin:0;color:var(--ink-2);font-size:.9rem;line-height:1.85;max-width:760px}
+    .story-copy h2{margin:0;font-family:var(--display);font-size:clamp(1.95rem,2.8vw,3.1rem);font-weight:500;line-height:1.05}
+    .story-copy p{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.75;max-width:760px}
     .story-copy .btn-row{margin-top:28px}
 
     /* PARTNERS */
@@ -203,7 +225,7 @@
       .footer-main>div:last-child{grid-column:2/4}
     }
 
-    @media(max-width:900px){
+    @media(max-width:1020px){
       html{scroll-padding-top:78px}
       .header-inner{min-height:76px}
       .brand img{width:46px;height:46px}
@@ -215,16 +237,16 @@
       .nav a,.nav button{width:100%;padding:18px 0;text-align:left;font-size:.95rem;border-bottom:1px solid var(--line)}
       .nav a::after,.nav button::after{display:none}
       .hero{min-height:auto;grid-template-columns:1fr}
-      .hero-copy{padding:72px 28px 68px}
+      .hero-copy{min-width:0;padding:72px 28px 68px}
       .hero-media{min-height:480px}
       .intro-grid,.bulletin-head,.story-copy-grid{grid-template-columns:1fr;gap:34px}
       .split,.split.reverse{grid-template-columns:1fr}
       .split.reverse .split-copy,.split.reverse .split-media{order:initial}
-      .split-copy{padding:70px 28px}
+      .split-copy{min-width:0;padding:70px 28px}
       .split-media>.photo-placeholder{min-height:500px}
       .bulletin{padding:82px 0}
-      .bulletin-card{grid-template-columns:1fr}
-      .bulletin-cover{min-height:420px}
+      .bulletin-slide{grid-template-columns:1fr}
+      .bulletin-cover{min-height:520px;border-right:0;border-bottom:1px solid var(--line)}
       .resources{padding:84px 0 90px}
       .resources-head{display:block}
       .resources-head .section-copy{margin-top:24px;max-width:680px}
@@ -245,17 +267,18 @@
       .brand-name{font-size:.76rem}
       .brand-place{font-size:.6rem}
       .hero-title{font-size:clamp(2.8rem,16vw,4.4rem)}
-      .hero-copy{padding:58px 20px 56px}
+      .hero-copy{min-width:0;padding:58px 20px 56px}
       .hero-media{min-height:400px}
       .intro-strip{padding:70px 0 66px}
       .section-title{font-size:clamp(2.1rem,12vw,3.2rem)}
       .section-copy,.story-copy p{font-size:.84rem;line-height:1.75}
-      .split-copy{padding:58px 20px}
+      .split-copy{min-width:0;padding:58px 20px}
       .split-media>.photo-placeholder{min-height:400px}
       .bulletin{padding:66px 0}
-      .bulletin-card{margin-left:-14px;margin-right:-14px}
-      .bulletin-body{padding:38px 26px 44px}
-      .bulletin-cover{min-height:350px}
+      .bulletin-carousel{margin-left:-14px;margin-right:-14px}
+      .bulletin-body{min-width:0;padding:36px 26px 42px}
+      .bulletin-cover{min-height:440px}
+      .bulletin-controls{padding:0 14px}
       .resource-grid{grid-template-columns:1fr}
       .resource,.resource:nth-child(3){border-left:1px solid var(--line)}
       .resources{padding:68px 0 76px}
@@ -268,6 +291,19 @@
       .footer-main>div:first-child,.footer-main>div:last-child{grid-column:auto}
       .footer-bottom{align-items:flex-start;flex-direction:column}
       .search-overlay{padding:92px 14px 14px}
+    }
+
+    @media(max-width:900px){
+      .bulletin-slide{grid-template-columns:1fr}
+      .bulletin-cover{min-height:520px;border-right:0;border-bottom:1px solid var(--line)}
+    }
+
+    @media(max-width:620px){
+      .bulletin-carousel{margin-left:-14px;margin-right:-14px}
+      .bulletin-body{min-width:0;padding:36px 26px 42px}
+      .bulletin-cover{min-height:440px}
+      .bulletin-controls{padding:0 14px}
+      .bulletin-note{font-size:.75rem}
     }
   </style>
 </head>
@@ -309,8 +345,8 @@
         <a class="btn btn-light" href="./docs/clima_index.html">Consultar información climática</a>
       </div>
     </div>
-    <div class="photo-placeholder hero-media" role="img" aria-label="Espacio reservado para fotografía relacionada con agricultura, clima y Sololá">
-      <span class="placeholder-label">Fotografía principal · agricultura / clima / Sololá</span>
+    <div class="hero-media photo-real">
+      <img src="./agricultura1.jpg" alt="Fotografía de agricultura para la Mesa Técnica Agroclimática de Sololá" loading="eager" fetchpriority="high">
     </div>
   </section>
 
@@ -331,36 +367,54 @@
         <a class="btn" href="#boletin">Consultar recomendaciones</a>
       </div>
     </div>
-    <div class="split-media">
-      <div class="photo-placeholder warm" role="img" aria-label="Espacio reservado para fotografía de producción agrícola">
-        <span class="placeholder-label">Fotografía · producción agrícola en Sololá</span>
-      </div>
+    <div class="split-media photo-real">
+      <img src="./agricultura2.jpg" alt="Fotografía de producción agrícola para la MTA Sololá" loading="lazy">
     </div>
   </section>
 
-  <!-- BOLETÍN: reemplazar portada, período y enlaces cuando se tenga el PDF definitivo. -->
+  <!-- BOLETÍN: carrusel listo para sumar nuevos documentos.
+       Para añadir otro boletín, duplica un <article class="bulletin-slide"> y cambia PDF/textos. -->
   <section class="bulletin" id="boletin">
     <div class="shell">
       <div class="bulletin-head">
         <div>
           <p class="eyebrow">Boletín agroclimático</p>
-          <h2 class="section-title display">El análisis más reciente, en un solo documento.</h2>
+          <h2 class="section-title display">Boletines de la Mesa Técnica Agroclimática.</h2>
         </div>
-        <p class="bulletin-note">Este bloque está listo para mostrar el boletín más reciente, su período de vigencia, una vista previa y los accesos para consultarlo o descargarlo.</p>
+        <p class="bulletin-note">Consulta el boletín más reciente. El carrusel queda preparado para incorporar nuevos documentos conforme sean publicados.</p>
       </div>
 
-      <article class="bulletin-card">
-        <div class="bulletin-cover" role="img" aria-label="Espacio reservado para la portada del boletín agroclimático más reciente"></div>
-        <div class="bulletin-body">
-          <p class="bulletin-period">Último boletín disponible · período por definir</p>
-          <h3 class="bulletin-title">Boletín agroclimático de la MTA Sololá</h3>
-          <p>Cuando el PDF esté disponible, aquí se mostrará una síntesis breve del período, la portada real y los botones para visualizar o descargar el documento.</p>
-          <div class="btn-row">
-            <a class="btn" href="#" aria-disabled="true" onclick="return false;">Consultar boletín</a>
-            <a class="text-link" href="#" aria-disabled="true" onclick="return false;">Descargar PDF</a>
+      <div class="bulletin-carousel" data-bulletin-carousel>
+        <div class="bulletin-viewport">
+          <div class="bulletin-track" data-bulletin-track>
+            <article class="bulletin-slide" data-bulletin-slide>
+              <div class="bulletin-cover" aria-label="Vista previa del boletín agroclimático DEFM 25-26">
+                <object class="bulletin-pdf" data="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf#page=1&view=FitH&toolbar=0&navpanes=0" type="application/pdf">
+                  <a class="bulletin-pdf-fallback" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" target="_blank" rel="noopener">Abrir portada del boletín DEFM 25–26</a>
+                </object>
+              </div>
+              <div class="bulletin-body">
+                <p class="bulletin-period">Último boletín disponible · DEFM 25–26</p>
+                <h3 class="bulletin-title">Boletín agroclimático de la MTA Sololá</h3>
+                <p>Documento vigente disponible en el portal de la Mesa Técnica Agroclimática de Sololá. Puedes consultarlo en el navegador o descargar el PDF completo.</p>
+                <div class="btn-row">
+                  <a class="btn" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" target="_blank" rel="noopener">Ver boletín</a>
+                  <a class="text-link" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" download>Descargar PDF</a>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
-      </article>
+
+        <div class="bulletin-controls" aria-label="Controles del carrusel de boletines">
+          <div class="bulletin-nav">
+            <button class="carousel-btn" type="button" aria-label="Boletín anterior" data-bulletin-prev>←</button>
+            <button class="carousel-btn" type="button" aria-label="Boletín siguiente" data-bulletin-next>→</button>
+          </div>
+          <div class="carousel-dots" data-bulletin-dots aria-label="Boletines disponibles"></div>
+          <div class="carousel-status" data-bulletin-status>01 / 01</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -426,7 +480,7 @@
       <h2 class="story-title">El clima se entiende mejor cuando la información técnica se encuentra con el conocimiento del territorio.</h2>
     </div>
 
-    <!-- TRES ESPACIOS FOTOGRÁFICOS: se pueden sustituir individualmente por imágenes reales. -->
+    <!-- TRES ESPACIOS FOTOGRÁFICOS adicionales: se pueden sustituir individualmente por imágenes reales. -->
     <div class="story-visuals" aria-label="Espacios reservados para fotografías de la Mesa Técnica Agroclimática">
       <div class="photo-placeholder green"><span class="placeholder-label">Fotografía · territorio</span></div>
       <div class="photo-placeholder warm"><span class="placeholder-label">Fotografía · trabajo técnico</span></div>
@@ -589,6 +643,38 @@
   overlay?.addEventListener('click',event=>{if(event.target===overlay)closeSearch();});
   input?.addEventListener('input',()=>render(input.value));
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeSearch();}});
+
+  document.querySelectorAll('[data-bulletin-carousel]').forEach(carousel=>{
+    const track=carousel.querySelector('[data-bulletin-track]');
+    const slides=[...carousel.querySelectorAll('[data-bulletin-slide]')];
+    const prev=carousel.querySelector('[data-bulletin-prev]');
+    const next=carousel.querySelector('[data-bulletin-next]');
+    const dots=carousel.querySelector('[data-bulletin-dots]');
+    const status=carousel.querySelector('[data-bulletin-status]');
+    let index=0;
+
+    const pad=n=>String(n).padStart(2,'0');
+    const render=()=>{
+      if(track)track.style.transform=`translateX(-${index*100}%)`;
+      slides.forEach((slide,i)=>slide.setAttribute('aria-hidden',String(i!==index)));
+      dots?.querySelectorAll('button').forEach((dot,i)=>dot.classList.toggle('active',i===index));
+      if(status)status.textContent=`${pad(index+1)} / ${pad(slides.length)}`;
+      if(prev)prev.disabled=slides.length<2;
+      if(next)next.disabled=slides.length<2;
+    };
+
+    slides.forEach((_,i)=>{
+      const dot=document.createElement('button');
+      dot.type='button';
+      dot.className='carousel-dot';
+      dot.setAttribute('aria-label',`Ir al boletín ${i+1}`);
+      dot.addEventListener('click',()=>{index=i;render();});
+      dots?.appendChild(dot);
+    });
+    prev?.addEventListener('click',()=>{index=(index-1+slides.length)%slides.length;render();});
+    next?.addEventListener('click',()=>{index=(index+1)%slides.length;render();});
+    render();
+  });
 
   const year=document.querySelector('[data-year]');
   if(year)year.textContent=new Date().getFullYear();
