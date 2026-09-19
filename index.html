@@ -169,6 +169,9 @@
     .story-visuals{display:grid;grid-template-columns:repeat(3,1fr);min-height:500px}
     .story-visuals .photo-placeholder{min-height:500px;border-right:1px solid rgba(255,255,255,.18)}
     .story-visuals .photo-placeholder:last-child{border-right:0}
+    .story-photo{position:relative;min-height:500px;overflow:hidden;background:#e9e6dc;border-right:1px solid rgba(255,255,255,.18)}
+    .story-photo:last-child{border-right:0}
+    .story-photo img{width:100%;height:100%;min-height:500px;display:block;object-fit:cover}
     .story-copy{padding:88px 0 98px}
     .story-copy-grid{display:grid;grid-template-columns:minmax(0,.74fr) minmax(0,1.26fr);gap:86px;align-items:start}
     .story-copy h2{margin:0;font-family:var(--display);font-size:clamp(1.95rem,2.8vw,3.1rem);font-weight:500;line-height:1.05}
@@ -253,6 +256,8 @@
       .story-title-wrap{padding:74px 0 54px}
       .story-visuals{grid-template-columns:1fr}
       .story-visuals .photo-placeholder{min-height:420px;border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}
+      .story-photo{min-height:420px;border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}
+      .story-photo img{min-height:420px}
       .story-copy{padding:70px 0 80px}
       .footer-main{grid-template-columns:1fr 1fr;gap:42px}
       .footer-main>div:first-child{grid-column:1/-1}
@@ -284,6 +289,7 @@
       .resources{padding:68px 0 76px}
       .story-title{font-size:clamp(2.5rem,13vw,3.8rem)}
       .story-visuals .photo-placeholder{min-height:330px}
+      .story-photo,.story-photo img{min-height:330px}
       .partner-grid{gap:22px 26px}
       .partner-grid a{width:84px;height:54px}
       .partner-grid img{max-height:45px}
@@ -346,7 +352,7 @@
       </div>
     </div>
     <div class="hero-media photo-real">
-      <img src="./agricultura1.jpg" alt="Fotografía de agricultura para la Mesa Técnica Agroclimática de Sololá" loading="eager" fetchpriority="high">
+      <img src="./agricultura2.jpg" alt="Fotografía de agricultura para la Mesa Técnica Agroclimática de Sololá" loading="eager" fetchpriority="high">
     </div>
   </section>
 
@@ -368,7 +374,7 @@
       </div>
     </div>
     <div class="split-media photo-real">
-      <img src="./agricultura2.jpg" alt="Fotografía de producción agrícola para la MTA Sololá" loading="lazy">
+      <img src="./agricultura1.jpg" alt="Fotografía de producción agrícola para la MTA Sololá" loading="lazy">
     </div>
   </section>
 
@@ -481,10 +487,10 @@
     </div>
 
     <!-- TRES ESPACIOS FOTOGRÁFICOS adicionales: se pueden sustituir individualmente por imágenes reales. -->
-    <div class="story-visuals" aria-label="Espacios reservados para fotografías de la Mesa Técnica Agroclimática">
-      <div class="photo-placeholder green"><span class="placeholder-label">Fotografía · territorio</span></div>
-      <div class="photo-placeholder warm"><span class="placeholder-label">Fotografía · trabajo técnico</span></div>
-      <div class="photo-placeholder"><span class="placeholder-label">Fotografía · productores</span></div>
+    <div class="story-visuals" aria-label="Fotografías de la Mesa Técnica Agroclimática">
+      <div class="story-photo"><img src="./Territorio.jpg" alt="Territorio de Sololá" loading="lazy"></div>
+      <div class="story-photo"><img src="./trabajotécnico.jpeg" alt="Trabajo técnico de la Mesa Técnica Agroclimática" loading="lazy"></div>
+      <div class="story-photo"><img src="./riegodecultivo.jpeg" alt="Riego de cultivo y producción agrícola" loading="lazy"></div>
     </div>
 
     <div class="story-copy">
