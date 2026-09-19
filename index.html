@@ -124,6 +124,32 @@
     .split-copy.blue .btn{border-color:#f8f2de;background:#f8f2de;color:var(--lake-deep)}
     .split-media>.photo-placeholder{height:100%;min-height:680px}
 
+    /* PERSPECTIVA / PDF CAROUSEL */
+    .climate-carousel-panel{background:#e9dfc4;display:flex;align-items:center;justify-content:center;padding:clamp(28px,4vw,64px);min-width:0}
+    .climate-carousel{width:min(100%,720px);min-width:0}
+    .climate-pdf-shell{position:relative;background:#fff;border:1px solid rgba(47,69,53,.18);height:clamp(430px,51vw,610px);max-height:610px;overflow:hidden;isolation:isolate;outline:none}
+    .climate-pdf-shell:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+    .climate-pdf{display:block;width:100%;height:100%;border:0;background:#fff}
+    .climate-quickview{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(30px,4vw,54px);background:rgba(39,59,44,.97);color:#f8f2de;opacity:0;transform:translateY(10px);transition:opacity .22s ease,transform .22s ease;pointer-events:none}
+    .climate-pdf-shell:hover .climate-quickview,.climate-pdf-shell:focus .climate-quickview,.climate-pdf-shell:focus-within .climate-quickview{opacity:1;transform:none}
+    .climate-quickview-label{margin:0 0 10px;font-size:.62rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#e7c983}
+    .climate-quickview h4{margin:0;font-family:var(--display);font-size:clamp(1.7rem,3vw,2.75rem);font-weight:500;line-height:1.02;color:#fff}
+    .climate-quickview-summary{margin:18px 0 0;max-width:620px;font-size:.8rem;line-height:1.7;color:rgba(248,242,222,.9)}
+    .climate-quickview-region{margin:15px 0 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.18);font-size:.68rem;line-height:1.6;color:rgba(248,242,222,.72)}
+    .climate-quickview-source{margin:12px 0 0;font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+    .climate-context-note{margin:22px 0 0;padding-top:18px;border-top:1px solid rgba(248,242,222,.22);max-width:660px;font-size:.72rem;line-height:1.65;color:rgba(248,242,222,.72)}
+    .climate-carousel-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:end;padding-top:22px}
+    .climate-kicker{margin:0 0 7px;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#78643d}
+    .climate-title{margin:0;font-family:var(--display);font-size:clamp(1.55rem,2.25vw,2.45rem);font-weight:500;line-height:1.02;color:var(--forest)}
+    .climate-actions{display:flex;align-items:center;gap:10px}
+    .climate-carousel-links{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:18px}
+    .climate-carousel-links .btn{min-height:42px;padding:0 18px}
+    .climate-carousel-links .text-link{font-size:.72rem}
+    .climate-dots{display:flex;align-items:center;gap:6px;margin-top:22px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+    .climate-dot{flex:0 0 18px;width:18px;height:2px;border:0;padding:0;background:rgba(47,69,53,.24);cursor:pointer}
+    .climate-dot.active{background:var(--forest)}
+    .climate-dot:focus-visible{outline:2px solid rgba(154,108,47,.45);outline-offset:4px}
+
     /* BULLETIN / CAROUSEL */
     .bulletin{padding:104px 0;background:#eee3c8}
     .bulletin-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.42fr);gap:58px;align-items:end;margin-bottom:48px}
@@ -190,7 +216,7 @@
     .footer{background:#283b2b;color:#f4edd8}
     .footer-main{padding:76px 0 60px;display:grid;grid-template-columns:minmax(260px,1.25fr) repeat(3,minmax(150px,.55fr));gap:54px}
     .footer-brand{display:flex;align-items:center;gap:15px;margin-bottom:22px}
-    .footer-brand img{width:61px;height:61px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9}
+    .footer-brand img{width:61px;height:61px;object-fit:contain;opacity:1}
     .footer-brand-name{font-family:var(--display);font-size:1.7rem;line-height:1.05}
     .footer-about{margin:0;max-width:380px;color:rgba(244,237,216,.77);font-size:.8rem;line-height:1.75}
     .footer h3{margin:4px 0 22px;font-size:.76rem;font-weight:700;color:#fff}
@@ -279,6 +305,14 @@
       .section-copy,.story-copy p{font-size:.84rem;line-height:1.75}
       .split-copy{min-width:0;padding:58px 20px}
       .split-media>.photo-placeholder{min-height:400px}
+      .climate-carousel-panel{padding:30px 20px 34px}
+      .climate-pdf-shell{height:470px}
+      .climate-quickview{padding:28px 24px}
+      .climate-quickview-summary{font-size:.76rem;line-height:1.62}
+      .climate-carousel-meta{grid-template-columns:1fr auto;gap:14px}
+      .climate-title{font-size:clamp(1.55rem,9vw,2rem)}
+      .climate-dots{gap:5px}
+      .climate-dot{flex-basis:15px;width:15px}
       .bulletin{padding:66px 0}
       .bulletin-carousel{margin-left:-14px;margin-right:-14px}
       .bulletin-body{min-width:0;padding:36px 26px 42px}
@@ -300,6 +334,8 @@
     }
 
     @media(max-width:900px){
+      .climate-carousel-panel{padding:42px 28px}
+      .climate-pdf-shell{height:560px}
       .bulletin-slide{grid-template-columns:1fr}
       .bulletin-cover{min-height:520px;border-right:0;border-bottom:1px solid var(--line)}
     }
@@ -424,19 +460,54 @@
     </div>
   </section>
 
-  <!-- PERSPECTIVA: sustituir por el contenido mensual proporcionado por INSIVUMEH. -->
+  <!-- PERSPECTIVA CLIMÁTICA: carrusel de documentos PDF en orden cronológico. -->
   <section class="split reverse" id="perspectiva">
     <div class="split-copy blue">
       <p class="eyebrow">Perspectiva climática</p>
       <h2 class="section-title display">Una mirada al período que viene.</h2>
-      <p class="section-copy">Aquí se presentará una lectura breve y visual de la perspectiva climática mensual proporcionada por INSIVUMEH, con los principales elementos que puedan apoyar la planificación del sector agropecuario.</p>
+      <p class="section-copy">Recorre las perspectivas y boletines climáticos oficiales. Pasa el cursor sobre cada portada —o tócala y enfócala en móvil— para ver una lectura rápida orientada a Sololá antes de abrir el documento completo.</p>
+      <p class="climate-context-note">La vista rápida toma como referencia principalmente las señales de <strong>Occidente</strong> y <strong>Altiplano Central</strong>. Por la topografía de Sololá, algunos sectores del sur pueden presentar transición hacia <strong>Bocacosta</strong>; por eso el resumen es orientativo y no sustituye el documento oficial.</p>
       <div class="btn-row">
         <a class="btn" href="./docs/clima_index.html">Explorar información climática</a>
       </div>
     </div>
-    <div class="split-media">
-      <div class="photo-placeholder gold" role="img" aria-label="Espacio reservado para recurso visual de perspectiva climática">
-        <span class="placeholder-label">Recurso visual · perspectiva climática</span>
+
+    <div class="split-media climate-carousel-panel">
+      <div class="climate-carousel" data-climate-carousel aria-label="Carrusel de perspectivas climáticas">
+        <div class="climate-pdf-shell" tabindex="0" aria-label="Vista rápida para Sololá. Pase el cursor o enfoque este documento.">
+          <iframe
+            class="climate-pdf"
+            data-climate-pdf
+            src="./Enero.pdf#page=1&view=FitH&toolbar=0&navpanes=0"
+            title="Vista previa de Enero.pdf"
+            loading="lazy">
+          </iframe>
+          <div class="climate-quickview" aria-live="polite">
+            <p class="climate-quickview-label">Vista rápida para Sololá</p>
+            <h4 data-climate-quick-title>Enero 2026</h4>
+            <p class="climate-quickview-summary" data-climate-summary>En Sololá, la señal regional apunta a un mes seco y frío: Occidente y Altiplano Central presentan acumulados bajos, con influencia de frentes fríos y descensos de temperatura.</p>
+            <p class="climate-quickview-region" data-climate-region>Referencia territorial: Occidente y Altiplano Central.</p>
+            <p class="climate-quickview-source" data-climate-source>Fuente: INSIVUMEH</p>
+          </div>
+        </div>
+
+        <div class="climate-carousel-meta">
+          <div>
+            <p class="climate-kicker" data-climate-status>01 / 12 · Documento climático</p>
+            <h3 class="climate-title" data-climate-title>Enero</h3>
+          </div>
+          <div class="climate-actions">
+            <button class="carousel-btn" type="button" aria-label="Documento anterior" data-climate-prev>←</button>
+            <button class="carousel-btn" type="button" aria-label="Documento siguiente" data-climate-next>→</button>
+          </div>
+        </div>
+
+        <div class="climate-dots" data-climate-dots aria-label="Documentos disponibles"></div>
+
+        <div class="climate-carousel-links">
+          <a class="btn" data-climate-open href="./Enero.pdf" target="_blank" rel="noopener">Abrir PDF</a>
+          <a class="text-link" data-climate-download href="./Enero.pdf" download>Descargar PDF</a>
+        </div>
       </div>
     </div>
   </section>
@@ -541,7 +612,7 @@
   <div class="shell footer-main">
     <div>
       <div class="footer-brand">
-        <img src="./docs/logos/MTA_LOGO.png" alt="">
+        <img src="./docs/logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
         <div class="footer-brand-name">MTA<br>Sololá</div>
       </div>
       <p class="footer-about">Información climática y agroclimática para apoyar la prevención, la planificación y la toma de decisiones del sector agropecuario en Sololá.</p>
@@ -679,6 +750,129 @@
     });
     prev?.addEventListener('click',()=>{index=(index-1+slides.length)%slides.length;render();});
     next?.addEventListener('click',()=>{index=(index+1)%slides.length;render();});
+    render();
+  });
+
+  // Carrusel de perspectivas climáticas.
+  // Para agregar un documento nuevo, añade otro objeto al arreglo conservando el nombre exacto del PDF en la raíz.
+  const climateDocuments=[
+    {
+      title:'Enero',file:'Enero.pdf',quickTitle:'Enero 2026',
+      summary:'En Sololá, la señal regional apunta a un mes seco y frío: Occidente y Altiplano Central presentan acumulados bajos de 0 a 25 mm, con influencia de frentes fríos y descensos marcados de temperatura. Para el sector agropecuario, conviene vigilar el frío nocturno y la disponibilidad de agua.',
+      region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
+    },
+    {
+      title:'Febrero',file:'Febrero.pdf',quickTitle:'Febrero 2026',
+      summary:'Persisten condiciones relativamente secas para Sololá: Occidente y Altiplano Central mantienen acumulados previstos de 0 a 25 mm. Se esperan tres frentes fríos y temperaturas bajas en las zonas altas, mientras comienza gradualmente la transición hacia la época cálida.',
+      region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
+    },
+    {
+      title:'Marzo',file:'Marzo.pdf',quickTitle:'Marzo 2026',
+      summary:'Sololá continúa con una señal de lluvia baja, entre 5 y 25 mm en Occidente y Altiplano Central. La transición hacia la época cálida avanza, aunque todavía pueden presentarse descensos de temperatura asociados al paso de dos frentes fríos.',
+      region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
+    },
+    {
+      title:'Boletín especial',file:'Boletinespecial.pdf',quickTitle:'Alerta especial · Julio y agosto',
+      summary:'La señal más importante para Sololá es un posible déficit de lluvia durante julio y agosto. El documento estima anomalías promedio de -79 mm y -101 mm para Occidente, y de -100 mm y -123 mm para Altiplano Central. La captación y el uso eficiente del agua son acciones clave.',
+      region:'Referencia territorial: Occidente y Altiplano Central; información preliminar.',source:'INSIVUMEH / CONRED'
+    },
+    {
+      title:'Abril',file:'Abril.pdf',quickTitle:'Abril 2026',
+      summary:'Para Sololá, las referencias de Occidente y Altiplano Central muestran acumulados de 15 a 75 mm. Abril marca el establecimiento de la época cálida; todavía puede presentarse un frente frío y la lluvia regional se mantiene entre condiciones normales y ligeramente deficitarias.',
+      region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
+    },
+    {
+      title:'IELL-202604',file:'IELL-202604.pdf',quickTitle:'Inicio de la época lluviosa 2026',
+      summary:'El inicio de la época lluviosa podría presentarse antes en Occidente, entre la segunda y tercera semana de abril, y más tarde en Altiplano Central, entre finales de abril y la primera semana de mayo. En Sololá, el relieve puede producir diferencias locales entre municipios y laderas.',
+      region:'Referencia territorial: Occidente y Altiplano Central; transición local hacia Bocacosta.',source:'INSIVUMEH'
+    },
+    {
+      title:'Mayo',file:'mayo.pdf',quickTitle:'Mayo 2026',
+      summary:'Comienza la época lluviosa. Occidente y Altiplano Central aparecen entre las regiones con mayores acumulados, dentro de un rango general de 100 a 515 mm. Aun así, la perspectiva señala lluvias por debajo de la climatología en términos generales y una probable transición hacia El Niño.',
+      region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
+    },
+    {
+      title:'MJJ 2026',file:'MJJ 2026.pdf',quickTitle:'Mayo · Junio · Julio 2026',
+      summary:'Para el trimestre mayo-julio, Occidente y Altiplano Central tendrían acumulados menores que las regiones más lluviosas y condiciones relativamente templadas, con temperaturas medias de 14 a 22 °C. El trimestre puede presentar déficit respecto a la climatología, por lo que el manejo de agua sigue siendo importante.',
+      region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
+    },
+    {
+      title:'Junio',file:'junio.pdf',quickTitle:'Junio 2026',
+      summary:'Junio coincide con el primer máximo lluvioso. La señal regional es contrastante: Altiplano Central aparece entre las zonas de mayores acumulados, de 195 a 595 mm, mientras Occidente integra el grupo de 130 a 295 mm. En Sololá pueden existir diferencias fuertes por altitud y exposición.',
+      region:'Referencia territorial: Occidente y Altiplano Central; variación local por relieve.',source:'INSIVUMEH'
+    },
+    {
+      title:'Julio',file:'julio.pdf',quickTitle:'Julio 2026 · alerta de precipitación',
+      summary:'Para julio, el boletín advierte un déficit de precipitación. La anomalía promedio estimada es de -79 mm en Occidente y -100 mm en Altiplano Central. Para Sololá, la canícula y la administración del agua son los principales puntos a vigilar.',
+      region:'Referencia territorial: Occidente y Altiplano Central; información preliminar.',source:'INSIVUMEH / CONRED'
+    },
+    {
+      title:'Agosto',file:'agosto.pdf',quickTitle:'Agosto 2026',
+      summary:'La canícula reduce la lluvia en las referencias más cercanas a Sololá: Occidente y Altiplano Central figuran entre las regiones con menores acumulados previstos, de 20 a 100 mm. La perspectiva señala lluvias por debajo de la normal y continuidad de condiciones de El Niño.',
+      region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
+    },
+    {
+      title:'Septiembre',file:'septiembre.pdf',quickTitle:'Septiembre 2026',
+      summary:'Septiembre corresponde al segundo máximo lluvioso del año, pero Occidente permanece entre las regiones con menores acumulados previstos, de 105 a 240 mm. Para Sololá, el repunte de lluvia no elimina la necesidad de vigilar posibles déficits respecto a la climatología.',
+      region:'Referencia territorial: Occidente; con variación local hacia Altiplano y Bocacosta.',source:'INSIVUMEH'
+    }
+  ];
+
+  document.querySelectorAll('[data-climate-carousel]').forEach(carousel=>{
+    const viewer=carousel.querySelector('[data-climate-pdf]');
+    const title=carousel.querySelector('[data-climate-title]');
+    const status=carousel.querySelector('[data-climate-status]');
+    const quickTitle=carousel.querySelector('[data-climate-quick-title]');
+    const quickSummary=carousel.querySelector('[data-climate-summary]');
+    const quickRegion=carousel.querySelector('[data-climate-region]');
+    const quickSource=carousel.querySelector('[data-climate-source]');
+    const open=carousel.querySelector('[data-climate-open]');
+    const download=carousel.querySelector('[data-climate-download]');
+    const prev=carousel.querySelector('[data-climate-prev]');
+    const next=carousel.querySelector('[data-climate-next]');
+    const dots=carousel.querySelector('[data-climate-dots]');
+    let index=0;
+
+    const pad=n=>String(n).padStart(2,'0');
+    const pdfUrl=file=>`./${encodeURIComponent(file).replace(/%2F/g,'/')}`;
+
+    const render=()=>{
+      const item=climateDocuments[index];
+      const url=pdfUrl(item.file);
+      if(viewer){
+        viewer.src=`${url}#page=1&view=FitH&toolbar=0&navpanes=0`;
+        viewer.title=`Vista previa de ${item.file}`;
+      }
+      if(title)title.textContent=item.title;
+      if(status)status.textContent=`${pad(index+1)} / ${pad(climateDocuments.length)} · Documento climático`;
+      if(quickTitle)quickTitle.textContent=item.quickTitle || item.title;
+      if(quickSummary)quickSummary.textContent=item.summary || '';
+      if(quickRegion)quickRegion.textContent=item.region || '';
+      if(quickSource)quickSource.textContent=`Fuente: ${item.source || 'INSIVUMEH'}`;
+      if(open)open.href=url;
+      if(download){download.href=url;download.setAttribute('download',item.file);}
+      dots?.querySelectorAll('button').forEach((dot,i)=>{
+        dot.classList.toggle('active',i===index);
+        dot.setAttribute('aria-current',i===index?'true':'false');
+      });
+    };
+
+    climateDocuments.forEach((item,i)=>{
+      const dot=document.createElement('button');
+      dot.type='button';
+      dot.className='climate-dot';
+      dot.setAttribute('aria-label',`Ver ${item.title}`);
+      dot.addEventListener('click',()=>{index=i;render();});
+      dots?.appendChild(dot);
+    });
+
+    prev?.addEventListener('click',()=>{index=(index-1+climateDocuments.length)%climateDocuments.length;render();});
+    next?.addEventListener('click',()=>{index=(index+1)%climateDocuments.length;render();});
+
+    carousel.addEventListener('keydown',event=>{
+      if(event.key==='ArrowLeft'){index=(index-1+climateDocuments.length)%climateDocuments.length;render();}
+      if(event.key==='ArrowRight'){index=(index+1)%climateDocuments.length;render();}
+    });
     render();
   });
 
