@@ -197,6 +197,32 @@
     .resource p{margin:0;color:var(--ink-2);font-size:.8rem;line-height:1.7}
     .resource .text-link{margin-top:auto;align-self:flex-start;padding-top:28px}
 
+
+    /* MAPAS Y ANÁLISIS TERRITORIALES */
+    .maps-section{padding:104px 0 112px;background:#e7e0cf}
+    .maps-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.44fr);gap:58px;align-items:end;margin-bottom:48px}
+    .maps-head .section-copy{margin:0;max-width:520px}
+    .maps-carousel{background:#fff;border:1px solid rgba(47,69,53,.16);min-width:0}
+    .maps-grid{display:grid;grid-template-columns:minmax(0,1.36fr) minmax(320px,.64fr);min-height:690px}
+    .map-media{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;background:#d9d8d1;border-right:1px solid var(--line);padding:24px}
+    .map-media-link{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:640px;text-decoration:none;cursor:zoom-in}
+    .map-media img{display:block;max-width:100%;max-height:760px;width:auto;height:auto;object-fit:contain;box-shadow:0 14px 42px rgba(30,42,34,.1);background:#fff}
+    .map-copy{min-width:0;padding:clamp(42px,5vw,72px);display:flex;flex-direction:column;justify-content:center}
+    .map-period{margin:0 0 13px;font-size:.64rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+    .map-title{margin:0;font-family:var(--display);font-size:clamp(1.75rem,2.45vw,2.75rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;color:var(--forest)}
+    .map-description{margin:20px 0 0;color:var(--ink-2);font-size:.82rem;line-height:1.76}
+    .map-credit{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);color:#677067;font-size:.68rem;line-height:1.65}
+    .map-links{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:28px}
+    .maps-footer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:18px 22px;border-top:1px solid var(--line);background:#f7f3e8}
+    .map-status{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6f644f}
+    .map-nav{display:flex;align-items:center;gap:10px}
+    .map-dots{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:14px 22px 18px;scrollbar-width:thin;background:#f7f3e8}
+    .map-dot{flex:0 0 18px;width:18px;height:2px;border:0;padding:0;background:rgba(47,69,53,.24);cursor:pointer}
+    .map-dot.active{background:var(--forest)}
+    .map-dot:focus-visible{outline:2px solid rgba(154,108,47,.45);outline-offset:4px}
+    .maps-carousel.is-dragging{user-select:none}
+    .maps-carousel.is-dragging .map-media-link{cursor:grabbing}
+
     /* MTA STORY */
     .story-title-wrap{padding:96px 0 72px}
     .story-title{margin:0;font-family:var(--display);font-size:clamp(2rem,3.25vw,3.65rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;max-width:1150px}
@@ -288,6 +314,13 @@
       .resources{padding:84px 0 90px}
       .resources-head{display:block}
       .resources-head .section-copy{margin-top:24px;max-width:680px}
+      .maps-section{padding:82px 0 90px}
+      .maps-head{grid-template-columns:1fr;gap:28px}
+      .maps-head .section-copy{max-width:720px}
+      .maps-grid{grid-template-columns:1fr}
+      .map-media{border-right:0;border-bottom:1px solid var(--line)}
+      .map-media-link{min-height:560px}
+      .map-copy{padding:52px 34px 58px}
       .story-title-wrap{padding:74px 0 54px}
       .story-visuals{grid-template-columns:1fr}
       .story-visuals .photo-placeholder{min-height:420px;border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}
@@ -336,6 +369,16 @@
       .resource-grid{grid-template-columns:1fr}
       .resource,.resource:nth-child(3){border-left:1px solid var(--line)}
       .resources{padding:68px 0 76px}
+      .maps-section{padding:66px 0 74px}
+      .maps-carousel{margin-left:-14px;margin-right:-14px}
+      .maps-head{margin-bottom:34px}
+      .map-media{padding:12px}
+      .map-media-link{min-height:430px}
+      .map-media img{max-height:520px}
+      .map-copy{padding:36px 26px 40px}
+      .map-title{font-size:clamp(1.65rem,9vw,2.15rem)}
+      .maps-footer{grid-template-columns:1fr auto;padding:15px 14px}
+      .map-dots{padding:12px 14px 16px}
       .story-title{font-size:clamp(2.5rem,13vw,3.8rem)}
       .story-visuals .photo-placeholder{min-height:330px}
       .story-photo,.story-photo img{min-height:330px}
@@ -556,11 +599,11 @@
           <p>Consulta las observaciones meteorológicas y las fuentes de datos utilizadas por la MTA. Esta área reúne la información disponible de estaciones y series de referencia para el territorio.</p>
           <span class="text-link">Consultar datos</span>
         </a>
-        <a class="resource" href="./docs/clima_index.html">
+        <a class="resource" href="#mapas">
           <span class="resource-number">03</span>
           <h3>Mapas</h3>
-          <p>Consulta mapas que permiten interpretar espacialmente las condiciones climáticas y agroclimáticas de Sololá y relacionarlas con los productos técnicos de la MTA.</p>
-          <span class="text-link">Ver recursos</span>
+          <p>Consulta productos cartográficos de la MTA para reconocer cómo se distribuyen la lluvia, los días sin precipitación y otras condiciones agroclimáticas dentro del departamento de Sololá.</p>
+          <span class="text-link">Consultar mapas</span>
         </a>
         <a class="resource" href="./docs/agroclima_index.html">
           <span class="resource-number">04</span>
@@ -568,6 +611,47 @@
           <p>Consulta balance hídrico, humedad y temperatura del suelo, variables atmosféricas y otros indicadores útiles para interpretar condiciones de estrés agroclimático.</p>
           <span class="text-link">Consultar agroclima</span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="maps-section" id="mapas" aria-labelledby="mapsTitle">
+    <div class="shell">
+      <div class="maps-head">
+        <div>
+          <p class="eyebrow">Mapas de Sololá</p>
+          <h2 class="section-title display" id="mapsTitle">Seguimiento territorial de las condiciones agroclimáticas.</h2>
+        </div>
+        <p class="section-copy">Esta colección reúne mapas y análisis elaborados para el departamento de Sololá. Puedes revisar cómo han cambiado la lluvia, los días sin precipitación y otras condiciones relevantes para la producción agropecuaria a lo largo de 2026.</p>
+      </div>
+
+      <div class="maps-carousel" data-map-carousel tabindex="0" aria-label="Colección de mapas agroclimáticos de Sololá">
+        <div class="maps-grid">
+          <div class="map-media">
+            <a class="map-media-link" data-map-open href="./mapa13.jpg" target="_blank" rel="noopener" aria-label="Abrir mapa en tamaño completo">
+              <img data-map-image src="./mapa13.jpg" alt="Acumulado de lluvia del 1 al 15 de septiembre de 2026 en Sololá">
+            </a>
+          </div>
+
+          <div class="map-copy">
+            <p class="map-period" data-map-period>1 al 15 de septiembre de 2026</p>
+            <h3 class="map-title" data-map-title>Acumulado de lluvia en la primera quincena de septiembre</h3>
+            <p class="map-description" data-map-description>Presenta la distribución espacial de la lluvia observada durante la primera mitad de septiembre y permite comparar las condiciones entre las zonas norte, este, oeste y Bocacosta del departamento.</p>
+            <p class="map-credit" data-map-credit>Producto de la Mesa Técnica Agroclimática del departamento de Sololá. Los créditos y fuentes específicas se conservan dentro de cada mapa.</p>
+            <div class="map-links">
+              <a class="btn" data-map-full href="./mapa13.jpg" target="_blank" rel="noopener">Ver imagen completa</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="maps-footer">
+          <span class="map-status" data-map-status>01 / 14</span>
+          <div class="map-nav">
+            <button class="carousel-btn" type="button" aria-label="Mapa anterior" data-map-prev>←</button>
+            <button class="carousel-btn" type="button" aria-label="Mapa siguiente" data-map-next>→</button>
+          </div>
+        </div>
+        <div class="map-dots" data-map-dots aria-label="Mapas disponibles"></div>
       </div>
     </div>
   </section>
@@ -817,6 +901,7 @@
     ['Temperatura','Condiciones térmicas y comparación municipal','./docs/temperatura_index.html'],
     ['Viento','Velocidad, dirección, rachas y pronóstico','./docs/viento_index.html'],
     ['Agroclima','Balance hídrico, suelo y atmósfera','./docs/agroclima_index.html'],
+    ['Mapas de Sololá','Seguimiento territorial de lluvia y condiciones agroclimáticas','#mapas'],
     ['Qué es la MTA','Información institucional de la Mesa Técnica Agroclimática','#la-mta'],
     ['Instituciones','Organizaciones integrantes de la MTA','#instituciones'],
     ['Contacto','Correo y canales de la MTA','#contacto']
@@ -1000,6 +1085,102 @@
       if(event.key==='ArrowLeft'){index=(index-1+climateDocuments.length)%climateDocuments.length;render();}
       if(event.key==='ArrowRight'){index=(index+1)%climateDocuments.length;render();}
     });
+    render();
+  });
+
+
+  const mapDocuments=[
+    {file:'mapa13.jpg',period:'1 al 15 de septiembre de 2026',title:'Acumulado de lluvia en la primera quincena de septiembre',alt:'Acumulado de lluvia del 1 al 15 de septiembre de 2026 en Sololá',description:'Presenta la distribución espacial de la lluvia observada durante la primera mitad de septiembre y permite comparar las condiciones entre las zonas norte, este, oeste y Bocacosta del departamento.'},
+    {file:'mapa14.jpg',period:'1 al 15 de septiembre de 2026',title:'Días sin lluvia en la primera quincena de septiembre',alt:'Días sin lluvia del 1 al 15 de septiembre de 2026 en Sololá',description:'Muestra la duración de los períodos sin lluvia durante la primera quincena de septiembre y ayuda a identificar las áreas con mayor continuidad de condiciones secas.'},
+    {file:'mapa10.jpg',period:'Septiembre de 2026',title:'Resumen agrometeorológico de septiembre',alt:'Reporte agrometeorológico de septiembre de 2026 para Sololá',description:'Resume información sobre ENOS, temperaturas esperadas y comportamiento de la lluvia para las regiones climáticas que influyen sobre Sololá, incluyendo Altiplano Central, Occidente y Bocacosta.'},
+    {file:'mapa11.jpg',period:'1 al 31 de agosto de 2026',title:'Acumulado de lluvia durante agosto',alt:'Acumulado de lluvia durante agosto de 2026 en Sololá',description:'Presenta el total de lluvia observado durante agosto y permite reconocer el contraste entre las áreas con menor acumulado y la Bocacosta, donde se registraron los valores más altos.'},
+    {file:'mapa12.jpg',period:'1 al 31 de agosto de 2026',title:'Días sin lluvia durante agosto',alt:'Días sin lluvia durante agosto de 2026 en Sololá',description:'Representa la cantidad de días sin lluvia registrada durante agosto y muestra la extensión territorial de la escasez hídrica observada durante la canícula.'},
+    {file:'mapa9.jpg',period:'1 al 15 de agosto de 2026',title:'Acumulado de lluvia en la primera quincena de agosto',alt:'Acumulado de lluvia del 1 al 15 de agosto de 2026 en Sololá',description:'Muestra la distribución de la lluvia durante los primeros quince días de agosto y permite observar las diferencias entre el altiplano, las áreas próximas al lago y la Bocacosta.'},
+    {file:'mapa8.jpg',period:'1 al 15 de agosto de 2026',title:'Días sin lluvia en la primera quincena de agosto',alt:'Días sin lluvia del 1 al 15 de agosto de 2026 en Sololá',description:'Identifica las zonas que acumularon más días consecutivos sin lluvia durante la primera mitad de agosto y aporta contexto sobre el déficit hídrico del período.'},
+    {file:'mapa7.jpg',period:'1 al 31 de julio de 2026',title:'Acumulado de lluvia durante julio',alt:'Acumulado de lluvia durante julio de 2026 en Sololá',description:'Presenta el acumulado mensual de lluvia de julio y permite reconocer las áreas con mayores y menores registros dentro del departamento.'},
+    {file:'mapa6.jpg',period:'1 al 31 de julio de 2026',title:'Días sin lluvia durante julio',alt:'Días sin lluvia durante julio de 2026 en Sololá',description:'Resume la distribución de los días sin lluvia durante julio y acompaña la interpretación del efecto de la canícula sobre distintas zonas del departamento.'},
+    {file:'mapa4.jpg',period:'1 al 20 de julio de 2026',title:'Acumulado de lluvia durante los primeros veinte días de julio',alt:'Acumulado de lluvia del 1 al 20 de julio de 2026 en Sololá',description:'Muestra el acumulado de precipitación registrado durante los primeros veinte días de julio y permite comparar la distribución espacial de la lluvia antes del cierre mensual.'},
+    {file:'mapa5.jpg',period:'1 al 20 de julio de 2026',title:'Días sin lluvia durante los primeros veinte días de julio',alt:'Días sin lluvia del 1 al 20 de julio de 2026 en Sololá',description:'Representa la continuidad de los períodos secos durante los primeros veinte días de julio y ayuda a localizar las áreas que presentaban mayor número de días sin precipitación.'},
+    {file:'mapa2.jpg',period:'1 al 30 de junio de 2026',title:'Acumulado de lluvia durante junio',alt:'Acumulado de lluvia durante junio de 2026 en Sololá',description:'Presenta la distribución del acumulado mensual de lluvia en junio y evidencia las diferencias entre el este, el entorno del lago, el occidente y el suroeste del departamento.'},
+    {file:'mapa3.jpg',period:'Junio de 2026',title:'Días sin lluvia durante junio',alt:'Días sin lluvia durante junio de 2026 en Sololá',description:'Muestra la distribución de los días sin lluvia durante junio y complementa el análisis de los acumulados de precipitación para reconocer sectores con mayor continuidad de condiciones secas.'},
+    {file:'mapa1.jpg',period:'Abril y mayo de 2026',title:'Probable inicio de la época lluviosa',alt:'Probable inicio de la época lluviosa de 2026 para el departamento de Sololá',description:'Presenta las fechas probables de establecimiento de la época lluviosa en el departamento y diferencia el inicio esperado en la Bocacosta respecto del resto de Sololá.'}
+  ];
+
+  document.querySelectorAll('[data-map-carousel]').forEach(carousel=>{
+    const image=carousel.querySelector('[data-map-image]');
+    const openImage=carousel.querySelector('[data-map-open]');
+    const fullImage=carousel.querySelector('[data-map-full]');
+    const period=carousel.querySelector('[data-map-period]');
+    const title=carousel.querySelector('[data-map-title]');
+    const description=carousel.querySelector('[data-map-description]');
+    const status=carousel.querySelector('[data-map-status]');
+    const prev=carousel.querySelector('[data-map-prev]');
+    const next=carousel.querySelector('[data-map-next]');
+    const dots=carousel.querySelector('[data-map-dots]');
+    let index=0;
+    let pointerStart=null;
+
+    const pad=n=>String(n).padStart(2,'0');
+    const imageUrl=file=>`./${encodeURIComponent(file).replace(/%2F/g,'/')}`;
+
+    const render=()=>{
+      const item=mapDocuments[index];
+      const url=imageUrl(item.file);
+      if(image){image.src=url;image.alt=item.alt;}
+      if(openImage){openImage.href=url;openImage.setAttribute('aria-label',`Abrir ${item.title} en tamaño completo`);}
+      if(fullImage)fullImage.href=url;
+      if(period)period.textContent=item.period;
+      if(title)title.textContent=item.title;
+      if(description)description.textContent=item.description;
+      if(status)status.textContent=`${pad(index+1)} / ${pad(mapDocuments.length)}`;
+      dots?.querySelectorAll('button').forEach((dot,i)=>{
+        dot.classList.toggle('active',i===index);
+        dot.setAttribute('aria-current',i===index?'true':'false');
+      });
+    };
+
+    const move=direction=>{
+      index=(index+direction+mapDocuments.length)%mapDocuments.length;
+      render();
+    };
+
+    mapDocuments.forEach((item,i)=>{
+      const dot=document.createElement('button');
+      dot.type='button';
+      dot.className='map-dot';
+      dot.setAttribute('aria-label',`Ver ${item.title}`);
+      dot.addEventListener('click',()=>{index=i;render();});
+      dots?.appendChild(dot);
+    });
+
+    prev?.addEventListener('click',()=>move(-1));
+    next?.addEventListener('click',()=>move(1));
+
+    carousel.addEventListener('keydown',event=>{
+      if(event.key==='ArrowLeft'){event.preventDefault();move(-1);}
+      if(event.key==='ArrowRight'){event.preventDefault();move(1);}
+    });
+
+    carousel.addEventListener('pointerdown',event=>{
+      if(event.target.closest('a,button'))return;
+      pointerStart={x:event.clientX,y:event.clientY};
+      carousel.classList.add('is-dragging');
+    });
+
+    carousel.addEventListener('pointerup',event=>{
+      if(!pointerStart)return;
+      const dx=event.clientX-pointerStart.x;
+      const dy=event.clientY-pointerStart.y;
+      carousel.classList.remove('is-dragging');
+      pointerStart=null;
+      if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy))move(dx<0?1:-1);
+    });
+
+    carousel.addEventListener('pointercancel',()=>{
+      pointerStart=null;
+      carousel.classList.remove('is-dragging');
+    });
+
     render();
   });
 
