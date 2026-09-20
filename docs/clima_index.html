@@ -127,20 +127,15 @@
     .module-detail{font-size:.74rem;line-height:1.6;color:inherit;opacity:.88}
     .construction-note{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:.74rem;line-height:1.7;color:var(--ink-2)}
 
-    /* SUMMARY */
-    .summary{padding:100px 0 108px;background:var(--paper)}
-    .summary-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.55fr);gap:64px;align-items:end;margin-bottom:48px}
-    .summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
-    .summary-card{min-height:270px;padding:32px 27px 29px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:flex;flex-direction:column;text-decoration:none;transition:background .22s ease,transform .22s ease}
-    .summary-card:first-child{border-left:1px solid var(--line)}
-    .summary-card:hover,.summary-card:focus-visible{background:var(--cream-soft);outline:none;transform:translateY(-4px)}
-    .summary-card.disabled{cursor:default}
-    .summary-card.disabled:hover{transform:none;background:#f4f1e9}
-    .summary-number{font-family:var(--display);font-size:1rem;color:var(--gold)}
-    .summary-card h3{margin:50px 0 12px;font-family:var(--display);font-size:clamp(1.45rem,2vw,2rem);font-weight:600;line-height:1.06}
-    .summary-card p{margin:0;color:var(--ink-2);font-size:.78rem;line-height:1.7}
-    .summary-card .text-link{margin-top:auto;align-self:flex-start;padding-top:26px}
-    .status-text{margin-top:auto;padding-top:26px;font-size:.7rem;font-weight:700;color:#6b715f}
+
+
+    /* INSTITUCIONES */
+    .partners{padding:82px 0 90px;background:#fff;border-top:1px solid var(--line)}
+    .partners-title{text-align:center;margin:0 0 42px;font-size:.8rem;font-weight:500;color:var(--ink-2)}
+    .partner-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:30px 42px}
+    .partner-grid a{display:flex;align-items:center;justify-content:center;width:105px;height:62px;text-decoration:none;opacity:.88;transition:opacity .2s ease,transform .2s ease}
+    .partner-grid a:hover,.partner-grid a:focus-visible{opacity:1;transform:translateY(-3px);outline:none}
+    .partner-grid img{max-width:100%;max-height:54px;object-fit:contain}
 
     /* FOOTER */
     .footer{background:#283b2b;color:#f4edd8}
@@ -187,8 +182,6 @@
       .hero{grid-template-columns:1fr 44%}
       .hero-copy{padding-left:48px;padding-right:48px}
       .module-copy{padding-left:48px;padding-right:48px}
-      .summary-grid{grid-template-columns:repeat(2,1fr)}
-      .summary-card:nth-child(3){border-left:1px solid var(--line)}
       .footer-main{grid-template-columns:1.2fr repeat(2,.6fr)}
       .footer-main>div:last-child{grid-column:2/4}
     }
@@ -208,12 +201,12 @@
       .hero{min-height:auto;grid-template-columns:1fr}
       .hero-copy{padding:72px 28px 68px}
       .hero-media{min-height:480px}
-      .intro-grid,.modules-intro-grid,.summary-head{grid-template-columns:1fr;gap:34px}
+      .intro-grid,.modules-intro-grid{grid-template-columns:1fr;gap:34px}
       .module,.module.reverse{grid-template-columns:1fr}
       .module.reverse .module-copy,.module.reverse .module-media{order:initial}
       .module-copy{padding:70px 28px}
       .module-media{min-height:500px}
-      .summary{padding:84px 0 90px}
+      .partner-grid{gap:24px 32px}
       .footer-main{grid-template-columns:1fr 1fr;gap:42px}
       .footer-main>div:first-child{grid-column:1/-1}
       .footer-main>div:last-child{grid-column:auto}
@@ -236,9 +229,9 @@
       .module-copy{padding:58px 20px}
       .module-media{min-height:390px}
       .module-details{grid-template-columns:1fr;gap:10px}
-      .summary-grid{grid-template-columns:1fr}
-      .summary-card,.summary-card:nth-child(3){border-left:1px solid var(--line)}
-      .summary{padding:68px 0 76px}
+      .partner-grid{gap:22px 26px}
+      .partner-grid a{width:84px;height:54px}
+      .partner-grid img{max-height:45px}
       .footer-main{grid-template-columns:1fr;padding:58px 0 44px}
       .footer-main>div:first-child,.footer-main>div:last-child{grid-column:auto}
       .footer-bottom{align-items:flex-start;flex-direction:column}
@@ -375,45 +368,35 @@
       <span class="photo-label">Espacio para fotografía de estación meteorológica</span>
     </div>
   </section>
-
-  <section class="summary reveal" aria-labelledby="summaryTitle">
+  <section class="partners reveal" id="instituciones" aria-labelledby="institucionesTitle">
     <div class="shell">
-      <div class="summary-head">
-        <div>
-          <p class="eyebrow">Acceso rápido</p>
-          <h2 class="section-title display" id="summaryTitle">Selecciona la información que deseas consultar.</h2>
-        </div>
-        <p class="section-copy">Los accesos siguientes conducen directamente a cada módulo climático. La sección de estaciones se habilitará cuando los datos estén disponibles para el portal.</p>
-      </div>
-
-      <div class="summary-grid">
-        <a class="summary-card" href="./precipitaciones_index.html">
-          <span class="summary-number">01</span>
-          <h3>Precipitación</h3>
-          <p>Lluvia observada, pronóstico, registros históricos y comparación territorial.</p>
-          <span class="text-link">Abrir módulo</span>
-        </a>
-        <a class="summary-card" href="./temperatura_index.html">
-          <span class="summary-number">02</span>
-          <h3>Temperatura</h3>
-          <p>Condiciones térmicas, máximos, mínimos, pronóstico y comparación municipal.</p>
-          <span class="text-link">Abrir módulo</span>
-        </a>
-        <a class="summary-card" href="./viento_index.html">
-          <span class="summary-number">03</span>
-          <h3>Viento</h3>
-          <p>Velocidad, dirección, rachas, pronóstico y visualizaciones de apoyo.</p>
-          <span class="text-link">Abrir módulo</span>
-        </a>
-        <div class="summary-card disabled" aria-label="Estaciones meteorológicas en construcción">
-          <span class="summary-number">04</span>
-          <h3>Estaciones</h3>
-          <p>Ubicación y datos de estaciones meteorológicas cuando estén disponibles.</p>
-          <span class="status-text">En construcción</span>
-        </div>
+      <h2 class="partners-title" id="institucionesTitle">Instituciones que integran y acompañan la Mesa Técnica Agroclimática de Sololá</h2>
+      <div class="partner-grid">
+        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy"></a>
+        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA02.png" alt="MAGA" loading="lazy"></a>
+        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy"></a>
+        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH" loading="lazy"></a>
+        <a href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy"></a>
+        <a href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy"></a>
+        <a href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./logos/FeedtheChildren.png" alt="Feed the Children Guatemala" loading="lazy"></a>
+        <a href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICC"><img src="./logos/ICC.png" alt="ICC" loading="lazy"></a>
+        <a href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy"></a>
+        <a href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy"></a>
+        <a href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy"></a>
+        <a href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy"></a>
+        <a href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Enabel"><img src="./logos/Belgica.png" alt="Enabel" loading="lazy"></a>
+        <a href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy"></a>
+        <a href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy"></a>
+        <a href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán UVG"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán UVG" loading="lazy"></a>
+        <a href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy"></a>
+        <a href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy"></a>
+        <a href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy"></a>
+        <a href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MARN"><img src="./logos/MARN.png" alt="MARN" loading="lazy"></a>
+        <a href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy"></a>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="footer" id="contacto">
@@ -443,6 +426,7 @@
         <a href="../index.html#recomendaciones">Recomendaciones</a>
         <a href="../index.html#boletin">Boletín</a>
         <a href="../index.html#mapas">Mapas</a>
+        <a href="#instituciones">Instituciones</a>
       </div>
     </div>
 
