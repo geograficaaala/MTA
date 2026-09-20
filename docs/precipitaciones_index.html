@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0f3a53" />
   <title>Análisis Pluviométrico · Mesa Agroclimática de Sololá</title>
-  <meta name="description" content="Análisis estadístico de precipitación pluvial diaria para los 19 municipios del departamento de Sololá, Guatemala. Datos NASA POWER MERRA-2, parámetro PRECTOTCORR." />
+  <meta name="description" content="Análisis estadístico de precipitación pluvial diaria para los 19 municipios del departamento de Sololá, Guatemala. Datos NASA POWER MERRA 2, parámetro PRECTOTCORR." />
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 
   <style>
     /* ============================================================
-       ROOT — VARIABLES
+       ROOT : VARIABLES
     ============================================================ */
     :root {
       --sky-900: #165c77;
@@ -137,7 +137,7 @@
     }
 
     /* ============================================================
-       NAVBAR — igual al index.html
+       NAVBAR : igual al index.html
     ============================================================ */
 
     .navbar {
@@ -446,7 +446,7 @@
     }
 
     /* ============================================================
-       PANELS — CHART BLOCKS
+       PANELS : CHART BLOCKS
     ============================================================ */
     .section-block {
       margin-top: 1.5rem;
@@ -541,7 +541,7 @@
       background-size: 24px 24px;
     }
 
-    /* chart-container: altura fija anclada al padre — evita que Chart.js
+    /* chart-container: altura fija anclada al padre : evita que Chart.js
        corrompa dimensiones al destruir y recrear el canvas */
     .chart-container {
       position: relative;
@@ -884,7 +884,7 @@
     }
 
     /* ============================================================
-       FOOTER / CINTILLO / REDES — igual al index.html
+       FOOTER / CINTILLO / REDES : igual al index.html
     ============================================================ */
 
     footer {
@@ -1318,7 +1318,7 @@
     }
 
     /* ============================================================
-       WINDY MAP — FULL WIDTH
+       WINDY MAP : FULL WIDTH
     ============================================================ */
     .map-full-section {
       background: #ffffff;
@@ -2025,62 +2025,590 @@
     }
 
   </style>
-  <link rel="stylesheet" href="../assets/css/site-shell.css">
+
+  <style id="mta-redesign">
+    :root{
+      --paper:#fbfaf6;
+      --cream:#f3e8c9;
+      --cream-soft:#f8f1df;
+      --ink:#24342b;
+      --ink-2:#4b5a50;
+      --forest:#334632;
+      --forest-2:#40563e;
+      --lake:#326875;
+      --lake-deep:#214f5b;
+      --gold:#9a6c2f;
+      --sage:#879784;
+      --sand:#efe2bf;
+      --mist:#dbe5df;
+      --line:rgba(36,52,43,.16);
+      --white:#fff;
+      --max:1440px;
+      --display:"Source Serif 4", Georgia, "Times New Roman", serif;
+      --sans:"Manrope", system-ui, sans-serif;
+      --nav-h:92px;
+    }
+
+    html{scroll-padding-top:100px}
+    body{
+      margin:0;
+      padding-top:0 !important;
+      background:var(--paper) !important;
+      color:var(--ink) !important;
+      font-family:var(--sans) !important;
+      font-size:15px;
+      text-align:justify;
+      text-justify:inter-word;
+    }
+    body.menu-open,body.search-open{overflow:hidden}
+    p{ text-align:justify; text-justify:inter-word; text-wrap:pretty }
+    h1,h2,h3{ text-wrap:balance }
+    .wrap,.site-container{width:min(var(--max),calc(100% - 64px));max-width:var(--max);padding-inline:0;margin-inline:auto}
+    a{color:inherit}
+
+    .navbar{display:none !important}
+    .header{
+      position:sticky;
+      top:0;
+      z-index:7000;
+      background:rgba(251,250,246,.97);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+    .shell{width:min(var(--max),calc(100% - 64px));margin:0 auto}
+    .header-inner{min-height:92px;display:flex;align-items:center;gap:36px}
+    .brand{display:flex;align-items:center;gap:13px;text-decoration:none;min-width:290px}
+    .brand img{width:55px;height:55px;object-fit:contain}
+    .brand-copy{display:flex;flex-direction:column;gap:2px}
+    .brand-name{font-size:.9rem;line-height:1.2;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+    .brand-place{font-size:.69rem;color:var(--ink-2)}
+    .nav{margin-left:auto;display:flex;align-items:center;gap:24px}
+    .nav a,.nav button{position:relative;border:0;background:none;padding:10px 0;color:var(--ink);font-size:.78rem;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap}
+    .nav a::after,.nav button::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:1px;background:var(--gold);transition:right .22s ease}
+    .nav a:hover::after,.nav a:focus-visible::after,.nav button:hover::after,.nav button:focus-visible::after,.nav a[aria-current="page"]::after{right:0}
+    .nav a:focus-visible,.nav button:focus-visible{outline:2px solid rgba(154,108,47,.35);outline-offset:5px}
+    .menu-toggle{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);background:transparent;align-items:center;justify-content:center;cursor:pointer}
+    .menu-lines,.menu-lines::before,.menu-lines::after{display:block;width:20px;height:1.5px;background:var(--ink);content:"";transition:.2s ease}
+    .menu-lines{position:relative}
+    .menu-lines::before{position:absolute;top:-6px}
+    .menu-lines::after{position:absolute;top:6px}
+    .menu-toggle[aria-expanded="true"] .menu-lines{background:transparent}
+    .menu-toggle[aria-expanded="true"] .menu-lines::before{transform:translateY(6px) rotate(45deg)}
+    .menu-toggle[aria-expanded="true"] .menu-lines::after{transform:translateY(-6px) rotate(-45deg)}
+
+    .page-context{
+      width:min(var(--max),calc(100% - 64px));
+      margin:0 auto;
+      min-height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      border-bottom:1px solid var(--line);
+      background:transparent;
+    }
+    .breadcrumbs{display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:var(--ink-2);font-size:.68rem}
+    .breadcrumbs a{text-decoration:none}
+    .breadcrumbs-separator::before{content:"›";color:var(--sage)}
+    .module-switcher{display:flex;align-items:center;gap:18px}
+    .module-switcher a{padding:18px 0 15px;text-decoration:none;font-size:.7rem;color:var(--ink-2);border-bottom:2px solid transparent}
+    .module-switcher a[aria-current="page"]{color:var(--forest);font-weight:700;border-bottom-color:var(--gold)}
+
+    .loader{inset:0 !important;background:rgba(251,250,246,.96) !important;backdrop-filter:none !important}
+    .loader-card{border-radius:0 !important;border:1px solid var(--line) !important;background:var(--paper) !important;box-shadow:none !important}
+    .spinner{border-color:var(--mist) !important;border-top-color:var(--forest) !important}
+
+    .hero-section{
+      background:var(--cream) !important;
+      background-image:none !important;
+      color:var(--ink) !important;
+      padding:clamp(64px,7vw,108px) 0 !important;
+      border-bottom:0 !important;
+    }
+    .hero-section .wrap{max-width:var(--max)}
+    .hero-eyebrow{
+      margin:0 0 22px;
+      color:var(--gold) !important;
+      font-size:.69rem !important;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      border:0 !important;
+      padding:0 !important;
+    }
+    .hero-section h1{
+      margin:0;
+      max-width:900px;
+      font-family:var(--display) !important;
+      font-size:clamp(2.7rem,5vw,5rem) !important;
+      line-height:1 !important;
+      font-weight:600 !important;
+      letter-spacing:-.025em !important;
+      color:#384432 !important;
+    }
+    .hero-section .sub{
+      max-width:900px;
+      margin-top:28px !important;
+      color:#4c5548 !important;
+      font-size:clamp(.84rem,.92vw,.96rem) !important;
+      line-height:1.8 !important;
+    }
+    .hero-source{
+      max-width:820px;
+      margin:18px 0 0;
+      padding-top:18px;
+      border-top:1px solid rgba(56,68,50,.18);
+      color:#667064;
+      font-size:.74rem;
+      line-height:1.7;
+    }
+
+    .map-full-section{background:var(--paper) !important;border-bottom:0 !important}
+    .map-section-inner{max-width:var(--max);padding:58px 32px 0 !important}
+    .map-section-label{
+      color:var(--gold) !important;
+      font-size:.69rem !important;
+      letter-spacing:.16em !important;
+      text-transform:uppercase;
+      padding-bottom:18px !important;
+    }
+    .windy-wrap iframe{border-radius:0 !important}
+    .map-credits{
+      margin-bottom:40px !important;
+      padding:14px 0 !important;
+      border:0 !important;
+      border-bottom:1px solid var(--line) !important;
+      background:transparent !important;
+      color:var(--ink-2) !important;
+      text-align:justify !important;
+      border-radius:0 !important;
+      font-size:.7rem !important;
+      line-height:1.6;
+    }
+
+    .controls-bar{top:calc(var(--nav-h) + 12px) !important;margin:0 !important;padding:20px 0;background:var(--paper)}
+    .controls-inner{
+      width:min(var(--max),calc(100% - 64px)) !important;
+      grid-template-columns:1.45fr 1fr 1fr auto !important;
+      gap:18px !important;
+      padding:24px 28px !important;
+      border:1px solid var(--line) !important;
+      border-radius:0 !important;
+      background:var(--cream-soft) !important;
+      box-shadow:none !important;
+      backdrop-filter:none !important;
+    }
+    .ctrl-label{padding:0 !important;color:#6c715f !important;font-size:.61rem !important;letter-spacing:.13em !important}
+    .ctrl-select,.ctrl-input{
+      height:46px !important;
+      border:0 !important;
+      border-bottom:1px solid rgba(36,52,43,.28) !important;
+      border-radius:0 !important;
+      background:transparent !important;
+      color:var(--ink) !important;
+      padding:0 !important;
+      font-family:var(--sans) !important;
+      font-size:.82rem !important;
+      font-weight:600 !important;
+      box-shadow:none !important;
+    }
+    .ctrl-select:focus,.ctrl-input:focus{border-bottom-color:var(--forest) !important;box-shadow:none !important}
+    .ctrl-actions{gap:10px !important}
+    .ctrl-btn{
+      height:46px !important;
+      min-width:104px;
+      padding:0 18px !important;
+      border:1px solid var(--forest) !important;
+      border-radius:0 !important;
+      background:var(--forest) !important;
+      color:#fff !important;
+      font-family:var(--sans) !important;
+      font-size:.74rem !important;
+      font-weight:700 !important;
+      transition:transform .2s ease,background .2s ease,color .2s ease !important;
+    }
+    .ctrl-btn:hover,.ctrl-btn:focus-visible{transform:translateY(-2px);background:var(--forest-2) !important;outline:none}
+    .ctrl-btn.secondary{background:transparent !important;color:var(--forest) !important}
+    .ctrl-btn.secondary:hover,.ctrl-btn.secondary:focus-visible{background:var(--forest) !important;color:#fff !important}
+
+    .kpi-strip{
+      margin:32px 0 56px !important;
+      padding:0 !important;
+      display:grid !important;
+      grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+      gap:0 !important;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:var(--cream);
+    }
+    .kpi{
+      min-width:0;
+      padding:28px 22px 30px !important;
+      border:0 !important;
+      border-right:1px solid rgba(36,52,43,.14) !important;
+      border-radius:0 !important;
+      background:transparent !important;
+      box-shadow:none !important;
+      transform:none !important;
+      transition:background .2s ease !important;
+    }
+    .kpi:last-child{border-right:0 !important}
+    .kpi:hover{background:rgba(255,255,255,.24) !important;box-shadow:none !important}
+    .kpi-label{
+      margin-bottom:16px !important;
+      color:#6d664f !important;
+      font-size:.61rem !important;
+      letter-spacing:.12em !important;
+    }
+    .kpi-value{
+      font-family:var(--display) !important;
+      font-size:clamp(1.65rem,2.5vw,2.55rem) !important;
+      font-weight:600 !important;
+      line-height:1 !important;
+      letter-spacing:-.02em !important;
+      color:var(--forest) !important;
+    }
+    .kpi-note{margin-top:9px !important;color:var(--ink-2) !important;font-size:.68rem !important;line-height:1.45 !important}
+
+    #deptSummary{margin-top:0 !important;margin-bottom:72px}
+    .dept-head{display:grid;grid-template-columns:minmax(0,.35fr) minmax(0,1fr);gap:46px;align-items:end;margin-bottom:26px !important}
+    .dept-eyebrow{margin:0 !important;color:var(--gold) !important;font-size:.64rem !important;letter-spacing:.16em !important}
+    .dept-title{
+      margin:0 !important;
+      font-family:var(--display) !important;
+      font-size:clamp(1.65rem,2.4vw,2.65rem) !important;
+      font-weight:600 !important;
+      line-height:1.08 !important;
+      letter-spacing:-.018em !important;
+      color:var(--forest) !important;
+    }
+    .dept-grid{
+      counter-reset:municipality;
+      display:grid !important;
+      grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+      gap:0 !important;
+      margin-bottom:0 !important;
+      border-top:1px solid var(--line);
+      border-left:1px solid var(--line);
+      background:#fff;
+    }
+    .dept-chip{
+      counter-increment:municipality;
+      position:relative;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:8px 18px;
+      align-items:end;
+      min-height:98px;
+      padding:20px 20px 17px 52px !important;
+      border:0 !important;
+      border-right:1px solid var(--line) !important;
+      border-bottom:1px solid var(--line) !important;
+      border-radius:0 !important;
+      background:#fff !important;
+      box-shadow:none !important;
+      transform:none !important;
+      transition:background .18s ease,color .18s ease !important;
+    }
+    .dept-chip::before{
+      content:counter(municipality,decimal-leading-zero);
+      position:absolute;
+      left:18px;
+      top:21px;
+      color:var(--gold);
+      font-size:.58rem;
+      font-weight:700;
+      letter-spacing:.08em;
+    }
+    .dept-chip:hover{background:var(--cream-soft) !important;box-shadow:none !important}
+    .dept-chip.active-mun{background:var(--cream) !important;border-color:var(--line) !important}
+    .dept-chip-name{margin:0 !important;color:var(--forest) !important;font-size:.74rem !important;line-height:1.35 !important}
+    .dept-chip-val{
+      font-family:var(--display) !important;
+      color:var(--lake-deep) !important;
+      font-size:1.15rem !important;
+      font-weight:600 !important;
+      white-space:nowrap;
+    }
+    .dept-chip-bar{
+      grid-column:1 / -1;
+      height:2px !important;
+      margin-top:7px !important;
+      background:rgba(36,52,43,.1) !important;
+      border-radius:0 !important;
+    }
+    .dept-chip-fill{border-radius:0 !important}
+
+    .section-block{margin-top:64px !important}
+    .section-label-bar{
+      gap:14px !important;
+      margin-bottom:18px !important;
+      padding:0 0 16px !important;
+      border-bottom:1px solid var(--line) !important;
+    }
+    .section-badge{
+      padding:0 !important;
+      border:0 !important;
+      border-radius:0 !important;
+      background:transparent !important;
+      color:var(--gold) !important;
+      font-size:.61rem !important;
+      letter-spacing:.14em !important;
+    }
+    .section-label-title{
+      color:var(--ink) !important;
+      font-family:var(--display) !important;
+      font-size:clamp(1.15rem,1.65vw,1.55rem) !important;
+      font-weight:600 !important;
+      line-height:1.2 !important;
+    }
+
+    .panel,.boxplot-wrap,.stat-kpi,.awn-kpi,.pred-kpi{
+      border-radius:0 !important;
+      box-shadow:none !important;
+    }
+    .panel{
+      border:1px solid var(--line) !important;
+      background:#fff !important;
+    }
+    .panel-head{
+      padding:18px 20px !important;
+      background:var(--paper) !important;
+      border-bottom:1px solid var(--line) !important;
+    }
+    .panel-title{
+      font-family:var(--display) !important;
+      font-size:1.08rem !important;
+      font-weight:600 !important;
+      color:var(--forest) !important;
+    }
+    .panel-subtitle{margin-top:5px !important;color:var(--ink-2) !important;font-size:.72rem !important;line-height:1.55 !important}
+    .panel-body,.chart-container.is-fullscreen{background:#fff !important;background-image:none !important}
+    .panel-foot{
+      padding:13px 20px !important;
+      background:var(--cream-soft) !important;
+      color:var(--ink-2) !important;
+      font-style:normal !important;
+      text-align:justify !important;
+    }
+    .pc-select,.pc-btn,.chart-expand-btn{
+      border-radius:0 !important;
+      font-family:var(--sans) !important;
+      box-shadow:none !important;
+    }
+    .pc-btn:hover,.pc-btn.active,.chart-expand-btn:hover{background:var(--cream) !important;border-color:var(--gold) !important}
+    .rain-legend{background:var(--paper) !important;border-top:1px solid var(--line) !important}
+
+    .stat-section-head h2,.pctile-section h3{
+      font-family:var(--display) !important;
+      color:var(--forest) !important;
+      font-weight:600 !important;
+    }
+    .stat-section-head p,.method-notice p{text-align:justify !important}
+    .stat-kpis{gap:0 !important;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .stat-kpi{
+      border:0 !important;
+      border-right:1px solid var(--line) !important;
+      border-bottom:1px solid var(--line) !important;
+      background:#fff !important;
+    }
+    .stat-kpi-value,.awn-kpi-value,.pred-kpi-value{font-family:var(--display) !important;letter-spacing:-.015em !important}
+    .formulas-panel{border-radius:0 !important;background:var(--forest) !important}
+    .boxplot-wrap{border:1px solid var(--line) !important;background:#fff !important}
+    .method-notice{
+      margin-top:70px !important;
+      padding:28px 30px !important;
+      border:0 !important;
+      border-top:1px solid var(--gold) !important;
+      border-radius:0 !important;
+      background:var(--cream-soft) !important;
+    }
+
+    table{font-family:var(--sans) !important}
+    th{background:var(--forest) !important;border-bottom:1px solid rgba(255,255,255,.24) !important}
+    th:hover{background:var(--forest-2) !important}
+    tbody tr:nth-child(even) td{background:#faf8f1 !important}
+    tbody tr:hover td{background:var(--cream-soft) !important}
+
+    .chart-fullscreen-overlay,.municipality-radar-overlay{background:rgba(23,31,25,.72) !important}
+    .chart-fullscreen-card,.municipality-radar-card{border-radius:0 !important}
+    .chart-fullscreen-head,.municipality-radar-head{
+      background:var(--forest) !important;
+      background-image:none !important;
+    }
+    .chart-fullscreen-close,.municipality-radar-close{border-radius:0 !important}
+    .to-top{border-radius:0 !important;background:var(--forest) !important}
+
+    .partners{margin-top:86px;padding:82px 0 90px;background:#fff;border-top:1px solid var(--line)}
+    .partners-title{text-align:center;margin:0 0 42px;font-size:.8rem;font-weight:500;color:var(--ink-2)}
+    .partner-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:30px 42px}
+    .partner-grid a{display:flex;align-items:center;justify-content:center;width:105px;height:62px;text-decoration:none;opacity:.88;transition:opacity .2s ease,transform .2s ease}
+    .partner-grid a:hover,.partner-grid a:focus-visible{opacity:1;transform:translateY(-3px);outline:none}
+    .partner-grid img{max-width:100%;max-height:54px;object-fit:contain}
+
+    .footer{margin-top:0 !important;background:#283b2b !important;background-image:none !important;color:#f4edd8 !important}
+    .footer-main{padding:76px 0 60px;display:grid;grid-template-columns:minmax(260px,1.25fr) repeat(3,minmax(150px,.55fr));gap:54px}
+    .footer-brand{display:flex;align-items:center;gap:15px;margin-bottom:22px}
+    .footer-brand img{width:61px;height:61px;object-fit:contain;opacity:1}
+    .footer-brand-name{font-family:var(--display);font-size:1.7rem;line-height:1.05}
+    .footer-about{margin:0;max-width:380px;color:rgba(244,237,216,.77);font-size:.8rem;line-height:1.75;text-align:justify}
+    .footer h3{margin:4px 0 22px;font-size:.76rem;font-weight:700;color:#fff}
+    .footer-links{display:flex;flex-direction:column;gap:13px}
+    .footer-links a{color:rgba(244,237,216,.82);font-size:.76rem;text-decoration:none}
+    .footer-links a:hover{text-decoration:underline;text-underline-offset:4px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding:24px 0 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;color:rgba(244,237,216,.65);font-size:.68rem}
+
+    .search-overlay{position:fixed;inset:0;z-index:9000;background:rgba(23,31,25,.62);display:none;align-items:flex-start;justify-content:center;padding:125px 24px 24px}
+    .search-overlay.open{display:flex}
+    .search-dialog{width:min(680px,100%);background:var(--paper);border:1px solid var(--line);box-shadow:0 30px 100px rgba(0,0,0,.2)}
+    .search-head{display:flex;gap:12px;padding:16px;border-bottom:1px solid var(--line)}
+    .search-input{flex:1;min-height:50px;border:0;background:transparent;padding:0 8px;color:var(--ink);outline:none;font-size:.9rem}
+    .search-close{border:1px solid var(--line);background:transparent;color:var(--ink);padding:0 15px;cursor:pointer;font-size:.72rem;font-weight:700}
+    .search-results{max-height:52vh;overflow:auto;padding:8px}
+    .search-result{display:block;padding:15px 16px;text-decoration:none;border-bottom:1px solid rgba(36,52,43,.08)}
+    .search-result:hover{background:var(--cream-soft)}
+    .search-result strong{display:block;font-size:.82rem;margin-bottom:4px}
+    .search-result span{color:var(--ink-2);font-size:.72rem}
+    .search-empty{padding:26px;text-align:center;color:var(--ink-2);font-size:.8rem}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:1100px){
+      .shell,.wrap,.site-container,.page-context{width:min(var(--max),calc(100% - 40px))}
+      .brand{min-width:0}
+      .nav{gap:17px}
+      .nav a,.nav button{font-size:.72rem}
+      .controls-inner{width:min(var(--max),calc(100% - 40px)) !important;grid-template-columns:1fr 1fr 1fr !important}
+      .ctrl-actions{grid-column:1 / -1;justify-content:flex-end}
+      .kpi-strip{grid-template-columns:repeat(3,1fr) !important}
+      .kpi:nth-child(3){border-right:0 !important}
+      .kpi:nth-child(-n+3){border-bottom:1px solid rgba(36,52,43,.14) !important}
+      .dept-grid{grid-template-columns:repeat(2,1fr) !important}
+      .footer-main{grid-template-columns:1.2fr repeat(2,.6fr)}
+      .footer-main>div:last-child{grid-column:2 / 4}
+    }
+
+    @media(max-width:1020px){
+      :root{--nav-h:76px}
+      html{scroll-padding-top:82px}
+      .header-inner{min-height:76px}
+      .brand img{width:46px;height:46px}
+      .brand-name{font-size:.82rem}
+      .brand-place{font-size:.64rem}
+      .menu-toggle{display:flex;position:relative;z-index:9200;background:var(--paper)}
+      .nav{
+        position:fixed;
+        z-index:9100;
+        top:76px;
+        left:0;
+        right:0;
+        height:calc(100dvh - 76px);
+        margin:0;
+        padding:28px 28px 44px;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:0;
+        overflow-y:auto;
+        background:var(--paper);
+        box-shadow:0 24px 60px rgba(25,35,28,.14);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transform:translateY(-10px);
+        transition:opacity .18s ease,transform .18s ease,visibility .18s ease;
+      }
+      .nav.open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+      .nav a,.nav button{width:100%;padding:18px 0;text-align:left;font-size:.95rem;border-bottom:1px solid var(--line)}
+      .nav a::after,.nav button::after{display:none}
+      .page-context{min-height:auto;padding:12px 0;align-items:flex-start;flex-direction:column}
+      .module-switcher{width:100%;overflow-x:auto;gap:22px}
+      .module-switcher a{white-space:nowrap}
+      .controls-bar{position:static !important;padding-top:26px}
+      .controls-inner{grid-template-columns:1fr 1fr !important}
+      .ctrl-actions{justify-content:flex-start}
+      .dept-head{grid-template-columns:1fr;gap:12px}
+      .awn-grid,.stat-grid,.two-col{grid-template-columns:1fr !important}
+      .footer-main{grid-template-columns:1fr 1fr;gap:42px}
+      .footer-main>div:first-child{grid-column:1 / -1}
+      .footer-main>div:last-child{grid-column:auto}
+    }
+
+    @media(max-width:680px){
+      :root{--nav-h:70px}
+      html{font-size:15px}
+      .shell,.wrap,.site-container,.page-context{width:calc(100% - 28px)}
+      .header-inner{min-height:70px}
+      .nav{top:70px;height:calc(100dvh - 70px)}
+      .brand-copy{max-width:205px}
+      .brand-name{font-size:.76rem}
+      .brand-place{font-size:.6rem}
+      .hero-section{padding:56px 0 62px !important}
+      .hero-section h1{font-size:clamp(2.5rem,14vw,4rem) !important}
+      .hero-section .sub{font-size:.84rem !important}
+      .map-section-inner{padding:42px 14px 0 !important}
+      .windy-wrap iframe{height:480px !important}
+      .controls-inner{width:calc(100% - 28px) !important;grid-template-columns:1fr !important;padding:22px 20px !important}
+      .ctrl-actions{grid-column:auto;display:grid;grid-template-columns:1fr 1fr;width:100%}
+      .ctrl-btn{width:100%}
+      .kpi-strip{grid-template-columns:repeat(2,1fr) !important;margin-top:24px !important}
+      .kpi{border-right:1px solid rgba(36,52,43,.14) !important;border-bottom:1px solid rgba(36,52,43,.14) !important;padding:23px 18px !important}
+      .kpi:nth-child(2n){border-right:0 !important}
+      .kpi:nth-last-child(-n+2){border-bottom:0 !important}
+      .kpi-value{font-size:2rem !important}
+      .dept-grid{grid-template-columns:1fr !important}
+      .dept-chip{min-height:88px;padding-left:48px !important}
+      .section-block{margin-top:54px !important}
+      .panel-head{align-items:flex-start !important}
+      .panel-controls{width:100%}
+      .panel-title{font-size:1rem !important}
+      .chart-container,.prediction-chart-container{min-height:360px !important}
+      .partner-grid{gap:22px 26px}
+      .partner-grid a{width:84px;height:54px}
+      .partner-grid img{max-height:45px}
+      .footer-main{grid-template-columns:1fr;padding:58px 0 44px}
+      .footer-main>div:first-child,.footer-main>div:last-child{grid-column:auto}
+      .footer-bottom{align-items:flex-start;flex-direction:column}
+      .search-overlay{padding:92px 14px 14px}
+    }
+  </style>
+
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <header class="site-header">
-  <div class="site-header-inner">
-    <a class="site-brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
-      <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá">
-      <span class="site-brand-copy"><span class="site-brand-name">Mesa Técnica Agroclimática Sololá</span><span class="site-brand-place">Sololá, Guatemala</span></span>
-    </a>
-    <button class="site-mobile-toggle" type="button" data-mobile-toggle aria-expanded="false" aria-label="Abrir menú"><span class="site-mobile-toggle-lines"></span></button>
-    <nav class="site-nav" data-site-nav aria-label="Navegación principal">
-      <a class="site-nav-link" href="../index.html">Inicio</a>
-      <div class="site-nav-item site-dropdown">
-        <button class="site-dropdown-toggle" type="button">La MTA</button>
-        <div class="site-dropdown-panel"><div class="site-menu-group">
-          <a class="site-menu-link" href="../index.html#la-mta"><strong>Qué es la MTA</strong><span>Propósito y alcance territorial</span></a>
-          <a class="site-menu-link" href="../index.html#objetivos"><strong>Objetivos</strong><span>Uso de información para la toma de decisiones</span></a>
-          <a class="site-menu-link" href="../index.html#instituciones"><strong>Instituciones integrantes</strong><span>Organizaciones que participan en la mesa</span></a>
-        </div></div>
-      </div>
-      <div class="site-nav-item site-dropdown site-dropdown-wide is-active">
-        <button class="site-dropdown-toggle" type="button">Áreas técnicas</button>
-        <div class="site-dropdown-panel">
-          <div class="site-menu-group"><span class="site-menu-title">Clima</span>
-            <a class="site-menu-link" href="./clima_index.html"><strong>Clima</strong><span>Acceso general al área meteorológica</span></a>
-            <a class="site-menu-link" href="./precipitaciones_index.html"><strong>Precipitación</strong><span>Observación, pronóstico e histórico</span></a>
-            <a class="site-menu-link" href="./temperatura_index.html"><strong>Temperatura</strong><span>Condiciones térmicas y comparación municipal</span></a>
-            <a class="site-menu-link" href="./viento_index.html"><strong>Viento</strong><span>Velocidad, dirección, rachas y pronóstico</span></a>
-          </div>
-          <div class="site-menu-group"><span class="site-menu-title">Agroclima</span><a class="site-menu-link" href="./agroclima_index.html"><strong>Agroclima y balance hídrico</strong><span>Agua, suelo, demanda atmosférica y estrés agrícola</span></a></div>
-        </div>
-      </div>
-      <div class="site-nav-item site-dropdown">
-        <button class="site-dropdown-toggle" type="button">Productos</button>
-        <div class="site-dropdown-panel"><div class="site-menu-group">
-          <a class="site-menu-link" href="./clima_index.html"><strong>Pronósticos</strong><span>Acceso a los módulos con predicción</span></a>
-          <a class="site-menu-link" href="./clima_index.html"><strong>Mapas interactivos</strong><span>Visualización territorial de variables</span></a>
-          <a class="site-menu-link" href="../index.html#productos"><strong>Datos y estaciones</strong><span>Fuentes y observación disponible</span></a>
-          <a class="site-menu-link" href="../index.html#boletines"><strong>Boletines agroclimáticos</strong><span>Productos de síntesis de la MTA</span></a>
-        </div></div>
-      </div>
-      <a class="site-nav-link" href="../index.html#contacto">Contacto</a>
-      <button class="site-search-button" type="button" data-search-open>Buscar</button>
-    </nav>
-  </div>
-</header>
+  <header class="header">
+    <div class="shell header-inner">
+      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá">
+        <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
+        <span class="brand-copy">
+          <span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
+          <span class="brand-place">Sololá, Guatemala</span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+        <span class="menu-lines"></span>
+      </button>
+
+      <nav class="nav" aria-label="Navegación principal" data-nav>
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#recomendaciones">Recomendaciones agroclimáticas</a>
+        <a href="./clima_index.html" aria-current="page">Información climática</a>
+        <a href="../index.html#contacto">Contacto</a>
+        <button type="button" data-search-open>Buscar</button>
+      </nav>
+    </div>
+  </header>
 
   <!-- LOADER -->
   <div class="loader" id="loader">
     <div class="loader-card">
       <div class="spinner"></div>
-      <strong>Cargando datos pluviométricos</strong>
-      <p>Leyendo serie histórica NASA POWER MERRA-2 para los 19 municipios del departamento de Sololá.</p>
+      <strong>Cargando información de precipitación</strong>
+      <p>Consultando la serie histórica de NASA POWER MERRA 2 para los 19 municipios del departamento de Sololá.</p>
     </div>
   </div>
 
@@ -2090,35 +2618,33 @@
     <!-- HERO -->
     <section class="hero-section">
       <div class="wrap">
-        <h1>Análisis Pluviométrico</h1>
+        <p class="hero-eyebrow">Información climática</p>
+        <h1>Precipitación en Sololá</h1>
         <p class="sub">
-          Análisis estadístico descriptivo de la precipitación pluvial diaria para los 19 municipios
-          del departamento de Sololá, Guatemala. Los datos provienen del modelo de reanálisis
-          MERRA-2 de la NASA, distribuidos a través de la API pública NASA POWER en su comunidad
-          agroclimática (AG). Los registros corresponden al periodo comprendido entre el 1 de enero
-          de 2026 y el último día disponible en el servidor de la NASA al momento de la última
-          actualización automática del repositorio.
+          Este módulo permite consultar el comportamiento de la lluvia en los municipios del departamento de Sololá. Reúne observaciones disponibles, estimaciones históricas, comparaciones territoriales y pronósticos para facilitar la lectura de las condiciones hídricas y apoyar la planificación agropecuaria.
+        </p>
+        <p class="hero-source">
+          La serie histórica utiliza información de NASA POWER con el producto MERRA 2. Los registros se actualizan automáticamente conforme se publican nuevos datos disponibles para el portal.
         </p>
       </div>
     </section>
 
     <!-- ============================================================
-         MAPA DE LLUVIA — RADAR WINDY (FULL WIDTH)
+         MAPA DE LLUVIA : RADAR WINDY (FULL WIDTH)
     ============================================================ -->
     <div class="map-full-section">
       <div class="map-section-inner">
-        <div class="map-section-label">Radar de lluvia en tiempo real — Sololá, Guatemala</div>
+        <div class="map-section-label">Radar de lluvia en tiempo real para Sololá, Guatemala</div>
         <div class="windy-wrap">
           <iframe
             src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=10&overlay=rain&product=ecmwf&level=surface&lat=14.708&lon=-91.075"
-            title="Radar de lluvia ECMWF — Sololá, Guatemala"
+            title="Radar de lluvia ECMWF para Sololá, Guatemala"
             allowfullscreen loading="lazy">
           </iframe>
         </div>
         <div class="map-credits">
           Capa de precipitación: modelo ECMWF · Fuente y visualización:
-          <a href="https://www.windy.com" target="_blank" rel="noreferrer">Windy.com</a> —
-          uso no comercial sujeto a los términos de Windy.
+          <a href="https://www.windy.com" target="_blank" rel="noreferrer">Windy.com</a>. Consulta sujeta a los términos de uso de Windy.
         </div>
       </div>
     </div>
@@ -2150,60 +2676,60 @@
       <div class="kpi-strip reveal">
         <div class="kpi">
           <div class="kpi-label">Acumulado total</div>
-          <div class="kpi-value" id="kTotal">—</div>
+          <div class="kpi-value" id="kTotal">Sin dato</div>
           <div class="kpi-note">mm en el periodo filtrado</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Media diaria</div>
-          <div class="kpi-value" id="kMean">—</div>
-          <div class="kpi-note">mm · dia&#x207B;&#xB9; (μ)</div>
+          <div class="kpi-value" id="kMean">Sin dato</div>
+          <div class="kpi-note">milímetros por día</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Máximo diario</div>
-          <div class="kpi-value" id="kMax">—</div>
-          <div class="kpi-note" id="kMaxDate">—</div>
+          <div class="kpi-value" id="kMax">Sin dato</div>
+          <div class="kpi-note" id="kMaxDate">Sin dato</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Días lluviosos</div>
-          <div class="kpi-value" id="kWet">—</div>
+          <div class="kpi-value" id="kWet">Sin dato</div>
           <div class="kpi-note">P &gt; 0 mm</div>
         </div>
         <div class="kpi">
-          <div class="kpi-label">Racha seca máx.</div>
-          <div class="kpi-value" id="kCSD">—</div>
+          <div class="kpi-label">Racha seca máxima</div>
+          <div class="kpi-value" id="kCSD">Sin dato</div>
           <div class="kpi-note">días consecutivos sin lluvia</div>
         </div>
         <div class="kpi">
-          <div class="kpi-label">Desv. estándar</div>
-          <div class="kpi-value" id="kStd">—</div>
+          <div class="kpi-label">Desviación estándar</div>
+          <div class="kpi-value" id="kStd">Sin dato</div>
           <div class="kpi-note">mm (σ)</div>
         </div>
       </div>
     </div>
 
-    <!-- DEPARTAMENTO SUMMARY — always visible, never filtered -->
+    <!-- DEPARTAMENTO SUMMARY : always visible, never filtered -->
     <div class="wrap reveal" id="deptSummary">
       <div class="dept-head">
         <span class="dept-eyebrow">Resumen departamental</span>
-        <h2 class="dept-title">Sololá — precipitación acumulada en el periodo completo</h2>
+        <h2 class="dept-title">Precipitación acumulada por municipio en el período seleccionado</h2>
       </div>
       <div class="dept-grid" id="deptGrid"></div>
     </div>
 
     <!-- ============================================================
-         SECCIÓN: ACTUAL — ESTACIÓN METEOROLÓGICA DE CAMPO (AWN)
+         SECCIÓN: ACTUAL : ESTACIÓN METEOROLÓGICA DE CAMPO (AWN)
     ============================================================ -->
     <div class="section-block wrap reveal">
       <div class="section-label-bar">
         <span class="section-badge badge-actual">Actual</span>
-        <span class="section-label-title">Observación de campo — Estación AWN · Santa Catarina Palopó</span>
+        <span class="section-label-title">Observación de campo en Santa Catarina Palopó</span>
       </div>
       <div class="awn-grid">
         <div class="awn-card panel" id="awnCard">
           <div class="panel-head">
             <div class="panel-title-block">
-              <div class="panel-title">Última lectura — Estación meteorológica propia</div>
-              <div class="panel-subtitle">Datos directos desde Ambient Weather Network · Santa Catarina Palopó · desde 23 abr 2026</div>
+              <div class="panel-title">Última lectura de la estación meteorológica</div>
+              <div class="panel-subtitle">Datos registrados por la estación de Santa Catarina Palopó desde abril de 2026</div>
             </div>
             <span class="awn-status" id="awnStatus">Conectando...</span>
           </div>
@@ -2214,7 +2740,7 @@
         <div class="panel awn-chart-panel">
           <div class="panel-head">
             <div class="panel-title-block">
-              <div class="panel-title">Precipitación reciente — últimas lecturas de la estación</div>
+              <div class="panel-title">Precipitación reciente registrada por la estación</div>
               <div class="panel-subtitle">Datos observados en campo, Santa Catarina Palopó</div>
             </div>
           </div>
@@ -2229,17 +2755,17 @@
     </div>
 
     <!-- ============================================================
-         SECCIÓN: PREDICCIÓN — OPEN-METEO (16 DÍAS)
+         SECCIÓN: PREDICCIÓN : OPEN-METEO (16 DÍAS)
     ============================================================ -->
     <div class="section-block wrap reveal">
       <div class="section-label-bar">
         <span class="section-badge badge-pred">Predicción</span>
-        <span class="section-label-title">Pronóstico de precipitación — 16 días · Open-Meteo</span>
+        <span class="section-label-title">Pronóstico de precipitación para los próximos 16 días</span>
       </div>
       <div class="panel">
         <div class="panel-head">
           <div class="panel-title-block">
-            <div class="panel-title">Pronóstico pluviométrico — Sololá (16 días)</div>
+            <div class="panel-title">Pronóstico de precipitación para Sololá</div>
             <div class="panel-subtitle">Precipitación diaria estimada · lectura visual con tendencia</div>
           </div>
           <span class="pred-note" id="predNote">Cargando pronóstico...</span>
@@ -2255,12 +2781,12 @@
     </div>
 
     <!-- ============================================================
-         SECCIÓN: HISTÓRICO — NASA POWER MERRA-2
+         SECCIÓN: HISTÓRICO : NASA POWER MERRA 2
     ============================================================ -->
     <div class="wrap" style="margin-top:1.5rem;">
       <div class="section-label-bar">
         <span class="section-badge badge-hist">Histórico</span>
-        <span class="section-label-title">Serie histórica NASA POWER MERRA-2 · 1 enero 2026 a hoy · 19 municipios</span>
+        <span class="section-label-title">Serie histórica de NASA POWER MERRA 2 para los 19 municipios</span>
       </div>
     </div>
 
@@ -2288,14 +2814,14 @@
           </div>
         </div>
         <div class="rain-legend">
-          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-trace);"></span>Traza (0.01–2 mm)</span>
-          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-light);"></span>Leve (2–5 mm)</span>
-          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-moderate);"></span>Moderada (5–10 mm)</span>
-          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-strong);"></span>Fuerte (10–20 mm)</span>
+          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-trace);"></span>Traza (0.01 a 2 mm)</span>
+          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-light);"></span>Leve (2 a 5 mm)</span>
+          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-moderate);"></span>Moderada (5 a 10 mm)</span>
+          <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-strong);"></span>Fuerte (10 a 20 mm)</span>
           <span class="rain-legend-item"><span class="swatch" style="background:var(--rain-extreme);"></span>Muy fuerte (&gt;20 mm)</span>
         </div>
         <div class="panel-foot">
-          Fuente: NASA POWER MERRA-2, PRECTOTCORR, comunidad AG. Los datos corresponden al municipio seleccionado en el control global. Las líneas de referencia indican umbrales de intensidad de la OMM (2, 5, 10 mm).
+          Fuente: NASA POWER MERRA 2, parámetro PRECTOTCORR, comunidad AG. Los datos corresponden al municipio seleccionado en el control global. Las líneas de referencia indican umbrales de intensidad de la OMM (2, 5, 10 mm).
         </div>
       </div>
     </div>
@@ -2331,7 +2857,7 @@
       <div class="panel">
         <div class="panel-head">
           <div class="panel-title-block">
-            <div class="panel-title">Comparación multimunicipal — 19 municipios de Sololá</div>
+            <div class="panel-title">Comparación de precipitación entre los 19 municipios de Sololá</div>
             <div class="panel-subtitle">Tarjetas comparativas por municipio; al hacer clic se abre una gráfica radial</div>
           </div>
           <div class="panel-controls">
@@ -2392,7 +2918,7 @@
           </div>
         </div>
         <div class="panel-foot">
-          El acumulado mensual evidencia la estacionalidad del ciclo hidrológico en el altiplano occidental de Guatemala. El inicio de la temporada lluviosa (mayo–octubre) es el indicador agroclimático de mayor relevancia para el departamento.
+          El acumulado mensual evidencia la estacionalidad del ciclo hidrológico en el altiplano occidental de Guatemala. El inicio de la temporada lluviosa, entre mayo y octubre, es el indicador agroclimático de mayor relevancia para el departamento.
         </div>
       </div>
 
@@ -2438,16 +2964,16 @@
       <div class="method-notice reveal">
         <h3>Nota metodológica</h3>
         <p>
-          Los datos de precipitación provienen del modelo de reanálisis MERRA-2 de la NASA,
+          Los datos de precipitación provienen del modelo de reanálisis MERRA 2 de la NASA,
           distribuidos mediante la API NASA POWER (parámetro PRECTOTCORR, comunidad agroclimática AG).
-          MERRA-2 es un producto modelado que combina observaciones satelitales, radiosondeos y
+          MERRA 2 es un producto modelado que combina observaciones satelitales, radiosondeos y
           salidas de modelos de circulación general, procesados mediante asimilación de datos.
           Los valores representan la precipitación total diaria estimada para un punto geográfico
-          —el centroide del municipio— y no corresponden a observaciones directas de pluviómetros
-          ni estaciones meteorológicas de campo. La resolución espacial nativa de MERRA-2 es
+          correspondiente al centroide del municipio y no corresponden a observaciones directas de pluviómetros
+          ni estaciones meteorológicas de campo. La resolución espacial nativa de MERRA 2 es
           aproximadamente 0.5° × 0.625° (latitud × longitud), por lo que municipios geográficamente
           cercanos pueden compartir la misma celda del modelo. Los valores negativos devueltos
-          por la API (centinela -999 para dato ausente) son convertidos a 0.0 en el proceso
+          por la API (valor centinela negativo 999 para dato ausente) son convertidos a 0.0 en el proceso
           de normalización del script de descarga.
         </p>
       </div>
@@ -2455,74 +2981,90 @@
 
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <section class="partners-ribbon-wrap" aria-labelledby="partnersRibbonTitle">
-      <h2 class="partners-ribbon-title" id="partnersRibbonTitle">Instituciones integrantes de la Mesa Técnica Agroclimática Sololá</h2>
-      <div class="partners-ribbon">
-        <div class="partners-logo-row partners-logo-row-top">
-          <a class="partner-logo logo-xxl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-xl" href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA 02"><img src="./logos/MAGA02.png" alt="MAGA 02" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-xl" href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH 02"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH 02" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-sm" href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-lg" href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-lg" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./logos/FeedtheChildren.png" alt="Feed the Children" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-xl" href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Instituto Privado de Investigación sobre Cambio Climático"><img src="./logos/ICC.png" alt="Instituto Privado de Investigación sobre Cambio Climático" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-md" href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-xl" href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy" decoding="async"></a>
+  <section class="partners" id="instituciones" aria-labelledby="institucionesTitle">
+    <div class="shell">
+      <h2 class="partners-title" id="institucionesTitle">Instituciones que integran y acompañan la Mesa Técnica Agroclimática de Sololá</h2>
+      <div class="partner-grid">
+        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy"></a>
+        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA02.png" alt="MAGA" loading="lazy"></a>
+        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy"></a>
+        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH" loading="lazy"></a>
+        <a href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy"></a>
+        <a href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy"></a>
+        <a href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./logos/FeedtheChildren.png" alt="Feed the Children Guatemala" loading="lazy"></a>
+        <a href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICC"><img src="./logos/ICC.png" alt="ICC" loading="lazy"></a>
+        <a href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy"></a>
+        <a href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy"></a>
+        <a href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy"></a>
+        <a href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy"></a>
+        <a href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Enabel"><img src="./logos/Belgica.png" alt="Enabel" loading="lazy"></a>
+        <a href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy"></a>
+        <a href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy"></a>
+        <a href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán UVG"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán UVG" loading="lazy"></a>
+        <a href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy"></a>
+        <a href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy"></a>
+        <a href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy"></a>
+        <a href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MARN"><img src="./logos/MARN.png" alt="MARN" loading="lazy"></a>
+        <a href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy"></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="contacto">
+    <div class="shell footer-main">
+      <div>
+        <div class="footer-brand">
+          <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
+          <div class="footer-brand-name">MTA<br>Sololá</div>
         </div>
+        <p class="footer-about">Portal de consulta climática y agroclimática para productores, técnicos, instituciones y organizaciones vinculadas al sector agropecuario de Sololá.</p>
+      </div>
 
-        <div class="partners-logo-row partners-logo-row-bottom">
-          <a class="partner-logo logo-sm" href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-md" href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-md" href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Bélgica, socio para el desarrollo"><img src="./logos/Belgica.png" alt="Bélgica, socio para el desarrollo" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-md" href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-lg" href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-lg logo-uvg" href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán de la Universidad del Valle de Guatemala"><img src="./logos/UVG.png" alt="Centro de Estudios Atitlán - Universidad del Valle de Guatemala" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-lg" href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-lg" href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-md" href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-xl" href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="Ministerio de Ambiente y Recursos Naturales"><img src="./logos/MARN.png" alt="Ministerio de Ambiente y Recursos Naturales" loading="lazy" decoding="async"></a>
-          <a class="partner-logo logo-sm" href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy" decoding="async"></a>
+      <div>
+        <h3>Información climática</h3>
+        <div class="footer-links">
+          <a href="./clima_index.html">Vista general</a>
+          <a href="./precipitaciones_index.html">Precipitación</a>
+          <a href="./temperatura_index.html">Temperatura</a>
+          <a href="./viento_index.html">Viento</a>
         </div>
       </div>
-    </section>
 
-    <div class="footer-contact site-container">
-      <div class="footer-update-chip" id="footerUpdate">
-        Consultando última actualización&hellip;
+      <div>
+        <h3>Contenido de la MTA</h3>
+        <div class="footer-links">
+          <a href="../index.html#recomendaciones">Recomendaciones</a>
+          <a href="../index.html#mapas">Mapas</a>
+          <a href="../index.html#perspectiva">Perspectiva climática</a>
+          <a href="#instituciones">Instituciones</a>
+        </div>
       </div>
 
-      <div class="footer-social">
-        <div class="footer-social-title">Visita nuestras redes sociales</div>
-        <ul class="footer-social-list" aria-label="Redes sociales y contacto de la Mesa Técnica Agroclimática Sololá">
-          <li>
-            <a class="footer-social-link" href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">
-              <span class="footer-social-icon" aria-hidden="true">f</span>
-              <span class="footer-social-copy">
-                <span class="footer-social-label">Facebook</span>
-                <span class="footer-social-value">Mesa Técnica Agroclimática Sololá</span>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a class="footer-social-link" href="mailto:mtasolola@cunsol.edu.gt">
-              <span class="footer-social-icon" aria-hidden="true">Correo</span>
-              <span class="footer-social-copy">
-                <span class="footer-social-label">Contáctanos</span>
-                <span class="footer-social-value">mtasolola@cunsol.edu.gt</span>
-              </span>
-            </a>
-          </li>
-        </ul>
+      <div>
+        <h3>Contacto</h3>
+        <div class="footer-links">
+          <a href="mailto:mtasolola@cunsol.edu.gt">mtasolola@cunsol.edu.gt</a>
+          <a href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </div>
       </div>
+    </div>
 
-      <a class="footer-negative-logo" href="../index.html" aria-label="Mesa Técnica Agroclimática Sololá">
-        <img src="./logos/NEGATIVO.png" alt="Logo negativo de la Mesa Técnica Agroclimática Sololá" loading="lazy" decoding="async">
-      </a>
+    <div class="shell footer-bottom">
+      <span>© <span data-year></span> Mesa Técnica Agroclimática de Sololá.</span>
+      <span id="footerUpdate">Datos y productos técnicos disponibles en el módulo de precipitación.</span>
     </div>
   </footer>
+
+
+  <div class="search-overlay" aria-hidden="true" data-search-overlay>
+    <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Buscar en el portal">
+      <div class="search-head">
+        <input class="search-input" type="search" autocomplete="off" placeholder="Buscar en el portal" aria-label="Buscar en el portal" data-search-input>
+        <button class="search-close" type="button" data-search-close>Cerrar</button>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
 
   <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">Arriba</button>
 
@@ -2580,8 +3122,8 @@
 
     const DAYS   = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
 
-    const FONT   = "Inter, Segoe UI, Arial, sans-serif";
-    const MONO   = "Inter, Segoe UI, Arial, sans-serif";
+    const FONT   = "Manrope, Segoe UI, Arial, sans-serif";
+    const MONO   = "Manrope, Segoe UI, Arial, sans-serif";
 
     Chart.defaults.font.family = FONT;
     Chart.defaults.font.size = 18;
@@ -2603,8 +3145,16 @@
     };
 
     /* ---- UTILITIES ---- */
-    const fmt  = (v, d = 1) => v == null || isNaN(v) ? "—" : Number(v).toFixed(d);
-    const fmm  = (v, d = 1) => v == null || isNaN(v) ? "—" : `${fmt(v, d)} mm`;
+
+    function formatIsoDisplay(value) {
+      if (!value || typeof value !== "string") return "Sin dato";
+      const parts = value.slice(0, 10).split("-");
+      if (parts.length !== 3) return value;
+      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    }
+
+    const fmt  = (v, d = 1) => v == null || isNaN(v) ? "Sin dato" : Number(v).toFixed(d);
+    const fmm  = (v, d = 1) => v == null || isNaN(v) ? ":" : `${fmt(v, d)} mm`;
 
     function rainColor(mm, alpha = 0.85) {
       if (mm <= 0)    return `rgba(200,210,218,0.4)`;
@@ -2850,7 +3400,7 @@
               ...baseOpts().plugins.tooltip,
               callbacks: {
                 title: items => items[0].label,
-                label: item => ` ${fmt(item.parsed.y, 2)} mm — ${rainCategory(item.parsed.y)}`,
+                label: item => ` ${fmt(item.parsed.y, 2)} mm, ${rainCategory(item.parsed.y)}`,
                 afterLabel: item => {
                   const dow = DAYS[new Date(item.label + "T12:00:00").getDay()];
                   return ` ${dow}`;
@@ -3145,10 +3695,10 @@
 
       const bins = [
         { label: "Sin lluvia (0 mm)",       min: 0,    max: 0,    color: "rgba(200,210,218,0.8)" },
-        { label: "Traza (0.01–2 mm)",        min: 0.01, max: 2,    color: "rgba(168,216,240,0.85)" },
-        { label: "Leve (2–5 mm)",            min: 2,    max: 5,    color: "rgba(77,184,232,0.85)" },
-        { label: "Moderada (5–10 mm)",       min: 5,    max: 10,   color: "rgba(31,126,193,0.85)" },
-        { label: "Fuerte (10–20 mm)",        min: 10,   max: 20,   color: "rgba(15,58,83,0.85)" },
+        { label: "Traza (0.01 a 2 mm)",        min: 0.01, max: 2,    color: "rgba(168,216,240,0.85)" },
+        { label: "Leve (2 a 5 mm)",            min: 2,    max: 5,    color: "rgba(77,184,232,0.85)" },
+        { label: "Moderada (5 a 10 mm)",       min: 5,    max: 10,   color: "rgba(31,126,193,0.85)" },
+        { label: "Fuerte (10 a 20 mm)",        min: 10,   max: 20,   color: "rgba(15,58,83,0.85)" },
         { label: "Muy fuerte (> 20 mm)",     min: 20,   max: Infinity, color: "rgba(143,28,28,0.85)" }
       ];
 
@@ -3326,7 +3876,7 @@
       document.getElementById("kMean").textContent   = fmm(st.mean, 2);
       document.getElementById("kMax").textContent    = fmm(st.max, 2);
       const maxRec = records.find(r => r.lluvia === st.max);
-      document.getElementById("kMaxDate").textContent = maxRec ? maxRec.fecha : "—";
+      document.getElementById("kMaxDate").textContent = maxRec ? formatIsoDisplay(maxRec.fecha) : "Sin dato";
       document.getElementById("kWet").textContent  = `${st.wetDays}d`;
       document.getElementById("kCSD").textContent  = `${st.csdMax}d`;
       document.getElementById("kStd").textContent  = fmm(st.stddev, 2);
@@ -3356,11 +3906,11 @@
         const kpiDefs = [
           { label: "N (observaciones)",  val: `${st.n} días`,          note: "Total de registros diarios" },
           { label: "Acumulado (Σx)",     val: fmm(st.sum, 1),          note: "Precipitación total" },
-          { label: "Máximo diario",      val: fmm(st.max, 2),          note: `Ocurrió el ${maxRec?.fecha || "—"}` },
+          { label: "Máximo diario",      val: fmm(st.max, 2),          note: `Ocurrió el ${maxRec?.fecha || ":"}` },
           { label: "Días lluviosos",     val: `${st.wetDays}`,         note: `${((st.wetDays / st.n) * 100).toFixed(1)} % del periodo` },
           { label: "Días secos",         val: `${st.dryDays}`,         note: `${((st.dryDays / st.n) * 100).toFixed(1)} % del periodo` },
           { label: "Intensidad media",   val: fmm(st.wetIntensity, 2), note: "mm/día lluv." },
-          { label: "P25 — P75 (IQR)",   val: `${fmt(st.p25,1)} – ${fmt(st.p75,1)} mm`, note: "Rango intercuartílico" },
+          { label: "P25 a P75 (IQR)",   val: `${fmt(st.p25,1)}  a  ${fmt(st.p75,1)} mm`, note: "Rango intercuartílico" },
           { label: "Percentil P90",      val: fmm(st.p90, 2),          note: "Umbral de evento extremo" },
           { label: "Percentil P95",      val: fmm(st.p95, 2),          note: "Precipitación de diseño" },
         ];
@@ -3473,7 +4023,7 @@
 
 
     /* ============================================================
-       MONTH SELECTS — se generan desde las fechas reales del JSON
+       MONTH SELECTS : se generan desde las fechas reales del JSON
     ============================================================ */
     function getAvailableMonths() {
       const months = new Set();
@@ -3792,7 +4342,7 @@
        Esto evita que esas secciones queden en "cargando".
     */
     /* ============================================================
-       AWN — LEE JSON LOCAL (generado por fetch_awn.py / GitHub Actions)
+       AWN : LEE JSON LOCAL (generado por fetch_awn.py / GitHub Actions)
        No llama la API desde el browser para evitar CORS
     ============================================================ */
     const AWN_JSON_URL = "./data/precipitaciones/awn_estacion.json";
@@ -3806,7 +4356,7 @@
       try {
         const resp = await fetch(`${AWN_JSON_URL}?v=${Date.now()}`, { cache: "no-store" });
 
-        if (!resp.ok) throw new Error(`HTTP ${resp.status} — archivo no generado aún`);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status} : archivo no generado aún`);
         const data = await resp.json();
 
         const est  = data.estacion       || {};
@@ -3822,15 +4372,15 @@
 
         /* KPIs de precipitación (solo lluvia) */
         const fields = [
-          { label: "Lluvia diaria",   val: last.lluvia_diaria_mm  != null ? `${last.lluvia_diaria_mm} mm`  : "—", note: "Acumulado hoy" },
-          { label: "Lluvia evento",   val: last.lluvia_evento_mm  != null ? `${last.lluvia_evento_mm} mm`  : "—", note: "Evento actual" },
-          { label: "Lluvia semanal",  val: last.lluvia_semanal_mm != null ? `${last.lluvia_semanal_mm} mm` : "—", note: "Últimos 7 días" },
-          { label: "Lluvia mensual",  val: last.lluvia_mensual_mm != null ? `${last.lluvia_mensual_mm} mm` : "—", note: "Mes en curso" },
-          { label: "Total histórico", val: res.total_mm           != null ? `${res.total_mm} mm`           : "—", note: `desde ${est.activa_desde || "—"}` },
-          { label: "Máximo diario",   val: res.max_diario_mm      != null ? `${res.max_diario_mm} mm`      : "—", note: "Registrado en campo" },
-          { label: "Días con dato",   val: res.dias_con_dato      != null ? `${res.dias_con_dato}`          : "—", note: "Registros diarios" },
-          { label: "Días con lluvia", val: res.dias_con_lluvia    != null ? `${res.dias_con_lluvia}`        : "—", note: "P > 0 mm" },
-          { label: "Última lectura",  val: last.fecha_utc ? last.fecha_utc.replace("T"," ") : "—",               note: "Hora Guatemala" },
+          { label: "Lluvia diaria",   val: last.lluvia_diaria_mm  != null ? `${last.lluvia_diaria_mm} mm`  : ":", note: "Acumulado hoy" },
+          { label: "Lluvia evento",   val: last.lluvia_evento_mm  != null ? `${last.lluvia_evento_mm} mm`  : ":", note: "Evento actual" },
+          { label: "Lluvia semanal",  val: last.lluvia_semanal_mm != null ? `${last.lluvia_semanal_mm} mm` : ":", note: "Últimos 7 días" },
+          { label: "Lluvia mensual",  val: last.lluvia_mensual_mm != null ? `${last.lluvia_mensual_mm} mm` : ":", note: "Mes en curso" },
+          { label: "Total histórico", val: res.total_mm           != null ? `${res.total_mm} mm`           : ":", note: `desde ${est.activa_desde || ":"}` },
+          { label: "Máximo diario",   val: res.max_diario_mm      != null ? `${res.max_diario_mm} mm`      : ":", note: "Registrado en campo" },
+          { label: "Días con dato",   val: res.dias_con_dato      != null ? `${res.dias_con_dato}`          : ":", note: "Registros diarios" },
+          { label: "Días con lluvia", val: res.dias_con_lluvia    != null ? `${res.dias_con_lluvia}`        : ":", note: "P > 0 mm" },
+          { label: "Última lectura",  val: last.fecha_utc ? last.fecha_utc.replace("T"," ") : ":",               note: "Hora Guatemala" },
         ];
 
         bodyEl.innerHTML = fields.map(f => `
@@ -3911,7 +4461,7 @@
               bodyFont:  { family: MONO, size: 10 },
               padding: 9, cornerRadius: 4,
               callbacks: {
-                label: item => ` ${fmt(item.parsed.y, 2)} mm — ${rainCategory(item.parsed.y)}`
+                label: item => ` ${fmt(item.parsed.y, 2)} mm, ${rainCategory(item.parsed.y)}`
               }
             },
             annotation: {
@@ -4143,7 +4693,7 @@
     }
 
     /* ============================================================
-       DEPARTMENT SUMMARY — always shows all 19 municipalities
+       DEPARTMENT SUMMARY : always shows all 19 municipalities
     ============================================================ */
     function renderDeptSummary() {
       if (!S.raw) return;
@@ -4208,9 +4758,9 @@
       try {
         const actual = await fetchJson(DATA_URL_ACTUAL);
         const updateText = formatDate(actual.generated_at_gt || actual.generated_at_utc);
-        el.textContent = "Actualizado por última vez: " + updateText;
+        el.textContent = "Última actualización disponible: " + updateText;
       } catch {
-        el.textContent = "Actualizado por última vez: datos pendientes de generar.";
+        el.textContent = "Última actualización disponible: datos pendientes de generar.";
       }
     }
 
@@ -4251,6 +4801,93 @@
     load();
   </script>
 
-  <script src="../assets/js/site-shell.js"></script>
+
+  <script>
+  (() => {
+    const menuToggle = document.querySelector('[data-menu-toggle]');
+    const nav = document.querySelector('[data-nav]');
+
+    const closeMenu = () => {
+      nav?.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuToggle?.setAttribute('aria-expanded','false');
+    };
+
+    menuToggle?.addEventListener('click', () => {
+      const open = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!open));
+      nav?.classList.toggle('open', !open);
+      document.body.classList.toggle('menu-open', !open);
+    });
+
+    nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+
+    document.addEventListener('click', event => {
+      if (!nav?.classList.contains('open')) return;
+      if (nav.contains(event.target) || menuToggle?.contains(event.target)) return;
+      closeMenu();
+    });
+
+    const overlay = document.querySelector('[data-search-overlay]');
+    const input = document.querySelector('[data-search-input]');
+    const results = document.querySelector('[data-search-results]');
+
+    const searchItems = [
+      ['Inicio','Página principal de la Mesa Técnica Agroclimática de Sololá','../index.html'],
+      ['Recomendaciones agroclimáticas','Orientaciones vigentes para la producción agropecuaria','../index.html#recomendaciones'],
+      ['Información climática','Acceso a precipitación, temperatura, viento y estaciones','./clima_index.html'],
+      ['Precipitación','Consulta de lluvia, históricos, observaciones y pronóstico','./precipitaciones_index.html'],
+      ['Temperatura','Consulta de condiciones térmicas y pronóstico','./temperatura_index.html'],
+      ['Viento','Consulta de velocidad, dirección y pronóstico','./viento_index.html'],
+      ['Mapas de Sololá','Productos cartográficos de la Mesa Técnica Agroclimática','../index.html#mapas'],
+      ['Perspectiva climática','Documentos climáticos de INSIVUMEH','../index.html#perspectiva']
+    ];
+
+    const drawResults = query => {
+      if (!results) return;
+      const q = String(query || '').trim().toLowerCase();
+      const filtered = q ? searchItems.filter(item => `${item[0]} ${item[1]}`.toLowerCase().includes(q)) : searchItems;
+      results.innerHTML = filtered.length
+        ? filtered.map(item => `<a class="search-result" href="${item[2]}"><strong>${item[0]}</strong><span>${item[1]}</span></a>`).join('')
+        : '<div class="search-empty">No se encontraron resultados.</div>';
+    };
+
+    const openSearch = () => {
+      if (!overlay) return;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      document.body.classList.add('search-open');
+      drawResults('');
+      setTimeout(() => input?.focus(), 30);
+    };
+
+    const closeSearch = () => {
+      overlay?.classList.remove('open');
+      overlay?.setAttribute('aria-hidden','true');
+      document.body.classList.remove('search-open');
+    };
+
+    document.querySelectorAll('[data-search-open]').forEach(btn => btn.addEventListener('click', () => {
+      closeMenu();
+      openSearch();
+    }));
+    document.querySelector('[data-search-close]')?.addEventListener('click', closeSearch);
+    input?.addEventListener('input', event => drawResults(event.target.value));
+    overlay?.addEventListener('click', event => {
+      if (event.target === overlay) closeSearch();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeMenu();
+        closeSearch();
+      }
+    });
+
+    const year = document.querySelector('[data-year]');
+    if (year) year.textContent = new Date().getFullYear();
+  })();
+  </script>
+
 </body>
 </html>
