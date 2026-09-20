@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#2f4535">
   <title>Información climática · Mesa Técnica Agroclimática de Sololá</title>
-  <meta name="description" content="Acceso a precipitación, temperatura, viento y estaciones meteorológicas de la Mesa Técnica Agroclimática de Sololá.">
+  <meta name="description" content="Acceso a precipitación, temperatura, viento, agroclima y estaciones meteorológicas de la Mesa Técnica Agroclimática de Sololá.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
@@ -113,6 +113,12 @@
     .module-copy.blue .btn{border-color:#f8f2de;background:#f8f2de;color:var(--lake-deep)}
     .module-copy.blue .btn:hover{background:#fff}
     .module-copy.cream{background:#eee3c8;color:var(--ink)}
+    .module-copy.earth{background:#665744;color:#f9f3df}
+    .module-copy.earth .eyebrow{color:#eed39a}
+    .module-copy.earth .section-copy{color:rgba(249,243,223,.84)}
+    .module-copy.earth .btn{border-color:#f8f0db;background:#f8f0db;color:#514536}
+    .module-copy.earth .btn:hover{background:#fff}
+    .module-media.earth{background:#7b725e}
     .module-copy.sage{background:#667661;color:#f9f3df}
     .module-copy.sage .eyebrow{color:#eed39a}
     .module-copy.sage .section-copy{color:rgba(249,243,223,.84)}
@@ -269,7 +275,7 @@
     <div class="hero-copy">
       <p class="eyebrow">Información climática</p>
       <h1 class="hero-title" id="climateTitle">Consulta climática para el departamento de Sololá.</h1>
-      <p class="hero-lead">Esta sección reúne los módulos meteorológicos disponibles para consultar precipitación, temperatura y viento. Cada módulo permite revisar las condiciones observadas, los pronósticos y los registros disponibles para apoyar el seguimiento climático del territorio.</p>
+      <p class="hero-lead">Esta sección reúne los módulos disponibles para consultar precipitación, temperatura, viento y variables agroclimáticas. Cada módulo permite revisar observaciones, pronósticos, registros históricos y herramientas de análisis territorial para apoyar el seguimiento climático y agropecuario de Sololá.</p>
       <div class="btn-row">
         <a class="btn" href="#modulos">Consultar módulos</a>
         <a class="btn btn-light" href="#estaciones">Ver estaciones meteorológicas</a>
@@ -282,8 +288,8 @@
 
   <section class="intro-strip reveal">
     <div class="shell intro-grid">
-      <p class="intro-large">Información organizada por variable meteorológica.</p>
-      <p class="intro-side">Los módulos conservan sus herramientas de consulta y presentan la información por tema. Desde aquí puedes ingresar directamente al contenido que necesites sin recorrer secciones que no corresponden a tu consulta.</p>
+      <p class="intro-large">Información climática y agroclimática organizada por tema.</p>
+      <p class="intro-side">Cada módulo concentra herramientas específicas de consulta y análisis. Desde esta página puedes ingresar directamente a la variable o al conjunto de indicadores que necesites revisar.</p>
     </div>
   </section>
 
@@ -291,9 +297,9 @@
     <div class="shell modules-intro-grid">
       <div>
         <p class="eyebrow">Módulos disponibles</p>
-        <h2 class="section-title display">Precipitación, temperatura y viento.</h2>
+        <h2 class="section-title display">Precipitación, temperatura, viento y agroclima.</h2>
       </div>
-      <p class="section-copy">Cada módulo concentra observaciones, pronósticos, series históricas, comparaciones y visualizaciones relacionadas con una variable meteorológica específica.</p>
+      <p class="section-copy">Los módulos reúnen observaciones, pronósticos, series históricas, comparaciones y visualizaciones. Agroclima integra además balance hídrico, humedad del suelo y otros indicadores útiles para interpretar las condiciones agrícolas.</p>
     </div>
   </section>
 
@@ -357,7 +363,27 @@
     </div>
   </section>
 
-  <section class="module reverse reveal" id="estaciones">
+  <section class="module reverse reveal" id="agroclima">
+    <div class="module-copy earth">
+      <p class="eyebrow">Agroclima</p>
+      <h2 class="module-title">Balance hídrico y condiciones para la producción agrícola.</h2>
+      <p class="section-copy">Integra precipitación, evapotranspiración de referencia, humedad y temperatura del suelo, déficit de presión de vapor, radiación solar y días secos. El módulo permite revisar estos indicadores de forma conjunta y comparar su comportamiento entre municipios.</p>
+      <div class="module-details" aria-label="Contenido del módulo de agroclima">
+        <span class="module-detail">Balance hídrico</span>
+        <span class="module-detail">Humedad del suelo</span>
+        <span class="module-detail">Demanda atmosférica</span>
+        <span class="module-detail">Comparación municipal</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="./agroclima_index.html">Abrir agroclima</a>
+      </div>
+    </div>
+    <div class="module-media earth" aria-label="Espacio reservado para una fotografía relacionada con agricultura y condiciones agroclimáticas">
+      <span class="photo-label">Espacio para fotografía agroclimática</span>
+    </div>
+  </section>
+
+  <section class="module reveal" id="estaciones">
     <div class="module-copy sage">
       <p class="eyebrow">Estaciones meteorológicas</p>
       <h2 class="module-title">Consulta de estaciones en preparación.</h2>
@@ -415,6 +441,7 @@
         <a href="./precipitaciones_index.html">Precipitación</a>
         <a href="./temperatura_index.html">Temperatura</a>
         <a href="./viento_index.html">Viento</a>
+        <a href="./agroclima_index.html">Agroclima</a>
         <a href="#estaciones">Estaciones</a>
       </div>
     </div>
@@ -489,6 +516,7 @@
     ['Precipitación','Observación, pronóstico e histórico','./precipitaciones_index.html'],
     ['Temperatura','Condiciones térmicas y comparación municipal','./temperatura_index.html'],
     ['Viento','Velocidad, dirección, rachas y pronóstico','./viento_index.html'],
+    ['Agroclima','Balance hídrico, suelo, demanda atmosférica y estrés agrícola','./agroclima_index.html'],
     ['Estaciones meteorológicas','Sección en construcción','#estaciones'],
     ['Mapas de Sololá','Productos cartográficos de la MTA','../index.html#mapas'],
     ['Contacto','Correo y canales de la MTA','../index.html#contacto']
