@@ -3,72 +3,548 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#2d6655">
-  <title>Clima · Mesa Técnica Agroclimática Sololá</title>
-  <meta name="description" content="Área de clima de la Mesa Técnica Agroclimática Sololá con acceso a precipitación, temperatura y viento.">
+  <meta name="theme-color" content="#2f4535">
+  <title>Información climática · Mesa Técnica Agroclimática de Sololá</title>
+  <meta name="description" content="Acceso a precipitación, temperatura, viento y estaciones meteorológicas de la Mesa Técnica Agroclimática de Sololá.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/site-shell.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#fbfaf6;
+      --cream:#f3e8c9;
+      --cream-soft:#f8f1df;
+      --ink:#24342b;
+      --ink-2:#4b5a50;
+      --forest:#334632;
+      --forest-2:#40563e;
+      --lake:#326875;
+      --lake-deep:#214f5b;
+      --gold:#9a6c2f;
+      --sage:#879784;
+      --sand:#efe2bf;
+      --mist:#dbe5df;
+      --line:rgba(36,52,43,.16);
+      --white:#fff;
+      --max:1440px;
+      --display:"Source Serif 4", Georgia, "Times New Roman", serif;
+      --sans:"Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:96px}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body.search-open,body.menu-open{overflow:hidden}
+    h1,h2,h3,p,a,span{overflow-wrap:break-word}
+    h1,h2,h3{text-wrap:balance}
+    p{text-wrap:pretty;text-align:justify;text-justify:inter-word}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    button,input{font:inherit}
+    .shell{width:min(var(--max),calc(100% - 64px));margin:0 auto}
+
+    /* HEADER */
+    .header{position:sticky;top:0;z-index:1000;background:rgba(251,250,246,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+    .header-inner{min-height:92px;display:flex;align-items:center;gap:36px}
+    .brand{display:flex;align-items:center;gap:13px;text-decoration:none;min-width:290px}
+    .brand img{width:55px;height:55px;object-fit:contain}
+    .brand-copy{display:flex;flex-direction:column;gap:2px}
+    .brand-name{font-size:.9rem;line-height:1.2;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+    .brand-place{font-size:.69rem;color:var(--ink-2)}
+    .nav{margin-left:auto;display:flex;align-items:center;gap:24px}
+    .nav a,.nav button{position:relative;border:0;background:none;padding:10px 0;color:var(--ink);font-size:.78rem;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap}
+    .nav a::after,.nav button::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:1px;background:var(--gold);transition:right .22s ease}
+    .nav a:hover::after,.nav a:focus-visible::after,.nav button:hover::after,.nav button:focus-visible::after,.nav a[aria-current="page"]::after{right:0}
+    .nav a:focus-visible,.nav button:focus-visible{outline:2px solid rgba(154,108,47,.35);outline-offset:5px}
+    .menu-toggle{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);background:transparent;align-items:center;justify-content:center;cursor:pointer}
+    .menu-lines,.menu-lines::before,.menu-lines::after{display:block;width:20px;height:1.5px;background:var(--ink);content:"";transition:.2s ease}
+    .menu-lines{position:relative}
+    .menu-lines::before{position:absolute;top:-6px}
+    .menu-lines::after{position:absolute;top:6px}
+    .menu-toggle[aria-expanded="true"] .menu-lines{background:transparent}
+    .menu-toggle[aria-expanded="true"] .menu-lines::before{transform:translateY(6px) rotate(45deg)}
+    .menu-toggle[aria-expanded="true"] .menu-lines::after{transform:translateY(-6px) rotate(-45deg)}
+
+    /* TYPE + BUTTONS */
+    .eyebrow{margin:0 0 22px;font-size:.69rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+    .display{font-family:var(--display);font-weight:600;letter-spacing:-.018em}
+    .section-title{margin:0;font-size:clamp(1.9rem,3vw,3.35rem);line-height:1.08;max-width:980px}
+    .section-copy{margin:22px 0 0;max-width:720px;color:var(--ink-2);font-size:clamp(.82rem,.9vw,.92rem);line-height:1.75}
+    .btn-row{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:34px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border:1px solid var(--forest);background:var(--forest);color:#fff;text-decoration:none;font-size:.76rem;font-weight:700;letter-spacing:.01em;transition:transform .2s ease,background .2s ease,color .2s ease}
+    .btn:hover,.btn:focus-visible{transform:translateY(-2px);background:var(--forest-2);outline:none}
+    .btn-light{background:transparent;color:var(--forest)}
+    .btn-light:hover,.btn-light:focus-visible{background:var(--forest);color:#fff}
+    .text-link{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;font-size:.78rem;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:3px}
+    .text-link::after{content:"→";transition:transform .2s ease}
+    .text-link:hover::after{transform:translateX(4px)}
+
+    /* HERO */
+    .hero{background:var(--cream);min-height:calc(100vh - 92px);display:grid;grid-template-columns:minmax(0,1.04fr) minmax(420px,.96fr);align-items:stretch}
+    .hero-copy{min-width:0;padding:clamp(70px,8vw,132px) clamp(54px,7vw,124px);display:flex;flex-direction:column;justify-content:center}
+    .hero .eyebrow{color:#7d5d25}
+    .hero-title{margin:0;max-width:790px;font-family:var(--display);font-weight:600;font-size:clamp(2.65rem,4.5vw,4.75rem);line-height:1;letter-spacing:-.02em;color:#384432}
+    .hero-lead{margin:25px 0 0;max-width:700px;color:#4c5548;font-size:clamp(.82rem,.92vw,.94rem);line-height:1.75}
+    .hero-media{position:relative;min-height:620px;overflow:hidden;background:#55727a}
+    .hero-media::before,.module-media::before{content:"";position:absolute;inset:22px;border:1px solid rgba(255,255,255,.28);pointer-events:none}
+    .photo-label{position:absolute;left:30px;bottom:27px;color:rgba(255,255,255,.92);font-size:.62rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+
+    /* INTRO */
+    .intro-strip{padding:92px 0 86px;background:var(--paper)}
+    .intro-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:80px;align-items:end}
+    .intro-large{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,3.2vw,3.45rem);line-height:1.08;letter-spacing:-.018em;color:#364333}
+    .intro-side{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.75}
+
+    /* MODULES */
+    .modules-intro{padding:0 0 54px;background:var(--paper)}
+    .modules-intro-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.55fr);gap:64px;align-items:end}
+    .module{display:grid;grid-template-columns:1fr 1fr;min-height:650px}
+    .module.reverse .module-copy{order:2}
+    .module.reverse .module-media{order:1}
+    .module-copy{min-width:0;padding:clamp(64px,7vw,112px) clamp(44px,7vw,108px);display:flex;flex-direction:column;justify-content:center}
+    .module-copy.dark{background:var(--forest);color:#f9f1d9}
+    .module-copy.dark .eyebrow{color:#edcc90}
+    .module-copy.dark .section-copy{color:rgba(249,241,217,.82)}
+    .module-copy.dark .btn{border-color:#f5e8c6;background:#f5e8c6;color:var(--forest)}
+    .module-copy.dark .btn:hover{background:#fff}
+    .module-copy.blue{background:#315f65;color:#f8f2de}
+    .module-copy.blue .eyebrow{color:#dfc98e}
+    .module-copy.blue .section-copy{color:rgba(248,242,222,.84)}
+    .module-copy.blue .btn{border-color:#f8f2de;background:#f8f2de;color:var(--lake-deep)}
+    .module-copy.blue .btn:hover{background:#fff}
+    .module-copy.cream{background:#eee3c8;color:var(--ink)}
+    .module-copy.sage{background:#667661;color:#f9f3df}
+    .module-copy.sage .eyebrow{color:#eed39a}
+    .module-copy.sage .section-copy{color:rgba(249,243,223,.84)}
+    .module-copy.sage .construction-note{color:rgba(249,243,223,.76);border-color:rgba(255,255,255,.24)}
+    .module-media{position:relative;min-height:650px;overflow:hidden;background:#6f7f79}
+    .module-media.warm{background:#8b7758}
+    .module-media.lake{background:#567881}
+    .module-media.green{background:#667761}
+    .module-title{margin:0;font-family:var(--display);font-size:clamp(2rem,3vw,3.3rem);font-weight:600;line-height:1.06;letter-spacing:-.018em}
+    .module-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px;margin:30px 0 0;padding:24px 0 0;border-top:1px solid currentColor;border-top-color:rgba(255,255,255,.22)}
+    .module-copy.cream .module-details{border-top-color:var(--line)}
+    .module-detail{font-size:.74rem;line-height:1.6;color:inherit;opacity:.88}
+    .construction-note{margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line);font-size:.74rem;line-height:1.7;color:var(--ink-2)}
+
+    /* SUMMARY */
+    .summary{padding:100px 0 108px;background:var(--paper)}
+    .summary-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.55fr);gap:64px;align-items:end;margin-bottom:48px}
+    .summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+    .summary-card{min-height:270px;padding:32px 27px 29px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:flex;flex-direction:column;text-decoration:none;transition:background .22s ease,transform .22s ease}
+    .summary-card:first-child{border-left:1px solid var(--line)}
+    .summary-card:hover,.summary-card:focus-visible{background:var(--cream-soft);outline:none;transform:translateY(-4px)}
+    .summary-card.disabled{cursor:default}
+    .summary-card.disabled:hover{transform:none;background:#f4f1e9}
+    .summary-number{font-family:var(--display);font-size:1rem;color:var(--gold)}
+    .summary-card h3{margin:50px 0 12px;font-family:var(--display);font-size:clamp(1.45rem,2vw,2rem);font-weight:600;line-height:1.06}
+    .summary-card p{margin:0;color:var(--ink-2);font-size:.78rem;line-height:1.7}
+    .summary-card .text-link{margin-top:auto;align-self:flex-start;padding-top:26px}
+    .status-text{margin-top:auto;padding-top:26px;font-size:.7rem;font-weight:700;color:#6b715f}
+
+    /* FOOTER */
+    .footer{background:#283b2b;color:#f4edd8}
+    .footer-main{padding:76px 0 60px;display:grid;grid-template-columns:minmax(260px,1.25fr) repeat(3,minmax(150px,.55fr));gap:54px}
+    .footer-brand{display:flex;align-items:center;gap:15px;margin-bottom:22px}
+    .footer-brand img{width:61px;height:61px;object-fit:contain;opacity:1}
+    .footer-brand-name{font-family:var(--display);font-size:1.7rem;line-height:1.05}
+    .footer-about{margin:0;max-width:380px;color:rgba(244,237,216,.77);font-size:.8rem;line-height:1.75}
+    .footer h3{margin:4px 0 22px;font-size:.76rem;font-weight:700;color:#fff}
+    .footer-links{display:flex;flex-direction:column;gap:13px}
+    .footer-links a{color:rgba(244,237,216,.82);font-size:.76rem;text-decoration:none}
+    .footer-links a:hover{text-decoration:underline;text-underline-offset:4px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding:24px 0 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;color:rgba(244,237,216,.65);font-size:.68rem}
+
+    /* SEARCH */
+    .search-overlay{position:fixed;inset:0;z-index:5000;background:rgba(23,31,25,.62);display:none;align-items:flex-start;justify-content:center;padding:125px 24px 24px}
+    .search-overlay.open{display:flex}
+    .search-dialog{width:min(680px,100%);background:var(--paper);border:1px solid var(--line);box-shadow:0 30px 100px rgba(0,0,0,.2)}
+    .search-head{display:flex;gap:12px;padding:16px;border-bottom:1px solid var(--line)}
+    .search-input{flex:1;min-height:50px;border:0;background:transparent;padding:0 8px;color:var(--ink);outline:none;font-size:.9rem}
+    .search-close{border:1px solid var(--line);background:transparent;color:var(--ink);padding:0 15px;cursor:pointer;font-size:.72rem;font-weight:700}
+    .search-results{max-height:52vh;overflow:auto;padding:8px}
+    .search-result{display:block;padding:15px 16px;text-decoration:none;border-bottom:1px solid rgba(36,52,43,.08)}
+    .search-result:hover{background:var(--cream-soft)}
+    .search-result strong{display:block;font-size:.82rem;margin-bottom:4px}
+    .search-result span{color:var(--ink-2);font-size:.72rem}
+    .search-empty{padding:26px;text-align:center;color:var(--ink-2);font-size:.8rem}
+
+    /* TRANSITIONS */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:none}
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{transition:none!important;animation:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){
+      .shell{width:min(var(--max),calc(100% - 40px))}
+      .brand{min-width:0}
+      .nav{gap:17px}
+      .nav a,.nav button{font-size:.72rem}
+      .hero{grid-template-columns:1fr 44%}
+      .hero-copy{padding-left:48px;padding-right:48px}
+      .module-copy{padding-left:48px;padding-right:48px}
+      .summary-grid{grid-template-columns:repeat(2,1fr)}
+      .summary-card:nth-child(3){border-left:1px solid var(--line)}
+      .footer-main{grid-template-columns:1.2fr repeat(2,.6fr)}
+      .footer-main>div:last-child{grid-column:2/4}
+    }
+
+    @media(max-width:1020px){
+      html{scroll-padding-top:78px}
+      .header-inner{min-height:76px}
+      .brand img{width:46px;height:46px}
+      .brand-name{font-size:.82rem}
+      .brand-place{font-size:.64rem}
+      .header{z-index:7000;backdrop-filter:none;-webkit-backdrop-filter:none}
+      .menu-toggle{display:flex;position:relative;z-index:7200;background:var(--paper)}
+      .nav{position:fixed;z-index:7100;top:76px;left:0;right:0;height:calc(100dvh - 76px);background:var(--paper);display:flex;margin:0;padding:28px 28px 44px;flex-direction:column;align-items:stretch;gap:0;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 24px 60px rgba(25,35,28,.14);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-10px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+      .nav.open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+      .nav a,.nav button{width:100%;padding:18px 0;text-align:left;font-size:.95rem;border-bottom:1px solid var(--line);flex:0 0 auto}
+      .nav a::after,.nav button::after{display:none}
+      .hero{min-height:auto;grid-template-columns:1fr}
+      .hero-copy{padding:72px 28px 68px}
+      .hero-media{min-height:480px}
+      .intro-grid,.modules-intro-grid,.summary-head{grid-template-columns:1fr;gap:34px}
+      .module,.module.reverse{grid-template-columns:1fr}
+      .module.reverse .module-copy,.module.reverse .module-media{order:initial}
+      .module-copy{padding:70px 28px}
+      .module-media{min-height:500px}
+      .summary{padding:84px 0 90px}
+      .footer-main{grid-template-columns:1fr 1fr;gap:42px}
+      .footer-main>div:first-child{grid-column:1/-1}
+      .footer-main>div:last-child{grid-column:auto}
+    }
+
+    @media(max-width:620px){
+      .shell{width:calc(100% - 28px)}
+      .header-inner{min-height:70px}
+      .nav{top:70px;height:calc(100dvh - 70px)}
+      .brand-copy{max-width:205px}
+      .brand-name{font-size:.76rem}
+      .brand-place{font-size:.6rem}
+      .hero-title{font-size:clamp(2.6rem,15vw,4rem)}
+      .hero-copy{padding:58px 20px 56px}
+      .hero-media{min-height:390px}
+      .intro-strip{padding:70px 0 66px}
+      .section-title{font-size:clamp(2rem,11vw,3rem)}
+      .section-copy{font-size:.84rem;line-height:1.75}
+      .modules-intro{padding-bottom:38px}
+      .module-copy{padding:58px 20px}
+      .module-media{min-height:390px}
+      .module-details{grid-template-columns:1fr;gap:10px}
+      .summary-grid{grid-template-columns:1fr}
+      .summary-card,.summary-card:nth-child(3){border-left:1px solid var(--line)}
+      .summary{padding:68px 0 76px}
+      .footer-main{grid-template-columns:1fr;padding:58px 0 44px}
+      .footer-main>div:first-child,.footer-main>div:last-child{grid-column:auto}
+      .footer-bottom{align-items:flex-start;flex-direction:column}
+      .search-overlay{padding:92px 14px 14px}
+    }
+  </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="site-header-inner">
-    <a class="site-brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática Sololá">
-      <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática Sololá">
-      <span class="site-brand-copy"><span class="site-brand-name">Mesa Técnica Agroclimática Sololá</span><span class="site-brand-place">Sololá, Guatemala</span></span>
+<header class="header">
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá">
+      <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
+      <span class="brand-copy">
+        <span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
+        <span class="brand-place">Sololá, Guatemala</span>
+      </span>
     </a>
-    <button class="site-mobile-toggle" type="button" data-mobile-toggle aria-expanded="false" aria-label="Abrir menú"><span class="site-mobile-toggle-lines"></span></button>
-    <nav class="site-nav" data-site-nav aria-label="Navegación principal">
-      <a class="site-nav-link" href="../index.html">Inicio</a>
-      <div class="site-nav-item site-dropdown">
-        <button class="site-dropdown-toggle" type="button">La MTA</button>
-        <div class="site-dropdown-panel"><div class="site-menu-group">
-          <a class="site-menu-link" href="../index.html#la-mta"><strong>Qué es la MTA</strong><span>Propósito y alcance territorial</span></a>
-          <a class="site-menu-link" href="../index.html#objetivos"><strong>Objetivos</strong><span>Uso de información para la toma de decisiones</span></a>
-          <a class="site-menu-link" href="../index.html#instituciones"><strong>Instituciones integrantes</strong><span>Organizaciones que participan en la mesa</span></a>
-        </div></div>
-      </div>
-      <div class="site-nav-item site-dropdown site-dropdown-wide is-active">
-        <button class="site-dropdown-toggle" type="button">Áreas técnicas</button>
-        <div class="site-dropdown-panel">
-          <div class="site-menu-group"><span class="site-menu-title">Clima</span>
-            <a class="site-menu-link" href="./clima_index.html"><strong>Clima</strong><span>Acceso general al área meteorológica</span></a>
-            <a class="site-menu-link" href="./precipitaciones_index.html"><strong>Precipitación</strong><span>Observación, pronóstico e histórico</span></a>
-            <a class="site-menu-link" href="./temperatura_index.html"><strong>Temperatura</strong><span>Condiciones térmicas y comparación municipal</span></a>
-            <a class="site-menu-link" href="./viento_index.html"><strong>Viento</strong><span>Velocidad, dirección, rachas y pronóstico</span></a>
-          </div>
-          <div class="site-menu-group"><span class="site-menu-title">Agroclima</span><a class="site-menu-link" href="./agroclima_index.html"><strong>Agroclima y balance hídrico</strong><span>Agua, suelo, demanda atmosférica y estrés agrícola</span></a></div>
-        </div>
-      </div>
-      <div class="site-nav-item site-dropdown">
-        <button class="site-dropdown-toggle" type="button">Productos</button>
-        <div class="site-dropdown-panel"><div class="site-menu-group">
-          <a class="site-menu-link" href="./clima_index.html"><strong>Pronósticos</strong><span>Acceso a los módulos con predicción</span></a>
-          <a class="site-menu-link" href="./clima_index.html"><strong>Mapas interactivos</strong><span>Visualización territorial de variables</span></a>
-          <a class="site-menu-link" href="../index.html#productos"><strong>Datos y estaciones</strong><span>Fuentes y observación disponible</span></a>
-          <a class="site-menu-link" href="../index.html#boletines"><strong>Boletines agroclimáticos</strong><span>Productos de síntesis de la MTA</span></a>
-        </div></div>
-      </div>
-      <a class="site-nav-link" href="../index.html#contacto">Contacto</a>
-      <button class="site-search-button" type="button" data-search-open>Buscar</button>
+
+    <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
+      <span class="menu-lines"></span>
+    </button>
+
+    <nav class="nav" aria-label="Navegación principal" data-nav>
+      <a href="../index.html">Inicio</a>
+      <a href="../index.html#recomendaciones">Recomendaciones agroclimáticas</a>
+      <a href="./clima_index.html" aria-current="page">Información climática</a>
+      <a href="../index.html#contacto">Contacto</a>
+      <button type="button" data-search-open>Buscar</button>
     </nav>
   </div>
 </header>
-<div class="page-context"><div class="breadcrumbs" aria-label="Ruta de navegación"><a href="../index.html">Inicio</a><span class="breadcrumbs-separator"></span><span>Áreas técnicas</span><span class="breadcrumbs-separator"></span><span>Clima</span></div></div>
-<main class="home-main">
-  <section class="climate-hero">
-    <div class="home-eyebrow">Área técnica</div>
-    <h1>Clima</h1>
-    <p>Accede a los módulos de precipitación, temperatura y viento desde una sola área. Cada módulo conserva sus datos, filtros, pronósticos, series históricas, comparaciones municipales y visualizaciones especializadas.</p>
+
+<main>
+  <section class="hero" aria-labelledby="climateTitle">
+    <div class="hero-copy">
+      <p class="eyebrow">Información climática</p>
+      <h1 class="hero-title" id="climateTitle">Consulta climática para el departamento de Sololá.</h1>
+      <p class="hero-lead">Esta sección reúne los módulos meteorológicos disponibles para consultar precipitación, temperatura y viento. Cada módulo permite revisar las condiciones observadas, los pronósticos y los registros disponibles para apoyar el seguimiento climático del territorio.</p>
+      <div class="btn-row">
+        <a class="btn" href="#modulos">Consultar módulos</a>
+        <a class="btn btn-light" href="#estaciones">Ver estaciones meteorológicas</a>
+      </div>
+    </div>
+    <div class="hero-media" aria-label="Espacio reservado para una fotografía relacionada con clima y territorio en Sololá">
+      <span class="photo-label">Espacio para fotografía climática o territorial</span>
+    </div>
   </section>
-  <section class="climate-grid" aria-label="Módulos climáticos">
-    <a class="climate-card" href="./precipitaciones_index.html"><span class="climate-card-label">Variable climática</span><h2>Precipitación</h2><p>Consulta lluvia observada, pronóstico, comportamiento histórico y distribución municipal.</p><ul><li>Observación de estación</li><li>Pronóstico de 16 días</li><li>Serie histórica y comparación</li><li>Mapas y tablas</li></ul><strong>Abrir precipitación</strong></a>
-    <a class="climate-card" href="./temperatura_index.html"><span class="climate-card-label">Variable climática</span><h2>Temperatura</h2><p>Revisa temperatura media, máxima, mínima, rango térmico, humedad y comportamiento territorial.</p><ul><li>Observación de estación</li><li>Pronóstico térmico</li><li>Serie histórica y comparación</li><li>Mapas y tablas</li></ul><strong>Abrir temperatura</strong></a>
-    <a class="climate-card" href="./viento_index.html"><span class="climate-card-label">Variable climática</span><h2>Viento</h2><p>Explora velocidad, dirección, rachas, pronóstico y patrones de viento para los municipios de Sololá.</p><ul><li>Observación de estación</li><li>Pronóstico de viento</li><li>Serie histórica y rosa de vientos</li><li>Mapas y tablas</li></ul><strong>Abrir viento</strong></a>
+
+  <section class="intro-strip reveal">
+    <div class="shell intro-grid">
+      <p class="intro-large">Información organizada por variable meteorológica.</p>
+      <p class="intro-side">Los módulos conservan sus herramientas de consulta y presentan la información por tema. Desde aquí puedes ingresar directamente al contenido que necesites sin recorrer secciones que no corresponden a tu consulta.</p>
+    </div>
+  </section>
+
+  <section class="modules-intro reveal" id="modulos">
+    <div class="shell modules-intro-grid">
+      <div>
+        <p class="eyebrow">Módulos disponibles</p>
+        <h2 class="section-title display">Precipitación, temperatura y viento.</h2>
+      </div>
+      <p class="section-copy">Cada módulo concentra observaciones, pronósticos, series históricas, comparaciones y visualizaciones relacionadas con una variable meteorológica específica.</p>
+    </div>
+  </section>
+
+  <section class="module reveal" id="precipitacion">
+    <div class="module-copy dark">
+      <p class="eyebrow">Precipitación</p>
+      <h2 class="module-title">Lluvia observada y comportamiento esperado.</h2>
+      <p class="section-copy">Consulta la precipitación registrada, el pronóstico de lluvia, las series históricas y la distribución territorial disponible para los municipios de Sololá. El módulo permite comparar períodos y revisar el comportamiento reciente de la lluvia.</p>
+      <div class="module-details" aria-label="Contenido del módulo de precipitación">
+        <span class="module-detail">Observación meteorológica</span>
+        <span class="module-detail">Pronóstico de precipitación</span>
+        <span class="module-detail">Series históricas</span>
+        <span class="module-detail">Comparación municipal</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="./precipitaciones_index.html">Abrir precipitación</a>
+      </div>
+    </div>
+    <div class="module-media warm" aria-label="Espacio reservado para una fotografía relacionada con lluvia o precipitación">
+      <span class="photo-label">Espacio para fotografía de precipitación</span>
+    </div>
+  </section>
+
+  <section class="module reverse reveal" id="temperatura">
+    <div class="module-copy blue">
+      <p class="eyebrow">Temperatura</p>
+      <h2 class="module-title">Condiciones térmicas y variación territorial.</h2>
+      <p class="section-copy">Revisa temperatura media, máxima y mínima, además de pronósticos y registros históricos. El módulo facilita la comparación entre municipios y permite identificar cambios térmicos relevantes para el seguimiento climático y agropecuario.</p>
+      <div class="module-details" aria-label="Contenido del módulo de temperatura">
+        <span class="module-detail">Temperatura observada</span>
+        <span class="module-detail">Pronóstico térmico</span>
+        <span class="module-detail">Valores máximos y mínimos</span>
+        <span class="module-detail">Comparación territorial</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="./temperatura_index.html">Abrir temperatura</a>
+      </div>
+    </div>
+    <div class="module-media lake" aria-label="Espacio reservado para una fotografía relacionada con temperatura o condiciones atmosféricas">
+      <span class="photo-label">Espacio para fotografía de condiciones térmicas</span>
+    </div>
+  </section>
+
+  <section class="module reveal" id="viento">
+    <div class="module-copy cream">
+      <p class="eyebrow">Viento</p>
+      <h2 class="module-title">Velocidad, dirección y rachas de viento.</h2>
+      <p class="section-copy">Explora las condiciones de viento disponibles para Sololá mediante registros observados, pronósticos y herramientas de comparación. El módulo incluye información sobre velocidad, dirección y rachas, además de productos de apoyo para interpretar sus patrones.</p>
+      <div class="module-details" aria-label="Contenido del módulo de viento">
+        <span class="module-detail">Velocidad del viento</span>
+        <span class="module-detail">Dirección predominante</span>
+        <span class="module-detail">Rachas y pronóstico</span>
+        <span class="module-detail">Series y visualizaciones</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="./viento_index.html">Abrir viento</a>
+      </div>
+    </div>
+    <div class="module-media green" aria-label="Espacio reservado para una fotografía relacionada con viento o paisaje de Sololá">
+      <span class="photo-label">Espacio para fotografía de viento o paisaje</span>
+    </div>
+  </section>
+
+  <section class="module reverse reveal" id="estaciones">
+    <div class="module-copy sage">
+      <p class="eyebrow">Estaciones meteorológicas</p>
+      <h2 class="module-title">Consulta de estaciones en preparación.</h2>
+      <p class="section-copy">Este espacio concentrará la ubicación de las estaciones meteorológicas y el acceso a sus datos cuando la información telemétrica esté disponible para su integración en el portal.</p>
+      <p class="construction-note">La estructura queda preparada para incorporar posteriormente estaciones, ubicación, variables medidas y acceso a datos de observación.</p>
+    </div>
+    <div class="module-media warm" aria-label="Espacio reservado para una fotografía de una estación meteorológica">
+      <span class="photo-label">Espacio para fotografía de estación meteorológica</span>
+    </div>
+  </section>
+
+  <section class="summary reveal" aria-labelledby="summaryTitle">
+    <div class="shell">
+      <div class="summary-head">
+        <div>
+          <p class="eyebrow">Acceso rápido</p>
+          <h2 class="section-title display" id="summaryTitle">Selecciona la información que deseas consultar.</h2>
+        </div>
+        <p class="section-copy">Los accesos siguientes conducen directamente a cada módulo climático. La sección de estaciones se habilitará cuando los datos estén disponibles para el portal.</p>
+      </div>
+
+      <div class="summary-grid">
+        <a class="summary-card" href="./precipitaciones_index.html">
+          <span class="summary-number">01</span>
+          <h3>Precipitación</h3>
+          <p>Lluvia observada, pronóstico, registros históricos y comparación territorial.</p>
+          <span class="text-link">Abrir módulo</span>
+        </a>
+        <a class="summary-card" href="./temperatura_index.html">
+          <span class="summary-number">02</span>
+          <h3>Temperatura</h3>
+          <p>Condiciones térmicas, máximos, mínimos, pronóstico y comparación municipal.</p>
+          <span class="text-link">Abrir módulo</span>
+        </a>
+        <a class="summary-card" href="./viento_index.html">
+          <span class="summary-number">03</span>
+          <h3>Viento</h3>
+          <p>Velocidad, dirección, rachas, pronóstico y visualizaciones de apoyo.</p>
+          <span class="text-link">Abrir módulo</span>
+        </a>
+        <div class="summary-card disabled" aria-label="Estaciones meteorológicas en construcción">
+          <span class="summary-number">04</span>
+          <h3>Estaciones</h3>
+          <p>Ubicación y datos de estaciones meteorológicas cuando estén disponibles.</p>
+          <span class="status-text">En construcción</span>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
-<footer class="site-footer-min"><div class="site-footer-inner"><div><div class="site-footer-title">Mesa Técnica Agroclimática Sololá</div><div class="site-footer-copy">Área técnica de clima para consulta de precipitación, temperatura y viento.</div></div><div class="site-footer-links"><a href="../index.html#instituciones">Instituciones</a><a href="../index.html#contacto">Contacto</a><a href="./agroclima_index.html">Agroclima</a></div></div></footer>
-<script src="../assets/js/site-shell.js"></script>
+
+<footer class="footer" id="contacto">
+  <div class="shell footer-main">
+    <div>
+      <div class="footer-brand">
+        <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
+        <div class="footer-brand-name">MTA<br>Sololá</div>
+      </div>
+      <p class="footer-about">Portal de consulta climática y agroclimática para productores, técnicos, instituciones y organizaciones vinculadas al sector agropecuario de Sololá.</p>
+    </div>
+
+    <div>
+      <h3>Información climática</h3>
+      <div class="footer-links">
+        <a href="./precipitaciones_index.html">Precipitación</a>
+        <a href="./temperatura_index.html">Temperatura</a>
+        <a href="./viento_index.html">Viento</a>
+        <a href="#estaciones">Estaciones</a>
+      </div>
+    </div>
+
+    <div>
+      <h3>Portal MTA</h3>
+      <div class="footer-links">
+        <a href="../index.html">Inicio</a>
+        <a href="../index.html#recomendaciones">Recomendaciones</a>
+        <a href="../index.html#boletin">Boletín</a>
+        <a href="../index.html#mapas">Mapas</a>
+      </div>
+    </div>
+
+    <div>
+      <h3>Contacto</h3>
+      <div class="footer-links">
+        <a href="mailto:mtasolola@cunsol.edu.gt">mtasolola@cunsol.edu.gt</a>
+        <a href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell footer-bottom">
+    <span>© <span data-year></span> Mesa Técnica Agroclimática de Sololá.</span>
+    <span>Información climática para consulta territorial.</span>
+  </div>
+</footer>
+
+<div class="search-overlay" aria-hidden="true" data-search-overlay>
+  <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Buscar en el portal">
+    <div class="search-head">
+      <input class="search-input" type="search" autocomplete="off" placeholder="Buscar en el portal" aria-label="Buscar en el portal" data-search-input>
+      <button class="search-close" type="button" data-search-close>Cerrar</button>
+    </div>
+    <div class="search-results" data-search-results></div>
+  </div>
+</div>
+
+<script>
+(()=>{
+  const menuToggle=document.querySelector('[data-menu-toggle]');
+  const nav=document.querySelector('[data-nav]');
+  const closeMenu=()=>{
+    nav?.classList.remove('open');
+    menuToggle?.setAttribute('aria-expanded','false');
+    document.body.classList.remove('menu-open');
+  };
+  menuToggle?.addEventListener('click',()=>{
+    const open=menuToggle.getAttribute('aria-expanded')==='true';
+    menuToggle.setAttribute('aria-expanded',String(!open));
+    nav?.classList.toggle('open',!open);
+    document.body.classList.toggle('menu-open',!open);
+  });
+  nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+  window.addEventListener('resize',()=>{if(window.innerWidth>1020)closeMenu();});
+  document.addEventListener('click',event=>{
+    if(window.innerWidth>1020||!document.body.classList.contains('menu-open'))return;
+    if(nav?.contains(event.target)||menuToggle?.contains(event.target))return;
+    closeMenu();
+  });
+
+  const overlay=document.querySelector('[data-search-overlay]');
+  const input=document.querySelector('[data-search-input]');
+  const results=document.querySelector('[data-search-results]');
+  const destinations=[
+    ['Inicio','Portada de la Mesa Técnica Agroclimática','../index.html'],
+    ['Recomendaciones agroclimáticas','Orientaciones y recomendaciones para productores','../index.html#recomendaciones'],
+    ['Boletín agroclimático','Boletín disponible de la MTA Sololá','../index.html#boletin'],
+    ['Información climática','Acceso general a los módulos meteorológicos','./clima_index.html'],
+    ['Precipitación','Observación, pronóstico e histórico','./precipitaciones_index.html'],
+    ['Temperatura','Condiciones térmicas y comparación municipal','./temperatura_index.html'],
+    ['Viento','Velocidad, dirección, rachas y pronóstico','./viento_index.html'],
+    ['Estaciones meteorológicas','Sección en construcción','#estaciones'],
+    ['Mapas de Sololá','Productos cartográficos de la MTA','../index.html#mapas'],
+    ['Contacto','Correo y canales de la MTA','../index.html#contacto']
+  ];
+
+  const render=(query='')=>{
+    const q=query.trim().toLocaleLowerCase('es');
+    const filtered=q?destinations.filter(item=>(item[0]+' '+item[1]).toLocaleLowerCase('es').includes(q)):destinations.slice(0,8);
+    results.innerHTML=filtered.length?filtered.map(item=>`<a class="search-result" href="${item[2]}"><strong>${item[0]}</strong><span>${item[1]}</span></a>`).join(''):'<div class="search-empty">No se encontraron resultados.</div>';
+    results.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeSearch));
+  };
+
+  const openSearch=()=>{
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden','false');
+    document.body.classList.add('search-open');
+    render();
+    requestAnimationFrame(()=>input.focus());
+  };
+  function closeSearch(){
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.classList.remove('search-open');
+  }
+  document.querySelectorAll('[data-search-open]').forEach(btn=>btn.addEventListener('click',()=>{closeMenu();openSearch();}));
+  document.querySelector('[data-search-close]')?.addEventListener('click',closeSearch);
+  overlay?.addEventListener('click',event=>{if(event.target===overlay)closeSearch();});
+  input?.addEventListener('input',()=>render(input.value));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeSearch();}});
+
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  const year=document.querySelector('[data-year]');
+  if(year)year.textContent=new Date().getFullYear();
+})();
+</script>
 </body>
 </html>
