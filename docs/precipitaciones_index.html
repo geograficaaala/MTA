@@ -3477,6 +3477,145 @@
     }
   </style>
 
+
+  <style id="mta-mobile-chart-fix">
+    @media(max-width:680px){
+      /*
+        En teléfonos las gráficas mantienen un ancho técnico mínimo.
+        El usuario puede desplazarse horizontalmente con el dedo sin perder legibilidad.
+      */
+      .panel-body{
+        overflow-x:auto !important;
+        overflow-y:hidden !important;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:thin;
+      }
+
+      .panel-body > .chart-container,
+      .panel-body > .prediction-chart-container{
+        width:720px !important;
+        min-width:720px !important;
+        max-width:none !important;
+        height:400px !important;
+        min-height:400px !important;
+      }
+
+      .prediction-chart-container{
+        height:430px !important;
+        min-height:430px !important;
+      }
+
+      .two-col .panel-body > .chart-container{
+        width:680px !important;
+        min-width:680px !important;
+      }
+
+      /* En vista ampliada, usar toda la altura y permitir desplazamiento lateral. */
+      .chart-fullscreen-body{
+        overflow:auto !important;
+        -webkit-overflow-scrolling:touch;
+      }
+
+      .chart-fullscreen-host{
+        width:max-content !important;
+        min-width:100% !important;
+        height:100% !important;
+        overflow:visible !important;
+      }
+
+      .chart-fullscreen-host .chart-container.is-fullscreen{
+        width:820px !important;
+        min-width:820px !important;
+        max-width:none !important;
+        height:calc(100dvh - 16px) !important;
+        min-height:520px !important;
+      }
+
+      /* El perfil radial sí se adapta a una sola pantalla porque tiene menos ejes. */
+      .municipality-radar-chart{
+        min-height:430px !important;
+        height:430px !important;
+        overflow:hidden !important;
+      }
+
+      .municipality-radar-chart canvas{
+        max-width:100% !important;
+      }
+
+      /* Señal discreta de que la gráfica se puede mover lateralmente. */
+      .panel-body:has(.chart-container)::after{
+        content:"Desliza horizontalmente para consultar toda la gráfica";
+        position:sticky;
+        left:10px;
+        display:inline-block;
+        margin:8px 0 2px;
+        padding:6px 9px;
+        background:rgba(248,241,223,.94);
+        border:1px solid rgba(51,70,50,.14);
+        color:var(--ink-2);
+        font-family:var(--sans);
+        font-size:.58rem;
+        font-weight:600;
+        line-height:1.2;
+        pointer-events:none;
+      }
+    }
+
+    @media(max-width:420px){
+      .panel-body > .chart-container,
+      .panel-body > .prediction-chart-container{
+        width:660px !important;
+        min-width:660px !important;
+      }
+
+      .chart-fullscreen-host .chart-container.is-fullscreen{
+        width:760px !important;
+        min-width:760px !important;
+      }
+    }
+  </style>
+
+
+  <style id="mta-expand-button-final">
+    .chart-expand-btn{
+      min-width:118px !important;
+      height:38px !important;
+      padding:0 14px !important;
+      gap:8px !important;
+      border:1px solid rgba(51,70,50,.24) !important;
+      background:#fff !important;
+      color:var(--forest) !important;
+      box-shadow:inset 0 -2px 0 transparent !important;
+    }
+
+    .chart-expand-btn::after{
+      display:none !important;
+    }
+
+    .chart-expand-btn:hover,
+    .chart-expand-btn:focus-visible{
+      background:var(--cream-soft) !important;
+      border-color:var(--gold) !important;
+      color:var(--forest) !important;
+      box-shadow:inset 0 -2px 0 var(--gold) !important;
+      transform:none !important;
+    }
+
+    .chart-expand-btn svg{
+      width:15px !important;
+      height:15px !important;
+    }
+
+    @media(max-width:420px){
+      .chart-expand-btn{
+        min-width:38px !important;
+        width:38px !important;
+        height:38px !important;
+        padding:0 !important;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -4010,99 +4149,19 @@
 
     const FONT   = "Manrope, Segoe UI, Arial, sans-serif";
     const MONO   = "Manrope, Segoe UI, Arial, sans-serif";
+Chart.defaults.font.family = FONT;
+    Chart.defaults.font.size = window.matchMedia("(max-width: 680px)").matches ? 11 : 14;
+    Chart.defaults.color = "#415c55";
 
-
-    const isPhoneChart = () => window.matchMedia("(max-width: 680px)").matches;
-
-    const mobileChartReadability = {
-      id: "mobileChartReadability",
-      beforeUpdate(chart) {
-        if (!isPhoneChart()) return;
-
-        const options = chart.options || {};
-        options.layout = options.layout || {};
-        options.layout.padding = 4;
-
-        if (options.plugins) {
-          if (options.plugins.legend) {
-            options.plugins.legend.display = false;
-          }
-
-          if (options.plugins.tooltip) {
-            options.plugins.tooltip.titleFont = { family: FONT, size: 11, weight: "700" };
-            options.plugins.tooltip.bodyFont = { family: MONO, size: 10, weight: "600" };
-            options.plugins.tooltip.padding = 8;
-            options.plugins.tooltip.cornerRadius = 2;
-          }
-
-          const annotations = options.plugins.annotation?.annotations;
-          if (annotations && typeof annotations === "object") {
-            Object.values(annotations).forEach(annotation => {
-              if (annotation?.label) annotation.label.display = false;
-            });
-          }
-        }
-
-        const scales = options.scales || {};
-
-        ["x", "y"].forEach(axisName => {
-          const axis = scales[axisName];
-          if (!axis) return;
-
-          axis.ticks = axis.ticks || {};
-          axis.ticks.font = { family: axisName === "y" ? MONO : FONT, size: 10, weight: "600" };
-          axis.ticks.padding = 4;
-          axis.ticks.maxTicksLimit = axisName === "x" ? 5 : 5;
-          axis.ticks.maxRotation = 0;
-          axis.ticks.minRotation = 0;
-
-          axis.grid = axis.grid || {};
-          axis.grid.lineWidth = 0.6;
-
-          if (axis.title) axis.title.display = false;
-        });
-
-        if (scales.r) {
-          scales.r.pointLabels = scales.r.pointLabels || {};
-          scales.r.pointLabels.font = { family: FONT, size: 10, weight: "600" };
-          scales.r.pointLabels.padding = 5;
-
-          scales.r.ticks = scales.r.ticks || {};
-          scales.r.ticks.display = false;
-
-          scales.r.grid = scales.r.grid || {};
-          scales.r.grid.lineWidth = 0.7;
-        }
-
-        chart.data?.datasets?.forEach(dataset => {
-          const type = dataset.type || chart.config.type;
-          if (type === "line") {
-            dataset.pointRadius = 0;
-            dataset.pointHoverRadius = 4;
-            dataset.borderWidth = Math.min(Number(dataset.borderWidth || 2), 2);
-          }
-          if (type === "radar") {
-            dataset.pointRadius = 2.5;
-            dataset.pointHoverRadius = 4;
-            dataset.borderWidth = 2;
-          }
-          if (type === "bar") {
-            dataset.borderWidth = 0;
-            dataset.borderRadius = 0;
-          }
-        });
-      }
-    };
-
-    if (typeof Chart !== "undefined") {
-      Chart.register(mobileChartReadability);
+    if (window.matchMedia("(max-width: 680px)").matches) {
+      Chart.defaults.plugins.legend.labels.boxWidth = 10;
+      Chart.defaults.plugins.legend.labels.boxHeight = 10;
+      Chart.defaults.plugins.legend.labels.padding = 10;
+      Chart.defaults.plugins.tooltip.titleFont = { family: FONT, size: 11, weight: "700" };
+      Chart.defaults.plugins.tooltip.bodyFont = { family: MONO, size: 10, weight: "600" };
+      Chart.defaults.plugins.tooltip.padding = 8;
     }
 
-
-
-    Chart.defaults.font.family = FONT;
-    Chart.defaults.font.size = 18;
-    Chart.defaults.color = "#415c55";
 
     /* ---- STATE ---- */
     const S = {
