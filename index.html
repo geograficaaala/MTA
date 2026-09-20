@@ -37,7 +37,7 @@
     body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
     h1,h2,h3,p,a,span{overflow-wrap:break-word}
     h1,h2,h3{ text-wrap:balance }
-    p{ text-wrap:pretty }
+    p{ text-wrap:pretty;text-align:justify;text-justify:inter-word }
     main>*{min-width:0}
     body.search-open,body.menu-open{overflow:hidden}
     img{max-width:100%;display:block}
@@ -129,10 +129,11 @@
     .climate-carousel{width:min(100%,760px);min-width:0}
     .pdf-reader{background:#fff;border:1px solid rgba(47,69,53,.18);min-width:0}
     .pdf-stage{position:relative;height:clamp(500px,58vw,700px);overflow:auto;background:#dedbd2;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-    .pdf-stage canvas{display:block;margin:0 auto;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .pdf-pages{display:flex;flex-direction:column;align-items:center;gap:18px;padding:14px;min-width:100%}
+    .pdf-stage canvas{display:block;flex:0 0 auto;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.08)}
     .pdf-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:#5e655f;font-size:.76rem;background:#f4f1e8}
     .pdf-loading.hidden{display:none}
-    .pdf-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
+    .pdf-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
     .pdf-toolbar-group{display:flex;align-items:center;gap:8px}
     .pdf-control{min-width:38px;height:38px;border:1px solid rgba(47,69,53,.26);background:#fff;color:var(--forest);cursor:pointer;padding:0 10px;font-size:.72rem;font-weight:700}
     .pdf-control:hover,.pdf-control:focus-visible{background:var(--forest);color:#fff;outline:none}
@@ -167,7 +168,7 @@
     .bulletin-slide{min-width:100%;display:grid;grid-template-columns:minmax(330px,.64fr) minmax(0,1.36fr);background:#fff}
     .bulletin-cover{position:relative;min-height:520px;background:#d8d0bc;border-right:1px solid var(--line);overflow:hidden;padding:18px}
     .bulletin-cover .pdf-reader{height:100%;display:flex;flex-direction:column}
-    .bulletin-cover .pdf-stage{flex:1;height:auto;min-height:470px}
+    .bulletin-cover .pdf-stage{height:clamp(500px,58vw,700px);min-height:0}
     .bulletin-body{min-width:0;padding:clamp(42px,5.4vw,76px);display:flex;flex-direction:column;justify-content:center;min-width:0}
     .bulletin-period{margin:0 0 14px;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
     .bulletin-title{margin:0;font-family:var(--display);font-size:clamp(1.8rem,2.7vw,3rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;max-width:760px}
@@ -395,7 +396,7 @@
     <div class="hero-copy">
       <p class="eyebrow">Información agroclimática</p>
       <h1 class="hero-title" id="heroTitle">Mesa Técnica Agroclimática de Sololá.</h1>
-      <p class="hero-lead">Información climática y agroclimática traducida en herramientas claras para apoyar la prevención y la toma de decisiones del sector agropecuario en Sololá.</p>
+      <p class="hero-lead">El portal reúne información climática, perspectivas, recomendaciones y herramientas de consulta para apoyar la planificación y la toma de decisiones del sector agropecuario en Sololá.</p>
       <div class="btn-row">
         <a class="btn" href="#recomendaciones">Ver recomendaciones</a>
         <a class="btn btn-light" href="./docs/clima_index.html">Consultar información climática</a>
@@ -409,7 +410,7 @@
   <section class="intro-strip">
     <div class="shell intro-grid">
       <p class="intro-large">Información climática para la planificación agropecuaria en Sololá.</p>
-      <p class="intro-side">La MTA reúne información meteorológica, conocimiento local y análisis técnico para comunicar escenarios climáticos, anticipar riesgos y orientar acciones en la producción agropecuaria.</p>
+      <p class="intro-side">En este sitio encontrarás información meteorológica, análisis agroclimático y productos técnicos que ayudan a comprender las condiciones del territorio y a planificar acciones en la producción agropecuaria.</p>
     </div>
   </section>
 
@@ -418,7 +419,7 @@
     <div class="split-copy dark">
       <p class="eyebrow">Contenido principal</p>
       <h2 class="section-title display">Recomendaciones agroclimáticas.</h2>
-      <p class="section-copy">Consulta orientaciones para el período vigente, elaboradas a partir de las condiciones climáticas y agroclimáticas analizadas por la Mesa Técnica Agroclimática de Sololá. Este espacio quedará preparado para mostrar primero las recomendaciones del boletín más reciente.</p>
+      <p class="section-copy">En esta sección encontrarás las recomendaciones agroclimáticas vigentes para Sololá. Las orientaciones integran información climática, análisis técnico y condiciones del territorio para apoyar decisiones de manejo, prevención y planificación productiva.</p>
       <div class="btn-row">
         <a class="btn" href="#boletin">Consultar recomendaciones</a>
       </div>
@@ -437,7 +438,7 @@
           <p class="eyebrow">Boletín agroclimático</p>
           <h2 class="section-title display">Boletines agroclimáticos de Sololá.</h2>
         </div>
-        <p class="bulletin-note">Consulta el boletín más reciente. El carrusel queda preparado para incorporar nuevos documentos conforme sean publicados.</p>
+        <p class="bulletin-note">Aquí puedes consultar el boletín agroclimático disponible para Sololá, revisar su contenido directamente en la página y descargar el documento completo para utilizarlo como referencia técnica.</p>
       </div>
 
       <div class="bulletin-carousel" data-bulletin-carousel>
@@ -446,28 +447,19 @@
             <article class="bulletin-slide" data-bulletin-slide>
               <div class="bulletin-cover" aria-label="Lector del boletín agroclimático">
                 <div class="pdf-reader" data-pdf-reader data-pdf="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf">
-                  <div class="pdf-stage" data-pdf-stage>
-                    <canvas data-pdf-canvas aria-label="Página del boletín agroclimático"></canvas>
+                  <div class="pdf-stage" data-pdf-stage tabindex="0" aria-label="Documento PDF. Desplázate para recorrer sus páginas">
+                    <div class="pdf-pages" data-pdf-pages></div>
                     <div class="pdf-loading" data-pdf-loading>Cargando boletín</div>
                   </div>
-                  <div class="pdf-toolbar" aria-label="Controles de lectura del boletín">
-                    <div class="pdf-toolbar-group">
-                      <button class="pdf-control" type="button" data-pdf-prev-page aria-label="Página anterior">Anterior</button>
-                      <span class="pdf-page-status" data-pdf-page-status>1 de 1</span>
-                      <button class="pdf-control" type="button" data-pdf-next-page aria-label="Página siguiente">Siguiente</button>
-                    </div>
-                    <div class="pdf-toolbar-group">
-                      <button class="pdf-control" type="button" data-pdf-zoom-out aria-label="Reducir documento">Menos</button>
-                      <button class="pdf-control" type="button" data-pdf-zoom-reset aria-label="Ajustar al ancho">Ajustar</button>
-                      <button class="pdf-control" type="button" data-pdf-zoom-in aria-label="Ampliar documento">Más</button>
-                    </div>
+                  <div class="pdf-toolbar" aria-label="Opciones de lectura del boletín">
+                    <button class="pdf-control" type="button" data-pdf-fit aria-label="Ajustar tamaño del documento">Ajustar tamaño</button>
                   </div>
                 </div>
               </div>
               <div class="bulletin-body">
                 <p class="bulletin-period">Último boletín disponible. Período DEFM 2025 2026</p>
                 <h3 class="bulletin-title">Boletín agroclimático de la MTA Sololá</h3>
-                <p>Documento vigente disponible en el portal de la Mesa Técnica Agroclimática de Sololá. Puedes consultarlo en el navegador o descargar el PDF completo.</p>
+                <p>El boletín reúne el análisis climático y las recomendaciones agroclimáticas elaboradas para el territorio. Puedes leer el documento completo en esta página o descargarlo para consultarlo posteriormente.</p>
                 <div class="btn-row">
                   <a class="btn" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" target="_blank" rel="noopener">Ver boletín</a>
                   <a class="text-link" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" download>Descargar PDF</a>
@@ -494,8 +486,8 @@
     <div class="split-copy blue">
       <p class="eyebrow">Perspectiva climática</p>
       <h2 class="section-title display">Una mirada al periodo que viene.</h2>
-      <p class="section-copy">Consulta las perspectivas y boletines climáticos oficiales. Cada documento incluye una lectura rápida para Sololá y un lector con controles de página y ampliación para facilitar la consulta en computadora y teléfono.</p>
-      <p class="climate-context-note">La vista rápida toma como referencia principalmente las señales de <strong>Occidente</strong> y <strong>Altiplano Central</strong>. Por la topografía de Sololá, algunos sectores del sur pueden presentar transición hacia <strong>Bocacosta</strong>; por eso el resumen es orientativo y no sustituye el documento oficial.</p>
+      <p class="section-copy">En esta sección se reúnen las perspectivas y boletines climáticos oficiales emitidos por INSIVUMEH. Puedes seleccionar cada período, consultar el documento completo y revisar una síntesis territorial enfocada en las condiciones relevantes para Sololá.</p>
+      <p class="climate-context-note">La síntesis para Sololá toma como referencia principalmente las señales de <strong>Occidente</strong> y <strong>Altiplano Central</strong>. Debido a la topografía del departamento, algunos sectores del sur también pueden presentar condiciones asociadas a <strong>Bocacosta</strong>. Esta lectura facilita una revisión inicial y debe complementarse con el documento oficial de INSIVUMEH.</p>
       <div class="btn-row">
         <a class="btn" href="./docs/clima_index.html">Explorar información climática</a>
       </div>
@@ -504,21 +496,12 @@
     <div class="split-media climate-carousel-panel">
       <div class="climate-carousel" data-climate-carousel aria-label="Carrusel de perspectivas climáticas">
         <div class="pdf-reader" data-pdf-reader data-climate-pdf data-pdf="./Enero.pdf">
-          <div class="pdf-stage" data-pdf-stage>
-            <canvas data-pdf-canvas aria-label="Página de la perspectiva climática"></canvas>
+          <div class="pdf-stage" data-pdf-stage tabindex="0" aria-label="Documento PDF. Desplázate para recorrer sus páginas">
+            <div class="pdf-pages" data-pdf-pages></div>
             <div class="pdf-loading" data-pdf-loading>Cargando perspectiva climática</div>
           </div>
-          <div class="pdf-toolbar" aria-label="Controles de lectura de la perspectiva">
-            <div class="pdf-toolbar-group">
-              <button class="pdf-control" type="button" data-pdf-prev-page aria-label="Página anterior">Anterior</button>
-              <span class="pdf-page-status" data-pdf-page-status>1 de 1</span>
-              <button class="pdf-control" type="button" data-pdf-next-page aria-label="Página siguiente">Siguiente</button>
-            </div>
-            <div class="pdf-toolbar-group">
-              <button class="pdf-control" type="button" data-pdf-zoom-out aria-label="Reducir documento">Menos</button>
-              <button class="pdf-control" type="button" data-pdf-zoom-reset aria-label="Ajustar al ancho">Ajustar</button>
-              <button class="pdf-control" type="button" data-pdf-zoom-in aria-label="Ampliar documento">Más</button>
-            </div>
+          <div class="pdf-toolbar" aria-label="Opciones de lectura de la perspectiva">
+            <button class="pdf-control" type="button" data-pdf-fit aria-label="Ajustar tamaño del documento">Ajustar tamaño</button>
           </div>
         </div>
         <div class="climate-summary-panel" aria-live="polite">
@@ -557,32 +540,32 @@
           <p class="eyebrow">Información climática</p>
           <h2 class="section-title display">Información climática y herramientas de consulta.</h2>
         </div>
-        <p class="section-copy">El portal mantiene los módulos existentes y los organiza como recursos directos para consultar variables, estaciones, mapas y pronósticos.</p>
+        <p class="section-copy">Esta sección concentra las herramientas de consulta climática del portal. Desde aquí puedes revisar precipitación, temperatura, viento, datos meteorológicos, mapas y productos agroclimáticos disponibles para el departamento.</p>
       </div>
 
       <div class="resource-grid">
         <a class="resource" href="./docs/clima_index.html">
           <span class="resource-number">01</span>
           <h3>Variables climáticas</h3>
-          <p>Acceso general a precipitación, temperatura, viento y otros productos de consulta meteorológica.</p>
+          <p>Consulta precipitación, temperatura y viento mediante los módulos de observación, pronóstico, comparación territorial y análisis histórico disponibles en el portal.</p>
           <span class="text-link">Explorar clima</span>
         </a>
         <a class="resource" href="./docs/precipitaciones_index.html">
           <span class="resource-number">02</span>
           <h3>Estaciones y datos</h3>
-          <p>Observaciones, fuentes meteorológicas y series disponibles. El módulo de estaciones se ampliará conforme existan nuevos datos.</p>
+          <p>Consulta las observaciones meteorológicas y las fuentes de datos utilizadas por la MTA. Esta área reúne la información disponible de estaciones y series de referencia para el territorio.</p>
           <span class="text-link">Consultar datos</span>
         </a>
         <a class="resource" href="./docs/clima_index.html">
           <span class="resource-number">03</span>
           <h3>Mapas</h3>
-          <p>Espacio para integrar mapas territoriales de apoyo y los mapas utilizados en productos y boletines de la MTA.</p>
+          <p>Consulta mapas que permiten interpretar espacialmente las condiciones climáticas y agroclimáticas de Sololá y relacionarlas con los productos técnicos de la MTA.</p>
           <span class="text-link">Ver recursos</span>
         </a>
         <a class="resource" href="./docs/agroclima_index.html">
           <span class="resource-number">04</span>
           <h3>Agroclima</h3>
-          <p>Balance hídrico, variables de suelo y atmósfera y herramientas para interpretar condiciones de estrés agroclimático.</p>
+          <p>Consulta balance hídrico, humedad y temperatura del suelo, variables atmosféricas y otros indicadores útiles para interpretar condiciones de estrés agroclimático.</p>
           <span class="text-link">Consultar agroclima</span>
         </a>
       </div>
@@ -606,7 +589,7 @@
       <div class="shell story-copy-grid">
         <h2>Funciones de la Mesa Técnica Agroclimática.</h2>
         <div>
-          <p>La Mesa Técnica Agroclimática de Sololá es un espacio de coordinación interinstitucional para analizar información climática, generar información agroclimática preventiva y apoyar la toma de decisiones en la producción agropecuaria. Integra fuentes técnicas y conocimiento territorial para producir recomendaciones, productos de síntesis y herramientas de consulta.</p>
+          <p>La Mesa Técnica Agroclimática de Sololá es un espacio de coordinación interinstitucional que analiza información climática y agroclimática junto con conocimiento del territorio. Su trabajo permite generar recomendaciones preventivas, comunicar escenarios de interés para el sector agropecuario y facilitar información útil para la planificación y la toma de decisiones.</p>
           <div class="btn-row">
             <a class="text-link" href="#instituciones">Conocer instituciones integrantes</a>
           </div>
@@ -653,7 +636,7 @@
         <img src="./docs/logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
         <div class="footer-brand-name">MTA<br>Sololá</div>
       </div>
-      <p class="footer-about">Información climática y agroclimática para apoyar la prevención, la planificación y la toma de decisiones del sector agropecuario en Sololá.</p>
+      <p class="footer-about">Portal de consulta climática y agroclimática para productores, técnicos, instituciones y organizaciones vinculadas al sector agropecuario de Sololá.</p>
     </div>
 
     <div>
@@ -708,18 +691,10 @@
 
   const createPdfReader=root=>{
     const stage=root.querySelector('[data-pdf-stage]');
-    const canvas=root.querySelector('[data-pdf-canvas]');
+    const pagesContainer=root.querySelector('[data-pdf-pages]');
     const loading=root.querySelector('[data-pdf-loading]');
-    const prevPage=root.querySelector('[data-pdf-prev-page]');
-    const nextPage=root.querySelector('[data-pdf-next-page]');
-    const pageStatus=root.querySelector('[data-pdf-page-status]');
-    const zoomOut=root.querySelector('[data-pdf-zoom-out]');
-    const zoomReset=root.querySelector('[data-pdf-zoom-reset]');
-    const zoomIn=root.querySelector('[data-pdf-zoom-in]');
-    const ctx=canvas?.getContext('2d');
+    const fitButton=root.querySelector('[data-pdf-fit]');
     let pdf=null;
-    let pageNumber=1;
-    let zoom=1;
     let loadVersion=0;
     let renderVersion=0;
 
@@ -729,88 +704,74 @@
       loading.classList.toggle('hidden',!show);
     };
 
-    const updateControls=()=>{
-      const pages=pdf?.numPages||1;
-      if(pageStatus)pageStatus.textContent=`${pageNumber} de ${pages}`;
-      if(prevPage)prevPage.disabled=!pdf||pageNumber<=1;
-      if(nextPage)nextPage.disabled=!pdf||pageNumber>=pages;
-    };
-
-    const renderPage=async()=>{
-      if(!pdf||!canvas||!ctx||!stage)return;
+    const renderDocument=async()=>{
+      if(!pdf||!stage||!pagesContainer)return;
       const myRender=++renderVersion;
+      pagesContainer.innerHTML='';
+      setLoading('Preparando documento',true);
+      const available=Math.max(250,stage.clientWidth-28);
+      const dpr=Math.min(window.devicePixelRatio||1,1.6);
+
       try{
-        const page=await pdf.getPage(pageNumber);
-        if(myRender!==renderVersion)return;
-        const natural=page.getViewport({scale:1});
-        const available=Math.max(260,stage.clientWidth-28);
-        const fitScale=available/natural.width;
-        const viewport=page.getViewport({scale:fitScale*zoom});
-        const dpr=Math.min(window.devicePixelRatio||1,2);
-        canvas.width=Math.floor(viewport.width*dpr);
-        canvas.height=Math.floor(viewport.height*dpr);
-        canvas.style.width=`${Math.floor(viewport.width)}px`;
-        canvas.style.height=`${Math.floor(viewport.height)}px`;
-        await page.render({
-          canvasContext:ctx,
-          viewport,
-          transform:dpr===1?null:[dpr,0,0,dpr,0,0]
-        }).promise;
+        for(let pageNumber=1;pageNumber<=pdf.numPages;pageNumber+=1){
+          if(myRender!==renderVersion)return;
+          const page=await pdf.getPage(pageNumber);
+          const natural=page.getViewport({scale:1});
+          const fitScale=available/natural.width;
+          const viewport=page.getViewport({scale:fitScale});
+          const canvas=document.createElement('canvas');
+          canvas.setAttribute('aria-label',`Página ${pageNumber} de ${pdf.numPages}`);
+          canvas.width=Math.floor(viewport.width*dpr);
+          canvas.height=Math.floor(viewport.height*dpr);
+          canvas.style.width=`${Math.floor(viewport.width)}px`;
+          canvas.style.height=`${Math.floor(viewport.height)}px`;
+          pagesContainer.appendChild(canvas);
+          const ctx=canvas.getContext('2d');
+          await page.render({
+            canvasContext:ctx,
+            viewport,
+            transform:dpr===1?null:[dpr,0,0,dpr,0,0]
+          }).promise;
+        }
         if(myRender!==renderVersion)return;
         setLoading('',false);
-        updateControls();
       }catch(error){
         if(error?.name==='RenderingCancelledException')return;
-        setLoading('No fue posible mostrar esta página. Usa el botón Abrir PDF para leer el documento completo.',true);
+        setLoading('No fue posible mostrar el documento dentro de la página. Puedes abrir el PDF completo desde el enlace disponible.',true);
       }
     };
 
     const load=async url=>{
       const myLoad=++loadVersion;
+      renderVersion+=1;
       pdf=null;
-      pageNumber=1;
-      zoom=1;
       stage.scrollTop=0;
       stage.scrollLeft=0;
+      if(pagesContainer)pagesContainer.innerHTML='';
       setLoading('Cargando documento',true);
-      updateControls();
       try{
         if(!window.pdfjsLib)throw new Error('PDF.js no disponible');
         window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
         const doc=await window.pdfjsLib.getDocument(url).promise;
         if(myLoad!==loadVersion){try{doc.destroy();}catch{} return;}
         pdf=doc;
-        await renderPage();
+        await renderDocument();
       }catch(error){
         if(myLoad!==loadVersion)return;
-        setLoading('No fue posible cargar el documento dentro de la página. Puedes abrirlo con el botón Abrir PDF.',true);
+        setLoading('No fue posible cargar el documento dentro de la página. Puedes abrir el PDF completo desde el enlace disponible.',true);
       }
     };
 
-    prevPage?.addEventListener('click',async()=>{
-      if(!pdf||pageNumber<=1)return;
-      pageNumber-=1;
-      stage.scrollTop=0;
+    fitButton?.addEventListener('click',()=>{
+      if(!pdf)return;
       stage.scrollLeft=0;
-      setLoading('Cargando página',true);
-      await renderPage();
+      renderDocument();
     });
-    nextPage?.addEventListener('click',async()=>{
-      if(!pdf||pageNumber>=pdf.numPages)return;
-      pageNumber+=1;
-      stage.scrollTop=0;
-      stage.scrollLeft=0;
-      setLoading('Cargando página',true);
-      await renderPage();
-    });
-    zoomOut?.addEventListener('click',()=>{zoom=Math.max(.7,zoom-.2);renderPage();});
-    zoomReset?.addEventListener('click',()=>{zoom=1;stage.scrollLeft=0;renderPage();});
-    zoomIn?.addEventListener('click',()=>{zoom=Math.min(3.2,zoom+.25);renderPage();});
 
     let resizeTimer;
     window.addEventListener('resize',()=>{
       clearTimeout(resizeTimer);
-      resizeTimer=setTimeout(()=>{if(pdf)renderPage();},180);
+      resizeTimer=setTimeout(()=>{if(pdf)renderDocument();},220);
     });
 
     const controller={load};
@@ -891,6 +852,7 @@
     const next=carousel.querySelector('[data-bulletin-next]');
     const dots=carousel.querySelector('[data-bulletin-dots]');
     const status=carousel.querySelector('[data-bulletin-status]');
+    const controls=carousel.querySelector('.bulletin-controls');
     let index=0;
 
     const pad=n=>String(n).padStart(2,'0');
@@ -901,6 +863,7 @@
       if(status)status.textContent=`${pad(index+1)} / ${pad(slides.length)}`;
       if(prev)prev.disabled=slides.length<2;
       if(next)next.disabled=slides.length<2;
+      if(controls)controls.hidden=slides.length<2;
     };
 
     slides.forEach((_,i)=>{
