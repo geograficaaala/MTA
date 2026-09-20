@@ -2358,8 +2358,6 @@
         card.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();openMunicipalityRadar(card.dataset.radarMunicipio)}});
       });
       document.querySelectorAll("[data-radar-button]").forEach(button=>button.addEventListener("click",event=>{event.stopPropagation();openMunicipalityRadar(button.dataset.radarButton)}));
-    });
-      document.querySelectorAll("[data-radar-button]").forEach(button=>button.addEventListener("click",event=>{event.stopPropagation();openMunicipalityRadar(button.dataset.radarButton)}));
     }
 
     function renderTable() {
