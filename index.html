@@ -8,7 +8,7 @@
   <meta name="description" content="Portal de información climática y agroclimática de la Mesa Técnica Agroclimática de Sololá, Guatemala.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -28,7 +28,7 @@
       --line:rgba(36,52,43,.16);
       --white:#fff;
       --max:1440px;
-      --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --display:"Source Serif 4", Georgia, "Times New Roman", serif;
       --sans:"Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -71,7 +71,7 @@
     /* TYPE + BUTTONS */
     .eyebrow{margin:0 0 22px;font-size:.69rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
     .display{font-family:var(--display);font-weight:400;letter-spacing:-.028em}
-    .section-title{margin:0;font-size:clamp(2rem,3.4vw,3.85rem);line-height:1.02;max-width:980px}
+    .section-title{margin:0;font-size:clamp(1.9rem,3vw,3.35rem);line-height:1.08;max-width:980px;font-weight:600;letter-spacing:-.018em}
     .section-copy{margin:22px 0 0;max-width:720px;color:var(--ink-2);font-size:clamp(.82rem,.9vw,.92rem);line-height:1.75}
     .btn-row{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:34px}
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border:1px solid var(--forest);background:var(--forest);color:#fff;text-decoration:none;font-size:.76rem;font-weight:700;letter-spacing:.01em;transition:transform .2s ease,background .2s ease,color .2s ease}
@@ -98,14 +98,14 @@
     .hero{background:#f2e7c8;min-height:calc(100vh - 92px);display:grid;grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr);align-items:stretch}
     .hero-copy{min-width:0;padding:clamp(70px,8vw,132px) clamp(54px,7vw,124px);display:flex;flex-direction:column;justify-content:center}
     .hero .eyebrow{color:#7d5d25}
-    .hero-title{margin:0;max-width:850px;font-family:var(--display);font-weight:500;font-size:clamp(2.9rem,5.15vw,5.6rem);line-height:.94;letter-spacing:-.025em;color:#384432}
+    .hero-title{margin:0;max-width:850px;font-family:var(--display);font-weight:600;font-size:clamp(2.65rem,4.55vw,4.9rem);line-height:1;letter-spacing:-.02em;color:#384432}
     .hero-lead{margin:25px 0 0;max-width:700px;color:#4c5548;font-size:clamp(.82rem,.92vw,.94rem);line-height:1.75}
     .hero-media{min-height:620px}
 
     /* INTRO STRIP */
     .intro-strip{padding:92px 0 86px;background:var(--paper)}
     .intro-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:80px;align-items:end}
-    .intro-large{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(2.15rem,3.9vw,4.2rem);line-height:1.02;letter-spacing:-.02em;color:#364333}
+    .intro-large{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,3.2vw,3.45rem);line-height:1.08;letter-spacing:-.018em;color:#364333}
     .intro-side{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.75}
 
     /* SPLIT SECTIONS */
@@ -124,23 +124,30 @@
     .split-copy.blue .btn{border-color:#f8f2de;background:#f8f2de;color:var(--lake-deep)}
     .split-media>.photo-placeholder{height:100%;min-height:680px}
 
-    /* PERSPECTIVA / PDF CAROUSEL */
+    /* PERSPECTIVA Y LECTORES PDF */
     .climate-carousel-panel{background:#e9dfc4;display:flex;align-items:center;justify-content:center;padding:clamp(28px,4vw,64px);min-width:0}
-    .climate-carousel{width:min(100%,720px);min-width:0}
-    .climate-pdf-shell{position:relative;background:#fff;border:1px solid rgba(47,69,53,.18);height:clamp(430px,51vw,610px);max-height:610px;overflow:hidden;isolation:isolate;outline:none}
-    .climate-pdf-shell:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
-    .climate-pdf{display:block;width:100%;height:100%;border:0;background:#fff}
-    .climate-quickview{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(30px,4vw,54px);background:rgba(39,59,44,.97);color:#f8f2de;opacity:0;transform:translateY(10px);transition:opacity .22s ease,transform .22s ease;pointer-events:none}
-    .climate-pdf-shell:hover .climate-quickview,.climate-pdf-shell:focus .climate-quickview,.climate-pdf-shell:focus-within .climate-quickview{opacity:1;transform:none}
-    .climate-quickview-label{margin:0 0 10px;font-size:.62rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#e7c983}
-    .climate-quickview h4{margin:0;font-family:var(--display);font-size:clamp(1.7rem,3vw,2.75rem);font-weight:500;line-height:1.02;color:#fff}
-    .climate-quickview-summary{margin:18px 0 0;max-width:620px;font-size:.8rem;line-height:1.7;color:rgba(248,242,222,.9)}
-    .climate-quickview-region{margin:15px 0 0;padding-top:15px;border-top:1px solid rgba(255,255,255,.18);font-size:.68rem;line-height:1.6;color:rgba(248,242,222,.72)}
-    .climate-quickview-source{margin:12px 0 0;font-size:.64rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
+    .climate-carousel{width:min(100%,760px);min-width:0}
+    .pdf-reader{background:#fff;border:1px solid rgba(47,69,53,.18);min-width:0}
+    .pdf-stage{position:relative;height:clamp(500px,58vw,700px);overflow:auto;background:#dedbd2;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+    .pdf-stage canvas{display:block;margin:0 auto;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .pdf-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:#5e655f;font-size:.76rem;background:#f4f1e8}
+    .pdf-loading.hidden{display:none}
+    .pdf-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
+    .pdf-toolbar-group{display:flex;align-items:center;gap:8px}
+    .pdf-control{min-width:38px;height:38px;border:1px solid rgba(47,69,53,.26);background:#fff;color:var(--forest);cursor:pointer;padding:0 10px;font-size:.72rem;font-weight:700}
+    .pdf-control:hover,.pdf-control:focus-visible{background:var(--forest);color:#fff;outline:none}
+    .pdf-control:disabled{opacity:.35;cursor:default}
+    .pdf-page-status{min-width:66px;text-align:center;font-size:.68rem;font-weight:700;color:#5f665f}
+    .climate-summary-panel{margin-top:18px;padding:22px 24px;background:#f8f4e9;border:1px solid rgba(47,69,53,.14)}
+    .climate-summary-label{margin:0 0 8px;font-size:.62rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#7b6233}
+    .climate-summary-panel h4{margin:0;font-family:var(--display);font-size:clamp(1.45rem,2.2vw,2rem);font-weight:600;line-height:1.1;color:var(--forest)}
+    .climate-summary-text{margin:12px 0 0;font-size:.78rem;line-height:1.68;color:#4f5b52}
+    .climate-summary-region{margin:12px 0 0;padding-top:12px;border-top:1px solid rgba(47,69,53,.14);font-size:.68rem;line-height:1.6;color:#687168}
+    .climate-summary-source{margin:9px 0 0;font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#35493a}
     .climate-context-note{margin:22px 0 0;padding-top:18px;border-top:1px solid rgba(248,242,222,.22);max-width:660px;font-size:.72rem;line-height:1.65;color:rgba(248,242,222,.72)}
     .climate-carousel-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:end;padding-top:22px}
-    .climate-kicker{margin:0 0 7px;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#78643d}
-    .climate-title{margin:0;font-family:var(--display);font-size:clamp(1.55rem,2.25vw,2.45rem);font-weight:500;line-height:1.02;color:var(--forest)}
+    .climate-kicker{margin:0 0 7px;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#78643d}
+    .climate-title{margin:0;font-family:var(--display);font-size:clamp(1.45rem,2vw,2.15rem);font-weight:600;line-height:1.08;color:var(--forest)}
     .climate-actions{display:flex;align-items:center;gap:10px}
     .climate-carousel-links{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:18px}
     .climate-carousel-links .btn{min-height:42px;padding:0 18px}
@@ -158,12 +165,12 @@
     .bulletin-viewport{overflow:hidden;border:1px solid rgba(68,63,48,.18);background:#fff}
     .bulletin-track{display:flex;transition:transform .42s ease}
     .bulletin-slide{min-width:100%;display:grid;grid-template-columns:minmax(330px,.64fr) minmax(0,1.36fr);background:#fff}
-    .bulletin-cover{position:relative;min-height:520px;background:#d8d0bc;border-right:1px solid var(--line);overflow:hidden}
-    .bulletin-pdf{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
-    .bulletin-pdf-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:34px;text-align:center;background:#d8d0bc;color:var(--ink);font-size:.8rem;line-height:1.6}
+    .bulletin-cover{position:relative;min-height:520px;background:#d8d0bc;border-right:1px solid var(--line);overflow:hidden;padding:18px}
+    .bulletin-cover .pdf-reader{height:100%;display:flex;flex-direction:column}
+    .bulletin-cover .pdf-stage{flex:1;height:auto;min-height:470px}
     .bulletin-body{min-width:0;padding:clamp(42px,5.4vw,76px);display:flex;flex-direction:column;justify-content:center;min-width:0}
     .bulletin-period{margin:0 0 14px;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-    .bulletin-title{margin:0;font-family:var(--display);font-size:clamp(2rem,3.1vw,3.5rem);font-weight:500;line-height:1.02;letter-spacing:-.02em;max-width:760px}
+    .bulletin-title{margin:0;font-family:var(--display);font-size:clamp(1.8rem,2.7vw,3rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;max-width:760px}
     .bulletin-body p{margin:20px 0 0;color:var(--ink-2);font-size:.84rem;line-height:1.75;max-width:720px}
     .bulletin-controls{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:22px}
     .bulletin-nav{display:flex;align-items:center;gap:10px}
@@ -191,7 +198,7 @@
 
     /* MTA STORY */
     .story-title-wrap{padding:96px 0 72px}
-    .story-title{margin:0;font-family:var(--display);font-size:clamp(2.35rem,4vw,4.55rem);font-weight:500;line-height:1.02;letter-spacing:-.02em;max-width:1150px}
+    .story-title{margin:0;font-family:var(--display);font-size:clamp(2rem,3.25vw,3.65rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;max-width:1150px}
     .story-visuals{display:grid;grid-template-columns:repeat(3,1fr);min-height:500px}
     .story-visuals .photo-placeholder{min-height:500px;border-right:1px solid rgba(255,255,255,.18)}
     .story-visuals .photo-placeholder:last-child{border-right:0}
@@ -200,7 +207,7 @@
     .story-photo img{width:100%;height:100%;min-height:500px;display:block;object-fit:cover}
     .story-copy{padding:88px 0 98px}
     .story-copy-grid{display:grid;grid-template-columns:minmax(0,.74fr) minmax(0,1.26fr);gap:86px;align-items:start}
-    .story-copy h2{margin:0;font-family:var(--display);font-size:clamp(1.95rem,2.8vw,3.1rem);font-weight:500;line-height:1.05}
+    .story-copy h2{margin:0;font-family:var(--display);font-size:clamp(1.8rem,2.5vw,2.7rem);font-weight:600;line-height:1.08}
     .story-copy p{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.75;max-width:760px}
     .story-copy .btn-row{margin-top:28px}
 
@@ -260,10 +267,11 @@
       .brand img{width:46px;height:46px}
       .brand-name{font-size:.82rem}
       .brand-place{font-size:.64rem}
-      .menu-toggle{display:flex}
-      .nav{position:fixed;top:76px;left:0;right:0;bottom:0;background:var(--paper);display:none;margin:0;padding:30px 28px;flex-direction:column;align-items:stretch;gap:0;overflow:auto}
-      .nav.open{display:flex}
-      .nav a,.nav button{width:100%;padding:18px 0;text-align:left;font-size:.95rem;border-bottom:1px solid var(--line)}
+      .header{z-index:7000;backdrop-filter:none;-webkit-backdrop-filter:none}
+      .menu-toggle{display:flex;position:relative;z-index:7200;background:var(--paper)}
+      .nav{position:fixed;z-index:7100;top:76px;left:0;right:0;height:calc(100dvh - 76px);background:var(--paper);display:flex;margin:0;padding:28px 28px 44px;flex-direction:column;align-items:stretch;gap:0;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 24px 60px rgba(25,35,28,.14);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-10px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+      .nav.open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+      .nav a,.nav button{width:100%;padding:18px 0;text-align:left;font-size:.95rem;border-bottom:1px solid var(--line);flex:0 0 auto}
       .nav a::after,.nav button::after{display:none}
       .hero{min-height:auto;grid-template-columns:1fr}
       .hero-copy{min-width:0;padding:72px 28px 68px}
@@ -293,7 +301,7 @@
     @media(max-width:620px){
       .shell{width:calc(100% - 28px)}
       .header-inner{min-height:70px}
-      .nav{top:70px}
+      .nav{top:70px;height:calc(100dvh - 70px)}
       .brand-copy{max-width:205px}
       .brand-name{font-size:.76rem}
       .brand-place{font-size:.6rem}
@@ -306,9 +314,15 @@
       .split-copy{min-width:0;padding:58px 20px}
       .split-media>.photo-placeholder{min-height:400px}
       .climate-carousel-panel{padding:30px 20px 34px}
-      .climate-pdf-shell{height:470px}
-      .climate-quickview{padding:28px 24px}
-      .climate-quickview-summary{font-size:.76rem;line-height:1.62}
+      .pdf-stage{height:64vh;min-height:420px}
+      .pdf-toolbar{gap:8px;padding:10px}
+      .pdf-control{min-width:36px;height:36px;padding:0 8px}
+      .climate-carousel-links .btn{width:100%}
+      .pdf-stage{height:62vh;min-height:440px;max-height:660px}
+      .pdf-toolbar{position:sticky;bottom:0;z-index:2;flex-wrap:wrap}
+      .pdf-toolbar-group{flex:1 1 auto;justify-content:center}
+      .climate-summary-panel{padding:20px}
+      .climate-summary-text{font-size:.76rem;line-height:1.65}
       .climate-carousel-meta{grid-template-columns:1fr auto;gap:14px}
       .climate-title{font-size:clamp(1.55rem,9vw,2rem)}
       .climate-dots{gap:5px}
@@ -335,7 +349,7 @@
 
     @media(max-width:900px){
       .climate-carousel-panel{padding:42px 28px}
-      .climate-pdf-shell{height:560px}
+      .pdf-stage{height:620px}
       .bulletin-slide{grid-template-columns:1fr}
       .bulletin-cover{min-height:520px;border-right:0;border-bottom:1px solid var(--line)}
     }
@@ -379,7 +393,7 @@
   <!-- PORTADA: sustituir el placeholder derecho por la fotografía principal cuando esté disponible. -->
   <section class="hero" aria-labelledby="heroTitle">
     <div class="hero-copy">
-      <p class="eyebrow">Agricultura · clima · territorio</p>
+      <p class="eyebrow">Información agroclimática</p>
       <h1 class="hero-title" id="heroTitle">Mesa Técnica Agroclimática de Sololá.</h1>
       <p class="hero-lead">Información climática y agroclimática traducida en herramientas claras para apoyar la prevención y la toma de decisiones del sector agropecuario en Sololá.</p>
       <div class="btn-row">
@@ -394,7 +408,7 @@
 
   <section class="intro-strip">
     <div class="shell intro-grid">
-      <p class="intro-large">Datos del clima que se convierten en decisiones para el territorio.</p>
+      <p class="intro-large">Información climática para la planificación agropecuaria en Sololá.</p>
       <p class="intro-side">La MTA reúne información meteorológica, conocimiento local y análisis técnico para comunicar escenarios climáticos, anticipar riesgos y orientar acciones en la producción agropecuaria.</p>
     </div>
   </section>
@@ -421,7 +435,7 @@
       <div class="bulletin-head">
         <div>
           <p class="eyebrow">Boletín agroclimático</p>
-          <h2 class="section-title display">Boletines de la Mesa Técnica Agroclimática.</h2>
+          <h2 class="section-title display">Boletines agroclimáticos de Sololá.</h2>
         </div>
         <p class="bulletin-note">Consulta el boletín más reciente. El carrusel queda preparado para incorporar nuevos documentos conforme sean publicados.</p>
       </div>
@@ -430,13 +444,28 @@
         <div class="bulletin-viewport">
           <div class="bulletin-track" data-bulletin-track>
             <article class="bulletin-slide" data-bulletin-slide>
-              <div class="bulletin-cover" aria-label="Vista previa del boletín agroclimático DEFM 25-26">
-                <object class="bulletin-pdf" data="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf#page=1&view=FitH&toolbar=0&navpanes=0" type="application/pdf">
-                  <a class="bulletin-pdf-fallback" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" target="_blank" rel="noopener">Abrir portada del boletín DEFM 25–26</a>
-                </object>
+              <div class="bulletin-cover" aria-label="Lector del boletín agroclimático">
+                <div class="pdf-reader" data-pdf-reader data-pdf="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf">
+                  <div class="pdf-stage" data-pdf-stage>
+                    <canvas data-pdf-canvas aria-label="Página del boletín agroclimático"></canvas>
+                    <div class="pdf-loading" data-pdf-loading>Cargando boletín</div>
+                  </div>
+                  <div class="pdf-toolbar" aria-label="Controles de lectura del boletín">
+                    <div class="pdf-toolbar-group">
+                      <button class="pdf-control" type="button" data-pdf-prev-page aria-label="Página anterior">Anterior</button>
+                      <span class="pdf-page-status" data-pdf-page-status>1 de 1</span>
+                      <button class="pdf-control" type="button" data-pdf-next-page aria-label="Página siguiente">Siguiente</button>
+                    </div>
+                    <div class="pdf-toolbar-group">
+                      <button class="pdf-control" type="button" data-pdf-zoom-out aria-label="Reducir documento">Menos</button>
+                      <button class="pdf-control" type="button" data-pdf-zoom-reset aria-label="Ajustar al ancho">Ajustar</button>
+                      <button class="pdf-control" type="button" data-pdf-zoom-in aria-label="Ampliar documento">Más</button>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="bulletin-body">
-                <p class="bulletin-period">Último boletín disponible · DEFM 25–26</p>
+                <p class="bulletin-period">Último boletín disponible. Período DEFM 2025 2026</p>
                 <h3 class="bulletin-title">Boletín agroclimático de la MTA Sololá</h3>
                 <p>Documento vigente disponible en el portal de la Mesa Técnica Agroclimática de Sololá. Puedes consultarlo en el navegador o descargar el PDF completo.</p>
                 <div class="btn-row">
@@ -464,8 +493,8 @@
   <section class="split reverse" id="perspectiva">
     <div class="split-copy blue">
       <p class="eyebrow">Perspectiva climática</p>
-      <h2 class="section-title display">Una mirada al período que viene.</h2>
-      <p class="section-copy">Recorre las perspectivas y boletines climáticos oficiales. Pasa el cursor sobre cada portada —o tócala y enfócala en móvil— para ver una lectura rápida orientada a Sololá antes de abrir el documento completo.</p>
+      <h2 class="section-title display">Una mirada al periodo que viene.</h2>
+      <p class="section-copy">Consulta las perspectivas y boletines climáticos oficiales. Cada documento incluye una lectura rápida para Sololá y un lector con controles de página y ampliación para facilitar la consulta en computadora y teléfono.</p>
       <p class="climate-context-note">La vista rápida toma como referencia principalmente las señales de <strong>Occidente</strong> y <strong>Altiplano Central</strong>. Por la topografía de Sololá, algunos sectores del sur pueden presentar transición hacia <strong>Bocacosta</strong>; por eso el resumen es orientativo y no sustituye el documento oficial.</p>
       <div class="btn-row">
         <a class="btn" href="./docs/clima_index.html">Explorar información climática</a>
@@ -474,26 +503,35 @@
 
     <div class="split-media climate-carousel-panel">
       <div class="climate-carousel" data-climate-carousel aria-label="Carrusel de perspectivas climáticas">
-        <div class="climate-pdf-shell" tabindex="0" aria-label="Vista rápida para Sololá. Pase el cursor o enfoque este documento.">
-          <iframe
-            class="climate-pdf"
-            data-climate-pdf
-            src="./Enero.pdf#page=1&view=FitH&toolbar=0&navpanes=0"
-            title="Vista previa de Enero.pdf"
-            loading="lazy">
-          </iframe>
-          <div class="climate-quickview" aria-live="polite">
-            <p class="climate-quickview-label">Vista rápida para Sololá</p>
-            <h4 data-climate-quick-title>Enero 2026</h4>
-            <p class="climate-quickview-summary" data-climate-summary>En Sololá, la señal regional apunta a un mes seco y frío: Occidente y Altiplano Central presentan acumulados bajos, con influencia de frentes fríos y descensos de temperatura.</p>
-            <p class="climate-quickview-region" data-climate-region>Referencia territorial: Occidente y Altiplano Central.</p>
-            <p class="climate-quickview-source" data-climate-source>Fuente: INSIVUMEH</p>
+        <div class="pdf-reader" data-pdf-reader data-climate-pdf data-pdf="./Enero.pdf">
+          <div class="pdf-stage" data-pdf-stage>
+            <canvas data-pdf-canvas aria-label="Página de la perspectiva climática"></canvas>
+            <div class="pdf-loading" data-pdf-loading>Cargando perspectiva climática</div>
           </div>
+          <div class="pdf-toolbar" aria-label="Controles de lectura de la perspectiva">
+            <div class="pdf-toolbar-group">
+              <button class="pdf-control" type="button" data-pdf-prev-page aria-label="Página anterior">Anterior</button>
+              <span class="pdf-page-status" data-pdf-page-status>1 de 1</span>
+              <button class="pdf-control" type="button" data-pdf-next-page aria-label="Página siguiente">Siguiente</button>
+            </div>
+            <div class="pdf-toolbar-group">
+              <button class="pdf-control" type="button" data-pdf-zoom-out aria-label="Reducir documento">Menos</button>
+              <button class="pdf-control" type="button" data-pdf-zoom-reset aria-label="Ajustar al ancho">Ajustar</button>
+              <button class="pdf-control" type="button" data-pdf-zoom-in aria-label="Ampliar documento">Más</button>
+            </div>
+          </div>
+        </div>
+        <div class="climate-summary-panel" aria-live="polite">
+          <p class="climate-summary-label">Vista rápida para Sololá</p>
+          <h4 data-climate-quick-title>Enero 2026</h4>
+          <p class="climate-summary-text" data-climate-summary>En Sololá, la señal regional apunta a un mes seco y frío. Occidente y Altiplano Central presentan acumulados bajos, con influencia de frentes fríos y descensos de temperatura.</p>
+          <p class="climate-summary-region" data-climate-region>Referencia territorial: Occidente y Altiplano Central.</p>
+          <p class="climate-summary-source" data-climate-source>Fuente: INSIVUMEH</p>
         </div>
 
         <div class="climate-carousel-meta">
           <div>
-            <p class="climate-kicker" data-climate-status>01 / 12 · Documento climático</p>
+            <p class="climate-kicker" data-climate-status>01 / 12 Documento climático</p>
             <h3 class="climate-title" data-climate-title>Enero</h3>
           </div>
           <div class="climate-actions">
@@ -517,7 +555,7 @@
       <div class="resources-head">
         <div>
           <p class="eyebrow">Información climática</p>
-          <h2 class="section-title display">Recursos para consultar el territorio.</h2>
+          <h2 class="section-title display">Información climática y herramientas de consulta.</h2>
         </div>
         <p class="section-copy">El portal mantiene los módulos existentes y los organiza como recursos directos para consultar variables, estaciones, mapas y pronósticos.</p>
       </div>
@@ -554,7 +592,7 @@
   <section id="la-mta">
     <div class="shell story-title-wrap">
       <p class="eyebrow">Qué es la MTA</p>
-      <h2 class="story-title">El clima se entiende mejor cuando la información técnica se encuentra con el conocimiento del territorio.</h2>
+      <h2 class="story-title">Coordinación técnica para la gestión agroclimática de Sololá.</h2>
     </div>
 
     <!-- TRES ESPACIOS FOTOGRÁFICOS adicionales: se pueden sustituir individualmente por imágenes reales. -->
@@ -566,7 +604,7 @@
 
     <div class="story-copy">
       <div class="shell story-copy-grid">
-        <h2>Coordinación, análisis y prevención.</h2>
+        <h2>Funciones de la Mesa Técnica Agroclimática.</h2>
         <div>
           <p>La Mesa Técnica Agroclimática de Sololá es un espacio de coordinación interinstitucional para analizar información climática, generar información agroclimática preventiva y apoyar la toma de decisiones en la producción agropecuaria. Integra fuentes técnicas y conocimiento territorial para producir recomendaciones, productos de síntesis y herramientas de consulta.</p>
           <div class="btn-row">
@@ -663,8 +701,127 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 (()=>{
+  const pdfControllers=new WeakMap();
+
+  const createPdfReader=root=>{
+    const stage=root.querySelector('[data-pdf-stage]');
+    const canvas=root.querySelector('[data-pdf-canvas]');
+    const loading=root.querySelector('[data-pdf-loading]');
+    const prevPage=root.querySelector('[data-pdf-prev-page]');
+    const nextPage=root.querySelector('[data-pdf-next-page]');
+    const pageStatus=root.querySelector('[data-pdf-page-status]');
+    const zoomOut=root.querySelector('[data-pdf-zoom-out]');
+    const zoomReset=root.querySelector('[data-pdf-zoom-reset]');
+    const zoomIn=root.querySelector('[data-pdf-zoom-in]');
+    const ctx=canvas?.getContext('2d');
+    let pdf=null;
+    let pageNumber=1;
+    let zoom=1;
+    let loadVersion=0;
+    let renderVersion=0;
+
+    const setLoading=(message,show=true)=>{
+      if(!loading)return;
+      loading.textContent=message;
+      loading.classList.toggle('hidden',!show);
+    };
+
+    const updateControls=()=>{
+      const pages=pdf?.numPages||1;
+      if(pageStatus)pageStatus.textContent=`${pageNumber} de ${pages}`;
+      if(prevPage)prevPage.disabled=!pdf||pageNumber<=1;
+      if(nextPage)nextPage.disabled=!pdf||pageNumber>=pages;
+    };
+
+    const renderPage=async()=>{
+      if(!pdf||!canvas||!ctx||!stage)return;
+      const myRender=++renderVersion;
+      try{
+        const page=await pdf.getPage(pageNumber);
+        if(myRender!==renderVersion)return;
+        const natural=page.getViewport({scale:1});
+        const available=Math.max(260,stage.clientWidth-28);
+        const fitScale=available/natural.width;
+        const viewport=page.getViewport({scale:fitScale*zoom});
+        const dpr=Math.min(window.devicePixelRatio||1,2);
+        canvas.width=Math.floor(viewport.width*dpr);
+        canvas.height=Math.floor(viewport.height*dpr);
+        canvas.style.width=`${Math.floor(viewport.width)}px`;
+        canvas.style.height=`${Math.floor(viewport.height)}px`;
+        await page.render({
+          canvasContext:ctx,
+          viewport,
+          transform:dpr===1?null:[dpr,0,0,dpr,0,0]
+        }).promise;
+        if(myRender!==renderVersion)return;
+        setLoading('',false);
+        updateControls();
+      }catch(error){
+        if(error?.name==='RenderingCancelledException')return;
+        setLoading('No fue posible mostrar esta página. Usa el botón Abrir PDF para leer el documento completo.',true);
+      }
+    };
+
+    const load=async url=>{
+      const myLoad=++loadVersion;
+      pdf=null;
+      pageNumber=1;
+      zoom=1;
+      stage.scrollTop=0;
+      stage.scrollLeft=0;
+      setLoading('Cargando documento',true);
+      updateControls();
+      try{
+        if(!window.pdfjsLib)throw new Error('PDF.js no disponible');
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        const doc=await window.pdfjsLib.getDocument(url).promise;
+        if(myLoad!==loadVersion){try{doc.destroy();}catch{} return;}
+        pdf=doc;
+        await renderPage();
+      }catch(error){
+        if(myLoad!==loadVersion)return;
+        setLoading('No fue posible cargar el documento dentro de la página. Puedes abrirlo con el botón Abrir PDF.',true);
+      }
+    };
+
+    prevPage?.addEventListener('click',async()=>{
+      if(!pdf||pageNumber<=1)return;
+      pageNumber-=1;
+      stage.scrollTop=0;
+      stage.scrollLeft=0;
+      setLoading('Cargando página',true);
+      await renderPage();
+    });
+    nextPage?.addEventListener('click',async()=>{
+      if(!pdf||pageNumber>=pdf.numPages)return;
+      pageNumber+=1;
+      stage.scrollTop=0;
+      stage.scrollLeft=0;
+      setLoading('Cargando página',true);
+      await renderPage();
+    });
+    zoomOut?.addEventListener('click',()=>{zoom=Math.max(.7,zoom-.2);renderPage();});
+    zoomReset?.addEventListener('click',()=>{zoom=1;stage.scrollLeft=0;renderPage();});
+    zoomIn?.addEventListener('click',()=>{zoom=Math.min(3.2,zoom+.25);renderPage();});
+
+    let resizeTimer;
+    window.addEventListener('resize',()=>{
+      clearTimeout(resizeTimer);
+      resizeTimer=setTimeout(()=>{if(pdf)renderPage();},180);
+    });
+
+    const controller={load};
+    pdfControllers.set(root,controller);
+    const initial=root.dataset.pdf;
+    if(initial)load(initial);
+    return controller;
+  };
+
+  document.querySelectorAll('[data-pdf-reader]').forEach(createPdfReader);
+
   const menuToggle=document.querySelector('[data-menu-toggle]');
   const nav=document.querySelector('[data-nav]');
   const closeMenu=()=>{
@@ -679,6 +836,12 @@
     document.body.classList.toggle('menu-open',!open);
   });
   nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+  window.addEventListener('resize',()=>{if(window.innerWidth>1020)closeMenu();});
+  document.addEventListener('click',event=>{
+    if(window.innerWidth>1020||!document.body.classList.contains('menu-open'))return;
+    if(nav?.contains(event.target)||menuToggle?.contains(event.target))return;
+    closeMenu();
+  });
 
   const overlay=document.querySelector('[data-search-overlay]');
   const input=document.querySelector('[data-search-input]');
@@ -753,7 +916,7 @@
     render();
   });
 
-  // Carrusel de perspectivas climáticas.
+  // Carrusel de perspectivas climáticas con lector integrado.
   // Para agregar un documento nuevo, añade otro objeto al arreglo conservando el nombre exacto del PDF en la raíz.
   const climateDocuments=[
     {
@@ -772,9 +935,9 @@
       region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
     },
     {
-      title:'Boletín especial',file:'Boletinespecial.pdf',quickTitle:'Alerta especial · Julio y agosto',
-      summary:'La señal más importante para Sololá es un posible déficit de lluvia durante julio y agosto. El documento estima anomalías promedio de -79 mm y -101 mm para Occidente, y de -100 mm y -123 mm para Altiplano Central. La captación y el uso eficiente del agua son acciones clave.',
-      region:'Referencia territorial: Occidente y Altiplano Central; información preliminar.',source:'INSIVUMEH / CONRED'
+      title:'Boletín especial',file:'Boletinespecial.pdf',quickTitle:'Alerta especial para julio y agosto',
+      summary:'La señal más importante para Sololá es un posible déficit de lluvia durante julio y agosto. El documento estima déficits promedio de 79 mm y 101 mm para Occidente, y de 100 mm y 123 mm para Altiplano Central. La captación y el uso eficiente del agua son acciones clave.',
+      region:'Referencia territorial: Occidente y Altiplano Central; información preliminar.',source:'INSIVUMEH y CONRED'
     },
     {
       title:'Abril',file:'Abril.pdf',quickTitle:'Abril 2026',
@@ -782,7 +945,7 @@
       region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
     },
     {
-      title:'IELL-202604',file:'IELL-202604.pdf',quickTitle:'Inicio de la época lluviosa 2026',
+      title:'Inicio de época lluviosa',file:'IELL-202604.pdf',quickTitle:'Inicio de la época lluviosa 2026',
       summary:'El inicio de la época lluviosa podría presentarse antes en Occidente, entre la segunda y tercera semana de abril, y más tarde en Altiplano Central, entre finales de abril y la primera semana de mayo. En Sololá, el relieve puede producir diferencias locales entre municipios y laderas.',
       region:'Referencia territorial: Occidente y Altiplano Central; transición local hacia Bocacosta.',source:'INSIVUMEH'
     },
@@ -792,8 +955,8 @@
       region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
     },
     {
-      title:'MJJ 2026',file:'MJJ 2026.pdf',quickTitle:'Mayo · Junio · Julio 2026',
-      summary:'Para el trimestre mayo-julio, Occidente y Altiplano Central tendrían acumulados menores que las regiones más lluviosas y condiciones relativamente templadas, con temperaturas medias de 14 a 22 °C. El trimestre puede presentar déficit respecto a la climatología, por lo que el manejo de agua sigue siendo importante.',
+      title:'MJJ 2026',file:'MJJ 2026.pdf',quickTitle:'Mayo a julio de 2026',
+      summary:'Para el trimestre mayo a julio, Occidente y Altiplano Central tendrían acumulados menores que las regiones más lluviosas y condiciones relativamente templadas, con temperaturas medias de 14 a 22 °C. El trimestre puede presentar déficit respecto a la climatología, por lo que el manejo de agua sigue siendo importante.',
       region:'Referencia territorial: Occidente y Altiplano Central.',source:'INSIVUMEH'
     },
     {
@@ -802,9 +965,9 @@
       region:'Referencia territorial: Occidente y Altiplano Central; variación local por relieve.',source:'INSIVUMEH'
     },
     {
-      title:'Julio',file:'julio.pdf',quickTitle:'Julio 2026 · alerta de precipitación',
-      summary:'Para julio, el boletín advierte un déficit de precipitación. La anomalía promedio estimada es de -79 mm en Occidente y -100 mm en Altiplano Central. Para Sololá, la canícula y la administración del agua son los principales puntos a vigilar.',
-      region:'Referencia territorial: Occidente y Altiplano Central; información preliminar.',source:'INSIVUMEH / CONRED'
+      title:'Julio',file:'julio.pdf',quickTitle:'Julio 2026. Alerta de precipitación',
+      summary:'Para julio, el boletín advierte un déficit de precipitación. El déficit promedio estimado es de 79 mm en Occidente y 100 mm en Altiplano Central. Para Sololá, la canícula y la administración del agua son los principales puntos a vigilar.',
+      region:'Referencia territorial: Occidente y Altiplano Central; información preliminar.',source:'INSIVUMEH y CONRED'
     },
     {
       title:'Agosto',file:'agosto.pdf',quickTitle:'Agosto 2026',
@@ -840,11 +1003,12 @@
       const item=climateDocuments[index];
       const url=pdfUrl(item.file);
       if(viewer){
-        viewer.src=`${url}#page=1&view=FitH&toolbar=0&navpanes=0`;
-        viewer.title=`Vista previa de ${item.file}`;
+        viewer.dataset.pdf=url;
+        const controller=pdfControllers.get(viewer) || createPdfReader(viewer);
+        controller.load(url);
       }
       if(title)title.textContent=item.title;
-      if(status)status.textContent=`${pad(index+1)} / ${pad(climateDocuments.length)} · Documento climático`;
+      if(status)status.textContent=`${pad(index+1)} / ${pad(climateDocuments.length)} Documento climático`;
       if(quickTitle)quickTitle.textContent=item.quickTitle || item.title;
       if(quickSummary)quickSummary.textContent=item.summary || '';
       if(quickRegion)quickRegion.textContent=item.region || '';
