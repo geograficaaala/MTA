@@ -71,6 +71,45 @@
     .hero h1{margin:0;max-width:900px;color:#384432;font-family:var(--display);font-size:clamp(2.7rem,5vw,5rem);font-weight:600;line-height:1;letter-spacing:-.025em}
     .hero-copy{max-width:860px;margin:28px 0 0;color:#4c5548;font-size:clamp(.84rem,.95vw,.98rem);line-height:1.8}
 
+
+    .hero-actions{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:18px;
+      margin-top:34px;
+    }
+    .hero-home-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 22px;
+      border:1px solid var(--forest);
+      background:var(--forest);
+      color:#fff;
+      text-decoration:none;
+      font-size:.74rem;
+      font-weight:700;
+      transition:background .18s ease,transform .18s ease;
+    }
+    .hero-home-btn:hover,
+    .hero-home-btn:focus-visible{
+      background:var(--forest-2);
+      transform:translateY(-1px);
+      outline:none;
+    }
+    .hero-climate-link{
+      display:inline-flex;
+      align-items:center;
+      min-height:46px;
+      color:var(--forest);
+      text-decoration:none;
+      border-bottom:1px solid var(--forest);
+      font-size:.74rem;
+      font-weight:700;
+    }
+
     .feedback{padding:clamp(70px,8vw,112px) 0;background:var(--paper)}
     .feedback-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(48px,7vw,110px);align-items:start}
     .feedback-intro h2{margin:0;color:var(--forest);font-family:var(--display);font-size:clamp(2rem,3.2vw,3.65rem);font-weight:600;line-height:1.04;letter-spacing:-.018em}
@@ -191,8 +230,8 @@
 <body>
   <header class="header">
     <div class="shell header-inner">
-      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá">
-        <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
+      <a class="brand" href="./index.html" aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá">
+        <img src="./docs/logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
         <span class="brand-copy">
           <span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
           <span class="brand-place">Sololá, Guatemala</span>
@@ -204,11 +243,11 @@
       </button>
 
       <nav class="nav" aria-label="Navegación principal" data-nav>
-        <a href="../index.html">Inicio</a>
-        <a href="../index.html#recomendaciones">Recomendaciones agroclimáticas</a>
-        <a href="./clima_index.html">Información climática</a>
+        <a href="./index.html">Inicio</a>
+        <a href="./index.html#recomendaciones">Recomendaciones agroclimáticas</a>
+        <a href="./docs/clima_index.html">Información climática</a>
         <a href="./comentarios_index.html" aria-current="page">Comentarios</a>
-        <a href="../index.html#contacto">Contacto</a>
+        <a href="./index.html#contacto">Contacto</a>
         <button type="button" data-search-open>Buscar</button>
       </nav>
     </div>
@@ -220,6 +259,10 @@
         <p class="eyebrow">Participación</p>
         <h1>Comentarios y sugerencias</h1>
         <p class="hero-copy">Este espacio permite compartir observaciones, sugerencias y comentarios sobre los contenidos y herramientas del portal de la Mesa Técnica Agroclimática de Sololá. Los mensajes recibidos ayudan a identificar necesidades de información y oportunidades para mejorar la consulta pública.</p>
+        <div class="hero-actions">
+          <a class="hero-home-btn" href="./index.html">Volver al inicio</a>
+          <a class="hero-climate-link" href="./docs/clima_index.html">Información climática</a>
+        </div>
       </div>
     </section>
 
@@ -304,40 +347,41 @@
     </section>
 
     <section class="partners" id="instituciones" aria-labelledby="institucionesTitle">
-      <div class="shell">
-        <h2 class="partners-title" id="institucionesTitle">Instituciones que integran y acompañan la Mesa Técnica Agroclimática de Sololá</h2>
-        <div class="partner-grid">
-          <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA.png" alt="MAGA" loading="lazy"></a>
-          <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./logos/MAGA02.png" alt="MAGA" loading="lazy"></a>
-          <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy"></a>
-          <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./logos/INSIVUMEN02.png" alt="INSIVUMEH" loading="lazy"></a>
-          <a href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy"></a>
-          <a href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy"></a>
-          <a href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./logos/FeedtheChildren.png" alt="Feed the Children Guatemala" loading="lazy"></a>
-          <a href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICC"><img src="./logos/ICC.png" alt="ICC" loading="lazy"></a>
-          <a href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy"></a>
-          <a href="#" aria-label="World Vision"><img src="./logos/WorldVision.png" alt="World Vision" loading="lazy"></a>
-          <a href="#" aria-label="CERCAP"><img src="./logos/CERCAP.png" alt="CERCAP" loading="lazy"></a>
-          <a href="#" aria-label="Rikolto"><img src="./logos/Rikolto.png" alt="Rikolto" loading="lazy"></a>
-          <a href="#" aria-label="Cooperación de Bélgica"><img src="./logos/Belgica.png" alt="Cooperación de Bélgica" loading="lazy"></a>
-          <a href="#" aria-label="ICTA"><img src="./logos/ICTA.png" alt="ICTA" loading="lazy"></a>
-          <a href="#" aria-label="Anacafé"><img src="./logos/Anacafe.png" alt="Anacafé" loading="lazy"></a>
-          <a href="#" aria-label="Universidad del Valle de Guatemala"><img src="./logos/UVG.png" alt="Universidad del Valle de Guatemala" loading="lazy"></a>
-          <a href="#" aria-label="Mercy Corps"><img src="./logos/MercyCorps.png" alt="Mercy Corps" loading="lazy"></a>
-          <a href="#" aria-label="Vivamos Mejor"><img src="./logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy"></a>
-          <a href="#" aria-label="EFA"><img src="./logos/EFA.png" alt="EFA" loading="lazy"></a>
-          <a href="#" aria-label="MARN"><img src="./logos/MARN.png" alt="MARN" loading="lazy"></a>
-          <a href="#" aria-label="Amigos del Lago"><img src="./logos/AmigosdelLago.png" alt="Amigos del Lago" loading="lazy"></a>
-        </div>
+    <div class="shell">
+      <h2 class="partners-title" id="institucionesTitle">Instituciones que integran y acompañan la Mesa Técnica Agroclimática de Sololá</h2>
+      <div class="partner-grid">
+        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./docs/logos/MAGA.png" alt="MAGA" loading="lazy"></a>
+        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./docs/logos/MAGA02.png" alt="MAGA" loading="lazy"></a>
+        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./docs/logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy"></a>
+        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./docs/logos/INSIVUMEN02.png" alt="INSIVUMEH" loading="lazy"></a>
+        <a href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./docs/logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy"></a>
+        <a href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./docs/logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy"></a>
+        <a href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./docs/logos/FeedtheChildren.png" alt="Feed the Children Guatemala" loading="lazy"></a>
+        <a href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICC"><img src="./docs/logos/ICC.png" alt="ICC" loading="lazy"></a>
+        <a href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./docs/logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy"></a>
+        <a href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./docs/logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy"></a>
+        <a href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./docs/logos/CERCAP.png" alt="CERCAP" loading="lazy"></a>
+        <a href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./docs/logos/Rikolto.png" alt="Rikolto" loading="lazy"></a>
+        <a href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Enabel"><img src="./docs/logos/Belgica.png" alt="Enabel" loading="lazy"></a>
+        <a href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./docs/logos/ICTA.png" alt="ICTA" loading="lazy"></a>
+        <a href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./docs/logos/Anacafe.png" alt="Anacafé" loading="lazy"></a>
+        <!-- Sustituir UVG.png por el logo CEAA UVG cuando se reciba el archivo definitivo. -->
+        <a href="https://www.uvg.edu.gt/investigacion/cea/" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán UVG"><img src="./docs/logos/UVG.png" alt="Centro de Estudios Atitlán UVG" loading="lazy"></a>
+        <a href="https://www.mercycorpsguatemala.com/" target="_blank" rel="noopener noreferrer" aria-label="Mercy Corps Guatemala"><img src="./docs/logos/MercyCorps.png" alt="Mercy Corps Guatemala" loading="lazy"></a>
+        <a href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./docs/logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy"></a>
+        <a href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./docs/logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy"></a>
+        <a href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MARN"><img src="./docs/logos/MARN.png" alt="MARN" loading="lazy"></a>
+        <a href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./docs/logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy"></a>
       </div>
-    </section>
+    </div>
+  </section>
   </main>
 
   <footer class="footer" id="contacto">
     <div class="shell footer-main">
       <div>
         <div class="footer-brand">
-          <img src="./logos/MTA_LOGO.png" alt="Mesa Técnica Agroclimática de Sololá">
+          <img src="./docs/logos/MTA_LOGO.png" alt="Mesa Técnica Agroclimática de Sololá">
           <span class="footer-brand-name">MTA Sololá</span>
         </div>
         <p class="footer-about">Espacio interinstitucional para el análisis de información climática y agroclimática orientada al territorio y a la producción agropecuaria del departamento de Sololá.</p>
@@ -346,9 +390,9 @@
       <div>
         <h3>Navegación</h3>
         <div class="footer-links">
-          <a href="../index.html">Inicio</a>
-          <a href="../index.html#recomendaciones">Recomendaciones agroclimáticas</a>
-          <a href="./clima_index.html">Información climática</a>
+          <a href="./index.html">Inicio</a>
+          <a href="./index.html#recomendaciones">Recomendaciones agroclimáticas</a>
+          <a href="./docs/clima_index.html">Información climática</a>
           <a href="./comentarios_index.html">Comentarios</a>
         </div>
       </div>
@@ -356,10 +400,10 @@
       <div>
         <h3>Información climática</h3>
         <div class="footer-links">
-          <a href="./precipitaciones_index.html">Precipitación</a>
-          <a href="./temperatura_index.html">Temperatura</a>
-          <a href="./viento_index.html">Viento</a>
-          <a href="./agroclima_index.html">Agroclima</a>
+          <a href="./docs/precipitaciones_index.html">Precipitación</a>
+          <a href="./docs/temperatura_index.html">Temperatura</a>
+          <a href="./docs/viento_index.html">Viento</a>
+          <a href="./docs/agroclima_index.html">Agroclima</a>
         </div>
       </div>
 
@@ -367,7 +411,7 @@
         <h3>Contacto</h3>
         <div class="footer-links">
           <a href="./comentarios_index.html">Enviar comentario</a>
-          <a href="../index.html#contacto">Información de contacto</a>
+          <a href="./index.html#contacto">Información de contacto</a>
         </div>
       </div>
     </div>
@@ -413,16 +457,16 @@
       const results=document.querySelector("[data-search-results]");
 
       const items=[
-        ["Inicio","Página principal de la Mesa Técnica Agroclimática de Sololá","../index.html"],
-        ["Recomendaciones agroclimáticas","Orientaciones vigentes para la producción agropecuaria","../index.html#recomendaciones"],
-        ["Información climática","Acceso general a los módulos de consulta","./clima_index.html"],
-        ["Precipitación","Lluvia, históricos, observaciones y pronóstico","./precipitaciones_index.html"],
-        ["Temperatura","Condiciones térmicas, históricos y pronóstico","./temperatura_index.html"],
-        ["Viento","Velocidad, dirección, históricos y pronóstico","./viento_index.html"],
-        ["Agroclima","Balance hídrico, humedad del suelo y estrés agrícola","./agroclima_index.html"],
+        ["Inicio","Página principal de la Mesa Técnica Agroclimática de Sololá","./index.html"],
+        ["Recomendaciones agroclimáticas","Orientaciones vigentes para la producción agropecuaria","./index.html#recomendaciones"],
+        ["Información climática","Acceso general a los módulos de consulta","./docs/clima_index.html"],
+        ["Precipitación","Lluvia, históricos, observaciones y pronóstico","./docs/precipitaciones_index.html"],
+        ["Temperatura","Condiciones térmicas, históricos y pronóstico","./docs/temperatura_index.html"],
+        ["Viento","Velocidad, dirección, históricos y pronóstico","./docs/viento_index.html"],
+        ["Agroclima","Balance hídrico, humedad del suelo y estrés agrícola","./docs/agroclima_index.html"],
         ["Comentarios","Enviar sugerencias y observaciones sobre el portal","./comentarios_index.html"],
-        ["Mapas de Sololá","Productos cartográficos de la Mesa Técnica Agroclimática","../index.html#mapas"],
-        ["Perspectiva climática","Documentos climáticos de INSIVUMEH","../index.html#perspectiva"]
+        ["Mapas de Sololá","Productos cartográficos de la Mesa Técnica Agroclimática","./index.html#mapas"],
+        ["Perspectiva climática","Documentos climáticos de INSIVUMEH","./index.html#perspectiva"]
       ];
 
       const render=query=>{
