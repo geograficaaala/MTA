@@ -1,7 +1,7 @@
 {
   "schema": "mta_precipitaciones_pws_v4",
-  "generated_at_utc": "2026-09-22T16:58:59.133977+00:00",
-  "generated_at_gt": "2026-09-22T10:58:59.133977-06:00",
+  "generated_at_utc": "2026-09-23T17:03:08.995257+00:00",
+  "generated_at_gt": "2026-09-23T11:03:08.995257-06:00",
   "department": "Sololá",
   "source": {
     "institution": "PWS configuradas manualmente",
@@ -9,8 +9,8 @@
     "credit": "Datos: estación meteorológica complementaria pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
   },
   "date_range_used": {
-    "start_date": "2026-09-22",
-    "end_date": "2026-09-22"
+    "start_date": "2026-09-23",
+    "end_date": "2026-09-23"
   },
   "ambient_weather_api": {
     "enabled": true,
@@ -36,7 +36,7 @@
       "precipitation_available": "si_extraida",
       "online_status": "online",
       "quality_class": "complementaria",
-      "source_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-09-22/2026-09-22/monthly",
+      "source_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-09-23/2026-09-23/monthly",
       "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
       "inventory_method": "pws_config_json",
       "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
@@ -55,7 +55,7 @@
       "precipitation_available": "si_extraida",
       "online_status": "online",
       "quality_class": "complementaria",
-      "source_url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-09-22/2026-09-22/monthly",
+      "source_url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-09-23/2026-09-23/monthly",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
       "inventory_method": "pws_config_json",
       "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
@@ -74,7 +74,7 @@
       "precipitation_available": "si_extraida",
       "online_status": "online",
       "quality_class": "complementaria",
-      "source_url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-09-22/2026-09-22/monthly",
+      "source_url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-09-23/2026-09-23/monthly",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
       "inventory_method": "pws_config_json",
       "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
@@ -93,7 +93,7 @@
       "precipitation_available": "historica_por_verificar",
       "online_status": "historica",
       "quality_class": "complementaria_historica",
-      "source_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-09-22/2026-09-22/monthly",
+      "source_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-09-23/2026-09-23/monthly",
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
       "inventory_method": "pws_config_json",
       "credit": "Datos: Weather Underground / estación PWS pública. Visualización y procesamiento: Mesa Técnica Agroclimática de Sololá."
@@ -145,28 +145,28 @@
       "station_code": "IPANAJ5",
       "dashboard_id": null,
       "station_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5",
-      "history_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-09-22/2026-09-22/monthly",
+      "history_url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-09-23/2026-09-23/monthly",
       "enabled": true,
       "enabled_current_extraction": true,
       "enabled_historical_extraction": true,
       "ok": true,
       "online_status": "online",
       "precipitation_found": true,
-      "precipitation_mm": 1.016,
+      "precipitation_mm": 0.0,
       "error": null,
-      "matched_text": "Precipitation\t0.04 in",
+      "matched_text": "Precipitation Rate\t0in",
       "unit_conversion": "in_to_mm",
       "render_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-09-22/2026-09-22/monthly",
+        "url": "https://www.wunderground.com/dashboard/pws/IPANAJ5/table/2026-09-23/2026-09-23/monthly",
         "ok": false,
         "usable": true,
         "engine": "playwright_chromium",
         "error": "networkidle: Timeout 15000ms exceeded.",
-        "html_length": 550776,
-        "text_length": 4640,
+        "html_length": 92578,
+        "text_length": 2288,
         "effective_ok": true
       },
-      "raw_text_path": "docs/data/precipitaciones/raw/wunderground_pws_panajachel_2026-09-22.txt"
+      "raw_text_path": "docs/data/precipitaciones/raw/wunderground_pws_panajachel_2026-09-23.txt"
     },
     {
       "station_id": "vivamos_mejor_pws_complementaria_vivamos_mejor_casa_santa_rita",
@@ -175,28 +175,28 @@
       "station_code": "ISANTA535",
       "dashboard_id": null,
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTA535",
-      "history_url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-09-22/2026-09-22/monthly",
+      "history_url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-09-23/2026-09-23/monthly",
       "enabled": true,
       "enabled_current_extraction": true,
       "enabled_historical_extraction": true,
       "ok": true,
       "online_status": "online",
       "precipitation_found": true,
-      "precipitation_mm": 0.0,
+      "precipitation_mm": 2.286,
       "error": null,
-      "matched_text": "Precipitation Rate\t0in",
+      "matched_text": "Precipitation Rate\t0.09in",
       "unit_conversion": "in_to_mm",
       "render_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-09-22/2026-09-22/monthly",
-        "ok": true,
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTA535/table/2026-09-23/2026-09-23/monthly",
+        "ok": false,
         "usable": true,
         "engine": "playwright_chromium",
-        "error": null,
-        "html_length": 90205,
-        "text_length": 2305,
+        "error": "networkidle: Timeout 15000ms exceeded.",
+        "html_length": 92733,
+        "text_length": 2357,
         "effective_ok": true
       },
-      "raw_text_path": "docs/data/precipitaciones/raw/wunderground_vivamos_mejor_casa_santa_rita_2026-09-22.txt"
+      "raw_text_path": "docs/data/precipitaciones/raw/wunderground_vivamos_mejor_casa_santa_rita_2026-09-23.txt"
     },
     {
       "station_id": "vivamos_mejor_pws_complementaria_asociacion_vivamos_mejor_coatitlan_r_l",
@@ -205,28 +205,28 @@
       "station_code": "ISANTI135",
       "dashboard_id": null,
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTI135",
-      "history_url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-09-22/2026-09-22/monthly",
+      "history_url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-09-23/2026-09-23/monthly",
       "enabled": true,
       "enabled_current_extraction": true,
       "enabled_historical_extraction": true,
       "ok": true,
       "online_status": "online",
       "precipitation_found": true,
-      "precipitation_mm": 0.0,
+      "precipitation_mm": 17.272,
       "error": null,
-      "matched_text": "Precipitation Rate\t0in",
+      "matched_text": "Precipitation\t0.68 in",
       "unit_conversion": "in_to_mm",
       "render_status": {
-        "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-09-22/2026-09-22/monthly",
-        "ok": true,
+        "url": "https://www.wunderground.com/dashboard/pws/ISANTI135/table/2026-09-23/2026-09-23/monthly",
+        "ok": false,
         "usable": true,
         "engine": "playwright_chromium",
-        "error": null,
-        "html_length": 91664,
-        "text_length": 2473,
+        "error": "networkidle: Timeout 15000ms exceeded.",
+        "html_length": 349165,
+        "text_length": 3339,
         "effective_ok": true
       },
-      "raw_text_path": "docs/data/precipitaciones/raw/wunderground_asociacion_vivamos_mejor_coatitlan_r_l_2026-09-22.txt"
+      "raw_text_path": "docs/data/precipitaciones/raw/wunderground_asociacion_vivamos_mejor_coatitlan_r_l_2026-09-23.txt"
     },
     {
       "station_id": "vivamos_mejor_pws_complementaria_vivamos_mejor_tv_cable_santa_clara",
@@ -235,7 +235,7 @@
       "station_code": "ISANTACL3",
       "dashboard_id": null,
       "station_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3",
-      "history_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-09-22/2026-09-22/monthly",
+      "history_url": "https://www.wunderground.com/dashboard/pws/ISANTACL3/table/2026-09-23/2026-09-23/monthly",
       "enabled": true,
       "enabled_current_extraction": false,
       "enabled_historical_extraction": true,
