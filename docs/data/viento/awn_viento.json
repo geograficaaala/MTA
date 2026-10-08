@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "generated_at_gt": "2026-10-08T10:38:04-06:00",
-  "generated_at_utc": "2026-10-08T16:38:04+00:00",
+  "generated_at_gt": "2026-10-08T16:13:04-06:00",
+  "generated_at_utc": "2026-10-08T22:13:04+00:00",
   "source": {
     "name": "Ambient Weather REST API",
     "devices_endpoint": "https://api.ambientweather.net/v1/devices",
@@ -84,1298 +84,25 @@
     "direccion_promedio_10min_grados": "Dirección media durante diez minutos"
   },
   "latest": {
-    "fecha": "2026-10-08T10:37:00-06:00",
-    "timestamp": "2026-10-08T10:37:00-06:00",
-    "dateutc": 1791477420000,
+    "fecha": "2026-10-08T16:12:00-06:00",
+    "timestamp": "2026-10-08T16:12:00-06:00",
+    "dateutc": 1791497520000,
     "velocidad_viento_kmh": 0.0,
-    "racha_viento_kmh": 1.8,
-    "racha_maxima_diaria_kmh": 1.8,
-    "direccion_viento_grados": 34.0,
-    "direccion_viento_cardinal": "NE",
-    "direccion_promedio_10min_grados": 34.0,
-    "direccion_promedio_10min_cardinal": "NE",
+    "racha_viento_kmh": 0.0,
+    "racha_maxima_diaria_kmh": 5.41,
+    "direccion_viento_grados": 20.0,
+    "direccion_viento_cardinal": "NNE",
+    "direccion_promedio_10min_grados": 20.0,
+    "direccion_promedio_10min_cardinal": "NNE",
     "datos_originales": {
       "windspeedmph": 0.0,
-      "windgustmph": 1.12,
-      "maxdailygust": 1.12,
-      "winddir": 34.0,
-      "winddir_avg10m": 34.0
+      "windgustmph": 0.0,
+      "maxdailygust": 3.36,
+      "winddir": 20.0,
+      "winddir_avg10m": 20.0
     }
   },
   "history": [
-    {
-      "fecha": "2026-10-07T10:40:00-06:00",
-      "timestamp": "2026-10-07T10:40:00-06:00",
-      "dateutc": 1791391200000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 3.6,
-      "direccion_viento_grados": 29.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 29.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 2.24,
-        "winddir": 29.0,
-        "winddir_avg10m": 29.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T10:45:00-06:00",
-      "timestamp": "2026-10-07T10:45:00-06:00",
-      "dateutc": 1791391500000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 3.6,
-      "direccion_viento_grados": 30.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 30.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 2.24,
-        "maxdailygust": 2.24,
-        "winddir": 30.0,
-        "winddir_avg10m": 30.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T10:50:00-06:00",
-      "timestamp": "2026-10-07T10:50:00-06:00",
-      "dateutc": 1791391800000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 28.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 28.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T10:55:00-06:00",
-      "timestamp": "2026-10-07T10:55:00-06:00",
-      "dateutc": 1791392100000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 26.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 26.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 26.0,
-        "winddir_avg10m": 26.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:00:00-06:00",
-      "timestamp": "2026-10-07T11:00:00-06:00",
-      "dateutc": 1791392400000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:05:00-06:00",
-      "timestamp": "2026-10-07T11:05:00-06:00",
-      "dateutc": 1791392700000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:10:00-06:00",
-      "timestamp": "2026-10-07T11:10:00-06:00",
-      "dateutc": 1791393000000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:15:00-06:00",
-      "timestamp": "2026-10-07T11:15:00-06:00",
-      "dateutc": 1791393300000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 26.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 26.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:20:00-06:00",
-      "timestamp": "2026-10-07T11:20:00-06:00",
-      "dateutc": 1791393600000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:25:00-06:00",
-      "timestamp": "2026-10-07T11:25:00-06:00",
-      "dateutc": 1791393900000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 25.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 25.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:30:00-06:00",
-      "timestamp": "2026-10-07T11:30:00-06:00",
-      "dateutc": 1791394200000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:35:00-06:00",
-      "timestamp": "2026-10-07T11:35:00-06:00",
-      "dateutc": 1791394500000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:40:00-06:00",
-      "timestamp": "2026-10-07T11:40:00-06:00",
-      "dateutc": 1791394800000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:45:00-06:00",
-      "timestamp": "2026-10-07T11:45:00-06:00",
-      "dateutc": 1791395100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:51:00-06:00",
-      "timestamp": "2026-10-07T11:51:00-06:00",
-      "dateutc": 1791395460000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:55:00-06:00",
-      "timestamp": "2026-10-07T11:55:00-06:00",
-      "dateutc": 1791395700000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 5.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 5.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:00:00-06:00",
-      "timestamp": "2026-10-07T12:00:00-06:00",
-      "dateutc": 1791396000000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 328.0,
-      "direccion_viento_cardinal": "NNO",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 328.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:05:00-06:00",
-      "timestamp": "2026-10-07T12:05:00-06:00",
-      "dateutc": 1791396300000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 28.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 18.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 28.0,
-        "winddir_avg10m": 18.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:10:00-06:00",
-      "timestamp": "2026-10-07T12:10:00-06:00",
-      "dateutc": 1791396600000,
-      "velocidad_viento_kmh": 1.8,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 82.0,
-      "direccion_viento_cardinal": "E",
-      "direccion_promedio_10min_grados": 32.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.12,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 82.0,
-        "winddir_avg10m": 32.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:15:00-06:00",
-      "timestamp": "2026-10-07T12:15:00-06:00",
-      "dateutc": 1791396900000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 65.0,
-      "direccion_viento_cardinal": "ENE",
-      "direccion_promedio_10min_grados": 66.0,
-      "direccion_promedio_10min_cardinal": "ENE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 65.0,
-        "winddir_avg10m": 66.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:20:00-06:00",
-      "timestamp": "2026-10-07T12:20:00-06:00",
-      "dateutc": 1791397200000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 106.0,
-      "direccion_viento_cardinal": "ESE",
-      "direccion_promedio_10min_grados": 60.0,
-      "direccion_promedio_10min_cardinal": "ENE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 106.0,
-        "winddir_avg10m": 60.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:25:00-06:00",
-      "timestamp": "2026-10-07T12:25:00-06:00",
-      "dateutc": 1791397500000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 30.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 30.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:30:00-06:00",
-      "timestamp": "2026-10-07T12:30:00-06:00",
-      "dateutc": 1791397800000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:35:00-06:00",
-      "timestamp": "2026-10-07T12:35:00-06:00",
-      "dateutc": 1791398100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:40:00-06:00",
-      "timestamp": "2026-10-07T12:40:00-06:00",
-      "dateutc": 1791398400000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:45:00-06:00",
-      "timestamp": "2026-10-07T12:45:00-06:00",
-      "dateutc": 1791398700000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:51:00-06:00",
-      "timestamp": "2026-10-07T12:51:00-06:00",
-      "dateutc": 1791399060000,
-      "velocidad_viento_kmh": 1.08,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 340.0,
-      "direccion_viento_cardinal": "NNO",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.67,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 340.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:55:00-06:00",
-      "timestamp": "2026-10-07T12:55:00-06:00",
-      "dateutc": 1791399300000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 15.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 15.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:00:00-06:00",
-      "timestamp": "2026-10-07T13:00:00-06:00",
-      "dateutc": 1791399600000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 18.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 18.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:05:00-06:00",
-      "timestamp": "2026-10-07T13:05:00-06:00",
-      "dateutc": 1791399900000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 19.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 19.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 19.0,
-        "winddir_avg10m": 19.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:10:00-06:00",
-      "timestamp": "2026-10-07T13:10:00-06:00",
-      "dateutc": 1791400200000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 10.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 18.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 10.0,
-        "winddir_avg10m": 18.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:15:00-06:00",
-      "timestamp": "2026-10-07T13:15:00-06:00",
-      "dateutc": 1791400500000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 11.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 11.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 11.0,
-        "winddir_avg10m": 11.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:20:00-06:00",
-      "timestamp": "2026-10-07T13:20:00-06:00",
-      "dateutc": 1791400800000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 11.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 10.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 11.0,
-        "winddir_avg10m": 10.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:25:00-06:00",
-      "timestamp": "2026-10-07T13:25:00-06:00",
-      "dateutc": 1791401100000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 7.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 6.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 7.0,
-        "winddir_avg10m": 6.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:30:00-06:00",
-      "timestamp": "2026-10-07T13:30:00-06:00",
-      "dateutc": 1791401400000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 5.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 6.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 5.0,
-        "winddir_avg10m": 6.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:35:00-06:00",
-      "timestamp": "2026-10-07T13:35:00-06:00",
-      "dateutc": 1791401700000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 0.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 359.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 0.0,
-        "winddir_avg10m": 359.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:40:00-06:00",
-      "timestamp": "2026-10-07T13:40:00-06:00",
-      "dateutc": 1791402000000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 358.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 357.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 358.0,
-        "winddir_avg10m": 357.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:45:00-06:00",
-      "timestamp": "2026-10-07T13:45:00-06:00",
-      "dateutc": 1791402300000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 17.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 351.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 17.0,
-        "winddir_avg10m": 351.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:50:00-06:00",
-      "timestamp": "2026-10-07T13:50:00-06:00",
-      "dateutc": 1791402600000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 353.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 29.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 353.0,
-        "winddir_avg10m": 29.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:55:00-06:00",
-      "timestamp": "2026-10-07T13:55:00-06:00",
-      "dateutc": 1791402900000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 48.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 42.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 48.0,
-        "winddir_avg10m": 42.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:00:00-06:00",
-      "timestamp": "2026-10-07T14:00:00-06:00",
-      "dateutc": 1791403200000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 25.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 46.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 25.0,
-        "winddir_avg10m": 46.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:05:00-06:00",
-      "timestamp": "2026-10-07T14:05:00-06:00",
-      "dateutc": 1791403500000,
-      "velocidad_viento_kmh": 2.88,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 9.37,
-      "direccion_viento_grados": 17.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.79,
-        "windgustmph": 5.82,
-        "maxdailygust": 5.82,
-        "winddir": 17.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:10:00-06:00",
-      "timestamp": "2026-10-07T14:10:00-06:00",
-      "dateutc": 1791403800000,
-      "velocidad_viento_kmh": 5.04,
-      "racha_viento_kmh": 7.19,
-      "racha_maxima_diaria_kmh": 9.37,
-      "direccion_viento_grados": 359.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 3.13,
-        "windgustmph": 4.47,
-        "maxdailygust": 5.82,
-        "winddir": 359.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:15:00-06:00",
-      "timestamp": "2026-10-07T14:15:00-06:00",
-      "dateutc": 1791404100000,
-      "velocidad_viento_kmh": 3.6,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 2.24,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:20:00-06:00",
-      "timestamp": "2026-10-07T14:20:00-06:00",
-      "dateutc": 1791404400000,
-      "velocidad_viento_kmh": 2.53,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.57,
-        "windgustmph": 5.82,
-        "maxdailygust": 6.93,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:25:00-06:00",
-      "timestamp": "2026-10-07T14:25:00-06:00",
-      "dateutc": 1791404700000,
-      "velocidad_viento_kmh": 6.49,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 11.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 4.03,
-        "windgustmph": 5.82,
-        "maxdailygust": 6.93,
-        "winddir": 11.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:30:00-06:00",
-      "timestamp": "2026-10-07T14:30:00-06:00",
-      "dateutc": 1791405000000,
-      "velocidad_viento_kmh": 2.88,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 28.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.79,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 28.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:35:00-06:00",
-      "timestamp": "2026-10-07T14:35:00-06:00",
-      "dateutc": 1791405300000,
-      "velocidad_viento_kmh": 3.6,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 205.0,
-      "direccion_viento_cardinal": "SSO",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 2.24,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 205.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:40:00-06:00",
-      "timestamp": "2026-10-07T14:40:00-06:00",
-      "dateutc": 1791405600000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 353.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 5.82,
-        "maxdailygust": 6.93,
-        "winddir": 353.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:45:00-06:00",
-      "timestamp": "2026-10-07T14:45:00-06:00",
-      "dateutc": 1791405900000,
-      "velocidad_viento_kmh": 4.31,
-      "racha_viento_kmh": 7.19,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 351.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 2.68,
-        "windgustmph": 4.47,
-        "maxdailygust": 6.93,
-        "winddir": 351.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:50:00-06:00",
-      "timestamp": "2026-10-07T14:50:00-06:00",
-      "dateutc": 1791406200000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 41.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 41.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:55:00-06:00",
-      "timestamp": "2026-10-07T14:55:00-06:00",
-      "dateutc": 1791406500000,
-      "velocidad_viento_kmh": 2.88,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 45.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 54.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 1.79,
-        "windgustmph": 2.24,
-        "maxdailygust": 6.93,
-        "winddir": 45.0,
-        "winddir_avg10m": 54.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:00:00-06:00",
-      "timestamp": "2026-10-07T15:00:00-06:00",
-      "dateutc": 1791406800000,
-      "velocidad_viento_kmh": 1.08,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 26.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 26.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.67,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 26.0,
-        "winddir_avg10m": 26.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:05:00-06:00",
-      "timestamp": "2026-10-07T15:05:00-06:00",
-      "dateutc": 1791407100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 23.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 23.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 2.24,
-        "maxdailygust": 6.93,
-        "winddir": 23.0,
-        "winddir_avg10m": 23.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:10:00-06:00",
-      "timestamp": "2026-10-07T15:10:00-06:00",
-      "dateutc": 1791407400000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 13.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 13.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:15:00-06:00",
-      "timestamp": "2026-10-07T15:15:00-06:00",
-      "dateutc": 1791407700000,
-      "velocidad_viento_kmh": 1.8,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 0.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.12,
-        "windgustmph": 2.24,
-        "maxdailygust": 6.93,
-        "winddir": 0.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:20:00-06:00",
-      "timestamp": "2026-10-07T15:20:00-06:00",
-      "dateutc": 1791408000000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 35.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 35.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:25:00-06:00",
-      "timestamp": "2026-10-07T15:25:00-06:00",
-      "dateutc": 1791408300000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 34.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 35.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 34.0,
-        "winddir_avg10m": 35.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:30:00-06:00",
-      "timestamp": "2026-10-07T15:30:00-06:00",
-      "dateutc": 1791408600000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 22.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 22.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:35:00-06:00",
-      "timestamp": "2026-10-07T15:35:00-06:00",
-      "dateutc": 1791408900000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 22.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 22.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:40:00-06:00",
-      "timestamp": "2026-10-07T15:40:00-06:00",
-      "dateutc": 1791409200000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 22.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 22.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:45:00-06:00",
-      "timestamp": "2026-10-07T15:45:00-06:00",
-      "dateutc": 1791409500000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:50:00-06:00",
-      "timestamp": "2026-10-07T15:50:00-06:00",
-      "dateutc": 1791409800000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:55:00-06:00",
-      "timestamp": "2026-10-07T15:55:00-06:00",
-      "dateutc": 1791410100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T16:00:00-06:00",
-      "timestamp": "2026-10-07T16:00:00-06:00",
-      "dateutc": 1791410400000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T16:05:00-06:00",
-      "timestamp": "2026-10-07T16:05:00-06:00",
-      "dateutc": 1791410700000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T16:10:00-06:00",
-      "timestamp": "2026-10-07T16:10:00-06:00",
-      "dateutc": 1791411000000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
     {
       "fecha": "2026-10-07T16:15:00-06:00",
       "timestamp": "2026-10-07T16:15:00-06:00",
@@ -5576,9 +4303,9 @@
       }
     },
     {
-      "fecha": "2026-10-08T10:37:00-06:00",
-      "timestamp": "2026-10-08T10:37:00-06:00",
-      "dateutc": 1791477420000,
+      "fecha": "2026-10-08T10:40:00-06:00",
+      "timestamp": "2026-10-08T10:40:00-06:00",
+      "dateutc": 1791477600000,
       "velocidad_viento_kmh": 0.0,
       "racha_viento_kmh": 1.8,
       "racha_maxima_diaria_kmh": 1.8,
@@ -5592,1284 +4319,1284 @@
         "maxdailygust": 1.12,
         "winddir": 34.0,
         "winddir_avg10m": 34.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T10:45:00-06:00",
+      "timestamp": "2026-10-08T10:45:00-06:00",
+      "dateutc": 1791477900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 1.8,
+      "direccion_viento_grados": 34.0,
+      "direccion_viento_cardinal": "NE",
+      "direccion_promedio_10min_grados": 34.0,
+      "direccion_promedio_10min_cardinal": "NE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 1.12,
+        "winddir": 34.0,
+        "winddir_avg10m": 34.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T10:50:00-06:00",
+      "timestamp": "2026-10-08T10:50:00-06:00",
+      "dateutc": 1791478200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 1.8,
+      "direccion_viento_grados": 34.0,
+      "direccion_viento_cardinal": "NE",
+      "direccion_promedio_10min_grados": 34.0,
+      "direccion_promedio_10min_cardinal": "NE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 1.12,
+        "winddir": 34.0,
+        "winddir_avg10m": 34.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T10:55:00-06:00",
+      "timestamp": "2026-10-08T10:55:00-06:00",
+      "dateutc": 1791478500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 1.8,
+      "direccion_viento_grados": 33.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 33.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 1.12,
+        "winddir": 33.0,
+        "winddir_avg10m": 33.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:00:00-06:00",
+      "timestamp": "2026-10-08T11:00:00-06:00",
+      "dateutc": 1791478800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 33.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 33.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:05:00-06:00",
+      "timestamp": "2026-10-08T11:05:00-06:00",
+      "dateutc": 1791479100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 13.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 13.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:10:00-06:00",
+      "timestamp": "2026-10-08T11:10:00-06:00",
+      "dateutc": 1791479400000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 13.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 13.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:15:00-06:00",
+      "timestamp": "2026-10-08T11:15:00-06:00",
+      "dateutc": 1791479700000,
+      "velocidad_viento_kmh": 1.08,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 13.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 13.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.67,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 13.0,
+        "winddir_avg10m": 13.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:20:00-06:00",
+      "timestamp": "2026-10-08T11:20:00-06:00",
+      "dateutc": 1791480000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 14.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 14.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:25:00-06:00",
+      "timestamp": "2026-10-08T11:25:00-06:00",
+      "dateutc": 1791480300000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:30:00-06:00",
+      "timestamp": "2026-10-08T11:30:00-06:00",
+      "dateutc": 1791480600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:35:00-06:00",
+      "timestamp": "2026-10-08T11:35:00-06:00",
+      "dateutc": 1791480900000,
+      "velocidad_viento_kmh": 1.08,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.67,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:40:00-06:00",
+      "timestamp": "2026-10-08T11:40:00-06:00",
+      "dateutc": 1791481200000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:45:00-06:00",
+      "timestamp": "2026-10-08T11:45:00-06:00",
+      "dateutc": 1791481500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:50:00-06:00",
+      "timestamp": "2026-10-08T11:50:00-06:00",
+      "dateutc": 1791481800000,
+      "velocidad_viento_kmh": 2.88,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.79,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:55:00-06:00",
+      "timestamp": "2026-10-08T11:55:00-06:00",
+      "dateutc": 1791482100000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 4.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 4.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:00:00-06:00",
+      "timestamp": "2026-10-08T12:00:00-06:00",
+      "dateutc": 1791482400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:05:00-06:00",
+      "timestamp": "2026-10-08T12:05:00-06:00",
+      "dateutc": 1791482700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:10:00-06:00",
+      "timestamp": "2026-10-08T12:10:00-06:00",
+      "dateutc": 1791483000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:15:00-06:00",
+      "timestamp": "2026-10-08T12:15:00-06:00",
+      "dateutc": 1791483300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:20:00-06:00",
+      "timestamp": "2026-10-08T12:20:00-06:00",
+      "dateutc": 1791483600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:25:00-06:00",
+      "timestamp": "2026-10-08T12:25:00-06:00",
+      "dateutc": 1791483900000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:30:00-06:00",
+      "timestamp": "2026-10-08T12:30:00-06:00",
+      "dateutc": 1791484200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:35:00-06:00",
+      "timestamp": "2026-10-08T12:35:00-06:00",
+      "dateutc": 1791484500000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 4.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 4.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:40:00-06:00",
+      "timestamp": "2026-10-08T12:40:00-06:00",
+      "dateutc": 1791484800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:45:00-06:00",
+      "timestamp": "2026-10-08T12:45:00-06:00",
+      "dateutc": 1791485100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:50:00-06:00",
+      "timestamp": "2026-10-08T12:50:00-06:00",
+      "dateutc": 1791485400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:55:00-06:00",
+      "timestamp": "2026-10-08T12:55:00-06:00",
+      "dateutc": 1791485700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:00:00-06:00",
+      "timestamp": "2026-10-08T13:00:00-06:00",
+      "dateutc": 1791486000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 9.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 8.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 9.0,
+        "winddir_avg10m": 8.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:05:00-06:00",
+      "timestamp": "2026-10-08T13:05:00-06:00",
+      "dateutc": 1791486300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 15.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 10.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 15.0,
+        "winddir_avg10m": 10.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:10:00-06:00",
+      "timestamp": "2026-10-08T13:10:00-06:00",
+      "dateutc": 1791486600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 15.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 15.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 15.0,
+        "winddir_avg10m": 15.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:16:00-06:00",
+      "timestamp": "2026-10-08T13:16:00-06:00",
+      "dateutc": 1791486960000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:20:00-06:00",
+      "timestamp": "2026-10-08T13:20:00-06:00",
+      "dateutc": 1791487200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:25:00-06:00",
+      "timestamp": "2026-10-08T13:25:00-06:00",
+      "dateutc": 1791487500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:30:00-06:00",
+      "timestamp": "2026-10-08T13:30:00-06:00",
+      "dateutc": 1791487800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:35:00-06:00",
+      "timestamp": "2026-10-08T13:35:00-06:00",
+      "dateutc": 1791488100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:40:00-06:00",
+      "timestamp": "2026-10-08T13:40:00-06:00",
+      "dateutc": 1791488400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:45:00-06:00",
+      "timestamp": "2026-10-08T13:45:00-06:00",
+      "dateutc": 1791488700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:50:00-06:00",
+      "timestamp": "2026-10-08T13:50:00-06:00",
+      "dateutc": 1791489000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:55:00-06:00",
+      "timestamp": "2026-10-08T13:55:00-06:00",
+      "dateutc": 1791489300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 23.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 23.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:00:00-06:00",
+      "timestamp": "2026-10-08T14:00:00-06:00",
+      "dateutc": 1791489600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:05:00-06:00",
+      "timestamp": "2026-10-08T14:05:00-06:00",
+      "dateutc": 1791489900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:10:00-06:00",
+      "timestamp": "2026-10-08T14:10:00-06:00",
+      "dateutc": 1791490200000,
+      "velocidad_viento_kmh": 0.72,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.45,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:15:00-06:00",
+      "timestamp": "2026-10-08T14:15:00-06:00",
+      "dateutc": 1791490500000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:20:00-06:00",
+      "timestamp": "2026-10-08T14:20:00-06:00",
+      "dateutc": 1791490800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 1.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 1.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:25:00-06:00",
+      "timestamp": "2026-10-08T14:25:00-06:00",
+      "dateutc": 1791491100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 1.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 1.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:30:00-06:00",
+      "timestamp": "2026-10-08T14:30:00-06:00",
+      "dateutc": 1791491400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 1.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 1.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:35:00-06:00",
+      "timestamp": "2026-10-08T14:35:00-06:00",
+      "dateutc": 1791491700000,
+      "velocidad_viento_kmh": 3.96,
+      "racha_viento_kmh": 5.41,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 9.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 2.46,
+        "windgustmph": 3.36,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 9.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:40:00-06:00",
+      "timestamp": "2026-10-08T14:40:00-06:00",
+      "dateutc": 1791492000000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:45:00-06:00",
+      "timestamp": "2026-10-08T14:45:00-06:00",
+      "dateutc": 1791492300000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:50:00-06:00",
+      "timestamp": "2026-10-08T14:50:00-06:00",
+      "dateutc": 1791492600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:55:00-06:00",
+      "timestamp": "2026-10-08T14:55:00-06:00",
+      "dateutc": 1791492900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:00:00-06:00",
+      "timestamp": "2026-10-08T15:00:00-06:00",
+      "dateutc": 1791493200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:05:00-06:00",
+      "timestamp": "2026-10-08T15:05:00-06:00",
+      "dateutc": 1791493500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:10:00-06:00",
+      "timestamp": "2026-10-08T15:10:00-06:00",
+      "dateutc": 1791493800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:15:00-06:00",
+      "timestamp": "2026-10-08T15:15:00-06:00",
+      "dateutc": 1791494100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:20:00-06:00",
+      "timestamp": "2026-10-08T15:20:00-06:00",
+      "dateutc": 1791494400000,
+      "velocidad_viento_kmh": 0.72,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 19.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 19.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.45,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 19.0,
+        "winddir_avg10m": 19.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:25:00-06:00",
+      "timestamp": "2026-10-08T15:25:00-06:00",
+      "dateutc": 1791494700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:30:00-06:00",
+      "timestamp": "2026-10-08T15:30:00-06:00",
+      "dateutc": 1791495000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:35:00-06:00",
+      "timestamp": "2026-10-08T15:35:00-06:00",
+      "dateutc": 1791495300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:40:00-06:00",
+      "timestamp": "2026-10-08T15:40:00-06:00",
+      "dateutc": 1791495600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:45:00-06:00",
+      "timestamp": "2026-10-08T15:45:00-06:00",
+      "dateutc": 1791495900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:50:00-06:00",
+      "timestamp": "2026-10-08T15:50:00-06:00",
+      "dateutc": 1791496200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:55:00-06:00",
+      "timestamp": "2026-10-08T15:55:00-06:00",
+      "dateutc": 1791496500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:00:00-06:00",
+      "timestamp": "2026-10-08T16:00:00-06:00",
+      "dateutc": 1791496800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:05:00-06:00",
+      "timestamp": "2026-10-08T16:05:00-06:00",
+      "dateutc": 1791497100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:10:00-06:00",
+      "timestamp": "2026-10-08T16:10:00-06:00",
+      "dateutc": 1791497400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:12:00-06:00",
+      "timestamp": "2026-10-08T16:12:00-06:00",
+      "dateutc": 1791497520000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
       }
     }
   ],
   "registros": [
     {
-      "fecha": "2026-10-07T10:40:00-06:00",
-      "timestamp": "2026-10-07T10:40:00-06:00",
-      "dateutc": 1791391200000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 3.6,
-      "direccion_viento_grados": 29.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 29.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 2.24,
-        "winddir": 29.0,
-        "winddir_avg10m": 29.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T10:45:00-06:00",
-      "timestamp": "2026-10-07T10:45:00-06:00",
-      "dateutc": 1791391500000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 3.6,
-      "direccion_viento_grados": 30.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 30.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 2.24,
-        "maxdailygust": 2.24,
-        "winddir": 30.0,
-        "winddir_avg10m": 30.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T10:50:00-06:00",
-      "timestamp": "2026-10-07T10:50:00-06:00",
-      "dateutc": 1791391800000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 28.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 28.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T10:55:00-06:00",
-      "timestamp": "2026-10-07T10:55:00-06:00",
-      "dateutc": 1791392100000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 26.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 26.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 26.0,
-        "winddir_avg10m": 26.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:00:00-06:00",
-      "timestamp": "2026-10-07T11:00:00-06:00",
-      "dateutc": 1791392400000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:05:00-06:00",
-      "timestamp": "2026-10-07T11:05:00-06:00",
-      "dateutc": 1791392700000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:10:00-06:00",
-      "timestamp": "2026-10-07T11:10:00-06:00",
-      "dateutc": 1791393000000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:15:00-06:00",
-      "timestamp": "2026-10-07T11:15:00-06:00",
-      "dateutc": 1791393300000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 26.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 26.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:20:00-06:00",
-      "timestamp": "2026-10-07T11:20:00-06:00",
-      "dateutc": 1791393600000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 27.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 27.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:25:00-06:00",
-      "timestamp": "2026-10-07T11:25:00-06:00",
-      "dateutc": 1791393900000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 25.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 25.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:30:00-06:00",
-      "timestamp": "2026-10-07T11:30:00-06:00",
-      "dateutc": 1791394200000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:35:00-06:00",
-      "timestamp": "2026-10-07T11:35:00-06:00",
-      "dateutc": 1791394500000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:40:00-06:00",
-      "timestamp": "2026-10-07T11:40:00-06:00",
-      "dateutc": 1791394800000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:45:00-06:00",
-      "timestamp": "2026-10-07T11:45:00-06:00",
-      "dateutc": 1791395100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:51:00-06:00",
-      "timestamp": "2026-10-07T11:51:00-06:00",
-      "dateutc": 1791395460000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 24.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 24.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T11:55:00-06:00",
-      "timestamp": "2026-10-07T11:55:00-06:00",
-      "dateutc": 1791395700000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 5.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 24.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 5.0,
-        "winddir_avg10m": 24.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:00:00-06:00",
-      "timestamp": "2026-10-07T12:00:00-06:00",
-      "dateutc": 1791396000000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 328.0,
-      "direccion_viento_cardinal": "NNO",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 328.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:05:00-06:00",
-      "timestamp": "2026-10-07T12:05:00-06:00",
-      "dateutc": 1791396300000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 28.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 18.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 28.0,
-        "winddir_avg10m": 18.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:10:00-06:00",
-      "timestamp": "2026-10-07T12:10:00-06:00",
-      "dateutc": 1791396600000,
-      "velocidad_viento_kmh": 1.8,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 82.0,
-      "direccion_viento_cardinal": "E",
-      "direccion_promedio_10min_grados": 32.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.12,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 82.0,
-        "winddir_avg10m": 32.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:15:00-06:00",
-      "timestamp": "2026-10-07T12:15:00-06:00",
-      "dateutc": 1791396900000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 65.0,
-      "direccion_viento_cardinal": "ENE",
-      "direccion_promedio_10min_grados": 66.0,
-      "direccion_promedio_10min_cardinal": "ENE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 65.0,
-        "winddir_avg10m": 66.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:20:00-06:00",
-      "timestamp": "2026-10-07T12:20:00-06:00",
-      "dateutc": 1791397200000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 106.0,
-      "direccion_viento_cardinal": "ESE",
-      "direccion_promedio_10min_grados": 60.0,
-      "direccion_promedio_10min_cardinal": "ENE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 106.0,
-        "winddir_avg10m": 60.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:25:00-06:00",
-      "timestamp": "2026-10-07T12:25:00-06:00",
-      "dateutc": 1791397500000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 30.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 30.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:30:00-06:00",
-      "timestamp": "2026-10-07T12:30:00-06:00",
-      "dateutc": 1791397800000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:35:00-06:00",
-      "timestamp": "2026-10-07T12:35:00-06:00",
-      "dateutc": 1791398100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:40:00-06:00",
-      "timestamp": "2026-10-07T12:40:00-06:00",
-      "dateutc": 1791398400000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:45:00-06:00",
-      "timestamp": "2026-10-07T12:45:00-06:00",
-      "dateutc": 1791398700000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:51:00-06:00",
-      "timestamp": "2026-10-07T12:51:00-06:00",
-      "dateutc": 1791399060000,
-      "velocidad_viento_kmh": 1.08,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 340.0,
-      "direccion_viento_cardinal": "NNO",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.67,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 340.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T12:55:00-06:00",
-      "timestamp": "2026-10-07T12:55:00-06:00",
-      "dateutc": 1791399300000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 15.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 15.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:00:00-06:00",
-      "timestamp": "2026-10-07T13:00:00-06:00",
-      "dateutc": 1791399600000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 18.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 18.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:05:00-06:00",
-      "timestamp": "2026-10-07T13:05:00-06:00",
-      "dateutc": 1791399900000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 19.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 19.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 19.0,
-        "winddir_avg10m": 19.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:10:00-06:00",
-      "timestamp": "2026-10-07T13:10:00-06:00",
-      "dateutc": 1791400200000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 10.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 18.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 10.0,
-        "winddir_avg10m": 18.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:15:00-06:00",
-      "timestamp": "2026-10-07T13:15:00-06:00",
-      "dateutc": 1791400500000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 11.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 11.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 11.0,
-        "winddir_avg10m": 11.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:20:00-06:00",
-      "timestamp": "2026-10-07T13:20:00-06:00",
-      "dateutc": 1791400800000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 11.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 10.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 11.0,
-        "winddir_avg10m": 10.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:25:00-06:00",
-      "timestamp": "2026-10-07T13:25:00-06:00",
-      "dateutc": 1791401100000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 7.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 6.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 7.0,
-        "winddir_avg10m": 6.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:30:00-06:00",
-      "timestamp": "2026-10-07T13:30:00-06:00",
-      "dateutc": 1791401400000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 5.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 6.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 3.36,
-        "winddir": 5.0,
-        "winddir_avg10m": 6.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:35:00-06:00",
-      "timestamp": "2026-10-07T13:35:00-06:00",
-      "dateutc": 1791401700000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 0.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 359.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 0.0,
-        "winddir_avg10m": 359.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:40:00-06:00",
-      "timestamp": "2026-10-07T13:40:00-06:00",
-      "dateutc": 1791402000000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 358.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 357.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 358.0,
-        "winddir_avg10m": 357.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:45:00-06:00",
-      "timestamp": "2026-10-07T13:45:00-06:00",
-      "dateutc": 1791402300000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 17.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 351.0,
-      "direccion_promedio_10min_cardinal": "N",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 2.24,
-        "maxdailygust": 3.36,
-        "winddir": 17.0,
-        "winddir_avg10m": 351.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:50:00-06:00",
-      "timestamp": "2026-10-07T13:50:00-06:00",
-      "dateutc": 1791402600000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 353.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 29.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 353.0,
-        "winddir_avg10m": 29.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T13:55:00-06:00",
-      "timestamp": "2026-10-07T13:55:00-06:00",
-      "dateutc": 1791402900000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 48.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 42.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 3.36,
-        "winddir": 48.0,
-        "winddir_avg10m": 42.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:00:00-06:00",
-      "timestamp": "2026-10-07T14:00:00-06:00",
-      "dateutc": 1791403200000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 5.41,
-      "direccion_viento_grados": 25.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 46.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 3.36,
-        "maxdailygust": 3.36,
-        "winddir": 25.0,
-        "winddir_avg10m": 46.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:05:00-06:00",
-      "timestamp": "2026-10-07T14:05:00-06:00",
-      "dateutc": 1791403500000,
-      "velocidad_viento_kmh": 2.88,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 9.37,
-      "direccion_viento_grados": 17.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 27.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.79,
-        "windgustmph": 5.82,
-        "maxdailygust": 5.82,
-        "winddir": 17.0,
-        "winddir_avg10m": 27.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:10:00-06:00",
-      "timestamp": "2026-10-07T14:10:00-06:00",
-      "dateutc": 1791403800000,
-      "velocidad_viento_kmh": 5.04,
-      "racha_viento_kmh": 7.19,
-      "racha_maxima_diaria_kmh": 9.37,
-      "direccion_viento_grados": 359.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 3.13,
-        "windgustmph": 4.47,
-        "maxdailygust": 5.82,
-        "winddir": 359.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:15:00-06:00",
-      "timestamp": "2026-10-07T14:15:00-06:00",
-      "dateutc": 1791404100000,
-      "velocidad_viento_kmh": 3.6,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 2.24,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:20:00-06:00",
-      "timestamp": "2026-10-07T14:20:00-06:00",
-      "dateutc": 1791404400000,
-      "velocidad_viento_kmh": 2.53,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 20.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.57,
-        "windgustmph": 5.82,
-        "maxdailygust": 6.93,
-        "winddir": 20.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:25:00-06:00",
-      "timestamp": "2026-10-07T14:25:00-06:00",
-      "dateutc": 1791404700000,
-      "velocidad_viento_kmh": 6.49,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 11.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 4.03,
-        "windgustmph": 5.82,
-        "maxdailygust": 6.93,
-        "winddir": 11.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:30:00-06:00",
-      "timestamp": "2026-10-07T14:30:00-06:00",
-      "dateutc": 1791405000000,
-      "velocidad_viento_kmh": 2.88,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 28.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 20.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.79,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 28.0,
-        "winddir_avg10m": 20.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:35:00-06:00",
-      "timestamp": "2026-10-07T14:35:00-06:00",
-      "dateutc": 1791405300000,
-      "velocidad_viento_kmh": 3.6,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 205.0,
-      "direccion_viento_cardinal": "SSO",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 2.24,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 205.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:40:00-06:00",
-      "timestamp": "2026-10-07T14:40:00-06:00",
-      "dateutc": 1791405600000,
-      "velocidad_viento_kmh": 2.16,
-      "racha_viento_kmh": 9.37,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 353.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.34,
-        "windgustmph": 5.82,
-        "maxdailygust": 6.93,
-        "winddir": 353.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:45:00-06:00",
-      "timestamp": "2026-10-07T14:45:00-06:00",
-      "dateutc": 1791405900000,
-      "velocidad_viento_kmh": 4.31,
-      "racha_viento_kmh": 7.19,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 351.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 28.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 2.68,
-        "windgustmph": 4.47,
-        "maxdailygust": 6.93,
-        "winddir": 351.0,
-        "winddir_avg10m": 28.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:50:00-06:00",
-      "timestamp": "2026-10-07T14:50:00-06:00",
-      "dateutc": 1791406200000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 41.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 41.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T14:55:00-06:00",
-      "timestamp": "2026-10-07T14:55:00-06:00",
-      "dateutc": 1791406500000,
-      "velocidad_viento_kmh": 2.88,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 45.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 54.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 1.79,
-        "windgustmph": 2.24,
-        "maxdailygust": 6.93,
-        "winddir": 45.0,
-        "winddir_avg10m": 54.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:00:00-06:00",
-      "timestamp": "2026-10-07T15:00:00-06:00",
-      "dateutc": 1791406800000,
-      "velocidad_viento_kmh": 1.08,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 26.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 26.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.67,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 26.0,
-        "winddir_avg10m": 26.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:05:00-06:00",
-      "timestamp": "2026-10-07T15:05:00-06:00",
-      "dateutc": 1791407100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 23.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 23.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 2.24,
-        "maxdailygust": 6.93,
-        "winddir": 23.0,
-        "winddir_avg10m": 23.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:10:00-06:00",
-      "timestamp": "2026-10-07T15:10:00-06:00",
-      "dateutc": 1791407400000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 5.41,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 13.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 3.36,
-        "maxdailygust": 6.93,
-        "winddir": 13.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:15:00-06:00",
-      "timestamp": "2026-10-07T15:15:00-06:00",
-      "dateutc": 1791407700000,
-      "velocidad_viento_kmh": 1.8,
-      "racha_viento_kmh": 3.6,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 0.0,
-      "direccion_viento_cardinal": "N",
-      "direccion_promedio_10min_grados": 15.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 1.12,
-        "windgustmph": 2.24,
-        "maxdailygust": 6.93,
-        "winddir": 0.0,
-        "winddir_avg10m": 15.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:20:00-06:00",
-      "timestamp": "2026-10-07T15:20:00-06:00",
-      "dateutc": 1791408000000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 35.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 25.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 35.0,
-        "winddir_avg10m": 25.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:25:00-06:00",
-      "timestamp": "2026-10-07T15:25:00-06:00",
-      "dateutc": 1791408300000,
-      "velocidad_viento_kmh": 0.72,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 34.0,
-      "direccion_viento_cardinal": "NE",
-      "direccion_promedio_10min_grados": 35.0,
-      "direccion_promedio_10min_cardinal": "NE",
-      "datos_originales": {
-        "windspeedmph": 0.45,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 34.0,
-        "winddir_avg10m": 35.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:30:00-06:00",
-      "timestamp": "2026-10-07T15:30:00-06:00",
-      "dateutc": 1791408600000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 22.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 22.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:35:00-06:00",
-      "timestamp": "2026-10-07T15:35:00-06:00",
-      "dateutc": 1791408900000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 22.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 22.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:40:00-06:00",
-      "timestamp": "2026-10-07T15:40:00-06:00",
-      "dateutc": 1791409200000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 22.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 22.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 22.0,
-        "winddir_avg10m": 22.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:45:00-06:00",
-      "timestamp": "2026-10-07T15:45:00-06:00",
-      "dateutc": 1791409500000,
-      "velocidad_viento_kmh": 0.35,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.22,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:50:00-06:00",
-      "timestamp": "2026-10-07T15:50:00-06:00",
-      "dateutc": 1791409800000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T15:55:00-06:00",
-      "timestamp": "2026-10-07T15:55:00-06:00",
-      "dateutc": 1791410100000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T16:00:00-06:00",
-      "timestamp": "2026-10-07T16:00:00-06:00",
-      "dateutc": 1791410400000,
-      "velocidad_viento_kmh": 1.43,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.89,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T16:05:00-06:00",
-      "timestamp": "2026-10-07T16:05:00-06:00",
-      "dateutc": 1791410700000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 1.8,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 1.12,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
-      "fecha": "2026-10-07T16:10:00-06:00",
-      "timestamp": "2026-10-07T16:10:00-06:00",
-      "dateutc": 1791411000000,
-      "velocidad_viento_kmh": 0.0,
-      "racha_viento_kmh": 0.0,
-      "racha_maxima_diaria_kmh": 11.15,
-      "direccion_viento_grados": 21.0,
-      "direccion_viento_cardinal": "NNE",
-      "direccion_promedio_10min_grados": 21.0,
-      "direccion_promedio_10min_cardinal": "NNE",
-      "datos_originales": {
-        "windspeedmph": 0.0,
-        "windgustmph": 0.0,
-        "maxdailygust": 6.93,
-        "winddir": 21.0,
-        "winddir_avg10m": 21.0
-      }
-    },
-    {
       "fecha": "2026-10-07T16:15:00-06:00",
       "timestamp": "2026-10-07T16:15:00-06:00",
       "dateutc": 1791411300000,
@@ -11069,9 +9796,9 @@
       }
     },
     {
-      "fecha": "2026-10-08T10:37:00-06:00",
-      "timestamp": "2026-10-08T10:37:00-06:00",
-      "dateutc": 1791477420000,
+      "fecha": "2026-10-08T10:40:00-06:00",
+      "timestamp": "2026-10-08T10:40:00-06:00",
+      "dateutc": 1791477600000,
       "velocidad_viento_kmh": 0.0,
       "racha_viento_kmh": 1.8,
       "racha_maxima_diaria_kmh": 1.8,
@@ -11085,6 +9812,1279 @@
         "maxdailygust": 1.12,
         "winddir": 34.0,
         "winddir_avg10m": 34.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T10:45:00-06:00",
+      "timestamp": "2026-10-08T10:45:00-06:00",
+      "dateutc": 1791477900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 1.8,
+      "direccion_viento_grados": 34.0,
+      "direccion_viento_cardinal": "NE",
+      "direccion_promedio_10min_grados": 34.0,
+      "direccion_promedio_10min_cardinal": "NE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 1.12,
+        "winddir": 34.0,
+        "winddir_avg10m": 34.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T10:50:00-06:00",
+      "timestamp": "2026-10-08T10:50:00-06:00",
+      "dateutc": 1791478200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 1.8,
+      "direccion_viento_grados": 34.0,
+      "direccion_viento_cardinal": "NE",
+      "direccion_promedio_10min_grados": 34.0,
+      "direccion_promedio_10min_cardinal": "NE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 1.12,
+        "winddir": 34.0,
+        "winddir_avg10m": 34.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T10:55:00-06:00",
+      "timestamp": "2026-10-08T10:55:00-06:00",
+      "dateutc": 1791478500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 1.8,
+      "direccion_viento_grados": 33.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 33.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 1.12,
+        "winddir": 33.0,
+        "winddir_avg10m": 33.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:00:00-06:00",
+      "timestamp": "2026-10-08T11:00:00-06:00",
+      "dateutc": 1791478800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 33.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 33.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:05:00-06:00",
+      "timestamp": "2026-10-08T11:05:00-06:00",
+      "dateutc": 1791479100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 13.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 13.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:10:00-06:00",
+      "timestamp": "2026-10-08T11:10:00-06:00",
+      "dateutc": 1791479400000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 13.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 13.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:15:00-06:00",
+      "timestamp": "2026-10-08T11:15:00-06:00",
+      "dateutc": 1791479700000,
+      "velocidad_viento_kmh": 1.08,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 13.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 13.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.67,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 13.0,
+        "winddir_avg10m": 13.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:20:00-06:00",
+      "timestamp": "2026-10-08T11:20:00-06:00",
+      "dateutc": 1791480000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 14.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 14.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 14.0,
+        "winddir_avg10m": 14.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:25:00-06:00",
+      "timestamp": "2026-10-08T11:25:00-06:00",
+      "dateutc": 1791480300000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:30:00-06:00",
+      "timestamp": "2026-10-08T11:30:00-06:00",
+      "dateutc": 1791480600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:35:00-06:00",
+      "timestamp": "2026-10-08T11:35:00-06:00",
+      "dateutc": 1791480900000,
+      "velocidad_viento_kmh": 1.08,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.67,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:40:00-06:00",
+      "timestamp": "2026-10-08T11:40:00-06:00",
+      "dateutc": 1791481200000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:45:00-06:00",
+      "timestamp": "2026-10-08T11:45:00-06:00",
+      "dateutc": 1791481500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:50:00-06:00",
+      "timestamp": "2026-10-08T11:50:00-06:00",
+      "dateutc": 1791481800000,
+      "velocidad_viento_kmh": 2.88,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.79,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T11:55:00-06:00",
+      "timestamp": "2026-10-08T11:55:00-06:00",
+      "dateutc": 1791482100000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 4.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 4.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:00:00-06:00",
+      "timestamp": "2026-10-08T12:00:00-06:00",
+      "dateutc": 1791482400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:05:00-06:00",
+      "timestamp": "2026-10-08T12:05:00-06:00",
+      "dateutc": 1791482700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:10:00-06:00",
+      "timestamp": "2026-10-08T12:10:00-06:00",
+      "dateutc": 1791483000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:15:00-06:00",
+      "timestamp": "2026-10-08T12:15:00-06:00",
+      "dateutc": 1791483300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:20:00-06:00",
+      "timestamp": "2026-10-08T12:20:00-06:00",
+      "dateutc": 1791483600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:25:00-06:00",
+      "timestamp": "2026-10-08T12:25:00-06:00",
+      "dateutc": 1791483900000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:30:00-06:00",
+      "timestamp": "2026-10-08T12:30:00-06:00",
+      "dateutc": 1791484200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:35:00-06:00",
+      "timestamp": "2026-10-08T12:35:00-06:00",
+      "dateutc": 1791484500000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 4.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 4.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:40:00-06:00",
+      "timestamp": "2026-10-08T12:40:00-06:00",
+      "dateutc": 1791484800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:45:00-06:00",
+      "timestamp": "2026-10-08T12:45:00-06:00",
+      "dateutc": 1791485100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:50:00-06:00",
+      "timestamp": "2026-10-08T12:50:00-06:00",
+      "dateutc": 1791485400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T12:55:00-06:00",
+      "timestamp": "2026-10-08T12:55:00-06:00",
+      "dateutc": 1791485700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 5.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 5.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 5.0,
+        "winddir_avg10m": 5.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:00:00-06:00",
+      "timestamp": "2026-10-08T13:00:00-06:00",
+      "dateutc": 1791486000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 9.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 8.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 9.0,
+        "winddir_avg10m": 8.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:05:00-06:00",
+      "timestamp": "2026-10-08T13:05:00-06:00",
+      "dateutc": 1791486300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 15.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 10.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 15.0,
+        "winddir_avg10m": 10.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:10:00-06:00",
+      "timestamp": "2026-10-08T13:10:00-06:00",
+      "dateutc": 1791486600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 15.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 15.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 15.0,
+        "winddir_avg10m": 15.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:16:00-06:00",
+      "timestamp": "2026-10-08T13:16:00-06:00",
+      "dateutc": 1791486960000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:20:00-06:00",
+      "timestamp": "2026-10-08T13:20:00-06:00",
+      "dateutc": 1791487200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:25:00-06:00",
+      "timestamp": "2026-10-08T13:25:00-06:00",
+      "dateutc": 1791487500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:30:00-06:00",
+      "timestamp": "2026-10-08T13:30:00-06:00",
+      "dateutc": 1791487800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:35:00-06:00",
+      "timestamp": "2026-10-08T13:35:00-06:00",
+      "dateutc": 1791488100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:40:00-06:00",
+      "timestamp": "2026-10-08T13:40:00-06:00",
+      "dateutc": 1791488400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:45:00-06:00",
+      "timestamp": "2026-10-08T13:45:00-06:00",
+      "dateutc": 1791488700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:50:00-06:00",
+      "timestamp": "2026-10-08T13:50:00-06:00",
+      "dateutc": 1791489000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T13:55:00-06:00",
+      "timestamp": "2026-10-08T13:55:00-06:00",
+      "dateutc": 1791489300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 23.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 23.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:00:00-06:00",
+      "timestamp": "2026-10-08T14:00:00-06:00",
+      "dateutc": 1791489600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:05:00-06:00",
+      "timestamp": "2026-10-08T14:05:00-06:00",
+      "dateutc": 1791489900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 22.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 22.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 22.0,
+        "winddir_avg10m": 22.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:10:00-06:00",
+      "timestamp": "2026-10-08T14:10:00-06:00",
+      "dateutc": 1791490200000,
+      "velocidad_viento_kmh": 0.72,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.45,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:15:00-06:00",
+      "timestamp": "2026-10-08T14:15:00-06:00",
+      "dateutc": 1791490500000,
+      "velocidad_viento_kmh": 0.35,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.22,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:20:00-06:00",
+      "timestamp": "2026-10-08T14:20:00-06:00",
+      "dateutc": 1791490800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 1.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 1.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:25:00-06:00",
+      "timestamp": "2026-10-08T14:25:00-06:00",
+      "dateutc": 1791491100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 1.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 1.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:30:00-06:00",
+      "timestamp": "2026-10-08T14:30:00-06:00",
+      "dateutc": 1791491400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 1.0,
+      "direccion_viento_cardinal": "N",
+      "direccion_promedio_10min_grados": 1.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 1.0,
+        "winddir_avg10m": 1.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:35:00-06:00",
+      "timestamp": "2026-10-08T14:35:00-06:00",
+      "dateutc": 1791491700000,
+      "velocidad_viento_kmh": 3.96,
+      "racha_viento_kmh": 5.41,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 9.0,
+      "direccion_promedio_10min_cardinal": "N",
+      "datos_originales": {
+        "windspeedmph": 2.46,
+        "windgustmph": 3.36,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 9.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:40:00-06:00",
+      "timestamp": "2026-10-08T14:40:00-06:00",
+      "dateutc": 1791492000000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 21.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 21.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 21.0,
+        "winddir_avg10m": 21.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:45:00-06:00",
+      "timestamp": "2026-10-08T14:45:00-06:00",
+      "dateutc": 1791492300000,
+      "velocidad_viento_kmh": 1.8,
+      "racha_viento_kmh": 3.6,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 1.12,
+        "windgustmph": 2.24,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:50:00-06:00",
+      "timestamp": "2026-10-08T14:50:00-06:00",
+      "dateutc": 1791492600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T14:55:00-06:00",
+      "timestamp": "2026-10-08T14:55:00-06:00",
+      "dateutc": 1791492900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:00:00-06:00",
+      "timestamp": "2026-10-08T15:00:00-06:00",
+      "dateutc": 1791493200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:05:00-06:00",
+      "timestamp": "2026-10-08T15:05:00-06:00",
+      "dateutc": 1791493500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:10:00-06:00",
+      "timestamp": "2026-10-08T15:10:00-06:00",
+      "dateutc": 1791493800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:15:00-06:00",
+      "timestamp": "2026-10-08T15:15:00-06:00",
+      "dateutc": 1791494100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 18.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 18.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 18.0,
+        "winddir_avg10m": 18.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:20:00-06:00",
+      "timestamp": "2026-10-08T15:20:00-06:00",
+      "dateutc": 1791494400000,
+      "velocidad_viento_kmh": 0.72,
+      "racha_viento_kmh": 1.8,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 19.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 19.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.45,
+        "windgustmph": 1.12,
+        "maxdailygust": 3.36,
+        "winddir": 19.0,
+        "winddir_avg10m": 19.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:25:00-06:00",
+      "timestamp": "2026-10-08T15:25:00-06:00",
+      "dateutc": 1791494700000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:30:00-06:00",
+      "timestamp": "2026-10-08T15:30:00-06:00",
+      "dateutc": 1791495000000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:35:00-06:00",
+      "timestamp": "2026-10-08T15:35:00-06:00",
+      "dateutc": 1791495300000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:40:00-06:00",
+      "timestamp": "2026-10-08T15:40:00-06:00",
+      "dateutc": 1791495600000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:45:00-06:00",
+      "timestamp": "2026-10-08T15:45:00-06:00",
+      "dateutc": 1791495900000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:50:00-06:00",
+      "timestamp": "2026-10-08T15:50:00-06:00",
+      "dateutc": 1791496200000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T15:55:00-06:00",
+      "timestamp": "2026-10-08T15:55:00-06:00",
+      "dateutc": 1791496500000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:00:00-06:00",
+      "timestamp": "2026-10-08T16:00:00-06:00",
+      "dateutc": 1791496800000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:05:00-06:00",
+      "timestamp": "2026-10-08T16:05:00-06:00",
+      "dateutc": 1791497100000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:10:00-06:00",
+      "timestamp": "2026-10-08T16:10:00-06:00",
+      "dateutc": 1791497400000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
+      }
+    },
+    {
+      "fecha": "2026-10-08T16:12:00-06:00",
+      "timestamp": "2026-10-08T16:12:00-06:00",
+      "dateutc": 1791497520000,
+      "velocidad_viento_kmh": 0.0,
+      "racha_viento_kmh": 0.0,
+      "racha_maxima_diaria_kmh": 5.41,
+      "direccion_viento_grados": 20.0,
+      "direccion_viento_cardinal": "NNE",
+      "direccion_promedio_10min_grados": 20.0,
+      "direccion_promedio_10min_cardinal": "NNE",
+      "datos_originales": {
+        "windspeedmph": 0.0,
+        "windgustmph": 0.0,
+        "maxdailygust": 3.36,
+        "winddir": 20.0,
+        "winddir_avg10m": 20.0
       }
     }
   ],
