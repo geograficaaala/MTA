@@ -405,6 +405,33 @@
       .bulletin-controls{padding:0 14px}
       .bulletin-note{font-size:.75rem}
     }
+
+    /* Nuevas secciones: mismos colores, tipografías y componentes del sitio. */
+    .mta-history{border-top:1px solid var(--line)}
+    .history-content{min-height:135px}
+    .home-previews{padding-top:90px;padding-bottom:100px}
+    .previews-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .preview-resource{display:flex;flex-direction:column;gap:16px}
+    .preview-media{width:100%;aspect-ratio:4/3;background:var(--cream-soft);border:1px solid var(--line)}
+    .preview-resource .text-link{align-self:flex-start;margin-top:auto}
+    .nav-dropdown{position:relative;flex:0 0 auto}
+    .nav-dropdown summary{list-style:none;cursor:pointer;position:relative;padding:10px 14px 10px 0;font-size:.78rem;font-weight:500;white-space:nowrap}
+    .nav-dropdown summary::-webkit-details-marker{display:none}
+    .nav-dropdown summary::after{content:"⌄";position:absolute;right:0;top:8px;color:var(--gold)}
+    .nav-dropdown summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    .nav-submenu{position:absolute;left:0;top:100%;min-width:235px;background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 35px rgba(25,35,28,.12);padding:9px 18px;z-index:50}
+    .nav-submenu a{display:block;white-space:normal;border-bottom:1px solid var(--line);padding:13px 0}
+    .nav-submenu a:last-child{border-bottom:0}
+    @media(max-width:1100px) and (min-width:1021px){.nav-dropdown summary{font-size:.72rem}}
+    @media(max-width:1020px){
+      .nav-dropdown{width:100%;flex:0 0 auto}
+      .nav-dropdown summary{font-size:.95rem;padding:18px 0;border-bottom:1px solid var(--line)}
+      .nav-dropdown summary::after{right:5px;top:16px}
+      .nav-submenu{position:static;box-shadow:none;border:0;padding:0 0 0 20px}
+      .nav-submenu a{font-size:.85rem;padding:14px 0}
+      .previews-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:620px){.previews-grid{grid-template-columns:1fr}.home-previews{padding-top:64px;padding-bottom:70px}}
   </style>
 </head>
 <body>
@@ -425,8 +452,23 @@
 
     <nav class="nav" aria-label="Navegación principal" data-nav>
       <a href="./index.html" aria-current="page">Inicio</a>
-      <a href="#recomendaciones">Recomendaciones agroclimáticas</a>
-      <a href="./docs/clima_index.html">Información climática</a>
+      <details class="nav-dropdown">
+        <summary>Recomendaciones agroclimáticas</summary>
+        <div class="nav-submenu">
+          <a href="./boletines.html">Boletines</a>
+          <a href="./infografias.html">Recomendaciones (infografías)</a>
+          <a href="./mapas.html">Mapas</a>
+        </div>
+      </details>
+      <details class="nav-dropdown">
+        <summary>Información climática</summary>
+        <div class="nav-submenu">
+          <a href="./docs/precipitaciones_index.html">Precipitación</a>
+          <a href="./docs/temperatura_index.html">Temperatura</a>
+          <a href="./docs/viento_index.html">Viento</a>
+          <a href="./docs/agroclima_index.html">Agroclima</a>
+        </div>
+      </details>
       <a href="./comentarios_index.html">Comentarios</a>
       <a href="#contacto">Contacto</a>
       <button type="button" data-search-open>Buscar</button>
@@ -442,9 +484,9 @@
       <h1 class="hero-title" id="heroTitle">Mesa Técnica Agroclimática de Sololá.</h1>
       <p class="hero-lead">El portal reúne información climática, perspectivas, recomendaciones y herramientas de consulta para apoyar la planificación y la toma de decisiones del sector agropecuario en Sololá.</p>
       <div class="btn-row">
-        <a class="btn" href="#recomendaciones">Ver recomendaciones</a>
+        <a class="btn" href="./infografias.html">Ver recomendaciones</a>
         <a class="btn btn-light" href="./docs/clima_index.html">Consultar información climática</a>
-        <a class="btn btn-light" href="#mapas">Ir a mapas</a>
+        <a class="btn btn-light" href="./mapas.html">Ir a mapas</a>
       </div>
     </div>
     <div class="hero-media photo-real">
@@ -460,203 +502,14 @@
   </section>
 
   <!-- RECOMENDACIONES: posteriormente puede enlazar a la página propia de recomendaciones. -->
-  <section class="split" id="recomendaciones">
-    <div class="split-copy dark">
-      <p class="eyebrow">Contenido principal</p>
-      <h2 class="section-title display">Recomendaciones agroclimáticas.</h2>
-      <p class="section-copy">En esta sección encontrarás las recomendaciones agroclimáticas vigentes para Sololá. Las orientaciones integran información climática, análisis técnico y condiciones del territorio para apoyar decisiones de manejo, prevención y planificación productiva.</p>
-      <div class="btn-row">
-        <a class="btn" href="#boletin">Consultar recomendaciones</a>
-      </div>
-    </div>
-    <div class="split-media photo-real">
-      <img src="./agricultura1.jpg" alt="Fotografía de producción agrícola para la MTA Sololá" loading="lazy">
-    </div>
-  </section>
 
   <!-- BOLETÍN: carrusel listo para sumar nuevos documentos.
        Para añadir otro boletín, duplica un <article class="bulletin-slide"> y cambia PDF/textos. -->
-  <section class="bulletin" id="boletin">
-    <div class="shell">
-      <div class="bulletin-head">
-        <div>
-          <p class="eyebrow">Boletín agroclimático</p>
-          <h2 class="section-title display">Boletines agroclimáticos de Sololá.</h2>
-        </div>
-        <p class="bulletin-note">Aquí puedes consultar el boletín agroclimático disponible para Sololá, revisar su contenido directamente en la página y descargar el documento completo para utilizarlo como referencia técnica.</p>
-      </div>
-
-      <div class="bulletin-carousel" data-bulletin-carousel>
-        <div class="bulletin-viewport">
-          <div class="bulletin-track" data-bulletin-track>
-            <article class="bulletin-slide" data-bulletin-slide>
-              <div class="bulletin-cover" aria-label="Lector del boletín agroclimático">
-                <div class="pdf-reader" data-pdf-reader data-pdf="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf">
-                  <div class="pdf-stage" data-pdf-stage tabindex="0" aria-label="Documento PDF. Desplázate para recorrer sus páginas">
-                    <div class="pdf-pages" data-pdf-pages></div>
-                    <div class="pdf-loading" data-pdf-loading>Cargando boletín</div>
-                  </div>
-                  <div class="pdf-toolbar" aria-label="Opciones de lectura del boletín">
-                    <button class="pdf-control" type="button" data-pdf-fit aria-label="Ajustar tamaño del documento">Ajustar tamaño</button>
-                  </div>
-                </div>
-              </div>
-              <div class="bulletin-body">
-                <p class="bulletin-period">Último boletín disponible. Período DEFM 2025 2026</p>
-                <h3 class="bulletin-title">Boletín agroclimático de la MTA Sololá</h3>
-                <p>El boletín reúne el análisis climático y las recomendaciones agroclimáticas elaboradas para el territorio. Puedes leer el documento completo en esta página o descargarlo para consultarlo posteriormente.</p>
-                <div class="btn-row">
-                  <a class="btn" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" target="_blank" rel="noopener">Ver boletín</a>
-                  <a class="text-link" href="./Bolet%C3%ADn%20SOLOLA%20DEFM%2025-26.pdf.pdf" download>Descargar PDF</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="bulletin-controls" aria-label="Controles del carrusel de boletines">
-          <div class="bulletin-nav">
-            <button class="carousel-btn" type="button" aria-label="Boletín anterior" data-bulletin-prev>←</button>
-            <button class="carousel-btn" type="button" aria-label="Boletín siguiente" data-bulletin-next>→</button>
-          </div>
-          <div class="carousel-dots" data-bulletin-dots aria-label="Boletines disponibles"></div>
-          <div class="carousel-status" data-bulletin-status>01 / 01</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- PERSPECTIVA CLIMÁTICA: carrusel de documentos PDF en orden cronológico. -->
-  <section class="split reverse" id="perspectiva">
-    <div class="split-copy blue">
-      <p class="eyebrow">Perspectiva climática</p>
-      <h2 class="section-title display">Una mirada al periodo que viene.</h2>
-      <p class="section-copy">En esta sección se reúnen las perspectivas y boletines climáticos oficiales emitidos por INSIVUMEH. Puedes seleccionar cada período, consultar el documento completo y revisar una síntesis territorial enfocada en las condiciones relevantes para Sololá.</p>
-      <p class="climate-context-note">La síntesis para Sololá toma como referencia principalmente las señales de <strong>Occidente</strong> y <strong>Altiplano Central</strong>. Debido a la topografía del departamento, algunos sectores del sur también pueden presentar condiciones asociadas a <strong>Bocacosta</strong>. Esta lectura facilita una revisión inicial y debe complementarse con el documento oficial de INSIVUMEH.</p>
-      <div class="btn-row">
-        <a class="btn" href="./docs/clima_index.html">Explorar información climática</a>
-      </div>
-    </div>
 
-    <div class="split-media climate-carousel-panel">
-      <div class="climate-carousel" data-climate-carousel aria-label="Carrusel de perspectivas climáticas">
-        <div class="pdf-reader" data-pdf-reader data-climate-pdf data-pdf="./Enero.pdf">
-          <div class="pdf-stage" data-pdf-stage tabindex="0" aria-label="Documento PDF. Desplázate para recorrer sus páginas">
-            <div class="pdf-pages" data-pdf-pages></div>
-            <div class="pdf-loading" data-pdf-loading>Cargando perspectiva climática</div>
-          </div>
-          <div class="pdf-toolbar" aria-label="Opciones de lectura de la perspectiva">
-            <button class="pdf-control" type="button" data-pdf-fit aria-label="Ajustar tamaño del documento">Ajustar tamaño</button>
-          </div>
-        </div>
-        <div class="climate-summary-panel" aria-live="polite">
-          <p class="climate-summary-label">Vista rápida para Sololá</p>
-          <h4 data-climate-quick-title>Enero 2026</h4>
-          <p class="climate-summary-text" data-climate-summary>En Sololá, la señal regional apunta a un mes seco y frío. Occidente y Altiplano Central presentan acumulados bajos, con influencia de frentes fríos y descensos de temperatura.</p>
-          <p class="climate-summary-region" data-climate-region>Referencia territorial: Occidente y Altiplano Central.</p>
-          <p class="climate-summary-source" data-climate-source>Fuente: INSIVUMEH</p>
-        </div>
 
-        <div class="climate-carousel-meta">
-          <div>
-            <p class="climate-kicker" data-climate-status>01 / 12 Documento climático</p>
-            <h3 class="climate-title" data-climate-title>Enero</h3>
-          </div>
-          <div class="climate-actions">
-            <button class="carousel-btn" type="button" aria-label="Documento anterior" data-climate-prev>←</button>
-            <button class="carousel-btn" type="button" aria-label="Documento siguiente" data-climate-next>→</button>
-          </div>
-        </div>
 
-        <div class="climate-dots" data-climate-dots aria-label="Documentos disponibles"></div>
-
-        <div class="climate-carousel-links">
-          <a class="btn" data-climate-open href="./Enero.pdf" target="_blank" rel="noopener">Abrir PDF</a>
-          <a class="text-link" data-climate-download href="./Enero.pdf" download>Descargar PDF</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="resources" id="recursos">
-    <div class="shell">
-      <div class="resources-head">
-        <div>
-          <p class="eyebrow">Información climática</p>
-          <h2 class="section-title display">Información climática y herramientas de consulta.</h2>
-        </div>
-        <p class="section-copy">Esta sección concentra las herramientas de consulta climática del portal. Desde aquí puedes revisar precipitación, temperatura, viento, datos meteorológicos, mapas y productos agroclimáticos disponibles para el departamento.</p>
-      </div>
-
-      <div class="resource-grid">
-        <a class="resource" href="./docs/clima_index.html">
-          <span class="resource-number">01</span>
-          <h3>Variables climáticas</h3>
-          <p>Consulta precipitación, temperatura y viento mediante los módulos de observación, pronóstico, comparación territorial y análisis histórico disponibles en el portal.</p>
-          <span class="text-link">Explorar clima</span>
-        </a>
-        <a class="resource" href="./docs/precipitaciones_index.html">
-          <span class="resource-number">02</span>
-          <h3>Estaciones y datos</h3>
-          <p>Consulta las observaciones meteorológicas y las fuentes de datos utilizadas por la MTA. Esta área reúne la información disponible de estaciones y series de referencia para el territorio.</p>
-          <span class="text-link">Consultar datos</span>
-        </a>
-        <a class="resource" href="#mapas">
-          <span class="resource-number">03</span>
-          <h3>Mapas</h3>
-          <p>Consulta productos cartográficos de la MTA para reconocer cómo se distribuyen la lluvia, los días sin precipitación y otras condiciones agroclimáticas dentro del departamento de Sololá.</p>
-          <span class="text-link">Consultar mapas</span>
-        </a>
-        <a class="resource" href="./docs/agroclima_index.html">
-          <span class="resource-number">04</span>
-          <h3>Agroclima</h3>
-          <p>Consulta balance hídrico, humedad y temperatura del suelo, variables atmosféricas y otros indicadores útiles para interpretar condiciones de estrés agroclimático.</p>
-          <span class="text-link">Consultar agroclima</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="maps-section" id="mapas" aria-labelledby="mapsTitle">
-    <div class="shell">
-      <div class="maps-head">
-        <div>
-          <p class="eyebrow">Mapas de Sololá</p>
-          <h2 class="section-title display" id="mapsTitle">Seguimiento territorial de las condiciones agroclimáticas.</h2>
-        </div>
-        <p class="section-copy">Esta colección reúne mapas y análisis elaborados para el departamento de Sololá. Puedes revisar cómo han cambiado la lluvia, los días sin precipitación y otras condiciones relevantes para la producción agropecuaria a lo largo de 2026.</p>
-      </div>
-
-      <div class="maps-carousel" data-map-carousel tabindex="0" aria-label="Colección de mapas agroclimáticos de Sololá">
-        <div class="maps-grid">
-          <div class="map-media">
-            <a class="map-media-link" data-map-open href="./mapa13.jpg" target="_blank" rel="noopener" aria-label="Abrir mapa en tamaño completo">
-              <img data-map-image src="./mapa13.jpg" alt="Acumulado de lluvia del 1 al 15 de septiembre de 2026 en Sololá">
-            </a>
-          </div>
-
-          <div class="map-copy">
-            <p class="map-period" data-map-period>1 al 15 de septiembre de 2026</p>
-            <h3 class="map-title" data-map-title>Acumulado de lluvia en la primera quincena de septiembre</h3>
-            <p class="map-description" data-map-description>Presenta la distribución espacial de la lluvia observada durante la primera mitad de septiembre y permite comparar las condiciones entre las zonas norte, este, oeste y Bocacosta del departamento.</p>
-            <p class="map-credit" data-map-credit>Producto de la Mesa Técnica Agroclimática del departamento de Sololá. Los créditos y fuentes específicas se conservan dentro de cada mapa.</p>
-            <div class="map-links">
-              <a class="btn" data-map-full href="./mapa13.jpg" target="_blank" rel="noopener">Ver imagen completa</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="maps-footer">
-          <span class="map-status" data-map-status>01 / 14</span>
-          <div class="map-nav">
-            <button class="carousel-btn" type="button" aria-label="Mapa anterior" data-map-prev>←</button>
-            <button class="carousel-btn" type="button" aria-label="Mapa siguiente" data-map-next>→</button>
-          </div>
-        </div>
-        <div class="map-dots" data-map-dots aria-label="Mapas disponibles"></div>
-      </div>
-    </div>
-  </section>
 
   <section id="la-mta">
     <div class="shell story-title-wrap">
@@ -680,6 +533,46 @@
             <a class="text-link" href="#instituciones">Conocer instituciones integrantes</a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Historia: el contenido será incorporado cuando MAGA lo proporcione. -->
+  <section class="story-copy mta-history" id="historia" aria-labelledby="historiaTitle">
+    <div class="shell story-copy-grid">
+      <h2 id="historiaTitle">Historia de la MTA.</h2>
+      <div class="history-content" aria-label="Área para la historia de la MTA"></div>
+    </div>
+  </section>
+
+  <!-- Muestras pendientes: MAGA/proyecto proporcionará boletín, infografía y mapa. -->
+  <section class="resources home-previews" id="contenidos" aria-labelledby="contenidosTitle">
+    <div class="shell">
+      <div class="resources-head">
+        <div>
+          <p class="eyebrow">Herramientas de consulta</p>
+          <h2 class="section-title display" id="contenidosTitle">Boletines, infografías y mapas.</h2>
+        </div>
+      </div>
+      <div class="resource-grid previews-grid">
+        <a class="resource preview-resource" href="./boletines.html" aria-label="Ir a boletines">
+          <span class="resource-number">01</span>
+          <div class="preview-media" aria-hidden="true"></div>
+          <h3>Boletines</h3>
+          <span class="text-link">Ver boletines</span>
+        </a>
+        <a class="resource preview-resource" href="./infografias.html" aria-label="Ir a infografías">
+          <span class="resource-number">02</span>
+          <div class="preview-media" aria-hidden="true"></div>
+          <h3>Infografías</h3>
+          <span class="text-link">Ver infografías</span>
+        </a>
+        <a class="resource preview-resource" href="./mapas.html" aria-label="Ir a mapas">
+          <span class="resource-number">03</span>
+          <div class="preview-media" aria-hidden="true"></div>
+          <h3>Mapas</h3>
+          <span class="text-link">Ver mapas</span>
+        </a>
       </div>
     </div>
   </section>
@@ -728,11 +621,11 @@
     <div>
       <h3>Explorar</h3>
       <div class="footer-links">
-        <a href="#recomendaciones">Recomendaciones</a>
+        <a href="./infografias.html">Recomendaciones</a>
         <a href="./docs/clima_index.html">Información climática</a>
         <a href="./docs/agroclima_index.html">Agroclima</a>
         <a href="./comentarios_index.html">Comentarios</a>
-        <a href="#boletin">Boletín</a>
+        <a href="./boletines.html">Boletín</a>
       </div>
     </div>
 
@@ -741,8 +634,8 @@
       <div class="footer-links">
         <a href="#la-mta">Qué es la MTA</a>
         <a href="#instituciones">Instituciones</a>
-        <a href="#perspectiva">Perspectiva climática</a>
-        <a href="#recursos">Recursos</a>
+        <a href="./docs/clima_index.html">Perspectiva climática</a>
+        <a href="#contenidos">Recursos</a>
       </div>
     </div>
 
@@ -884,6 +777,13 @@
     document.body.classList.toggle('menu-open',!open);
   });
   nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+  const dropdowns=[...document.querySelectorAll('.nav-dropdown')];
+  dropdowns.forEach(item=>item.addEventListener('toggle',()=>{
+    if(item.open)dropdowns.forEach(other=>{if(other!==item)other.open=false;});
+  }));
+  document.addEventListener('click',event=>{
+    dropdowns.forEach(item=>{if(!item.contains(event.target))item.open=false;});
+  });
   window.addEventListener('resize',()=>{if(window.innerWidth>1020)closeMenu();});
   document.addEventListener('click',event=>{
     if(window.innerWidth>1020||!document.body.classList.contains('menu-open'))return;
@@ -896,16 +796,18 @@
   const results=document.querySelector('[data-search-results]');
   const destinations=[
     ['Inicio','Portada de la Mesa Técnica Agroclimática','./index.html'],
-    ['Recomendaciones agroclimáticas','Orientaciones del período vigente','#recomendaciones'],
-    ['Boletín agroclimático','Último boletín y acceso al documento','#boletin'],
-    ['Perspectiva climática','Resumen de la perspectiva mensual','#perspectiva'],
+    ['Recomendaciones agroclimáticas','Orientaciones del período vigente','./infografias.html'],
+    ['Boletín agroclimático','Último boletín y acceso al documento','./boletines.html'],
+    ['Perspectiva climática','Resumen de la perspectiva mensual','./docs/clima_index.html'],
     ['Información climática','Acceso general a los recursos meteorológicos','./docs/clima_index.html'],
     ['Precipitación','Observación, pronóstico e histórico','./docs/precipitaciones_index.html'],
     ['Temperatura','Condiciones térmicas y comparación municipal','./docs/temperatura_index.html'],
     ['Viento','Velocidad, dirección, rachas y pronóstico','./docs/viento_index.html'],
     ['Agroclima','Balance hídrico, suelo y atmósfera','./docs/agroclima_index.html'],
     ['Comentarios','Enviar sugerencias y observaciones sobre el portal','./comentarios_index.html'],
-    ['Mapas de Sololá','Seguimiento territorial de lluvia y condiciones agroclimáticas','#mapas'],
+    ['Mapas de Sololá','Seguimiento territorial de lluvia y condiciones agroclimáticas','./mapas.html'],
+    ['Infografías','Recomendaciones visuales','./infografias.html'],
+    ['Historia de la MTA','Antecedentes de la Mesa Técnica Agroclimática','#historia'],
     ['Qué es la MTA','Información institucional de la Mesa Técnica Agroclimática','#la-mta'],
     ['Instituciones','Organizaciones integrantes de la MTA','#instituciones'],
     ['Contacto','Correo y canales de la MTA','#contacto']
