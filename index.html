@@ -1,16 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#2f4535">
-  <title>Mesa Técnica Agroclimática de Sololá</title>
-  <meta name="description" content="Portal de información climática y agroclimática de la Mesa Técnica Agroclimática de Sololá, Guatemala.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#2f4535" name="theme-color"/>
+<title>Mesa Técnica Agroclimática de Sololá</title>
+<meta content="Portal de información climática y agroclimática de la Mesa Técnica Agroclimática de Sololá, Guatemala." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet"/>
+<style>
     :root{
       --paper:#fbfaf6;
       --cream:#f3e8c9;
@@ -435,235 +435,211 @@
   </style>
 </head>
 <body>
-
 <header class="header">
-  <div class="shell header-inner">
-    <a class="brand" href="./index.html" aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá">
-      <img src="./docs/logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
-      <span class="brand-copy">
-        <span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
-        <span class="brand-place">Sololá, Guatemala</span>
-      </span>
-    </a>
-
-    <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
-      <span class="menu-lines"></span>
-    </button>
-
-    <nav class="nav" aria-label="Navegación principal" data-nav>
-      <a href="./index.html" aria-current="page">Inicio</a>
-      <details class="nav-dropdown">
-        <summary>Recomendaciones agroclimáticas</summary>
-        <div class="nav-submenu">
-          <a href="./boletines.html">Boletines</a>
-          <a href="./infografias.html">Recomendaciones (infografías)</a>
-          <a href="./mapas.html">Mapas</a>
-        </div>
-      </details>
-      <details class="nav-dropdown">
-        <summary>Información climática</summary>
-        <div class="nav-submenu">
-          <a href="./docs/precipitaciones_index.html">Precipitación</a>
-          <a href="./docs/temperatura_index.html">Temperatura</a>
-          <a href="./docs/viento_index.html">Viento</a>
-          <a href="./docs/agroclima_index.html">Agroclima</a>
-        </div>
-      </details>
-      <a href="./comentarios_index.html">Comentarios</a>
-      <a href="#contacto">Contacto</a>
-      <button type="button" data-search-open>Buscar</button>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <!-- PORTADA: sustituir el placeholder derecho por la fotografía principal cuando esté disponible. -->
-  <section class="hero" aria-labelledby="heroTitle">
-    <div class="hero-copy">
-      <p class="eyebrow">Información agroclimática</p>
-      <h1 class="hero-title" id="heroTitle">Mesa Técnica Agroclimática de Sololá.</h1>
-      <p class="hero-lead">El portal reúne información climática, perspectivas, recomendaciones y herramientas de consulta para apoyar la planificación y la toma de decisiones del sector agropecuario en Sololá.</p>
-      <div class="btn-row">
-        <a class="btn" href="./infografias.html">Ver recomendaciones</a>
-        <a class="btn btn-light" href="./docs/clima_index.html">Consultar información climática</a>
-        <a class="btn btn-light" href="./mapas.html">Ir a mapas</a>
-      </div>
-    </div>
-    <div class="hero-media photo-real">
-      <img src="./agricultura2.jpg" alt="Fotografía de agricultura para la Mesa Técnica Agroclimática de Sololá" loading="eager" fetchpriority="high">
-    </div>
-  </section>
-
-  <section class="intro-strip">
-    <div class="shell intro-grid">
-      <p class="intro-large">Información climática para la planificación agropecuaria en Sololá.</p>
-      <p class="intro-side">En este sitio encontrarás información meteorológica, análisis agroclimático y productos técnicos que ayudan a comprender las condiciones del territorio y a planificar acciones en la producción agropecuaria.</p>
-    </div>
-  </section>
-
-  <!-- RECOMENDACIONES: posteriormente puede enlazar a la página propia de recomendaciones. -->
-
-  <!-- BOLETÍN: carrusel listo para sumar nuevos documentos.
-       Para añadir otro boletín, duplica un <article class="bulletin-slide"> y cambia PDF/textos. -->
-
-  <!-- PERSPECTIVA CLIMÁTICA: carrusel de documentos PDF en orden cronológico. -->
-
-
-
-
-  <section id="la-mta">
-    <div class="shell story-title-wrap">
-      <p class="eyebrow">Qué es la MTA</p>
-      <h2 class="story-title">Coordinación técnica para la gestión agroclimática de Sololá.</h2>
-    </div>
-
-    <!-- TRES ESPACIOS FOTOGRÁFICOS adicionales: se pueden sustituir individualmente por imágenes reales. -->
-    <div class="story-visuals" aria-label="Fotografías de la Mesa Técnica Agroclimática">
-      <div class="story-photo"><img src="./Territorio.jpg" alt="Territorio de Sololá" loading="lazy"></div>
-      <div class="story-photo"><img src="./trabajotécnico.jpeg" alt="Trabajo técnico de la Mesa Técnica Agroclimática" loading="lazy"></div>
-      <div class="story-photo"><img src="./riegodecultivo.jpeg" alt="Riego de cultivo y producción agrícola" loading="lazy"></div>
-    </div>
-
-    <div class="story-copy">
-      <div class="shell story-copy-grid">
-        <h2>Funciones de la Mesa Técnica Agroclimática.</h2>
-        <div>
-          <p>La Mesa Técnica Agroclimática de Sololá es un espacio de coordinación interinstitucional que analiza información climática y agroclimática junto con conocimiento del territorio. Su trabajo permite generar recomendaciones preventivas, comunicar escenarios de interés para el sector agropecuario y facilitar información útil para la planificación y la toma de decisiones.</p>
-          <div class="btn-row">
-            <a class="text-link" href="#instituciones">Conocer instituciones integrantes</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Historia: el contenido será incorporado cuando MAGA lo proporcione. -->
-  <section class="story-copy mta-history" id="historia" aria-labelledby="historiaTitle">
-    <div class="shell story-copy-grid">
-      <h2 id="historiaTitle">Historia de la MTA.</h2>
-      <div class="history-content" aria-label="Área para la historia de la MTA"></div>
-    </div>
-  </section>
-
-  <!-- Muestras pendientes: MAGA/proyecto proporcionará boletín, infografía y mapa. -->
-  <section class="resources home-previews" id="contenidos" aria-labelledby="contenidosTitle">
-    <div class="shell">
-      <div class="resources-head">
-        <div>
-          <p class="eyebrow">Herramientas de consulta</p>
-          <h2 class="section-title display" id="contenidosTitle">Boletines, infografías y mapas.</h2>
-        </div>
-      </div>
-      <div class="resource-grid previews-grid">
-        <a class="resource preview-resource" href="./boletines.html" aria-label="Ir a boletines">
-          <span class="resource-number">01</span>
-          <div class="preview-media" aria-hidden="true"></div>
-          <h3>Boletines</h3>
-          <span class="text-link">Ver boletines</span>
-        </a>
-        <a class="resource preview-resource" href="./infografias.html" aria-label="Ir a infografías">
-          <span class="resource-number">02</span>
-          <div class="preview-media" aria-hidden="true"></div>
-          <h3>Infografías</h3>
-          <span class="text-link">Ver infografías</span>
-        </a>
-        <a class="resource preview-resource" href="./mapas.html" aria-label="Ir a mapas">
-          <span class="resource-number">03</span>
-          <div class="preview-media" aria-hidden="true"></div>
-          <h3>Mapas</h3>
-          <span class="text-link">Ver mapas</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="partners" id="instituciones" aria-labelledby="institucionesTitle">
-    <div class="shell">
-      <h2 class="partners-title" id="institucionesTitle">Instituciones que integran y acompañan la Mesa Técnica Agroclimática de Sololá</h2>
-      <div class="partner-grid">
-        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./docs/logos/MAGA.png" alt="MAGA" loading="lazy"></a>
-        <a href="https://www.maga.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MAGA"><img src="./docs/logos/MAGA02.png" alt="MAGA" loading="lazy"></a>
-        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./docs/logos/INSIVUMEH.png" alt="INSIVUMEH" loading="lazy"></a>
-        <a href="https://insivumeh.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="INSIVUMEH"><img src="./docs/logos/INSIVUMEN02.png" alt="INSIVUMEH" loading="lazy"></a>
-        <a href="https://sites.google.com/view/caritas-nacional/" target="_blank" rel="noopener noreferrer" aria-label="Cáritas de Guatemala"><img src="./docs/logos/Caritas.png" alt="Cáritas de Guatemala" loading="lazy"></a>
-        <a href="https://www.heiferguatemala.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Heifer International Guatemala"><img src="./docs/logos/HeiferInternational.png" alt="Heifer International Guatemala" loading="lazy"></a>
-        <a href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" target="_blank" rel="noopener noreferrer" aria-label="Feed the Children Guatemala"><img src="./docs/logos/FeedtheChildren.png" alt="Feed the Children Guatemala" loading="lazy"></a>
-        <a href="https://www.icc.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICC"><img src="./docs/logos/ICC.png" alt="ICC" loading="lazy"></a>
-        <a href="https://www.amsclae.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="AMSCLAE"><img src="./docs/logos/AMSCLAE.png" alt="AMSCLAE" loading="lazy"></a>
-        <a href="https://worldvision.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="World Vision Guatemala"><img src="./docs/logos/WorldVision.png" alt="World Vision Guatemala" loading="lazy"></a>
-        <a href="https://asociacioncdro.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="CERCAP"><img src="./docs/logos/CERCAP.png" alt="CERCAP" loading="lazy"></a>
-        <a href="https://latinoamerica.rikolto.org/" target="_blank" rel="noopener noreferrer" aria-label="Rikolto"><img src="./docs/logos/Rikolto.png" alt="Rikolto" loading="lazy"></a>
-        <a href="https://www.enabel.be/" target="_blank" rel="noopener noreferrer" aria-label="Enabel"><img src="./docs/logos/Belgica.png" alt="Enabel" loading="lazy"></a>
-        <a href="https://www.icta.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="ICTA"><img src="./docs/logos/ICTA.png" alt="ICTA" loading="lazy"></a>
-        <a href="https://www.anacafe.org/" target="_blank" rel="noopener noreferrer" aria-label="Anacafé"><img src="./docs/logos/Anacafe.png" alt="Anacafé" loading="lazy"></a>
-        <!-- Sustituir UVG.png por el logo CEAA UVG cuando se reciba el archivo definitivo. -->
-        <a href="https://www.uvg.edu.gt/investigacion/ceaa" target="_blank" rel="noopener noreferrer" aria-label="Centro de Estudios Atitlán UVG"><img src="./docs/logos/UVG.png" alt="Centro de Estudios Atitlán UVG" loading="lazy"></a>
-        <a href="https://vivamosmejor.org.gt/" target="_blank" rel="noopener noreferrer" aria-label="Vivamos Mejor"><img src="./docs/logos/VivamosMejor.png" alt="Vivamos Mejor" loading="lazy"></a>
-        <a href="https://admisionesefasolol.wixsite.com/efasolola" target="_blank" rel="noopener noreferrer" aria-label="Escuela de Formación Agrícola Sololá"><img src="./docs/logos/EFA.png" alt="Escuela de Formación Agrícola Sololá" loading="lazy"></a>
-        <a href="https://www.marn.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="MARN"><img src="./docs/logos/MARN.png" alt="MARN" loading="lazy"></a>
-        <a href="https://amigosdeatitlan.org/" target="_blank" rel="noopener noreferrer" aria-label="Amigos del Lago de Atitlán"><img src="./docs/logos/AmigosdelLago.png" alt="Amigos del Lago de Atitlán" loading="lazy"></a>
-        <a href="https://conred.gob.gt/" target="_blank" rel="noopener noreferrer" aria-label="CONRED"><img src="./docs/logos/Logo_de_CONRED.png" alt="Coordinadora Nacional para la Reducción de Desastres CONRED" loading="lazy"></a>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="footer" id="contacto">
-  <div class="shell footer-main">
-    <div>
-      <div class="footer-brand">
-        <img src="./docs/logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
-        <div class="footer-brand-name">MTA<br>Sololá</div>
-      </div>
-      <p class="footer-about">Portal de consulta climática y agroclimática para productores, técnicos, instituciones y organizaciones vinculadas al sector agropecuario de Sololá.</p>
-    </div>
-
-    <div>
-      <h3>Explorar</h3>
-      <div class="footer-links">
-        <a href="./infografias.html">Recomendaciones</a>
-        <a href="./docs/clima_index.html">Información climática</a>
-        <a href="./docs/agroclima_index.html">Agroclima</a>
-        <a href="./comentarios_index.html">Comentarios</a>
-        <a href="./boletines.html">Boletín</a>
-      </div>
-    </div>
-
-    <div>
-      <h3>La MTA</h3>
-      <div class="footer-links">
-        <a href="#la-mta">Qué es la MTA</a>
-        <a href="#instituciones">Instituciones</a>
-        <a href="./docs/clima_index.html">Perspectiva climática</a>
-        <a href="#contenidos">Recursos</a>
-      </div>
-    </div>
-
-    <div>
-      <h3>Contacto</h3>
-      <div class="footer-links">
-        <a href="mailto:mtasolola@proton.me">mtasolola@proton.me</a>
-        <a href="https://www.facebook.com/MTASolola/about?locale=es_LA" target="_blank" rel="noopener noreferrer">Facebook</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="shell footer-bottom">
-    <span>© <span data-year></span> Mesa Técnica Agroclimática de Sololá.</span>
-    <span id="footerUpdate">Datos y productos técnicos disponibles en los módulos de consulta.</span>
-  </div>
-</footer>
-
-<div class="search-overlay" aria-hidden="true" data-search-overlay>
-  <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Buscar en el portal">
-    <div class="search-head">
-      <input class="search-input" type="search" autocomplete="off" placeholder="Buscar en el portal" aria-label="Buscar en el portal" data-search-input>
-      <button class="search-close" type="button" data-search-close>Cerrar</button>
-    </div>
-    <div class="search-results" data-search-results></div>
-  </div>
+<div class="shell header-inner">
+<a aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá" class="brand" href="./index.html">
+<img alt="Logo de la Mesa Técnica Agroclimática de Sololá" src="./docs/logos/MTA_LOGO.png"/>
+<span class="brand-copy">
+<span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
+<span class="brand-place">Sololá, Guatemala</span>
+</span>
+</a>
+<button aria-expanded="false" aria-label="Abrir menú" class="menu-toggle" data-menu-toggle="" type="button">
+<span class="menu-lines"></span>
+</button>
+<nav aria-label="Navegación principal" class="nav" data-nav="">
+<a aria-current="page" href="./index.html">Inicio</a>
+<details class="nav-dropdown">
+<summary>Recomendaciones agroclimáticas</summary>
+<div class="nav-submenu">
+<a href="./boletines.html">Boletines</a>
+<a href="./infografias.html">Recomendaciones (infografías)</a>
+<a href="./mapas.html">Mapas</a>
 </div>
-
+</details>
+<details class="nav-dropdown">
+<summary>Información climática</summary>
+<div class="nav-submenu">
+<a href="./docs/precipitaciones_index.html">Precipitación</a>
+<a href="./docs/temperatura_index.html">Temperatura</a>
+<a href="./docs/viento_index.html">Viento</a>
+<a href="./docs/agroclima_index.html">Agroclima</a>
+</div>
+</details>
+<a href="./comentarios_index.html">Comentarios</a>
+<a href="#contacto">Contacto</a>
+<button data-search-open="" type="button">Buscar</button>
+</nav>
+</div>
+</header>
+<main>
+<!-- PORTADA: sustituir el placeholder derecho por la fotografía principal cuando esté disponible. -->
+<section aria-labelledby="heroTitle" class="hero">
+<div class="hero-copy">
+<p class="eyebrow">Información agroclimática</p>
+<h1 class="hero-title" id="heroTitle">Mesa Técnica Agroclimática de Sololá.</h1>
+<p class="hero-lead">El portal reúne información climática, perspectivas, recomendaciones y herramientas de consulta para apoyar la planificación y la toma de decisiones del sector agropecuario en Sololá.</p>
+<div class="btn-row">
+<a class="btn" href="./infografias.html">Ver recomendaciones</a>
+<a class="btn btn-light" href="./docs/clima_index.html">Consultar información climática</a>
+<a class="btn btn-light" href="./mapas.html">Ir a mapas</a>
+</div>
+</div>
+<div class="hero-media photo-real">
+<img alt="Fotografía de agricultura para la Mesa Técnica Agroclimática de Sololá" fetchpriority="high" loading="eager" src="./agricultura2.jpg"/>
+</div>
+</section>
+<section class="intro-strip">
+<div class="shell intro-grid">
+<p class="intro-large">Información climática para la planificación agropecuaria en Sololá.</p>
+<p class="intro-side">En este sitio encontrarás información meteorológica, análisis agroclimático y productos técnicos que ayudan a comprender las condiciones del territorio y a planificar acciones en la producción agropecuaria.</p>
+</div>
+</section>
+<!-- RECOMENDACIONES: posteriormente puede enlazar a la página propia de recomendaciones. -->
+<!-- BOLETÍN: carrusel listo para sumar nuevos documentos.
+       Para añadir otro boletín, duplica un <article class="bulletin-slide"> y cambia PDF/textos. -->
+<!-- PERSPECTIVA CLIMÁTICA: carrusel de documentos PDF en orden cronológico. -->
+<section id="la-mta">
+<div class="shell story-title-wrap">
+<p class="eyebrow">Qué es la MTA</p>
+<h2 class="story-title">Coordinación técnica para la gestión agroclimática de Sololá.</h2>
+</div>
+<!-- TRES ESPACIOS FOTOGRÁFICOS adicionales: se pueden sustituir individualmente por imágenes reales. -->
+<div aria-label="Fotografías de la Mesa Técnica Agroclimática" class="story-visuals">
+<div class="story-photo"><img alt="Territorio de Sololá" loading="lazy" src="./Territorio.jpg"/></div>
+<div class="story-photo"><img alt="Trabajo técnico de la Mesa Técnica Agroclimática" loading="lazy" src="./trabajotécnico.jpeg"/></div>
+<div class="story-photo"><img alt="Riego de cultivo y producción agrícola" loading="lazy" src="./riegodecultivo.jpeg"/></div>
+</div>
+<div class="story-copy">
+<div class="shell story-copy-grid">
+<h2>Funciones de la Mesa Técnica Agroclimática.</h2>
+<div>
+<p>La Mesa Técnica Agroclimática de Sololá es un espacio de coordinación interinstitucional que analiza información climática y agroclimática junto con conocimiento del territorio. Su trabajo permite generar recomendaciones preventivas, comunicar escenarios de interés para el sector agropecuario y facilitar información útil para la planificación y la toma de decisiones.</p>
+<div class="btn-row">
+<a class="text-link" href="#instituciones">Conocer instituciones integrantes</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Historia: el contenido será incorporado cuando MAGA lo proporcione. -->
+<section aria-labelledby="historiaTitle" class="story-copy mta-history" id="historia">
+<div class="shell story-copy-grid">
+<h2 id="historiaTitle">Historia de la MTA.</h2>
+<div aria-label="Área para la historia de la MTA" class="history-content"></div>
+</div>
+</section>
+<!-- Muestras pendientes: MAGA/proyecto proporcionará boletín, infografía y mapa. -->
+<section aria-labelledby="contenidosTitle" class="resources home-previews" id="contenidos">
+<div class="shell">
+<div class="resources-head">
+<div>
+<p class="eyebrow">Herramientas de consulta</p>
+<h2 class="section-title display" id="contenidosTitle">Boletines, infografías y mapas.</h2>
+</div>
+</div>
+<div class="resource-grid previews-grid">
+<a aria-label="Ir a boletines" class="resource preview-resource" href="./boletines.html">
+<span class="resource-number">01</span>
+<div aria-hidden="true" class="preview-media"><img alt="Portada del reporte agrometeorológico de octubre de 2026" loading="lazy" src="./assets/boletines/boletin-octubre-2026.jpg" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;"/></div>
+<h3>Boletines</h3>
+<span class="text-link">Ver boletines</span>
+</a>
+<a aria-label="Ir a infografías" class="resource preview-resource" href="./infografias.html">
+<span class="resource-number">02</span>
+<div aria-hidden="true" class="preview-media"></div>
+<h3>Infografías</h3>
+<span class="text-link">Ver infografías</span>
+</a>
+<a aria-label="Ir a mapas" class="resource preview-resource" href="./mapas.html">
+<span class="resource-number">03</span>
+<div aria-hidden="true" class="preview-media"></div>
+<h3>Mapas</h3>
+<span class="text-link">Ver mapas</span>
+</a>
+</div>
+</div>
+</section>
+<section aria-labelledby="institucionesTitle" class="partners" id="instituciones">
+<div class="shell">
+<h2 class="partners-title" id="institucionesTitle">Instituciones que integran y acompañan la Mesa Técnica Agroclimática de Sololá</h2>
+<div class="partner-grid">
+<a aria-label="MAGA" href="https://www.maga.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="MAGA" loading="lazy" src="./docs/logos/MAGA.png"/></a>
+<a aria-label="MAGA" href="https://www.maga.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="MAGA" loading="lazy" src="./docs/logos/MAGA02.png"/></a>
+<a aria-label="INSIVUMEH" href="https://insivumeh.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="INSIVUMEH" loading="lazy" src="./docs/logos/INSIVUMEH.png"/></a>
+<a aria-label="INSIVUMEH" href="https://insivumeh.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="INSIVUMEH" loading="lazy" src="./docs/logos/INSIVUMEN02.png"/></a>
+<a aria-label="Cáritas de Guatemala" href="https://sites.google.com/view/caritas-nacional/" rel="noopener noreferrer" target="_blank"><img alt="Cáritas de Guatemala" loading="lazy" src="./docs/logos/Caritas.png"/></a>
+<a aria-label="Heifer International Guatemala" href="https://www.heiferguatemala.org.gt/" rel="noopener noreferrer" target="_blank"><img alt="Heifer International Guatemala" loading="lazy" src="./docs/logos/HeiferInternational.png"/></a>
+<a aria-label="Feed the Children Guatemala" href="https://www.feedthechildren.org/our-work/around-the-world/guatemala/" rel="noopener noreferrer" target="_blank"><img alt="Feed the Children Guatemala" loading="lazy" src="./docs/logos/FeedtheChildren.png"/></a>
+<a aria-label="ICC" href="https://www.icc.org.gt/" rel="noopener noreferrer" target="_blank"><img alt="ICC" loading="lazy" src="./docs/logos/ICC.png"/></a>
+<a aria-label="AMSCLAE" href="https://www.amsclae.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="AMSCLAE" loading="lazy" src="./docs/logos/AMSCLAE.png"/></a>
+<a aria-label="World Vision Guatemala" href="https://worldvision.org.gt/" rel="noopener noreferrer" target="_blank"><img alt="World Vision Guatemala" loading="lazy" src="./docs/logos/WorldVision.png"/></a>
+<a aria-label="CERCAP" href="https://asociacioncdro.org.gt/" rel="noopener noreferrer" target="_blank"><img alt="CERCAP" loading="lazy" src="./docs/logos/CERCAP.png"/></a>
+<a aria-label="Rikolto" href="https://latinoamerica.rikolto.org/" rel="noopener noreferrer" target="_blank"><img alt="Rikolto" loading="lazy" src="./docs/logos/Rikolto.png"/></a>
+<a aria-label="Enabel" href="https://www.enabel.be/" rel="noopener noreferrer" target="_blank"><img alt="Enabel" loading="lazy" src="./docs/logos/Belgica.png"/></a>
+<a aria-label="ICTA" href="https://www.icta.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="ICTA" loading="lazy" src="./docs/logos/ICTA.png"/></a>
+<a aria-label="Anacafé" href="https://www.anacafe.org/" rel="noopener noreferrer" target="_blank"><img alt="Anacafé" loading="lazy" src="./docs/logos/Anacafe.png"/></a>
+<!-- Sustituir UVG.png por el logo CEAA UVG cuando se reciba el archivo definitivo. -->
+<a aria-label="Centro de Estudios Atitlán UVG" href="https://www.uvg.edu.gt/investigacion/ceaa" rel="noopener noreferrer" target="_blank"><img alt="Centro de Estudios Atitlán UVG" loading="lazy" src="./docs/logos/UVG.png"/></a>
+<a aria-label="Vivamos Mejor" href="https://vivamosmejor.org.gt/" rel="noopener noreferrer" target="_blank"><img alt="Vivamos Mejor" loading="lazy" src="./docs/logos/VivamosMejor.png"/></a>
+<a aria-label="Escuela de Formación Agrícola Sololá" href="https://admisionesefasolol.wixsite.com/efasolola" rel="noopener noreferrer" target="_blank"><img alt="Escuela de Formación Agrícola Sololá" loading="lazy" src="./docs/logos/EFA.png"/></a>
+<a aria-label="MARN" href="https://www.marn.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="MARN" loading="lazy" src="./docs/logos/MARN.png"/></a>
+<a aria-label="Amigos del Lago de Atitlán" href="https://amigosdeatitlan.org/" rel="noopener noreferrer" target="_blank"><img alt="Amigos del Lago de Atitlán" loading="lazy" src="./docs/logos/AmigosdelLago.png"/></a>
+<a aria-label="CONRED" href="https://conred.gob.gt/" rel="noopener noreferrer" target="_blank"><img alt="Coordinadora Nacional para la Reducción de Desastres CONRED" loading="lazy" src="./docs/logos/Logo_de_CONRED.png"/></a>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer" id="contacto">
+<div class="shell footer-main">
+<div>
+<div class="footer-brand">
+<img alt="Logo de la Mesa Técnica Agroclimática de Sololá" src="./docs/logos/MTA_LOGO.png"/>
+<div class="footer-brand-name">MTA<br/>Sololá</div>
+</div>
+<p class="footer-about">Portal de consulta climática y agroclimática para productores, técnicos, instituciones y organizaciones vinculadas al sector agropecuario de Sololá.</p>
+</div>
+<div>
+<h3>Explorar</h3>
+<div class="footer-links">
+<a href="./infografias.html">Recomendaciones</a>
+<a href="./docs/clima_index.html">Información climática</a>
+<a href="./docs/agroclima_index.html">Agroclima</a>
+<a href="./comentarios_index.html">Comentarios</a>
+<a href="./boletines.html">Boletín</a>
+</div>
+</div>
+<div>
+<h3>La MTA</h3>
+<div class="footer-links">
+<a href="#la-mta">Qué es la MTA</a>
+<a href="#instituciones">Instituciones</a>
+<a href="./docs/clima_index.html">Perspectiva climática</a>
+<a href="#contenidos">Recursos</a>
+</div>
+</div>
+<div>
+<h3>Contacto</h3>
+<div class="footer-links">
+<a href="mailto:mtasolola@proton.me">mtasolola@proton.me</a>
+<a href="https://www.facebook.com/MTASolola/about?locale=es_LA" rel="noopener noreferrer" target="_blank">Facebook</a>
+</div>
+</div>
+</div>
+<div class="shell footer-bottom">
+<span>© <span data-year=""></span> Mesa Técnica Agroclimática de Sololá.</span>
+<span id="footerUpdate">Datos y productos técnicos disponibles en los módulos de consulta.</span>
+</div>
+</footer>
+<div aria-hidden="true" class="search-overlay" data-search-overlay="">
+<div aria-label="Buscar en el portal" aria-modal="true" class="search-dialog" role="dialog">
+<div class="search-head">
+<input aria-label="Buscar en el portal" autocomplete="off" class="search-input" data-search-input="" placeholder="Buscar en el portal" type="search"/>
+<button class="search-close" data-search-close="" type="button">Cerrar</button>
+</div>
+<div class="search-results" data-search-results=""></div>
+</div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 (()=>{
