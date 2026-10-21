@@ -1,0 +1,9 @@
+/* Replica de los estilos del cintillo original del index MTA. */
+.mta-cintillo{padding:82px 0 90px;background:#fff;border-top:1px solid var(--line,#e0e4dd)}
+.mta-cintillo .shell{width:min(1160px,calc(100% - 48px));margin-inline:auto}
+.mta-cintillo .partners-title{text-align:center;margin:0 0 42px;font-size:.8rem;font-weight:500;color:var(--ink-2,#566659)}
+.mta-cintillo .partner-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px 34px}
+.mta-cintillo .partner-grid a{display:flex;align-items:center;justify-content:center;width:112px;height:66px;text-decoration:none;opacity:.9;transition:opacity .2s ease,transform .2s ease}
+.mta-cintillo .partner-grid a:hover{opacity:1;transform:translateY(-3px)}
+.mta-cintillo .partner-grid img{width:100%;height:50px;object-fit:contain;object-position:center}
+@media(max-width:600px){.mta-cintillo{padding:56px 0}.mta-cintillo .shell{width:calc(100% - 32px)}.mta-cintillo .partner-grid{gap:16px}.mta-cintillo .partner-grid a{width:95px;height:60px}}
