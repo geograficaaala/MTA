@@ -1,0 +1,33 @@
+name: Migrar cintillo institucional
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Escribe MIGRAR para crear un Pull Request con los cambios'
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  migracion:
+    if: ${{ inputs.confirmar == 'MIGRAR' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Vista previa de la migración
+        run: python scripts/migrar_cintillo.py
+      - name: Ejecutar migración
+        run: python scripts/migrar_cintillo.py --apply
+      - name: Crear Pull Request para revisión
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Migrar cintillos HTML a componente maestro'
+          branch: automatizacion/cintillo-maestro
+          delete-branch: true
+          title: 'Migrar cintillos a un componente maestro'
+          body: 'Migración automatizada. Revisar visualmente el sitio y la lista de HTML modificados antes de fusionar.'
