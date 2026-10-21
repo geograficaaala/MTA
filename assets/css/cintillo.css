@@ -1,9 +1,14 @@
-/* Replica de los estilos del cintillo original del index MTA. */
+/* Cintillo maestro: tipografía, fondo y separación conservados del sitio MTA. */
 .mta-cintillo{padding:82px 0 90px;background:#fff;border-top:1px solid var(--line,#e0e4dd)}
-.mta-cintillo .shell{width:min(1160px,calc(100% - 48px));margin-inline:auto}
+.mta-cintillo .shell{width:min(1480px,calc(100% - 48px));margin-inline:auto}
 .mta-cintillo .partners-title{text-align:center;margin:0 0 42px;font-size:.8rem;font-weight:500;color:var(--ink-2,#566659)}
-.mta-cintillo .partner-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px 34px}
-.mta-cintillo .partner-grid a{display:flex;align-items:center;justify-content:center;width:112px;height:66px;text-decoration:none;opacity:.9;transition:opacity .2s ease,transform .2s ease}
-.mta-cintillo .partner-grid a:hover{opacity:1;transform:translateY(-3px)}
-.mta-cintillo .partner-grid img{width:100%;height:50px;object-fit:contain;object-position:center}
-@media(max-width:600px){.mta-cintillo{padding:56px 0}.mta-cintillo .shell{width:calc(100% - 32px)}.mta-cintillo .partner-grid{gap:16px}.mta-cintillo .partner-grid a{width:95px;height:60px}}
+.mta-cintillo .mta-logos-fila{display:flex;align-items:center;justify-content:space-between;column-gap:6px;row-gap:16px;width:100%;margin-inline:auto}
+.mta-cintillo .mta-logos-fila+.mta-logos-fila{margin-top:15px}
+.mta-cintillo .mta-logo-entidad{box-sizing:border-box;display:flex;flex:0 1 var(--logo-ancho);min-width:0;max-width:var(--logo-ancho);height:83px;align-items:center;justify-content:center;gap:3px;text-decoration:none;opacity:.96;transition:opacity .2s ease,transform .2s ease}
+.mta-cintillo a.mta-logo-entidad:hover{opacity:1;transform:translateY(-3px)}
+.mta-cintillo .mta-logo-entidad img{display:block;max-width:100%;width:auto;min-width:0;height:auto;max-height:79px;object-fit:contain;object-position:center}
+.mta-cintillo .mta-logo-entidad img:only-child{max-width:100%}
+.mta-cintillo .mta-logo-entidad img:not(:only-child){max-width:60%;max-height:70px;flex:0 1 auto}
+@media(max-width:900px){.mta-cintillo .mta-logos-fila{flex-wrap:wrap;justify-content:center;gap:14px 19px}.mta-cintillo .mta-logo-entidad{flex:0 1 min(var(--logo-ancho),42vw)}}
+@media(max-width:600px){.mta-cintillo{padding:56px 0}.mta-cintillo .shell{width:calc(100% - 32px)}.mta-cintillo .mta-logo-entidad{height:68px}.mta-cintillo .mta-logo-entidad img{max-height:64px}.mta-cintillo .mta-logo-entidad img:not(:only-child){max-height:56px}}
+@media(prefers-reduced-motion:reduce){.mta-cintillo a.mta-logo-entidad{transition:none}}
