@@ -1,0 +1,29 @@
+name: Ajustar responsive de páginas climáticas
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  ajuste:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Aplicar ajustes limitados a páginas climáticas
+        run: python scripts/ajustar_climaticas.py
+      - name: Crear Pull Request para revisión
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Mejorar vista móvil de cinco páginas climáticas'
+          branch: automatizacion/responsive-climaticas
+          delete-branch: true
+          title: 'Ajustes móviles de páginas climáticas'
+          body: |
+            Solo cinco archivos `docs/*_index.html` reciben una hoja CSS compartida.
+            Incluye `reporte-climaticas-responsive.md` para revisar la causa del
+            espacio posterior al footer antes de eliminar ningún elemento.
+            No modifica el cintillo maestro ni el contenido de gráficos y mapas.
