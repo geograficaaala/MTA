@@ -1,0 +1,21 @@
+/* MTA — mejoras conservadoras solo para páginas climáticas.
+   Preserva colores, cintillo institucional y contenido técnico. */
+html, body { max-width: 100%; }
+img, video, svg { max-width: 100%; }
+/* El footer no debe dejar un margen extra al final de la página.
+   No ocultar ni recortar contenido para disimular huecos desconocidos. */
+body > footer.footer, body > .footer { margin-bottom: 0 !important; }
+@media (max-width: 768px) {
+  :where(main, article, section, .wrap, .shell, .container, .panel) { min-width: 0; }
+  :where(.wrap, .shell, .container, .footer-main, .footer-bottom) {
+    box-sizing: border-box; max-width: 100%;
+  }
+  :where(.panel-body, .table-scroll, .table-responsive, .table-wrapper) {
+    max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  :where(input, select, textarea, button) { max-width: 100%; }
+  :where(.footer-links a, .footer a) { overflow-wrap: anywhere; }
+}
+@media (max-width: 480px) {
+  :where(.footer-main, .footer-bottom) { padding-left: 16px; padding-right: 16px; }
+}
