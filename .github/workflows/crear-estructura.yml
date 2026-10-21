@@ -1,0 +1,37 @@
+name: Crear estructura del cintillo maestro
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  crear-estructura:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Crear carpetas necesarias
+        run: |
+          mkdir -p scripts assets/js assets/css
+          for dir in scripts assets/js assets/css; do
+            if [ -z "$(find "$dir" -mindepth 1 -maxdepth 1 -print -quit)" ]; then
+              touch "$dir/.gitkeep"
+            fi
+          done
+
+      - name: Guardar estructura en la rama actual
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/.gitkeep assets/js/.gitkeep assets/css/.gitkeep 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "La estructura ya existe. No hay cambios que guardar."
+          else
+            git commit -m "Preparar carpetas para cintillo maestro"
+            git push origin HEAD:${{ github.ref_name }}
+          fi
