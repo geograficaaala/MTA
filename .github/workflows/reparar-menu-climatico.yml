@@ -1,0 +1,43 @@
+name: Reparar menú de páginas climáticas
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Escribe MENU para preparar el Pull Request (no publica cambios)'
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  reparar:
+    if: ${{ github.event.inputs.confirmar == 'MENU' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ajustar menú únicamente en páginas climáticas
+        run: python scripts/reparar_menu_climatico.py
+      - name: Comprobar que no se modificaron otros archivos
+        run: |
+          git diff --name-only | tee /tmp/cambios.txt
+          if grep -Ev '^docs/(clima|precipitaciones|temperatura|viento|agroclima)_index\.html$' /tmp/cambios.txt; then
+            echo 'Se detectaron cambios inesperados'; exit 1
+          fi
+      - name: Crear Pull Request de revisión
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automatizacion/menu-climatico
+          delete-branch: true
+          commit-message: 'Unificar menú desplegable en páginas climáticas'
+          title: 'Corregir navegación y desplegables de las páginas climáticas'
+          body: |
+            Actualiza solo el bloque nav[data-nav] en las cinco páginas climáticas.
+            Añade CSS/JS compartidos para dropdowns, móvil y teclado.
+            No modifica el controlador del cintillo, la paleta, los datos ni las gráficas.
+            Revisar en móvil y escritorio antes de fusionar.
