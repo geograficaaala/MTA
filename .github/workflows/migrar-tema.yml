@@ -1,0 +1,40 @@
+name: Migrar paleta de colores MTA
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Escribe TEMA para preparar un Pull Request (no publica cambios)'
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  tema:
+    if: ${{ inputs.confirmar == 'TEMA' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener repositorio
+        uses: actions/checkout@v4
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Integrar hoja de estilos en los HTML existentes
+        run: python scripts/aplicar_tema.py
+      - name: Verificar que no se altere el controlador del cintillo
+        run: |
+          git diff --exit-code -- assets/js/cintillo.js assets/css/cintillo.css
+          git diff --check
+      - name: Crear Pull Request sin publicar directamente en main
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Integrar tema MTA compartido sin alterar cintillo'
+          branch: automatizacion/tema-mta
+          delete-branch: true
+          title: 'Integrar paleta institucional MTA en las paginas'
+          body: |
+            Inserta assets/css/tema-mta.css en las paginas existentes.
+            No reemplaza HTML completos ni modifica cintillo.js / cintillo.css.
+            Revisar la vista movil, contraste y los graficos climaticos antes del merge.
