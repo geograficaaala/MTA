@@ -452,6 +452,21 @@
 .mta3d-dots button[aria-current="true"]{background:var(--forest,#31543a);width:28px;border-radius:8px}
 @media(max-width:700px){.mta3d-stage{min-height:410px}.mta3d-card{width:72%;height:362px}.mta3d-image{height:265px}.mta3d-card[data-position="left"]{transform:translateX(-103%) rotateY(28deg) scale(.7)}.mta3d-card[data-position="right"]{transform:translateX(3%) rotateY(-28deg) scale(.7)}.mta3d-card-copy{padding:13px 18px}.mta3d-arrow{width:35px;height:35px;font-size:18px;top:43%}.mta3d-card-copy h3{font-size:1.25rem}}
 @media(prefers-reduced-motion:reduce){.mta3d-card,.mta3d-dots button{transition:none}}
+
+/* Noticias del inicio: conserva el tema institucional */
+.home-news{padding:70px 0;background:#f2f7fa;border-top:1px solid #dce5ed;border-bottom:1px solid #dce5ed}
+.home-news-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:30px}
+.home-news-head p:not(.eyebrow){max-width:650px;line-height:1.7;color:#34435a}
+.home-news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
+.home-news-item{display:flex;flex-direction:column;gap:16px;background:#fff;border:1px solid #dce5ed;border-radius:12px;padding:28px;color:#242d51;text-decoration:none;min-height:235px;transition:transform .2s,box-shadow .2s}
+.home-news-item:hover{transform:translateY(-5px);box-shadow:0 14px 24px rgba(30,43,70,.11)}
+.home-news-item strong{font-family:var(--display);font-size:1.47rem;line-height:1.22}
+.home-news-item span:not(.home-news-tag){font-size:.82rem;color:#506177}
+.home-news-item b{font-size:.8rem;color:#365a2d;margin-top:auto}
+.home-news-tag{font-size:.69rem;text-transform:uppercase;letter-spacing:.09em;font-weight:800;color:#365a2d}
+.history-content p{text-align:left;line-height:1.78;margin:0 0 16px}
+@media(max-width:900px){.home-news-grid{grid-template-columns:1fr 1fr}.home-news-head{align-items:flex-start;flex-direction:column}}
+@media(max-width:620px){.home-news{padding:43px 0}.home-news-grid{grid-template-columns:1fr}.home-news-item{min-height:0;padding:23px}}
 </style>
 <link rel="stylesheet" href="assets/css/tema-mta.css" data-mta-tema>
 <link rel="stylesheet" href="assets/css/cintillo.css" data-mta-cintillo-css>
@@ -489,6 +504,7 @@
 <a href="./docs/agroclima_index.html">Agroclima</a>
 </div>
 </details>
+<a href="./noticias.html">Noticias</a>
 <a href="./comentarios_index.html">Comentarios</a>
 <a href="#contacto">Contacto</a>
 <button data-search-open="" type="button">Buscar</button>
@@ -545,11 +561,12 @@
 </div>
 </div>
 </section>
-<!-- Historia: el contenido será incorporado cuando MAGA lo proporcione. -->
+<section class="home-news" id="noticias" aria-labelledby="homeNewsTitle"><div class="shell"><div class="home-news-head"><div><p class="eyebrow">Actualidad y publicaciones</p><h2 id="homeNewsTitle" class="section-title display">Noticias de la MTA.</h2><p>Actividades institucionales y documentos oficiales para mantenerse informado sobre el clima y el sector agropecuario.</p></div><a class="btn" href="./noticias.html">Ver todas las noticias ↗</a></div><div class="home-news-grid"><a href="./noticias.html" class="home-news-item"><span class="home-news-tag">Participación institucional</span><strong>La MTA de Sololá acerca la información climática al sector agrícola</strong><span>Feria Agropecuaria 2026 · San Juan La Laguna</span><b>Leer noticia ↗</b></a><a href="./noticias.html" class="home-news-item"><span class="home-news-tag">Informe técnico · Octubre 2026</span><strong>Condiciones de El Niño – Oscilación del Sur</strong><span>Documento de INSIVUMEH sobre ENOS.</span><b>Consultar publicación ↗</b></a><a href="./noticias.html" class="home-news-item"><span class="home-news-tag">Material informativo</span><strong>El Niño y La Niña</strong><span>Trifoliares de prevención y consulta.</span><b>Consultar documentos ↗</b></a></div></div></section>
+<!-- Historia oficial proporcionada para la MTA de Sololá. -->
 <section aria-labelledby="historiaTitle" class="story-copy mta-history" id="historia">
 <div class="shell story-copy-grid">
 <h2 id="historiaTitle">Historia de la MTA.</h2>
-<div aria-label="Área para la historia de la MTA" class="history-content"></div>
+<div class="history-content"><p>Las Mesas Técnicas Agroclimáticas (MTA) surgieron en Guatemala como espacios interinstitucionales para analizar información climática y fortalecer la toma de decisiones agropecuarias según el contexto de cada departamento. Iniciaron en 2015 con un plan piloto en Chiquimula y, entre 2019 y 2020, se expandieron a nivel nacional.</p><p>En noviembre de 2020 comenzaron las gestiones para establecer la MTA en Sololá. Especialistas de entidades como INSIVUMEH, MAGA, Alliance Bioversity-CIAT, Mercy Corps y la Universidad Estatal de Colorado evaluaron el clima local, la importancia ecológica del Lago de Atitlán y experiencias previas.</p><p>El 25 de mayo de 2021 se inauguró oficialmente la MTA Sololá, liderada por el MAGA e integrada por instituciones académicas, ambientales, gremiales y de cooperación. Desde entonces, este espacio analiza datos meteorológicos y agropecuarios para elaborar boletines y recomendaciones técnicas, impulsando la gestión del riesgo y la adaptación productiva local frente al cambio climático.</p></div>
 </div>
 </section>
 <!-- Muestras pendientes: MAGA/proyecto proporcionará boletín, infografía y mapa. -->
