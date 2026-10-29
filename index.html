@@ -473,59 +473,49 @@
 <style>/* Espacio para enlaces directos de Noticias y Spots radiales */
 @media(min-width:1101px){.nav{gap:clamp(8px,1.02vw,17px)}.nav a,.nav button,.nav summary{font-size:.73rem}.header-inner{gap:18px}.brand{min-width:250px}}
 </style><style>
-/* Ajustes de presentación del inicio — sin afectar los controladores maestros */
-#la-mta .shell > h2, #la-mta h2, #contenidos .section-title, .intro-strip h2, .mta-section-heading, .mta-history-updated .mta-section-heading {text-align:center}
-#la-mta .shell > p, #la-mta .intro-copy p, #contenidos .section-lead, #contenidos .section-head p, .intro-strip p {text-align:center}
-.mta-section-heading{max-width:790px;margin:0 auto 36px;text-align:center}
-.mta-section-heading .eyebrow{margin-bottom:12px}
-.mta-section-heading h2{margin:0 0 14px}
-.mta-section-heading p:last-child{margin:0 auto;max-width:690px;line-height:1.7;color:#445266}
-.mta-news-updated{padding:85px 0;background:#f5f8fb}
-.mta-news-toolbar,.mta-news-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 14px}
-.mta-news-bottom{margin:18px 0 0}
-.mta-news-toolbar #newsSlideStatus{font-weight:700;color:#242d51;font-size:.85rem;letter-spacing:.08em}
-.mta-news-actions,.mta-time-foot>div{display:flex;gap:9px}
-.mta-news-arrow,.mta-time-foot button{border:1px solid #b6c5d2;background:#fff;color:#242d51;border-radius:50%;height:43px;width:43px;font-size:23px;cursor:pointer;transition:background .2s,color .2s}
-.mta-news-arrow:hover,.mta-time-foot button:hover{background:#242d51;color:white}
-.mta-news-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth;padding:3px 2px 12px}
-.mta-news-track::-webkit-scrollbar{display:none}
-.mta-news-slide{scroll-snap-align:start;flex:0 0 calc((100% - 40px)/3);min-width:0;overflow:hidden;background:#fff;border:1px solid #e0e7ed;border-radius:17px;box-shadow:0 12px 26px rgba(25,42,68,.07)}
-.mta-news-cover{display:block;height:230px;background:#e8edf3;overflow:hidden}
-.mta-news-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
-.mta-news-slide:hover .mta-news-cover img{transform:scale(1.035)}
-.mta-news-info{padding:23px}.mta-news-info>span{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#365a2d;font-weight:750}
-.mta-news-info h3{font-size:1.23rem;color:#242d51;line-height:1.25;margin:12px 0;min-height:63px;text-align:center}
-.mta-news-info p{color:#425165;line-height:1.55;font-size:.92rem;min-height:62px;text-align:center}
-.mta-news-info a{display:inline-block;margin-top:14px;font-weight:750;color:#28532b;text-decoration:none}
-.mta-news-dots{display:flex;align-items:center;gap:9px}
-.mta-news-dots button{width:9px;height:9px;padding:0;border:0;border-radius:100px;background:#bec8d2;cursor:pointer}
-.mta-news-dots button.is-active{width:28px;background:#365a2d}
-.mta-history-updated{padding:88px 0 92px;background:#fff}
-.mta-timeline{border:1px solid #e2e9ed;border-radius:20px;padding:34px;background:#f8fafb;box-shadow:0 12px 38px rgba(23,43,65,.05)}
-.mta-timeline-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative;margin-bottom:32px;gap:10px}
-.mta-timeline-steps:before{content:'';position:absolute;left:12%;right:12%;top:12px;height:2px;background:#ced8df}
-.mta-time-step{position:relative;display:flex;flex-direction:column;align-items:center;gap:7px;border:0;background:transparent;color:#425064;padding:0 5px 12px;cursor:pointer;text-align:center;font:inherit}
-.mta-time-dot{position:relative;display:block;width:25px;height:25px;background:#fff;border:3px solid #aab9c6;border-radius:50%;transition:all .2s}
-.mta-time-step.is-active .mta-time-dot{background:#365a2d;border-color:#365a2d;box-shadow:0 0 0 6px #e1eedf}
-.mta-time-step strong{font-size:1.05rem;color:#242d51}
-.mta-time-step small{font-size:.82rem;color:#566476}
-.mta-time-step.is-active strong{color:#365a2d}
-.mta-timeline-panel{background:#242d51;color:#fff;border-radius:15px;padding:36px;display:grid;grid-template-columns:190px 1fr;gap:38px;min-height:260px;align-items:center}
-.mta-timeline-year{font-size:3.3rem;font-weight:700;letter-spacing:-.055em;color:#badca8;line-height:1.1}
-.mta-timeline-label{text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;color:#c0d8ed;margin:0 0 12px}
-.mta-timeline-panel h3{color:#fff;font-size:1.6rem;line-height:1.25;margin:0 0 14px;text-align:left}
-.mta-timeline-panel p:not(.mta-timeline-label){color:#ecf1f5;line-height:1.7;margin:0;text-align:left}
-.mta-time-foot{display:flex;align-items:center;justify-content:space-between;margin-top:25px;color:#cbd8e5}
-.mta-time-foot button{height:37px;width:37px;background:transparent;border-color:#73829a;color:#fff}
-.mta-history-closing{margin:25px auto 0;max-width:820px;text-align:center}
-.mta-history-closing strong{color:#365a2d}.mta-history-closing p{color:#425165;line-height:1.7;margin:9px auto 0}
-@media(max-width:900px){.mta-news-slide{flex-basis:calc((100% - 20px)/2)}.mta-timeline-panel{grid-template-columns:1fr;gap:16px}.mta-timeline-year{font-size:2.4rem}}
-@media(max-width:600px){.mta-news-updated,.mta-history-updated{padding:55px 0}.mta-news-slide{flex-basis:88%}.mta-news-cover{height:210px}.mta-news-info h3,.mta-news-info p{min-height:0}.mta-news-bottom{flex-wrap:wrap;justify-content:center}.mta-timeline{padding:19px 12px}.mta-timeline-steps{gap:2px}.mta-time-step strong{font-size:.76rem}.mta-time-step small{font-size:.66rem}.mta-time-dot{height:20px;width:20px}.mta-timeline-steps:before{top:9px}.mta-timeline-panel{padding:24px 20px}.mta-timeline-panel h3{font-size:1.26rem}}
-@media(prefers-reduced-motion:reduce){.mta-news-track{scroll-behavior:auto}.mta-news-cover img{transition:none}}
-
-/* Títulos e introducciones centrados */
-.intro-strip .shell, #la-mta .section-heading, #contenidos .section-heading, #contenidos .resources-head, #contenidos .resources-heading, .hero .hero-copy {text-align:center}
-.hero .hero-copy p,.hero .hero-copy h1{ text-align:center }
+/* Ajustes específicos del inicio. No se alteran el tema ni el cintillo maestro. */
+:root { color-scheme:light; }
+#la-mta, #noticias, #historia, #contenidos { isolation:isolate; }
+#la-mta .story-title-wrap, .intro-strip .intro-grid, #contenidos .resources-head {display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:16px;max-width:1040px;margin-inline:auto;}
+#la-mta .story-title-wrap h2, #la-mta .story-title-wrap .eyebrow, .intro-strip .intro-large, .intro-strip .intro-side, #contenidos .section-title, #noticias .section-title, #historia .section-title {margin-inline:auto!important;text-align:center!important;max-width:min(100%,900px)!important;}
+#la-mta .story-title-wrap .eyebrow {width:100%;}
+#la-mta .story-copy-grid {display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;max-width:940px;gap:22px;text-align:center!important;}
+#la-mta .story-copy-grid>*, #la-mta .story-copy-grid>div {width:100%;max-width:810px;margin-inline:auto!important;min-width:0;}
+#la-mta .story-copy-grid h2, #la-mta .story-copy-grid p, #la-mta .story-copy-grid .btn-row {text-align:center!important;justify-content:center!important;margin-left:auto!important;margin-right:auto!important;}
+.hero .hero-copy{align-items:center!important;text-align:center!important;min-width:0;}
+.hero .hero-copy h1, .hero .hero-copy p, .hero .hero-copy .hero-title, .hero .hero-copy .hero-lead {text-align:center!important;margin-left:auto!important;margin-right:auto!important;}
+.hero .hero-copy .btn-row{justify-content:center!important;}
+.mta-section-heading,.mta-heading-center {display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center!important;gap:12px;width:100%;max-width:900px;margin:0 auto 38px!important;}
+.mta-section-heading>*,.mta-heading-center>* {text-align:center!important;margin-left:auto!important;margin-right:auto!important;max-width:850px;}
+.mta-heading-center .eyebrow{margin-bottom:0!important}
+.mta-heading-desc,.mta-section-heading>p:last-child{color:#40516a!important;line-height:1.7;max-width:680px!important;}
+#noticias .mta-news-info h3,#noticias .mta-news-info p{text-align:center!important;}
+#noticias .mta-news-info h3{color:#242d51!important;}
+#noticias .mta-news-info p{color:#40516a!important;}
+#contenidos .resources-head{width:100%!important;}
+#contenidos .resources-head>div{width:100%;text-align:center;}
+#contenidos .resources-head .eyebrow{text-align:center!important;}
+/* Historia: cronología editorial, sin paneles superpuestos. */
+.mta-history-rebuild{padding:clamp(60px,7vw,110px) 0;background:#f5f8fb;color:#242d51;}
+.mta-history-rebuild .section-title{color:#242d51!important;line-height:1.15!important;}
+.mta-chronology{max-width:960px;margin:0 auto;position:relative;padding-left:34px;}
+.mta-chronology:before{content:"";position:absolute;left:12px;top:25px;bottom:25px;width:2px;background:#a6bfc3;}
+.mta-era{position:relative;background:#fff;border:1px solid #d7e3e8;border-radius:13px;margin:0 0 16px;box-shadow:0 6px 22px rgba(24,45,65,.045);overflow:visible;}
+.mta-era:before{content:"";position:absolute;left:-30px;top:28px;width:14px;height:14px;background:#fff;border:3px solid #365a2d;border-radius:50%;z-index:1;}
+.mta-era[open]:before{background:#365a2d;box-shadow:0 0 0 4px #e4f0e1;}
+.mta-era summary{list-style:none;display:grid;grid-template-columns:minmax(112px,165px) minmax(0,1fr) 32px;align-items:center;gap:16px;cursor:pointer;padding:22px 26px;min-height:78px;color:#242d51!important;}
+.mta-era summary::-webkit-details-marker{display:none;}
+.mta-era summary:focus-visible{outline:3px solid #365a2d;outline-offset:3px;}
+.mta-era-date{font-weight:800;color:#365a2d!important;font-size:clamp(.95rem,1.5vw,1.16rem);}
+.mta-era-heading{font-family:var(--display,Georgia,serif);font-size:clamp(1.2rem,2vw,1.65rem);font-weight:600;line-height:1.25;color:#242d51!important;}
+.mta-era-action{width:27px;height:27px;border:1px solid #a9c4b2;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.mta-era-action:before{content:"+";font-size:21px;color:#365a2d;line-height:1;}
+.mta-era[open] .mta-era-action:before{content:"−";}
+.mta-era-body{padding:0 26px 24px 26px;border-top:1px solid #edf1f4;}
+.mta-era-body p{max-width:760px;margin:20px 0 0;color:#33475b!important;font-size:clamp(.92rem,1.1vw,1rem);line-height:1.8;text-align:left!important;}
+@media(max-width:850px){.hero{grid-template-columns:minmax(0,1fr)!important;}.hero-copy{padding:56px 24px!important}.hero-media{min-height:350px!important}.story-copy-grid{padding-inline:15px}.mta-news-slide{flex-basis:min(78%,390px)!important}}
+@media(max-width:600px){.shell{width:calc(100% - 32px)}.mta-chronology{padding-left:23px}.mta-chronology:before{left:6px}.mta-era:before{left:-23px;width:12px;height:12px;top:31px}.mta-era summary{grid-template-columns:minmax(0,1fr) 28px;gap:5px 10px;padding:17px 15px}.mta-era-date{grid-column:1;grid-row:1}.mta-era-heading{grid-column:1;grid-row:2}.mta-era-action{grid-column:2;grid-row:1 / 3}.mta-era-body{padding:0 15px 20px}.mta-news-slide{flex-basis:88%!important}.mta-history-rebuild{padding:55px 0}.hero .btn-row{gap:10px;justify-content:center}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important}}
 </style></head>
 <body>
 <header class="header">
@@ -629,16 +619,15 @@
 <div class="mta-news-bottom"><div aria-label="Seleccionar noticia" class="mta-news-dots" id="mtaNewsDots"></div><a class="btn" href="./noticias.html">Ver todas las noticias ↗</a></div>
 </div></section>
 <!-- Historia oficial proporcionada para la MTA de Sololá. -->
-<section aria-labelledby="historiaTitle" class="story-copy mta-history-updated" id="historia"><div class="shell">
-<div class="mta-section-heading"><p class="eyebrow">Nuestra trayectoria</p><h2 class="section-title display" id="historiaTitle">Historia de la MTA</h2><p>De la iniciativa piloto a la consolidación de la Mesa Técnica Agroclimática de Sololá.</p></div>
-<div class="mta-timeline" id="mtaTimeline"><div aria-label="Etapas de la historia de la MTA" class="mta-timeline-steps" role="tablist">
-<button aria-controls="mtaHistoryPanel" aria-selected="true" class="mta-time-step is-active" data-step="0" id="step-2015" role="tab"><span class="mta-time-dot"></span><strong>2015</strong><small>Primer piloto</small></button>
-<button aria-controls="mtaHistoryPanel" aria-selected="false" class="mta-time-step" data-step="1" id="step-expansion" role="tab" tabindex="-1"><span class="mta-time-dot"></span><strong>2019–2020</strong><small>Expansión nacional</small></button>
-<button aria-controls="mtaHistoryPanel" aria-selected="false" class="mta-time-step" data-step="2" id="step-gestiones" role="tab" tabindex="-1"><span class="mta-time-dot"></span><strong>Noviembre 2020</strong><small>Gestiones en Sololá</small></button>
-<button aria-controls="mtaHistoryPanel" aria-selected="false" class="mta-time-step" data-step="3" id="step-inauguracion" role="tab" tabindex="-1"><span class="mta-time-dot"></span><strong>25 mayo 2021</strong><small>Inauguración oficial</small></button>
-</div><div aria-labelledby="step-2015" class="mta-timeline-panel" id="mtaHistoryPanel" role="tabpanel" tabindex="0"><div class="mta-timeline-year" id="mtaTimelineYear">2015</div><div><p class="mta-timeline-label" id="mtaTimelineLabel">Origen de las MTA</p><h3 id="mtaTimelineTitle">Un primer espacio de coordinación agroclimática</h3><p id="mtaTimelineText">Las Mesas Técnicas Agroclimáticas surgieron en Guatemala para analizar información climática y fortalecer la toma de decisiones agropecuarias. El primer plan piloto comenzó en Chiquimula en 2015.</p><div class="mta-time-foot"><span id="mtaTimeCount">01 / 04</span><div><button aria-label="Etapa anterior" id="mtaTimePrev" type="button">←</button><button aria-label="Etapa siguiente" id="mtaTimeNext" type="button">→</button></div></div></div></div></div>
-<div class="mta-history-closing"><strong>Desde 2021</strong><p>La MTA Sololá analiza información meteorológica y agropecuaria para elaborar boletines y recomendaciones técnicas, fortalecer la gestión del riesgo y apoyar la adaptación productiva frente al cambio climático.</p></div>
-</div></section>
+<section aria-labelledby="historiaTitle" class="mta-history-rebuild" id="historia">
+<div class="shell">
+<header class="mta-heading-center"><p class="eyebrow">Nuestra trayectoria</p><h2 class="section-title display" id="historiaTitle">Historia de la MTA</h2><p class="mta-heading-desc">De las primeras mesas agroclimáticas a la consolidación de una red de coordinación técnica en Sololá.</p></header>
+<div aria-label="Cronología de la Mesa Técnica Agroclimática" class="mta-chronology">
+<details class="mta-era" open=""><summary><span class="mta-era-date">2015</span><span class="mta-era-heading">Origen en Chiquimula</span><span aria-hidden="true" class="mta-era-action"></span></summary><div class="mta-era-body"><p>Las Mesas Técnicas Agroclimáticas surgieron en Guatemala como espacios interinstitucionales para analizar información climática y fortalecer la toma de decisiones agropecuarias según el contexto de cada departamento. Iniciaron en 2015 con un plan piloto en Chiquimula.</p></div></details>
+<details class="mta-era"><summary><span class="mta-era-date">2019–2020</span><span class="mta-era-heading">Expansión nacional</span><span aria-hidden="true" class="mta-era-action"></span></summary><div class="mta-era-body"><p>Entre 2019 y 2020, las Mesas Técnicas Agroclimáticas se expandieron a nivel nacional para acercar la información climática a los sectores productivos de cada departamento.</p></div></details>
+<details class="mta-era"><summary><span class="mta-era-date">Nov. 2020</span><span class="mta-era-heading">Preparación de la MTA Sololá</span><span aria-hidden="true" class="mta-era-action"></span></summary><div class="mta-era-body"><p>En noviembre de 2020 comenzaron las gestiones para establecer la MTA en Sololá. Especialistas del INSIVUMEH, MAGA, Alliance Bioversity-CIAT, Mercy Corps y la Universidad Estatal de Colorado evaluaron el clima local, la importancia ecológica del Lago de Atitlán y experiencias previas.</p></div></details>
+<details class="mta-era"><summary><span class="mta-era-date">25 mayo 2021</span><span class="mta-era-heading">Inauguración oficial</span><span aria-hidden="true" class="mta-era-action"></span></summary><div class="mta-era-body"><p>Se inauguró oficialmente la MTA Sololá, liderada por el MAGA e integrada por instituciones académicas, ambientales, gremiales y de cooperación. Desde entonces, analiza datos meteorológicos y agropecuarios para elaborar boletines y recomendaciones técnicas, impulsando la gestión del riesgo y la adaptación productiva frente al cambio climático.</p></div></details>
+</div></div></section>
 <!-- Muestras pendientes: MAGA/proyecto proporcionará boletín, infografía y mapa. -->
 <section aria-labelledby="contenidosTitle" class="resources home-previews" id="contenidos">
 <div class="shell">
