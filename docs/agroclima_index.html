@@ -1229,50 +1229,47 @@
 <link rel="stylesheet" href="../assets/css/responsive-climaticas.css" data-mta-climaticas-responsive>
 <link rel="stylesheet" href="../assets/css/tema-mta.css" data-mta-tema>
   <link rel="stylesheet" href="../assets/css/menu-climatico.css" data-mta-menu-climatico>
+<link rel="stylesheet" href="../assets/css/header-unificado.css" data-mta-header-style>
 </head>
 <body>
-  <header class="header">
-    <div class="shell header-inner">
-      <a class="brand" href="../index.html" aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá">
-        <img src="./logos/MTA_LOGO.png" alt="Logo de la Mesa Técnica Agroclimática de Sololá">
-        <span class="brand-copy">
-          <span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
-          <span class="brand-place">Sololá, Guatemala</span>
-        </span>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-menu-toggle>
-        <span class="menu-lines"></span>
-      </button>
-
-      <nav class="nav mta-nav-climatica" aria-label="Navegación principal" data-nav>
-      <a href="../index.html">Inicio</a>
-      <details class="mta-nav-group">
-        <summary>Recomendaciones agroclimáticas</summary>
-        <div class="mta-nav-options">
-          <a href="../boletines.html">Boletines</a>
-          <a href="../infografias.html">Infografías</a>
-          <a href="../mapas.html">Mapas</a>
-        </div>
-      </details>
-      <details class="mta-nav-group">
-        <summary aria-current="page">Información climática</summary>
-        <div class="mta-nav-options">
-          <a href="./precipitaciones_index.html">Precipitación</a>
-          <a href="./temperatura_index.html">Temperatura</a>
-          <a href="./viento_index.html">Viento</a>
-          <a href="./agroclima_index.html" aria-current="page">Agroclima</a>
-          <a href="./clima_index.html">Resumen climático</a>
-        </div>
-      </details>
-      <a href="../spots-radiales.html">Spots radiales</a>
-      <a href="../noticias.html">Noticias</a>
-      <a href="../comentarios_index.html">Comentarios</a>
-      <a href="../index.html#contacto">Contacto</a>
-      <button type="button" data-search-open>Buscar</button>
-    </nav>
-    </div>
-  </header>
+  <header class="header" data-mta-header-unificado="">
+<div class="shell header-inner">
+<a aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá" class="brand" href="../index.html">
+<img alt="Logo de la Mesa Técnica Agroclimática de Sololá" src="../docs/logos/MTA_LOGO.png"/>
+<span class="brand-copy">
+<span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
+<span class="brand-place">Sololá, Guatemala</span>
+</span>
+</a>
+<button aria-expanded="false" aria-label="Abrir menú" class="menu-toggle" data-menu-toggle="" type="button">
+<span class="menu-lines"></span>
+</button>
+<nav aria-label="Navegación principal" class="nav" data-nav="">
+<a href="../index.html">Inicio</a>
+<details class="nav-dropdown">
+<summary>Recomendaciones agroclimáticas</summary>
+<div class="nav-submenu">
+<a href="../boletines.html">Boletines</a>
+<a href="../infografias.html">Recomendaciones (infografías)</a>
+<a href="../mapas.html">Mapas</a>
+</div>
+</details>
+<details class="nav-dropdown">
+<summary>Información climática</summary>
+<div class="nav-submenu">
+<a href="../docs/precipitaciones_index.html">Precipitación</a>
+<a href="../docs/temperatura_index.html">Temperatura</a>
+<a href="../docs/viento_index.html">Viento</a>
+<a aria-current="page" href="../docs/agroclima_index.html">Agroclima</a>
+</div>
+</details><a href="../spots-radiales.html">Spots radiales</a>
+<a href="../noticias.html">Noticias</a>
+<a href="../comentarios_index.html">Comentarios</a>
+<a href="../index.html#contacto">Contacto</a>
+<button data-search-open="" type="button">Buscar</button>
+</nav>
+</div>
+</header>
 
     <div class="page-context">
     <div class="breadcrumbs" aria-label="Ruta de navegación">
@@ -2728,5 +2725,6 @@
 
 <script defer src="../assets/js/cintillo.js" data-mta-cintillo-js></script>
   <script defer src="../assets/js/menu-climatico.js" data-mta-menu-climatico></script>
+<script defer src="../assets/js/header-unificado.js" data-mta-header-script></script>
 </body>
 </html>
