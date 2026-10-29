@@ -1,36 +1,94 @@
-/* Tema institucional MTA: azul marino + verde agroclimatico + blanco.
-   Archivo compartido. No modifica ni el estilo ni los logos del cintillo maestro. */
+/* MTA | Tema institucional compartido
+   Azul y verde de los boletines, fondos blancos y contraste de lectura.
+   IMPORTANTE: No modificar .partners, .partner-grid, .mta-cintillo
+   ni estilos internos del cintillo maestro. */
 :root {
-  --mta-navy: #242d51;
-  --mta-blue: #317bb5;
-  --mta-green: #365a2d;
-  --mta-green-deep: #284424;
-  --mta-white: #ffffff;
-  --mta-ice: #f3f7fa;
-  --mta-text: #1f2937;
-  --mta-muted: #455568;
-  --mta-border: #cbd6df;
-  /* Variables utilizadas por las paginas que usan el estilo original. */
-  --paper: var(--mta-white);
-  --cream: var(--mta-ice);
-  --cream-soft: #f7fafc;
-  --ink: var(--mta-text);
-  --ink-2: var(--mta-muted);
-  --forest: var(--mta-green);
-  --forest-2: var(--mta-green-deep);
-  --lake: var(--mta-blue);
-  --lake-deep: var(--mta-navy);
-  --gold: var(--mta-green);
-  --sage: #71936d;
-  --sand: #eaf2f6;
-  --mist: #e6eff3;
-  --line: rgba(36,45,81,.17);
-  --white: #fff;
+  --mta-navy:#242d51;
+  --mta-blue:#317bb5;
+  --mta-cyan:#12a9da;
+  --mta-green:#365a2d;
+  --mta-green-deep:#284424;
+  --mta-white:#ffffff;
+  --mta-ice:#f2f7fa;
+  --mta-text:#202c3b;
+  --mta-muted:#455568;
+  --mta-border:#cbd6df;
+  --paper:#ffffff;
+  --cream:#f2f7fa;
+  --cream-soft:#f7fafc;
+  --ink:#202c3b;
+  --ink-2:#455568;
+  --forest:#365a2d;
+  --forest-2:#284424;
+  --lake:#317bb5;
+  --lake-deep:#242d51;
+  --gold:#365a2d;
+  --sage:#71936d;
+  --sand:#eaf2f6;
+  --mist:#e6eff3;
+  --line:rgba(36,45,81,.17);
+  --white:#fff;
 }
-/* Comunes a las distintas paginas, sin afectar los graficos, mapas ni tablas de datos. */
-html { color-scheme: light; }
-body { background-color: var(--mta-white); color: var(--mta-text); }
-.header { background: rgba(255,255,255,.97); border-bottom-color: var(--mta-border); }
-.header .nav a, .header .nav button, .header .brand, .header .brand-name { color: var(--mta-navy); }
-.header a:focus-visible, .header button:focus-visible { outline: 3px solid var(--mta-blue); outline-offset: 3px; }
-/* El cintillo institucional se administra exclusivamente desde cintillo.css / cintillo.js. */
+html { color-scheme:light; }
+body { background-color:var(--mta-white); color:var(--mta-text); }
+/* Encabezado: solo navegación; el cintillo institucional no se modifica. */
+.header { background:rgba(255,255,255,.97); border-bottom-color:var(--mta-border); }
+.header .nav a,.header .nav button,.header .nav summary,
+.header .brand-name { color:var(--mta-navy); }
+.header a:focus-visible,.header button:focus-visible,.header summary:focus-visible {
+  outline:3px solid var(--mta-blue);outline-offset:3px;
+}
+/* Portada y secciones con colores escritos directamente en HTML */
+.hero { background:var(--mta-ice); }
+.hero .eyebrow { color:var(--mta-green); }
+.hero-title { color:var(--mta-navy); }
+.hero-lead { color:var(--mta-muted); }
+.intro-strip,.resources,.story-title-wrap,.story-copy { background:var(--mta-white); }
+.intro-large,.story-title,.story-copy h2,.section-title { color:var(--mta-navy); }
+.intro-side,.section-copy,.story-copy p { color:var(--mta-muted); }
+/* Paneles oscuros: texto claro obligatorio */
+.split-copy.dark { background:var(--mta-navy); color:#fff; }
+.split-copy.blue { background:var(--mta-blue); color:#fff; }
+.split-copy.dark .section-title,.split-copy.blue .section-title,
+.split-copy.dark .story-title,.split-copy.blue .story-title { color:#fff; }
+.split-copy.dark .eyebrow,.split-copy.blue .eyebrow { color:#dbefd9; }
+.split-copy.dark .section-copy,.split-copy.blue .section-copy,
+.split-copy.dark .climate-context-note,.split-copy.blue .climate-context-note { color:#f1f5f9; }
+.split-copy.dark .btn,.split-copy.blue .btn {
+  background:#fff;border-color:#fff;color:var(--mta-navy);
+}
+.split-copy.dark .btn:hover,.split-copy.blue .btn:hover {
+  background:#e9f4fa;border-color:#e9f4fa;color:var(--mta-navy);
+}
+/* Botones de contraste alto */
+.btn:not(.btn-light) { background:var(--mta-green);border-color:var(--mta-green);color:#fff; }
+.btn:not(.btn-light):hover { background:var(--mta-green-deep);border-color:var(--mta-green-deep);color:#fff; }
+.btn-light { background:transparent;border-color:var(--mta-green);color:var(--mta-green-deep); }
+.btn-light:hover { background:var(--mta-green);color:#fff; }
+/* Superficies y paneles del portal */
+.climate-carousel-panel,.bulletin,.maps-section { background:var(--mta-ice); }
+.climate-summary-panel,.maps-footer,.map-dots { background:#edf4f8; }
+.climate-summary-label,.climate-kicker,.bulletin-period,.map-period,
+.eyebrow { color:var(--mta-green); }
+.climate-title,.map-title,.climate-summary-panel h4 { color:var(--mta-navy); }
+.bulletin-note,.map-description,.climate-summary-text,.map-credit { color:var(--mta-muted); }
+.map-media,.bulletin-cover,.pdf-stage { background:#e6eff3; }
+.pdf-loading { background:#f2f7fa;color:var(--mta-text); }
+.resource:hover,.resource:focus-visible { background:var(--mta-ice); }
+/* Carrusel del inicio: conservar posiciones y animaciones 3D */
+.mta3d-arrow { background:#fff;color:var(--mta-navy);border-color:var(--mta-border); }
+.mta3d-arrow:hover { background:var(--mta-ice); }
+.mta3d-dots button[aria-current="true"] { background:var(--mta-green); }
+/* Pie de página (independiente del cintillo de instituciones) */
+.footer { background:var(--mta-navy);color:#fff; }
+.footer .footer-about,.footer .footer-links a,.footer .footer-bottom { color:#e2e9f3; }
+.footer h3 { color:#fff; }
+/* Formularios y foco en elementos fuera del cintillo */
+main a:focus-visible,main button:focus-visible,
+.footer a:focus-visible,.footer button:focus-visible {
+  outline:3px solid var(--mta-blue);outline-offset:3px;
+}
+@media(max-width:700px) {
+  .hero { background:var(--mta-ice); }
+  .hero-copy { color:var(--mta-text); }
+}
