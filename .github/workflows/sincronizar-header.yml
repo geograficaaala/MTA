@@ -1,0 +1,36 @@
+name: Sincronizar header en todas las subpaginas
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Escribe HEADER para preparar el Pull Request'
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  sincronizar:
+    if: ${{ inputs.confirmar == 'HEADER' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar analizador HTML
+        run: python -m pip install beautifulsoup4==4.12.3
+      - name: Copiar menu actual del index y ajustar rutas
+        run: python scripts/sincronizar_header.py
+      - name: Comprobar que controlador del cintillo no fue alterado
+        run: |
+          if git diff --name-only | grep -E '(^assets/(js|css)/cintillo\.|^assets/css/tema-mta\.css)'; then
+            echo 'ERROR: cambio inesperado en controladores maestros'; exit 1
+          fi
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'Sincronizar header del index en todas las subpaginas'
+          branch: automatizacion/header-unificado
+          delete-branch: true
+          title: 'Unificar menu del header en todas las subpaginas'
+          body: 'Copia el header actual del index, ajusta enlaces relativos y agrega comportamiento movil. No toca cintillo, tema, gráficas ni footer. Revisar antes de fusionar.'
