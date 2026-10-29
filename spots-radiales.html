@@ -491,9 +491,10 @@
 @media(max-width:500px){.radio-player{padding:24px 18px}.radio-wave{height:80px}.radio-controls{gap:20px}.radio-player h2{margin-top:28px}.radio-progress{gap:6px}.radio-hero h1{font-size:2.5rem}}
 @media(prefers-reduced-motion:reduce){.radio-wave.playing i{animation:none;transform:scaleY(.6)}}
 </style>
+<link rel="stylesheet" href="./assets/css/header-unificado.css" data-mta-header-style>
 </head>
 <body>
-<header class="header">
+<header class="header" data-mta-header-unificado="">
 <div class="shell header-inner">
 <a aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá" class="brand" href="./index.html">
 <img alt="Logo de la Mesa Técnica Agroclimática de Sololá" src="./docs/logos/MTA_LOGO.png"/>
@@ -513,7 +514,6 @@
 <a href="./boletines.html">Boletines</a>
 <a href="./infografias.html">Recomendaciones (infografías)</a>
 <a href="./mapas.html">Mapas</a>
-<a aria-current="page" href="./spots-radiales.html">Spots radiales</a>
 </div>
 </details>
 <details class="nav-dropdown">
@@ -524,9 +524,10 @@
 <a href="./docs/viento_index.html">Viento</a>
 <a href="./docs/agroclima_index.html">Agroclima</a>
 </div>
-</details>
+</details><a aria-current="page" href="./spots-radiales.html">Spots radiales</a>
+<a href="./noticias.html">Noticias</a>
 <a href="./comentarios_index.html">Comentarios</a>
-<a href="#contacto">Contacto</a>
+<a href="./index.html#contacto">Contacto</a>
 <button data-search-open="" type="button">Buscar</button>
 </nav>
 </div>
@@ -627,4 +628,5 @@ document.getElementById('radioPrevious').addEventListener('click',()=>choose(cur
 audio.addEventListener('play',sync);audio.addEventListener('pause',sync);audio.addEventListener('ended',()=>choose(current+1,false));audio.addEventListener('loadedmetadata',()=>document.getElementById('radioDuration').textContent=time(audio.duration));audio.addEventListener('timeupdate',()=>{document.getElementById('radioCurrent').textContent=time(audio.currentTime);seek.value=audio.duration?audio.currentTime/audio.duration*100:0});seek.addEventListener('input',()=>{if(audio.duration)audio.currentTime=audio.duration*Number(seek.value)/100});
 audio.addEventListener('error',()=>{document.getElementById('radioStatus').textContent='No se pudo cargar el audio. Verifica la ruta del archivo.'});
 })();
-</script><script defer src="assets/js/cintillo.js" data-mta-cintillo-js></script></body></html>
+</script><script defer src="assets/js/cintillo.js" data-mta-cintillo-js></script><script defer src="./assets/js/header-unificado.js" data-mta-header-script></script>
+</body></html>
