@@ -25,6 +25,7 @@
       {nombre:'UVG y Centro de Estudios Agrícolas y Alimentarios',url:'https://www.uvg.edu.gt/',logos:['UVG.png'],ancho:240},
       {nombre:'MARN',url:'https://www.marn.gob.gt/',logos:['MARN.png'],ancho:180},
       {nombre:'Heifer y Futuro Sostenible',url:'https://www.heiferguatemala.org.gt/',logos:['HeiferInternational.png'],ancho:180},
+      {nombre:'Feed the Children',url:'https://www.feedthechildren.org/our-work/around-the-world/guatemala/',logos:['FeedtheChildren.png'],ancho:110},
       {nombre:'Cáritas',url:'https://sites.google.com/view/caritas-nacional/',logos:['Caritas.png'],ancho:109},
       {nombre:'CONRED',url:'https://conred.gob.gt/',logos:['Logo_de_CONRED.png'],ancho:72},
       {nombre:'CERCAP',url:'https://asociacioncdro.org.gt/',logos:['CERCAP.png'],ancho:102},
