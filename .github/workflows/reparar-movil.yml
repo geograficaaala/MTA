@@ -1,0 +1,32 @@
+name: Reparar navegación y PDF en teléfonos
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Escribe MOVIL para preparar el Pull Request'
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  reparar:
+    if: ${{ inputs.confirmar == 'MOVIL' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Aplicar recursos móviles
+        run: python scripts/aplicar_movil.py
+      - name: Comprobar sintaxis
+        run: python -m py_compile scripts/aplicar_movil.py
+      - name: Crear Pull Request para revisar
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'Mejorar menú móvil y lectura de PDF'
+          branch: fix/mta-responsive-global
+          delete-branch: true
+          title: 'Corrección móvil: menú y acceso a PDF'
+          body: 'Corrige navegación táctil y mejora la lectura de PDF en móvil sin modificar los PDF ni las gráficas. Revisar en teléfono antes de fusionar.'
