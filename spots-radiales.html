@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#2f4535" name="theme-color"/>
+<title>Spots radiales | MTA Sololá</title>
+<meta content="Portal de información climática y agroclimática de la Mesa Técnica Agroclimática de Sololá, Guatemala." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root{
+      --paper:#fbfaf6;
+      --cream:#f3e8c9;
+      --cream-soft:#f8f1df;
+      --ink:#24342b;
+      --ink-2:#4b5a50;
+      --forest:#334632;
+      --forest-2:#40563e;
+      --lake:#326875;
+      --lake-deep:#214f5b;
+      --gold:#9a6c2f;
+      --sage:#879784;
+      --sand:#efe2bf;
+      --mist:#dbe5df;
+      --line:rgba(36,52,43,.16);
+      --white:#fff;
+      --max:1440px;
+      --display:"Source Serif 4", Georgia, "Times New Roman", serif;
+      --sans:"Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:96px}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    h1,h2,h3,p,a,span{overflow-wrap:break-word}
+    h1,h2,h3{ text-wrap:balance }
+    p{ text-wrap:pretty;text-align:justify;text-justify:inter-word }
+    main>*{min-width:0}
+    body.search-open,body.menu-open{overflow:hidden}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    button,input{font:inherit}
+
+    .shell{width:min(var(--max),calc(100% - 64px));margin:0 auto}
+
+    /* HEADER */
+    .header{position:sticky;top:0;z-index:1000;background:rgba(251,250,246,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+    .header-inner{min-height:92px;display:flex;align-items:center;gap:36px}
+    .brand{display:flex;align-items:center;gap:13px;text-decoration:none;min-width:290px}
+    .brand img{width:55px;height:55px;object-fit:contain}
+    .brand-copy{display:flex;flex-direction:column;gap:2px}
+    .brand-name{font-size:.9rem;line-height:1.2;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
+    .brand-place{font-size:.69rem;color:var(--ink-2)}
+    .nav{margin-left:auto;display:flex;align-items:center;gap:24px}
+    .nav a,.nav button{position:relative;border:0;background:none;padding:10px 0;color:var(--ink);font-size:.78rem;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap}
+    .nav a::after,.nav button::after{content:"";position:absolute;left:0;right:100%;bottom:4px;height:1px;background:var(--gold);transition:right .22s ease}
+    .nav a:hover::after,.nav a:focus-visible::after,.nav button:hover::after,.nav button:focus-visible::after,.nav a[aria-current="page"]::after{right:0}
+    .nav a:focus-visible,.nav button:focus-visible{outline:2px solid rgba(181,130,53,.35);outline-offset:5px}
+    .menu-toggle{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);background:transparent;align-items:center;justify-content:center;cursor:pointer}
+    .menu-lines,.menu-lines::before,.menu-lines::after{display:block;width:20px;height:1.5px;background:var(--ink);content:"";transition:.2s ease}
+    .menu-lines{position:relative}
+    .menu-lines::before{position:absolute;top:-6px}
+    .menu-lines::after{position:absolute;top:6px}
+    .menu-toggle[aria-expanded="true"] .menu-lines{background:transparent}
+    .menu-toggle[aria-expanded="true"] .menu-lines::before{transform:translateY(6px) rotate(45deg)}
+    .menu-toggle[aria-expanded="true"] .menu-lines::after{transform:translateY(-6px) rotate(-45deg)}
+
+    /* TYPE + BUTTONS */
+    .eyebrow{margin:0 0 22px;font-size:.69rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+    .display{font-family:var(--display);font-weight:400;letter-spacing:-.028em}
+    .section-title{margin:0;font-size:clamp(1.9rem,3vw,3.35rem);line-height:1.08;max-width:980px;font-weight:600;letter-spacing:-.018em}
+    .section-copy{margin:22px 0 0;max-width:720px;color:var(--ink-2);font-size:clamp(.82rem,.9vw,.92rem);line-height:1.75}
+    .btn-row{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:34px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border:1px solid var(--forest);background:var(--forest);color:#fff;text-decoration:none;font-size:.76rem;font-weight:700;letter-spacing:.01em;transition:transform .2s ease,background .2s ease,color .2s ease}
+    .btn:hover,.btn:focus-visible{transform:translateY(-2px);background:var(--forest-2);outline:none}
+    .btn-light{background:transparent;color:var(--forest)}
+    .btn-light:hover,.btn-light:focus-visible{background:var(--forest);color:#fff}
+    .text-link{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none;font-size:.78rem;font-weight:700;border-bottom:1px solid currentColor;padding-bottom:3px}
+    .text-link::after{content:"→";transition:transform .2s ease}
+    .text-link:hover::after{transform:translateX(4px)}
+
+    /* PLACEHOLDERS */
+    .photo-placeholder{position:relative;min-height:560px;overflow:hidden;background:#55727a;border:0}
+    .photo-placeholder::before{content:"";position:absolute;inset:22px;border:1px solid rgba(255,255,255,.26);pointer-events:none}
+    .placeholder-label{position:absolute;left:30px;bottom:27px;color:rgba(255,255,255,.9);font-size:.62rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+    .photo-placeholder.warm{background:#8b7758}
+    .photo-placeholder.green{background:#63765f}
+    .photo-placeholder.gold{background:#9c814c}
+    .photo-fill{width:100%;height:100%;min-height:inherit;object-fit:cover;object-position:center;display:block}
+    .split-media,.hero-media{overflow:hidden}
+    .hero-media.photo-real,.split-media.photo-real{position:relative}
+    .hero-media.photo-real img,.split-media.photo-real img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* HERO */
+    .hero{background:#f2e7c8;min-height:calc(100vh - 92px);display:grid;grid-template-columns:minmax(0,1.06fr) minmax(420px,.94fr);align-items:stretch}
+    .hero-copy{min-width:0;padding:clamp(70px,8vw,132px) clamp(54px,7vw,124px);display:flex;flex-direction:column;justify-content:center}
+    .hero .eyebrow{color:#7d5d25}
+    .hero-title{margin:0;max-width:850px;font-family:var(--display);font-weight:600;font-size:clamp(2.65rem,4.55vw,4.9rem);line-height:1;letter-spacing:-.02em;color:#384432}
+    .hero-lead{margin:25px 0 0;max-width:700px;color:#4c5548;font-size:clamp(.82rem,.92vw,.94rem);line-height:1.75}
+    .hero-media{min-height:620px}
+
+    /* INTRO STRIP */
+    .intro-strip{padding:92px 0 86px;background:var(--paper)}
+    .intro-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr);gap:80px;align-items:end}
+    .intro-large{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,3.2vw,3.45rem);line-height:1.08;letter-spacing:-.018em;color:#364333}
+    .intro-side{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.75}
+
+    /* SPLIT SECTIONS */
+    .split{display:grid;grid-template-columns:1fr 1fr;min-height:680px}
+    .split.reverse .split-copy{order:2}
+    .split.reverse .split-media{order:1}
+    .split-copy{min-width:0;padding:clamp(64px,7vw,116px) clamp(44px,7vw,112px);display:flex;flex-direction:column;justify-content:center}
+    .split-copy.dark{background:#2f4535;color:#f9f1d9}
+    .split-copy.dark .eyebrow{color:#edcc90}
+    .split-copy.dark .section-copy{color:rgba(249,241,217,.82)}
+    .split-copy.dark .btn{border-color:#f5e8c6;background:#f5e8c6;color:var(--forest)}
+    .split-copy.dark .btn:hover{background:#fff}
+    .split-copy.blue{background:#315f65;color:#f8f2de}
+    .split-copy.blue .eyebrow{color:#dfc98e}
+    .split-copy.blue .section-copy{color:rgba(248,242,222,.82)}
+    .split-copy.blue .btn{border-color:#f8f2de;background:#f8f2de;color:var(--lake-deep)}
+    .split-media>.photo-placeholder{height:100%;min-height:680px}
+
+    /* PERSPECTIVA Y LECTORES PDF */
+    .climate-carousel-panel{background:#e9dfc4;display:flex;align-items:center;justify-content:center;padding:clamp(28px,4vw,64px);min-width:0}
+    .climate-carousel{width:min(100%,760px);min-width:0}
+    .pdf-reader{background:#fff;border:1px solid rgba(47,69,53,.18);min-width:0}
+    .pdf-stage{position:relative;height:clamp(500px,58vw,700px);overflow:auto;background:#dedbd2;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+    .pdf-pages{display:flex;flex-direction:column;align-items:center;gap:18px;padding:14px;min-width:100%}
+    .pdf-stage canvas{display:block;flex:0 0 auto;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .pdf-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:#5e655f;font-size:.76rem;background:#f4f1e8}
+    .pdf-loading.hidden{display:none}
+    .pdf-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:14px;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
+    .pdf-toolbar-group{display:flex;align-items:center;gap:8px}
+    .pdf-control{min-width:38px;height:38px;border:1px solid rgba(47,69,53,.26);background:#fff;color:var(--forest);cursor:pointer;padding:0 10px;font-size:.72rem;font-weight:700}
+    .pdf-control:hover,.pdf-control:focus-visible{background:var(--forest);color:#fff;outline:none}
+    .pdf-control:disabled{opacity:.35;cursor:default}
+    .pdf-page-status{min-width:66px;text-align:center;font-size:.68rem;font-weight:700;color:#5f665f}
+    .climate-summary-panel{margin-top:18px;padding:22px 24px;background:#f8f4e9;border:1px solid rgba(47,69,53,.14)}
+    .climate-summary-label{margin:0 0 8px;font-size:.62rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#7b6233}
+    .climate-summary-panel h4{margin:0;font-family:var(--display);font-size:clamp(1.45rem,2.2vw,2rem);font-weight:600;line-height:1.1;color:var(--forest)}
+    .climate-summary-text{margin:12px 0 0;font-size:.78rem;line-height:1.68;color:#4f5b52}
+    .climate-summary-region{margin:12px 0 0;padding-top:12px;border-top:1px solid rgba(47,69,53,.14);font-size:.68rem;line-height:1.6;color:#687168}
+    .climate-summary-source{margin:9px 0 0;font-size:.64rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#35493a}
+    .climate-context-note{margin:22px 0 0;padding-top:18px;border-top:1px solid rgba(248,242,222,.22);max-width:660px;font-size:.72rem;line-height:1.65;color:rgba(248,242,222,.72)}
+    .climate-carousel-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:end;padding-top:22px}
+    .climate-kicker{margin:0 0 7px;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#78643d}
+    .climate-title{margin:0;font-family:var(--display);font-size:clamp(1.45rem,2vw,2.15rem);font-weight:600;line-height:1.08;color:var(--forest)}
+    .climate-actions{display:flex;align-items:center;gap:10px}
+    .climate-carousel-links{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:18px}
+    .climate-carousel-links .btn{min-height:42px;padding:0 18px}
+    .climate-carousel-links .text-link{font-size:.72rem}
+    .climate-dots{display:flex;align-items:center;gap:6px;margin-top:22px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+    .climate-dot{flex:0 0 18px;width:18px;height:2px;border:0;padding:0;background:rgba(47,69,53,.24);cursor:pointer}
+    .climate-dot.active{background:var(--forest)}
+    .climate-dot:focus-visible{outline:2px solid rgba(154,108,47,.45);outline-offset:4px}
+
+    /* BULLETIN / CAROUSEL */
+    .bulletin{padding:104px 0;background:#eee3c8}
+    .bulletin-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.42fr);gap:58px;align-items:end;margin-bottom:48px}
+    .bulletin-note{margin:0;color:#61594a;font-size:.78rem;line-height:1.7}
+    .bulletin-carousel{position:relative}
+    .bulletin-viewport{overflow:hidden;border:1px solid rgba(68,63,48,.18);background:#fff}
+    .bulletin-track{display:flex;transition:transform .42s ease}
+    .bulletin-slide{min-width:100%;display:grid;grid-template-columns:minmax(330px,.64fr) minmax(0,1.36fr);background:#fff}
+    .bulletin-cover{position:relative;min-height:520px;background:#d8d0bc;border-right:1px solid var(--line);overflow:hidden;padding:18px}
+    .bulletin-cover .pdf-reader{height:100%;display:flex;flex-direction:column}
+    .bulletin-cover .pdf-stage{height:clamp(500px,58vw,700px);min-height:0}
+    .bulletin-body{min-width:0;padding:clamp(42px,5.4vw,76px);display:flex;flex-direction:column;justify-content:center;min-width:0}
+    .bulletin-period{margin:0 0 14px;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .bulletin-title{margin:0;font-family:var(--display);font-size:clamp(1.8rem,2.7vw,3rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;max-width:760px}
+    .bulletin-body p{margin:20px 0 0;color:var(--ink-2);font-size:.84rem;line-height:1.75;max-width:720px}
+    .bulletin-controls{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:22px}
+    .bulletin-nav{display:flex;align-items:center;gap:10px}
+    .carousel-btn{width:42px;height:42px;border:1px solid rgba(47,69,53,.35);background:transparent;color:var(--forest);cursor:pointer;display:grid;place-items:center;font-size:1rem;transition:background .2s ease,color .2s ease}
+    .carousel-btn:hover:not(:disabled),.carousel-btn:focus-visible:not(:disabled){background:var(--forest);color:#fff;outline:none}
+    .carousel-btn:disabled{opacity:.32;cursor:default}
+    .carousel-status{font-size:.68rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#6e6555;white-space:nowrap}
+    .carousel-dots{display:flex;align-items:center;gap:8px}
+    .carousel-dot{width:24px;height:2px;border:0;background:rgba(47,69,53,.26);padding:0;cursor:pointer}
+    .carousel-dot.active{background:var(--forest)}
+
+    /* RESOURCES */
+    .resources{padding:110px 0 118px;background:var(--paper)}
+    .resources-head{display:flex;justify-content:space-between;gap:64px;align-items:flex-end;margin-bottom:56px}
+    .resources-head .section-title{max-width:850px}
+    .resources-head .section-copy{max-width:450px;margin:0}
+    .resource-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+    .resource{min-height:295px;padding:34px 28px 30px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);display:flex;flex-direction:column;text-decoration:none;transition:background .22s ease,transform .22s ease}
+    .resource:first-child{border-left:1px solid var(--line)}
+    .resource:hover,.resource:focus-visible{background:var(--cream-soft);outline:none;transform:translateY(-4px)}
+    .resource-number{font-family:var(--display);font-size:1rem;color:var(--gold)}
+    .resource h3{margin:54px 0 12px;font-family:var(--display);font-size:clamp(1.55rem,2vw,2.2rem);font-weight:400;line-height:1.05}
+    .resource p{margin:0;color:var(--ink-2);font-size:.8rem;line-height:1.7}
+    .resource .text-link{margin-top:auto;align-self:flex-start;padding-top:28px}
+
+
+    /* MAPAS Y ANÁLISIS TERRITORIALES */
+    .maps-section{padding:104px 0 112px;background:#e7e0cf}
+    .maps-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.44fr);gap:58px;align-items:end;margin-bottom:48px}
+    .maps-head .section-copy{margin:0;max-width:520px}
+    .maps-carousel{background:#fff;border:1px solid rgba(47,69,53,.16);min-width:0}
+    .maps-grid{display:grid;grid-template-columns:minmax(0,1.36fr) minmax(320px,.64fr);min-height:690px}
+    .map-media{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;background:#d9d8d1;border-right:1px solid var(--line);padding:24px}
+    .map-media-link{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:640px;text-decoration:none;cursor:zoom-in}
+    .map-media img{display:block;max-width:100%;max-height:760px;width:auto;height:auto;object-fit:contain;box-shadow:0 14px 42px rgba(30,42,34,.1);background:#fff}
+    .map-copy{min-width:0;padding:clamp(42px,5vw,72px);display:flex;flex-direction:column;justify-content:center}
+    .map-period{margin:0 0 13px;font-size:.64rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+    .map-title{margin:0;font-family:var(--display);font-size:clamp(1.75rem,2.45vw,2.75rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;color:var(--forest)}
+    .map-description{margin:20px 0 0;color:var(--ink-2);font-size:.82rem;line-height:1.76}
+    .map-credit{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);color:#677067;font-size:.68rem;line-height:1.65}
+    .map-links{display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:28px}
+    .maps-footer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:18px 22px;border-top:1px solid var(--line);background:#f7f3e8}
+    .map-status{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6f644f}
+    .map-nav{display:flex;align-items:center;gap:10px}
+    .map-dots{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:14px 22px 18px;scrollbar-width:thin;background:#f7f3e8}
+    .map-dot{flex:0 0 18px;width:18px;height:2px;border:0;padding:0;background:rgba(47,69,53,.24);cursor:pointer}
+    .map-dot.active{background:var(--forest)}
+    .map-dot:focus-visible{outline:2px solid rgba(154,108,47,.45);outline-offset:4px}
+    .maps-carousel.is-dragging{user-select:none}
+    .maps-carousel.is-dragging .map-media-link{cursor:grabbing}
+
+    /* MTA STORY */
+    .story-title-wrap{padding:96px 0 72px}
+    .story-title{margin:0;font-family:var(--display);font-size:clamp(2rem,3.25vw,3.65rem);font-weight:600;line-height:1.08;letter-spacing:-.018em;max-width:1150px}
+    .story-visuals{display:grid;grid-template-columns:repeat(3,1fr);min-height:500px}
+    .story-visuals .photo-placeholder{min-height:500px;border-right:1px solid rgba(255,255,255,.18)}
+    .story-visuals .photo-placeholder:last-child{border-right:0}
+    .story-photo{position:relative;min-height:500px;overflow:hidden;background:#e9e6dc;border-right:1px solid rgba(255,255,255,.18)}
+    .story-photo:last-child{border-right:0}
+    .story-photo img{width:100%;height:100%;min-height:500px;display:block;object-fit:cover}
+    .story-copy{padding:88px 0 98px}
+    .story-copy-grid{display:grid;grid-template-columns:minmax(0,.74fr) minmax(0,1.26fr);gap:86px;align-items:start}
+    .story-copy h2{margin:0;font-family:var(--display);font-size:clamp(1.8rem,2.5vw,2.7rem);font-weight:600;line-height:1.08}
+    .story-copy p{margin:0;color:var(--ink-2);font-size:.84rem;line-height:1.75;max-width:760px}
+    .story-copy .btn-row{margin-top:28px}
+
+    /* PARTNERS */
+    .partners{padding:82px 0 90px;background:#fff;border-top:1px solid var(--line)}
+    .partners-title{text-align:center;margin:0 0 42px;font-size:.8rem;font-weight:500;color:var(--ink-2)}
+    .partner-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px 34px}
+    .partner-grid a{display:flex;align-items:center;justify-content:center;width:112px;height:66px;text-decoration:none;opacity:.9;transition:opacity .2s ease,transform .2s ease}
+    .partner-grid a:hover{opacity:1;transform:translateY(-3px)}
+    .partner-grid img{width:100%;height:50px;object-fit:contain;object-position:center}
+
+    /* FOOTER */
+    .footer{background:#283b2b;color:#f4edd8}
+    .footer-main{padding:76px 0 60px;display:grid;grid-template-columns:minmax(260px,1.25fr) repeat(3,minmax(150px,.55fr));gap:54px}
+    .footer-brand{display:flex;align-items:center;gap:15px;margin-bottom:22px}
+    .footer-brand img{width:61px;height:61px;object-fit:contain;opacity:1}
+    .footer-brand-name{font-family:var(--display);font-size:1.7rem;line-height:1.05}
+    .footer-about{margin:0;max-width:380px;color:rgba(244,237,216,.77);font-size:.8rem;line-height:1.75}
+    .footer h3{margin:4px 0 22px;font-size:.76rem;font-weight:700;color:#fff}
+    .footer-links{display:flex;flex-direction:column;gap:13px}
+    .footer-links a{color:rgba(244,237,216,.82);font-size:.76rem;text-decoration:none}
+    .footer-links a:hover{text-decoration:underline;text-underline-offset:4px}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.18);padding:24px 0 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;color:rgba(244,237,216,.65);font-size:.68rem}
+
+    /* SEARCH */
+    .search-overlay{position:fixed;inset:0;z-index:5000;background:rgba(23,31,25,.62);display:none;align-items:flex-start;justify-content:center;padding:125px 24px 24px}
+    .search-overlay.open{display:flex}
+    .search-dialog{width:min(680px,100%);background:var(--paper);border:1px solid var(--line);box-shadow:0 30px 100px rgba(0,0,0,.2)}
+    .search-head{display:flex;gap:12px;padding:16px;border-bottom:1px solid var(--line)}
+    .search-input{flex:1;min-height:50px;border:0;background:transparent;padding:0 8px;color:var(--ink);outline:none;font-size:.9rem}
+    .search-close{border:1px solid var(--line);background:transparent;color:var(--ink);padding:0 15px;cursor:pointer;font-size:.72rem;font-weight:700}
+    .search-results{max-height:52vh;overflow:auto;padding:8px}
+    .search-result{display:block;padding:15px 16px;text-decoration:none;border-bottom:1px solid rgba(36,52,43,.08)}
+    .search-result:hover{background:var(--cream-soft)}
+    .search-result strong{display:block;font-size:.82rem;margin-bottom:4px}
+    .search-result span{color:var(--ink-2);font-size:.72rem}
+    .search-empty{padding:26px;text-align:center;color:var(--ink-2);font-size:.8rem}
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){
+      .shell{width:min(var(--max),calc(100% - 40px))}
+      .brand{min-width:0}
+      .nav{gap:17px}
+      .nav a,.nav button{font-size:.72rem}
+      .hero{grid-template-columns:1fr 44%}
+      .hero-copy{padding-left:48px;padding-right:48px}
+      .split-copy{padding-left:48px;padding-right:48px}
+      .resource-grid{grid-template-columns:repeat(2,1fr)}
+      .resource:nth-child(3){border-left:1px solid var(--line)}
+      .footer-main{grid-template-columns:1.2fr repeat(2,.6fr)}
+      .footer-main>div:last-child{grid-column:2/4}
+    }
+
+    @media(max-width:1020px){
+      html{scroll-padding-top:78px}
+      .header-inner{min-height:76px}
+      .brand img{width:46px;height:46px}
+      .brand-name{font-size:.82rem}
+      .brand-place{font-size:.64rem}
+      .header{z-index:7000;backdrop-filter:none;-webkit-backdrop-filter:none}
+      .menu-toggle{display:flex;position:relative;z-index:7200;background:var(--paper)}
+      .nav{position:fixed;z-index:7100;top:76px;left:0;right:0;height:calc(100dvh - 76px);background:var(--paper);display:flex;margin:0;padding:28px 28px 44px;flex-direction:column;align-items:stretch;gap:0;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 24px 60px rgba(25,35,28,.14);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-10px);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+      .nav.open{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+      .nav a,.nav button{width:100%;padding:18px 0;text-align:left;font-size:.95rem;border-bottom:1px solid var(--line);flex:0 0 auto}
+      .nav a::after,.nav button::after{display:none}
+      .hero{min-height:auto;grid-template-columns:1fr}
+      .hero-copy{min-width:0;padding:72px 28px 68px}
+      .hero-media{min-height:480px}
+      .intro-grid,.bulletin-head,.story-copy-grid{grid-template-columns:1fr;gap:34px}
+      .split,.split.reverse{grid-template-columns:1fr}
+      .split.reverse .split-copy,.split.reverse .split-media{order:initial}
+      .split-copy{min-width:0;padding:70px 28px}
+      .split-media>.photo-placeholder{min-height:500px}
+      .bulletin{padding:82px 0}
+      .bulletin-slide{grid-template-columns:1fr}
+      .bulletin-cover{min-height:520px;border-right:0;border-bottom:1px solid var(--line)}
+      .resources{padding:84px 0 90px}
+      .resources-head{display:block}
+      .resources-head .section-copy{margin-top:24px;max-width:680px}
+      .maps-section{padding:82px 0 90px}
+      .maps-head{grid-template-columns:1fr;gap:28px}
+      .maps-head .section-copy{max-width:720px}
+      .maps-grid{grid-template-columns:1fr}
+      .map-media{border-right:0;border-bottom:1px solid var(--line)}
+      .map-media-link{min-height:560px}
+      .map-copy{padding:52px 34px 58px}
+      .story-title-wrap{padding:74px 0 54px}
+      .story-visuals{grid-template-columns:1fr}
+      .story-visuals .photo-placeholder{min-height:420px;border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}
+      .story-photo{min-height:420px;border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}
+      .story-photo img{min-height:420px}
+      .story-copy{padding:70px 0 80px}
+      .footer-main{grid-template-columns:1fr 1fr;gap:42px}
+      .footer-main>div:first-child{grid-column:1/-1}
+      .footer-main>div:last-child{grid-column:auto}
+    }
+
+    @media(max-width:620px){
+      .shell{width:calc(100% - 28px)}
+      .header-inner{min-height:70px}
+      .nav{top:70px;height:calc(100dvh - 70px)}
+      .brand-copy{max-width:205px}
+      .brand-name{font-size:.76rem}
+      .brand-place{font-size:.6rem}
+      .hero-title{font-size:clamp(2.8rem,16vw,4.4rem)}
+      .hero-copy{min-width:0;padding:58px 20px 56px}
+      .hero-media{min-height:400px}
+      .intro-strip{padding:70px 0 66px}
+      .section-title{font-size:clamp(2.1rem,12vw,3.2rem)}
+      .section-copy,.story-copy p{font-size:.84rem;line-height:1.75}
+      .split-copy{min-width:0;padding:58px 20px}
+      .split-media>.photo-placeholder{min-height:400px}
+      .climate-carousel-panel{padding:30px 20px 34px}
+      .pdf-stage{height:64vh;min-height:420px}
+      .pdf-toolbar{gap:8px;padding:10px}
+      .pdf-control{min-width:36px;height:36px;padding:0 8px}
+      .climate-carousel-links .btn{width:100%}
+      .pdf-stage{height:62vh;min-height:440px;max-height:660px}
+      .pdf-toolbar{position:sticky;bottom:0;z-index:2;flex-wrap:wrap}
+      .pdf-toolbar-group{flex:1 1 auto;justify-content:center}
+      .climate-summary-panel{padding:20px}
+      .climate-summary-text{font-size:.76rem;line-height:1.65}
+      .climate-carousel-meta{grid-template-columns:1fr auto;gap:14px}
+      .climate-title{font-size:clamp(1.55rem,9vw,2rem)}
+      .climate-dots{gap:5px}
+      .climate-dot{flex-basis:15px;width:15px}
+      .bulletin{padding:66px 0}
+      .bulletin-carousel{margin-left:-14px;margin-right:-14px}
+      .bulletin-body{min-width:0;padding:36px 26px 42px}
+      .bulletin-cover{min-height:440px}
+      .bulletin-controls{padding:0 14px}
+      .resource-grid{grid-template-columns:1fr}
+      .resource,.resource:nth-child(3){border-left:1px solid var(--line)}
+      .resources{padding:68px 0 76px}
+      .maps-section{padding:66px 0 74px}
+      .maps-carousel{margin-left:-14px;margin-right:-14px}
+      .maps-head{margin-bottom:34px}
+      .map-media{padding:12px}
+      .map-media-link{min-height:430px}
+      .map-media img{max-height:520px}
+      .map-copy{padding:36px 26px 40px}
+      .map-title{font-size:clamp(1.65rem,9vw,2.15rem)}
+      .maps-footer{grid-template-columns:1fr auto;padding:15px 14px}
+      .map-dots{padding:12px 14px 16px}
+      .story-title{font-size:clamp(2.5rem,13vw,3.8rem)}
+      .story-visuals .photo-placeholder{min-height:330px}
+      .story-photo,.story-photo img{min-height:330px}
+      .partner-grid{gap:20px 22px}
+      .partner-grid a{width:92px;height:56px}
+      .partner-grid img{width:100%;height:42px;object-fit:contain}
+      .footer-main{grid-template-columns:1fr;padding:58px 0 44px}
+      .footer-main>div:first-child,.footer-main>div:last-child{grid-column:auto}
+      .footer-bottom{align-items:flex-start;flex-direction:column}
+      .search-overlay{padding:92px 14px 14px}
+    }
+
+    @media(max-width:900px){
+      .climate-carousel-panel{padding:42px 28px}
+      .pdf-stage{height:620px}
+      .bulletin-slide{grid-template-columns:1fr}
+      .bulletin-cover{min-height:520px;border-right:0;border-bottom:1px solid var(--line)}
+    }
+
+    @media(max-width:620px){
+      .bulletin-carousel{margin-left:-14px;margin-right:-14px}
+      .bulletin-body{min-width:0;padding:36px 26px 42px}
+      .bulletin-cover{min-height:440px}
+      .bulletin-controls{padding:0 14px}
+      .bulletin-note{font-size:.75rem}
+    }
+
+    /* Nuevas secciones: mismos colores, tipografías y componentes del sitio. */
+    .mta-history{border-top:1px solid var(--line)}
+    .history-content{min-height:135px}
+    .home-previews{padding-top:90px;padding-bottom:100px}
+    .previews-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .preview-resource{display:flex;flex-direction:column;gap:16px}
+    .preview-media{width:100%;aspect-ratio:4/3;background:var(--cream-soft);border:1px solid var(--line)}
+    .preview-resource .text-link{align-self:flex-start;margin-top:auto}
+    .nav-dropdown{position:relative;flex:0 0 auto}
+    .nav-dropdown summary{list-style:none;cursor:pointer;position:relative;padding:10px 14px 10px 0;font-size:.78rem;font-weight:500;white-space:nowrap}
+    .nav-dropdown summary::-webkit-details-marker{display:none}
+    .nav-dropdown summary::after{content:"⌄";position:absolute;right:0;top:8px;color:var(--gold)}
+    .nav-dropdown summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    .nav-submenu{position:absolute;left:0;top:100%;min-width:235px;background:var(--paper);border:1px solid var(--line);box-shadow:0 14px 35px rgba(25,35,28,.12);padding:9px 18px;z-index:50}
+    .nav-submenu a{display:block;white-space:normal;border-bottom:1px solid var(--line);padding:13px 0}
+    .nav-submenu a:last-child{border-bottom:0}
+    @media(max-width:1100px) and (min-width:1021px){.nav-dropdown summary{font-size:.72rem}}
+    @media(max-width:1020px){
+      .nav-dropdown{width:100%;flex:0 0 auto}
+      .nav-dropdown summary{font-size:.95rem;padding:18px 0;border-bottom:1px solid var(--line)}
+      .nav-dropdown summary::after{right:5px;top:16px}
+      .nav-submenu{position:static;box-shadow:none;border:0;padding:0 0 0 20px}
+      .nav-submenu a{font-size:.85rem;padding:14px 0}
+      .previews-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:620px){.previews-grid{grid-template-columns:1fr}.home-previews{padding-top:64px;padding-bottom:70px}}
+  
+/* Carrusel 3D de herramientas: aislado para no alterar el diseño del resto de la web */
+.mta3d-carousel{position:relative;margin:34px auto 0;max-width:1120px;outline-offset:5px}
+.mta3d-stage{position:relative;min-height:490px;perspective:1400px;overflow:hidden}
+.mta3d-card{position:absolute;top:12px;left:50%;width:min(43%,400px);height:438px;display:flex;flex-direction:column;overflow:hidden;background:var(--paper,#f8f5eb);border:1px solid rgba(51,65,50,.18);border-radius:8px;text-decoration:none;color:inherit;box-shadow:0 20px 42px rgba(23,36,29,.13);transition:transform .55s ease,opacity .55s ease,filter .55s ease;transform-style:preserve-3d;will-change:transform;transform:translateX(-50%) scale(.72);opacity:0;pointer-events:none}
+.mta3d-card[data-position="center"]{transform:translateX(-50%) translateZ(100px) scale(1);opacity:1;z-index:3;pointer-events:auto}
+.mta3d-card[data-position="left"]{transform:translateX(-118%) rotateY(32deg) scale(.78);opacity:.74;z-index:2;pointer-events:auto;filter:saturate(.85)}
+.mta3d-card[data-position="right"]{transform:translateX(18%) rotateY(-32deg) scale(.78);opacity:.74;z-index:2;pointer-events:auto;filter:saturate(.85)}
+.mta3d-image{height:335px;background:#eee9dc;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mta3d-image img{width:100%;height:100%;display:block;object-fit:contain}
+.mta3d-card-copy{display:flex;flex-direction:column;gap:12px;padding:17px 22px;flex:1}
+.mta3d-card-copy h3{margin:0;font-family:var(--display,serif);font-size:1.5rem;color:var(--ink,#213e2e)}
+.mta3d-card-copy .text-link{font-size:.85rem}
+.mta3d-arrow{position:absolute;top:44%;z-index:5;width:44px;height:44px;border:1px solid rgba(48,66,53,.25);border-radius:50%;background:#f8f5eb;color:#27442f;cursor:pointer;font-size:24px;display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.mta3d-prev{left:0}.mta3d-next{right:0}.mta3d-arrow:hover{background:#e9dfc4}
+.mta3d-dots{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:2px}
+.mta3d-dots button{width:10px;height:10px;border-radius:50%;border:0;background:#b5b8a8;cursor:pointer;padding:0;transition:width .2s,background .2s}
+.mta3d-dots button[aria-current="true"]{background:var(--forest,#31543a);width:28px;border-radius:8px}
+@media(max-width:700px){.mta3d-stage{min-height:410px}.mta3d-card{width:72%;height:362px}.mta3d-image{height:265px}.mta3d-card[data-position="left"]{transform:translateX(-103%) rotateY(28deg) scale(.7)}.mta3d-card[data-position="right"]{transform:translateX(3%) rotateY(-28deg) scale(.7)}.mta3d-card-copy{padding:13px 18px}.mta3d-arrow{width:35px;height:35px;font-size:18px;top:43%}.mta3d-card-copy h3{font-size:1.25rem}}
+@media(prefers-reduced-motion:reduce){.mta3d-card,.mta3d-dots button{transition:none}}
+</style>
+<link rel="stylesheet" href="assets/css/tema-mta.css" data-mta-tema>
+<link rel="stylesheet" href="assets/css/cintillo.css" data-mta-cintillo-css>
+<style>
+.radio-hero{padding:86px 0 45px;background:var(--mta-ice,#f3f7fa)}
+.radio-hero .eyebrow{color:var(--mta-green,#365a2d)}
+.radio-hero h1{color:var(--mta-navy,#242d51);font-family:var(--display);font-size:clamp(2.8rem,5vw,5.4rem);line-height:1.07;margin:0 0 20px}
+.radio-hero p:last-child{max-width:720px;line-height:1.75;color:var(--mta-muted,#455568)}
+.radio-section{padding:38px 0 110px;background:var(--mta-white,#fff)}
+.radio-shell{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px, .85fr);gap:24px;align-items:stretch}
+.radio-player{background:var(--mta-navy,#242d51);border-radius:20px;padding:clamp(24px,4vw,52px);color:#fff;box-shadow:0 20px 60px rgba(36,45,81,.15);min-width:0}
+.radio-label{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.14em;font-size:.73rem;color:#dbe8dc;font-weight:700}
+.radio-live{display:inline-block;width:10px;height:10px;border-radius:50%;background:#a8d38c;box-shadow:0 0 0 5px rgba(168,211,140,.13)}
+.radio-player h2{font-family:var(--display);font-size:clamp(2rem,3.4vw,3.25rem);line-height:1.1;font-weight:500;margin:32px 0 12px;color:#fff}
+.radio-player p{color:#e1e9f5;font-size:.93rem;line-height:1.7;margin:0;text-align:left}
+.radio-wave{height:110px;display:flex;gap:3px;align-items:center;margin:29px 0 16px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.radio-wave i{display:block;flex:1;min-width:2px;background:#9ec28a;border-radius:20px;opacity:.75;transform-origin:center;transform:scaleY(.5)}
+.radio-wave.playing i{animation:radioPulse 850ms ease-in-out infinite alternate;animation-delay:var(--d)}
+@keyframes radioPulse{from{transform:scaleY(.25);opacity:.46}to{transform:scaleY(1);opacity:1}}
+.radio-controls{display:flex;align-items:center;justify-content:center;gap:26px;margin:20px 0}
+.radio-control{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;cursor:pointer;width:48px;height:48px;border-radius:50%;font-size:19px}
+.radio-control:focus-visible,.radio-choice:focus-visible,.radio-download:focus-visible{outline:3px solid #a8d38c;outline-offset:3px}
+.radio-toggle{border:0;background:#a8d38c;color:#182c24;width:78px;height:78px;border-radius:50%;cursor:pointer;font-size:29px;font-weight:700;box-shadow:0 0 0 9px rgba(168,211,140,.1)}
+.radio-progress{display:flex;align-items:center;gap:12px;font-size:.78rem;color:#e1e9f5}
+.radio-progress input{flex:1;min-width:0;accent-color:#a8d38c;cursor:pointer}
+.radio-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px}
+.radio-download{color:#fff;text-decoration:underline;text-underline-offset:5px;font-size:.85rem}
+.radio-list{border:1px solid var(--mta-border,#cbd6df);border-radius:20px;background:#fff;padding:clamp(20px,3vw,30px);min-width:0}
+.radio-list h2{font-family:var(--display);font-size:1.9rem;color:var(--mta-navy,#242d51);margin:0 0 8px}
+.radio-list>p{color:var(--mta-muted,#455568);line-height:1.65;font-size:.87rem;margin:0 0 25px;text-align:left}
+.radio-choice{width:100%;display:flex;align-items:center;gap:14px;padding:18px 15px;text-align:left;border:1px solid var(--mta-border,#cbd6df);border-radius:13px;background:#fff;color:var(--mta-navy,#242d51);cursor:pointer;margin:0 0 12px;transition:background .2s,border-color .2s}
+.radio-choice[aria-pressed="true"]{border-color:var(--mta-green,#365a2d);background:#eff6ec}
+.radio-choice .radio-choice-icon{display:grid;place-items:center;width:40px;height:40px;flex-shrink:0;background:var(--mta-navy,#242d51);border-radius:9px;color:#fff}
+.radio-choice strong{display:block;font-size:.9rem}.radio-choice small{display:block;font-size:.75rem;margin-top:5px;color:var(--mta-muted,#455568)}
+.radio-note{font-size:.8rem;color:var(--mta-muted,#455568);border-top:1px solid var(--mta-border,#cbd6df);padding-top:19px;margin-top:26px;line-height:1.65}
+@media(max-width:850px){.radio-shell{grid-template-columns:1fr}.radio-hero{padding:54px 0 28px}.radio-section{padding:20px 0 60px}}
+@media(max-width:500px){.radio-player{padding:24px 18px}.radio-wave{height:80px}.radio-controls{gap:20px}.radio-player h2{margin-top:28px}.radio-progress{gap:6px}.radio-hero h1{font-size:2.5rem}}
+@media(prefers-reduced-motion:reduce){.radio-wave.playing i{animation:none;transform:scaleY(.6)}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="shell header-inner">
+<a aria-label="Inicio de la Mesa Técnica Agroclimática de Sololá" class="brand" href="./index.html">
+<img alt="Logo de la Mesa Técnica Agroclimática de Sololá" src="./docs/logos/MTA_LOGO.png"/>
+<span class="brand-copy">
+<span class="brand-name">Mesa Técnica Agroclimática de Sololá</span>
+<span class="brand-place">Sololá, Guatemala</span>
+</span>
+</a>
+<button aria-expanded="false" aria-label="Abrir menú" class="menu-toggle" data-menu-toggle="" type="button">
+<span class="menu-lines"></span>
+</button>
+<nav aria-label="Navegación principal" class="nav" data-nav="">
+<a href="./index.html">Inicio</a>
+<details class="nav-dropdown">
+<summary>Recomendaciones agroclimáticas</summary>
+<div class="nav-submenu">
+<a href="./boletines.html">Boletines</a>
+<a href="./infografias.html">Recomendaciones (infografías)</a>
+<a href="./mapas.html">Mapas</a>
+<a aria-current="page" href="./spots-radiales.html">Spots radiales</a>
+</div>
+</details>
+<details class="nav-dropdown">
+<summary>Información climática</summary>
+<div class="nav-submenu">
+<a href="./docs/precipitaciones_index.html">Precipitación</a>
+<a href="./docs/temperatura_index.html">Temperatura</a>
+<a href="./docs/viento_index.html">Viento</a>
+<a href="./docs/agroclima_index.html">Agroclima</a>
+</div>
+</details>
+<a href="./comentarios_index.html">Comentarios</a>
+<a href="#contacto">Contacto</a>
+<button data-search-open="" type="button">Buscar</button>
+</nav>
+</div>
+</header>
+<main>
+<section class="radio-hero"><div class="shell"><h1>La información también se escucha.</h1><p>Escucha los spots radiales de la Mesa Técnica Agroclimática de Sololá.</p></div></section>
+<section class="radio-section"><div class="shell radio-shell">
+<div class="radio-player" aria-label="Reproductor de spots radiales">
+
+<h2 id="radioTitle">Audio 1</h2><p id="radioDescription">Escucha las recomendaciones agroclimáticas de la Mesa Técnica Agroclimática de Sololá.</p>
+<div class="radio-wave" id="radioWave" aria-hidden="true"></div>
+<div class="radio-controls"><button class="radio-control" id="radioPrevious" type="button" aria-label="Spot anterior">⏮</button><button class="radio-toggle" id="radioPlay" type="button" aria-label="Reproducir spot">▶</button><button class="radio-control" id="radioNext" type="button" aria-label="Siguiente spot">⏭</button></div>
+<div class="radio-progress"><span id="radioCurrent">0:00</span><input type="range" id="radioSeek" min="0" max="100" value="0" step="0.1" aria-label="Avance de reproducción"><span id="radioDuration">0:00</span></div>
+<div class="radio-meta"><span id="radioStatus" role="status" aria-live="polite">Selecciona reproducir para escuchar.</span><a id="radioDownload" class="radio-download" href="assets/audios/recomendaciones_cafe.mpeg" download>Descargar audio ↗</a></div>
+<audio id="radioAudio" preload="metadata"><source src="assets/audios/recomendaciones_cafe.mpeg" type="audio/mpeg"></audio>
+</div>
+<aside class="radio-list"><h2>Biblioteca de spots</h2><p>Selecciona el audio que deseas escuchar.</p>
+<button class="radio-choice" type="button" aria-pressed="true" data-spot="0"><span class="radio-choice-icon" aria-hidden="true">♫</span><span><strong>Audio 1</strong><small>Spot radial</small></span></button>
+<button class="radio-choice" type="button" aria-pressed="false" data-spot="1"><span class="radio-choice-icon" aria-hidden="true">♫</span><span><strong>Audio 2</strong><small>Spot radial</small></span></button>
+<div class="radio-note">Los audios se reproducen únicamente cuando lo solicitas. Puedes pausar, cambiar de spot o descargar los archivos originales.</div>
+</aside></div></section>
+</main>
+<section id="instituciones" class="partners mta-cintillo" data-mta-cintillo></section>
+
+<footer class="footer" id="contacto">
+<div class="shell footer-main">
+<div>
+<div class="footer-brand">
+<img alt="Logo de la Mesa Técnica Agroclimática de Sololá" src="./docs/logos/MTA_LOGO.png"/>
+<div class="footer-brand-name">MTA<br/>Sololá</div>
+</div>
+<p class="footer-about">Portal de consulta climática y agroclimática para productores, técnicos, instituciones y organizaciones vinculadas al sector agropecuario de Sololá.</p>
+</div>
+<div>
+<h3>Explorar</h3>
+<div class="footer-links">
+<a href="./infografias.html">Recomendaciones</a>
+<a href="./docs/clima_index.html">Información climática</a>
+<a href="./docs/agroclima_index.html">Agroclima</a>
+<a href="./comentarios_index.html">Comentarios</a>
+<a href="./boletines.html">Boletín</a>
+</div>
+</div>
+<div>
+<h3>La MTA</h3>
+<div class="footer-links">
+<a href="./index.html#la-mta">Qué es la MTA</a>
+<a href="#instituciones">Instituciones</a>
+<a href="./docs/clima_index.html">Perspectiva climática</a>
+<a href="./index.html#contenidos">Recursos</a>
+</div>
+</div>
+<div>
+<h3>Contacto</h3>
+<div class="footer-links">
+<a href="mailto:mtasolola@proton.me">mtasolola@proton.me</a>
+<a href="https://www.facebook.com/MTASolola/about?locale=es_LA" rel="noopener noreferrer" target="_blank">Facebook</a>
+</div>
+</div>
+</div>
+<div class="shell footer-bottom">
+<span>© <span data-year=""></span> Mesa Técnica Agroclimática de Sololá.</span>
+<span id="footerUpdate">Datos y productos técnicos disponibles en los módulos de consulta.</span>
+</div>
+</footer>
+<div aria-hidden="true" class="search-overlay" data-search-overlay="">
+<div aria-label="Buscar en el portal" aria-modal="true" class="search-dialog" role="dialog">
+<div class="search-head">
+<input aria-label="Buscar en el portal" autocomplete="off" class="search-input" data-search-input="" placeholder="Buscar en el portal" type="search"/>
+<button class="search-close" data-search-close="" type="button">Cerrar</button>
+</div>
+<div class="search-results" data-search-results=""></div>
+</div>
+</div>
+<script>
+(()=>{
+const menu=document.querySelector('[data-menu-toggle]'),nav=document.querySelector('[data-nav]');
+function closeMenu(){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open')}
+menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!open));nav.classList.toggle('open',!open);document.body.classList.toggle('menu-open',!open)});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+const dropdowns=[...document.querySelectorAll('.nav-dropdown')];dropdowns.forEach(d=>d.addEventListener('toggle',()=>{if(d.open)dropdowns.forEach(o=>{if(o!==d)o.open=false})}));document.addEventListener('click',e=>{dropdowns.forEach(d=>{if(!d.contains(e.target))d.open=false})});
+const overlay=document.querySelector('[data-search-overlay]'),searchInput=document.querySelector('[data-search-input]');
+document.querySelector('[data-search-open]').addEventListener('click',()=>{overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');searchInput.focus()});
+function closeSearch(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true')}
+document.querySelector('[data-search-close]').addEventListener('click',closeSearch);overlay.addEventListener('click',e=>{if(e.target===overlay)closeSearch()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();closeSearch()}});
+const destinations=[['Inicio','./index.html'],['Boletines','./boletines.html'],['Infografías','./infografias.html'],['Mapas','./mapas.html'],['Spots radiales','./spots-radiales.html'],['Información climática','./docs/clima_index.html'],['Precipitación','./docs/precipitaciones_index.html'],['Temperatura','./docs/temperatura_index.html'],['Viento','./docs/viento_index.html'],['Agroclima','./docs/agroclima_index.html']];
+searchInput.addEventListener('input',()=>{const q=searchInput.value.trim().toLocaleLowerCase('es');document.querySelector('[data-search-results]').innerHTML=destinations.filter(v=>v[0].toLocaleLowerCase('es').includes(q)).map(v=>`<a class="search-result" href="${v[1]}"><strong>${v[0]}</strong></a>`).join('')});
+document.querySelector('[data-year]').textContent=new Date().getFullYear();
+const tracks=[{title:'Audio 1',file:'recomendaciones_cafe.mpeg'},{title:'Audio 2',file:'recomendaciones_recursos.mpeg'}];
+const audio=document.getElementById('radioAudio'),title=document.getElementById('radioTitle'),play=document.getElementById('radioPlay'),wave=document.getElementById('radioWave'),seek=document.getElementById('radioSeek'),choices=[...document.querySelectorAll('[data-spot]')];let current=0;
+const time=t=>Number.isFinite(t)?Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0'):'0:00';
+for(let i=0;i<62;i++){let bar=document.createElement('i');bar.style.height=(14+Math.abs(Math.sin(i*.79)*Math.cos(i*.21))*80)+'%';bar.style.setProperty('--d',(-i*67)+'ms');wave.appendChild(bar)}
+function sync(){const playing=!audio.paused;play.textContent=playing?'Ⅱ':'▶';play.setAttribute('aria-label',playing?'Pausar spot':'Reproducir spot');wave.classList.toggle('playing',playing);document.getElementById('radioStatus').textContent=playing?'Reproduciendo':'Listo para escuchar'}
+function choose(n,autoplay=false){current=(n+tracks.length)%tracks.length;audio.pause();audio.src='assets/audios/'+tracks[current].file;audio.load();title.textContent=tracks[current].title;document.getElementById('radioDownload').href=audio.src;seek.value=0;document.getElementById('radioCurrent').textContent='0:00';document.getElementById('radioDuration').textContent='0:00';choices.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===current)));sync();if(autoplay)audio.play().catch(()=>{})}
+play.addEventListener('click',()=>{if(audio.paused)audio.play().catch(()=>{document.getElementById('radioStatus').textContent='No fue posible cargar el audio. Comprueba que esté publicado en assets/audios/.'});else audio.pause()});
+choices.forEach(b=>b.addEventListener('click',()=>choose(Number(b.dataset.spot),true)));
+document.getElementById('radioPrevious').addEventListener('click',()=>choose(current-1,true));document.getElementById('radioNext').addEventListener('click',()=>choose(current+1,true));
+audio.addEventListener('play',sync);audio.addEventListener('pause',sync);audio.addEventListener('ended',()=>choose(current+1,false));audio.addEventListener('loadedmetadata',()=>document.getElementById('radioDuration').textContent=time(audio.duration));audio.addEventListener('timeupdate',()=>{document.getElementById('radioCurrent').textContent=time(audio.currentTime);seek.value=audio.duration?audio.currentTime/audio.duration*100:0});seek.addEventListener('input',()=>{if(audio.duration)audio.currentTime=audio.duration*Number(seek.value)/100});
+audio.addEventListener('error',()=>{document.getElementById('radioStatus').textContent='No se pudo cargar el audio. Verifica la ruta del archivo.'});
+})();
+</script><script defer src="assets/js/cintillo.js" data-mta-cintillo-js></script></body></html>
