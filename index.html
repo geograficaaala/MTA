@@ -548,7 +548,8 @@
 #noticias .mta-news-bottom>a{display:inline-block!important;color:#242d51!important;text-decoration:underline!important;text-underline-offset:5px!important;font-weight:700!important;}
 @media(max-width:760px){#noticias .mta-news-shell{width:calc(100% - 28px)!important;}#noticias .mta-news-slide{grid-template-columns:minmax(0,1fr)!important;min-height:0!important;}#noticias .mta-news-cover{height:270px!important;min-height:270px!important;}#noticias .mta-news-cover img{height:270px!important;max-height:270px!important;}#noticias .mta-news-info{padding:25px 21px 30px!important;}#noticias .mta-news-info h3{font-size:1.6rem!important;}#noticias .mta-news-heading{margin-bottom:25px!important;}#noticias .mta-news-arrow{width:40px!important;height:40px!important;}}
 @media(prefers-reduced-motion:reduce){#noticias .mta-news-track{scroll-behavior:auto!important;}}
-</style></head>
+</style><link rel="stylesheet" href="./assets/css/movil-global.css">
+</head>
 <body>
 <header class="header">
 <div class="shell header-inner">
@@ -1206,5 +1207,6 @@
   tabs.forEach((b,i)=>{b.addEventListener('click',()=>select(i,false));b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();select(i+1,true)}if(e.key==='ArrowLeft'){e.preventDefault();select(i-1,true)}})});
   document.getElementById('mtaTimePrev').addEventListener('click',()=>select(current-1,false));document.getElementById('mtaTimeNext').addEventListener('click',()=>select(current+1,false));
 })();
-</script></body>
+</script><script src="./assets/js/movil-global.js" defer></script>
+</body>
 </html>
