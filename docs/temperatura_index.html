@@ -3828,6 +3828,7 @@
 <link rel="stylesheet" href="../assets/css/cintillo.css" data-mta-cintillo-css>
 <link rel="stylesheet" href="../assets/css/responsive-climaticas.css" data-mta-climaticas-responsive>
 <link rel="stylesheet" href="../assets/css/tema-mta.css" data-mta-tema>
+  <link rel="stylesheet" href="../assets/css/menu-climatico.css" data-mta-menu-climatico>
 </head>
 
 <body>
@@ -3846,14 +3847,32 @@
         <span class="menu-lines"></span>
       </button>
 
-      <nav class="nav" aria-label="Navegación principal" data-nav>
-        <a href="../index.html">Inicio</a>
-        <a href="../index.html#recomendaciones">Recomendaciones agroclimáticas</a>
-        <a href="./clima_index.html" aria-current="page">Información climática</a>
-        <a href="../comentarios_index.html">Comentarios</a>
-        <a href="../index.html#contacto">Contacto</a>
-        <button type="button" data-search-open>Buscar</button>
-      </nav>
+      <nav class="nav mta-nav-climatica" aria-label="Navegación principal" data-nav>
+      <a href="../index.html">Inicio</a>
+      <details class="mta-nav-group">
+        <summary>Recomendaciones agroclimáticas</summary>
+        <div class="mta-nav-options">
+          <a href="../boletines.html">Boletines</a>
+          <a href="../infografias.html">Infografías</a>
+          <a href="../mapas.html">Mapas</a>
+        </div>
+      </details>
+      <details class="mta-nav-group">
+        <summary aria-current="page">Información climática</summary>
+        <div class="mta-nav-options">
+          <a href="./precipitaciones_index.html">Precipitación</a>
+          <a href="./temperatura_index.html" aria-current="page">Temperatura</a>
+          <a href="./viento_index.html">Viento</a>
+          <a href="./agroclima_index.html">Agroclima</a>
+          <a href="./clima_index.html">Resumen climático</a>
+        </div>
+      </details>
+      <a href="../spots-radiales.html">Spots radiales</a>
+      <a href="../noticias.html">Noticias</a>
+      <a href="../comentarios_index.html">Comentarios</a>
+      <a href="../index.html#contacto">Contacto</a>
+      <button type="button" data-search-open>Buscar</button>
+    </nav>
     </div>
   </header>
 
@@ -4506,5 +4525,6 @@
   </script>
 
 <script defer src="../assets/js/cintillo.js" data-mta-cintillo-js></script>
+  <script defer src="../assets/js/menu-climatico.js" data-mta-menu-climatico></script>
 </body>
 </html>
