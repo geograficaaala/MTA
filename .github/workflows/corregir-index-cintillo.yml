@@ -1,0 +1,33 @@
+name: Corregir cintillo del inicio
+on:
+  workflow_dispatch:
+    inputs:
+      confirmar:
+        description: 'Escribe CORREGIR para preparar el Pull Request'
+        required: true
+        type: string
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  correccion:
+    if: github.event.inputs.confirmar == 'CORREGIR'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Aplicar cambio seguro solo al index
+        run: python scripts/corregir_index_cintillo.py
+      - name: Mostrar diferencia
+        run: git diff --check && git diff --stat && git diff -- index.html
+      - name: Crear Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: automatizacion/corregir-cintillo-index
+          delete-branch: true
+          commit-message: 'Corregir cintillo maestro en index sin alterar footer'
+          title: 'Corregir cintillo institucional del inicio'
+          body: 'Sustituye el cintillo antiguo de index.html por el maestro. No modifica el footer, la paleta, los controladores ni otras páginas. Revisar antes de merge.'
+          add-paths: index.html
