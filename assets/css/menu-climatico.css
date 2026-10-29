@@ -1,0 +1,40 @@
+/* Navegación compartida para páginas climáticas; no afecta gráficos ni cintillo. */
+.header { position: relative; z-index: 1100; }
+.mta-nav-climatica { overflow: visible; align-items: center; }
+.mta-nav-climatica .mta-nav-group { position: relative; flex: 0 0 auto; }
+.mta-nav-climatica .mta-nav-group > summary {
+  list-style: none; cursor: pointer; display: inline-flex; align-items: center;
+  gap: 7px; padding: 10px 12px; color: inherit; font: inherit;
+  font-size: .78rem; font-weight: 600; white-space: nowrap;
+}
+.mta-nav-climatica .mta-nav-group > summary::-webkit-details-marker { display: none; }
+.mta-nav-climatica .mta-nav-group > summary::after { content: '⌄'; font-size: .9em; }
+.mta-nav-climatica .mta-nav-group > summary:focus-visible,
+.mta-nav-climatica .mta-nav-options a:focus-visible { outline: 2px solid #365A2D; outline-offset: 3px; }
+.mta-nav-climatica .mta-nav-options {
+  position: absolute; top: calc(100% + 5px); left: 0; z-index: 1200;
+  display: grid; min-width: 215px; max-width: min(320px, 90vw); padding: 8px;
+  background: #fff; color: #242D51; border: 1px solid #ccd7df;
+  border-radius: 12px; box-shadow: 0 15px 35px rgba(20,31,54,.16);
+}
+.mta-nav-climatica .mta-nav-group:not([open]) .mta-nav-options { display: none; }
+.mta-nav-climatica .mta-nav-options a {
+  display: block; padding: 10px 12px; border-radius: 8px;
+  color: #242D51 !important; text-decoration: none; font-size: .84rem;
+  white-space: normal; line-height: 1.4;
+}
+.mta-nav-climatica .mta-nav-options a:hover,
+.mta-nav-climatica .mta-nav-options a[aria-current="page"] {
+  background: #edf5ed; color: #244a2a !important;
+}
+@media (max-width: 1080px) {
+  .mta-nav-climatica { overflow-y: auto; max-height: calc(100dvh - 80px); }
+  .mta-nav-climatica .mta-nav-group { width: 100%; }
+  .mta-nav-climatica .mta-nav-group > summary { width: 100%; padding: 13px 16px; }
+  .mta-nav-climatica .mta-nav-options {
+    position: static; box-shadow: none; min-width: 0; max-width: none;
+    width: 100%; border: 0; border-left: 3px solid #365A2D;
+    border-radius: 0; background: #f5f8f9; padding: 5px 8px;
+  }
+  .mta-nav-climatica .mta-nav-options a { color: #242D51 !important; }
+}
