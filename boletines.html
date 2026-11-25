@@ -453,7 +453,7 @@
 @media(max-width:620px){.bulletin-heading{padding:68px 0 48px}.bulletin-list-section{padding:56px 0 68px}.bulletin-grid{grid-template-columns:1fr}.bulletin-cover{aspect-ratio:4 / 3.4}}
 </style><style>
 /* Carrusel de boletines con profundidad 3D; utiliza los colores originales. */
-.mta-3d-gallery{margin:30px auto 55px;max-width:1110px;overflow:hidden}
+.mta-3d-gallery{margin:0 auto 55px;max-width:1110px;overflow:hidden}
 .mta-3d-stage{height:560px;position:relative;perspective:1400px;perspective-origin:50% 45%;outline-offset:-4px;touch-action:pan-y}
 .mta-3d-card{position:absolute;top:12px;left:50%;width:min(330px,57vw);height:510px;display:flex;flex-direction:column;margin-left:calc(min(330px,57vw) / -2);background:var(--paper,#fff);border:1px solid var(--line,#ddd);box-shadow:0 15px 32px rgba(20,38,26,.16);transition:transform .65s cubic-bezier(.2,.75,.2,1),opacity .45s,filter .45s;transform-style:preserve-3d;overflow:hidden;will-change:transform;}
 .mta-3d-card[data-position="center"]{box-shadow:0 25px 55px rgba(20,38,26,.25)}
@@ -482,18 +482,12 @@
 <link rel="stylesheet" href="./assets/css/movil-global.css">
 
 <style>
-/* Portadas identificativas para los 11 PDF; se mantiene el carrusel 3D original. */
-.mta-pdf-cover{box-sizing:border-box;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:23px 24px 22px;color:#f7f2e6;background:linear-gradient(155deg,#2b634b 0%,#1c493c 50%,#153c33 100%);position:relative;overflow:hidden}
-.mta-pdf-cover:before{content:"";position:absolute;width:290px;height:290px;border:42px solid rgba(235,204,136,.12);border-radius:50%;right:-145px;bottom:24px;pointer-events:none}
-.mta-pdf-cover:after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:#c8a663}
-.mta-pdf-cover-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;font-size:.52rem;letter-spacing:.09em;line-height:1.5;font-weight:750;position:relative;z-index:1}
-.mta-pdf-cover-top span:last-child{text-align:right}
-.mta-pdf-cover-main{display:flex;flex-direction:column;gap:13px;position:relative;z-index:1}
-.mta-pdf-cover-label{font-size:.69rem;font-weight:750;letter-spacing:.17em;line-height:1.4}
-.mta-pdf-cover-number{font-family:var(--display,serif);font-size:7.7rem;line-height:.9;font-weight:600;color:#e9ca8b}
-.mta-pdf-cover-period{font-family:var(--display,serif);font-size:1.1rem;line-height:1.25;font-weight:600;max-width:255px}
-.mta-pdf-cover-bottom{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.35);padding-top:12px;display:flex;gap:10px;justify-content:space-between;align-items:center;font-size:.60rem;line-height:1.35}
-.mta-pdf-cover-bottom span:last-child{border:1px solid rgba(255,255,255,.65);padding:3px 6px;font-weight:750}
+/* Portadas reales: primera página del archivo PDF renderizada en el navegador. */
+.mta-pdf-preview{width:100%;height:100%;display:flex;justify-content:center;align-items:center;overflow:hidden;background:#f0eee8;position:relative}
+.mta-pdf-preview-canvas{display:block;max-width:100%;max-height:100%;box-shadow:0 6px 22px rgba(25,40,28,.17);background:#fff}
+.mta-pdf-preview-canvas[hidden],.mta-pdf-preview-status[hidden]{display:none}
+.mta-pdf-preview-status{font-size:.81rem;color:#5c665c;text-align:center;padding:18px;line-height:1.5}
+.mta-3d-card .bulletin-cover img{object-fit:contain}
 .mta-3d-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:auto}
 .mta-3d-card .mta-3d-actions .bulletin-action{margin-top:0;font-size:.78rem}
 .mta-3d-card:not([data-position="center"]) .mta-3d-actions a{pointer-events:none}
@@ -502,7 +496,7 @@
 .mta-other-reports p{font-size:.84rem;margin:0 0 16px;color:var(--ink-2,#686b63)}
 .mta-other-reports ul{padding-left:20px;display:grid;gap:10px;margin:0}
 .mta-other-reports a{overflow-wrap:anywhere;font-size:.84rem}
-@media(max-width:700px){.mta-pdf-cover{padding:19px 18px}.mta-pdf-cover-number{font-size:6.2rem}.mta-pdf-cover-period{font-size:1rem}.mta-3d-dots{flex-wrap:wrap;max-width:330px;margin-left:auto;margin-right:auto}}
+@media(max-width:700px){.mta-3d-dots{flex-wrap:wrap;max-width:330px;margin-left:auto;margin-right:auto}}
 </style>
 </head>
 <body>
@@ -544,186 +538,162 @@
 </nav>
 </div>
 </header>
-<main><section class="bulletin-heading"><div class="shell"><p class="eyebrow">Recomendaciones agroclimáticas</p><h1 class="section-title display">Boletines agroclimáticos.</h1><p class="section-copy">Consulta los reportes de la Mesa Técnica Agroclimática de Sololá. Los documentos se presentan del más reciente al más antiguo.</p></div></section>
-<section aria-labelledby="mensuales-title" class="bulletin-list-section">
+<main><section class="bulletin-heading"><div class="shell"><p class="eyebrow">Recomendaciones agroclimáticas</p><h1 class="section-title display">Boletines agroclimáticos</h1><p class="section-copy">Consulta los reportes de la Mesa Técnica Agroclimática de Sololá. Los documentos se presentan del más reciente al más antiguo.</p></div></section>
+<section aria-label="Carrusel de boletines agroclimáticos" class="bulletin-list-section">
 <div class="shell">
-<h2 class="bulletin-group-title" id="mensuales-title">Boletines agroclimáticos </h2>
-<p class="bulletin-group-copy">Explora los 11 boletines de la Mesa Técnica Agroclimática de Sololá, ordenados del número 11 (más reciente) al 1 (más antiguo). Desplázate con las flechas para abrir o descargar cada PDF.</p>
 <div aria-label="Carrusel 3D de los 11 boletines agroclimáticos" class="mta-3d-gallery" data-carousel-3d="">
  <div class="mta-3d-stage" aria-roledescription="carrusel" tabindex="0">
 <article class="mta-3d-card" data-slide="0" aria-label="Boletín 11 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./11_agosto_octubre_26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 11">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">11</span><span class="mta-pdf-cover-period">agosto – octubre de 2026</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Agosto – octubre de 2026</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 11</h3>
+    <h3 class="bulletin-name">Agosto – octubre de 2026</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./11_agosto_octubre_26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 11 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./11_agosto_octubre_26.pdf" download="11_agosto_octubre_26.pdf" aria-label="Descargar boletín 11 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="1" aria-label="Boletín 10 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./10_mayo_julio_26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 10">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">10</span><span class="mta-pdf-cover-period">mayo – julio de 2026</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Mayo – julio de 2026</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 10</h3>
+    <h3 class="bulletin-name">Mayo – julio de 2026</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./10_mayo_julio_26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 10 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./10_mayo_julio_26.pdf" download="10_mayo_julio_26.pdf" aria-label="Descargar boletín 10 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="2" aria-label="Boletín 9 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./9_diciembre_25_%20marzo_26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 9">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">09</span><span class="mta-pdf-cover-period">diciembre de 2025 – marzo de 2026</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Diciembre de 2025 – marzo de 2026</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 9</h3>
+    <h3 class="bulletin-name">Diciembre de 2025 – marzo de 2026</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./9_diciembre_25_%20marzo_26.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 9 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./9_diciembre_25_%20marzo_26.pdf" download="9_diciembre_25_ marzo_26.pdf" aria-label="Descargar boletín 9 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="3" aria-label="Boletín 8 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./8_agosto_octubre_25.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 8">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">08</span><span class="mta-pdf-cover-period">agosto – octubre de 2025</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Agosto – octubre de 2025</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 8</h3>
+    <h3 class="bulletin-name">Agosto – octubre de 2025</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./8_agosto_octubre_25.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 8 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./8_agosto_octubre_25.pdf" download="8_agosto_octubre_25.pdf" aria-label="Descargar boletín 8 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="4" aria-label="Boletín 7 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./7_mayo_julio_25.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 7">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">07</span><span class="mta-pdf-cover-period">mayo – julio de 2025</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Mayo – julio de 2025</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 7</h3>
+    <h3 class="bulletin-name">Mayo – julio de 2025</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./7_mayo_julio_25.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 7 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./7_mayo_julio_25.pdf" download="7_mayo_julio_25.pdf" aria-label="Descargar boletín 7 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="5" aria-label="Boletín 6 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./6_diciembre_24_marzo_25.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 6">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">06</span><span class="mta-pdf-cover-period">diciembre de 2024 – marzo de 2025</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Diciembre de 2024 – marzo de 2025</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 6</h3>
+    <h3 class="bulletin-name">Diciembre de 2024 – marzo de 2025</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./6_diciembre_24_marzo_25.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 6 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./6_diciembre_24_marzo_25.pdf" download="6_diciembre_24_marzo_25.pdf" aria-label="Descargar boletín 6 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="6" aria-label="Boletín 5 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./5_agosto_octubre_24.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 5">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">05</span><span class="mta-pdf-cover-period">agosto – octubre de 2024</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Agosto – octubre de 2024</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 5</h3>
+    <h3 class="bulletin-name">Agosto – octubre de 2024</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./5_agosto_octubre_24.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 5 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./5_agosto_octubre_24.pdf" download="5_agosto_octubre_24.pdf" aria-label="Descargar boletín 5 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="7" aria-label="Boletín 4 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./4_mayo_julio_24.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 4">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">04</span><span class="mta-pdf-cover-period">mayo – julio de 2024</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Mayo – julio de 2024</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 4</h3>
+    <h3 class="bulletin-name">Mayo – julio de 2024</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./4_mayo_julio_24.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 4 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./4_mayo_julio_24.pdf" download="4_mayo_julio_24.pdf" aria-label="Descargar boletín 4 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="8" aria-label="Boletín 3 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./3_diciembre_23_marzo_24.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 3">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">03</span><span class="mta-pdf-cover-period">diciembre de 2023 – marzo de 2024</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Diciembre de 2023 – marzo de 2024</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 3</h3>
+    <h3 class="bulletin-name">Diciembre de 2023 – marzo de 2024</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./3_diciembre_23_marzo_24.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 3 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./3_diciembre_23_marzo_24.pdf" download="3_diciembre_23_marzo_24.pdf" aria-label="Descargar boletín 3 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="9" aria-label="Boletín 2 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./2_agosto_octubre_23.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 2">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">02</span><span class="mta-pdf-cover-period">agosto – octubre de 2023</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Agosto – octubre de 2023</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 2</h3>
+    <h3 class="bulletin-name">Agosto – octubre de 2023</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./2_agosto_octubre_23.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 2 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./2_agosto_octubre_23.pdf" download="2_agosto_octubre_23.pdf" aria-label="Descargar boletín 2 en PDF">Descargar</a></div>
   </div>
 </article>
 <article class="mta-3d-card" data-slide="10" aria-label="Boletín 1 de 11">
   <div class="bulletin-cover">
     <a class="mta-3d-cover-link" href="./1_mayo_julio_23.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir PDF del boletín 1">
-      <div class="mta-pdf-cover" aria-hidden="true">
-        <div class="mta-pdf-cover-top"><span>MESA TÉCNICA AGROCLIMÁTICA</span><span>SOLOLÁ · GUATEMALA</span></div>
-        <div class="mta-pdf-cover-main"><span class="mta-pdf-cover-label">BOLETÍN AGROCLIMÁTICO</span><span class="mta-pdf-cover-number">01</span><span class="mta-pdf-cover-period">mayo – julio de 2023</span></div>
-        <div class="mta-pdf-cover-bottom"><span>Recomendaciones agroclimáticas</span><span>PDF</span></div>
+      <div class="mta-pdf-preview" aria-hidden="true">
+        <span class="mta-pdf-preview-status">Cargando portada…</span>
+        <canvas class="mta-pdf-preview-canvas" hidden></canvas>
       </div>
     </a>
   </div>
   <div class="bulletin-body">
-    <span class="bulletin-date">Mayo – julio de 2023</span>
-    <h3 class="bulletin-name">Boletín agroclimático N.º 1</h3>
+    <h3 class="bulletin-name">Mayo – julio de 2023</h3>
     <div class="mta-3d-actions"><a class="text-link bulletin-action" href="./1_mayo_julio_23.pdf" target="_blank" rel="noopener noreferrer" aria-label="Abrir boletín 1 en PDF">Abrir PDF</a><a class="text-link bulletin-action" href="./1_mayo_julio_23.pdf" download="1_mayo_julio_23.pdf" aria-label="Descargar boletín 1 en PDF">Descargar</a></div>
   </div>
 </article>
@@ -750,7 +720,7 @@
 <div class="mta-other-reports" aria-labelledby="mta-other-reports-title">
  <h3 id="mta-other-reports-title">Otros reportes agroclimáticos</h3>
  <p>Se conservan los enlaces a los cuatro reportes mensuales que aparecían en el carrusel anterior.</p>
- <ul><li><a class="text-link" href="./60c815fe-3a01-477c-9d16-8f39c8232b17.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático · Octubre 2026</a></li><li><a class="text-link" href="./Copia%20de%20%20REPORTE%20MTASEPTIEMBRE%20%282%29.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático · Septiembre 2026</a></li><li><a class="text-link" href="./BOLETIN%20MAYO-MTA.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático · Mayo 2026</a></li><li><a class="text-link" href="./Reporte%20Clima%CC%81tico%20MTA%20Solola%CC%81%20Abril%202026.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático · Abril 2026</a></li></ul>
+ <ul><li><a class="text-link" href="./60c815fe-3a01-477c-9d16-8f39c8232b17.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático de octubre de 2026</a></li><li><a class="text-link" href="./Copia%20de%20%20REPORTE%20MTASEPTIEMBRE%20%282%29.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático de septiembre de 2026</a></li><li><a class="text-link" href="./BOLETIN%20MAYO-MTA.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático de mayo de 2026</a></li><li><a class="text-link" href="./Reporte%20Clima%CC%81tico%20MTA%20Solola%CC%81%20Abril%202026.pdf" target="_blank" rel="noopener noreferrer">Reporte agroclimático de abril de 2026</a></li></ul>
 </div>
 </div>
 </section></main>
@@ -771,7 +741,7 @@
 <a href="./docs/clima_index.html">Información climática</a>
 <a href="./docs/agroclima_index.html">Agroclima</a>
 <a href="./comentarios_index.html">Contacto</a>
-<a href="./boletines.html">Boletín</a>
+<a href="./boletines.html">Boletines</a>
 </div>
 </div>
 <div>
@@ -1257,6 +1227,38 @@
  const dots=[...root.querySelectorAll('[data-jump]')];
  const counter=root.querySelector('.mta-3d-position');
  let current=0,startX=null;
+ // Usa la primera página auténtica del PDF, evitando portadas decorativas.
+ function renderPdfCover(card){
+  const preview=card.querySelector('.mta-pdf-preview');
+  if(!preview||preview.dataset.state)return;
+  preview.dataset.state='loading';
+  const message=preview.querySelector('.mta-pdf-preview-status');
+  const canvas=preview.querySelector('canvas');
+  const url=card.querySelector('.mta-3d-cover-link')?.getAttribute('href');
+  (async()=>{
+   if(!url||!window.pdfjsLib)throw new Error('No se pudo iniciar el lector de PDF');
+   window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+   const pdf=await window.pdfjsLib.getDocument(url).promise;
+   try{
+    const page=await pdf.getPage(1);
+    const original=page.getViewport({scale:1});
+    const ratio=Math.min(window.devicePixelRatio||1,2);
+    const scale=Math.min(320/original.width,375/original.height)*ratio;
+    const viewport=page.getViewport({scale});
+    canvas.width=Math.ceil(viewport.width);
+    canvas.height=Math.ceil(viewport.height);
+    canvas.style.width=`${Math.ceil(viewport.width/ratio)}px`;
+    canvas.style.height=`${Math.ceil(viewport.height/ratio)}px`;
+    await page.render({canvasContext:canvas.getContext('2d'),viewport}).promise;
+    canvas.hidden=false;
+    message.hidden=true;
+    preview.dataset.state='ready';
+   }finally{await pdf.destroy();}
+  })().catch(()=>{
+   preview.dataset.state='failed';
+   message.textContent='Portada no disponible';
+  });
+ }
  function render(){
   const mobile=window.matchMedia('(max-width:700px)').matches;
   cards.forEach((card,i)=>{
@@ -1275,6 +1277,7 @@
    card.dataset.position=hidden?'hidden':abs===0?'center':'side';
    card.setAttribute('aria-hidden',String(hidden));
    card.querySelectorAll('a').forEach(a=>{a.tabIndex=abs===0?0:-1});
+   if(abs<=1)renderPdfCover(card);
   });
   dots.forEach((dot,i)=>dot.setAttribute('aria-current',String(i===current)));
   counter.textContent=`${current+1} de ${cards.length}`;
