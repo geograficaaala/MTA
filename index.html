@@ -549,6 +549,58 @@
 @media(max-width:760px){#noticias .mta-news-shell{width:calc(100% - 28px)!important;}#noticias .mta-news-slide{grid-template-columns:minmax(0,1fr)!important;min-height:0!important;}#noticias .mta-news-cover{height:270px!important;min-height:270px!important;}#noticias .mta-news-cover img{height:270px!important;max-height:270px!important;}#noticias .mta-news-info{padding:25px 21px 30px!important;}#noticias .mta-news-info h3{font-size:1.6rem!important;}#noticias .mta-news-heading{margin-bottom:25px!important;}#noticias .mta-news-arrow{width:40px!important;height:40px!important;}}
 @media(prefers-reduced-motion:reduce){#noticias .mta-news-track{scroll-behavior:auto!important;}}
 </style><link rel="stylesheet" href="./assets/css/movil-global.css">
+<style>
+/* Portada principal MTA: fotografía real a ancho completo y contenido inferior. */
+.hero.mta-hero-stacked {
+  display:flex !important;
+  flex-direction:column !important;
+  grid-template-columns:none !important;
+  min-height:0 !important;
+  width:100%;
+  background:#f2f6f9;
+}
+.hero.mta-hero-stacked .hero-media {
+  display:block;
+  order:0;
+  width:100%;
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible;
+  background:transparent;
+}
+.hero.mta-hero-stacked .hero-media img {
+  display:block;
+  width:100% !important;
+  height:auto !important;
+  max-width:none;
+  max-height:none;
+  object-fit:contain !important;
+  object-position:center;
+  opacity:1 !important;
+  filter:none !important;
+  transform:none !important;
+}
+.hero.mta-hero-stacked .hero-copy {
+  order:1;
+  width:min(100%, 1080px);
+  max-width:100%;
+  min-width:0;
+  margin:0 auto;
+  padding:clamp(54px,6vw,92px) clamp(20px,5vw,54px) !important;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.hero.mta-hero-stacked .hero-title,
+.hero.mta-hero-stacked .hero-lead,
+.hero.mta-hero-stacked .eyebrow {text-align:center;}
+.hero.mta-hero-stacked .hero-copy .btn-row {justify-content:center;}
+@media (max-width:600px) {
+  .hero.mta-hero-stacked .hero-copy {padding:44px 18px 54px !important;}
+}
+</style>
 </head>
 <body>
 <header class="header">
@@ -590,8 +642,11 @@
 </div>
 </header>
 <main>
-<!-- Portada institucional de la MTA. -->
-<section aria-labelledby="heroTitle" class="hero">
+<!-- Portada institucional: fotografía oficial completa y presentación debajo. -->
+<section aria-labelledby="heroTitle" class="hero mta-hero-stacked">
+<div class="hero-media photo-real">
+<img alt="Fotografía oficial de la Mesa Técnica Agroclimática de Sololá" fetchpriority="high" loading="eager" src="./foto_oficial.jpeg"/>
+</div>
 <div class="hero-copy">
 <p class="eyebrow">Información agroclimática</p>
 <h1 class="hero-title" id="heroTitle">Mesa Técnica Agroclimática de Sololá.</h1>
@@ -601,9 +656,6 @@
 <a class="btn btn-light" href="./docs/clima_index.html">Consultar información climática</a>
 <a class="btn btn-light" href="./mapas.html">Ir a mapas</a>
 </div>
-</div>
-<div class="hero-media photo-real">
-<img alt="Fotografía grupal de la Mesa Técnica Agroclimática de Sololá" fetchpriority="high" loading="eager" src="./PortadaMTA.jpeg"/>
 </div>
 </section>
 <section class="intro-strip">
